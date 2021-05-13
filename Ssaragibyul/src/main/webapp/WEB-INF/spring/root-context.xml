@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+	<property name="driverClassName"	value="oracle.jdbc.driver.OracleDriver"></property>
+	<property name="url"				value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+	<property name="username"			value="SPRING"></property>
+	<property name="password"			value="SPRING"></property>
+</bean>
+
+<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<property name="dataSource" ref="dataSource"></property>
+</bean>
+
+<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+	<constructor-arg ref="sqlSession"></constructor-arg>
+</bean>
+
+<!-- 파일업로드 관련 bean 등록, MultipartResolver -->
+<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="maxUploadSize" value="100000000"></property>
+	<property name="maxInMemorySize" value="100000000"></property>
+</bean>
+<!-- 
+	1. maxUploadSize : 한 요청당 업로드가 허용되는 최대용량을 바이트 단위로 설정
+	, -1은 제한이 없다는 뜻이고 프로퍼티를 지정하지 않을 때 기본값
+	2. maxInMemorySize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는
+	바이트 단위 최대용량
+	기본값은 10240 바이트
+	1MB => 1000000 Byte, (KB, MB, GB, TB)
+ -->
+ </beans>
