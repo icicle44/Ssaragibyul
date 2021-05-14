@@ -7,10 +7,14 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias type="com.ssaragibyul.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.iei.spring.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.iei.spring.notice.domain.Notice" alias="Notice"/>
+		<typeAlias type="com.iei.spring.board.domain.Board" alias="Board"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"></mapper>
+		<mapper resource="mappers/notice-mapper.xml"></mapper>
+		<mapper resource="mappers/board-mapper.xml"></mapper>
 	</mappers>
 </configuration>

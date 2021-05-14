@@ -40,6 +40,12 @@
 			DB연결이 필요할 때마다 생성하여 접속하는것이 아니라
 			Connection Pool에 연결을 생성하여 놓고 재사용하는 방식 
 		-->
+		<!-- 파일업로드  -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
 		<dependency>
 		    <groupId>commons-dbcp</groupId>
 		    <artifactId>commons-dbcp</artifactId>

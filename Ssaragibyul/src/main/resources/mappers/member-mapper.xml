@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+
+	<resultMap type="Member" id="memberResultMap">
+		<id property="userId" column="USER_ID"></id>
+		<result property="userPw" column="USER_PW"></result>
+		<result property="userName" column="USER_NAME"></result>
+		<result property="userEmail" column="USER_EMAIL"></result>
+		<result property="userAge" column="USER_AGE"></result>
+		<result property="userPhone" column="USER_PHONE"></result>
+		<result property="userAddr" column="USER_ADDR"></result>
+		<result property="enrollDate" column="ENROLL_DATE"></result>
+		<result property="updateDate" column="UPDATE_DATE"></result>
+		<result property="mStatus" column="M_STATUS"></result>
+	</resultMap>
+
+	<select id="selectOneMember" parameterType="Member" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE USER_ID = #{userId } AND USER_PW = #{userPw } 
+	</select>
+	
+	<select id="checkIdDup" resultType = "_int">
+		SELECT COUNT(*) FROM MEMBER WHERE USER_ID = #{userId }
+	</select>	
+	
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER VALUES(#{userId},#{userPw},#{userName},#{userEmail},#{userAge},#{userPhone},#{userAddr},SYSDATE, SYSDATE, 'Y')
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER SET USER_PW = #{userPw}, USER_AGE = #{userAge}, USER_EMAIL = #{userEmail}, USER_PHONE = #{userPhone}, USER_ADDR = #{userAddr}, UPDATE_DATE = SYSDATE WHERE USER_ID = #{userId}
+	</update>
+	
+	<delete id="deleteMember" parameterType="Member">
+		DELETE MEMBER WHERE USER_ID = #{userId }
+	</delete>
+	
+</mapper>
