@@ -100,4 +100,32 @@ public class VisitController {
 		// 2. HashMap 사용하기
 			return "common/errorPage";
 		}
+	public int addHitsCount(int visitNo) {
+		int result = 0;
+		
+		return result;
+	}
+	public int checkLikes(int visitNo, String userId) {
+		int result = 0;
+		return result;
+	}
+	public int updateLikesCount(int visitNo, String userId, String state) {
+		int result = 0;
+		return result;
+	}
+	public int plusLikesCount(String userId, int visitNo) {
+		int result = 0;
+		
+		return result;
+	}
+	public int minusLikesCount(String userId, int visitNo, String state) {
+		int result = 0;
+		
+		return result;
+	}
+	public int getLikes(String userId, int visitNo) {
+		int likes = 0;
+
+		return likes;
+	}
 }

@@ -74,5 +74,40 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
+	// 조회수 증가
+	public int addHitsCount(int visitNo) { 
+		int result = 0;
 
+		return result;
+	}
+	// Review 좋아요 유무 체크
+	public int checkLikes(int visitNo, String userId) {
+		int result =0;
+
+		return result;
+	}
+	// 좋아요 0일때 plus
+	public int plusLikesReview(String userId, int visitNo) {
+		int result = 0;
+
+		return result;
+	}
+	// 좋아요 0보다 클때 plus
+	public int updateLikesCountReview(int visitNo, String userId, String state) {
+		int likes = 0;
+
+		return likes;
+	}
+	// 좋아요 minus
+	public int minusLikesReview(String userId, int visitNo, String state) {
+		int likes = 0;
+
+		return likes;
+	}
+	// 좋아요 수
+	public int getLikes(String userId, int visitNo) {
+		int likes = 0;
+
+		return likes;
+	}
 }

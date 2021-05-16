@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.ssaragibyul.visit.controller.VisitController" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/controller/VisitController.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="206" y="167"/>    
+    <position height="-1" width="-1" x="201" y="168"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,7 +13,7 @@
   </class>  
   <class id="2" language="java" name="com.ssaragibyul.visit.domain.Visit" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/domain/Visit.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="535" y="201"/>    
+    <position height="-1" width="-1" x="538" y="151"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,7 +23,7 @@
   <interface id="3" language="java" name="com.ssaragibyul.visit.service.VisitService" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/service/VisitService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="743" y="147"/>    
+    <position height="-1" width="-1" x="755" y="95"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -33,7 +33,7 @@
   <class id="4" language="java" name="com.ssaragibyul.visit.service.serviceLogic.VisitServiceImpl" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/service/serviceLogic/VisitServiceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="744" y="455"/>    
+    <position height="-1" width="-1" x="771" y="585"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -42,7 +42,7 @@
   </class>  
   <interface id="5" language="java" name="com.ssaragibyul.visit.store.VisitStore" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/store/VisitStore.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="995" y="148"/>    
+    <position height="-1" width="-1" x="1040" y="94"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -52,7 +52,7 @@
   <class id="6" language="java" name="com.ssaragibyul.visit.store.storeLogic.VisitStoreLogic" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/visit/store/storeLogic/VisitStoreLogic.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="994" y="457"/>    
+    <position height="-1" width="-1" x="1052" y="570"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -63,18 +63,22 @@
     <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="8">    
+  <realization id="8">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="9">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="9" name="vService"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
+      <attribute id="10" name="vService">        
+        <position height="0" width="0" x="12" y="-52"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="12" y="-52"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="11">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
