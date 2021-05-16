@@ -3,6 +3,8 @@ package com.ssaragibyul.member.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.member.service.MemberService;
 
+@Controller
 public class MemberController {
+	
+	@Autowired
+	private MemberService mService;
 	
 	@RequestMapping(value="login.kh", method=RequestMethod.POST)
 	public String memberLogin(HttpServletRequest request) {
@@ -56,10 +63,22 @@ public class MemberController {
 	}
 	
 	// 아이디 중복 검사
-	@ResponseBody ///////중요
+	@ResponseBody 
 	@RequestMapping(value="dupId.kh", method=RequestMethod.GET)
 	public String idDuplicateCheck(@RequestParam("userId") String userId) {
 		return "";
 		
+	}
+	
+	// 아아디 찾기
+	public String searchId(@RequestParam("userId") String userId, Model model) {
+
+		return "common/errorPage";
+	}
+	
+	// 비밀번호 찾기
+	public String searchPw(@RequestParam("userPw") String userPw, Model model) {
+
+		return "common/errorPage";
 	}
 }

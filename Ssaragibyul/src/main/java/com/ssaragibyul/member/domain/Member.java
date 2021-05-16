@@ -11,8 +11,8 @@ public class Member {
 	private String userAddr;
 	private String birthday;
 	private Date enrollDate;
-	private Date withdrawDate;
-	private int mStatus;
+	private Date withdrawDate; //뭐징
+	private int mCode;
 	private int mngNo;
 	
 	public Member() {
@@ -97,12 +97,12 @@ public class Member {
 		this.withdrawDate = withdrawDate;
 	}
 
-	public int getmStatus() {
-		return mStatus;
+	public int getmCode() {
+		return mCode;
 	}
 
-	public void setmStatus(int mStatus) {
-		this.mStatus = mStatus;
+	public void setmCode(int mCode) {
+		this.mCode = mCode;
 	}
 
 	public int getMngNo() {
@@ -117,7 +117,7 @@ public class Member {
 	public String toString() {
 		return "Member [userId=" + userId + ", userPw=" + userPw + ", nickName=" + nickName + ", userEmail=" + userEmail
 				+ ", userPhone=" + userPhone + ", userAddr=" + userAddr + ", birthday=" + birthday + ", enrollDate="
-				+ enrollDate + ", withdrawDate=" + withdrawDate + ", mStatus=" + mStatus + ", mngNo=" + mngNo + "]";
+				+ enrollDate + ", withdrawDate=" + withdrawDate + ", mngNo=" + mngNo + "]";
 	}
 	
 }
