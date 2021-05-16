@@ -1,6 +1,209 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
-  associations="true" dependencies="false" nesting-relationships="true">  
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <package id="1" language="java" name="com.ssaragibyul.donation.domain" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1486" width="961" x="5" y="-3"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.ssaragibyul.donation.domain.Donation" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/Donation.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="274" y="479"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.ssaragibyul.donation.domain.DonationComments" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/DonationComments.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="463" y="1228"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.ssaragibyul.donation.domain.DonationFile" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/DonationFile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="155" y="1226"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.ssaragibyul.donation.domain.DonationLog" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/DonationLog.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="502" width="320" x="557" y="62"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.ssaragibyul.donation.domain.DonationReport" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/DonationReport.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="789" y="1227"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.ssaragibyul.donation.domain.DonationLike" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain/DonationLike.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="340" width="319" x="559" y="586"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="8" language="java" name="com.ssaragibyul.donation.store" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1042" width="463" x="1099" y="16"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="9" language="java" name="com.ssaragibyul.donation.store.DonationStore" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/store/DonationStore.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1318" y="281"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="10" language="java" name="com.ssaragibyul.donation.store.logic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="515" width="402" x="1131" y="522"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="11" language="java" name="com.ssaragibyul.donation.store.logic.DonationStoreLogic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/store/logic/DonationStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1336" y="803"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="12" language="java" name="com.ssaragibyul.donation.service" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1024" width="488" x="1679" y="29"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="13" language="java" name="com.ssaragibyul.donation.service.DonationService" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/service/DonationService.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1929" y="295"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="14" language="java" name="com.ssaragibyul.donation.service.logic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="514" width="417" x="1724" y="518"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="15" language="java" name="com.ssaragibyul.donation.service.logic.DonationServiceImpl" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/service/logic/DonationServiceImpl.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1928" y="798"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="16" language="java" name="com.ssaragibyul.donation.controller" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="589" width="463" x="2283" y="26"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="17" language="java" name="com.ssaragibyul.donation.controller.DonationController" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/controller/DonationController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2518" y="343"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="18" language="java" name="com.ssaragibyul.common" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="631" width="731" x="1229" y="-735"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="19" language="java" name="com.ssaragibyul.common.FileData" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/FileData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1361" y="-398"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="com.ssaragibyul.common.Reply" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/Reply.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1828" y="-422"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="com.ssaragibyul.common.PageInfo" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/PageInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1594" y="-414"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="11"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="26">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="27">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
+  <dependency id="28">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="29">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="18"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
