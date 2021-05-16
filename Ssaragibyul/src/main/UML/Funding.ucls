@@ -1,91 +1,297 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.ssaragibyul.funding.controller.FundingController" project="Ssaragibyul" 
-    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/controller/FundingController.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="836" y="463"/>    
+  <package id="1" language="java" name="com.ssaragibyul.common" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="599" width="653" x="1003" y="11"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="2" language="java" name="com.ssaragibyul.common.FileData" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/FileData.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1111" y="327"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.ssaragibyul.funding.domain.Funding" project="Ssaragibyul" 
+  <class id="3" language="java" name="com.ssaragibyul.common.PageInfo" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/PageInfo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1327" y="318"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.ssaragibyul.common.Reply" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/common/Reply.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1529" y="311"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="5" language="java" name="com.ssaragibyul.donation.domain" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/donation/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1563" width="795" x="69" y="394"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="6" language="java" name="com.ssaragibyul.funding.domain.Funding" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/Funding.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1524" y="282"/>    
+    <position height="-1" width="-1" x="284" y="934"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.ssaragibyul.funding.domain.FundingLog" project="Ssaragibyul" 
+  <class id="7" language="java" name="com.ssaragibyul.funding.domain.FundingLog" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/FundingLog.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="170" y="154"/>    
+    <position height="-1" width="-1" x="672" y="800"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="com.ssaragibyul.funding.service.logic.FundingSerivceImpl" project="Ssaragibyul" 
-    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/service/logic/FundingSerivceImpl.java" binary="false" 
+  <class id="8" language="java" name="com.ssaragibyul.funding.domain.FundingLike" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/FundingLike.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="469" y="511"/>    
+    <position height="333" width="247" x="554" y="1139"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="com.ssaragibyul.funding.domain.FundingFile" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/FundingFile.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="180" y="1720"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="5" language="java" name="com.ssaragibyul.funding.service.FundingService" project="Ssaragibyul" 
+  <class id="10" language="java" name="com.ssaragibyul.funding.domain.FundingComments" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/FundingComments.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="446" y="1720"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="com.ssaragibyul.funding.domain.FundingReport" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/domain/FundingReport.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="718" y="1723"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="12" language="java" name="com.ssaragibyul.funding.service" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1338" width="367" x="1537" y="624"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="13" language="java" name="com.ssaragibyul.funding.store" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/store" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1333" width="451" x="914" y="625"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <package id="14" language="java" name="com.ssaragibyul.funding.store.logic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/store/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="685" width="308" x="961" y="1242"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="15" language="java" name="com.ssaragibyul.funding.service.FundingService" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/service/FundingService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="565" y="21"/>    
+    <position height="-1" width="-1" x="1722" y="968"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="6" language="java" name="com.ssaragibyul.funding.store.logic.FundingStoreLogic" project="Ssaragibyul" 
-    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/store/logic/FundingStoreLogic.java" binary="false" 
+  <package id="16" language="java" name="com.ssaragibyul.funding.service.logic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/service/logic" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="670" width="320" x="1559" y="1261"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="17" language="java" name="com.ssaragibyul.funding.service.logic.FundingSerivceImpl" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/service/logic/FundingSerivceImpl.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1196" y="16"/>    
+    <position height="-1" width="-1" x="1732" y="1605"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="com.ssaragibyul.funding.store.FundingStore" project="Ssaragibyul" 
+  <package id="18" language="java" name="com.ssaragibyul.funding.controller" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="610" width="591" x="1997" y="163"/>    
+    <display autosize="false" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="19" language="java" name="com.ssaragibyul.funding.controller.FundingController" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/controller/FundingController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2257" y="447"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="20" language="java" name="com.ssaragibyul.funding.store.FundingStore" project="Ssaragibyul" 
     file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/store/FundingStore.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1198" y="487"/>    
+    <position height="-1" width="-1" x="1130" y="953"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <realization id="8">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
+  <class id="21" language="java" name="com.ssaragibyul.funding.store.logic.FundingStoreLogic" project="Ssaragibyul" 
+    file="/Ssaragibyul/src/main/java/com/ssaragibyul/funding/store/logic/FundingStoreLogic.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1120" y="1609"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="23">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="24">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <realization id="25">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="20"/>  
   </realization>  
-  <association id="9">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="10" name="fService"/>      
-      <multiplicity id="11" minimum="0" maximum="1"/>    
+  <dependency id="26">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <association id="27">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="28" name="fService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="29" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="15" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="12">    
-    <end type="SOURCE" refId="4"/>    
+  <dependency id="30">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="31">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="32">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="33">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="34">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="35">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="36">    
+    <end type="SOURCE" refId="13"/>    
     <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="37">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="38">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="39">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <realization id="40">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
   </realization>  
+  <dependency id="41">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="42">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="43">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="44">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="45">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="46">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="47">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="48">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="12"/>  
+  </dependency>  
+  <dependency id="49">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="11"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

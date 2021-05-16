@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.service.FundingService;
 
 public class FundingSerivceImpl implements FundingService {
@@ -16,7 +18,25 @@ public class FundingSerivceImpl implements FundingService {
 	}
 
 	@Override
-	public int likeStatus(int projectNo) {
+	public int likesStatus(int projectNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int plusLikes(String userId, int projectNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateLikes(String userId, int projectNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int minusLikes(String userId, int projectNo) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -40,7 +60,7 @@ public class FundingSerivceImpl implements FundingService {
 	}
 
 	@Override
-	public ArrayList<Reply> printAllReply(int projectNo) {
+	public ArrayList<FundingComments> printAllRCommnets(int projectNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -70,19 +90,19 @@ public class FundingSerivceImpl implements FundingService {
 	}
 
 	@Override
-	public int registerReply(Reply reply) {
+	public int registerCommnets(Reply reply) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int modifyReply(Reply reply) {
+	public int modifyCommnets(Reply reply) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int removeReply(Reply reply) {
+	public int removeCommnets(Reply reply) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -115,6 +135,48 @@ public class FundingSerivceImpl implements FundingService {
 	public int fundingCancel(int projectNo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public void achieve(int projectNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void dateRemain(int projectNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void participant(int projectNo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Funding> printAllRecommend(int projectNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int modifySuggest(Funding funding) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeSuggest(int projectNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Funding printOneSuggest(int projectNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

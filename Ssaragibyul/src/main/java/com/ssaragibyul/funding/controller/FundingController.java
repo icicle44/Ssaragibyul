@@ -25,7 +25,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
+import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.domain.DonationLike;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
@@ -37,8 +41,8 @@ public class FundingController {
 	@Autowired
 	private FundingService fService;
 	
-	@RequestMapping(value = "fundingList", method = RequestMethod.GET)
-	public ModelAndView fundingList(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
+	@RequestMapping(value = "fundingListView", method = RequestMethod.GET)
+	public ModelAndView fundingListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
 
 		return mv;
 	}
@@ -50,7 +54,7 @@ public class FundingController {
 	}
 
 
-	@RequestMapping(value = "fundingOfferView", method = RequestMethod.GET)
+	@RequestMapping(value = "fundingWriteView", method = RequestMethod.GET)
 	public String fundingOfferView() {
 		return "";
 	}
@@ -91,15 +95,20 @@ public class FundingController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="addReply", method=RequestMethod.POST)
-	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
+	@RequestMapping(value="addComments", method=RequestMethod.POST)
+	public String addComments(@ModelAttribute Reply reply, HttpSession session) {
 			
 	return "";
 	}
 	
-	@RequestMapping(value="replyList", method=RequestMethod.GET)
-	public void getReplyList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
+	@RequestMapping(value="CommentsList", method=RequestMethod.GET)
+	public void CommentsList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
 
+	}
+	
+	public void RecommendList(@RequestParam("dProjectNo") int projectNo) {
+		ArrayList<Funding> fList = fService.printAllRecommend(projectNo);
+		
 	}
 	
 	public void changeLikeStatus() {
@@ -108,6 +117,34 @@ public class FundingController {
 	
 	public void changeFundingStatus() {
 
+	}
+	
+	public int checkLikes(int projectNo, String userId) {
+		int result = 0;
+		return result;
+	}
+	public int updateLikesCount(int projectNo, String userId, String state) {
+		int result = 0;
+		return result;
+	}
+	public int plusLikesCount(String userId, int projectNo) {
+		int result = 0;
+		return result;
+	}
+	public int minusLikesCount(String userId, int projectNo, String state) {
+		int result = 0;
+		return result;
+	}
+	public int getLikes(String userId, int projectNo) {
+		int likes = 0;
+		return likes;
+	}
+	public String ReportView(FundingReport fReport) {
+		return "";
+	}
+	
+	public String fundingPay() {
+		return "";
 	}
 	
 }
