@@ -1,5 +1,11 @@
 package com.ssaragibyul.history.store;
 
-public interface HistoryStore {
+import java.util.ArrayList;
 
+import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.history.domain.History;
+
+public interface HistoryStore {
+	public ArrayList<History> selectAllList(PageInfo pi);
+	public History selectOne(int boardNo);
 }

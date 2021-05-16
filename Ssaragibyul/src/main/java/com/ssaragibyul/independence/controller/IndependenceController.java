@@ -1,4 +1,5 @@
-package com.ssaragibyul.history.controller;
+package com.ssaragibyul.independence.controller;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,30 +8,29 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.common.Search;
-import com.ssaragibyul.history.service.HistoryService;
 import com.ssaragibyul.independence.service.IndependenceService;
 
 @Controller
-public class HistoryController {
-	
-	@Autowired
-	private HistoryService hService;
+public class IndependenceController {
 
-	@RequestMapping(value="historyList.kh", method=RequestMethod.GET)
-	public ModelAndView historyListView(ModelAndView mv) {
-		
-		return mv;
-	}
-	@RequestMapping(value="historyDetail.kh", method=RequestMethod.GET)
-	public String historyDetail(@RequestParam("historyNo") int noticeNo, Model model) {
+	@Autowired
+	private IndependenceService nService;
+
+	@RequestMapping(value="independenceList.kh", method=RequestMethod.GET)
+	public String independenceList(Model model) {
+
 		return "";
 	}
 	
-	@RequestMapping(value="historySearch.kh", method=RequestMethod.GET)
-	public String historySearch(@ModelAttribute Search search, Model model) {
+	@RequestMapping(value="independenceDetail.kh", method=RequestMethod.GET)
+	public String independenceDetail(@RequestParam("independenceNo") int independenceNo, Model model) {
+		return "";
+	}
+	
+	@RequestMapping(value="independenceSearch.kh", method=RequestMethod.GET)
+	public String independenceSearch(@ModelAttribute Search search, Model model) {
 		
 		// 2개의 값을 하나에 담아서 보내는 방법
 		// 1. Domain(VO) 클래스 이용
