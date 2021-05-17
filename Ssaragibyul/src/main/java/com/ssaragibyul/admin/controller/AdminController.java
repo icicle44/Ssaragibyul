@@ -2,11 +2,14 @@ package com.ssaragibyul.admin.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.admin.service.AdminService;
@@ -174,6 +177,10 @@ public class AdminController {
 	// 기념관 등록하기
 	public ModelAndView histoyRegister() {
 		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		return null;
 	}
 
