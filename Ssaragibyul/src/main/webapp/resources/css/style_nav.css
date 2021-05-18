@@ -2,6 +2,10 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+@font-face{
+	src:url("../fonts/korea.ttf");
+	font-family: "korea";
+}
 :root {
   scroll-behavior: smooth;
 }
@@ -70,6 +74,12 @@ section {
   transition: all 0.5s;
   z-index: 997;
   padding: 20px 0;
+}
+#starLogo{
+	font-family : "korea";
+	font-size : 28px;
+	text-decoration: none;
+	/* color : black; */
 }
 
 .header.header-scrolled {

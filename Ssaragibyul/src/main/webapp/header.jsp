@@ -24,6 +24,7 @@
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="/resources/css/style_nav.css">
 
 
 </head>
@@ -42,7 +43,7 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <a href="/index.jsp" class="logo d-flex align-items-center">
 	    <img src="/resources/img/logo.png" alt="">
-        <span>싸라기별</span>
+        <span id="starLogo">싸라기별</sapn>
       </a>
 		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		    <span class="navbar-toggler-icon"></span>
