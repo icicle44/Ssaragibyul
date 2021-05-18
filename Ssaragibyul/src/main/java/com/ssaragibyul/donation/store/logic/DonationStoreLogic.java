@@ -2,12 +2,14 @@ package com.ssaragibyul.donation.store.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.store.DonationStore;
-
+@Repository
 public class DonationStoreLogic implements DonationStore{
 
 	@Override

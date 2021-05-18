@@ -2,11 +2,13 @@ package com.ssaragibyul.visit.store.storeLogic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.store.VisitStore;
-
+@Repository
 public class VisitStoreLogic implements VisitStore{
 
 	@Override

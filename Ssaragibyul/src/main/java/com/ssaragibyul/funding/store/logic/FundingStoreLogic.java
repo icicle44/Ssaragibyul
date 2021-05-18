@@ -2,13 +2,15 @@ package com.ssaragibyul.funding.store.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.store.FundingStore;
-
+@Repository
 public class FundingStoreLogic implements FundingStore{
 
 	@Override

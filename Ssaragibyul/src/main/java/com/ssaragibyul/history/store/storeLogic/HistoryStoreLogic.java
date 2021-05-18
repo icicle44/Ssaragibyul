@@ -2,10 +2,12 @@ package com.ssaragibyul.history.store.storeLogic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.history.store.HistoryStore;
-
+@Repository
 public class HistoryStoreLogic implements HistoryStore{
 
 	@Override

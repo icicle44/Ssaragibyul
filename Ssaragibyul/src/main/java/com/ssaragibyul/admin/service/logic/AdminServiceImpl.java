@@ -2,6 +2,8 @@ package com.ssaragibyul.admin.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.ssaragibyul.admin.service.AdminService;
 import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
@@ -12,7 +14,7 @@ import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
-
+@Service
 public class AdminServiceImpl implements AdminService{
 
 	@Override

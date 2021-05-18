@@ -2,13 +2,15 @@ package com.ssaragibyul.funding.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.service.FundingService;
-
+@Service
 public class FundingSerivceImpl implements FundingService {
 
 	@Override

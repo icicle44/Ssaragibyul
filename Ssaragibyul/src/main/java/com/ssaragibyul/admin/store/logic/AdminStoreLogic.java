@@ -2,6 +2,8 @@ package com.ssaragibyul.admin.store.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Repository;
+
 import com.ssaragibyul.admin.store.AdminStore;
 import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
@@ -13,6 +15,8 @@ import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
 
+import jdk.nashorn.internal.ir.annotations.Reference;
+@Repository
 public class AdminStoreLogic implements AdminStore{
 
 	@Override
