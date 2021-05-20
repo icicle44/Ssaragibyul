@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>메인</title>
+<title>펀딩</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,9 +28,8 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
-	
 	<%-- <%@include file="introduce.jsp" %> --%>
-	<%@include file="header.jsp" %>
+	<%@include file="../../../header.jsp" %>
 
 	<header class="header-bar d-flex align-items-center site-navbar-target"
 		data-aos="fade-right">
@@ -40,22 +39,6 @@
 			<a href="#" class="site-menu-toggle js-menu-toggle text-white"><span
 				class="icon-menu h3"></span></a>
 		</div>
-
-		<div class="main-menu">
-			<ul class="js-clone-nav">
-				<li><a href="#section-home" class="nav-link">사이트 소개</a></li>
-				<li><a href="#section-funding" class="nav-link">펀딩 프로젝트</a></li>
-				<li><a href="#section-donation" class="nav-link">기부 프로젝트</a></li>
-				<li><a href="#section-bio" class="nav-link">제안하기</a></li>
-				<li><a href="#section-blog" class="nav-link">별보러 가자</a></li>
-				<!-- <li><a href="#section-contact" class="nav-link">검색</a></li> -->
-			</ul>
-			<!--      <ul class="social js-clone-nav">
-        <li><a href="#"><span class="icon-facebook"></span></a></li>
-        <li><a href="#"><span class="icon-twitter"></span></a></li>
-        <li><a href="#"><span class="icon-instagram"></span></a></li>
-      </ul>-->
-		</div>
 	</header>
 
 	<main class="main-content">
@@ -63,6 +46,12 @@
 			<!-- 펀딩 프로젝트 -->
 			<div style="height: 1080px; padding-top: 200px;">
 				<section class="row align-items-stretch photos" id="section-funding">
+				<h2>진행중 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				 <select name = "chose1" class="select">
+					          <option value = "money_list" selected>모금액 순</option>
+					          <option value = "news_list">최신글 순</option>
+					          <option value = "like_list">좋아요 순</option>
+				</select>
 					<div class="col-12">
 						<div class="row align-items-stretch">
 
@@ -139,14 +128,27 @@
 									</div>
 								</a>
 								<p>펀딩 프로젝트 이름</p>
+								
 							</div>
+							
 						</div>
+						
 					</div>
+			<button class="btn">프로젝트 더 보기</button> 
+					
 				</section>
 				<!-- #section-funding -->
+				
 			</div>
+			<br><br><br><br><br><br>
 			<!-- 기부 프로젝트 -->
 			<section class="row align-items-stretch photos" id="section-donation">
+							<h2>종료된 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+						 <select name = "chose2" class="select">
+					          <option value = "money_list" selected>모금액 순</option>
+					          <option value = "news_list">최신글 순</option>
+					          <option value = "like_list">좋아요 순</option>
+				</select>
 				<div class="col-12">
 					<div class="row align-items-stretch">
 
@@ -229,183 +231,14 @@
 					</div>
 
 				</div>
+				<button class="btn">프로젝트 더 보기</button> 
 			</section>
 			<!-- #section-donation -->
 
+<div>
+<br><br><br><br><br><br><br>
 
-			<section class="site-section" id="section-testimonial">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-md-8 text-center">
-							<h2 class="heading text-uppercase text-white">Testimonial</h2>
-
-							<div class="row justify-content-center">
-								<div class="col-md-12">
-
-									<div class="owl-carousel slide-one-item home-slider">
-
-										<div class="testimony text-center px-md-4">
-											<figure class="mx-auto d-inline-block">
-												<img src="/resources/img/images/person_2.jpg" alt="Image"
-													class="mx-auto img-fluid w-25 rounded-circle">
-											</figure>
-											<p class="text-white">
-												<strong>Jean Smith</strong>
-											</p>
-											<blockquote>
-												<p>&ldquo;Lorem ipsum dolor sit amet, consectetur
-													adipisicing elit. Unde tenetur quis facilis quam optio
-													voluptate totam placeat, doloremque. Sit repellat ipsum
-													dolor fugit similique itaque maxime saepe ipsam. Velit,
-													harum!&rdquo;</p>
-											</blockquote>
-										</div>
-
-										<div class="testimony text-center px-md-4">
-											<figure class="mx-auto d-inline-block">
-												<img src="/resources/img/images/person_3.jpg" alt="Image"
-													class="mx-auto img-fluid w-25 rounded-circle">
-											</figure>
-											<p class="text-white">
-												<strong>Jean Smith</strong>
-											</p>
-											<blockquote>
-												<p>&ldquo;Lorem ipsum dolor sit amet, consectetur
-													adipisicing elit. Unde tenetur quis facilis quam optio
-													voluptate totam placeat, doloremque. Sit repellat ipsum
-													dolor fugit similique itaque maxime saepe ipsam. Velit,
-													harum!&rdquo;</p>
-											</blockquote>
-										</div>
-
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section class="site-section-hero bg-image"
-				style="background-image: url('images/img_9.jpg');"
-				data-stellar-background-ratio="0.5" id="section-bio">
-				<div class="row justify-content-center align-items-center">
-					<div class="col-md-7 text-center">
-						<h1 class="text-white heading text-uppercase" data-aos="fade-up">싸라기별 프로젝트 제안하기</h1>
-						<p class="lead text-white mb-5" data-aos="fade-up"
-							data-aos-delay="100">당신의 마음을 함께 해주세요.</p>
-						<p data-aos="fade-up" data-aos-delay="100">
-							<a href="#section-contact"
-								class="btn btn-primary btn-md smoothscroll">제안하기</a>
-						</p>
-					</div>
-				</div>
-			</section>
-
-			<section class="site-section" id="section-blog">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-md-8">
-							<div class="row">
-								<h2 class="heading text-uppercase text-white" data-aos="fade-up">Blog</h2>
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_1.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_2.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_3.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_4.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-12 text-center">
-									<div class="custom-pagination">
-					                    <div class="d-grid gap-2 col-6 mx-auto">
-					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="">더보기</button>
-					                    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
+</div>
 <!-- 			<section class="site-section darken-bg" id="section-contact">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -466,13 +299,14 @@
 				</div>
 			</section> -->
 
- 		<%@include file="footer.jsp" %>
+
+		<%@include file="../../../footer.jsp" %>
 	</main>
 
 	<!-- .site-wrap -->
- 
-<!--  	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
- 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
+
+<!-- 	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
+<!-- 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
@@ -487,7 +321,7 @@
 
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
-	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/main.js"></script> -->
 
 </body>
 </html>
