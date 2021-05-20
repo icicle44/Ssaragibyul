@@ -465,24 +465,13 @@
 					</div>
 				</div>
 			</section> -->
-			<div style="width: 80%; height: 200px; text-align: center;" >
-                <nav class="navbar navbar-light bg-light">
-                  <div class="container-fluid">
-                    <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                      style="width:90%; text-align: center;">
-                      <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                  </div>
-                </nav>
-            </div>
 
-<%-- 		<%@include file="footer.jsp" %> --%>
+ 		<%@include file="footer.jsp" %>
 	</main>
 
 	<!-- .site-wrap -->
-<!-- 
- 	<script src="/resources/js/jquery-3.3.1.min.js"></script>
+ 
+<!--  	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
  	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
@@ -499,6 +488,6 @@
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
- -->
+
 </body>
 </html>
