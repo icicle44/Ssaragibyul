@@ -110,6 +110,7 @@
 </div>
 
 <!-- End Footer -->
+<!-- 
 <script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/resources/js/jquery.easing.1.3.js"></script>
 <script src="/resources/js/jquery-ui.js"></script>
@@ -126,6 +127,6 @@
 <script src="/resources/js/jquery.fancybox.min.js"></script>
 
 <script src="/resources/js/main.js"></script>
-
+ -->
 </body>
 </html>

@@ -28,6 +28,7 @@
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
+	
 	<%-- <%@include file="introduce.jsp" %> --%>
 	<%@include file="header.jsp" %>
 
@@ -47,7 +48,7 @@
 				<li><a href="#section-donation" class="nav-link">기부 프로젝트</a></li>
 				<li><a href="#section-bio" class="nav-link">제안하기</a></li>
 				<li><a href="#section-blog" class="nav-link">별보러 가자</a></li>
-				<li><a href="#section-contact" class="nav-link">검색</a></li>
+				<!-- <li><a href="#section-contact" class="nav-link">검색</a></li> -->
 			</ul>
 			<!--      <ul class="social js-clone-nav">
         <li><a href="#"><span class="icon-facebook"></span></a></li>
@@ -395,7 +396,7 @@
 								<div class="col-12 text-center">
 									<div class="custom-pagination">
 					                    <div class="d-grid gap-2 col-6 mx-auto">
-					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="#">더보기</button>
+					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="">더보기</button>
 					                    </div>
 									</div>
 								</div>
@@ -464,24 +465,25 @@
 					</div>
 				</div>
 			</section> -->
-			<div style="width: 80%; height: 200px; text-align: center;">
+			<div style="width: 80%; height: 200px; text-align: center;" >
                 <nav class="navbar navbar-light bg-light">
                   <div class="container-fluid">
                     <form class="d-flex">
-                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                      style="width:90%; text-align: center;">
                       <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                   </div>
                 </nav>
             </div>
 
-		<%@include file="footer.jsp" %>
+<%-- 		<%@include file="footer.jsp" %> --%>
 	</main>
 
 	<!-- .site-wrap -->
-
-<!-- 	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
-<!-- 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
+<!-- 
+ 	<script src="/resources/js/jquery-3.3.1.min.js"></script>
+ 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
@@ -496,7 +498,7 @@
 
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
-	<script src="/resources/js/main.js"></script> -->
-
+	<script src="/resources/js/main.js"></script>
+ -->
 </body>
 </html>
