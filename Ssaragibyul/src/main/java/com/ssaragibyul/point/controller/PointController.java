@@ -50,7 +50,7 @@ public class PointController {
 	//point insert문 안에서 selectkey, select last_number(동적쿼리로 시퀀스명 변경) 사용
 	
 	//포인트내역 등록-충전용
-	@RequestMapping(value="chargePoint", method=RequestMethod.POST)
+	@RequestMapping(value="chargePoint.do", method=RequestMethod.POST)
 	public ModelAndView chargePointRegister(ModelAndView mv, int varAmount, HttpSession session) {
 		//결제화면.jsp에서 ajax에 json(varAmount:결제금액)으로 넘겨옴
 		Member loginUser = (Member)session.getAttribute("loginUser"); //login담당자에게 setAttribute 명칭 물어보기
@@ -140,7 +140,7 @@ public class PointController {
 	
 	//포인트 사용내역 출력(전체, 펀딩, 기부, 선물, 방문인증, 충전) //펀딩-기부 UNIONALL
 	//아직 차감안된 포인트내역도 나오게 해야함
-	@RequestMapping(value="pointList", method=RequestMethod.GET)
+	@RequestMapping(value="pointList.do", method=RequestMethod.GET)
 	public ModelAndView PointList(ModelAndView mv,
 								@RequestParam(value="page", required=false) Integer page,
 								HttpSession session) {

@@ -7,6 +7,7 @@ import java.util.List;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
 
 public interface MessageStore {
 	
@@ -18,8 +19,8 @@ public interface MessageStore {
 	public int deleteMsgComp(List<Integer> msgNoArr);
 	
 	public ArrayList<Message> selectAllnMsg(PageInfo pi);
-	public ArrayList<Message> selectAllrMsg(PageInfo pi, String userId);
-	public ArrayList<Message> selectAllsMsg(PageInfo pi, String userId);
+	public ArrayList<MessageAndNick> selectAllrMsg(PageInfo pi, String userId);
+	public ArrayList<MessageAndNick> selectAllsMsg(PageInfo pi, String userId);
 	
 	public Message selectOne(int msgNo);
 	public int updateRead(int msgNo);

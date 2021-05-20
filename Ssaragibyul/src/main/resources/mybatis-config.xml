@@ -8,9 +8,13 @@
 
 	<typeAliases>
 		<typeAlias type="com.ssaragibyul.member.domain.Member" alias="Member"/>
+		<typeAlias type="com.ssaragibyul.message.domain.Message" alias="Message"/>
+		<typeAlias type="com.ssaragibyul.message.domain.MessageAndNick" alias="MessageAndNick"/>
+	
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/member-mapper.xml"></mapper>
+		<mapper resource="mappers/message-mapper.xml"></mapper>
 	</mappers>
 </configuration>

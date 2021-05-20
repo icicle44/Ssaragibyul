@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.service.MessageService;
 import com.ssaragibyul.message.store.MessageStore;
 
@@ -55,12 +56,12 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public ArrayList<Message> printAllrMsg(PageInfo pi, String userId) {
+	public ArrayList<MessageAndNick> printAllrMsg(PageInfo pi, String userId) {
 		return msgStore.selectAllrMsg(pi, userId);
 	}
 
 	@Override
-	public ArrayList<Message> printAllsMsg(PageInfo pi, String userId) {
+	public ArrayList<MessageAndNick> printAllsMsg(PageInfo pi, String userId) {
 		return msgStore.selectAllsMsg(pi, userId);
 	}
 

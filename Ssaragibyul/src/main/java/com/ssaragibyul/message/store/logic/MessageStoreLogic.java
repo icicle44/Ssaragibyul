@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.store.MessageStore;
 
 @Repository
@@ -57,20 +59,23 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public ArrayList<Message> selectAllnMsg(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectNMsgList");
 	}
 
 	@Override
-	public ArrayList<Message> selectAllrMsg(PageInfo pi, String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<MessageAndNick> selectAllrMsg(PageInfo pi, String userId) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectRMsgList", userId);
 	}
 
 	@Override
-	public ArrayList<Message> selectAllsMsg(PageInfo pi, String userId) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<MessageAndNick> selectAllsMsg(PageInfo pi, String userId) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
+		return (ArrayList)sqlSession.selectList("messageMapper.selectSMsgList", userId);
 	}
 
 	@Override
@@ -105,8 +110,7 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public int getMsgListCount(HashMap<String, String> cntMap) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("messageMapper.selectMsgListCount", cntMap);
 	}
 
 	@Override

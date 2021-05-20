@@ -13,12 +13,12 @@ public class Message {
 	private int readYn;
 	private int sendDeleteYn;
 	private int recDeleteYn;
-	private int noticeMsgYn;
-	
+	private int msgType;
+		
 	public Message() {}
 
 	public Message(int msgNo, String senderId, String receiverId, String msgTitle, String msgContents, int presentPoint,
-			Timestamp regDate, int readYn, int sendDeleteYn, int recDeleteYn, int noticeMsgYn) {
+			Timestamp regDate, int readYn, int sendDeleteYn, int recDeleteYn, int msgType) {
 		super();
 		this.msgNo = msgNo;
 		this.senderId = senderId;
@@ -30,7 +30,7 @@ public class Message {
 		this.readYn = readYn;
 		this.sendDeleteYn = sendDeleteYn;
 		this.recDeleteYn = recDeleteYn;
-		this.noticeMsgYn = noticeMsgYn;
+		this.msgType = msgType;
 	}
 
 	public int getMsgNo() {
@@ -113,12 +113,12 @@ public class Message {
 		this.recDeleteYn = recDeleteYn;
 	}
 
-	public int getNoticeMsgYn() {
-		return noticeMsgYn;
+	public int getMsgType() {
+		return msgType;
 	}
 
-	public void setNoticeMsgYn(int noticeMsgYn) {
-		this.noticeMsgYn = noticeMsgYn;
+	public void setMsgType(int msgType) {
+		this.msgType = msgType;
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class Message {
 		return "Message [msgNo=" + msgNo + ", senderId=" + senderId + ", receiverId=" + receiverId + ", msgTitle="
 				+ msgTitle + ", msgContents=" + msgContents + ", presentPoint=" + presentPoint + ", regDate=" + regDate
 				+ ", readYn=" + readYn + ", sendDeleteYn=" + sendDeleteYn + ", recDeleteYn=" + recDeleteYn
-				+ ", noticeMsgYn=" + noticeMsgYn + "]";
+				+ ", msgType=" + msgType + "]";
 	}
 	
 }

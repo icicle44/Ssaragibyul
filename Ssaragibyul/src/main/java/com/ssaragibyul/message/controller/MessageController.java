@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
+import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.service.MessageService;
 
 //추가할 것: 페이징, 읽음여부 업데이트 메소드, httpsession
@@ -37,13 +40,25 @@ public class MessageController {
 	////////////쪽지유형 jsp에서 넘겨줄 것!!!
 	
 	//쪽지작성 화면으로 이동
-	@RequestMapping(value="msgWriterView", method=RequestMethod.GET)
-	public String messageWriterView() {
-		return "";
+	//작성화면으로 넘어갈 때 자동으로 받는사람 아이디, 닉네임(관리자는 관리자로) 뜨도록 넘겨줄 것
+	@RequestMapping(value="msgWriterView.do", method=RequestMethod.GET)
+	public ModelAndView messageWriterView(ModelAndView mv,
+										@ModelAttribute Message message,
+										@RequestParam("nickName") String nickName,
+										HttpSession session) {
+		if(session.getAttribute("loginUser") != null) {
+			mv.addObject("message", message);
+			mv.addObject("nickName", nickName);
+			mv.setViewName("message/messageWriteForm");
+		} else {
+			//mv.addObject("msg", "로그인 해주세요.");
+			//mv.setViewName("common/main");
+		}
+		return mv;
 	}
 	
 	//1:1 쪽지 등록(회원, 관리자 모두 보낼 수 있음)
-	@RequestMapping(value="registerMemMsg", method=RequestMethod.POST)
+	@RequestMapping(value="registerMemMsg.do", method=RequestMethod.POST)
 	public ModelAndView registerMemMessage(@ModelAttribute Message message
 										, HttpSession session
 										, ModelAndView mv) {
@@ -62,7 +77,7 @@ public class MessageController {
 	}
 	
 	//관리자의 공지 쪽지 등록
-	@RequestMapping(value="registerNotiMsg", method=RequestMethod.POST)
+	@RequestMapping(value="registerNotiMsg.do", method=RequestMethod.POST)
 	public ModelAndView registerNotiMessage(@ModelAttribute Message message
 										, HttpSession session
 										, ModelAndView mv) {
@@ -71,7 +86,7 @@ public class MessageController {
 	}
 		
 	//받은 쪽지 삭제(다중선택)
-	@RequestMapping(value="recMsgDelete", method=RequestMethod.GET)
+	@RequestMapping(value="recMsgDelete.do", method=RequestMethod.GET)
 	public ModelAndView receivedMsgDelete(@RequestParam(value = "msgNoArr[]") List<Integer> msgNoArr, ModelAndView mv) {
 		//배열에 해당하는 쪽지의 삭제표시컬럼 update
 		int Result1 = msgService.deleteReceivedMsg(msgNoArr);
@@ -84,7 +99,7 @@ public class MessageController {
 	
 	//공지쪽지는 무조건 삭제할거면 메소드 별도로 구성, 아니면 이 메소드 쓰면 update만 되니까 괜찮음
 	//보낸 쪽지 삭제(다중선택)
-	@RequestMapping(value="sendMsgDelete", method=RequestMethod.GET)
+	@RequestMapping(value="sendMsgDelete.do", method=RequestMethod.GET)
 	public ModelAndView sendMsgDelete(@RequestParam(value = "msgNoArr[]") List<Integer> msgNoArr, ModelAndView mv) {
 		//배열에 해당하는 쪽지의 삭제표시컬럼 update
 		int Result1 = msgService.deleteSendMsg(msgNoArr);
@@ -105,55 +120,94 @@ public class MessageController {
 	
 	//공지 쪽지리스트 출력(별도 페이지 구성) //사용처: 관리자의 보낸 쪽지 리스트, 사용자의 받은 쪽지 리스트
 	//보낸사람삭제여부 컬럼 값 N인 것만 select
-	@RequestMapping(value="noticeMsgList", method=RequestMethod.GET)
+	@RequestMapping(value="noticeMsgList.do", method=RequestMethod.GET)
 	public ModelAndView noticeMessageList(ModelAndView mv,
-									@RequestParam(value="page", required=false) Integer page) { 
+										@RequestParam(value="page", required=false) Integer page) { 
+
 		int currentPage = (page != null)? page : 1;
 		int listCount = msgService.getNoticeListCount();
-		PageInfo pi = new PageInfo();
-		//PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
+		PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
 		ArrayList<Message> nMList = msgService.printAllnMsg(pi);
+		if(!nMList.isEmpty()) {
+			mv.addObject("msgList", nMList);
+			mv.addObject("pi", pi);
+			mv.addObject("flag", "notice");
+			mv.setViewName("message/messageListView");
+		}else {
+//			mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
+//			mv.setViewName("common/main");
+		}
 		return mv;
 	} 
 	
 	//받은쪽지 리스트 출력
-	@RequestMapping(value="recMsgList", method=RequestMethod.GET)
-	public ModelAndView receivedMessageList(@RequestParam("userId") String userId
-											, ModelAndView mv
-											, @RequestParam(value="page", required=false) Integer page) {
+	@RequestMapping(value="recMsgList.do", method=RequestMethod.GET)
+	public ModelAndView receivedMessageList(ModelAndView mv,
+											//HttpSession session,
+											@RequestParam("userId") String userId,
+											@RequestParam(value="page", required=false) Integer page) {
 		//공지쪽지여부 컬럼값 1인 쪽지는 받은사람 아이디 null이라 어차피 select 안됨
-		String flag = "rec"; //??? 기억이안남...
+		
+		//userId 넘겨주거나, 아니면 session, jsp에 하드코딩 해놓은것 고치기!!!
+		//전체 로그인체크로 쌀 것
+		
+		//String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		String flag = "rec";
+
 		HashMap<String, String> cntMap = new HashMap<String, String>();
 		cntMap.put("flag", flag);
 		cntMap.put("userId", userId);
+		int currentPage = (page != null)? page : 1;
 		int listCount = msgService.getMsgListCount(cntMap);
-		PageInfo pi = new PageInfo();
-		//PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		
-		ArrayList<Message> rMList = msgService.printAllrMsg(pi, userId);
+		PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+
+		ArrayList<MessageAndNick> rMList = msgService.printAllrMsg(pi, userId);
+		rMList.toString();
+		if(!rMList.isEmpty()) {
+			mv.addObject("msgList", rMList);
+			mv.addObject("pi", pi);
+			mv.addObject("flag", flag);
+			mv.setViewName("message/messageListView");
+		}else {
+			//mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
+			//mv.setViewName("common/main");
+		}
 		return mv;
 	}
 	
 	//보낸 쪽지리스트 출력
-	@RequestMapping(value="sendMsgList", method=RequestMethod.GET)
-	public ModelAndView sendedMessageList(@RequestParam("userId") String userId
-										, ModelAndView mv
-										, @RequestParam(value="page", required=false) Integer page) {
-		String flag = "send"; //??? 기억이안남...
+	@RequestMapping(value="sendMsgList.do", method=RequestMethod.GET)
+	public ModelAndView sendedMessageList(ModelAndView mv,
+										@RequestParam("userId") String userId,
+										//HttpSession session,
+										@RequestParam(value="page", required=false) Integer page) {
+		//전체 로그인체크로 쌀 것
+		//String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		
+		String flag = "send";
 		HashMap<String, String> cntMap = new HashMap<String, String>();
 		cntMap.put("flag", flag);
 		cntMap.put("userId", userId);
+		int currentPage = (page != null)? page : 1;
 		int listCount = msgService.getMsgListCount(cntMap);
-		PageInfo pi = new PageInfo();
-		//PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<Message> rMList = msgService.printAllsMsg(pi, userId);
-		
+		PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+
+		ArrayList<MessageAndNick> sMList = msgService.printAllsMsg(pi, userId);
+		if(!sMList.isEmpty()) {
+			mv.addObject("msgList", sMList);
+			mv.addObject("pi", pi);
+			mv.addObject("flag", flag);
+			mv.setViewName("message/messageListView");
+		}else {
+//			mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
+//			mv.setViewName("common/main");			
+		}
 		return mv;
 	}
 	
 	//쪽지 상세보기
-	@RequestMapping(value="msgDetail", method=RequestMethod.GET)
+	@RequestMapping(value="msgDetail.do", method=RequestMethod.GET)
 	public String MessageDetail(@RequestParam("msgNo") int msgNo, Model model) {
 		Message message = msgService.printOne(msgNo);
 		
@@ -180,8 +234,8 @@ public class MessageController {
 		return 0;
 	}
 	
-	//쪽지검색
-	@RequestMapping(value="msgSearch", method=RequestMethod.GET)
+	//쪽지검색(검색/ 선물,관리자쪽지 모아보기)
+	@RequestMapping(value="msgSearch.do", method=RequestMethod.GET)
 	public ModelAndView MessageSearch(@ModelAttribute Search search
 								, ModelAndView mv
 								, @RequestParam(value="page", required=false) Integer page) {

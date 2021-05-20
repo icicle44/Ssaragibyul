@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="messageMapper">
+	<resultMap type="Message" id="messageResultMap">
+		<id property="msgNo" column="MSG_NO"/>
+		<result property="senderId" column="SENDER_ID"/>
+		<result property="receiverId" column="RECEIVER_ID"/>
+		<result property="msgTitle" column="MSG_TITLE"/>
+		<result property="msgContents" column="MSG_CONTENTS"/>
+		<result property="presentPoint" column="PRESENT_POINT"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="readYn" column="READ_YN"/>
+		<result property="sendDeleteYn" column="SEND_DELETE_YN"/>
+		<result property="recDeleteYn" column="REC_DELETE_YN"/>
+		<result property="msgType" column="MSG_TYPE"/>
+	</resultMap>
+	<resultMap type="MessageAndNick" id="messageNickResultMap">
+		<id property="msgNo" column="MSG_NO"/>
+		<result property="senderId" column="SENDER_ID"/>
+		<result property="receiverId" column="RECEIVER_ID"/>
+		<result property="msgTitle" column="MSG_TITLE"/>
+		<result property="msgContents" column="MSG_CONTENTS"/>
+		<result property="presentPoint" column="PRESENT_POINT"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="readYn" column="READ_YN"/>
+		<result property="sendDeleteYn" column="SEND_DELETE_YN"/>
+		<result property="recDeleteYn" column="REC_DELETE_YN"/>
+		<result property="msgType" column="MSG_TYPE"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+
+	<select id="selectNMsgList" resultMap="messageResultMap">
+		SELECT * FROM MESSAGE WHERE MSG_TYPE = 0 AND SEND_DELETE_YN = 0 ORDER BY REG_DATE DESC
+	</select>
+	<select id="selectRMsgList" parameterType="string" resultMap="messageNickResultMap">
+		SELECT * FROM MESSAGE LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER) ON(SENDER_ID = USER_ID)
+		WHERE RECEIVER_ID=#{userId} AND REC_DELETE_YN = 0  ORDER BY REG_DATE DESC
+	</select>
+	<select id="selectSMsgList" parameterType="string" resultMap="messageNickResultMap">
+		SELECT * FROM MESSAGE LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER) ON(RECEIVER_ID = USER_ID)
+		WHERE SENDER_ID=#{userId} AND SEND_DELETE_YN = 0 ORDER BY REG_DATE DESC
+	</select>
+	<select id="selectMsgListCount" parameterType="map" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE
+		<if test="flag.toString() == 'rec'">
+			WHERE RECEIVER_ID = #{userId}	
+		</if>
+		<if test="flag.toString() == 'send'">
+			WHERE SENDER_ID = #{userId}
+		</if>
+	</select>
+
+
+
+
+
+
+
+
+
+
+</mapper>

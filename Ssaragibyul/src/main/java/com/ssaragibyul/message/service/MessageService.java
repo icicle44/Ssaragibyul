@@ -7,6 +7,7 @@ import java.util.List;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
 
 public interface MessageService {
 	
@@ -25,9 +26,9 @@ public interface MessageService {
 	//공지쪽지리스트 출력
 	public ArrayList<Message> printAllnMsg(PageInfo pi);
 	//받은쪽지 리스트 출력
-	public ArrayList<Message> printAllrMsg(PageInfo pi, String userId);
+	public ArrayList<MessageAndNick> printAllrMsg(PageInfo pi, String userId);
 	//보낸쪽지리스트 출력
-	public ArrayList<Message> printAllsMsg(PageInfo pi, String userId);
+	public ArrayList<MessageAndNick> printAllsMsg(PageInfo pi, String userId);
 	//쪽지 상세보기
 	public Message printOne(int msgNo);
 	//읽지않은 받은쪽지 갯수 출력
