@@ -38,7 +38,7 @@
 
 	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
 		<div class="container-fluid">
-			<a href="/index.jsp" class="logo d-flex align-items-center"> 
+			<a href="/index.jsp" class="logo d-flex align-items-center" style="text-decoration: none;"> 
 				<img src="/resources/img/logo.png" alt=""> <span id="starLogo">싸라기별</sapn></a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarSupportedContent"
@@ -56,8 +56,7 @@
 						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> 기념관 </a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown"
-							style="text-align: center; width: 200px;">
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: center; width: 200px;">
 							<a class="dropdown-item" href="/independenceList">독립유공자 공훈록</a> <a
 								class="dropdown-item" href="#">별들의 발자취</a> <a
 								class="dropdown-item" href="#">별보러 가자</a>
