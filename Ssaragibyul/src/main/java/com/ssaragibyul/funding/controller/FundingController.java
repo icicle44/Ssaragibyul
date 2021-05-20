@@ -41,26 +41,26 @@ public class FundingController {
 	@Autowired
 	private FundingService fService;
 	
-	@RequestMapping(value = "fundingListView", method = RequestMethod.GET)
+	@RequestMapping(value = "fundingListView.do", method = RequestMethod.GET)
 	public ModelAndView fundingListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
 
 		return mv;
 	}
 
-	@RequestMapping(value = "fundingDetail", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 		
 		return mv;
 	}
 
 
-	@RequestMapping(value = "fundingWriteView", method = RequestMethod.GET)
+	@RequestMapping(value = "fundingWriteView.do", method = RequestMethod.GET)
 	public String fundingOfferView() {
 		return "";
 	}
 
 
-	@RequestMapping(value = "fundingRegister", method = RequestMethod.POST)
+	@RequestMapping(value = "fundingRegister.do", method = RequestMethod.POST)
 	public ModelAndView fundingRegister(ModelAndView mv, @ModelAttribute Funding funding, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
 
 		return mv;
@@ -71,20 +71,20 @@ public class FundingController {
 		return null;
 	}
 
-	@RequestMapping(value = "fundingModifyView")
+	@RequestMapping(value = "fundingModifyView.do")
 	public ModelAndView fundingModifyView(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 
 		return mv;
 	}
 
-	@RequestMapping(value = "fundingUpdate", method = RequestMethod.POST)
+	@RequestMapping(value = "fundingUpdate.do", method = RequestMethod.POST)
 	public ModelAndView fundingUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Funding funding, @RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
 	
 		return mv;
 	}
 
 	// 게시글 삭제(실제로는 상태 업데이트)
-	@RequestMapping(value = "fundingDelete", method = RequestMethod.GET)
+	@RequestMapping(value = "fundingDelete.do", method = RequestMethod.GET)
 	public String fundingDelete(Model model, @RequestParam("projectNo") int projectNo, @RequestParam("renameFilename") String renameFilename, HttpServletRequest request) {
 	
 		return "";
@@ -95,18 +95,18 @@ public class FundingController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="addComments", method=RequestMethod.POST)
+	@RequestMapping(value="addComments.do", method=RequestMethod.POST)
 	public String addComments(@ModelAttribute Reply reply, HttpSession session) {
 			
 	return "";
 	}
 	
-	@RequestMapping(value="CommentsList", method=RequestMethod.GET)
+	@RequestMapping(value="CommentsList.do", method=RequestMethod.GET)
 	public void CommentsList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
 
 	}
 	
-	public void RecommendList(@RequestParam("dProjectNo") int projectNo) {
+	public void RecommendList(@RequestParam("dProjectNo.do") int projectNo) {
 		ArrayList<Funding> fList = fService.printAllRecommend(projectNo);
 		
 	}
