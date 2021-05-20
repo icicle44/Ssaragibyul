@@ -18,18 +18,18 @@ public class IndependenceController {
 	@Autowired
 	private IndependenceService nService;
 
-	@RequestMapping(value="independenceList", method=RequestMethod.GET)
+	@RequestMapping(value="independenceList.do", method=RequestMethod.GET)
 	public String independenceList() {
 		
 		return "independence/independenceList";
 	}
 	
-	@RequestMapping(value="independenceDetail", method=RequestMethod.GET)
+	@RequestMapping(value="independenceDetail.do", method=RequestMethod.GET)
 	public String independenceDetail(@RequestParam("independenceNo") int independenceNo, Model model) {
 		return "";
 	}
 	
-	@RequestMapping(value="independenceSearch", method=RequestMethod.GET)
+	@RequestMapping(value="independenceSearch.do", method=RequestMethod.GET)
 	public String independenceSearch(@ModelAttribute Search search, Model model) {
 		
 		// 2개의 값을 하나에 담아서 보내는 방법

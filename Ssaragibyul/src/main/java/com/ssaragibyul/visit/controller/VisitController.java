@@ -33,39 +33,39 @@ public class VisitController {
 		return mv;
 	}
 	
-	@RequestMapping(value="visitDetail", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		
 		
 		return mv;
 	}
 	// 게시글 등록화면
-	@RequestMapping(value="visitWriteView", method=RequestMethod.GET)
+	@RequestMapping(value="visitWriteView.do", method=RequestMethod.GET)
 	public String visitWriteView() {
 		return "";
 	}
 	// 게시글 등록
-	@RequestMapping(value="visitRegister", method=RequestMethod.POST)
+	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)
 	public ModelAndView visitRegister(ModelAndView mv,@ModelAttribute Visit visit,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) {
 
 		return mv;
 	}
 	
 	// 게시글 수정화면
-	@RequestMapping(value="visitModifyView")
+	@RequestMapping(value="visitModifyView.do")
 	public ModelAndView visitModifyView(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 
 		return mv;
 	}
 	// 게시글 수정
-	@RequestMapping(value="visitUpdate", method=RequestMethod.POST)
+	@RequestMapping(value="visitUpdate.do", method=RequestMethod.POST)
 	public ModelAndView visitUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Visit visit, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
 
 		return mv;
 	}
 	
 	// 게시글 삭제
-	@RequestMapping(value="visitDelete", method=RequestMethod.GET)
+	@RequestMapping(value="visitDelete.do", method=RequestMethod.GET)
 	public String visitDelete(Model model, @RequestParam("visitNo") int visitNo,@RequestParam("renameFilename") String renameFilename,HttpServletRequest request) {
 
 		return "common/errorPage";
@@ -81,18 +81,18 @@ public class VisitController {
 	}
 	// 댓글등록
 	@ResponseBody
-	@RequestMapping(value="addReply", method=RequestMethod.POST)
+	@RequestMapping(value="addReply.do", method=RequestMethod.POST)
 	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
 
 		return "fail";
 	}
 	// 댓글삭제
-	@RequestMapping(value="replyList", method=RequestMethod.GET)
+	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
 	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
 		
 		
 	}
-	@RequestMapping(value="noticeSearch.kh", method=RequestMethod.GET)
+	@RequestMapping(value="noticeSearch.do", method=RequestMethod.GET)
 	public String visitSearch(@ModelAttribute Search search, Model model) {
 		
 		// 2개의 값을 하나에 담아서 보내는 방법

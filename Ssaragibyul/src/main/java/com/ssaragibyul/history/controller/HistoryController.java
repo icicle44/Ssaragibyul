@@ -19,17 +19,17 @@ public class HistoryController {
 	@Autowired
 	private HistoryService hService;
 
-	@RequestMapping(value="historyList.kh", method=RequestMethod.GET)
+	@RequestMapping(value="historyList.do", method=RequestMethod.GET)
 	public ModelAndView historyListView(ModelAndView mv) {
 		
 		return mv;
 	}
-	@RequestMapping(value="historyDetail.kh", method=RequestMethod.GET)
+	@RequestMapping(value="historyDetail.do", method=RequestMethod.GET)
 	public String historyDetail(@RequestParam("historyNo") int noticeNo, Model model) {
 		return "";
 	}
 	
-	@RequestMapping(value="historySearch.kh", method=RequestMethod.GET)
+	@RequestMapping(value="historySearch.do", method=RequestMethod.GET)
 	public String historySearch(@ModelAttribute Search search, Model model) {
 		
 		// 2개의 값을 하나에 담아서 보내는 방법
