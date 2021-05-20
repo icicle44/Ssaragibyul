@@ -77,6 +77,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 								data-aos-delay="100">
@@ -88,6 +89,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 								data-aos-delay="200">
@@ -99,6 +101,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
@@ -110,6 +113,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 								data-aos-delay="100">
@@ -121,6 +125,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 								data-aos-delay="200" style="padding-bottom: 200px;">
@@ -132,6 +137,7 @@
 										<span class="icon icon-search"></span>
 									</div>
 								</a>
+								<p>펀딩 프로젝트 이름</p>
 							</div>
 						</div>
 					</div>
@@ -153,7 +159,7 @@
 
 								</div>
 							</a>
-
+							<p>기부 프로젝트 이름</p>
 						</div>
 						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 							data-aos-delay="100">
@@ -165,6 +171,7 @@
 									<span class="icon icon-search">프로젝트 이름</span>
 								</div>
 							</a>
+							<p>기부 프로젝트 이름</p>
 						</div>
 						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 							data-aos-delay="200">
@@ -176,6 +183,7 @@
 									<span class="icon icon-search"></span>
 								</div>
 							</a>
+							<p>기부 프로젝트 이름</p>
 						</div>
 
 
@@ -189,6 +197,7 @@
 									<span class="icon icon-search"></span>
 								</div>
 							</a>
+							<p>기부 프로젝트 이름</p>
 						</div>
 						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 							data-aos-delay="100">
@@ -200,6 +209,7 @@
 									<span class="icon icon-search"></span>
 								</div>
 							</a>
+							<p>기부 프로젝트 이름</p>
 						</div>
 						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
 							data-aos-delay="200">
@@ -211,6 +221,7 @@
 									<span class="icon icon-search"></span>
 								</div>
 							</a>
+							<p>기부 프로젝트 이름</p>
 						</div>
 
 
@@ -280,14 +291,12 @@
 				data-stellar-background-ratio="0.5" id="section-bio">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-7 text-center">
-						<h1 class="text-white heading text-uppercase" data-aos="fade-up">Welcome</h1>
+						<h1 class="text-white heading text-uppercase" data-aos="fade-up">싸라기별 프로젝트 제안하기</h1>
 						<p class="lead text-white mb-5" data-aos="fade-up"
-							data-aos-delay="100">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Tempore animi accusantium voluptatum saepe.
-							Natus nihil, facere corporis numquam, architecto dolorum.</p>
+							data-aos-delay="100">당신의 마음을 함께 해주세요.</p>
 						<p data-aos="fade-up" data-aos-delay="100">
 							<a href="#section-contact"
-								class="btn btn-primary btn-md smoothscroll">참여하기</a>
+								class="btn btn-primary btn-md smoothscroll">제안하기</a>
 						</p>
 					</div>
 				</div>
@@ -312,7 +321,7 @@
 													Featured in Forbes</a>
 											</h2>
 											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">Jan 18, 2019</a>
+												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
 											</div>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
@@ -333,7 +342,7 @@
 													Featured in Forbes</a>
 											</h2>
 											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">Jan 18, 2019</a>
+												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
 											</div>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
@@ -354,7 +363,7 @@
 													Featured in Forbes</a>
 											</h2>
 											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">Jan 18, 2019</a>
+												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
 											</div>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
@@ -375,7 +384,7 @@
 													Featured in Forbes</a>
 											</h2>
 											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">Jan 18, 2019</a>
+												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
 											</div>
 											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
 												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
@@ -385,8 +394,9 @@
 
 								<div class="col-12 text-center">
 									<div class="custom-pagination">
-										<span>1</span> <a href="#">2</a> <a href="#">3</a> <span>...</span>
-										<a href="#">7</a>
+					                    <div class="d-grid gap-2 col-6 mx-auto">
+					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="#">더보기</button>
+					                    </div>
 									</div>
 								</div>
 							</div>
@@ -454,7 +464,16 @@
 					</div>
 				</div>
 			</section> -->
-
+			<div style="width: 80%; height: 200px; text-align: center;">
+                <nav class="navbar navbar-light bg-light">
+                  <div class="container-fluid">
+                    <form class="d-flex">
+                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                      <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                  </div>
+                </nav>
+            </div>
 
 		<%@include file="footer.jsp" %>
 	</main>
