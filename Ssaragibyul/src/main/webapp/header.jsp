@@ -4,29 +4,23 @@
 <html lang="ko">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>싸라기별</title>
-  <meta content="" name="description">
-
-  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="/resources/img/favicon.png" rel="icon">
   
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
   <!-- Vendor CSS Files -->
   
 
   <!-- Template Main CSS File -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/style_nav.css">
-
-
+  <link rel="stylesheet" href="/resources/css/style_nav.css">
+<link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <style>
 .navbar .getstarted {
@@ -59,7 +53,7 @@
 		          기념관
 		        </a>
 		        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-		          <a class="dropdown-item" href="#">독립유공자 공훈록</a>
+		          <a class="dropdown-item" href="/independenceList">독립유공자 공훈록</a>
 		          <a class="dropdown-item" href="#">별들의 발자취</a>
 		          <div class="dropdown-divider"></div>
 		          <a class="dropdown-item" href="#">별보러 가자</a>
@@ -86,9 +80,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
-  <script src="js/jquery.fancybox.min.js"></script>
+	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/jquery-ui.js"></script>
+	<script src="/resources/js/popper.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/owl.carousel.min.js"></script>
+	<script src="/resources/js/jquery.stellar.min.js"></script>
+	<script src="/resources/js/jquery.countdown.min.js"></script>
+	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
+	<script src="/resources/js/aos.js"></script>
+	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
-  <script src="js/main.js"></script>
+	<script src="/resources/js/jquery.fancybox.min.js"></script>
+
+	<script src="/resources/js/main.js"></script>
     
   </body>
 </html>
