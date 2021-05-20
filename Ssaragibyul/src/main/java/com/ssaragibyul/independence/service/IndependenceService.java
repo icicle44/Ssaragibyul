@@ -9,4 +9,5 @@ public interface IndependenceService {
 	public ArrayList<Independence> printAll();
 	public ArrayList<Independence> printSearchAll(Search search);
 	public Independence printOne(int nId);
+	public int getListCount();
 }

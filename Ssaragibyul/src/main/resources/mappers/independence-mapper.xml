@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="independenceMapper">
+	<resultMap type="Independence" id="independenceResultMap">
+		<id property="independenceNo" column="MNG_NO"/>
+		<result property="nameKo" column="NAME_KO"/>
+		<result property="nameCh" column="NAME_CH"/>
+		<result property="birthday" column="BIRTHDAY"/>
+		<result property="lastday" column="LASTDAY"/>
+		<result property="sex" column="SEX"/>
+		<result property="registerLarge" column="REGISTER_LARGE_DIV"/>
+		<result property="registerMid" column="REGISTER_MID_DIV"/>
+		<result property="prizedYear" column="PRIZED_YEAR"/>
+		<result property="prizeClass" column="PRIZED_CLASS"/>
+		<result property="activityLine" column="ACTIVTY_LINE"/>
+		<result property="achievement" column="ACHIEVEMENT_KO"/>
+	</resultMap>
+
+
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM INDEPENDENCE
+	</select>
+	<select id="selectAllList" resultMap="independenceResultMap">
+		SELECT * FROM INDEPENDENCE ORDER BY MNG_NO
+	</select>
+</mapper>

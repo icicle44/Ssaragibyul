@@ -9,4 +9,5 @@ public interface IndependenceStore {
 	public ArrayList<Independence> selectList();
 	public ArrayList<Independence> selectSearchList(Search search);
 	public Independence selectOne(int nId);
+	public int selectListCount();
 }

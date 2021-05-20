@@ -6,15 +6,15 @@ public class Independence {
 	private int independenceNo;
 	private String nameKo;
 	private String nameCh;
-	private Date birthday;
-	private Date lastday;
+	private String birthday;
+	private String lastday;
 	private String sex;
 	private String registerLarge;
 	private String registerMid;
 	private String activityLine;
-	private Date prizedYear;
+	private int prizedYear;
 	private String prizeClass;
-	private String prizeContents;
+	private String achievement;
 	
 	public Independence() {
 		// TODO Auto-generated constructor stub
@@ -44,19 +44,19 @@ public class Independence {
 		this.nameCh = nameCh;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
-	public Date getLastday() {
+	public String getLastday() {
 		return lastday;
 	}
 
-	public void setLastday(Date lastday) {
+	public void setLastday(String lastday) {
 		this.lastday = lastday;
 	}
 
@@ -92,11 +92,11 @@ public class Independence {
 		this.activityLine = activityLine;
 	}
 
-	public Date getPrizedYear() {
+	public int getPrizedYear() {
 		return prizedYear;
 	}
 
-	public void setPrizedYear(Date prizedYear) {
+	public void setPrizedYear(int prizedYear) {
 		this.prizedYear = prizedYear;
 	}
 
@@ -108,12 +108,12 @@ public class Independence {
 		this.prizeClass = prizeClass;
 	}
 
-	public String getPrizeContents() {
-		return prizeContents;
+	public String getAchievement() {
+		return getAchievement();
 	}
 
-	public void setPrizeContents(String prizeContents) {
-		this.prizeContents = prizeContents;
+	public void setAchivement(String prizeContents) {
+		this.achievement = achievement;
 	}
 
 	@Override
@@ -121,7 +121,7 @@ public class Independence {
 		return "independence [independenceNo=" + independenceNo + ", nameKo=" + nameKo + ", nameCh=" + nameCh
 				+ ", birthday=" + birthday + ", lastday=" + lastday + ", sex=" + sex + ", registerLarge="
 				+ registerLarge + ", registerMid=" + registerMid + ", activityLine=" + activityLine + ", prizedYear="
-				+ prizedYear + ", prizeClass=" + prizeClass + ", prizeContents=" + prizeContents + "]";
+				+ prizedYear + ", prizeClass=" + prizeClass + ", achievement=" + achievement + "]";
 	}
 	
 	
