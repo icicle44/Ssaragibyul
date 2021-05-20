@@ -38,11 +38,12 @@
 	<%-- <%@include file="introduce.jsp" %> --%>
 	<%@include file="../../../header.jsp" %>
 
-	<div class="back1">
-	<div>
-	안녕하세요</div>
-	</div>
-	<div class="back2">
+	<!-- <div class="blur back1">	</div> -->
+	<div class="content">
+	<p style="color:#fff;">bg에만 blur가  적용되어야 한다면</p>
+</div>
+<div class="back3"></div>
+	<div class="blur back2">
 	안녕하세요2
 	</div>
 	
