@@ -59,7 +59,7 @@
 		        </div>
 		      </li>
 			  <li class="nav-item">
-		        <a class="nav-link" href="#">펀딩</a>
+		        <a class="nav-link" href="/fundingMain">펀딩</a>
 		      </li>
 			  <li class="nav-item">
 		        <a class="nav-link" href="#">기부</a>
@@ -69,7 +69,7 @@
 		      </li>
 		      	
 		    </ul>
-			  	<a class="getstarted scrollto" href="#">참여하기</a>
+			  	<a class="getstarted scrollto" href="/SuggestMain">참여하기</a>
 			<a class="nav-link" href="#">로그인</a>
 		  </div>
 		

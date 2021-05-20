@@ -29,7 +29,7 @@
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
 	<%-- <%@include file="introduce.jsp" %> --%>
-	<%@include file="header.jsp" %>
+	<%@include file="../../../header.jsp" %>
 
 	<header class="header-bar d-flex align-items-center site-navbar-target"
 		data-aos="fade-right">
@@ -47,6 +47,11 @@
 			<div style="height: 1080px; padding-top: 200px;">
 				<section class="row align-items-stretch photos" id="section-funding">
 				<h2>진행중 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				 <select name = "chose1" class="select">
+					          <option value = "money_list" selected>모금액 순</option>
+					          <option value = "news_list">최신글 순</option>
+					          <option value = "like_list">좋아요 순</option>
+				</select>
 					<div class="col-12">
 						<div class="row align-items-stretch">
 
@@ -123,15 +128,27 @@
 									</div>
 								</a>
 								<p>펀딩 프로젝트 이름</p>
+								
 							</div>
+							
 						</div>
+						
 					</div>
+			<button class="btn">프로젝트 더 보기</button> 
+					
 				</section>
 				<!-- #section-funding -->
+				
 			</div>
+			<br><br><br><br><br><br>
 			<!-- 기부 프로젝트 -->
 			<section class="row align-items-stretch photos" id="section-donation">
 							<h2>종료된 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+						 <select name = "chose2" class="select">
+					          <option value = "money_list" selected>모금액 순</option>
+					          <option value = "news_list">최신글 순</option>
+					          <option value = "like_list">좋아요 순</option>
+				</select>
 				<div class="col-12">
 					<div class="row align-items-stretch">
 
@@ -214,10 +231,14 @@
 					</div>
 
 				</div>
+				<button class="btn">프로젝트 더 보기</button> 
 			</section>
 			<!-- #section-donation -->
 
+<div>
+<br><br><br><br><br><br><br>
 
+</div>
 <!-- 			<section class="site-section darken-bg" id="section-contact">
 				<div class="container">
 					<div class="row justify-content-center">
@@ -279,7 +300,7 @@
 			</section> -->
 
 
-		<%@include file="footer.jsp" %>
+		<%@include file="../../../footer.jsp" %>
 	</main>
 
 	<!-- .site-wrap -->

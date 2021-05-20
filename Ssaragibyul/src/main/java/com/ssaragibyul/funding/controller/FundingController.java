@@ -46,6 +46,15 @@ public class FundingController {
 
 		return mv;
 	}
+	 @RequestMapping(value="fundingMain", method=RequestMethod.GET)
+	 public String fundingMain() {
+		 return "funding/fundingMain";
+	 }
+
+	 @RequestMapping(value="SuggestMain", method=RequestMethod.GET)
+	 public String SuggestMain() {
+		 return "common/Suggest";
+	 }
 
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
