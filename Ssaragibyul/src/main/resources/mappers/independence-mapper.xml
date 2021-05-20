@@ -22,6 +22,6 @@
 		SELECT COUNT(*) FROM INDEPENDENCE
 	</select>
 	<select id="selectAllList" resultMap="independenceResultMap">
-		SELECT * FROM INDEPENDENCE ORDER BY MNG_NO
+		SELECT * FROM INDEPENDENCE  WHERE MNG_NO &lt;= 100 ORDER BY MNG_NO
 	</select>
 </mapper>

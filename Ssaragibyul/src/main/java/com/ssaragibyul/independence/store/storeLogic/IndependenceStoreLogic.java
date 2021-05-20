@@ -17,6 +17,7 @@ public class IndependenceStoreLogic implements IndependenceStore{
 	
 	@Override
 	public ArrayList<Independence> selectList() {
+		System.out.println("store iList : " + sqlSession.selectList("independenceMapper.selectAllList"));
 		return (ArrayList)sqlSession.selectList("independenceMapper.selectAllList");
 	}
 

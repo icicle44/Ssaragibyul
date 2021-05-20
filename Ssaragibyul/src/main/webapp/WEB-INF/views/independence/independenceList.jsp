@@ -34,7 +34,7 @@
 		</div>
 		<div class="table-users">
 			<!--    <div class="header">Users</div> -->
-
+${independence}
 			<table class="table" cellspacing="0">
 				<tr>
 					<th>순번</th>
@@ -46,7 +46,7 @@
 					<th>포상훈격</th>
 					<th>본적</th>
 				</tr>
-				<c:forEach items="${iList }" var="independence }">
+				<c:forEach items="${iList }" var="independence ">
 				<tr>
 					<td align="center">${independence.mngNo }</td>
 					<td align="center">${independence.nameKo }</td>

@@ -17,6 +17,7 @@ public class IndependenceServiceImpl implements IndependenceService{
 	
 	@Override
 	public ArrayList<Independence> printAll() {
+		System.out.println("service iList" + iStore.selectList());
 		return iStore.selectList();
 	}
 
