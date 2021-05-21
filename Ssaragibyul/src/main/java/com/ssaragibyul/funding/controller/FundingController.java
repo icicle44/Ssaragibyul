@@ -47,17 +47,17 @@ public class FundingController {
 
 		return mv;
 	}
-	 @RequestMapping(value="fundingMain", method=RequestMethod.GET)
+	 @RequestMapping(value="fundingMain.do", method=RequestMethod.GET)
 	 public String fundingMain() {
 		 return "funding/fundingMain";
 	 }
 
-	 @RequestMapping(value="SuggestMain", method=RequestMethod.GET)
+	 @RequestMapping(value="SuggestMain.do", method=RequestMethod.GET)
 	 public String SuggestMain() {
 		 return "common/Suggest";
 	 }
 	 						
-	 @RequestMapping(value="fundingSuggest", method=RequestMethod.GET)
+	 @RequestMapping(value="fundingSuggest.do", method=RequestMethod.GET)
 	 public String FsuggestMain() {
 		 return "funding/fundingSuggest";
 	 }
