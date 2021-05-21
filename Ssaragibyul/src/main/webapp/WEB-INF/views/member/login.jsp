@@ -17,10 +17,11 @@
         </header>
         <jsp:include page="../../../header.jsp"/>
         <form action="memberLogin.do" method="get">
+        <div class="frame">
         <div class='preload login--container'>
             <div class='login--form'>
                 <div class='login--username-container'>
-                    <input autofocus placeholder='아이디를 입력해주세요.' type='text' name="userId">
+                    <input placeholder='아이디를 입력해주세요.' type='text' name="userId">
                 </div>
                 <div class='login--password-container'>
                     <input placeholder='비밀번호를 입력해주세요.' type='password' name="userPw">
@@ -47,6 +48,7 @@
                     <div id="pwSearch">비밀번호 찾기</div>
                 </a>
             </div>
+        </div>
         </div>
         </form>
  			<jsp:include page="../../../footer.jsp"/>

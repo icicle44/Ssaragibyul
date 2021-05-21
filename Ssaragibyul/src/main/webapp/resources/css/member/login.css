@@ -5,7 +5,7 @@ body{
     background-color: black;
 /*     background-size: cover; */
     width: auto;
-    height: 1000px;
+    height: 1200px;
 }
 
 header{
@@ -13,9 +13,13 @@ header{
     height: 100px;
 }
 form{
+	height: 700px;
 	background-color: black;
 }
 
+.frame{
+	padding-top:150px;
+}
 * {
   margin: 0;
   padding: 0;
@@ -54,6 +58,9 @@ input[type="text"]:focus, input[type="password"]:focus {
   box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.3);
 }
 
+input[type="text"]:focus, input[type="password"]::-webkit-input-placeholder { 
+    padding-left: 10px;
+}
 
 button {
     padding-left: 1.5em;
@@ -116,6 +123,7 @@ button {
   padding: 0.5em;
 }
 
+//웅
 .login--username-container {
     transform-origin: 100% 0%;
     transform: perspective(1000px) rotateY(180deg);
@@ -130,14 +138,16 @@ button {
 
 
 /*회원가입*/
+
 .content2{
     height: 200px;
     position: relative;
+    padding-top: 50px;
 }
 #join{
     width: 400px;
     position: absolute;
-    left: 40%;
+    left: 42%;
 }
 #coment{
     padding-right: 7px;
@@ -165,9 +175,9 @@ button {
     height: 50px;
     width: 350px;
     padding-left: 50px;  
-    padding-top: 40px;
+    padding-top: 70px;
     position: absolute;
-    left: 40%;
+    left: 42%;
 }
 
 #link{
