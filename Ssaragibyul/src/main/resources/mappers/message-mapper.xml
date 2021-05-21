@@ -51,6 +51,9 @@
 		</if>
 	</select>
 
+	<insert id="insertMemMessage" parameterType="Message">
+		INSERT INTO MESSAGE VALUES(SEQ_MESSAGEID.NEXTVAL, #{senderId}, #{receiverId}, #{msgTitle}, #{msgContents}, #{presentPoint}, LOCALTIMESTAMP, DEFAULT, DEFAULT, DEFAULT, #{msgType})
+	</insert>
 
 
 

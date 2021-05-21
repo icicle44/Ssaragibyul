@@ -1,10 +1,13 @@
 package com.ssaragibyul.message.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,39 +43,39 @@ public class MessageController {
 	////////////쪽지유형 jsp에서 넘겨줄 것!!!
 	
 	//쪽지작성 화면으로 이동
-	//작성화면으로 넘어갈 때 자동으로 받는사람 아이디, 닉네임(관리자는 관리자로) 뜨도록 넘겨줄 것
+	//작성화면으로 넘어갈 때 자동으로 받는사람 아이디, 닉네임(관리자는 관리자로) 뜨도록 넘겨줄 것(message에 담아서)
 	@RequestMapping(value="msgWriterView.do", method=RequestMethod.GET)
 	public ModelAndView messageWriterView(ModelAndView mv,
 										@ModelAttribute Message message,
 										@RequestParam("nickName") String nickName,
 										HttpSession session) {
-		if(session.getAttribute("loginUser") != null) {
+//////////////////미비부분: 로그인 완성되면 session 이용하기
+		
+//		if(session.getAttribute("loginUser") != null) {
+//			Member loginUser = (Member)session.getAttribute("loginUser");
+//			message.setSenderId(loginUser.getUserId());
 			mv.addObject("message", message);
 			mv.addObject("nickName", nickName);
 			mv.setViewName("message/messageWriteForm");
-		} else {
+//		} else {
 			//mv.addObject("msg", "로그인 해주세요.");
-			//mv.setViewName("common/main");
-		}
+			//mv.setViewName("");
+//		}
 		return mv;
 	}
 	
 	//1:1 쪽지 등록(회원, 관리자 모두 보낼 수 있음)
 	@RequestMapping(value="registerMemMsg.do", method=RequestMethod.POST)
 	public ModelAndView registerMemMessage(@ModelAttribute Message message
-										, HttpSession session
 										, ModelAndView mv) {
 		//jsp에서 session memberId 잊지말고 가져오기!
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		message.setSenderId(loginUser.getUserId());
 		//jsp에서 <a href=경로?${member.userId}>나 hidden으로 받는사람 아이디? 닉네임? 가져오기!
-		
-		//jsp에 선물포인트 등 디폴트값, 0 등 필요한 값 input태그에 value로 넣어두기
+		//
 		int result = msgService.registerMemMessage(message);
 		
 		/////////////////선물포인트가 0이 아닌 경우, 포인트내역 insert 메소드 호출하기!(posi, neg 둘다 호출)
 		//if(message.getPresentPoint != 0 )
-		
+		System.out.println(message.toString());
 		return mv;
 	}
 	
@@ -123,36 +126,39 @@ public class MessageController {
 	@RequestMapping(value="noticeMsgList.do", method=RequestMethod.GET)
 	public ModelAndView noticeMessageList(ModelAndView mv,
 										@RequestParam(value="page", required=false) Integer page) { 
-
+		
+/////////////////미비부분: 로그인 완성되면 session 이용하기		
+		//로그인여부 체크
 		int currentPage = (page != null)? page : 1;
 		int listCount = msgService.getNoticeListCount();
 		PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
 		ArrayList<Message> nMList = msgService.printAllnMsg(pi);
 		if(!nMList.isEmpty()) {
 			mv.addObject("msgList", nMList);
-			mv.addObject("pi", pi);
-			mv.addObject("flag", "notice");
-			mv.setViewName("message/messageListView");
 		}else {
-//			mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
-//			mv.setViewName("common/main");
+			mv.addObject("msg", "공지가 없습니다.");
 		}
+		mv.addObject("pi", pi);
+		mv.addObject("flag", "notice");
+		mv.setViewName("message/messageListView");
 		return mv;
 	} 
 	
 	//받은쪽지 리스트 출력
 	@RequestMapping(value="recMsgList.do", method=RequestMethod.GET)
 	public ModelAndView receivedMessageList(ModelAndView mv,
-											//HttpSession session,
-											@RequestParam("userId") String userId,
+											HttpSession session,
+											//@RequestParam("userId") String userId,
 											@RequestParam(value="page", required=false) Integer page) {
+/////////////////미비부분: 로그인 완성되면 session 이용하기
+		
 		//공지쪽지여부 컬럼값 1인 쪽지는 받은사람 아이디 null이라 어차피 select 안됨
 		
 		//userId 넘겨주거나, 아니면 session, jsp에 하드코딩 해놓은것 고치기!!!
 		//전체 로그인체크로 쌀 것
 		
-		//String userId = ((Member)session.getAttribute("loginUser")).getUserId();
-		
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		System.out.println(userId);
 		String flag = "rec";
 
 		HashMap<String, String> cntMap = new HashMap<String, String>();
@@ -166,13 +172,13 @@ public class MessageController {
 		rMList.toString();
 		if(!rMList.isEmpty()) {
 			mv.addObject("msgList", rMList);
-			mv.addObject("pi", pi);
-			mv.addObject("flag", flag);
-			mv.setViewName("message/messageListView");
+					
 		}else {
-			//mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
-			//mv.setViewName("common/main");
+			mv.addObject("msg", "받은 쪽지가 없습니다.");
 		}
+		mv.addObject("pi", pi);
+		mv.addObject("flag", flag);	
+		mv.setViewName("message/messageListView");
 		return mv;
 	}
 	
@@ -182,6 +188,8 @@ public class MessageController {
 										@RequestParam("userId") String userId,
 										//HttpSession session,
 										@RequestParam(value="page", required=false) Integer page) {
+/////////////////미비부분: 로그인 완성되면 session 이용하기
+		
 		//전체 로그인체크로 쌀 것
 		//String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 		
@@ -196,13 +204,13 @@ public class MessageController {
 		ArrayList<MessageAndNick> sMList = msgService.printAllsMsg(pi, userId);
 		if(!sMList.isEmpty()) {
 			mv.addObject("msgList", sMList);
-			mv.addObject("pi", pi);
-			mv.addObject("flag", flag);
-			mv.setViewName("message/messageListView");
+			
 		}else {
-//			mv.addObject("msg", "공지 쪽지 리스트 조회 실패");
-//			mv.setViewName("common/main");			
+			mv.addObject("msg", "보낸 쪽지가 없습니다.");			
 		}
+		mv.addObject("pi", pi);
+		mv.addObject("flag", flag);
+		mv.setViewName("message/messageListView");
 		return mv;
 	}
 	
@@ -250,4 +258,14 @@ public class MessageController {
 		
 		return mv;
 	}
+	
+	/*
+	 * public static void alertAndMovePage(HttpServletResponse response, String
+	 * alertText, String nextPage) {
+	 * response.setContentType("text/html; charset=utf-8"); try { PrintWriter out =
+	 * response.getWriter();
+	 * out.println("<script>location.href='"+nextPage+"'; alert("+alertText+
+	 * ");</script>"); out.flush(); } catch (IOException e) { // TODO Auto-generated
+	 * catch block e.printStackTrace(); } }
+	 */
 }
