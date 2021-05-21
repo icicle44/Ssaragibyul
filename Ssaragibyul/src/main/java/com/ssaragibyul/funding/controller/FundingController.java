@@ -38,6 +38,7 @@ import com.ssaragibyul.visit.domain.Visit;
 @Controller
 public class FundingController {
 
+	// 깃 확인용
 	@Autowired
 	private FundingService fService;
 	
