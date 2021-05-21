@@ -27,7 +27,7 @@
 		
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
 	<!-- 전부 한글로 만들 수 있는 필터 -->
 	<filter>
