@@ -34,10 +34,10 @@
         </div>
         <div class="content2">
             <div id="join">
-                <div id="coment">아직도 싸라기별 아이디가 없으신가요?</div>
-                <a href="#" id="link">
-                    <div id="joinGo">회원가입</div>
-                </a>
+                	<div id="coment">아직도 싸라기별 아이디가 없으신가요?</div>
+                  <a href="enrollView.do" id="link">
+                    <div id="joinGo">회원가입 </div>
+                  </a>
             </div>
             <div class="search">
                 <a href="#" id="link">

@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
 body{
-    /* background-img: url(/resources/img/images/loginbackground.jpg); */
-    background-color: black;
-/*     background-size: cover; */
+    background-img: url(/resources/img/images/space_background.jpg);
+   /*  background-color: black; */
+    background-size: cover;
     width: auto;
-    height: 1200px;
+    height: 1100px;
 }
 
 header{
@@ -18,7 +18,7 @@ form{
 }
 
 .frame{
-	padding-top:150px;
+	padding-top:170px;
 }
 * {
   margin: 0;
@@ -60,7 +60,7 @@ input[type="text"]:focus, input[type="password"]:focus {
 
 input[type="text"]:focus, input[type="password"]::-webkit-input-placeholder { 
     padding-left: 10px;
-}
+} 
 
 button {
     padding-left: 1.5em;
@@ -80,6 +80,7 @@ button {
 
 .login--login-submit {
   float: right;
+  border-radius: 5px;
 }
 
 .login--container {
@@ -123,12 +124,11 @@ button {
   padding: 0.5em;
 }
 
-//웅
 .login--username-container {
     transform-origin: 100% 0%;
     transform: perspective(1000px) rotateY(180deg);
     transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
-    background-color: none;
+    background-color: black;
     backface-visibility: hidden;
 }
 
@@ -140,48 +140,49 @@ button {
 /*회원가입*/
 
 .content2{
+	width: 600px;
     height: 200px;
-    position: relative;
-    padding-top: 80px;
+    padding-top : 60px;
+    padding-left: 120px;
+    margin: 0 auto;
+  	top: 25%;
+    
 }
 #join{
-    width: 400px;
-    position: absolute;
-    left: 42%;
+    width: 370px;
+    height: 80px;
 }
+
 #coment{
-    padding-right: 7px;
+    padding-right: 13px;
     float: left;
     color: white;
     font-weight: 600;
-}
-
-#joinlink{
-    text-decoration: none; 
 }
 
 #joinGo{
     color: white;
     font-size: 18px;
     font-weight: 700;
-    color: rgb(235, 92, 1);
+    color:  rgb(174, 174, 174); 
 }
 
-#joinGo:active{
-    color:  rgb(174, 174, 174); 
+#joinGo:hover{
+    color: rgb(235, 92, 1);
 }
 
 .search{
     height: 50px;
     width: 350px;
     padding-left: 50px;  
-    padding-top: 70px;
-    position: absolute;
-    left: 42%;
+    padding-top: 10px;
+/*     left: 41%; */
 }
 
 #link{
     text-decoration: none; 
+    hight:100%;
+    width:100%;
 }
 
 #idSearch{
@@ -192,7 +193,7 @@ button {
     font-weight: 700;
 }
 
-#idSearch:active{
+#idSearch:hover{
     color: rgb(235, 92, 1);
 }
 
@@ -211,7 +212,7 @@ button {
     text-decoration: none;
     font-weight: 700;
 }
-#pwSearch:active{
+#pwSearch:hover{
     color: rgb(235, 92, 1);
 }
 

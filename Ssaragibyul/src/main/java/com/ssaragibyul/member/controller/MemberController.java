@@ -46,7 +46,7 @@ public class MemberController {
 	public String memberLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:index"; // sendRedirect와 유사함
+		return "redirect:index.jsp"; // sendRedirect와 유사함
 	}
 	
 	/*
