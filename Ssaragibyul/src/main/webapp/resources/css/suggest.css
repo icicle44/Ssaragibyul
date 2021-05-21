@@ -1465,49 +1465,47 @@ a:hover {
 	color: #fff;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5)
 }
-/* .content{
+/*  .content{
   left: 0;
   right: 0;
   z-index: 9999;
   margin-left: 20px;
   margin-right: 20px;
+} */
+.back0{
+	min-height:100px;
+	min-width : 100%;
 }
 .back1{
 	background: url('/resources/img/SuggestMain_01_Funding.png') ;
-  left: 0;
-  right: 0;
-  z-index: -1;
 	 min-height: 500px;
 	 min-width : 100%;
-  -webkit-filter: blur(5px);
+/*   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
-  filter: blur(5px);
+  filter: blur(5px); */
 
 
 }
-.back3{
+/* .back3{
 	 min-height: 500px;
 	 min-width : 100%;	
-}
+} */
 
 
 .back2{
 	background: url('/resources/img/SuggestMain_02_Donation.png') ;
-  left: 0;
-  right: 0;
-	z-index:1;
 	 min-height: 500px;
 	 min-width : 100%;
-  -webkit-filter: blur(5px);
+/*   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
-  filter: blur(5px);
-} */
+  filter: blur(5px); */
+} /*
 .content {
-  /* this is needed or the background will be offset by a few pixels at the top */
+  this is needed or the background will be offset by a few pixels at the top
   overflow: auto;
   position: relative;
 }
@@ -1530,6 +1528,10 @@ a:hover {
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+} 블러가 안돼.....ㅜㅠㅡㅜㅠ */
+.suggestBtn{
+	margin-left: 1111px;
+	margin-top: 333px;
 }
 /*# 
 ourceMappingURL=style.css.map */

@@ -37,14 +37,14 @@
 	data-offset="200">
 	<%-- <%@include file="introduce.jsp" %> --%>
 	<%@include file="../../../header.jsp" %>
-
+	<div class="back0"></div>
 	<!-- <div class="blur back1">	</div> -->
-	<div class="content">
-	<p style="color:#fff;">bg에만 blur가  적용되어야 한다면</p>
-</div>
-<div class="back3"></div>
+	<div class="blur back1">
+	<button class="suggestBtn" onclick="location.href='/fundingSuggest'">펀딩</button>
+	</div>
+<!-- <div class="back3"></div> -->
 	<div class="blur back2">
-	안녕하세요2
+	<button class="suggestBtn" onclick="location.href='DONATION">기부</button>
 	</div>
 	
 	<br>	<br>	<br>	<br>	<br>	<br>
