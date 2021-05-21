@@ -7,7 +7,7 @@
 			<a href="/index.jsp" class="logo d-flex" style="text-decoration: none;"> <img src="/resources/img/favicon.png" alt="logo">
 				<span id="starLogo"><h3>싸라기별</h3></sapn>
 			</a>
-				<p style="font-size: 14px;">
+				<p style="font-size: 11px;">
 					서울 중구 남대문로 120 대일빌딩 2F, 3F<br>
 					통신판매업신고 : 2021-서울중구-0615 |<br>
 					사업자등록번호 : 100-10-1010100 | <br>
@@ -17,26 +17,24 @@
 			<div class="col-4" style="padding-top: 22px;">
 			
 		      <ul class="bd-footer-links" style="margin-bottom: 0">
-		         <li class="d-inline-block" style="font-size: 14px;"><b>사이트 소개</b></li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">싸라기별이란?</li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">자주 묻는 질문</li><br>
+		         <li class="d-inline-block" style="font-size: 11px;"><b>사이트 소개</b></li><br>
+		         <li class="d-inline-block ms-3" style="font-size: 10px;">싸라기별이란?</li><br>
+		         <li class="d-inline-block ms-3" style="font-size: 10px;">자주 묻는 질문</li><br>
 		      </ul>
 		     </div>
 		     <div class="col-4" style="padding-top: 22px;">
 		      <ul class="bd-footer-links" style="margin-bottom: 0">
-		         <li class="d-inline-block" style="font-size: 14px;"><b>이용 약관</b></li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">회원가입 기본약관</li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">펀딩 이용약관</li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">기부 이용약관</li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">개인정보 처리방침(펀딩)</li><br>
-		         <li class="d-inline-block ms-3" style="font-size: 12px;">개인정보 처리방침(기부)</li><br>
+		         <li class="d-inline-block" style="font-size: 11px;"><b>이용 약관</b></li><br>
+		         <li class="d-inline-block ms-3" style="font-size: 11px;">회원가입 기본약관</li><br>
+		         <li class="d-inline-block ms-3" style="font-size: 11px;">펀딩 이용약관</li><br>
+		         <li class="d-inline-block ms-3" style="font-size: 11px;">기부 이용약관</li><br>
 		      </ul>
 		      </div>
 		</div>
 		<br>
 		<div class="row justify-content-center">
 			<div class="col-md-12 text-center">
-				<p>
+				<p style="font-size: 10px;">
 					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
 					Copyright &copy;
 					<script>document.write(new Date().getFullYear());</script>
