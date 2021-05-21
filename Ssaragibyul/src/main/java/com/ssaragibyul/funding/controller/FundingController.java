@@ -33,11 +33,12 @@ import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
-
+// 깃 확인용 주석
 
 @Controller
 public class FundingController {
 
+	// 깃 확인용
 	@Autowired
 	private FundingService fService;
 	
