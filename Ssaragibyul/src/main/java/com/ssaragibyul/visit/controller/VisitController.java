@@ -28,8 +28,9 @@ public class VisitController {
 	@Autowired
 	private VisitService vService;
 	
+	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
 	public ModelAndView visitListView(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
-
+		
 		return mv;
 	}
 	

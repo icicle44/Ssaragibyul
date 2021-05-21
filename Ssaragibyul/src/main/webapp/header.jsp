@@ -57,7 +57,7 @@
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> 기념관 </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: center; width: 200px;">
-							<a class="dropdown-item" href="/independenceList">독립유공자 공훈록</a> <a
+							<a class="dropdown-item" href="/independenceList.do">독립유공자 공훈록</a> <a
 								class="dropdown-item" href="#">별들의 발자취</a> <a
 								class="dropdown-item" href="#">별보러 가자</a>
 						</div></li>
