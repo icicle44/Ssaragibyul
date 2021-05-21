@@ -25,7 +25,7 @@ public class IndependenceController {
 	@Autowired
 	private IndependenceService iService;
 
-	@RequestMapping(value="independenceList", method=RequestMethod.GET)
+	@RequestMapping(value="independenceList.do", method=RequestMethod.GET)
 	public ModelAndView independenceList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
 		int listCount =iService.getListCount();
