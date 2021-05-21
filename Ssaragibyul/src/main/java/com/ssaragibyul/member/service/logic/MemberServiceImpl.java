@@ -15,7 +15,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member loginMember(Member member) {
-		return mStore.loginMember(member);
+		return mStore.selectOneMember(member);
 	}
 
 	@Override

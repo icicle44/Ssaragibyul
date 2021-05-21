@@ -70,14 +70,14 @@
 				<c:if test="${ empty sessionScope.loginUser }">
 					<div>
 						<a class="getstarted scrollto" href="/SuggestMain" style="text-decoration: none;">제안하기</a> 
-						<a class="nav-link" href="#">로그인</a>
+						<a class="nav-link" href="login.do">로그인</a>
 					</div>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId =='admin'}">
 					<div>
 						<a class="nav-link" href="#">관리자페이지</a> 
-						<a class="nav-link" href="#">로그아웃</a>
+						<a class="nav-link" href="logout.kh">로그아웃</a>
 					</div>
 				</c:if>
 				
@@ -85,7 +85,7 @@
 					<div>
 						<a class="getstarted scrollto" href="/SuggestMain" style="text-decoration: none;">제안하기</a> 
 						<a class="nav-link" href="#">마이페이지</a>
-						<a class="nav-link" href="#">로그아웃</a> 
+						<a class="nav-link" href="logout.kh">로그아웃</a> 
 					</div>
 				</c:if>
 				

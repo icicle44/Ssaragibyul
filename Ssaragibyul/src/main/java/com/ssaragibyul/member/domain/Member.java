@@ -6,6 +6,7 @@ public class Member {
 	private String userId;
 	private String userPw;
 	private String nickName;
+	private String userName;
 	private String userEmail;
 	private String userPhone;
 	private String userAddr;
@@ -18,7 +19,7 @@ public class Member {
 	public Member() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	public Member(String userId, String userPw) {
 		super();
 		this.userId = userId;
@@ -47,6 +48,14 @@ public class Member {
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
 	public String getUserEmail() {
@@ -115,9 +124,12 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [userId=" + userId + ", userPw=" + userPw + ", nickName=" + nickName + ", userEmail=" + userEmail
-				+ ", userPhone=" + userPhone + ", userAddr=" + userAddr + ", birthday=" + birthday + ", enrollDate="
-				+ enrollDate + ", withdrawDate=" + withdrawDate + ", mngNo=" + mngNo + "]";
+		return "Member [userId=" + userId + ", userPw=" + userPw + ", nickName=" + nickName + ", userName=" + userName
+				+ ", userEmail=" + userEmail + ", userPhone=" + userPhone + ", userAddr=" + userAddr + ", birthday="
+				+ birthday + ", enrollDate=" + enrollDate + ", withdrawDate=" + withdrawDate + ", mCode=" + mCode
+				+ ", mngNo=" + mngNo + "]";
 	}
+	
+	
 	
 }

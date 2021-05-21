@@ -21,17 +21,35 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
-	@RequestMapping(value="login.kh", method=RequestMethod.POST)
-	public String memberLogin(HttpServletRequest request) {
-			return "";
+	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
+	  public String loginView() {
+	        return "member/login";
+	  }
+	
+	
+	@RequestMapping(value="memberLogin.do", method =  {RequestMethod.GET, RequestMethod.POST})
+	public String memberLogin(HttpServletRequest request,
+							@ModelAttribute Member member, Model model) {
+		
+		Member mOne = new Member(member.getUserId(), member.getUserPw());
+		Member loginUser = mService.loginMember(mOne);
+		if (loginUser != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+			return "index";
+		}else {
+			model.addAttribute("msg", "로그인 실패");
+			return "common/errorPage";
+		}
 	}
 	@RequestMapping(value="logout.kh", method=RequestMethod.GET)
 	public String memberLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "redirect:"; // sendRedirect와 유사함
-		
+		return "redirect:index"; // sendRedirect와 유사함
 	}
+	
+	/*
 	// 회원가입 폼
 	@RequestMapping(value="enrollView.kh", method=RequestMethod.GET)
 	public String enrollView() {
@@ -81,4 +99,5 @@ public class MemberController {
 
 		return "common/errorPage";
 	}
+	*/
 }

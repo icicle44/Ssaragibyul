@@ -5,14 +5,16 @@
 	<resultMap type="Member" id="memberResultMap">
 		<id property="userId" column="USER_ID"></id>
 		<result property="userPw" column="USER_PW"></result>
-		<result property="userName" column="USER_NAME"></result>
+		<result property="nickName" column="USER_NAME"></result>
+		<result property="userName" column="NICKNAME"></result>
 		<result property="userEmail" column="USER_EMAIL"></result>
-		<result property="userAge" column="USER_AGE"></result>
 		<result property="userPhone" column="USER_PHONE"></result>
 		<result property="userAddr" column="USER_ADDR"></result>
+		<result property="birthday" column="BIRTHDAY"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
-		<result property="updateDate" column="UPDATE_DATE"></result>
-		<result property="mStatus" column="M_STATUS"></result>
+		<result property="withdrawDate" column="WITHDRAW_DATE"></result>
+		<result property="mCode" column="M_CODE"></result>
+		<result property="mngNo" column="MNG_NO"></result>
 	</resultMap>
 
 	<select id="selectOneMember" parameterType="Member" resultMap="memberResultMap">
@@ -20,7 +22,7 @@
 		WHERE USER_ID = #{userId } AND USER_PW = #{userPw } 
 	</select>
 	
-	<select id="checkIdDup" resultType = "_int">
+<!-- 	<select id="checkIdDup" resultType = "_int">
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID = #{userId }
 	</select>	
 	
@@ -34,6 +36,6 @@
 	
 	<delete id="deleteMember" parameterType="Member">
 		DELETE MEMBER WHERE USER_ID = #{userId }
-	</delete>
+	</delete> -->
 	
 </mapper>

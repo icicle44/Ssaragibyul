@@ -1,5 +1,7 @@
 package com.ssaragibyul.member.store.logic;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.member.domain.Member;
@@ -8,10 +10,12 @@ import com.ssaragibyul.member.store.MemberStore;
 @Repository
 public class MemberStoreLogic implements MemberStore{
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
-	public Member loginMember(Member member) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member selectOneMember(Member member) {
+		return sqlSession.selectOne("memberMapper.selectOneMember", member);
 	}
 
 	@Override
