@@ -25,7 +25,7 @@ public class DonationController {
 	private DonationService dService;
 
 	// 기부 리스트 보여주기(dListView)
-	@RequestMapping(value = "dListView.com", method = RequestMethod.GET)
+	@RequestMapping(value = "dListView.do", method = RequestMethod.GET)
 	public ModelAndView dListView(ModelAndView mv, Object Pagination) {
 		int cuurentPage = 0;
 		int listCount = dService.getListCount();

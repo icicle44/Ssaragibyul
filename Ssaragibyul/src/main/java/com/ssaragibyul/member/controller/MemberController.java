@@ -42,7 +42,7 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
-	@RequestMapping(value="logout.kh", method=RequestMethod.GET)
+	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String memberLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
