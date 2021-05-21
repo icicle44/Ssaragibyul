@@ -36,7 +36,7 @@ public class MemberController {
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			return "index";
+			return "redirect:index.jsp";
 		}else {
 			model.addAttribute("msg", "로그인 실패");
 			return "common/errorPage";

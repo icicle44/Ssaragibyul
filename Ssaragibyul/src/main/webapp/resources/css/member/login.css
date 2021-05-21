@@ -2,7 +2,7 @@
 
 body{
     /* background-img: url(/resources/img/images/loginbackground.jpg); */
-    background-color: ;
+    background-color: black;
 /*     background-size: cover; */
     width: auto;
     height: 1000px;
@@ -12,7 +12,9 @@ header{
     width: auto;
     height: 100px;
 }
-
+form{
+	background-color: black;
+}
 
 * {
   margin: 0;

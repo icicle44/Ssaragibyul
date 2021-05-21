@@ -57,14 +57,21 @@
             var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
         </script>
         <script>    
-           (function() {
-              $(".js-toggle-login").click(() => {
-                window.clearTimeout(this.timer);
-                $(".login--container").toggleClass("login--active");
-                return $(".login--username-container input").focus();
-              });
+        (function() {
+        	  $(function() {
+        	    $(".login--container").removeClass("preload");
+        	    this.timer = window.setTimeout(() => {
+        	    return $(".login--container").toggleClass("login--active");
+        	    }, 3000);
+        	    return $(".js-toggle-login").click(() => {
+        	      window.clearTimeout(this.timer);
+        	      $(".login--container").toggleClass("login--active");
+        	      return $(".login--username-container input").focus();
+        	    });
+        	  });
 
-            }).call(this);
+        	}).call(this);
+
     </script>
     </body>
 </html>
