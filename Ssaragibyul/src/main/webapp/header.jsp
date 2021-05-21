@@ -61,7 +61,7 @@
 								class="dropdown-item" href="#">별들의 발자취</a> <a
 								class="dropdown-item" href="#">별보러 가자</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link" href="/fundingMain">펀딩</a>
+					<li class="nav-item"><a class="nav-link" href="fundingMain.co">펀딩</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="#">기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">가이드</a></li>
@@ -69,7 +69,7 @@
 				</ul>
 				<c:if test="${ empty sessionScope.loginUser }">
 					<div>
-						<a class="getstarted scrollto" href="/SuggestMain" style="text-decoration: none;">제안하기</a> 
+						<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a> 
 						<a class="nav-link" href="login.do">로그인</a>
 					</div>
 				</c:if>
@@ -83,7 +83,7 @@
 				
 				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId !='admin'}">
 					<div>
-						<a class="getstarted scrollto" href="/SuggestMain" style="text-decoration: none;">제안하기</a> 
+						<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a> 
 						<a class="nav-link" href="#">마이페이지</a>
 						<a class="nav-link" href="logout.kh">로그아웃</a> 
 					</div>
