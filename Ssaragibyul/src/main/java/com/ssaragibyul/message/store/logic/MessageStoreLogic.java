@@ -23,8 +23,7 @@ public class MessageStoreLogic implements MessageStore{
 	
 	@Override
 	public int insertMemMessage(Message message) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("messageMapper.insertMemMessage", message);
 	}
 
 	@Override

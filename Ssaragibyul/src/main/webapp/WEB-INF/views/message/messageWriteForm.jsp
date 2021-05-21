@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/message/messageWriteView.css" type="text/css">
+<link rel="stylesheet" href="resources/css/message/messageWriteForm.css" type="text/css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <title>싸라기별</title>
 </head>
-<body>
+<body onload="window.resizeTo(530,465)">
 	<main id="main">
 			<!-- msgType, 게시글 작성자 ID, 닉네임, 관리자 ID 넘겨받아서 if문으로 폼변경해주고, DB에 갈때도 넘기기 -->
 		<section id="total">
@@ -19,27 +19,29 @@
 					<span id="table-title">쪽지 보내기</span>
 				</div>
 			</section>
-			<section class="write-middle">
-				<div id="point-present">
-					<div id="show-present">포인트 선물하기</div>
-					<div id="present-window">
-						<img src="" width="">
-						<span>선물할 포인트</span>&nbsp;&nbsp;&nbsp;
-						<input id="point-num" type="number" name="presentPoint" min="0" max="" placeholder="">
-						<br><span>선물 가능 포인트 </span>
+			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3)}">
+				<section class="write-middle">
+					<div id="point-present">
+						<div id="show-present">포인트 선물하기</div>
+						<div id="present-window">
+							<img src="" width="">
+							<span>선물할 포인트</span>&nbsp;&nbsp;&nbsp;
+							<input id="point-num" type="number" name="presentPoint" min="0" max="" placeholder="">
+							<br><span>선물 가능 포인트 </span>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			</c:if>
 			<section class="write-lower">
 				<div id="message-Write-Form">
 					<table border="1" align="center" width="490px">
 							<tr>
 								<th>받으시는 분</th>
-								<td><!-- 관리자/닉네임 --></td>
+								<td>${nickName}</td>
 							</tr>
 							<tr>
 								<th>제목</th>
-								<td><input type="text" id="" name="msgTitle"></td>
+								<td><input type="text" id="msgTitle" name="msgTitle"></td>
 							</tr>
 							<tr>
 								<th>내용</th>
@@ -48,7 +50,7 @@
 							<tr><td colspan="2"><hr></tr>
 							<tr>
 								<td colspan="2" align="center">
-									<textarea id="message-content" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요"></textarea>
+									<textarea id="msgContents" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요"></textarea>
 								</td>
 							</tr>
 							<tr><td colspan="2"><hr></tr>
@@ -79,23 +81,36 @@
 					$("#show-present").css("color", "#464646");					
 				}
 			});
-			/*$("#sendClose").on("click", function(){
-				var senderId = ${loginUser.userId};
-				var receiverId = ${receiverId}; 넘어온 멤버/관리자의 아이디로
-				var msgType = ${msgType};
+			$("#sendClose").on("click", function(){
+				var senderId = '${loginUser.userId}';
+				var receiverId = '${message.receiverId}'; /* 넘어온 멤버/관리자의 아이디로 */
+				var msgTitle = $("#msgTitle").val();
+				var msgContents = $("#msgContents").val();
+				if($("#point-num").val() != "") {
+					var presentPoint = $("#point-num").val();
+				}else {
+					var presentPoint = 0;					
+				}
+				var msgType = '${message.msgType}';
 				
 				$.ajax({
-					url: "",
-					type: "",
-					data: {"":""},
+					url: "registerMemMsg.do",
+					type: "post",
+					data: {"senderId":senderId,
+							"receiverId":receiverId,
+							"msgTitle": msgTitle,
+							"msgContents": msgContents,
+							"presentPoint": presentPoint,
+							"msgType": msgType
+							},
 					success: function(data){
-						
+						self.close();
 					},
 					error: function(){
 						
 					}
 				});
-			}); */
+			});
 		});
 	</script>
 </body>

@@ -59,20 +59,78 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${msgList}" var="message" varStatus="index">
+						<c:if test="${empty msgList}">
 							<tr>
-								<td>${index.count }</td>
-								<c:if test="${message.msgType != 0}">
-									<td>${message.nickName }</td>
-								</c:if>
-								<c:if test="${message.msgType == 0}">
-									<td>관리자</td>
-								</c:if>									
-								<td><a href="#">${message.msgTitle }</a></td>
-								<td><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
-								<td><input type="checkbox" class="msg-del-check" id="checkAll"></td>					
+								<td>${msg}</td>
 							</tr>
-						</c:forEach>
+						</c:if>
+						<c:if test="${!empty msgList}">
+							<c:forEach items="${msgList}" var="message" varStatus="index">
+								<tr>
+									<td>${index.count }</td>
+									<c:if test="${message.msgType != 0}">
+										<td>${message.nickName }</td>
+									</c:if>
+									<c:if test="${message.msgType == 0}">
+										<td>관리자</td>
+									</c:if>									
+									<td><a href="#">${message.msgTitle }</a></td>
+									<td><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
+									<td><input type="checkbox" class="msg-del-check" id="checkAll"></td>					
+								</tr>
+							</c:forEach>
+						</c:if>
+						<!-- 페이징 -->
+						<tr>
+							<td colspan="5">
+								<!-- 변수선언 -->
+								<c:if test="${flag=='notice'}">
+									<c:set var="pageUrl" value="noticeMsgList.do"/>
+								</c:if>
+								<c:if test="${flag=='rec' }">
+									<c:set var="pageUrl" value="recMsgList.do"/>
+								</c:if>
+								<c:if test="${flag=='send' }">
+									<c:set var="pageUrl" value="sendMsgList.do"/>
+								</c:if>
+								<!-- 이전 -->
+								<c:url var="before" value="${pageUrl}">
+									<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+								</c:url>
+								<c:if test="${pi.listCount ne 0 }">
+									<c:if test="${pi.currentPage <= 1 }">
+										[이전]&nbsp;
+									</c:if>
+									<c:if test="${pi.currentPage > 1 }">
+										<a href="${before }">[이전]</a>&nbsp;
+									</c:if>
+								</c:if>
+								<!-- 페이지 -->
+								<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
+									<c:url var="pagination" value="${pageUrl}">
+										<c:param name="page" value="${p}"></c:param>
+									</c:url>
+									<c:if test="${p eq pi.currentPage}">
+										[${p}]
+									</c:if>
+									<c:if test="${p ne pi.currentPage}">
+										<a href="${pagination }">${p}</a>&nbsp;
+									</c:if>
+								</c:forEach>
+								<!-- 다음 -->
+								<c:url var="after" value="${pageUrl}">
+									<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+								</c:url>
+								<c:if test="${pi.listCount ne 0 }">
+									<c:if test="${pi.currentPage >= pi.maxPage}">
+										[다음]&nbsp;
+									</c:if>
+									<c:if test="${pi.currentPage < pi.maxPage}">
+										<a href="${after}">[다음]</a>&nbsp;
+									</c:if>
+								</c:if>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</section>
@@ -94,12 +152,21 @@
 				<!-- </section> -->
 			</section>
 		</section>
-		<a href="#"><img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px"/></a>
+		<c:url var="qnaMsg" value="msgWriterView.do">
+			<c:param name="receiverId" value="admin"></c:param>
+			<c:param name="msgType" value="3"></c:param>
+			<c:param name="nickName" value="관리자"></c:param>
+		</c:url>
+		<img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px" onclick="qnaPopup();"/>
 	</main>
 	<jsp:include page="../../../footer.jsp"/>
 	
 	<script>
-
+		function qnaPopup() {
+			var popupX = (window.screen.width/2)-265;
+			var popupY = (window.screen.height/2)-(465/2);
+			window.open("${qnaMsg}", "qnaMsg", "height=400, width=500, left="+popupX+", top="+popupY+", resizable=no");
+		}
 	</script>
 </body>
 </html>
