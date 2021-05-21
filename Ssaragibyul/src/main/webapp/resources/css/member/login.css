@@ -1,0 +1,207 @@
+@charset "UTF-8";
+
+body{
+    /* background-img: url(/resources/img/images/loginbackground.jpg); */
+    background-color: ;
+/*     background-size: cover; */
+    width: auto;
+    height: 1000px;
+}
+
+header{
+    width: auto;
+    height: 100px;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*html, body {
+  height: 100%;
+  background-color: #F15A5C;
+  font-family: "Roboto Slab", serif;
+  color: white;
+}*/
+
+.preload * {
+  transition: none !important;
+
+}
+
+.preload login--container{
+    height: 300px;
+    padding-top: 250px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    height: 40px;
+    border: none; 
+    border-radius: 5px;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 15px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+  outline: none;
+  box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+button {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(174, 174, 174);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    height: 38px;
+    width: 120px;
+}
+
+.login--login-submit {
+  float: right;
+}
+
+.login--container {
+    width: 600px;
+    height: 150px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.login--toggle-container {
+    position: absolute;
+    background-color: black;
+    right: 0;
+    line-height: 2.5em;
+    width: 50%;
+    height: 100%;
+    cursor: pointer;
+    transform: perspective(1000px) translateZ(1px);
+    transform-origin: 0% 0%;
+    transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+    backface-visibility: hidden;
+}
+
+.login--toggle-container .js-toggle-login {
+    padding-top: 50px;
+    font-size: 35px;
+    font-weight: 600;
+    color: aliceblue;
+}
+
+.login--active .login--toggle-container {
+  transform: perspective(1000px) rotateY(180deg);
+  background-color: none;
+}
+
+.login--username-container, .login--password-container {
+  float: left;
+  background-color: none;
+  width: 50%;
+  height: 120px;
+  padding: 0.5em;
+}
+
+.login--username-container {
+    transform-origin: 100% 0%;
+    transform: perspective(1000px) rotateY(180deg);
+    transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+    background-color: none;
+    backface-visibility: hidden;
+}
+
+.login--active .login--username-container {
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+
+/*회원가입*/
+.content2{
+    height: 200px;
+    position: relative;
+}
+#join{
+    width: 400px;
+    position: absolute;
+    left: 40%;
+}
+#coment{
+    padding-right: 7px;
+    float: left;
+    color: white;
+    font-weight: 600;
+}
+
+#joinlink{
+    text-decoration: none; 
+}
+
+#joinGo{
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(235, 92, 1);
+}
+
+#joinGo:active{
+    color:  rgb(174, 174, 174); 
+}
+
+.search{
+    height: 50px;
+    width: 350px;
+    padding-left: 50px;  
+    padding-top: 40px;
+    position: absolute;
+    left: 40%;
+}
+
+#link{
+    text-decoration: none; 
+}
+
+#idSearch{
+    text-align: center;
+    float: left;
+    padding-right: 50px;
+    color: aliceblue;
+    font-weight: 700;
+}
+
+#idSearch:active{
+    color: rgb(235, 92, 1);
+}
+
+#or{
+    text-align: center;
+    float: left;
+    padding-right: 10px;
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+#pwSearch{
+    text-align: center;
+    color: aliceblue;
+    text-decoration: none;
+    font-weight: 700;
+}
+#pwSearch:active{
+    color: rgb(235, 92, 1);
+}
+
+
+
