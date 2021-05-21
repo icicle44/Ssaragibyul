@@ -13,7 +13,7 @@
 		<result property="registerMid" column="REGISTER_MID_DIV"/>
 		<result property="prizedYear" column="PRIZED_YEAR"/>
 		<result property="prizeClass" column="PRIZED_CLASS"/>
-		<result property="activityLine" column="ACTIVTY_LINE"/>
+		<result property="activityLine" column="ACTIVITY_LINE"/>
 		<result property="achievement" column="ACHIEVEMENT_KO"/>
 	</resultMap>
 
@@ -22,6 +22,7 @@
 		SELECT COUNT(*) FROM INDEPENDENCE
 	</select>
 	<select id="selectAllList" resultMap="independenceResultMap">
-		SELECT * FROM INDEPENDENCE  WHERE MNG_NO &lt;= 100 ORDER BY MNG_NO
+		<!-- SELECT * FROM INDEPENDENCE  WHERE MNG_NO &lt;= 100 ORDER BY MNG_NO ASC -->
+		SELECT * FROM INDEPENDENCE ORDER BY MNG_NO ASC
 	</select>
 </mapper>

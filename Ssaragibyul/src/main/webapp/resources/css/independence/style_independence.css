@@ -6,29 +6,31 @@ body * {
 
 .header {
   background-color: #EB5C01;
-  color: white;
+  color: black;
   font-size: 1.5em;
   padding: 1rem;
   text-align: center;
   text-transform: uppercase;
 }
 
-
 .search, .intro, .table-users {
+  width:100%;
+  height: auto;
   border: 1px solid #327a81;
   border-radius: 10px;
   box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   max-width: calc(100% - 2em);
   margin: 1em auto;
   overflow: hidden;
-  width: 800px;
 }
-
+.contents{
+	padding: 7rem;
+}
 table {
   width: 100%;
 }
 table th{
-	color: #FFF;
+	color: black;
   padding: 15px;
 } 
 table td{
@@ -45,14 +47,14 @@ table td {
   text-align: left;
 } */
 table th {
-  background-color: #EB5C01;
+  background-color: #F5F5F5;
   font-weight: 300;
 }
 table tr:nth-child(2n) {
   background-color: white;
 }
 table tr:nth-child(2n+1) {
-  background-color: #F5F5F5;
+  background-color: white;
 }
 
 @media screen and (max-width: 700px) {
@@ -107,7 +109,7 @@ td{
 @media screen and (max-width: 500px) {
   .header {
     background-color: transparent;
-    color: white;
+    color: black;
     font-size: 2em;
     font-weight: 700;
     padding: 0;

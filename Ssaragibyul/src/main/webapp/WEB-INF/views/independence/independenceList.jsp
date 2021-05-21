@@ -34,7 +34,6 @@
 		</div>
 		<div class="table-users">
 			<!--    <div class="header">Users</div> -->
-${independence}
 			<table class="table" cellspacing="0">
 				<tr>
 					<th>순번</th>
@@ -46,9 +45,10 @@ ${independence}
 					<th>포상훈격</th>
 					<th>본적</th>
 				</tr>
-				<c:forEach items="${iList }" var="independence ">
+				<c:forEach items="${iList }" var="independence">
+				<%-- ${iList.get(0).toString() } --%>
 				<tr>
-					<td align="center">${independence.mngNo }</td>
+					<td align="center">${independence.independenceNo }</td>
 					<td align="center">${independence.nameKo }</td>
 					<td align="center">${independence.nameCh }</td>
 					<td align="center">${independence.birthday } ~ ${independence.lastday }</td>
@@ -74,7 +74,7 @@ ${independence}
 				</c:if>
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<c:url var="pagination" value="boardList.kh">
+					<c:url var="pagination" value="independenceList">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
 					<c:if test="${p eq pi.currentPage }">
@@ -100,5 +100,6 @@ ${independence}
 		</div>
 	</section>
 </div>
+<%-- <%@include file="/footer.jsp" %> --%>
 </body>
 </html>

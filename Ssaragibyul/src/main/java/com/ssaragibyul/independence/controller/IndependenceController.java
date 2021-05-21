@@ -31,8 +31,7 @@ public class IndependenceController {
 		int listCount =iService.getListCount();
 		// Pagination은 common의 pagination
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
-		ArrayList<Independence> iList = iService.printAll();
-		System.out.println("controller iList : " + iService.printAll());
+		ArrayList<Independence> iList = iService.printAll(pi);
 		if(!iList.isEmpty()) {
 			mv.addObject("iList", iList);
 			mv.addObject("pi", pi);
