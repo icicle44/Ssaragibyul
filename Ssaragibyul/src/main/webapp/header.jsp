@@ -7,20 +7,16 @@
 <head>
 <meta charset="UTF-8">
 
-  <!-- Favicons -->
-  <link href="/resources/img/favicon.png" rel="icon">
-  
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
-  <!-- Vendor CSS Files -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet"> -->
+  <!-- Vendor CSS Files
   
 
   <!-- Template Main CSS File -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-   <link rel="stylesheet" href="/resources/css/style_nav.css">
-<link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="/resources/css/style_nav.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <style>
@@ -52,14 +48,13 @@
 					     <li class="nav-item active">
 		        <!-- <a class="nav-link" href="#">펀딩 <span class="sr-only">(current)</span></a> -->
 		      </li>
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 						role="button" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false"> 기념관 </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: center; width: 200px;">
 							<a class="dropdown-item" href="/independenceList.do">독립유공자 공훈록</a> <a
 								class="dropdown-item" href="#">별들의 발자취</a> <a
-								class="dropdown-item" href="#">별보러 가자</a>
+								class="dropdown-item" href="visitList.do">별보러 가자</a>
 						</div></li>
 					<li class="nav-item"><a class="nav-link" href="fundingMain.co">펀딩</a>
 					</li>
@@ -93,26 +88,8 @@
 		</div>
 	</nav> 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script> -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<!--  
- 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script> 
- 	<script src="/resources/js/jquery.easing.1.3.js"></script> 
- 	<script src="/resources/js/jquery-ui.js"></script> 
- 	<script src="/resources/js/popper.min.js"></script> 
- 	<script src="/resources/js/bootstrap.min.js"></script> 
-	<script src="/resources/js/owl.carousel.min.js"></script>
-	<script src="/resources/js/jquery.stellar.min.js"></script>
-	<script src="/resources/js/jquery.countdown.min.js"></script>
-	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
-	<script src="/resources/js/aos.js"></script>
-	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-
-	<script src="/resources/js/jquery.fancybox.min.js"></script>
-
-	<script src="/resources/js/main.js"></script>
-     --> 
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
   </body>
 </html>

@@ -7,30 +7,31 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+<!-- Favicons -->
+<link href="/resources/img/favicon.png" rel="icon">
+  
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-<link rel="stylesheet" href="fonts/icomoon/style.css">
-<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
-
-<!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css"> -->
+<link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
-<!-- <link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css"> -->
+<link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
+
 <link rel="stylesheet" href="/resources/css/aos.css">
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
-<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
 	
 	<%-- <%@include file="introduce.jsp" %> --%>
-	<%@include file="header.jsp" %>
+<%@include file="header.jsp" %>
 
 	<header class="header-bar d-flex align-items-center site-navbar-target"
 		data-aos="fade-right">
@@ -288,7 +289,7 @@
 			</section>
 
 			<section class="site-section-hero bg-image"
-				style="background-image: url('images/img_9.jpg');"
+				style="background-image: url('/resources/img/images/img_9.jpg');"
 				data-stellar-background-ratio="0.5" id="section-bio">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-7 text-center">
@@ -470,8 +471,10 @@
 	</main>
 
 	<!-- .site-wrap -->
- 
-<!--  	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/resources/js/jquery-3.3.1.min.js"></script>
  	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
@@ -483,7 +486,6 @@
 	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
 	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
 	<script src="/resources/js/aos.js"></script>
-	<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 

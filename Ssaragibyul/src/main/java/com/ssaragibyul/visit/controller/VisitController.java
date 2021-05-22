@@ -29,10 +29,14 @@ public class VisitController {
 	private VisitService vService;
 	
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
-	public ModelAndView visitListView(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
-		
-		return mv;
+	public String vivisListView() {
+		return "visit/visitList";
 	}
+//	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
+//	public ModelAndView visitListView(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
+//		
+//		return "visit/visitList";
+//	}
 	
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
