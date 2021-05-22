@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 body{
-    background-img: url(/resources/img/images/space_background.jpg);
-   /*  background-color: black; */
+/*     background-img: url(/resources/img/images/space_background.jpg); */
+	background-color: black;
     background-size: cover;
     width: auto;
     height: 1100px;

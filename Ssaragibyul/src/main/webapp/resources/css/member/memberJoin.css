@@ -1,0 +1,167 @@
+@charset "UTF-8";
+body{
+    width: auto;
+    height: 900px;
+}
+form{
+    background-image: url(/resources/img/member/member_background.jpg);
+    background-size:900px;
+    width: auto;
+    height: 900px;
+}
+.contents {
+	padding-top: 50px;
+    margin : auto;
+    padding-left: 210px;
+}
+h2{
+	padding-top:100px;
+    color: white;
+}
+.contents table {
+    margin : auto;
+    padding-left: 210px;
+}
+
+.contents td {
+    color: white;
+}
+span.guide {
+    display : none;
+    font-size : 12px;
+    top : 12px;
+    right : 10px;
+}
+span.ok{color:green}
+span.error{color:red}
+
+/**/
+#userId{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+#userId{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+#userPw{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+#userName{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+#userEmail{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+#userPhone{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+.postcodify_postcode5{
+    width: 160px;
+    height: 25px;
+    border-radius: 5px;
+}
+#postcodify_search_button{
+    width: 45px;
+    height: 31px;
+    background: rgb(174, 174, 174);
+    border-radius: 5px;
+}
+.postcodify_address{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+.postcodify_extra_info{
+    width: 210px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+
+/*닉네임*/
+
+#userAge{
+    width: 170px;
+    height: 25px;
+    border-radius: 5px;
+}
+#refresh{
+    width: 35px;
+    height: 32px;
+    background: rgb(174, 174, 174);
+    border-radius: 5px;
+    margin-top: 3px;
+}
+#refresh-img{
+    height: 13px;
+    width: 13px;
+}
+
+/*생년월일*/
+#bir_wrap {
+    display: table;
+    width: 100%;
+}
+
+#bir_yy {
+    display: table-cell;
+    float: left;
+    padding-top: 2px
+}
+#yy{
+    height: 25px;
+    width: 110px;
+    border-radius: 5px;
+}
+
+#bir_mm {
+    display: table-cell;
+}
+#mm{
+    height: 31px; 
+    width: 43px; 
+    border-radius: 5px;
+}
+#bir_dd {
+    display: table-cell;
+    width: 30px;
+}
+#dd{
+    height: 31px;
+    width: 43px;
+    border-radius: 5px;
+}
+#bir_mm, #bir_dd {
+    padding-left: 5px; 
+}
+
+
+.btns{
+    text-align: center;
+    padding-top: 20px;
+}
+
+#joinGo{
+    height: 31px;
+    width: 70px;
+    border-radius: 5px;
+    background: rgb(174, 174, 174);
+}
+
+#home{
+    height: 31px;
+    width: 70px;
+    border-radius: 5px;
+    background: rgb(174, 174, 174);
+}

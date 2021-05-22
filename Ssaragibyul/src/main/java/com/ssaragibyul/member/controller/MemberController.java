@@ -21,12 +21,14 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
+	
+	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
 	  public String loginView() {
 	        return "member/login";
 	  }
 	
-	
+	// 로그인
 	@RequestMapping(value="memberLogin.do", method =  {RequestMethod.GET, RequestMethod.POST})
 	public String memberLogin(HttpServletRequest request,
 							@ModelAttribute Member member, Model model) {
@@ -42,6 +44,8 @@ public class MemberController {
 			return "common/errorPage";
 		}
 	}
+	
+	//로그아웃
 	@RequestMapping(value="logout.do", method=RequestMethod.GET)
 	public String memberLogout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -49,12 +53,13 @@ public class MemberController {
 		return "redirect:index.jsp"; // sendRedirect와 유사함
 	}
 	
-	/*
 	// 회원가입 폼
-	@RequestMapping(value="enrollView.kh", method=RequestMethod.GET)
+	@RequestMapping(value="enrollView.do", method=RequestMethod.GET)
 	public String enrollView() {
 		return "member/memberJoin";
 	}
+	
+	/*
 	// 회원등록
 	@RequestMapping(value="memberRegister.kh", method=RequestMethod.POST)
 	public String memberRegister(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1") String address1, @RequestParam("address2")String address2, Model model) {
