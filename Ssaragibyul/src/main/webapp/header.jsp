@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet"> -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
   <!-- Vendor CSS Files
   
 
@@ -53,34 +53,33 @@
 						aria-expanded="false"> 기념관 </a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: center; width: 200px;">
 							<a class="dropdown-item" href="/independenceList.do">독립유공자 공훈록</a> <a
-								class="dropdown-item" href="#">별들의 발자취</a> <a
+								class="dropdown-item" href="/historyList.do">별들의 발자취</a> <a
 								class="dropdown-item" href="visitList.do">별보러 가자</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link" href="fundingMain.co">펀딩</a>
+					<li class="nav-item"><a class="nav-link" href="fundingMain.do">펀딩</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="#">기부</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">가이드</a></li>
-
+					<li class="nav-item"><a class="nav-link" href="donationList.do">기부</a></li>
+					<li class="nav-item"><a class="nav-link" href="guide.do">가이드</a></li>
+					<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a>
 				</ul>
 				<c:if test="${ empty sessionScope.loginUser }">
 					<div>
-						<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a> 
+						
 						<a class="nav-link" href="login.do">로그인</a>
 					</div>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId =='admin'}">
 					<div>
-						<a class="nav-link" href="#">관리자페이지</a> 
+						<a class="nav-link" href="admin.do">관리자페이지</a> 
 						<a class="nav-link" href="logout.do">로그아웃</a>
 					</div>
 				</c:if>
 				
 				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId !='admin'}">
 					<div>
-						<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a> 
-						<a class="nav-link" href="#">마이페이지</a>
-						<a class="nav-link" href="logout.kh">로그아웃</a> 
+						<a class="nav-link" href="logout.do">로그아웃</a> 
+						<a class="nav-link" href="myPage.do">마이페이지</a>
 					</div>
 				</c:if>
 				
