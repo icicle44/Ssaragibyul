@@ -56,11 +56,11 @@
 								class="dropdown-item" href="/historyList.do">별들의 발자취</a> <a
 								class="dropdown-item" href="visitList.do">별보러 가자</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link" href="fundingMain.do">펀딩</a>
+					<li class="nav-item"><a class="nav-link" href="fundingList.do">펀딩</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="donationList.do">기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="guide.do">가이드</a></li>
-					<a class="getstarted scrollto" href="suggestMain.do" style="text-decoration: none;">제안하기</a>
+					<a class="getstarted scrollto" href="suggestPage.do" style="text-decoration: none;">제안하기</a>
 				</ul>
 				<c:if test="${ empty sessionScope.loginUser }">
 					<div>
