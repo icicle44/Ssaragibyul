@@ -33,11 +33,6 @@
 	<select id="selectFundingList" resultMap="fundingResultMap"> 
 	SELECT * FROM FUNDING_PROJECT
 		ORDER BY GOAL_MONEY DESC </select>
-		
-	<select id="selectAllList" resultMap="fundingResultMap"> 
-   		SELECT * FROM FUNDING_PROJECT
-    	  ORDER BY F_PROJECT_NO DESC 
-   </select>
 
 	<!-- <update id="updateMember" parameterType="Member"> UPDATE MEMBER SET 
 		USER_PW = #{userPw}, USER_AGE = #{userAge}, USER_EMAIL = #{userEmail}, USER_PHONE 
