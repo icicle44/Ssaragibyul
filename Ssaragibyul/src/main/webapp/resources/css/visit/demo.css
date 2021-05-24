@@ -33,7 +33,7 @@
 
 body {
 	font-family: "Avenir Next", Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	color: #fff;
+	color: #5D5D5D;
 	background: #FFF;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
@@ -42,7 +42,7 @@ body {
 	width: 100vw;
 }
 
-a {
+/* a {
 	outline: none;
 	color: #77d45b;
 	text-decoration: none;
@@ -51,7 +51,7 @@ a {
 a:hover,
 a:focus {
 	color: #fff;
-}
+} */
 
 button:focus {
 	outline: none;

@@ -17,7 +17,6 @@
 		독립유공자 공훈록<hr>
 		별들의 발자취<hr>
 		별 보러 가자<hr>
-		
 	</section>
 
 	<section class="contents col-md-9">
@@ -36,15 +35,15 @@
 					<th>포상년도</th>
 					<th>포상훈격</th>
 					<th>본적</th>
-					<th>상세보기</th>
+					<!-- <th>상세보기</th> -->
 				</tr>
 				<c:forEach items="${iList }" var="independence">
 				<%-- ${iList.get(0).toString() } --%>
 				<tr>
 					<td align="center">${independence.independenceNo }</td>
-					<td align="center">${independence.nameKo }</td>
+					<%-- <td align="center">${independence.nameKo }</td> --%>
 					<%-- <td align="center" id="modal_open" data-toggle="modal" data-target="#detailPopup${independence.independenceNo }">${independence.nameKo }</td> --%>
-					<%-- <td align="center"><a id="modal_open" href="#detailPopup${independence.independenceNo }" data-toggle="modal">${independence.nameKo }</a></td> --%>
+					<td align="center"><a id="modal_open" href="#detailPopup${independence.independenceNo }" data-toggle="modal">${independence.nameKo }</a></td>
 					<%-- <td align="center"><button id="modal_open" type="button" data-toggle="modal" data-target="#detailPopup${independence.independenceNo }">${independence.nameKo }</button></td> --%> 
 					<td align="center">${independence.nameCh }</td>
 					<td align="center">${independence.birthday } ~ ${independence.lastday }</td>
@@ -52,7 +51,7 @@
 					<td align="center">${independence.prizedYear }</td>
 					<td align="center">${independence.prizeClass }</td>
 					<td align="center">${independence.registerLarge }&nbsp;${independence.registerMid }</td>
-					<td align="center"><button class="button" id="open_modal">상세보기</button></td>
+					<!-- <td align="center"><button class="button" id="open_modal">상세보기</button></td> -->
 				</tr>
 				</c:forEach>
 
@@ -96,8 +95,8 @@
 	</table>
 </div> 
 			<!-- <button class="btn btn-default" data-target="#detailPopup" data-toggle="modal">모달출력버튼</button><br/> -->
-<%-- <c:forEach items="${iList }" var="modal"> --%>
-<div class="modal fade" id="detailPopup${modal.independenceNo }" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<c:forEach items="${iList }" var="modal">
+<div class="modal fade" id="detailPopup${iList.get(0).getIndependenceNo()}" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -154,14 +153,16 @@
 		</div>
 	</div>
 </div>
-<%-- 	</c:forEach> --%>
+</c:forEach>
 	<%@include file="/footer.jsp" %>
 	</section>
 </div>
 <script>
     $(document).ready(function(){
-        $("#open_modal").click(function(){
-            $("#detailPopup${modal.independenceNo }").modal();
+    	var modal;
+        $("#modal_open").on("click",function(){
+        	modal = $("#modal_open").href();
+            $(".modal fade").id(modal);
         });
     });
 
