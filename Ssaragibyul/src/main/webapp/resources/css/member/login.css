@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 body{
-/*     background-img: url(/resources/img/images/space_background.jpg); */
-	background-color: black;
     background-size: cover;
     width: auto;
     height: 1100px;
@@ -14,7 +12,8 @@ header{
 }
 form{
 	height: 700px;
-	background-color: black;
+	background-image: url(/resources/img/member/member_background.jpg);
+	background-size:800px;
 }
 
 .frame{

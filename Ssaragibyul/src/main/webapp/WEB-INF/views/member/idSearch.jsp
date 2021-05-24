@@ -12,7 +12,7 @@
     <header>
     	<jsp:include page="../../../header.jsp"/>
     </header>
-    <form action="findId.do" method="post">
+    <form action="idSearch.do" method="post">
         <div class="contents">
             <h2 align="center" id="h2">아이디 찾기</h2>
             <div class="coment">

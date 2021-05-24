@@ -1,6 +1,10 @@
 package com.ssaragibyul.member.service.logic;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,21 +51,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int searchId(Member member) {
+	public String searchId(Member member){
 		return mStore.searchId(member);
-	}
-
-	@Override
-	public String searchPw(Map<String, Object> paramMap) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	/*
 	 * @Override public int searchPw(String userPw) { // TODO Auto-generated method
 	 * stub return 0; }
 	 */
-
-
 	
 }

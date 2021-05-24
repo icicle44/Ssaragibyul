@@ -14,7 +14,7 @@
     </header>
     <form action="findPw.do" method="post">
         <div class="contents">
-            <h2 align="center" id="h2">아이디 찾기</h2>
+            <h2 align="center" id="h2">비밀번호 찾기</h2>
             <div class="coment">
                 <p id="p">싸라기별에서는 가입하신 아이디와 이메일을 입력하시면 임시 비밀번호를 이메일로 발송해드립니다.
 				임시 비밀번호를 받으신 후 마이페이지에서 수정해주세요. </p>
@@ -27,7 +27,7 @@
                 <input type="email" name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요.">
             </div>
             <div class="btn">
-                <input type="submit" value="임시 비밀번호 받기" id="idSearch">
+                <input type="submit" value="임시 비밀번호 받기" id="pwSearch">
             </div>
             </div>
         </div>

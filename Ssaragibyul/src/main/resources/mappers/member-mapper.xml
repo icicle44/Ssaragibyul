@@ -5,8 +5,8 @@
 	<resultMap type="Member" id="memberResultMap">
 		<id property="userId" column="USER_ID"></id>
 		<result property="userPw" column="USER_PW"></result>
-		<result property="nickName" column="USER_NAME"></result>
-		<result property="userName" column="NICKNAME"></result>
+		<result property="nickName" column="NICKNAME"></result>
+		<result property="userName" column="USER_NAME"></result>
 		<result property="userEmail" column="USER_EMAIL"></result>
 		<result property="userPhone" column="USER_PHONE"></result>
 		<result property="userAddr" column="USER_ADDR"></result>
@@ -31,7 +31,7 @@
 	</insert>
 	
 	<!-- 아이디 찾기 -->
-	<select id="idSearch"  parameterType="Member">
+	<select id="idSearch"  parameterType="String" resultType="String">
 		SELECT * FROM MEMBER
 		WHERE USER_NAME = #{userName } AND USER_EMAIL = #{userEmail } 
 	</select>

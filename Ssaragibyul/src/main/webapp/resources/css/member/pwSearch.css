@@ -1,0 +1,99 @@
+@charset "UTF-8";
+body{
+    width: auto;
+    height: 600px;
+    margin : auto;
+}
+
+form{
+	background-image: url(/resources/img/member/member_background.jpg);
+   	background-size:600px;
+ 	height: 600px;
+    width: auto;
+}
+header{
+    width: auto;
+    height: 100px;
+}
+
+.contents{
+	margin:auto;
+}
+
+#h2{
+	padding-top: 100px;
+	font-weight: 600;
+	margin:auto;
+    color: white;
+}
+
+.coment{
+    padding-top: 35px;
+    width: 380px;
+    text-align: center;
+    font-size: 15px;
+    margin:auto;
+    /* padding-left: 20px; */
+    font-weight: 600;
+    color: white;
+}
+
+#p{
+    text-align: center;
+}
+
+.input{
+    padding-top: 35px;
+    padding-bottom: 30px;
+    text-align: center;
+    font-weight: 550;
+}
+
+input::-webkit-input-placeholder { 
+    padding-left: 5px;
+    font-weight: 540;
+} 
+
+.id{
+   padding-bottom: 15px; 
+}
+
+#userId{
+    width: 250px;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-weight: 540;
+    border: none;
+}
+
+#userEmail{
+    width: 250px;
+    height: 35px;
+    border-radius: 5px;
+    padding-left: 5px;
+    font-weight: 540;
+    border: none;
+}
+
+.btn{
+    padding-top: 70px;
+    
+}
+
+#pwSearch{
+    height: 35px;
+    width: 180px;
+    border-radius: 5px;
+    margin-top:20px;
+    background: rgb(174, 174, 174);
+   	font-weight: 550;
+    color: white;
+    border: none;
+}
+
+#pwSearch:active{
+    background-color: rgb(100, 100, 100);
+    border: none;
+}
+

@@ -45,14 +45,13 @@ public class MemberStoreLogic implements MemberStore{
 
 	// 아이디 찾기
 	@Override
-	public int searchId(Member member) {
+	public String searchId(Member member) {
 		return sqlSession.selectOne("memberMapper.idSearch", member);
 	}
 
-	@Override
-	public int searchPw(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/*
+	 * @Override public int searchPw(Member member) { // TODO Auto-generated method
+	 * stub return 0; }
+	 */
 
 }

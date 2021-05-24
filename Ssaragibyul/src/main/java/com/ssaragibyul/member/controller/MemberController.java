@@ -1,6 +1,8 @@
 package com.ssaragibyul.member.controller;
 
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
@@ -99,35 +102,25 @@ public class MemberController {
 	}
 	
 	// 아이디 찾기
-	@RequestMapping(value = "findId.do", method = RequestMethod.POST)
-	public String findId(HttpServletResponse response, 
-			@RequestParam("userName") String userName,
-			@RequestParam("userEmail") String userEmail,
-			@ModelAttribute Member member,
-			Model model) throws Exception{
-		model.addAttribute("userId", mService.searchId(member));
-		
-	response.setContentType("text/html;charset=utf-8");
-	PrintWriter out = response.getWriter();
+	@RequestMapping(value="/searchIdimpl.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	public String searchId(@ModelAttribute Member member) {
+		System.out.println("member" + member);
+		String searchid = mService.searchId(member);
+		System.out.println(searchid);
+		return searchid;
+	}
+
+
+
 	
-		
-	if (member == null) {
-		out.println("<script>");
-		out.println("alert('가입된 아이디가 없습니다.');");
-		out.println("history.go(-1);");
-		out.println("</script>");
-		out.close();
-		return "member/idSearch";
-	} else {
-		return "common.errorPage";
-	}
-	}
 	
 	//비밀번호 찾기 페이지로 이동
 	@RequestMapping(value = "pwSearch.do", method = RequestMethod.GET)
 	  public String pwSearchView() {
 	        return "member/pwSearch";
 	}
+	
+	
 	
 	// 비밀번호 찾기
 	public String searchPw(@RequestParam("userPw") String userPw, Model model) {
