@@ -40,11 +40,11 @@
                   </a>
             </div>
             <div class="search">
-                <a href="#" id="link">
+                <a href="idSearch.do" id="link">
                     <div id="idSearch">아이디 찾기</div>
                 </a>
                 <div id="or">/</div>
-                <a href="#" id="link">
+                <a href="pwSearch.do" id="link">
                     <div id="pwSearch">비밀번호 찾기</div>
                 </a>
             </div>

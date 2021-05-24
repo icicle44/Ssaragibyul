@@ -8,4 +8,7 @@ public interface MemberStore {
 	public int insertMember(Member member);
 	public int updateMember(Member member);
 	public int removeMember(String userId);
+	public int searchId(Member member);
+	public int searchPw(Member member);
+
 }

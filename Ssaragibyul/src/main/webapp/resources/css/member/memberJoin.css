@@ -1,21 +1,22 @@
 @charset "UTF-8";
 body{
     width: auto;
-    height: 900px;
+    height: 1000px;
 }
 form{
     background-image: url(/resources/img/member/member_background.jpg);
     background-size:900px;
     width: auto;
-    height: 900px;
+    height: 1000px;
 }
 .contents {
-	padding-top: 50px;
+	padding-top: 20px;
     margin : auto;
-    padding-left: 210px;
+    padding-left: 400px;
 }
-h2{
-	padding-top:100px;
+#h2{
+	padding-top:150px;
+	font-weight: 600;
     color: white;
 }
 .contents table {
@@ -25,6 +26,7 @@ h2{
 
 .contents td {
     color: white;
+    font-weight: 600;
 }
 span.guide {
     display : none;
@@ -32,80 +34,96 @@ span.guide {
     top : 12px;
     right : 10px;
 }
-span.ok{color:green}
+span.ok{color:rgb(174, 174, 174)}
 span.error{color:red}
 
 /**/
 #userId{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
+    float: le
 }
 #userId{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
 }
+
 #userPw{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+#pwCheck{
+	width: 250px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+#userPwCheck{
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
 }
 #userName{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35x;
     border-radius: 5px;
 }
 #userEmail{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height:35px;
     border-radius: 5px;
 }
 #userPhone{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
 }
 .postcodify_postcode5{
-    width: 160px;
-    height: 25px;
+    width: 185px;
+    height: 35x;
     border-radius: 5px;
 }
 #postcodify_search_button{
-    width: 45px;
-    height: 31px;
+    width: 60px;
+    height: 35px;
     background: rgb(174, 174, 174);
     border-radius: 5px;
+   	font-weight: 500;
+    color: white;
 }
 .postcodify_address{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
 }
 .postcodify_extra_info{
-    width: 210px;
-    height: 25px;
+    width: 250px;
+    height: 35px;
     border-radius: 5px;
 }
 
 
 /*닉네임*/
 
-#userAge{
-    width: 170px;
-    height: 25px;
+#nickName{
+    width: 200px;
+    height: 35px;
     border-radius: 5px;
 }
 #refresh{
-    width: 35px;
-    height: 32px;
+    width: 45px;
+    height: 35px;
     background: rgb(174, 174, 174);
     border-radius: 5px;
     margin-top: 3px;
 }
 #refresh-img{
-    height: 13px;
-    width: 13px;
+    height: 15px;
+    width: 15px;
 }
 
 /*생년월일*/
@@ -120,8 +138,8 @@ span.error{color:red}
     padding-top: 2px
 }
 #yy{
-    height: 25px;
-    width: 110px;
+    height: 35px;
+    width: 125px;
     border-radius: 5px;
 }
 
@@ -129,8 +147,8 @@ span.error{color:red}
     display: table-cell;
 }
 #mm{
-    height: 31px; 
-    width: 43px; 
+    height: 35px; 
+    width: 55px; 
     border-radius: 5px;
 }
 #bir_dd {
@@ -138,8 +156,8 @@ span.error{color:red}
     width: 30px;
 }
 #dd{
-    height: 31px;
-    width: 43px;
+    height: 35px;
+    width: 55px;
     border-radius: 5px;
 }
 #bir_mm, #bir_dd {
@@ -148,20 +166,24 @@ span.error{color:red}
 
 
 .btns{
-    text-align: center;
+	padding-left:30px;
     padding-top: 20px;
 }
 
 #joinGo{
-    height: 31px;
-    width: 70px;
+    height: 35px;
+    width: 90px;
     border-radius: 5px;
     background: rgb(174, 174, 174);
+   	font-weight: 500;
+    color: white;
 }
 
 #home{
-    height: 31px;
-    width: 70px;
+    height: 35px;
+    width: 90px;
     border-radius: 5px;
     background: rgb(174, 174, 174);
+    font-weight: 500;
+    color: white;
 }

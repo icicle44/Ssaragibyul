@@ -1,5 +1,7 @@
 package com.ssaragibyul.member.service.logic;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,21 +15,23 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberStore mStore;
 
+	
+	// 로그인
 	@Override
 	public Member loginMember(Member member) {
 		return mStore.selectOneMember(member);
 	}
 
+	// id 중복 체크
 	@Override
 	public int checkIdDup(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.checkIdDup(userId);
 	}
 
+	// 사용자 등록 
 	@Override
 	public int registerMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.insertMember(member);
 	}
 
 	@Override
@@ -43,15 +47,21 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int searchId(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int searchId(Member member) {
+		return mStore.searchId(member);
 	}
 
 	@Override
-	public int searchPw(String userPw) {
+	public String searchPw(Map<String, Object> paramMap) {
 		// TODO Auto-generated method stub
-		return 0;
+		return null;
 	}
+
+	/*
+	 * @Override public int searchPw(String userPw) { // TODO Auto-generated method
+	 * stub return 0; }
+	 */
+
+
 	
 }
