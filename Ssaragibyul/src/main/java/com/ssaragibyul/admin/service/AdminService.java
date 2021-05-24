@@ -2,6 +2,10 @@ package com.ssaragibyul.admin.service;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ssaragibyul.admin.store.AdminStore;
 import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -91,5 +95,9 @@ public interface AdminService {
 	public ArrayList<Visit> printSaerchVisit(Search search);
 	// 별보러가자 삭제
 	public int removeVisit(int visitNo);
+	
+	
+	// 페이징
+	public int getListCount();
 
 }

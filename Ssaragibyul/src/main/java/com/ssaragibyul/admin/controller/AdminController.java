@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ssaragibyul.admin.service.AdminService;
 import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
@@ -30,6 +31,12 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 
+	// 관리자 메인페이지 들어가기
+	@RequestMapping(value="adminMain.do", method = RequestMethod.GET)
+	public String adminMain() {
+		return "admin/adminMain";
+	}
+	
 	// 전체 회원 수
 	public int memberAllCount(ModelAndView mv) {
 		// TODO Auto-generated method stub
@@ -61,9 +68,21 @@ public class AdminController {
 	}
 
 	// 회원 전체 리스트 가져오기
-	public ModelAndView memberListView(ModelAndView mv) {
+	@RequestMapping(value="adminMemberListView.do", method = RequestMethod.GET)
+	public ModelAndView memberListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
 		// TODO Auto-generated method stub
-		return null;
+		int currentPage = (page != null)?page : 1;
+		int listCount = aService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Member> mList = aService.printAll(pi);
+		if(!mList.isEmpty()) {
+			mv.addObject("mList", mList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminMemberListView");
+		} else {
+			mv.addObject("msg", "회원 관리에 들어가지 못하였습니다.");
+		}
+		return mv;
 	}
 	
 	// 회원 상세정보(하나만 불러오기)

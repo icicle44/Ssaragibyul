@@ -2,6 +2,9 @@ package com.ssaragibyul.admin.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.admin.store.AdminStore;
@@ -18,6 +21,9 @@ import com.ssaragibyul.visit.domain.Visit;
 import jdk.nashorn.internal.ir.annotations.Reference;
 @Repository
 public class AdminStoreLogic implements AdminStore{
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	@Override
 	public int selectAllMemberCount(int MemberNo) {
@@ -51,8 +57,9 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public ArrayList<Member> selectAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllList", null, rowBounds);
 	}
 
 	@Override
@@ -227,6 +234,11 @@ public class AdminStoreLogic implements AdminStore{
 	public int deleteVisit(int visitNo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int selectListCount() {
+		return sqlSession.selectOne("boardMapper.selectListCount");
 	}
 
 }

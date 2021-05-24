@@ -25,7 +25,6 @@
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
-
 </head>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -58,14 +57,28 @@
       </ul>-->
 		</div>
 	</header>
-
+      <div style="width: 100%; height: 1100px;">
+                <section class="site-section darken-bg" id="section-home">
+        <div class="container" style="margin-top: 500px;">
+          <div class="row justify-content-center">
+            <div class="col-md-8">
+              <h2 class="heading text-uppercase text-white">Remeber</h2>
+			  <h2 class="heading text-uppercase text-white">Repay</h2>
+			  <h2 class="heading text-uppercase text-white">Reunion</h2>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div> 
+      
+      <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 		<div class="container-fluid">
 			<!-- 펀딩 프로젝트 -->
 			<div style="height: 1080px; padding-top: 200px;">
-				<section class="row align-items-stretch photos" id="section-funding">
-					<div class="col-12">
-						<div class="row align-items-stretch">
+				<section class="row align-items-stretch photos " id="section-funding">
+					<div class="col-12 justify-content-center">
+						<div class="row align-items-stretch" style="width: 1200px;">
 
 
 							<!-- 펀딩 프로젝트-->

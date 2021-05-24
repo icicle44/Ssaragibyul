@@ -90,5 +90,8 @@ public interface AdminStore {
 	public ArrayList<Visit> selectSaerchVisit(Search search);
 	// 별보러가자 삭제
 	public int deleteVisit(int visitNo);
+	
+	// 페이징
+	public int selectListCount();
 
 }

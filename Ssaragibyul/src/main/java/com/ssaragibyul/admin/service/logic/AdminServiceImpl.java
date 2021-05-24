@@ -2,9 +2,11 @@ package com.ssaragibyul.admin.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.admin.service.AdminService;
+import com.ssaragibyul.admin.store.AdminStore;
 import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -16,6 +18,9 @@ import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
 @Service
 public class AdminServiceImpl implements AdminService{
+	
+	@Autowired
+	private AdminStore aStore;
 
 	@Override
 	public int printAllMemberCount(int MemberNo) {
@@ -49,8 +54,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<Member> printAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return aStore.selectAll(pi);
 	}
 
 	@Override
@@ -225,6 +229,11 @@ public class AdminServiceImpl implements AdminService{
 	public int removeVisit(int visitNo) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getListCount() {
+		return aStore.selectListCount();
 	}
 
 }
