@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fundingMapper">
+
+	<resultMap type="Funding" id="fundingResultMap">
+		<id property="projectNo" column="F_PROJECT_NO"></id>
+		<result property="userId" column="USER_ID"></result>
+		<result property="subjectName" column="SUBJECT"></result>
+		<result property="productName" column="PRODUCT_NAME"></result>
+		<result property="goalMoney" column="GOAL_MONEY"></result>
+		<result property="sumMoney" column="SUM_MONEY"></result>
+		<result property="optionPrice" column="OPTION_PRICE"></result>
+		<result property="startDate" column="START_DATE"></result>
+		<result property="finDate" column="FIN_DATE"></result>
+		<result property="hostIntro" column="HOST_INTRO"></result>
+		<result property="projIntro" column="PROJ_INTRO"></result>
+		<result property="likeCount" column="LIKE_COUNT"></result>
+		<result property="hitsCount" column="HITS_COUNT"></result>
+		<result property="projectCode" column="PROJECT_CODE"></result>
+		<result property="deleiveryDate" column="DELIVERY_DATE"></result>
+	</resultMap>
+
+	<!-- <select id="selectOneMember" parameterType="Member" resultMap="memberResultMap"> 
+		SELECT * FROM MEMBER WHERE USER_ID = #{userId } AND USER_PW = #{userPw } 
+		</select> <select id="checkIdDup" resultType = "_int"> SELECT COUNT(*) FROM 
+		MEMBER WHERE USER_ID = #{userId } </select> -->
+	<insert id="insertFunding" parameterType="Funding">
+		INSERT INTO FUNDING_PROJECT
+		VALUES(SEQ_FUNDINGNO.NEXTVAL,#{userId},#{subjectName},#{productName},#{goalMoney},DEFAULT,#{optionPrice},SYSDATE,
+		#{finDate},#{hostIntro},#{projIntro},DEFAULT,DEFAULT,0,NULL)
+
+	</insert>
+	<select id="selectFundingList" resultMap="fundingResultMap"> 
+	SELECT * FROM FUNDING_PROJECT
+		ORDER BY GOAL_MONEY DESC </select>
+
+	<!-- <update id="updateMember" parameterType="Member"> UPDATE MEMBER SET 
+		USER_PW = #{userPw}, USER_AGE = #{userAge}, USER_EMAIL = #{userEmail}, USER_PHONE 
+		= #{userPhone}, USER_ADDR = #{userAddr}, UPDATE_DATE = SYSDATE WHERE USER_ID 
+		= #{userId} </update> <delete id="deleteMember" parameterType="Member"> DELETE 
+		MEMBER WHERE USER_ID = #{userId } </delete> -->
+</mapper>

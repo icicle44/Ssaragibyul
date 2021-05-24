@@ -6,15 +6,15 @@ public class Funding {
 	//펀딩 DB SQL 펀딩 프로젝트
 	private int projectNo;
 	private String userId;
-	private String subjectName;
-	private String productName;
-	private int goalMoney;
+	private String subjectName;//
+	private String productName;//
+	private int goalMoney;//
 	private int sumMoney;
-	private int optionPrice;
-	private Date startDate;
-	private Date finDate;
-	private String hostIntro;
-	private String projIntro;
+	private int optionPrice;//
+	private Date startDate; //sysdate
+	private Date finDate; //
+	private String hostIntro;//
+	private String projIntro;//
 	private int likeCount;
 	private int hitsCount;
 	private int projectCode;

@@ -25,7 +25,7 @@ public interface FundingService {
 
 	public int addreadCountHit(int projectNo);
 
-	public ArrayList<Funding> printAllProject(PageInfo pi);
+	public ArrayList<Funding> printAllProject();
 
 	public ArrayList<FundingComments> printAllRCommnets(int projectNo);
 	

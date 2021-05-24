@@ -40,10 +40,12 @@
 	<div class="back0"></div>
 	<!-- <div class="blur back1">	</div> -->
 	<div class="blur back1">
+		${loginUser.userId }
 	<button class="suggestBtn" onclick="location.href='fundingSuggest.do'">펀딩</button>
 	</div>
 <!-- <div class="back3"></div> -->
 	<div class="blur back2">
+		${loginUser.userId }
 	<button class="suggestBtn" onclick="location.href='DONATION">기부</button>
 	</div>
 	

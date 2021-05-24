@@ -47,10 +47,23 @@ public class FundingController {
 
 		return mv;
 	}
-	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
-	 public String fundingMain() {
-		 return "funding/fundingList";
+	 @RequestMapping(value="/fundingIndex.do", method=RequestMethod.GET)
+	 public String fundingIndex() {
+		 return "../../index";
 	 }
+	
+	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
+	 public String fundingList(Model model) {
+		 ArrayList<Funding> fList = fService.printAllProject();
+		 if(!fList.isEmpty()) {
+				model.addAttribute("fList", fList);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+		}
+	 
 
 	 @RequestMapping(value="suggestPage.do", method=RequestMethod.GET)
 	 public String SuggestMain() {
@@ -73,13 +86,24 @@ public class FundingController {
 	public String fundingOfferView() {
 		return "";
 	}
+	
+	 @RequestMapping(value="fundingRegister.do", method=RequestMethod.POST)
+	 public String memberRegister( @ModelAttribute Funding funding, Model model) {
+		 int result = fService.registerProject(funding);
+		 if(result > 0) {
+			 return "redirect:fundingIndex.do";
+		 }else {
+			 model.addAttribute("msg", "회원 가입 실패!!");
+			 return "common/errorPage";
+		 }
+	 }
 
 
-	@RequestMapping(value = "fundingRegister.do", method = RequestMethod.POST)
-	public ModelAndView fundingRegister(ModelAndView mv, @ModelAttribute Funding funding, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
-
-		return mv;
-	}
+//	@RequestMapping(value = "fundingRegister.do", method = RequestMethod.POST)
+//	public ModelAndView fundingRegister(ModelAndView mv, @ModelAttribute Funding funding, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
+//
+//		return mv;
+//	}
 
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 	

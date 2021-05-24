@@ -2,6 +2,7 @@ package com.ssaragibyul.funding.service.logic;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.PageInfo;
@@ -10,8 +11,12 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.service.FundingService;
+import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
 @Service
 public class FundingSerivceImpl implements FundingService {
+	
+	@Autowired
+	private FundingStoreLogic fStore;
 
 	@Override
 	public int getListCountFuncing() {
@@ -56,9 +61,9 @@ public class FundingSerivceImpl implements FundingService {
 	}
 
 	@Override
-	public ArrayList<Funding> printAllProject(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Funding> printAllProject() {
+		ArrayList<Funding> fList = fStore.printAllProject();
+		return fList;
 	}
 
 	@Override
@@ -75,8 +80,8 @@ public class FundingSerivceImpl implements FundingService {
 
 	@Override
 	public int registerProject(Funding funding) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = fStore.insertProject(funding);
+		return result;
 	}
 
 	@Override

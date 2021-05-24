@@ -2,6 +2,8 @@ package com.ssaragibyul.funding.store.logic;
 
 import java.util.ArrayList;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
@@ -13,6 +15,9 @@ import com.ssaragibyul.funding.store.FundingStore;
 @Repository
 public class FundingStoreLogic implements FundingStore{
 
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public int selectListCount() {
 		// TODO Auto-generated method stub
@@ -56,9 +61,8 @@ public class FundingStoreLogic implements FundingStore{
 	}
 
 	@Override
-	public ArrayList<Funding> printAllProject(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Funding> printAllProject() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList");
 	}
 
 	@Override
@@ -75,8 +79,8 @@ public class FundingStoreLogic implements FundingStore{
 
 	@Override
 	public int insertProject(Funding funding) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("fundingMapper.insertFunding", funding);
+		return result;
 	}
 
 	@Override
