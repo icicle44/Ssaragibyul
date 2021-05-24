@@ -13,7 +13,6 @@ div, article, section {
     color: #464646;
 }
 
-
 .wrapper-left {
 	float: left;
 	width: 20%;
@@ -91,19 +90,15 @@ table td {
 	text-decoration: none;
 }
 
---.table table-hover th
---:hover {
---	background-color:
---}
+button[type=submit] {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
 
 #search-window {
 	width: 100px;
 	display: inline-block;
-}
-
-#search-btn {
-	background-color: transparent;
-	border: none;
 }
 
 #qna-msg {

@@ -35,12 +35,16 @@
 	</select>
 	<select id="selectRMsgList" parameterType="string" resultMap="messageNickResultMap">
 		SELECT * FROM MESSAGE LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER) ON(SENDER_ID = USER_ID)
-		WHERE RECEIVER_ID=#{userId} AND REC_DELETE_YN = 0  ORDER BY REG_DATE DESC
+		WHERE RECEIVER_ID=#{userId} AND REC_DELETE_YN = 0 ORDER BY REG_DATE DESC
 	</select>
 	<select id="selectSMsgList" parameterType="string" resultMap="messageNickResultMap">
 		SELECT * FROM MESSAGE LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER) ON(RECEIVER_ID = USER_ID)
 		WHERE SENDER_ID=#{userId} AND SEND_DELETE_YN = 0 ORDER BY REG_DATE DESC
 	</select>
+	<select id="selectOne" parameterType="_int" resultMap="messageResultMap">
+		SELECT * FROM MESSAGE WHERE MSG_NO=#{msgNo}
+	</select>
+	<!-- 페이징용 리스트 갯수 -->
 	<select id="selectMsgListCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM MESSAGE
 		<if test="flag.toString() == 'rec'">
@@ -50,11 +54,88 @@
 			WHERE SENDER_ID = #{userId}
 		</if>
 	</select>
-
+	<select id="selectMsgSearchCount" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER)
+		<if test="flag.toString() == 'rec'">
+			ON(SENDER_ID = USER_ID)
+			WHERE RECEIVER_ID = #{userId} AND REC_DELETE_YN = 0 
+			<choose>
+<!-- 				<when test="searchCondition.toString()=='allUpper'">
+					
+				</when> -->
+				<when test="searchCondition.toString()=='present'">
+					AND PRESENT_POINT > 0
+				</when>
+				<when test="searchCondition.toString()=='admin'">
+					AND SENDER_ID = #{searchValue}
+				</when>
+				<when test="searchCondition.toString()=='allLower'">
+					AND NICKNAME LIKE '%'||#{searchValue}||'%'
+					OR MSG_TITLE LIKE '%'||#{searchValue}||'%'
+					OR REG_DATE LIKE '%'||#{searchValue}||'%'
+				</when>
+				<when test="searchCondition.toString()=='nickName'">
+					AND NICKNAME LIKE '%'||#{searchValue}||'%'
+				</when>
+				<when test="searchCondition.toString()=='msgTitle'">
+					AND MSG_TITLE LIKE '%'||#{searchValue}||'%'
+				</when>
+				<when test="searchCondition.toString()=='regDate'">
+					AND REG_DATE LIKE '%'||#{searchValue}||'%'
+				</when>
+				<otherwise></otherwise>
+			</choose>
+		</if>
+		<!-- <if test="flag.toString() == 'send'">
+			WHERE SENDER_ID = #{userId}
+			
+		</if> -->
+	</select>
+	
+	<!-- 읽지 않은 받은 쪽지 갯수 -->
+	<select id="selectRecCount" parameterType="string" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE RECEIVER_ID = #{userId} AND READ_YN = 0
+	</select>
+	<!-- 오늘의 공지 쪽지 갯수 -->
+	<select id="selectNotiCount" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE MSG_TYPE = 0 AND TO_CHAR(REG_DATE, 'YYYYMMDD') = TO_CHAR(SYSDATE, 'YYYYMMDD') 
+	</select>
+	
 	<insert id="insertMemMessage" parameterType="Message">
 		INSERT INTO MESSAGE VALUES(SEQ_MESSAGEID.NEXTVAL, #{senderId}, #{receiverId}, #{msgTitle}, #{msgContents}, #{presentPoint}, LOCALTIMESTAMP, DEFAULT, DEFAULT, DEFAULT, #{msgType})
 	</insert>
-
+	<insert id="insertNotiMessage" parameterType="Message">
+		INSERT INTO MESSAGE VALUES(SEQ_MESSAGEID.NEXTVAL, #{senderId}, #{receiverId}, #{msgTitle}, #{msgContents}, #{presentPoint}, LOCALTIMESTAMP, DEFAULT, DEFAULT, DEFAULT, #{msgType})
+	</insert>
+	
+	<!-- 읽음여부 변경 -->
+	<update id="updateRead" parameterType="_int">
+		UPDATE MESSAGE SET READ_YN = 1 WHERE MSG_NO=#{msgNo}
+	</update>
+	
+	<!-- 받은사람, 보낸사람 삭제여부 변경, 둘 다 삭제한 경우 해당 쪽지 DELETE(선물포인트 없는 경우만) -->
+	<update id="deleteReceiveMsg">
+			UPDATE MESSAGE SET REC_DELETE_YN = 1
+			WHERE MSG_NO IN
+		<foreach collection="list" item="msgNoArr" open="(" close=")" separator=",">
+				#{msgNoArr}
+		</foreach>
+	</update> 
+	<update id="deleteSendMsg">
+			UPDATE MESSAGE SET SEND_DELETE_YN = 1
+			WHERE MSG_NO IN
+		<foreach collection="list" item="msgNoArr" open="(" close=")" separator=",">
+				#{msgNoArr }
+		</foreach>
+	</update>
+	<delete id="deleteMsgComp">
+			DELETE FROM MESSAGE
+			WHERE MSG_NO IN
+		<foreach collection="list" item="msgNoArr" open="(" close=")" separator=",">
+				#{msgNoArr }
+		</foreach>
+			AND SEND_DELETE_YN = 1 AND REC_DELETE_YN = 1 AND PRESENT_POINT=0
+	</delete>
 
 
 

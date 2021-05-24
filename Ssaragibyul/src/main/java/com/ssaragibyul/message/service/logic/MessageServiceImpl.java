@@ -81,7 +81,7 @@ public class MessageServiceImpl implements MessageService{
 	}
 
 	@Override
-	public ArrayList<Message> printSearchList(PageInfo pi, Search search) {
+	public ArrayList<MessageAndNick> printSearchList(PageInfo pi, Search search) {
 		return msgStore.selectSearchList(pi, search);
 	}
 	

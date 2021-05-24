@@ -36,7 +36,7 @@ public interface MessageService {
 	//오늘의 공지쪽지 갯수 출력
 	public int getNoticeMsgCount();
 	//쪽지검색
-	public ArrayList<Message> printSearchList(PageInfo pi, Search search);
+	public ArrayList<MessageAndNick> printSearchList(PageInfo pi, Search search);
 	//공지쪽지 페이징용 리스트 갯수 출력
 	public int getNoticeListCount();
 	//쪽지함 페이징용 리스트 갯수 출력

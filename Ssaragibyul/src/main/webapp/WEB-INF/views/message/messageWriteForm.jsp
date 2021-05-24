@@ -10,7 +10,7 @@
 
 <title>싸라기별</title>
 </head>
-<body onload="window.resizeTo(530,465)">
+<body onload="window.resizeTo(530,500)">
 	<main id="main">
 			<!-- msgType, 게시글 작성자 ID, 닉네임, 관리자 ID 넘겨받아서 if문으로 폼변경해주고, DB에 갈때도 넘기기 -->
 		<section id="total">
@@ -37,7 +37,7 @@
 					<table border="1" align="center" width="490px">
 							<tr>
 								<th>받으시는 분</th>
-								<td>${nickName}</td>
+								<td>${nickName} 선생 ${message.receiverId }</td>
 							</tr>
 							<tr>
 								<th>제목</th>
@@ -55,9 +55,11 @@
 							</tr>
 							<tr><td colspan="2"><hr></tr>
 							<tr>
+								<!-- 버튼 -->
 								<td colspan="2" align="right">
 									<input type="button" value="보내기" id="sendClose">
 									&nbsp;&nbsp;&nbsp;<input type="button" value="창닫기" onclick="self.close();">
+									<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="공지전송" id="sendCloseNotice"> -->
 								</td>
 							</tr>
 	<!-- 						<input type="hidden" name="senderId" value="">
@@ -81,6 +83,8 @@
 					$("#show-present").css("color", "#464646");					
 				}
 			});
+			
+			/* 쪽지 보내기 누르면 insert 후 닫기 */
 			$("#sendClose").on("click", function(){
 				var senderId = '${loginUser.userId}';
 				var receiverId = '${message.receiverId}'; /* 넘어온 멤버/관리자의 아이디로 */
@@ -104,10 +108,50 @@
 							"msgType": msgType
 							},
 					success: function(data){
-						self.close();
+						if(data == "success") {
+							alert("쪽지가 전달되었습니다.");							
+							self.close();
+							opener.location.href="sendMsgList.do";
+						}else {
+							alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
+						}
 					},
 					error: function(){
-						
+						alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
+					}
+				});
+			});
+			
+			/* 공지-전체에게 보내기 누르면 insert 후 닫기 */
+			$("#sendCloseNotice").on("click", function(){
+				var senderId = '${loginUser.userId}';
+				var receiverId = ""; /* 넘어온 멤버/관리자의 아이디로 */
+				var msgTitle = $("#msgTitle").val();
+				var msgContents = $("#msgContents").val();
+				var presentPoint = 0;
+				var msgType = 0;
+				
+				$.ajax({
+					url: "registerNotiMsg.do",
+					type: "post",
+					data: {"senderId":senderId,
+							"receiverId":receiverId,
+							"msgTitle": msgTitle,
+							"msgContents": msgContents,
+							"presentPoint": presentPoint,
+							"msgType": msgType
+							},
+					success: function(data){
+						if(data == "success") {
+							alert("공지가 전달되었습니다.");							
+							self.close();
+							opener.location.href="sendMsgList.do";
+						}else {
+							alert("죄송합니다. 공지 전달을 실패하였습니다.");
+						}
+					},
+					error: function(){
+						alert("error");
 					}
 				});
 			});

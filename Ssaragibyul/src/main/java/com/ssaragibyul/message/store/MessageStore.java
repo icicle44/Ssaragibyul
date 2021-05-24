@@ -28,7 +28,7 @@ public interface MessageStore {
 	public int getRecMsgCount(String userId);
 	public int getNoticeMsgCount();
 	
-	public ArrayList<Message> selectSearchList(PageInfo pi, Search search);
+	public ArrayList<MessageAndNick> selectSearchList(PageInfo pi, Search search);
 	
 	public int getNoticeListCnt();
 	public int getMsgListCount(HashMap<String, String> cntMap);

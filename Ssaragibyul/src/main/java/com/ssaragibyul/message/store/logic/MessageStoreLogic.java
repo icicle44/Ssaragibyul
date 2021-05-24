@@ -28,75 +28,67 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public int insertNotiMessage(Message message) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("messageMapper.insertNotiMessage", message);
 	}
 
 	@Override
 	public int deleteReceivedMsg(List<Integer> msgNoArr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("messageMapper.deleteReceiveMsg", msgNoArr);
 	}
 
 	@Override
 	public int deleteSendMsg(List<Integer> msgNoArr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("messageMapper.deleteSendMsg", msgNoArr);
 	}
 
 	@Override
 	public int deleteMsgComp(List<Integer> msgNoArr) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("messageMapper.deleteMsgComp", msgNoArr);
 	}
 
 	@Override
 	public int updateRead(int msgNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("messageMapper.updateRead", msgNo);
 	}
 
 	@Override
 	public ArrayList<Message> selectAllnMsg(PageInfo pi) {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
-		return (ArrayList)sqlSession.selectList("messageMapper.selectNMsgList");
+		return (ArrayList)sqlSession.selectList("messageMapper.selectNMsgList", null, rowBounds);
 	}
 
 	@Override
 	public ArrayList<MessageAndNick> selectAllrMsg(PageInfo pi, String userId) {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
-		return (ArrayList)sqlSession.selectList("messageMapper.selectRMsgList", userId);
+		return (ArrayList)sqlSession.selectList("messageMapper.selectRMsgList", userId, rowBounds);
 	}
 
 	@Override
 	public ArrayList<MessageAndNick> selectAllsMsg(PageInfo pi, String userId) {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
-		return (ArrayList)sqlSession.selectList("messageMapper.selectSMsgList", userId);
+		return (ArrayList)sqlSession.selectList("messageMapper.selectSMsgList", userId, rowBounds);
 	}
 
 	@Override
 	public Message selectOne(int msgNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("messageMapper.selectOne", msgNo);
 	}
 
 	@Override
 	public int getRecMsgCount(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("messageMapper.selectRecCount", userId);
 	}
 
 	@Override
 	public int getNoticeMsgCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("messageMapper.selectNotiCount");
 	}
 
 	@Override
-	public ArrayList<Message> selectSearchList(PageInfo pi, Search search) {
+	public ArrayList<MessageAndNick> selectSearchList(PageInfo pi, Search search) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -114,8 +106,7 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public int getSearchListCount(Search search) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("messageMapper.selectMsgSearchCount", search);
 	}
 
 }
