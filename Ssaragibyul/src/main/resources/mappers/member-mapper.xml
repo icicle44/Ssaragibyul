@@ -31,7 +31,7 @@
 	</insert>
 	
 	<!-- 아이디 찾기 -->
-	<select id="idSearch"  parameterType="String" resultType="String">
+ 	<select id="idSearch"  parameterType="String" resultType="String">
 		SELECT * FROM MEMBER
 		WHERE USER_NAME = #{userName } AND USER_EMAIL = #{userEmail } 
 	</select>
@@ -45,7 +45,24 @@
     <!-- 확인용 -->
     <select id="selectAllList" resultMap="memberResultMap">
       SELECT * FROM MEMBER ORDER BY ENROLL_DATE DESC
-   </select>
+   	</select>
+	
+  	<!-- 확인용 -->
+	<select id="selectOne" parameterType="Member" resultMap="memberResultMap">
+      SELECT * FROM MEMBER
+      WHERE USER_ID = #{userId }
+   	</select>
+
+  	<!-- 확인용 -->
+   	<update id="deleteMember" parameterType="Member">
+     	UPDATE MEMBER SET M_CODE = 2
+   	</update>
+   	
+	<!-- 확인용 -->
+   	<update id="updateMember" parameterType="Member">
+      	UPDATE MEMBER SET USER_EMAIL= #{userEmail}, USER_PHONE=#{userPhone}, USER_ADDR=#{userAddr}
+   	</update>
+	
 	
 	<!--
 	<update id="updateMember" parameterType="Member">

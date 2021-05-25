@@ -23,7 +23,7 @@
                     <p id="end">입니다.</p>
                 </div>
                 <div class="btn">
-                    <input type="submit" value="로그인하기" id="loginBtn" "button" onclick="location.href='login.do';">
+                    <input type="submit" value="로그인하기" id="loginBtn" onclick="location.href='login.do';">
                 </div>
             </div>
         </div>

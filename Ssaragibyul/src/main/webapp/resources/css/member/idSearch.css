@@ -18,6 +18,10 @@ header{
 
 .contents{
 	margin:auto;
+	background-image: url(/resources/img/member/member_background.jpg);
+   	background-size:600px;
+ 	height: 600px;
+    width: auto;
 }
 
 #h2{

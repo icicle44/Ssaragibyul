@@ -102,12 +102,14 @@ public class MemberController {
 	}
 	
 	// 아이디 찾기
-	@RequestMapping(value="/searchIdimpl.do", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value="idFind.do", method = RequestMethod.GET)
 	public String searchId(@ModelAttribute Member member) {
-		System.out.println("member" + member);
-		String searchid = mService.searchId(member);
-		System.out.println(searchid);
-		return searchid;
+		String result = mService.searchId(member);
+		if (result != null ) {
+			return "member/idCheck";
+		}else {
+			return "common.errorPage";
+		}
 	}
 
 
