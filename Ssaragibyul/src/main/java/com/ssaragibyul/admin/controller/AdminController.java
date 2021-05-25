@@ -1,8 +1,10 @@
 package com.ssaragibyul.admin.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +24,11 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.controller.MessageController;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.MessageAndNick;
+import com.ssaragibyul.message.domain.PaginationMsg;
+import com.ssaragibyul.message.service.MessageService;
 import com.ssaragibyul.visit.domain.Visit;
 
 @Controller
@@ -30,6 +36,9 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService aService;
+	
+	@Autowired
+	private MessageService msgService;
 
 	// 관리자 메인페이지 들어가기
 	@RequestMapping(value="adminMain.do", method = RequestMethod.GET)
@@ -182,9 +191,10 @@ public class AdminController {
 	}
 
 	// 기념관 리스트
-	public ModelAndView histoyListView() {
+	@RequestMapping(value="adminHistoryList.do", method = RequestMethod.GET)
+	public ModelAndView histoyListView(ModelAndView mv) {
 		// TODO Auto-generated method stub
-		return null;
+		return mv;
 	}
 
 	// 기념관 상세보기
@@ -233,17 +243,77 @@ public class AdminController {
 		return null;
 	}
 
-	// 쪽지목록보기
-	public ModelAndView messageListView() {
-		// TODO Auto-generated method stub
-		return null;
+	// 받은 쪽지함 리스트
+	@RequestMapping(value="adminMessageList.do", method = RequestMethod.GET)
+	public ModelAndView messageListView(ModelAndView mv,
+										HttpSession session,
+										@RequestParam(value="page", required=false) Integer page) {
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+		String flag = "rec";
+		
+		HashMap<String, String> cntMap = new HashMap<String, String>();
+		cntMap.put("flag", flag);
+		cntMap.put("userId", userId);
+		int currentPage = (page != null)? page : 1;
+		int listCount = msgService.getMsgListCount(cntMap);
+		PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+
+		ArrayList<MessageAndNick> rMList = msgService.printAllrMsg(pi, userId);
+		rMList.toString();
+		if(!rMList.isEmpty()) {
+			mv.addObject("msgList", rMList);	
+		}else {
+			mv.addObject("tblMsg", "받은 쪽지가 없습니다.");
+		}
+		mv.addObject("pi", pi);
+		mv.addObject("flag", flag);	
+		mv.setViewName("admin/adminMessageList");
+		return mv;
 	}
 
-	// 쪽지 상세보기
-	public Message messageDetail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	// 쪽지 상세보기
+//	@RequestMapping(value="adminMessageDetail.do", method = RequestMethod.GET)
+//	public ModelAndView MessageDetail(@RequestParam("msgNo") int msgNo,
+//										@RequestParam("nickName") String nickName,
+//										@RequestParam("flag") String flag,
+//										ModelAndView mv) {
+//			//받은 쪽지 읽을 때만 읽음여부 컬럼 update
+//					int result = 0;
+//					if (flag.equals("rec")) {
+//						result = msgService.updateRead(msgNo);
+//					} else {
+//						result = 1;
+//					}
+//			//message select하기
+//					if (result > 0) {
+//						Message message = msgService.printOne(msgNo);
+//						if (message != null) {
+//							mv.addObject("message", message);
+//							mv.addObject("nickName", nickName);
+//							mv.addObject("flag", flag);
+//							mv.setViewName("admin/adminMessageDetailView");
+//						} else {
+//							mv.addObject("msg", "쪽지 상세보기에 실패하였습니다.");
+//							if (flag.equals("rec")) {
+//								mv.setViewName("redirect:adminMessageList.do");
+//							} else if (flag.equals("send")) {
+//								mv.setViewName("redirect:sendMsgList.do");
+//							} else {
+//								mv.setViewName("redirect:noticeMsgList.do");
+//							}
+//						}
+//					} else {
+//						mv.addObject("msg", "쪽지 상세보기에 실패하였습니다.");
+//						if (flag.equals("rec")) {
+//							mv.setViewName("redirect:adminMessageList.do");
+//						} else if (flag.equals("send")) {
+//							mv.setViewName("redirect:sendMsgList.do");
+//						} else {
+//							mv.setViewName("redirect:noticeMsgList.do");
+//						}
+//					}
+//					return mv;
+//				}
 
 	// 쪽지 삭세하기
 	public String messageDelete() {
@@ -251,7 +321,7 @@ public class AdminController {
 		return null;
 	}
 
-	// 쪽지 보내기
+	// 보낸쪽지함
 	public Message sendMessage() {
 		// TODO Auto-generated method stub
 		return null;

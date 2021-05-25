@@ -7,10 +7,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<title>관리자 메인페이지</title>
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-	<link rel="icon" href="resources/img/admin/icon.ico" type="image/x-icon"/>
 
 	<!-- Fonts and icons -->
-	<script src="resources/js/admin/plugin/webfont/webfont.min.js"></script>
+	<script src="/resources/js/admin/plugin/webfont/webfont.min.js"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -23,17 +22,18 @@
 
 	<!-- CSS Files -->
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-	<link rel="stylesheet" href="resources/css/admin/bootstrap.min.css">
-	<link rel="stylesheet" href="resources/css/admin/atlantis.min.css">
+	<link rel="stylesheet" href="/resources/css/admin/bootstrap.min.css">
+	<link rel="stylesheet" href="/resources/css/admin/atlantis.min.css">
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
-	<link rel="stylesheet" href="resources/css/admin/demo.css">
+	<link rel="stylesheet" href="/resources/css/admin/demo.css">
 </head>
 <body>
 <!-- 로고들이 다 안나와요 ㅠㅠ -->
 	<div class="wrapper">
-		<div class="main-header">
-			<!-- Logo Header -->
+	<%@include file="header.jsp" %>
+<!-- 		<div class="main-header">
+			Logo Header
 			<div class="logo-header" style="background-color: #EB5C01" >
 				싸라기별
 				<a href="index.html" class="logo">
@@ -51,9 +51,9 @@
 					</button>
 				</div>
 			</div>
-			<!-- End Logo Header -->
+			End Logo Header
 
-			<!-- Navbar Header -->
+			Navbar Header
 			<nav class="navbar navbar-header navbar-expand-lg" style="background-color: #EB5C01">
 				
 				<div class="container-fluid">
@@ -289,10 +289,10 @@
 					</ul>
 				</div>
 			</nav>
-			<!-- End Navbar -->
+			End Navbar
 		</div>
 
-		<!-- Sidebar -->
+		Sidebar
 		<div class="sidebar sidebar-style-2">			
 			<div class="sidebar-wrapper scrollbar scrollbar-inner">
 				<div class="sidebar-content">
@@ -309,7 +309,7 @@
 							</a>
 							<div class="clearfix"></div>
 
-<!--							<div class="collapse in" id="collapseExample">
+							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
 										<a href="#profile">
@@ -327,11 +327,11 @@
 										</a>
 									</li>
 								</ul>
-							</div>-->
+							</div>
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-<!--						<li class="nav-item active">
+						<li class="nav-item active">
 							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Dashboard</p>
@@ -351,7 +351,7 @@
 									</li>
 								</ul>
 							</div>
-						</li>-->
+						</li>
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
@@ -359,7 +359,7 @@
 							<h4 class="text-section">관리자페이지</h4>
 						</li>
                         
-                        <!-- 회원 정보 관리 -->
+                        회원 정보 관리
 						<li class="nav-item">
 							<a data-toggle="collapse" href="adminMemberListView.do">
 								<i class="fas fa-portrait"></i>
@@ -367,12 +367,12 @@
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="base">
-								<!--<ul class="nav nav-collapse">
-								</ul>-->
+								<ul class="nav nav-collapse">
+								</ul>
 							</div>
 						</li>
                         
-                        <!-- 프로젝트 관리 -->
+                        프로젝트 관리
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#sidebarLayouts">
 								<i class="fas fa-th-list"></i>
@@ -400,7 +400,7 @@
 							</div>
 						</li>
                         
-                        <!--기념관 게시판 관리-->
+                        기념관 게시판 관리
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#forms">
 								<i class="fas fa-university"></i>
@@ -408,17 +408,17 @@
 								<span class="caret"></span>
 							</a>
 							<div class="collapse" id="forms">
-<!--								<ul class="nav nav-collapse">
+								<ul class="nav nav-collapse">
 									<li>
 										<a href="forms/forms.html">
 											<span class="sub-item">Basic Form</span>
 										</a>
 									</li>
-								</ul>-->
+								</ul>
 							</div>
 						</li>
                         
-                        <!--별 보러 가자 관리-->
+                        별 보러 가자 관리
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#tables">
 								<i class="far fa-star"></i>
@@ -441,7 +441,7 @@
 							</div>
 						</li>
                         
-                        <!--쪽지 관리-->
+                        쪽지 관리
 						<li class="nav-item">
 							<a data-toggle="collapse" href="#maps">
 								<i class="fas fa-envelope"></i>
@@ -464,14 +464,14 @@
 							</div>
 						</li>
 				
-<!--						<li class="mx-4 mt-2">
+						<li class="mx-4 mt-2">
 							<a href="http://themekita.com/atlantis-bootstrap-dashboard.html" class="btn btn-primary btn-block"><span class="btn-label mr-2"> <i class="fa fa-heart"></i> </span>Buy Pro</a> 
-						</li>-->
+						</li>
 					</ul>
 				</div>
 			</div>
 		</div>
-		<!-- End Sidebar -->
+		End Sidebar -->
 
         <!--메인-->
 		<div class="main-panel">
@@ -484,7 +484,7 @@
 								<h5 class="text-white op-7 mb-2">싸라기별 프로젝트</h5>
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
-								<a href="#" class="btn btn-white btn-border btn-round mr-2">쪽지보내기</a>
+								<a href="msgWriterView.do" class="btn btn-white btn-border btn-round mr-2">쪽지보내기</a>
 								<a href="#" class="btn btn-secondary btn-round">기념관 등록하기</a>
 							</div>
 						</div>

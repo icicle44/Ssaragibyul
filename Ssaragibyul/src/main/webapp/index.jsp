@@ -58,13 +58,22 @@
 		</div>
 	</header>
       <div style="width: 100%; height: 1100px;">
+<%-- 		<%@include file="introduce.jsp" %> --%>
                 <section class="site-section darken-bg" id="section-home">
         <div class="container" style="margin-top: 500px;">
           <div class="row justify-content-center">
             <div class="col-md-8">
               <h2 class="heading text-uppercase text-white">Remeber</h2>
-			  <h2 class="heading text-uppercase text-white">Repay</h2>
-			  <h2 class="heading text-uppercase text-white">Reunion</h2>
+				<h5 class="heading text-uppercase text-white">현재 우리가 있을 수 있게
+					해주신 분들을 기억하고,</h5>
+				<br>
+				<h2 class="heading text-uppercase text-white">Repay</h2>
+				<h5 class="heading text-uppercase text-white">우리의 위치에서 그 분들을 위해
+					할 수 있는 것을 실행함으로써,</h5>
+				<br>
+				<h2 class="heading text-uppercase text-white">Reunion</h2>
+				<h5 class="heading text-uppercase text-white">다시 하나가 되어 어려움을
+					극복하고자 합니다.</h5>
             </div>
           </div>
         </div>
@@ -73,12 +82,12 @@
       
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
-		<div class="container-fluid">
+ 		<div class="container-fluid">
 			<!-- 펀딩 프로젝트 -->
 			<div style="height: 1080px; padding-top: 200px;">
 				<section class="row align-items-stretch photos " id="section-funding">
 					<div class="col-12 justify-content-center">
-						<div class="row align-items-stretch" style="width: 1200px;">
+						<div class="row align-items-stretch" style="">
 
 
 							<!-- 펀딩 프로젝트-->

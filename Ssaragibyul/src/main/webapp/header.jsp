@@ -71,7 +71,7 @@
 				
 				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId =='admin'}">
 					<div>
-						<a class="nav-link" href="admin.do">관리자페이지</a> 
+						<a class="nav-link" href="adminMain.do">관리자페이지</a> 
 						<a class="nav-link" href="logout.do">로그아웃</a>
 					</div>
 				</c:if>

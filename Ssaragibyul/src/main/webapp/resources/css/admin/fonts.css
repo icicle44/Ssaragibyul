@@ -1,11 +1,11 @@
 /* Flaticon */
 @font-face {
 	font-family: "Flaticon";
-	src: url("../fonts/flaticon/Flaticon.eot");
-	src: url("../fonts/flaticon/Flaticon.eot?#iefix") format("embedded-opentype"),
-	url("../fonts/flaticon/Flaticon.woff") format("woff"),
-	url("../fonts/flaticon/Flaticon.ttf") format("truetype"),
-	url("../fonts/flaticon/Flaticon.svg#Flaticon") format("svg");
+	src: url("/resources/fonts/admin/flaticon/Flaticon.eot");
+	src: url("/resources/fonts/admin/flaticon/Flaticon.eot?#iefix") format("embedded-opentype"),
+	url("/resources/fonts/admin/flaticon/Flaticon.woff") format("woff"),
+	url("/resources/fonts/admin/flaticon/Flaticon.ttf") format("truetype"),
+	url("/resources/fonts/admin/flaticon/Flaticon.svg#Flaticon") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -13,7 +13,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	@font-face {
 		font-family: "Flaticon";
-		src: url("../fonts/flaticon/Flaticon.svg#Flaticon") format("svg");
+		src: url("/resources/fonts/admin/flaticon/Flaticon.svg#Flaticon") format("svg");
 	}
 }
 
@@ -5666,8 +5666,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Brands';
   font-style: normal;
   font-weight: normal;
-  src: url("../fonts/fontawesome/fa-brands-400.eot");
-  src: url("../fonts/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("../fonts/fontawesome/fa-brands-400.woff2") format("woff2"), url("../fonts/fontawesome/fa-brands-400.woff") format("woff"), url("../fonts/fontawesome/fa-brands-400.ttf") format("truetype"), url("../fonts/fontawesome/fa-brands-400.svg#fontawesome") format("svg");
+  src: url("/resources/fonts/admin/fontawesome/fa-brands-400.eot");
+  src: url("/resources/fonts/admin/fontawesome/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("/resources/fonts/admin/fontawesome/fa-brands-400.woff2") format("woff2"), url("/resources/fonts/admin/fontawesome/fa-brands-400.woff") format("woff"), url("/resources/fonts/admin/fontawesome/fa-brands-400.ttf") format("truetype"), url("/resources/fonts/admin/fontawesome/fa-brands-400.svg#fontawesome") format("svg");
 }
 .fab {
   font-family: 'Font Awesome 5 Brands';
@@ -5677,8 +5677,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Regular';
   font-style: normal;
   font-weight: 400;
-  src: url("../fonts/fontawesome/fa-regular-400.eot");
-  src: url("../fonts/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("../fonts/fontawesome/fa-regular-400.woff2") format("woff2"), url("../fonts/fontawesome/fa-regular-400.woff") format("woff"), url("../fonts/fontawesome/fa-regular-400.ttf") format("truetype"), url("../fonts/fontawesome/fa-regular-400.svg#fontawesome") format("svg");
+  src: url("/resources/fonts/admin/fontawesome/fa-regular-400.eot");
+  src: url("/resources/fonts/admin/fontawesome/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("/resources/fonts/admin/fontawesome/fa-regular-400.woff2") format("woff2"), url("/resources/fonts/admin/fontawesome/fa-regular-400.woff") format("woff"), url("/resources/fonts/admin/fontawesome/fa-regular-400.ttf") format("truetype"), url("/resources/fonts/admin/fontawesome/fa-regular-400.svg#fontawesome") format("svg");
 }
 .far {
   font-family: 'Font Awesome 5 Regular';
@@ -5689,8 +5689,8 @@ readers do not read off random characters that represent icons */
   font-family: 'Font Awesome 5 Solid';
   font-style: normal;
   font-weight: 900;
-  src: url("../fonts/fontawesome/fa-solid-900.eot");
-  src: url("../fonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../fonts/fontawesome/fa-solid-900.woff2") format("woff2"), url("../fonts/fontawesome/fa-solid-900.woff") format("woff"), url("../fonts/fontawesome/fa-solid-900.ttf") format("truetype"), url("../fonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
+  src: url("/resources/fonts/admin/fontawesome/fa-solid-900.eot");
+  src: url("/resources/fonts/admin/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("/resources/fonts/admin/fontawesome/fa-solid-900.woff2") format("woff2"), url("/resources/fonts/admin/fontawesome/fa-solid-900.woff") format("woff"), url("/resources/fonts/admin/fontawesome/fa-solid-900.ttf") format("truetype"), url("/resources/fonts/admin/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
 }
 .fa, .fas {
   font-family: 'Font Awesome 5 Solid';
@@ -5701,8 +5701,8 @@ readers do not read off random characters that represent icons */
 
 @font-face {
   font-family: 'simple-line-icons';
-  src: url('../fonts/simple-line-icons/Simple-Line-Icons.eot?v=2.4.0');
-  src: url('../fonts/simple-line-icons/Simple-Line-Icons.eot?v=2.4.0#iefix') format('embedded-opentype'), url('../fonts/simple-line-icons/Simple-Line-Icons.woff2?v=2.4.0') format('woff2'), url('../fonts/simple-line-icons/Simple-Line-Icons.ttf?v=2.4.0') format('truetype'), url('../fonts/simple-line-icons/Simple-Line-Icons.woff?v=2.4.0') format('woff'), url('../fonts/simple-line-icons/Simple-Line-Icons.svg?v=2.4.0#simple-line-icons') format('svg');
+  src: url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.eot?v=2.4.0');
+  src: url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.eot?v=2.4.0#iefix') format('embedded-opentype'), url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.woff2?v=2.4.0') format('woff2'), url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.ttf?v=2.4.0') format('truetype'), url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.woff?v=2.4.0') format('woff'), url('/resources/fonts/admin/simple-line-icons/Simple-Line-Icons.svg?v=2.4.0#simple-line-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }

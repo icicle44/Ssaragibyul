@@ -238,7 +238,7 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public int selectListCount() {
-		return sqlSession.selectOne("boardMapper.selectListCount");
+		return sqlSession.selectOne("memberMapper.selectListCount");
 	}
 
 }
