@@ -28,8 +28,6 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 
-
-	
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
@@ -112,9 +110,6 @@ public class MemberController {
 		}
 	}
 
-
-
-	
 	
 	//비밀번호 찾기 페이지로 이동
 	@RequestMapping(value = "pwSearch.do", method = RequestMethod.GET)
@@ -123,12 +118,12 @@ public class MemberController {
 	}
 	
 	
-	
 	// 비밀번호 찾기
 	public String searchPw(@RequestParam("userPw") String userPw, Model model) {
 		
 		return "common/errorPage";
 	}
+	
 	
 	/*
 	// 비밀번호 메일 보내기
@@ -153,21 +148,26 @@ public class MemberController {
     }
 	*/
 
-
-
-	/*
 	// 마이페이지 뷰
-	@RequestMapping(value="myInfo.kh", method=RequestMethod.GET)
+	@RequestMapping(value="myPage.do", method=RequestMethod.GET)
 	public String myInfoView(Member member) {
-		
-		return "member/myPage";
+		return "mypage/myPageMain";
 	}
+	
+	
+	// 정보 수정 페이지
+	@RequestMapping(value="userUpdate.do", method=RequestMethod.GET)
+	public String updateView(Member member) {
+		return "mypage/userUpdate";
+	}
+	/*
 	// 정보수정
 	@RequestMapping(value="memberModify.kh", method=RequestMethod.POST)
 	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1")String address1, @RequestParam("address2") String address2, Model model, HttpServletRequest request) {
 
 		return "common/errorPage";
 	}
+	
 	// 회원 탈퇴
 	@RequestMapping(value="memberDelete.kh", method=RequestMethod.GET)
 	public String memberDelete(@RequestParam("userId") String userId, Model model) {

@@ -1,0 +1,273 @@
+@charset "UTF-8";
+body{
+    width: auto;
+    height: 700px;
+    margin : auto;
+}
+
+/*해더 부분*/
+header{
+    width: auto;
+    height: 100px;
+    padding-top: 70px;
+    margin : auto;
+}
+
+.background{
+    height:1000px;
+    margin : auto;
+    padding-top: 80px;
+    background: linear-gradient(rgb(70, 70, 70) 32%, #fff 10% );
+}
+
+.title{
+    position: relative;
+    padding-top: 60px;
+}
+
+#title{
+	font-weight: 600;
+    color: white;
+}
+
+#reeting{
+	font-weight: 600;
+    color: white;
+    padding-top: 10px;
+}
+
+.contents{
+    height: auto;
+    padding-top: 30px;
+}
+
+.leftMenu{
+    border: 3px solid black;
+    margin-left: 70px;
+    width: 18%;
+    height: 600px;
+    float: left;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+.rightCon{
+    border: 3px solid black;
+    margin-right: 70px;
+    width: 71%;
+    height: 600px;
+    float: right;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+#profile{
+    height: 50px;
+    margin: 40px 40px 40px 40px; 
+}
+
+
+
+#userImg{
+    width: 80px;
+    height: 80px;
+    border: 2px solid blick;
+    float: left;
+
+}
+
+#top-pf{
+    height: 30px;
+    width: auto;
+}
+
+#name{
+    float: left;
+    font-weight: 600;
+    font-size: 20px;
+    padding-left: 15px;
+    padding-top: 10px;
+    color: rgb(243, 156, 18);
+}
+
+#nim{
+    font-weight: 600;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 7px;
+    float: left;
+}
+
+#welcome{         
+    font-weight: 600;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-left: 15px;
+    float: left;
+}
+
+#rest-point{
+    padding-top: 8px;
+    font-weight: 600;
+    font-size: 18px;
+    text-align: center;
+    color: rgb(51, 51, 51);
+}
+
+#logout{
+    text-align: center;
+    padding-top: 18px;
+}
+#btn{
+    width: 200px;
+    height: 35px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    background: rgb(174, 174, 174);
+    border: none;
+    border-radius: 7px;
+}
+
+#btn:active{
+    background-color: rgb(100, 100, 100);
+    border: none;
+}
+
+
+
+/*메뉴바*/
+.nav{
+    margin: 25px 0px 20px 10px; 
+    width:230px;
+    height: 350px;
+}
+li{
+	color:black;
+}
+ul{
+    list-style:none;
+    text-decoration:none;
+}
+.nav a{
+    text-decoration:none;
+    color: black;
+} 
+.clear{
+    clear:both;
+} 
+
+#nav-v1{
+    width:230px;
+    font-size: 18px;
+    font-weight: 600;
+    color:black;
+} 
+.menu-v1{ 
+	width:230px;
+    line-height:2.8; 
+    color:blick;
+} 
+.menu-v1:hover{
+	text-decoration:none;
+    background-color:rgb(245, 245, 245);
+} 
+.menu-v1:hover>a{
+    font-weight:bold;
+    text-decoration:none;
+    color:  rgb(235, 92, 1);
+} 
+.menu-v1 .submenu{ 
+    text-decoration:none;
+    margin-top:7px; 
+    background-color:#fff; 
+    display:none; 
+    height: 90px;
+} 
+.menu-v1 .submenu :hover>a{
+	text-decoration:none;
+	color:  rgb(235, 92, 1);
+}
+
+.menu-v1 .submenu li:hover{ 
+    text-decoration:none;
+    background-color:rgb(245, 245, 245);
+    color:  rgb(235, 92, 1);
+    font-size: 18px;
+    font-weight: 600;
+} 
+
+
+/*오른쪽 내용*/
+
+.r-title{
+    margin: 40px 50px;
+    font-size: 22px;
+    font-weight: 600;
+}
+.r-title #my-nick{
+    float: left;
+    padding-right: 10px;
+}
+.r-title #nickname{
+    color: rgb(174, 174, 174)
+}
+
+.inform1{
+    margin-left: 50px;
+}
+#icon{
+    width: 35px;
+    height: 25px;
+    float: left;
+    padding-right: 10px
+}
+
+#peaple-inform{
+    font-size: 20px;
+    font-weight: 600;  
+    color: rgb(94, 94, 94);
+    padding-bottom: 15px;
+}
+
+table{
+    margin-left: 40px;
+    width: 1000px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 25px;
+}
+table td{
+    border: 3px solid rgb(204, 204, 204);
+}
+
+table #t{
+    background-color: rgb(220, 220, 220);  
+}
+
+.inform2{
+    margin-left: 50px;
+    padding-top: 15px;
+}
+
+.inform3{
+    margin-left: 50px;
+    padding-top: 15px;
+}
+
+.inform3 #inform-con{
+    width: 1000px;
+    height: inherit;
+    margin-left: 40px;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    border: 3px solid rgb(204, 204, 204);
+}
+                                    
