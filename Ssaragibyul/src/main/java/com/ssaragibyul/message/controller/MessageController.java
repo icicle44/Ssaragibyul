@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
@@ -287,16 +290,19 @@ public class MessageController {
 	}
 	
 	//읽지않은 받은쪽지 갯수 출력
-	
-	//@RequestMapping(value="", method=RequestMethod.GET)
-	public int getCountReceivedMsg(String userId) {
+	@ResponseBody
+	@RequestMapping(value="recMsgCnt.do", method= {RequestMethod.GET,RequestMethod.POST})
+	public void getCountReceivedMsg(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 		int rMsgCnt = msgService.getRecMsgCount(userId);
+		session.setAttribute("msgCount", rMsgCnt);
 		
+		Gson gson = new Gson();
+		gson.toJson(rMsgCnt, response.getWriter());
 		//1. 이 메소드를 로그인 메소드 안에서 호출 후, return 값 session에 넣기
 		//2. detail메소드 안에서 호출 후, session에 넣기
 		
 		//아니면 session에 넣는 것까지 이 메소드안에 작성
-		return rMsgCnt;
 	}
 	
 	//오늘의 공지쪽지 갯수 출력
@@ -306,7 +312,7 @@ public class MessageController {
 	}
 	
 	//쪽지검색(검색/ 선물,관리자쪽지 모아보기), 공지사항도 같이씀(sender==admin)
-	@RequestMapping(value="msgSearch.do", method=RequestMethod.GET)
+	@RequestMapping(value="msgSearch.do", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView MessageSearch(@ModelAttribute SearchMsg search,
 									@RequestParam("flag") String flag,
 									ModelAndView mv,
@@ -327,7 +333,9 @@ public class MessageController {
 			ArrayList<MessageAndNick> searchMsgList = msgService.printSearchList(pi, search);
 			if(!searchMsgList.isEmpty()) {
 				mv.addObject("msgList", searchMsgList);
+				mv.addObject("search", search);
 			}else {
+				mv.addObject("search", search);
 				mv.addObject("tblMsg", "해당하는 쪽지가 없습니다.");
 			}
 			mv.addObject("pi", pi);

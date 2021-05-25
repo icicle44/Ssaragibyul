@@ -89,8 +89,9 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public ArrayList<MessageAndNick> selectSearchList(PageInfo pi, Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("messageMapper.selectSearchMsgList", search, rowBounds);
 	}
 
 	@Override

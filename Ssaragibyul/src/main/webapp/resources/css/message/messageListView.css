@@ -64,6 +64,11 @@ table td {
 	color: #2b686e;
   	padding: 10px 0;
   	vertical-align: middle;
+  	
+}
+
+.td-small {
+	font-size: 13px;
 }
 
 #table-upper {

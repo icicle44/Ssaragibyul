@@ -16,7 +16,6 @@
 	<jsp:include page="../../../header.jsp"/>
 	<main id=main>
 		<section class="wrapper-left sideBar col-md-3" id="menubar">
-				<!-- ajax -->
 			<a href="recMsgList.do">받은 쪽지함</a><hr>
 			<a href="sendMsgList.do">보낸 쪽지함</a><hr>
 			<a href="noticeMsgList.do">공지 쪽지함</a><hr>			
@@ -37,13 +36,15 @@
 					</c:if>
 				</div>
 				<div id="sort-box">
-					<form action=""	method="get">		
-						<select name="searchCondition">
-							<option value="allUpper">전체</option>
-							<option value="present">선물</option>
-							<option value="admin">관리자</option>						
-						</select>
-					</form>				
+					<c:if test="${flag != 'notice'}">
+						<form action=""	method="get">		
+							<select name="searchCondition" id="sort">
+								<option value="allUpper" <c:if test="${search.searchCondition eq 'allUpper' }">selected</c:if>>전체</option>
+								<option value="present" <c:if test="${search.searchCondition eq 'present' }">selected</c:if>>선물</option>
+								<option value="admin" <c:if test="${search.searchCondition eq 'admin' }">selected</c:if>>관리자</option>				
+							</select>
+						</form>				
+					</c:if>
 				</div>
 			</section>
 			<section id="table-around">
@@ -51,7 +52,7 @@
 				<table align="center">
 					<thead>
 						<tr style="border-bottom:hidden;">
-							<th>번호</th>
+							<th>${search.searchCondition}번호</th>
 							<th>닉네임</th>
 							<th>쪽지 제목</th>
 							<th>받은 날짜</th>
@@ -60,6 +61,9 @@
 							</c:if>
 							<c:if test="${flag=='send' }">
 								<th width="100px">수신확인</th>
+							</c:if>
+							<c:if test="${flag=='notice' }">
+								<td></td>
 							</c:if>
 							<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
 						</tr>
@@ -111,15 +115,23 @@
 											<c:param name="flag" value="${flag }"></c:param>
 										</c:url>
 									</c:if>					
-									<td><a href="#" onclick="msgPopup('${msgDetail }');">${message.msgTitle }</a></td>
-									<td><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
+									<td>
+										<a href="#" onclick="msgPopup('${msgDetail }');">${message.msgTitle }</a>
+										<%-- <c:if test="${flag == 'rec' && message.readYn == 0 && message.msgType != 0}">
+											<sup><span class="badge rounded-pill bg-light text-dark" style="color:#7daabb;">새쪽지</span></sup>
+										</c:if> --%>
+									</td>
+									<td class="td-small"><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
 									<c:if test= "${message.msgType != 0 }">
 										<c:if test="${message.readYn == 1 }">
-											<td id=${message.msgNo }>읽음</td>
+											<td id=${message.msgNo } class="td-small">읽음</td>
 										</c:if>
 										<c:if test="${message.readYn == 0 }">
-											<td id=${message.msgNo }>읽지 않음</td>
+											<td id=${message.msgNo } class="td-small">읽지 않음</td>
 										</c:if>
+									</c:if>
+									<c:if test="${message.msgType == 0 }">
+										<td class="td-small"></td>
 									</c:if>
 									<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }">${message.msgNo }</td>					
 								</tr>
@@ -190,17 +202,18 @@
 			</section>
 			<section id="search">
 				<div align="center">
-					<form action="" method="get">
+					<form action="msgSearch.do" method="post">
+						<input type="hidden" name="flag" value="${flag }">
 						<select name="searchCondition">
-							<option value="allLower">전체</option>
-							<c:if test="${message.msgType != 0}">
-								<option value="nickName">닉네임</option>
+							<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
+							<c:if test="${flag != 'notice'}">
+								<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
 							</c:if>
-							<option value="msgTitle">제목</option>
-							<option value="regDate">등록일</option>							
+							<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
+							<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
 						</select>
-						<input id="search-window" type="text" size="3" name="searchValue" value="">
-						<button id="search-btn" type="submit"><img src="/resources/img/searchimg.svg" alt="search"></button>
+						<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
+						<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
 					</form>
 				</div>
 				<!-- </section> -->
@@ -290,6 +303,25 @@
 					}
 				}
 			});
+		});
+		
+		$("#sort").on("change", function(){
+			var searchCondition = $("#sort option:selected").val();
+			var flag = '${flag}'
+			location.href = 'msgSearch.do?searchCondition='+searchCondition+'&flag='+flag;
+			/* $.ajax({
+				url: "msgSearch.do",
+				type: "post",
+				data: {"searchValue":searchValue,
+						"flag":flag},
+				dataType: "json",
+				success: function(data){
+					
+				},
+				error: function() {
+					
+				}
+			}) */
 		});
 		
 		/* 에러메시지 alert */

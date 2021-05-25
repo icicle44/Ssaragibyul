@@ -119,17 +119,33 @@
 				}
 			});
 			
-			/* 돌아가기 */
-			$("#backBtn").on("click", function(){
-				var msgNo = '${message.msgNo }';
+			/* 팝업창 닫기 시 적용할 함수 */
+			function popUpClose() {
+				/* var msgNo = '${message.msgNo }';
 				var readYn = '${message.readYn}';
 				var readText = "";
 				if(readYn == 1) {
 					readText = "읽음";
 					$(opener.document).find("td[id="+msgNo+"]").text(readText);
+					changeMsgCnt();
+				} */
+				if(${flag eq "rec"}){
+					self.close();
+					opener.location.reload("recMsgList.do");								
+				}else if(${flag eq "send"}) {
+					self.close();
+					opener.location.reload("sendMsgList.do");	
 				}
+			}
+			/* 팝업창 닫힐때 */
+			$(window).bind("beforeunload",function(e){
+				popUpClose();
+			});
+			/* 돌아가기 */
+			$("#backBtn").on("click", function(){
 				self.close();			
 			});
+			
 		});
 	</script>
 </body>
