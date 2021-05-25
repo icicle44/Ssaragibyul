@@ -34,9 +34,8 @@ public class IndependenceStoreLogic implements IndependenceStore{
 	}
 
 	@Override
-	public Independence selectOne(int nId) {
-		
-		return null;
+	public Independence selectOne(int independenceNo) {
+		return sqlSession.selectOne("independenceMapper.selectOne", independenceNo);
 	}
 
 	

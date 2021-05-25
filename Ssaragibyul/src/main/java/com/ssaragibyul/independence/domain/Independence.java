@@ -109,10 +109,10 @@ public class Independence {
 	}
 
 	public String getAchievement() {
-		return getAchievement();
+		return this.achievement;
 	}
 
-	public void setAchivement(String prizeContents) {
+	public void setAchivement(String achievement) {
 		this.achievement = achievement;
 	}
 

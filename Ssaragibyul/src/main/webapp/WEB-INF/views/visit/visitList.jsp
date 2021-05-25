@@ -11,17 +11,35 @@
 	<meta name="description" content="Effect inspiration for opening an image grid item." />
 	<meta name="keywords" content="image grid, effect, inspiration, css, javascript, animation, masonry" />
 	<meta name="author" content="Codrops" />
-<title>별보러 가자</title>
+	<title>별보러 가자</title>
 <%@include file="/header.jsp" %> 
 	<link rel="stylesheet" type="text/css" href="/resources/fonts/visit/font-awesome-4.3.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/visit/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/visit/demo.css" />
-	<link rel="stylesheet" type="text/css" href="/resources/css/visit/style2.css" />
-		<script src="/resources/js/visit/modernizr-custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="/resources/css/visit/style_visit.css" />
+	<!-- Font -->
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+	
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
+
 	<div class="container">
-		<div class="content">
+	<div class="container-fluid col-md-12" >
+	<section class="sideBar col-md-3">
+		<a href="independenceList.do">독립유공자 공훈록</a><hr>
+		<a href="#">별들의 발자취</a><hr>
+		별 보러 가자<hr>
+	</section>
+
+	<section class="contents col-md-9">
+	<input type="text" placeholder="검색">
+<div class="container">
+  <button class="btn-2">Button 2</button>
+</div>
+
+				<div class="content">
 			<div class="grid">
 				<div class="grid__item" data-size="1280x857">
 					<a href="/resources/img/visit/original/6.jpg" class="img-wrap"><img src="/resources/img/visit/thumbs/6.jpg" alt="img06" />
@@ -406,11 +424,13 @@
 			<!-- /preview -->
 		</div>
 		<!-- /content -->
-		
+		</section>
 		
 	</div>
 	<!-- /container -->
 
+	<%-- <%@include file="/footer.jsp" %> --%>
+	<script src="/resources/js/visit/modernizr-custom.js"></script>
 	<script src="/resources/js/visit/imagesloaded.pkgd.min.js"></script>
 	<script src="/resources/js/visit/masonry.pkgd.min.js"></script>
 	<script src="/resources/js/visit/classie.js"></script>
@@ -473,7 +493,7 @@
 			});
 		})();
 	</script>
-	<%-- <%@include file="/footer.jsp" %> --%>
+
 </body>
 
 </body>

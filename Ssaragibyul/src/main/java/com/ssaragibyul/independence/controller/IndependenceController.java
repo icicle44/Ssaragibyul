@@ -2,6 +2,7 @@ package com.ssaragibyul.independence.controller;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.independence.service.IndependenceService;
+import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.service.MessageService;
 
 
 @Controller
@@ -24,7 +28,9 @@ public class IndependenceController {
 
 	@Autowired
 	private IndependenceService iService;
-
+	@Autowired
+	private MessageService mService;
+	
 	@RequestMapping(value="independenceList.do", method=RequestMethod.GET)
 	public ModelAndView independenceList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
@@ -32,9 +38,24 @@ public class IndependenceController {
 		// Pagination은 common의 pagination
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 		ArrayList<Independence> iList = iService.printAll(pi);
+//		int msgNo = 1;
+//		Message message = mService.printOne(msgNo);
+//		
+//		String userId = "userId";
+//		String flag = "rec";
+//		
+//		HashMap<String, String> cntMap = new HashMap<String, String>();
+//		cntMap.put("flag", flag);
+//		cntMap.put("userId", userId);
+//		
+//		int msgCount = mService.getMsgListCount(cntMap);
+		
+		
 		if(!iList.isEmpty()) {
 			mv.addObject("iList", iList);
 			mv.addObject("pi", pi);
+//			mv.addObject("message", message);
+//			mv.addObject("messageCount", msgCount);
 			mv.setViewName("independence/independenceList");
 		}else {
 			mv.addObject("msg", "데이터 조회 실패");
@@ -43,9 +64,25 @@ public class IndependenceController {
 		return mv;
 	}
 	
-	@RequestMapping(value="independenceDetail.do", method=RequestMethod.GET)
-	public String independenceDetail(@RequestParam("independenceNo") int independenceNo, Model model) {
-		return "";
+	@RequestMapping(value="independenceDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView independenceDetail(ModelAndView mv, @RequestParam("independenceNo") int independenceNo) {
+		try {
+			Independence independence = iService.printOne(independenceNo);
+			System.out.println("conto no" + independenceNo);
+			if(independence != null) {
+				mv.addObject("independence",independence).setViewName("independence/independenceList");
+				mv.addObject("no",independenceNo );
+			}else {
+				mv.addObject("msg", "게시글 상세 조회 실패");
+				mv.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		} catch (StackOverflowError e) {
+	        System.err.println("Exception: " + e );
+	        e.printStackTrace();
+		}
+		return mv;
 	}
 	
 	@RequestMapping(value="independenceSearch.do", method=RequestMethod.GET)

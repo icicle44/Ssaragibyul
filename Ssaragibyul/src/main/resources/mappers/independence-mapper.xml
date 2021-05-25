@@ -25,4 +25,8 @@
 		<!-- SELECT * FROM INDEPENDENCE  WHERE MNG_NO &lt;= 100 ORDER BY MNG_NO ASC -->
 		SELECT * FROM INDEPENDENCE ORDER BY MNG_NO ASC
 	</select>
+	
+	<select id="selectOne" resultMap="independenceResultMap">
+		SELECT * FROM INDEPENDENCE WHERE MNG_NO = #{independenceNo }
+	</select>
 </mapper>

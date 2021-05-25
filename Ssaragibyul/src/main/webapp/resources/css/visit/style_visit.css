@@ -1,6 +1,17 @@
+/* div, article, section {
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-family: 'Noto Serif KR', serif;
+    color: #464646;
+}  */
+body * {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Noto Sans KR', sans-serif;	 
+}
 .container{
-	margin-top:20px;
-	padding-top:20px;
+	margin-top:2em;
+	padding-top:2em;
 }
 
 .grid {
@@ -20,6 +31,14 @@
 	background-size: 60px auto;
 	-webkit-transition: opacity 0.3s;
 	transition: opacity 0.3s;
+}
+.sideBar{
+	font-size: 10px;
+	font-family: 'Noto Sans KR', sans-serif;
+	float:left;
+	padding-top:25em;
+	color: #2b686e;
+	text-align: center;
 }
 
 .js .grid--loaded::after {
@@ -355,4 +374,50 @@
 	.details {
 		display: none;
 	}
+}
+/* 글쓰기 버튼 */
+/* BUTTON 2 */
+/* GENERAL BUTTON STYLING */
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+button {
+  background: none;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  font-size: 1.6em;
+  font-weight: bold;
+  margin: 1em auto;
+  padding: 2em 6em;
+  position: relative;
+  text-transform: uppercase;
+}
+
+button::before,
+button::after {
+  background: #fff;
+  content: '';
+  position: absolute;
+  z-index: -1;
+}
+
+button:hover {
+  color: #2ecc71;
+}
+.btn-2::after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 0;
+}
+
+.btn-2:hover:after {
+  width: 100%;
 }

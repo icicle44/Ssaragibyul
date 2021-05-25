@@ -31,9 +31,8 @@ public class IndependenceServiceImpl implements IndependenceService{
 	}
 
 	@Override
-	public Independence printOne(int nId) {
-		
-		return null;
+	public Independence printOne(int independenceNo) {
+		return iStore.selectOne(independenceNo);
 	}
 
 
