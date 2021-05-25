@@ -8,6 +8,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
+import com.ssaragibyul.funding.domain.FundingFile;
 
 public interface FundingService {
 
@@ -26,12 +27,16 @@ public interface FundingService {
 	public int addreadCountHit(int projectNo);
 
 	public ArrayList<Funding> printAllProject();
+	
+	public ArrayList<FundingFile> printAllProjectFile();
 
 	public ArrayList<FundingComments> printAllRCommnets(int projectNo);
 	
 	public Funding printOne(int projectNo);
+	
+	public FundingFile printOneFile(int projectNo);
 
-	public int registerProject(Funding funding);
+	public int registerProject(Funding funding, FundingFile fundingFile);
 
 	public int modifyProject(Funding funding);
 

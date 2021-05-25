@@ -10,6 +10,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
+import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
 @Service
@@ -65,6 +66,11 @@ public class FundingSerivceImpl implements FundingService {
 		ArrayList<Funding> fList = fStore.printAllProject();
 		return fList;
 	}
+	@Override
+	public ArrayList<FundingFile> printAllProjectFile() {
+		ArrayList<FundingFile> fListFile = fStore.printAllProjectFile();
+		return fListFile;
+	}
 
 	@Override
 	public ArrayList<FundingComments> printAllRCommnets(int projectNo) {
@@ -74,15 +80,23 @@ public class FundingSerivceImpl implements FundingService {
 
 	@Override
 	public Funding printOne(int projectNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return fStore.selectOne(projectNo);
 	}
-
 	@Override
-	public int registerProject(Funding funding) {
-		int result = fStore.insertProject(funding);
-		return result;
+	public FundingFile printOneFile(int projectNo) {
+		return fStore.selectOneFile(projectNo);
 	}
+	
+	@Override
+	public int registerProject(Funding funding, FundingFile fundingFile) {
+		int result = fStore.insertProject(funding);
+		int fResult = 0;
+		if(result>0) {
+			fResult = fStore.insertProjectFile(fundingFile);
+		}
+		return fResult;
+	}
+	
 
 	@Override
 	public int modifyProject(Funding funding) {

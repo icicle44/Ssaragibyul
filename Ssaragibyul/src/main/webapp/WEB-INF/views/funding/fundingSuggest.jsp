@@ -92,7 +92,7 @@
 	
 
 	<main class="main-content">
-		<form action="fundingRegister.do" method="post">
+		<form action="fundingRegister.do" method="post" enctype="multipart/form-data">
 		<br>
 				<br>
 				<br>
@@ -136,7 +136,7 @@
 						<td>대표 이미지</td>
 					</tr>
 					<tr>
-						<td><input type="file" name=""></td>
+						<td><input type="file" name="uploadFileMain"></td>
 					</tr>
 				</table>
 				<br><br><br><br><br><br><br>
@@ -153,20 +153,20 @@
 					</tr>
 					<tr></tr>
 					<tr>
-						<td><input type="text" name=""></td>
+						<td><input type="text" name="videoUrl"></td>
 					</tr>
 					<tr>
 						<td> 이미지 등록</td>
 					</tr>
 					<tr>
-						<td><input type="file" name="">
-						<input type="file" name=""></td>
+						<td> <input type="file" name="uploadFileSub1">  
+						    <input type="file" name="uploadFileSub2"></td>
 					</tr>
 					<tr>
 						<td>프로젝트 스토리</td>
 					</tr>
 					<tr>
-						<td><textarea name="hostIntro" rows="6" cols="30" wrap="virtual"></textarea>							  </td>
+						<td><textarea name="projectStory" rows="6" cols="30" wrap="virtual"></textarea>							  </td>
 					</tr>
 					
 				</table>
@@ -192,7 +192,7 @@
 						<td>리워드 제공 가능 수</td>
 					</tr>
 					<tr>
-						<td><input type="text" name=""></td>
+						<td><input type="text" name="optionLimit"></td>
 					</tr>
 					<tr>
 						<td>리워드 제목</td>
@@ -204,7 +204,7 @@
 						<td>리워드 내용</td>
 					</tr>
 					<tr>
-						<td><textarea name="projIntro" rows="6" cols="30" wrap="virtual"></textarea></td>
+						<td><textarea name="productContent" rows="6" cols="30" wrap="virtual"></textarea></td>
 					</tr>
 						<tr>
 						<td>배송지 필요여부</td>
@@ -218,7 +218,7 @@
 						<td>예상 배송일</td>
 					</tr>
 					<tr>
-						<td><input type="date" name=""></td>
+						<td><input type="date" name="deleiveryDate"></td>
 					</tr>
 				</table>
 					<br><br><br><br><br>
@@ -236,7 +236,7 @@
 					</tr>
 					<tr></tr>
 					<tr>
-						<td><input type="text" name=""></td>
+						<td><textarea name="warningIntro" rows="6" cols="30" wrap="virtual"></textarea></td>
 					</tr>
 					<tr>
 						<td>문의 가능한 번호</td>

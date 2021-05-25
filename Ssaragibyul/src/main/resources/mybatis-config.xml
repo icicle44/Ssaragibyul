@@ -12,6 +12,7 @@
 		<typeAlias type="com.ssaragibyul.message.domain.MessageAndNick" alias="MessageAndNick"/>
 		<typeAlias type="com.ssaragibyul.independence.domain.Independence" alias="Independence"/>
 		<typeAlias type="com.ssaragibyul.funding.domain.Funding" alias="Funding"/>
+		<typeAlias type="com.ssaragibyul.funding.domain.FundingFile" alias="FundingFile"/>
 	</typeAliases>
 	
 	<mappers>

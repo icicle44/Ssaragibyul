@@ -54,7 +54,6 @@
 				<tr>
 					</c:forEach>
  --%>
- ${funding.subject }
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 		<div class="container-fluid">
@@ -254,6 +253,51 @@
 
 
 <br><br><br><br><br><br><br>
+<script>
+
+</script>
+
+	<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
+		<tr>
+			<th>번호</th>
+			<th>제목</th>
+			<th>리워드</th>
+			<th>종료일</th>
+			<th>첨부파일</th>
+		</tr>
+		<c:forEach items="${fList }" var="funding">
+			<tr>
+				<td align="center">${funding.projectNo }</td>
+				<td align="center">
+				<c:url var="fDetail" value="fundingDetail.do">
+						<c:param name="projectNo" value="${funding.projectNo }"></c:param>
+					</c:url> 
+					<a href="${fDetail }">${funding.subjectName }</a>
+				</td>
+				<td align="center">${funding.productName }</td>
+				<td align="center">${funding.finDate }</td>
+				<td align="center">${funding.startDate }</td>
+<%-- 				<td align="center"><img src="resources/upLoadFile/${fListFile.fileMainName } "/> </td> --%>
+			</tr>
+			
+		</c:forEach>
+	</table>
+		<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
+		<tr>
+			<th>사진</th>
+		</tr>
+			<c:forEach items="${fListFile }" var="File">
+		<tr>	
+			<td><img src="resources/upLoadFile/${File.fileMainName } "/></td> 
+		</tr>
+				</c:forEach>
+		</table>
+	<%-- 
+	<c:forEach items="${fListFile }" var="fundingFile">
+		<img src="resources/upLoadFile/${fundingFile.fileMainName } "/>
+	</c:forEach> <img src="resources/upLoadFile/${fListFile[0].fileMainName } "/> 
+						<img src="resources/upLoadFile/${fListFile[1].fileMainName } "/>
+ --%>
  		<%@include file="../../../footer.jsp" %>
 	</main>
 

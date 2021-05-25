@@ -29,6 +29,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
@@ -55,8 +56,10 @@ public class FundingController {
 	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
 	 public String fundingList(Model model) {
 		 ArrayList<Funding> fList = fService.printAllProject();
-		 if(!fList.isEmpty()) {
+		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();
+		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {
 				model.addAttribute("fList", fList);
+					model.addAttribute("fListFile", fListFile);
 				return "funding/fundingList";
 			}else {
 				model.addAttribute("msg", "펀딩 목록조회 실패");
@@ -75,9 +78,43 @@ public class FundingController {
 		 return "funding/fundingSuggest";
 	 }
 	 
+		@RequestMapping(value = "fundingJoin1.do", method = RequestMethod.GET)
+		public String fundingJoin1() {
+//		public String fundingJoin1(@RequestParam("projectNo") int projectNo, 
+//				Model model) {
+//			Funding funding = fService.printOne(projectNo);
+//				if(funding != null) {
+//				model.addAttribute("funding", funding);
+//				return "funding/fundingJoin1";
+//				}else {
+//				model.addAttribute("msg", "펀딩 참여 실패");
+//				return "common/errorPage";
+//				
+				return "funding/fundingJoin1";
+//				}
+}
+
+		/*
+		 * @RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET,
+		 * RequestMethod.POST }) public ModelAndView fundingDetail(ModelAndView
+		 * mv, @RequestParam("projectNo") int projectNo) {
+		 * 
+		 * return mv; }
+		 */
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-		
+//		fService.addReadCount(boardNo);
+		// 게시글 상세 조회
+		Funding funding = fService.printOne(projectNo);
+		FundingFile fundingFile = fService.printOneFile(projectNo);
+		if ((funding != null)&&(fundingFile != null)) {
+			// 메소드 체이닝 방식
+			mv.addObject("fundingFile", fundingFile);
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
+		} else {
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 
@@ -87,13 +124,42 @@ public class FundingController {
 		return "";
 	}
 	
-	 @RequestMapping(value="fundingRegister.do", method=RequestMethod.POST)
-	 public String memberRegister( @ModelAttribute Funding funding, Model model) {
-		 int result = fService.registerProject(funding);
+	 @RequestMapping(value="fundingRegister.do", method = RequestMethod.POST)
+	 public String fundingRegister(@ModelAttribute Funding funding, FundingFile fundingFile, 
+			 					   @RequestParam(value="uploadFileMain", required=false) MultipartFile uploadFileMain,
+			 					   @RequestParam(value="uploadFileSub1", required=false) MultipartFile uploadFileSub1,
+			 					   @RequestParam(value="uploadFileSub2", required=false) MultipartFile uploadFileSub2,
+			 					  HttpServletRequest request,
+			 					  Model model) { 
+		if(!uploadFileMain.getOriginalFilename().equals("")) {
+				// eclipse 워크스페이스에 파일 저장하는 부분을 적는데
+				// 너무 길어지니까 saveFile 메소드로 빼서 작성
+				String filePath = saveFile(uploadFileMain, request);
+				if(filePath != null) {
+					fundingFile.setFileMainName(uploadFileMain.getOriginalFilename());
+				}
+			}
+		if(!uploadFileSub1.getOriginalFilename().equals("")) {
+			// eclipse 워크스페이스에 파일 저장하는 부분을 적는데
+			// 너무 길어지니까 saveFile 메소드로 빼서 작성
+			String filePath = saveFile(uploadFileSub1, request);
+			if(filePath != null) {
+				fundingFile.setFileSub1Name(uploadFileSub1.getOriginalFilename());
+			}
+		}
+		if(!uploadFileSub2.getOriginalFilename().equals("")) {
+			// eclipse 워크스페이스에 파일 저장하는 부분을 적는데
+			// 너무 길어지니까 saveFile 메소드로 빼서 작성
+			String filePath = saveFile(uploadFileSub2, request);
+			if(filePath != null) {
+				fundingFile.setFileSub2Name(uploadFileSub2.getOriginalFilename());
+			}
+		}
+		 int result = fService.registerProject(funding, fundingFile);
 		 if(result > 0) {
 			 return "redirect:fundingIndex.do";
 		 }else {
-			 model.addAttribute("msg", "회원 가입 실패!!");
+			 model.addAttribute("msg", "제안 등록 실패!!");
 			 return "common/errorPage";
 		 }
 	 }
@@ -105,10 +171,30 @@ public class FundingController {
 //		return mv;
 //	}
 
-	public String saveFile(MultipartFile file, HttpServletRequest request) {
-	
-		return null;
-	}
+	 public String saveFile(MultipartFile file, HttpServletRequest request) {
+			// 파일 저장 경로 설정
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String savePath = root + "\\upLoadFile";
+			// 저장 폴더 선택
+			File folder = new File(savePath);
+			// 폴더가 없을 경우 자동 생성
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
+			String filePath = folder + "\\" + file.getOriginalFilename();
+			// 파일저장
+			try {
+				file.transferTo(new File(filePath));
+			} catch (IllegalStateException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// 파일경로 리턴
+			return filePath;
+		}
 
 	@RequestMapping(value = "fundingModifyView.do")
 	public ModelAndView fundingModifyView(ModelAndView mv, @RequestParam("projectNo") int projectNo) {

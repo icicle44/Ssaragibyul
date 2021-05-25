@@ -11,6 +11,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
+import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.store.FundingStore;
 @Repository
 public class FundingStoreLogic implements FundingStore{
@@ -64,6 +65,11 @@ public class FundingStoreLogic implements FundingStore{
 	public ArrayList<Funding> printAllProject() {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList");
 	}
+	
+	@Override
+	public ArrayList<FundingFile> printAllProjectFile() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingFileList");
+	}
 
 	@Override
 	public ArrayList<FundingComments> printAllRCommnets(int boardNo) {
@@ -73,16 +79,25 @@ public class FundingStoreLogic implements FundingStore{
 
 	@Override
 	public Funding selectOne(int projectNo) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("fundingMapper.selectOne", projectNo);
 	}
+	
+	@Override
+	public FundingFile selectOneFile(int projectNo) {
+		return sqlSession.selectOne("fundingMapper.selectOneFile", projectNo);
+	}
+
 
 	@Override
 	public int insertProject(Funding funding) {
 		int result = sqlSession.insert("fundingMapper.insertFunding", funding);
 		return result;
 	}
-
+	@Override
+	public int insertProjectFile(FundingFile fundingFile) {
+	int result = sqlSession.insert("fundingMapper.insertFundingFile", fundingFile);
+	return result;
+	}
 	@Override
 	public int updateProject(Funding funding) {
 		// TODO Auto-generated method stub

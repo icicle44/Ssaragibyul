@@ -10,14 +10,32 @@
 		<result property="goalMoney" column="GOAL_MONEY"></result>
 		<result property="sumMoney" column="SUM_MONEY"></result>
 		<result property="optionPrice" column="OPTION_PRICE"></result>
+		<result property="optionLimit" column="OPTION_LIMIT"></result>
 		<result property="startDate" column="START_DATE"></result>
 		<result property="finDate" column="FIN_DATE"></result>
-		<result property="hostIntro" column="HOST_INTRO"></result>
-		<result property="projIntro" column="PROJ_INTRO"></result>
+		<result property="projectStory" column="PROJ_STORY"></result>
+		<result property="productContent" column="PRODUCT_CONT"></result>
+		<result property="warningIntro" column="WARNING_INTRO"></result>
 		<result property="likeCount" column="LIKE_COUNT"></result>
 		<result property="hitsCount" column="HITS_COUNT"></result>
 		<result property="projectCode" column="PROJECT_CODE"></result>
 		<result property="deleiveryDate" column="DELIVERY_DATE"></result>
+	</resultMap>
+
+	<resultMap type="FundingFile" id="fundingFileResultMap">
+		<id property="fileNo" column="FILE_NO"></id>
+		<result property="videoUrl" column="FILE_VIDEO_URL"></result>
+		<result property="fileMainName" column="FILE_MAIN_NAME"></result>
+		<result property="fileMainSize" column="FILE_MAIN_SIZE"></result>
+		<result property="fileMainPath" column="FILE_MAIN_PATH"></result>
+		<result property="fileSub1Name" column="FILE_SUB1_NAME"></result>
+		<result property="fileSub1Size" column="FILE_SUB1_SIZE"></result>
+		<result property="fileSub1Path" column="FILE_SUB1_PATH"></result>
+		<result property="fileSub2Name" column="FILE_SUB2_NAME"></result>
+		<result property="fileSub2Size" column="FILE_SUB2_SIZE"></result>
+		<result property="fileSub2Path" column="FILE_SUB2_PATH"></result>
+		<result property="uploadTime" column="UPLOAD_TIME"></result>
+		<result property="projectNo" column="F_PROJECT_NO"></result>
 	</resultMap>
 
 	<!-- <select id="selectOneMember" parameterType="Member" resultMap="memberResultMap"> 
@@ -25,18 +43,38 @@
 		</select> <select id="checkIdDup" resultType = "_int"> SELECT COUNT(*) FROM 
 		MEMBER WHERE USER_ID = #{userId } </select> -->
 	<insert id="insertFunding" parameterType="Funding">
-		INSERT INTO FUNDING_PROJECT
-		VALUES(SEQ_FUNDINGNO.NEXTVAL,#{userId},#{subjectName},#{productName},#{goalMoney},DEFAULT,#{optionPrice},SYSDATE,
-		#{finDate},#{hostIntro},#{projIntro},DEFAULT,DEFAULT,0,NULL)
-
+		INSERT INTO
+		FUNDING_PROJECT
+		VALUES(SEQ_FUNDINGNO.NEXTVAL,#{userId},#{subjectName},#{productName},#{goalMoney},DEFAULT,#{optionPrice},#{optionLimit},SYSDATE,
+		#{finDate},#{projectStory},#{productContent},#{warningIntro},DEFAULT,DEFAULT,0,#{deleiveryDate})
 	</insert>
-	<select id="selectFundingList" resultMap="fundingResultMap"> 
-	SELECT * FROM FUNDING_PROJECT
-		ORDER BY GOAL_MONEY DESC </select>
-<select id="selectAllList" resultMap="fundingResultMap"> 
-   SELECT * FROM FUNDING_PROJECT
-      ORDER BY F_PROJECT_NO DESC 
-   </select>
+	<insert id="insertFundingFile" parameterType="FundingFile">
+		INSERT INTO
+		FUNDING_FILE
+		VALUES(SEQ_FUNDINFILENO.NEXTVAL,#{videoUrl},#{fileMainName},NULL,'AAA',
+		#{fileSub1Name},NULL,'BBB',#{fileSub2Name},NULL,'CCC',SYSTIMESTAMP,SEQ_FUNDINGNO.CURRVAL)
+	</insert>
+	<select id="selectOne" resultMap="fundingResultMap">
+		SELECT * FROM FUNDING_PROJECT WHERE F_PROJECT_NO = #{projectNo}
+	</select>
+	<select id="selectOneFile" resultMap="fundingFileResultMap">
+		SELECT * FROM FUNDING_FILE WHERE F_PROJECT_NO = #{projectNo}
+	</select>
+	<select id="selectFundingList" resultMap="fundingResultMap">
+		SELECT * FROM FUNDING_PROJECT
+		ORDER BY F_PROJECT_NO DESC
+	</select>
+		<select id="selectFundingFileList" resultMap="fundingFileResultMap">
+		SELECT * FROM FUNDING_FILE
+		ORDER BY F_PROJECT_NO DESC
+	</select>
+
+	
+	<!--나혜님꺼 -->
+	<select id="selectAllList" resultMap="fundingResultMap">
+		SELECT * FROM FUNDING_PROJECT
+		ORDER BY F_PROJECT_NO DESC
+	</select>
 
 	<!-- <update id="updateMember" parameterType="Member"> UPDATE MEMBER SET 
 		USER_PW = #{userPw}, USER_AGE = #{userAge}, USER_EMAIL = #{userEmail}, USER_PHONE 

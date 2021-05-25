@@ -7,6 +7,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
+import com.ssaragibyul.funding.domain.FundingFile;
 
 public interface FundingStore {
 
@@ -25,10 +26,14 @@ public interface FundingStore {
 	public int addreadCountHit(int projectNo);
 
 	public ArrayList<Funding> printAllProject();
+	
+	public ArrayList<FundingFile> printAllProjectFile();
 
 	public ArrayList<FundingComments> printAllRCommnets(int boardNo);
 
 	public Funding selectOne(int projectNo);
+	
+	public FundingFile selectOneFile(int projectNo);
 
 	public int insertProject(Funding funding);
 
@@ -63,6 +68,8 @@ public interface FundingStore {
 	public int deleteSuggest(int projectNo);
 
 	public Funding printOneSuggest(int projectNo);
+	
+	public int insertProjectFile(FundingFile fundingFile);
 }
 
 
