@@ -11,18 +11,21 @@
 </head>
 <body>
 <br><br><br><br><br><br><br><br><br><br>
-<textarea name="content" id="editor"></textarea>
+<div id="editor">
+	<p>This is the editor content.</p>
+</div>
 
-
-
-
+<script src="./node_modules/@ckeditor/ckeditor5-build-balloon/build/ckeditor.js"></script>
 <script>
-// 3. CKEditor5를 생성할 textarea 지정
-ClassicEditor
-    .create( document.querySelector( '#editor' ) )
-    .catch( error => {
-        console.error( error );
-    } );
+	BalloonEditor
+		.create( document.querySelector( '#editor' ) )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( error => {
+			console.error( 'There was a problem initializing the editor.', error );
+		} );
+</script>
 </script>
 	<%@include file="/footer.jsp" %>   
 </body>
