@@ -37,6 +37,19 @@
 		<result property="uploadTime" column="UPLOAD_TIME"></result>
 		<result property="projectNo" column="F_PROJECT_NO"></result>
 	</resultMap>
+	
+	<resultMap type="FundingLog" id="FundingLogResultMap">
+		<id property="doFundNo" column="DOFUND_NO"></id>
+		<result property="userId" column="USER_ID"></result>
+		<result property="fundingPoint" column="FUNDING_POINT"></result>
+		<result property="qunatity" column="QUNATITY"></result>
+		<result property="fundDate" column="FUND_DATE"></result>
+		<result property="cancleYn" column="CANCLE_YN"></result>
+		<result property="projectNo" column="F_PROJECT_NO2"></result>
+		<result property="receiverAddr" column="RECEIVER_ADDR"></result>
+		<result property="receiverName" column="RECEIVER"></result>
+		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
+	</resultMap>
 
 	<!-- <select id="selectOneMember" parameterType="Member" resultMap="memberResultMap"> 
 		SELECT * FROM MEMBER WHERE USER_ID = #{userId } AND USER_PW = #{userPw } 
@@ -54,6 +67,14 @@
 		VALUES(SEQ_FUNDINFILENO.NEXTVAL,#{videoUrl},#{fileMainName},NULL,'AAA',
 		#{fileSub1Name},NULL,'BBB',#{fileSub2Name},NULL,'CCC',SYSTIMESTAMP,SEQ_FUNDINGNO.CURRVAL)
 	</insert>
+	<insert id="insertFundingLog" parameterType="FundingLog">
+		INSERT INTO
+		DO_FUNDING
+		VALUES(SEQ_FUNDINGLOGNO.NEXTVAL,#{userId},#{fundingPoint},#{qunatity},SYSDATE,DEFAULT,#{projectNo}
+		,#{receiverAddr},#{receiverName},#{receiverPhone})
+	</insert>
+	
+	
 	<select id="selectOne" resultMap="fundingResultMap">
 		SELECT * FROM FUNDING_PROJECT WHERE F_PROJECT_NO = #{projectNo}
 	</select>

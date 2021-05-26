@@ -8,6 +8,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 
 public interface FundingStore {
 
@@ -36,6 +37,8 @@ public interface FundingStore {
 	public FundingFile selectOneFile(int projectNo);
 
 	public int insertProject(Funding funding);
+	
+	public int insertProjectLog(FundingLog fundingLog);
 
 	public int updateProject(Funding funding);
 

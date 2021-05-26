@@ -30,6 +30,7 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
@@ -78,21 +79,37 @@ public class FundingController {
 		 return "funding/fundingSuggest";
 	 }
 	 
-		@RequestMapping(value = "fundingJoin1.do", method = RequestMethod.GET)
-		public String fundingJoin1() {
-//		public String fundingJoin1(@RequestParam("projectNo") int projectNo, 
-//				Model model) {
-//			Funding funding = fService.printOne(projectNo);
-//				if(funding != null) {
-//				model.addAttribute("funding", funding);
-//				return "funding/fundingJoin1";
-//				}else {
-//				model.addAttribute("msg", "펀딩 참여 실패");
-//				return "common/errorPage";
-//				
-				return "funding/fundingJoin1";
-//				}
-}
+		
+		@RequestMapping(value = "fundingJoin1.do", method =  RequestMethod.POST )
+		public ModelAndView fundingJoin1(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+			// 게시글 상세 조회
+			Funding funding = fService.printOne(projectNo);
+			if (funding != null) {
+				// 메소드 체이닝 방식
+				mv.addObject("funding", funding).setViewName("funding/fundingJoinPage1");
+			} else {
+				mv.addObject("msg", "펀딩 참여 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+		
+		 @RequestMapping(value="fundingJoin2.do", method = RequestMethod.POST )
+		 public String fundingJoin2(@ModelAttribute FundingLog fundingLog) { 
+			 int result = fService.registerFundingLog(fundingLog);
+			 if(result > 0) {
+				 return "funding/fundingJoinPage2";
+				 //메소드!?!?!?!?!?!?!?@!?!?!?!?!?!?!?!?
+			 }else {
+				 return "common/errorPage";
+			 }
+		 }
+		 @RequestMapping(value="fundingJoin3.do", method=RequestMethod.GET)
+		 public String fundingJoin3() {
+			 return "funding/fundingJoinPage2";
+		 }
+		 
+		 
 
 		/*
 		 * @RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET,

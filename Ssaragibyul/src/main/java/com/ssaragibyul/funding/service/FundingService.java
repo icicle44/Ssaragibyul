@@ -9,6 +9,7 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 
 public interface FundingService {
 
@@ -37,6 +38,8 @@ public interface FundingService {
 	public FundingFile printOneFile(int projectNo);
 
 	public int registerProject(Funding funding, FundingFile fundingFile);
+	
+	public int registerFundingLog(FundingLog fundingLog);
 
 	public int modifyProject(Funding funding);
 

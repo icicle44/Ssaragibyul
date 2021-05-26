@@ -12,6 +12,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.store.FundingStore;
 @Repository
 public class FundingStoreLogic implements FundingStore{
@@ -93,6 +94,14 @@ public class FundingStoreLogic implements FundingStore{
 		int result = sqlSession.insert("fundingMapper.insertFunding", funding);
 		return result;
 	}
+	
+	@Override
+	public int insertProjectLog(FundingLog fundingLog) {
+		int result = sqlSession.insert("fundingMapper.insertFundingLog", fundingLog);
+		return result;
+	}
+	
+	
 	@Override
 	public int insertProjectFile(FundingFile fundingFile) {
 	int result = sqlSession.insert("fundingMapper.insertFundingFile", fundingFile);

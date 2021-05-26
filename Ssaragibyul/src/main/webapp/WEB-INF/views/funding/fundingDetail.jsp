@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -60,13 +61,18 @@
 	</header>
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<main class="main-content">
-	
-	<button class="getstarted" name="projectNo" value="${funding.projectNo }" onclick="location.href='fundingJoin1.do'">펀딩하기 </button>
-	
-<%-- 	<a class="getstarted scrollto" href="fundingJoin1.do" name="projectNo" value="${funding.projectNo }" style="text-decoration: none;" >펀딩하기</a> --%>
+    <form action="fundingJoin1.do" method="post">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="펀딩하기">
+    </form>
 	<a class="getstarted scrollto" href="fundingAccusation.do" style="text-decoration: none;">신고하기</a>
 	<br><br><br>
 			<table align="center" width="450" border="1">
+			<tr>
+			<td> 	<url var="fDetail" value="fundingDetail.do">
+			                     </url>
+			</td>
+			</tr>
 		<tr>
 			<td width="80">번호</td>
 			<td>${funding.projectNo } ${funding.projectNo } ${funding.projectNo }</td>

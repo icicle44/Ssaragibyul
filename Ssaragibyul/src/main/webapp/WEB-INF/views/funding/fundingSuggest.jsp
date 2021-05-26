@@ -260,12 +260,10 @@
 
 
 		</form>
-
-
 <!-- 
 		<a class="getstarted scrollto" href="fundingList.do"
-			style="text-decoration: none;">뭘 쓰지</a> -->
-			
+			style="text-decoration: none;">뭘 쓰지</a>
+			 -->
 		
 		<%@include file="../../../footer.jsp"%>
 	</main>

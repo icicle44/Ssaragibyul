@@ -11,6 +11,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
 @Service
@@ -60,6 +61,8 @@ public class FundingSerivceImpl implements FundingService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 
 	@Override
 	public ArrayList<Funding> printAllProject() {
@@ -96,7 +99,11 @@ public class FundingSerivceImpl implements FundingService {
 		}
 		return fResult;
 	}
-	
+	@Override
+	public int registerFundingLog(FundingLog fundingLog) {
+		int result = fStore.insertProjectLog(fundingLog);
+		return result;
+	}
 
 	@Override
 	public int modifyProject(Funding funding) {
