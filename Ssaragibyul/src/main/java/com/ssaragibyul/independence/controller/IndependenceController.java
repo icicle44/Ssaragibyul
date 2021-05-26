@@ -64,26 +64,7 @@ public class IndependenceController {
 		return mv;
 	}
 	
-	@RequestMapping(value="independenceDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView independenceDetail(ModelAndView mv, @RequestParam("independenceNo") int independenceNo) {
-		try {
-			Independence independence = iService.printOne(independenceNo);
-			System.out.println("conto no" + independenceNo);
-			if(independence != null) {
-				mv.addObject("independence",independence).setViewName("independence/independenceList");
-				mv.addObject("no",independenceNo );
-			}else {
-				mv.addObject("msg", "게시글 상세 조회 실패");
-				mv.setViewName("common/errorPage");
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		} catch (StackOverflowError e) {
-	        System.err.println("Exception: " + e );
-	        e.printStackTrace();
-		}
-		return mv;
-	}
+
 	
 	@RequestMapping(value="independenceSearch.do", method=RequestMethod.GET)
 	public String independenceSearch(@ModelAttribute Search search, Model model) {

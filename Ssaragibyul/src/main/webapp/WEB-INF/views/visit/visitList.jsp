@@ -12,7 +12,7 @@
 	<meta name="keywords" content="image grid, effect, inspiration, css, javascript, animation, masonry" />
 	<meta name="author" content="Codrops" />
 	<title>별보러 가자</title>
-<%@include file="/header.jsp" %> 
+	<%@include file="/header.jsp" %> 
 	<link rel="stylesheet" type="text/css" href="/resources/fonts/visit/font-awesome-4.3.0/css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/visit/normalize.css" />
 	<link rel="stylesheet" type="text/css" href="/resources/css/visit/demo.css" />
@@ -35,11 +35,11 @@
 
 	<section class="contents col-md-9">
 	<input type="text" placeholder="검색">
-<div class="container">
-  <button class="btn-2">Button 2</button>
+<div class="button-container">
+  <button class="btn-2" onclick="location.href='visitWriteView.do'">방문 인증하기</button>
 </div>
 
-				<div class="content">
+		<div class="content">
 			<div class="grid">
 				<div class="grid__item" data-size="1280x857">
 					<a href="/resources/img/visit/original/6.jpg" class="img-wrap"><img src="/resources/img/visit/thumbs/6.jpg" alt="img06" />
@@ -430,6 +430,7 @@
 	<!-- /container -->
 
 	<%-- <%@include file="/footer.jsp" %> --%>
+	<%@include file="/footer.jsp" %>
 	<script src="/resources/js/visit/modernizr-custom.js"></script>
 	<script src="/resources/js/visit/imagesloaded.pkgd.min.js"></script>
 	<script src="/resources/js/visit/masonry.pkgd.min.js"></script>

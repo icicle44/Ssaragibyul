@@ -72,7 +72,7 @@
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
 					<c:if test="${p eq pi.currentPage }">
-						<font color="red" size="3">[${p }]</font>
+						<font color="red" size="2">[${p }]</font>
 					</c:if>
 					<c:if test="${p ne pi.currentPage }">
 						<a href="${pagination }">${p }</a>&nbsp;
@@ -94,7 +94,6 @@
 </div> 
 	<%@include file="/footer.jsp" %>
 </section>
-
 <!-- 모달창 -->
 <c:forEach items="${iList }" var="list">
 	<div class="modal fade" id="modal_open${list.independenceNo }" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" static>

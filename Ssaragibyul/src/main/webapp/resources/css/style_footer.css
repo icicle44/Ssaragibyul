@@ -5,6 +5,9 @@ body {
 	font-size: 1rem;
 	background: #FFFFFF
 }
+#starLogo{
+	font-family: "korea";
+}
 .footer-top{
 	magin-top:100px;
 	padding-top: 50px;

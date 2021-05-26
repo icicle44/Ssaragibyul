@@ -47,7 +47,8 @@ public class VisitController {
 	// 게시글 등록화면
 	@RequestMapping(value="visitWriteView.do", method=RequestMethod.GET)
 	public String visitWriteView() {
-		return "";
+		
+		return "visit/visitWrite";
 	}
 	// 게시글 등록
 	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)

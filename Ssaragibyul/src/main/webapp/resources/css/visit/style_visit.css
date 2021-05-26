@@ -7,7 +7,6 @@
 body * {
   box-sizing: border-box;
   text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;	 
 }
 .container{
 	margin-top:2em;
@@ -378,6 +377,15 @@ body * {
 /* 글쓰기 버튼 */
 /* BUTTON 2 */
 /* GENERAL BUTTON STYLING */
+.button-container{
+	padding-right: 1em;
+	height:1em;
+}
+.btn-2{
+	float: right;
+	margin-right: 1em;
+	color: #404040;
+}
 button,
 button::after {
   -webkit-transition: all 0.3s;
@@ -387,37 +395,35 @@ button::after {
 }
 
 button {
+  width: 8em;
   background: none;
-  border: 3px solid #fff;
-  border-radius: 5px;
-  color: #fff;
+  border: 4px solid #EB5C01;
+  border-radius: 7px;
   display: block;
-  font-size: 1.6em;
+  font-size: 0.8em;
   font-weight: bold;
-  margin: 1em auto;
-  padding: 2em 6em;
   position: relative;
   text-transform: uppercase;
 }
 
 button::before,
 button::after {
-  background: #fff;
+  background: #EB5C01;
   content: '';
   position: absolute;
   z-index: -1;
 }
 
 button:hover {
-  color: #2ecc71;
+  color: #FFF
 }
 .btn-2::after {
-  height: 100%;
+  height: 110%;
   left: 0;
   top: 0;
   width: 0;
 }
 
 .btn-2:hover:after {
-  width: 100%;
+  width: 101%;
 }
