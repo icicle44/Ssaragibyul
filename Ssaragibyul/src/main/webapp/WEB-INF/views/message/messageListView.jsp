@@ -55,7 +55,7 @@
 							<th>${search.searchCondition}번호</th>
 							<th>닉네임</th>
 							<th>쪽지 제목</th>
-							<th>받은 날짜</th>
+							<th>날짜</th>
 							<c:if test="${flag=='rec' }">
 								<th width="100px"></th>
 							</c:if>

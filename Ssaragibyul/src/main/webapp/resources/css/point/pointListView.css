@@ -1,0 +1,126 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300&display=swap');
+
+body{
+	font-family: 'Noto Serif KR', serif;
+}
+
+div, article, section {
+    border: 1px solid black;
+    box-sizing: border-box;
+    font-family: 'Noto Serif KR', serif;
+    color: #464646;
+}
+
+.wrapper-left {
+	float: left;
+	width: 20%;
+	height: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.wrapper-right {
+	float: left;
+	width: 80%;
+	height: auto;
+	margin-top: 50px;
+	padding: 0% 10% 3% 10%;
+}
+
+#table-upper, #table-around, #search {
+	width: 800px;
+	max-width: calc(100% - 1em);
+	margin: 1em auto;
+	overflow: hidden;
+}
+
+#table-around {
+	border: 1px solid #327a81;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 0px;
+}
+
+table {
+	width: 100%;
+	text-align: center;
+}
+
+table tr {
+	border: 1px solid #d9e4e8;
+}
+
+table th {
+	background-color: #F5F5F5;
+	color: #327a81;
+	padding: 15px;
+	align: center;
+	font-weight: 300;
+}
+
+table td {
+	color: #2b686e;
+  	padding: 10px 0;
+  	vertical-align: middle;
+  	
+}
+
+.td-small {
+	font-size: 13px;
+}
+
+#table-upper {
+	padding: 0px;
+}
+
+#table-title {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+#subMenu {
+	display: none;
+}
+
+#plus {
+	color: blue;
+}
+
+#minus {
+	color: greean;
+}
+
+/*전체, 선물, 관리자*/
+#sort-box {
+	text-align: right;
+}
+
+/*테이블 div*/
+#message-table {
+	padding: 10px 0px;
+}
+
+.wrapper-left>ul
+:link {
+	text-decoration: none;
+}
+
+button[type=submit] {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+
+#search-window {
+	width: 100px;
+	display: inline-block;
+}
+
+#qna-msg {
+	position: fixed;
+	bottom: 1%;
+	right: 1%;
+	z-index: 999;
+}

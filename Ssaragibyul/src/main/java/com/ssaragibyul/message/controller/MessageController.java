@@ -306,9 +306,14 @@ public class MessageController {
 	}
 	
 	//오늘의 공지쪽지 갯수 출력
-	public int  getCountNoticeMsg() {
+	@ResponseBody
+	@RequestMapping(value="notiMsgCnt.do", method= {RequestMethod.GET,RequestMethod.POST})
+	public void getCountNoticeMsg(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
 		int nMsgCnt = msgService.getNoticeMsgCount();
-		return nMsgCnt;
+		session.setAttribute("notiCount", nMsgCnt);
+		
+		Gson gson = new Gson();
+		gson.toJson(nMsgCnt, response.getWriter());
 	}
 	
 	//쪽지검색(검색/ 선물,관리자쪽지 모아보기), 공지사항도 같이씀(sender==admin)
