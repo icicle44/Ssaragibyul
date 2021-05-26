@@ -8,4 +8,8 @@ import com.ssaragibyul.history.domain.History;
 public interface HistoryStore {
 	public ArrayList<History> selectAllList(PageInfo pi);
 	public History selectOne(int boardNo);
+	
+	public int insertHistory(History history);
+	public int updateHistory(History history);
+	public int deleteHistory(int siteNo);
 }

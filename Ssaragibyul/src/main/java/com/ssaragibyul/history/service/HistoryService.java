@@ -10,4 +10,10 @@ public interface HistoryService {
 	public ArrayList<History> printAll(PageInfo pi);
 	
 	public History printOne(int boardNo);
+	
+	public int registerHistory(History history);
+	
+	public int modifyHistory(History history);
+	
+	public int removeHistory(int siteNo);
 }

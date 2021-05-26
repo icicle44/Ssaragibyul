@@ -11,7 +11,7 @@
 		<div class="main-header">
 			<!-- Logo Header -->
 			<div class="logo-header" style="background-color: #EB5C01" >
-			<a href="/adminMain.do" class="logo d-flex align-items-center" style="text-decoration: none;"> 
+			<a href="/index.jsp" class="logo d-flex align-items-center" style="text-decoration: none;"> 
 				<img src="/resources/img/logo.png" alt=""> <span id="starLogo">싸라기별</sapn>
 			</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -390,8 +390,13 @@
 							<div class="collapse" id="forms">
 								<ul class="nav nav-collapse">
 									<li>
+										<a href="adminIndependenceList.do">
+											<span class="sub-item">독립유공자 공훈록</span>
+										</a>
+									</li>
+									<li>
 										<a href="forms/forms.html">
-											<span class="sub-item">기념관 리스트</span>
+											<span class="sub-item">별들의 발자취</span>
 										</a>
 									</li>
 								</ul>

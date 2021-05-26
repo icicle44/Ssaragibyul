@@ -22,5 +22,23 @@ public class HistoryStoreLogic implements HistoryStore{
 		return null;
 	}
 
+	@Override
+	public int insertHistory(History history) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateHistory(History history) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int deleteHistory(int siteNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	
 }

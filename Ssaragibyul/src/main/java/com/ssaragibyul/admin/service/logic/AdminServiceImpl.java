@@ -58,9 +58,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public Member printOne(int member) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member printOne(String userId) {
+		return aStore.selectOne(userId);
 	}
 
 	@Override
@@ -71,20 +70,17 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int modifyMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.updateMember(member);
 	}
 
 	@Override
 	public int deleteMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.deleteMember(userId);
 	}
 
 	@Override
 	public ArrayList<Funding> printAllFunding(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return aStore.selectAllFunding(pi);
 	}
 
 	@Override

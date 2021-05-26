@@ -31,7 +31,6 @@
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
 </head>
 <body>
-<!-- 로고들이 다 안나와요 ㅠㅠ -->
 	<div class="wrapper">
 		<%@include file="header.jsp" %>
 
@@ -40,7 +39,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">회원 리스트</h4>
+						<h4 class="page-title">회원 상세보기</h4>
 						<ul class="breadcrumbs">
 							<li class="nav-home">
 								<a href="adminMain.do">
@@ -57,7 +56,7 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">회원 리스트</a>
+								<a href="adminMemberListView.do">회원 리스트</a>
 							</li>
 						</ul>
 					</div>
@@ -65,59 +64,45 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title text-center">회원 리스트</h4>
-									<!-- 검색 -->
-									<div class="row-fluid" align="right">
-										<form class="pull-right" action="#" method="get">
-											<select name="searchCondition">
-												<option value="all"
-													<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-												<option value="writer"
-													<c:if test="${search.searchCondition == 'writer' }">selected</c:if>>작성자</option>
-												<option value="title"
-													<c:if test="${search.searchCondition == 'title' }">selected</c:if>>제목</option>
-												<option value="content"
-													<c:if test="${search.searchCondition == 'content' }">selected</c:if>>내용</option>
-											</select> <input type="text" name="searchValue"
-												value="${ search.searchValue }"> <input
-												type="submit" value="검색">
-										</form>
-									</div>
+									<h4 class="card-title text-center">${member.userName }님 정보 상세보기</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
+									<form action="daminMemberModify.do" method="post">
 										<table class="table table-hover" >
-											<thead>
-												<tr>
-													<th>번호</th>
-													<th>회원ID</th>
-													<th>별명</th>
-													<th>이름</th>
-													<th>회원가입일</th>
-													<th>회원등급</th>
-												</tr>
-											</thead>
-											
 											<tbody>
-                                               <c:forEach items="${mList }" var="member" varStatus="index">
-                                                <tr>
-													<td>${index.count }</td>
-													<td>
- 														<c:url var="mDetail" value="adminMemberDetail.do">
-															<c:param name="userId" value="${member.userId }"></c:param>
-														</c:url>
-														<a href="${mDetail }"> ${ member.userId }</a>
-													</td>
-													<td>${member.nickName }</td>
-													<td>${member.userName }</td>
-													<td>${member.enrollDate}</td>
-													<td>${member.mCode }</td>
-												</tr>
-											</c:forEach>
+                                               <tr>
+									               <td>* 아이디</td>
+									               <td>
+									                  <input type="text" name="userId" id="userId" value="${ member.userId }" readonly>
+									               </td>
+									            </tr>
+									            <tr>
+									               <td>* 이름</td>
+									               <td><input type="text" name="userName" value="${ member.userName }" ></td>
+									            </tr>
+									            <tr>
+									               <td>* 닉네임</td>
+									               <td><input type="text" name="nickName" value="${ member.nickName }"></td>
+									            </tr>
+									            <tr>
+									               <td>* 이메일</td>
+									               <td><input type="email" name="userEmail" value="${ member.userEmail }"></td>
+									            </tr>
+									            <tr>
+									               <td>* 전화번호</td>
+									               <td><input type="text" name="userPhone" value="${ member.userPhone }"></td>
+									            </tr>
+									           <tr>
+									               <td>* 주소</td>
+									               <td><input type="text" name="userAddr" value="${ member.userAddr }"></td>
+									            </tr>
 											</tbody>
 										</table>
+										</form>
 											<div>
-												<button type="button" class="btn btn-outline-secondary float-right" onclick="#">등록하기</button>
+												<input type="submit" class="btn btn-outline-secondary float-right" value="수정하기"> 
+												<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminMemberDelete.do?userId=${member.userId}';">삭제하기</button>
 											</div>
 									</div>
 								</div>

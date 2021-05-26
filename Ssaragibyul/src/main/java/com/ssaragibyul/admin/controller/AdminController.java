@@ -1,6 +1,10 @@
 package com.ssaragibyul.admin.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,9 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,8 +28,14 @@ import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.history.domain.History;
+import com.ssaragibyul.history.domain.HistoryFile;
+import com.ssaragibyul.history.service.HistoryService;
+import com.ssaragibyul.independence.domain.Independence;
+import com.ssaragibyul.independence.service.IndependenceService;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.controller.MessageController;
 import com.ssaragibyul.message.domain.Message;
@@ -30,6 +43,7 @@ import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.service.MessageService;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.service.VisitService;
 
 @Controller
 public class AdminController {
@@ -39,7 +53,24 @@ public class AdminController {
 	
 	@Autowired
 	private MessageService msgService;
+	
+	@Autowired
+	private IndependenceService iService;
+	
+	@Autowired
+	private HistoryService hService;
+	
+	@Autowired
+	private FundingService fService;
+	
+	@Autowired
+	private DonationService dService;
+	
+	@Autowired
+	private VisitService vService;
 
+	//히스토리랑 히스토리파일이랑 나눠져있어서 어캐해야되는지 모르겠어요!!
+	
 	// 관리자 메인페이지 들어가기
 	@RequestMapping(value="adminMain.do", method = RequestMethod.GET)
 	public String adminMain() {
@@ -95,21 +126,45 @@ public class AdminController {
 	}
 	
 	// 회원 상세정보(하나만 불러오기)
-	public Member memberDetail() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminMemberDetail.do", method = RequestMethod.GET)
+	public String memberDetail(@RequestParam("userId") String userId,
+								Model model) {
+		Member member = aService.printOne(userId);
+		if(member != null) {
+			model.addAttribute("member", member);
+			System.out.println(member);
+			return "admin/adminMemberDetail";
+		} else {
+			model.addAttribute("msg", "회원 상세조회에 실패하였습니다.");
+			return "common/errorPage";
+		}
 	}
 
 	// 회원 수정하기
-	public ModelAndView memberModifyView(ModelAndView mv) {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="daminMemberModify.do", method = RequestMethod.POST)
+	public ModelAndView memberModifyView(ModelAndView mv,
+										HttpServletRequest request,
+										@ModelAttribute Member member) {
+		int result = aService.modifyMember(member);
+		if(result > 0) {
+			mv.setViewName("redirect:adminMemberListView.do");
+		} else {
+			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.");
+		}
+		return mv;
 	}
 
 	// 회원 탈퇴하기
-	public String memberDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminMemberDelete.do", method = RequestMethod.GET)
+	public String memberDelete(@RequestParam("userId") String userId,
+								Model model) {
+		int result = aService.deleteMember(userId);
+		if(result > 0) {
+			return "redirect:adminMemberListView.do";
+		} else {
+			model.addAttribute("msg", "회원 탈퇴에 실패하였습니다.");
+			return "common/errorPage";			
+		}
 	}
 
 	// 회원 쪽지보내기
@@ -119,9 +174,23 @@ public class AdminController {
 	}
 
 	// 펀딩 리스트 출력
-	public ModelAndView fundingListView() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminFundingList.do", method = RequestMethod.GET)
+	public ModelAndView fundingListView(ModelAndView mv,
+										@RequestParam(value="page", required = false) Integer page) {
+		int currentPage = (page != null) ? page :1;
+		int listCount = aService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Funding> fList = aService.printAllFunding(pi);
+		if(!fList.isEmpty()) {
+			mv.addObject("fList", fList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/fundingListView");
+		} else {
+			mv.addObject("msg", "펀딩 리스트 출력에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		
+		return mv;
 	}
 
 	// 펀딩 상세보기
@@ -173,9 +242,22 @@ public class AdminController {
 	}
 
 	//댓글삭제하기
-	public String replyRemove() {
-		// TODO Auto-generated method stub
-		return null;
+	@ResponseBody
+	@RequestMapping(value="adminDeleteReply.do", method = RequestMethod.GET)
+	public String replyRemove(@ModelAttribute Reply reply) {
+		int result = 0; 
+		if(reply.getReplyType() == "funding") {
+			result = fService.removeCommnets(reply);
+		} else if(reply.getReplyType() == "donation") {
+			//result = dService.removeCommnets(reply);
+		} else if(reply.getReplyType() == "visit") {
+			result = vService.removeReply(reply);
+		}
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 
 	// 신고 댓글보기
@@ -190,7 +272,40 @@ public class AdminController {
 		return null;
 	}
 
-	// 기념관 리스트
+	@RequestMapping(value="adminIndependenceList.do", method=RequestMethod.GET)
+	public ModelAndView independenceList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount =iService.getListCount();
+		// Pagination은 common의 pagination
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		ArrayList<Independence> iList = iService.printAll(pi);
+//		int msgNo = 1;
+//		Message message = mService.printOne(msgNo);
+//		
+//		String userId = "userId";
+//		String flag = "rec";
+//		
+//		HashMap<String, String> cntMap = new HashMap<String, String>();
+//		cntMap.put("flag", flag);
+//		cntMap.put("userId", userId);
+//		
+//		int msgCount = mService.getMsgListCount(cntMap);
+		
+		
+		if(!iList.isEmpty()) {
+			mv.addObject("iList", iList);
+			mv.addObject("pi", pi);
+//			mv.addObject("message", message);
+//			mv.addObject("messageCount", msgCount);
+			mv.setViewName("admin/adminIndependenceList");
+		}else {
+			mv.addObject("msg", "데이터 조회 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
+	// 별들의발자취 리스트
 	@RequestMapping(value="adminHistoryList.do", method = RequestMethod.GET)
 	public ModelAndView histoyListView(ModelAndView mv) {
 		// TODO Auto-generated method stub
@@ -198,31 +313,155 @@ public class AdminController {
 	}
 
 	// 기념관 상세보기
-	public History histoyDetail() {
-		// TODO Auto-generated method stub
+	@RequestMapping(value="adminHistoryDetail.do", method = RequestMethod.GET)
+	public History histoyDetail(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
+		History histoy = hService.printOne(siteNo);
+		if(histoy != null) {
+			mv.addObject("histoy", histoy).setViewName("admin/adminHistoryDetailView");
+		} else {
+			mv.addObject("msg", "별들의 발자취 리스트 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
 		return null;
+	}
+	
+	// 별들의 발자취 리스트 등록화면
+	@RequestMapping(value="adminHistoryWriteView.do", method = RequestMethod.GET)
+	public String historyWriteView() {
+		return "admin/adminHistoryWriteView";
 	}
 	
 	// 기념관 등록하기
-	public ModelAndView histoyRegister() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminHistoryRegister.kh", method=RequestMethod.POST)
+	public ModelAndView histoyRegister(ModelAndView mv,
+										@ModelAttribute History history,
+										@RequestParam(value="uploadFile", required = false) MultipartFile uploadFile,
+										HttpServletRequest request) {
+		HistoryFile historyFile = new HistoryFile();
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String renameFileName = saveFile(uploadFile, request);
+			if(renameFileName != null) {
+				//historyFile.setOriginarFilename(originarFilename);
+				//history.setRenameFilename(renameFileName);
+			}
+		}
+		// 디비에 데이터를 저장하는 작업
+		int result = 0;
+		String path = "";
+		result = hService.registerHistory(history);
+		if(result > 0) {
+			path = "redirect:adminHistoryDetail.do?siteNo="+history.getSiteNo();
+		} else {
+			mv.addObject("msg", "기념관 등록에 실패하였습니다.");
+			path="common/errorPage";
+		}
+		mv.setViewName(path);
+		return mv;
 	}
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
-		return null;
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\";
+		
+		File folder = new File(savePath);
+		// 폴더 없으면 자동 생성
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		// 파일명 변경하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		// 시분초 형태를 yyyyMMddHHmmss이렇게 바꿔준다.
+		String originalFileName = file.getOriginalFilename();
+		// 실제 올린 파일명 그대로!
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "."
+				+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+		// abc.jpg
+		// originalFileName.substring(originalFileName.lastIndexOf(".")+1) 는 확장자를 가져오기
+		// 위해.
+		// 파일명에 .이 있는 것을 방지하여 lastIndexOf로 마지막에.을 가져온다! +1은 . 빼고 확장자명만 담아오기 위해!
+		String filePath = folder + "\\" + renameFileName;
+		// 파일저장
+		try {
+			file.transferTo(new File(filePath));
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// 리턴
+		return renameFileName;
 	}
 
+	// 게시글 수정화면
+	@RequestMapping(value="adminModifyView.do")
+	public ModelAndView historyModifyView(ModelAndView mv, @RequestParam("getSiteNo") int getSiteNo) {
+		History history = hService.printOne(getSiteNo);
+		if(history != null) {
+			mv.addObject("history", history).setViewName("admin/adminHistoryUpdateView");
+		} else {
+			mv.addObject("msg", "별들의 발자취 수정이 실패하였습니다.").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	// 기념관 수정하기
-	public ModelAndView historyUpdate() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminHistoryUpdate.do", method = RequestMethod.POST)
+	public ModelAndView historyUpdate(ModelAndView mv,
+										HttpServletRequest request,
+										@ModelAttribute History history,
+										@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile ) {
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			// 파일변수가 없어서!!확인요망!!ㅠㅠ
+			if(history.getSiteName() != "") {
+				//deleteFile(history.getRenameFilename(), request);
+			}
+			// 새 파일 업로드
+			String renameFileName = saveFile(reloadFile, request);
+			if(renameFileName != null) {
+				//history.setOriginalFilename(reloadFile.getOriginalFilename());
+				//history.setRenameFilename(renameFileName);
+			}
+		}
+		// DB수정
+		int result = hService.modifyHistory(history);
+		if(result > 0) {
+			mv.setViewName("redirect: adminHistoryList.do");
+		} else {
+			mv.addObject("msg", "별들의 발자취 수정에 실패하였습니다.").setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 	// 기념관 삭제하기
-	public String historyDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminHistoryDelete.do", method = RequestMethod.GET)
+	public String historyDelete(Model model, @RequestParam("siteNo") int siteNo,
+								@RequestParam("renameFilename") String renameFilename,
+								HttpServletRequest request) {
+		// 업로드된 파일 삭제
+		if(renameFilename != "") {
+			//deleteFile(renameFilename, request);
+		}
+		
+		// 디비에 데이터 업데이트
+		int result = hService.removeHistory(siteNo);
+		if(result > 0) {
+			return "redirect:adminHistoryList.do";
+		} else {
+			model.addAttribute("msg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	//기념관 파일 삭제
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\";
+		File file = new File(savePath + "\\" + fileName);
+		if(file.exists()) {
+			file.delete();
+		}
 	}
 
 	// 별보러가자 리스트

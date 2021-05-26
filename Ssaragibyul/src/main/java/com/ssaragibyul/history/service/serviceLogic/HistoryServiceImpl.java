@@ -22,4 +22,22 @@ public class HistoryServiceImpl implements HistoryService{
 		return null;
 	}
 
+	@Override
+	public int registerHistory(History history) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifyHistory(History history) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeHistory(int siteNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

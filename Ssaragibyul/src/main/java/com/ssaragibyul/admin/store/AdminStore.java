@@ -27,7 +27,7 @@ public interface AdminStore {
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> selectAll(PageInfo pi);
 	// 회원 상세정보(하나만 불러오기)
-	public Member selectOne(int member);
+	public Member selectOne(String userId);
 	// 회원 리스트 검색
 	public ArrayList<Member> selectSearchAll(Search search);
 	// 회원 수정하기

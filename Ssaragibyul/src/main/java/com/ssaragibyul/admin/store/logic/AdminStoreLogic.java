@@ -61,11 +61,10 @@ public class AdminStoreLogic implements AdminStore{
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("memberMapper.selectAllList", null, rowBounds);
 	}
-
+	
 	@Override
-	public Member selectOne(int member) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member selectOne(String userId) {
+		return sqlSession.selectOne("memberMapper.selectOne", userId);
 	}
 
 	@Override
@@ -76,20 +75,19 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public int updateMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("memberMapper.updateMember", member);
 	}
 
 	@Override
 	public int deleteMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("memberMapper.deleteMember", userId);
 	}
 
 	@Override
 	public ArrayList<Funding> selectAllFunding(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectAllList", null, rowBounds);
 	}
 
 	@Override
@@ -240,5 +238,7 @@ public class AdminStoreLogic implements AdminStore{
 	public int selectListCount() {
 		return sqlSession.selectOne("memberMapper.selectListCount");
 	}
+
+
 
 }

@@ -32,7 +32,7 @@ public interface AdminService {
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);
 	// 회원 상세정보(하나만 불러오기)
-	public Member printOne(int member);
+	public Member printOne(String userId);
 	// 회원 리스트 검색
 	public ArrayList<Member> printSearchAll(Search search);
 	// 회원 수정하기
