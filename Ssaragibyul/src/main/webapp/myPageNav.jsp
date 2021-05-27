@@ -36,7 +36,7 @@
      </div>
      </c:if>
      <div id="logout">
-         <input type="button" value="로그아웃" id="btn">
+         <input type="button" value="로그아웃" id="btn" onclick="location.href='logout.do';">
      </div>
      <div class="nav">
          <!--세로형 1--> 

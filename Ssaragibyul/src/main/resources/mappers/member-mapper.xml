@@ -36,33 +36,6 @@
 		WHERE USER_NAME = #{userName } AND USER_EMAIL = #{userEmail } 
 	</select>
 	
-	
-	<!-- 확인용 -->
-	<select id="selectListCount" resultType="_int">
-            SELECT COUNT(*) FROM MEMBER
-    </select>
-    
-    <!-- 관리자 확인용 -->
-    <select id="selectAllList" resultMap="memberResultMap">
-      SELECT * FROM MEMBER ORDER BY ENROLL_DATE DESC
-   	</select>
-	
-  	<!-- 관리자 확인용 -->
-	<select id="selectOne" parameterType="Member" resultMap="memberResultMap">
-      SELECT * FROM MEMBER
-      WHERE USER_ID = #{userId }
-   	</select>
-
-  	<!-- 관리자 확인용 -->
-   	<update id="deleteMember" parameterType="Member">
-     	UPDATE MEMBER SET M_CODE = 2
-   	</update>
-   	
-	<!-- 관리자 확인용 -->
-   	<update id="updateMember" parameterType="Member">
-      	UPDATE MEMBER SET USER_EMAIL= #{userEmail}, USER_PHONE=#{userPhone}, USER_ADDR=#{userAddr}
-   	</update>
-	
 	<!-- 사용자 정보 수정 -->
 	<update id="modifyMember" parameterType="Member">
 		UPDATE MEMBER SET USER_PW = #{userPw}, USER_NAME = #{userName}, USER_EMAIL = #{userEmail}, USER_PHONE = #{userPhone}, USER_ADDR = #{userAddr}  WHERE USER_ID = #{userId}
@@ -72,5 +45,36 @@
 	<delete id="removeMember" parameterType="Member">
 		DELETE MEMBER WHERE USER_ID = #{userId }
 	</delete> 
+	
+	
+	<!-- 관리자용 -->
+	
+	
+	<!-- 관리자 확인용 -->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER
+    </select>
+    
+    <!-- 관리자 확인용 -->
+    <select id="selectAllList" resultMap="memberResultMap">
+     	SELECT * FROM MEMBER ORDER BY ENROLL_DATE DESC
+   	</select>
+	
+  	<!-- 관리자 확인용 -->
+	<select id="selectOne" parameterType="Member" resultMap="memberResultMap">
+     	SELECT * FROM MEMBER
+     	WHERE USER_ID = #{userId }
+   	</select>
+
+  	<!-- 관리자 확인용 -->
+    <update id="deleteMember" parameterType="Member">
+   		UPDATE MEMBER SET M_CODE = 2 WHERE USER_ID= #{userId }
+    </update>
+      
+   	<!-- 관리자 확인용 -->
+    <update id="updateMember" parameterType="Member">
+    	UPDATE MEMBER SET USER_EMAIL= #{userEmail}, USER_PHONE=#{userPhone}, USER_ADDR=#{userAddr} WHERE USER_ID= #{userId }
+    </update>
+	
 	
 </mapper>
