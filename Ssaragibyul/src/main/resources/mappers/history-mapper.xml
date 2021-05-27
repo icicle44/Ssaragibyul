@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="visitMapper">
-<!-- 	<resultMap type="Visit" id="visitResultMap">
-		<id property="visitNo" column="VISIT_NO"/>
+<mapper namespace="historyMapper">
+	<resultMap type="History" id="historyResultMap">
+<!-- 		<id property="visitNo" column="VISIT_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="siteNo" column="SITE_NO"/>
 		<result property="visitTitle" column="VISIT_TITLE"/>
@@ -13,8 +13,8 @@
 		<result property="vUpdateDate" column="V_UPDATE_DATE"/>
 		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
 		<result property="renameFilename" column="RENAME_FILENAME"/>
-		<result property="uploadTime" column="UPLOAD_TIME"/>
-	</resultMap> -->
+		<result property="uploadTime" column="UPLOAD_TIME"/> -->
+	</resultMap>
 
 
    <select id="adminSelectAllList" resultMap="historyResultMap">
