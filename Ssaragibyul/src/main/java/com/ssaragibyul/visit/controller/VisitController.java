@@ -60,7 +60,7 @@ public class VisitController {
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile,request);
 			if(renameFileName != null) {
-				visit.setOriginalFilename(visit.getVisitNo()+"");
+				visit.setOriginalFilename(uploadFile.getOriginalFilename());
 				visit.setRenameFilename(renameFileName);
 			}
 		}
