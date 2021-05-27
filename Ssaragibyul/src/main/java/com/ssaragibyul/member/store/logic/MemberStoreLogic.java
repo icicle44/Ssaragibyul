@@ -31,16 +31,16 @@ public class MemberStoreLogic implements MemberStore{
 		return sqlSession.insert("memberMapper.insertMember", member);
 	}
 
+	// 사용자 정보 수정
 	@Override
 	public int updateMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("memberMapper.modifyMember", member);
 	}
 
+	//회원 탈퇴
 	@Override
 	public int removeMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.delete("memberMapper.removeMember", userId);
 	}
 
 	// 아이디 찾기

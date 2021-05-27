@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/mypage/myPageMain.css">
+<link rel="stylesheet" type="text/css" href="/resources/css/mypage/myPageNav.css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 		<script>
 		$(document).ready(function(){ 

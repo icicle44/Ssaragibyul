@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>회원가입 페이지</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/memberJoin.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -172,7 +173,8 @@
     <footer>
     	<jsp:include page="../../../footer.jsp"/>
     </footer>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 	<script>
 		$(function() {
@@ -202,6 +204,7 @@
 		
 		window.onload = function () {
 			var id = $('#userId');
+			console.log(id);
 			var pwd = $('#userPw');
 			var pwdch = $('#userPwCheck');
 			var name = $('#userName');
@@ -220,6 +223,7 @@
 					return false;
 				} 
 			});
+			
 			pwd.on("keyup", function () {
 				if (!pwdreg.test(pwd.val())) {
 					$("#message").text("패스워드는 대소문자,숫자를 포함한 4~12자리 입니다.");

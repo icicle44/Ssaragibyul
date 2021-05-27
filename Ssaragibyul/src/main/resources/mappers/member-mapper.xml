@@ -42,35 +42,35 @@
             SELECT COUNT(*) FROM MEMBER
     </select>
     
-    <!-- 확인용 -->
+    <!-- 관리자 확인용 -->
     <select id="selectAllList" resultMap="memberResultMap">
       SELECT * FROM MEMBER ORDER BY ENROLL_DATE DESC
    	</select>
 	
-  	<!-- 확인용 -->
+  	<!-- 관리자 확인용 -->
 	<select id="selectOne" parameterType="Member" resultMap="memberResultMap">
       SELECT * FROM MEMBER
       WHERE USER_ID = #{userId }
    	</select>
 
-  	<!-- 확인용 -->
+  	<!-- 관리자 확인용 -->
    	<update id="deleteMember" parameterType="Member">
      	UPDATE MEMBER SET M_CODE = 2
    	</update>
    	
-	<!-- 확인용 -->
+	<!-- 관리자 확인용 -->
    	<update id="updateMember" parameterType="Member">
       	UPDATE MEMBER SET USER_EMAIL= #{userEmail}, USER_PHONE=#{userPhone}, USER_ADDR=#{userAddr}
    	</update>
 	
-	
-	<!--
-	<update id="updateMember" parameterType="Member">
-		UPDATE MEMBER SET USER_PW = #{userPw}, USER_AGE = #{userAge}, USER_EMAIL = #{userEmail}, USER_PHONE = #{userPhone}, USER_ADDR = #{userAddr}, UPDATE_DATE = SYSDATE WHERE USER_ID = #{userId}
-	</update>
-	
-	<delete id="deleteMember" parameterType="Member">
+	<!-- 사용자 정보 수정 -->
+	<update id="modifyMember" parameterType="Member">
+		UPDATE MEMBER SET USER_PW = #{userPw}, USER_NAME = #{userName}, USER_EMAIL = #{userEmail}, USER_PHONE = #{userPhone}, USER_ADDR = #{userAddr}  WHERE USER_ID = #{userId}
+	</update>  
+
+	<!-- 사용자: 회원 탈퇴 -->	
+	<delete id="removeMember" parameterType="Member">
 		DELETE MEMBER WHERE USER_ID = #{userId }
-	</delete> -->
+	</delete> 
 	
 </mapper>

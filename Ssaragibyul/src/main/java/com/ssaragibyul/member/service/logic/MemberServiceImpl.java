@@ -38,16 +38,15 @@ public class MemberServiceImpl implements MemberService {
 		return mStore.insertMember(member);
 	}
 
+	// 사용자 정보 수정
 	@Override
 	public int modifyMember(Member member) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.updateMember(member);
 	}
 
 	@Override
 	public int removeMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return mStore.removeMember(userId);
 	}
 
 	@Override

@@ -2,7 +2,7 @@
 
 body{
     width: auto;
-    height: 700px;
+    height: 1350px;
     margin : auto;
 }
 
@@ -17,23 +17,30 @@ header{
 .background{
     height:1000px;
     margin : auto;
-    padding-top: 80px;
+    padding-top: 120px;
     background: linear-gradient(rgb(70, 70, 70) 32%, #fff 10% );
 }
 
 .contents{
-    height: auto;
-    padding-top: 60px;
+    padding-top: 80px;
 }
 
 .leftMenu{
-    height: 900px;
+    margin-left: 70px;
+    width: 18%;
+    height: 830px;
+    float: left;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
 }
 
 .rightCon{
+	padding-top: 30px;
     margin-right: 70px;
     width: 71%;
-    height: 840px;
+    height: 830px;
     float: right;
     border: 1px solid white;
     border-radius: 20px;
@@ -41,77 +48,105 @@ header{
     box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
 }
 
-
+#h2{
+	padding-top:15px;
+	font-weight: 600;
+}
 
 /**/
 
-table {
+.t-con{
+	padding-top: 10px;
     margin : auto;
-    padding-left: 210px;
+    padding-left: 350px;
 }
 
- td {
-    color: white;
+.t-con table {
+    margin : auto;
+    border: none;
+    
+}
+
+.t-con td {
+    color: rgb(94, 94, 94);
+    border:none;;
     font-weight: 600;
+    padding-bottom: 5px;
 }
 
 /**/
 
+#userId{
+    width: 320px;
+    height: 40px;
+    border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
+}
 
 #userPw{
-    width: 250px;
-    height: 35px;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 
 #pwCheck{
-	width: 250px;
-    height: 35px;
+	width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 
 #userPwCheck{
-    width: 250px;
-    height: 35px;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 #userName{
-    width: 250px;
-    height: 35x;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 #userEmail{
-    width: 250px;
-    height:35px;
+    width: 320px;
+    height:40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 #userPhone{
-    width: 250px;
-    height: 35px;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 .postcodify_postcode5{
-    width: 185px;
-    height: 35x;
+    width: 225px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 #postcodify_search_button{
-    width: 60px;
-    height: 35px;
+    width: 90px;
+    height: 40px;
     background: rgb(174, 174, 174);
+    border: none;
     border-radius: 5px;
    	font-weight: 500;
     color: white;
 }
 .postcodify_address{
-    width: 250px;
-    height: 35px;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 .postcodify_extra_info{
-    width: 250px;
-    height: 35px;
+    width: 320px;
+    height: 40px;
     border-radius: 5px;
+    border: 3px solid rgb(171, 163, 163);
 }
 
 
@@ -119,14 +154,16 @@ table {
 
 #nickName{
     width: 200px;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
+    border: 2px solid rgb(204, 204, 204);
 }
 #refresh{
     width: 45px;
-    height: 35px;
+    height: 40px;
     background: rgb(174, 174, 174);
     border-radius: 5px;
+    border: 2px solid rgb(204, 204, 204);
     margin-top: 3px;
 }
 #refresh-img{
@@ -146,27 +183,30 @@ table {
     padding-top: 2px
 }
 #yy{
-    height: 35px;
+    height: 40px;
     width: 125px;
     border-radius: 5px;
+    border: 2px solid rgb(204, 204, 204);
 }
 
 #bir_mm {
     display: table-cell;
 }
 #mm{
-    height: 35px; 
+    height: 40px; 
     width: 55px; 
     border-radius: 5px;
+    border: 2px solid rgb(204, 204, 204);
 }
 #bir_dd {
     display: table-cell;
     width: 30px;
 }
 #dd{
-    height: 35px;
+    height: 40px;
     width: 55px;
     border-radius: 5px;
+    border: 2px solid rgb(204, 204, 204);
 }
 #bir_mm, #bir_dd {
     padding-left: 5px; 
@@ -174,28 +214,37 @@ table {
 
 
 .btns{
-	padding-left:30px;
+	padding-left:45px;
     padding-top: 20px;
 }
 
-#joinGo{
-    height: 35px;
-    width: 90px;
+#update{
+    height: 40px;
+    width: 100px;
     border-radius: 5px;
     background: rgb(174, 174, 174);
    	font-weight: 500;
     color: white;
+    border: none;
+}
+
+#update:active{
+    background:rgb(235, 92, 1);
 }
 
 #reset-btn{
-    height: 35px;
-    width: 90px;
+    height: 40px;
+    width: 100px;
     border-radius: 5px;
     background: rgb(174, 174, 174);
     font-weight: 500;
     color: white;
+    border:none;
 }
 
+#reset-btn:active{
+	background:rgb(235, 92, 1);
+}
 #delete{
     padding-top: 10px;
     padding-right: 30px;
@@ -203,10 +252,16 @@ table {
 
 #delete-btn{
     float: right;
-    height: 35px;
+    height: 40px;
     width: 90px;
     border-radius: 15px;
     background: rgb(174, 174, 174);
     font-weight: 500;
     color: white;
+    border:none;
+}
+
+#delete-btn:active{
+	background:rgb(70, 70, 70);
+	border:none;
 }

@@ -160,20 +160,38 @@ public class MemberController {
 	public String updateView(Member member) {
 		return "mypage/userUpdate";
 	}
-	/*
+	
 	// 정보수정
-	@RequestMapping(value="memberModify.kh", method=RequestMethod.POST)
-	public String modifyMember(@ModelAttribute Member member, @RequestParam("post") String post, @RequestParam("address1")String address1, @RequestParam("address2") String address2, Model model, HttpServletRequest request) {
-
+	@RequestMapping(value="memberModify.do", method=RequestMethod.POST)
+	public String modifyMember(@ModelAttribute Member member,
+							@RequestParam("post") String post, 
+							@RequestParam("address1")String address1, 
+							@RequestParam("address2") String address2,
+							Model model, 
+							HttpServletRequest request) {
+	HttpSession session = request.getSession();
+	member.setUserAddr(post + ", " + address1 + ", " + address2);
+	int result = mService.modifyMember(member);
+	if(result > 0) {
+		return "mypage/myPageMain";
+	} else {
+		model.addAttribute("msg","정보 수정 실패");
 		return "common/errorPage";
 	}
+	}
+	
 	
 	// 회원 탈퇴
-	@RequestMapping(value="memberDelete.kh", method=RequestMethod.GET)
+	@RequestMapping(value="memberDelete.do", method=RequestMethod.GET)
 	public String memberDelete(@RequestParam("userId") String userId, Model model) {
-
-		return "common/errorPage";
+		int result = mService.removeMember(userId);
+		if (result > 0) {
+			return "redirect:logout.do";
+		}else {
+			model.addAttribute("msg", "회원 탈퇴 실패");
+			return "common/errorPage";
+		}
 	}
 	
-	*/
+	
 }
