@@ -14,7 +14,7 @@
     <header>
     	<jsp:include page="../../../header.jsp"/>
     </header>
-    <form action="memberRegister.do" method="post">
+    <form action="memberRegister.do" method="post"  onsubmit="return validate()">
         <h2 align="center" id="h2">회원가입</h2>
         <div class="contents">
             <table width="650" cellspacing="5" >
@@ -76,7 +76,7 @@
 				</tr>
 				<tr>
 					<td>
-                        <input type="text" name="address1" class="postcodify_address">
+                        <input type="text" name="address1" class="postcodify_address" id="addr" >
                     </td>
 				</tr>
 				<tr>
@@ -162,7 +162,7 @@
             <tr>
             	<td>
    		            <div class="btns">
-	                 	<input type="submit" value="가입하기" id="joinGo">
+	                 	<input type="submit" value="가입하기" id="joinGo" onclick="joinGo()">
 	                	<button type="button" onclick="location.href='login.do';" id="home">홈으로</button>
 	            </div>
             	</td>
@@ -202,75 +202,80 @@
 			})
 		});
 		
-		window.onload = function () {
-			var id = $('#userId');
+		/* 유효성 검사 */
+		
+		
+		function validate() {
+			var id = document.getElementById("userId");
 			console.log(id);
-			var pwd = $('#userPw');
-			var pwdch = $('#userPwCheck');
-			var name = $('#userName');
-			var email = $('#userEmail');
-			var phone = $('#userPhone');
+			var pw = document.getElementById("userPw"); 
+			var pwch = document.getElementById("userPwCheck"); 
+			var name = document.getElementById("userName");  
+			var email = document.getElementById("userEmail");
+			var phone = document.getElementById("userPhone");
+			var addr = document.getElementById("addr");
 			var idreg = /^[a-z][a-z|A-Z|0-9]{4,12}$/;
-			var pwdreg = /^[a-z|A-Z|0-9]{5,12}$/;
-			var nicknamereg = /^[a-z|A-Z|0-9|가-핳]{2,8}/;
-            var namereg = /^[a-z|A-Z|0-9|가-핳]{2,10}/
+			var pwdreg = /^[a-z|A-Z|0-9]{6,12}$/;
 			var emailreg = /^[a-z|A-Z|0-9]{2,}@[a-z]+\.[a-z]+$/;
 			var phonereg = /^[0-9]{8,}/;
-
-			$('#userId').on("keyup", function () {
-				if (!idreg.test(id.val())) {
-					$("#message").text("아이디는 대소문자,숫자를 포함한 4~12자리 입니다.");
-					return false;
-				} 
-			});
+		
+			// 아이디 유효성검사
+			if(!idreg.test(id.value)){ 
+	            alert("ID는 4~12자의 영문 대소문자와 숫자로만 입력하여 주세요.");        
+	            return false;
+	        }
 			
-			pwd.on("keyup", function () {
-				if (!pwdreg.test(pwd.val())) {
-					$("#message").text("패스워드는 대소문자,숫자를 포함한 4~12자리 입니다.");
-					return false;
-				} else {
-					$("#message").text("사용가능한 패스워드 입니다.");
-				}
+			// 비밀번호 유효성검사
+			if(!pwdreg.test(pw.value)){ 
+			 alert("패스워드는 6~12자의 영문 대소문자와 숫자로만 입력");
+			    return false;
+			}
+			
+/* 			if(pw.val() != pwdch.val()) {
+				alert("패스워드가 일치하지 않습니다. 다시 확인해주세요.");
+				return false;
+			}  */
+			
+			if(name.value=="") {
+			    alert("이름을 입력해 주세요");
+			    name.focus();
+			    return false;
+			}
 
-			});
-			$(pwdch).on("keyup", function () {
-				if (pwd.val() != pwdch.val()) {
-					$("#message").text("패스워드가 일치하지 않습니다. 다시 확인해주세요.");
-					return false;
-				} else {
-					$("#message").text("패스워드가 일치합니다.");
-				}
+			if(phone.value=="") {
+			    alert("전화번호를 입력해 주세요");
+			    phone.focus();
+			    return false;
+			}
 
-			});
+			if (!phonereg.test(phone.value)) {
+			  alert("전화번호는 숫자만 입력할 수 있습니다.");
+			  phone.focus();
+			  return false;
+			}
+		
+			if(email.value=="") {
+			    alert("이메일을 입력해 주세요");
+			    email.focus();
+			    return false;
+			}
+			
+			
+			if(email.value=="") {
+			    alert("이메일을 입력해 주세요");
+			    email.focus();
+			    return false;
+			}
+			
+			if(addr.value=="") {
+			    alert("주소를 입력해 주세요");
+			    addr.focus();
+			    return false;
+			}
 
-            $(name).on("keyup", function () {
-				if (!namereg.test(name.val())) {
-					$("#message").text("이름을 입력해주세요");
-					return false;
-				} else {
-					$("#message").text(" ");
-				}
-
-			});
-			$("#email").on("keyup", function () {
-				if (!emailreg.test(email.val())) {
-					$("#message").text("올바른 이메일 형식이 아닙니다. 다시 확인해주세요.");
-					return false;
-				} else {
-					$("#message").text(" ");
-				}
-
-			});
-			$("#phone").on("keyup", function () {
-				if (!phonereg.test(phone.val())) {
-					$("#message").text("번호는 8자이상 입력해주세요.");
-					return false;
-				} else {
-					$("#message").text(" ");
-				}
-
-			});
-		}
+			
+		}  
+	        
 
 	</script>
     </body>

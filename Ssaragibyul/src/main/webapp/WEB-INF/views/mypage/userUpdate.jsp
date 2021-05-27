@@ -125,6 +125,10 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
     <script>
+			$(function() {
+		        $("#postcodify_search_button").postcodifyPopUp();
+			});
+    
             function updateReset(){
         	if(!confirm("정보 수정을 취소하시겠습니까?")) {
            		return false;
