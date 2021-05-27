@@ -89,6 +89,10 @@
 			<td>작성날짜</td>
 			<td>${funding.productName }</td>
 		</tr>
+		<tr>
+			<td>조회수</td>
+			<td>${funding.hitsCount }</td>
+		</tr>
 		<tr height="300">
 			<td>내용</td>
 			<td>${funding.goalMoney }</td>

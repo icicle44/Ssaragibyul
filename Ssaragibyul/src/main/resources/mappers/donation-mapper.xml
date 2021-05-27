@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 나혜님꺼
+   <select id="selectDonationListCount" resultType="_int">
+      SELECT COUNT(*) FROM DONATION
+    </select> -->

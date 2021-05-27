@@ -93,7 +93,7 @@
 					<input id="sendNumber" type="number" name="" max="${funding.optionLimit }"> 한계 : ${funding.optionLimit }<br>
 				
 				<br><br><br><br><br><br><br>
-			<a id="sendBtn" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
+			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
 			</section>
 
 			<br><br><br><br><br><br><br>
@@ -103,10 +103,12 @@
 
 			<input class="getNumber" type="number" name="cal">
 				${funding.finDate }<br>
-				<input class="getResult" type="number" name="cal">
+				<input class="getResult1" type="number" name="cal"><br>
+				추가로 후원하기
+				<input type="number" id="addPrice" name="cal">
 			
 				<br><br><br><br><br><br><br>
-			<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">펀딩하기</a>
+			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">펀딩하기</a>
 			</section>
 
 		<br><br><br><br><br><br><br><br><br>
@@ -115,13 +117,14 @@
 			<br><br><br><br>
 				<form action="fundingJoinComplete.do" method="post">
 					<input type="text" name="qunatity" class="getNumber"><br>
-					<input type="text" name="fundingPoint" class="getResult"><br>
-	    			<input type="text" name="projectNo" value="${funding.projectNo }">
-	   				<input type="text" name="userId" value="${loginUser.userId }">
-	   				<input type="text" name="sumMoney" class="getResult">
-	   				<input type="text" name="receiverAddr">
-	   				<input type="text" name="receiverName">
-	   				<input type="text" name="receiverPhone">
+					<input type="text" name="" class="getResult1"><br>
+					<input type="text" name="fundingPoint" class="getResult2"><br>
+	    			<input type="text" name="projectNo" value="${funding.projectNo }"><br>
+	   				<input type="text" name="userId" value="${loginUser.userId }"><br>
+	   				<input type="text" name="sumMoney" class="getResult2"><br>
+	   				<input type="text" name="receiverAddr"><br>
+	   				<input type="text" name="receiverName"><br>
+	   				<input type="text" name="receiverPhone"><br>
 	    			<input type="submit" class="getstarted" value="예약완료">
     			</form>
 			</section>

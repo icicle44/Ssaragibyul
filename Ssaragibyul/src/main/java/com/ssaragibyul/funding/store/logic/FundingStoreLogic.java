@@ -58,8 +58,7 @@ public class FundingStoreLogic implements FundingStore{
 
 	@Override
 	public int addreadCountHit(int projectNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("fundingMapper.updateCount", projectNo);
 	}
 
 	@Override

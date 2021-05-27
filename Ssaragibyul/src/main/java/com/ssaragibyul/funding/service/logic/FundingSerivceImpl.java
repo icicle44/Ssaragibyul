@@ -58,8 +58,7 @@ public class FundingSerivceImpl implements FundingService {
 
 	@Override
 	public int addreadCountHit(int projectNo) {
-		// TODO Auto-generated method stub
-		return 0;
+		return fStore.addreadCountHit(projectNo);
 	}
 	
 	

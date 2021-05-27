@@ -56,9 +56,9 @@ public class FundingController {
 	
 	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
 	 public String fundingList(Model model) {
-		 ArrayList<Funding> fList = fService.printAllProject();
-		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();
-		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {
+		 ArrayList<Funding> fList = fService.printAllProject();   
+		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();		
+		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {				
 				model.addAttribute("fList", fList);
 					model.addAttribute("fListFile", fListFile);
 				return "funding/fundingList";
@@ -81,7 +81,7 @@ public class FundingController {
 	 
 		
 		@RequestMapping(value = "fundingJoin.do", method =  RequestMethod.POST )
-		public ModelAndView fundingJoin1(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		public ModelAndView fundingJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 			// 게시글 상세 조회
 			Funding funding = fService.printOne(projectNo);
 			if (funding != null) {
@@ -95,7 +95,7 @@ public class FundingController {
 		}
 		
 		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
-		 public String fundingJoin2(@ModelAttribute FundingLog fundingLog, Funding funding) { 
+		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) { 
 			 int result = fService.registerFundingLog(fundingLog, funding);
 			 if(result > 0) {
 				 return "funding/fundingJoinCompleteView";
@@ -104,11 +104,7 @@ public class FundingController {
 				 return "common/errorPage";
 			 }
 		 }
-		 @RequestMapping(value="fundingJoin3.do", method=RequestMethod.GET)
-		 public String fundingJoin3() {
-			 return "funding/fundingJoinPage2";
-		 }
-		 
+
 		 
 
 		/*
@@ -120,12 +116,12 @@ public class FundingController {
 		 */
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-//		fService.addReadCount(boardNo);
-		// 게시글 상세 조회
+		fService.addreadCountHit(projectNo); 
+		
 		Funding funding = fService.printOne(projectNo);
 		FundingFile fundingFile = fService.printOneFile(projectNo);
+		
 		if ((funding != null)&&(fundingFile != null)) {
-			// 메소드 체이닝 방식
 			mv.addObject("fundingFile", fundingFile);
 			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
 		} else {

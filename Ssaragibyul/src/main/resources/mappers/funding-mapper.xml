@@ -91,6 +91,12 @@
 		WHERE
 		F_PROJECT_NO = #{projectNo}
 	</update> 
+	<update id="updateCount" parameterType="Funding">
+		UPDATE FUNDING_PROJECT SET HITS_COUNT = HITS_COUNT + 1
+		WHERE
+		F_PROJECT_NO = #{projectNo }
+	</update>
+		
 		
 		<!-- 
 		
@@ -106,4 +112,8 @@
 		SELECT * FROM FUNDING_PROJECT
 		ORDER BY F_PROJECT_NO DESC
 	</select>
+	
+	  <select id="selectFundingListCount" resultType="_int">
+      SELECT COUNT(*) FROM FUNDING
+    </select>
 </mapper>
