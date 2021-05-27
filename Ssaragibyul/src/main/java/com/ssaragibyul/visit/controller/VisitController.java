@@ -1,8 +1,8 @@
-package com.ssaragibyul.visit.controller;
+ package com.ssaragibyul.visit.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -55,18 +55,23 @@ public class VisitController {
 	}
 	// 게시글 등록
 	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)
-	public ModelAndView visitRegister(ModelAndView mv,@ModelAttribute Visit visit,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) {
+	public ModelAndView visitRegister(ModelAndView mv,@ModelAttribute Visit visit, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) {
 		// 서버에 파일 저장
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile,request);
 			if(renameFileName != null) {
-				visit.setOriginalFilename(uploadFile.getOriginalFilename());
+				visit.setOriginalFilename(visit.getVisitNo()+"");
 				visit.setRenameFilename(renameFileName);
 			}
 		}
 		// 디비에 데이터 저장
 		int result = 0;
 		String path = "";
+		
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		visit.setUploadTime(sdf.format(timestamp));
+		
 		result = vService.registerVisit(visit);
 		if(result > 0) {
 			path = "redirect:visitList.do";

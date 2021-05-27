@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="visitMapper">
-	<resultMap type="Visit" id="visitResultMap">
+<!-- 	<resultMap type="Visit" id="visitResultMap">
 		<id property="visitNo" column="VISIT_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="siteNo" column="SITE_NO"/>
@@ -14,13 +14,15 @@
 		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
 		<result property="renameFilename" column="RENAME_FILENAME"/>
 		<result property="uploadTime" column="UPLOAD_TIME"/>
-	</resultMap>
+	</resultMap> -->
 
 
-	<insert id="insertVisit">
-		INSERT ALL 
-		INTO VISIT VALUES(SEQ_VISIT.NEXTVAL, #{userId }, #{siteNo }, #{visitTitle }, #{visitContents }, DEFAULT, DEFAULT, DEFAULT)
-		INTO VISIT_FILE VALUES(SEQ_VISIT_FILE.NEXTVAL, #{originalFilename }, #{renameFilename }, #{uploadTime }, SEQ_VISIT.NEXTVAL)
-		SELECT * FROM DUAL
-	</insert>
+   <select id="adminSelectAllList" resultMap="historyResultMap">
+           SELECT * FROM HISTORY ORDER BY SITE_NO DESC
+    </select>
+
+
+   <select id="selectHistoryListCount" resultType="_int">
+      SELECT COUNT(*) FROM HISTORY
+    </select>
 </mapper>

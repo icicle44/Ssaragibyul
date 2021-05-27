@@ -17,6 +17,7 @@
 		<typeAlias type="com.ssaragibyul.visit.domain.Visit" alias="Visit"/>
 		<typeAlias type="com.ssaragibyul.point.domain.Point" alias="Point"/>
 		<typeAlias type="com.ssaragibyul.point.domain.PointAndProject" alias="PointAndProject"/>
+		<typeAlias type="com.ssaragibyul.point.domain.History" alias="History"/>
 	</typeAliases>
 	
 	<mappers>
@@ -26,5 +27,7 @@
 		<mapper resource="mappers/funding-mapper.xml"></mapper>
 		<mapper resource="mappers/visit-mapper.xml"></mapper>
 		<mapper resource="mappers/point-mapper.xml"></mapper>
+		<mapper resource="mappers/history-mapper.xml"></mapper>
+		
 	</mappers>
 </configuration>
