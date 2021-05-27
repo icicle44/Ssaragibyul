@@ -89,8 +89,8 @@
                 </tr>
                 <tr>
 					<td>
-                        <input type="text" min="10" max="100" name="nickName" id="nickName" placeholder="${member.mngNo }" >
-                        <button id="refresh"><img src="/resources/img/member/refresh_img.png" id="refresh-img"></button>
+                        <input type="text" min="10" max="100" name="nickName" id="nickName" placeholder="버튼을 눌러주세요"  readonly>
+                        <button type="button" id="refresh"><img src="/resources/img/member/refresh_img.png" id="refresh-img"></button>
                     </td>
 				</tr>
                 <tr>
@@ -173,14 +173,28 @@
     <footer>
     	<jsp:include page="../../../footer.jsp"/>
     </footer>
-	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-	<script>
+    	<script>
 		$(function() {
             $("#postcodify_search_button").postcodifyPopUp();
+			
 		});
-		
+		 // 닉네임 새로 고침
+       	$("#refresh").on("click", function (){
+       		$.ajax({
+       			url: "nickRefresh.do",
+       			dataType: "json",
+       			success: function(data){
+       		/* 		if(data != null) {
+       					$("#nickName").val(data.nickName);
+       				}else {
+       					alert("버튼을 다시 눌러주세요");
+       				} */
+       				console("test");
+       			},
+       			error: function(){
+       			
+       			}	
+       	});
 		$("#userId").on("blur", function() {
 			var userId = $("#userId").val();
 			$.ajax({
@@ -272,11 +286,11 @@
 			    addr.focus();
 			    return false;
 			}
-
-			
 		}  
-	        
-
 	</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+
     </body>
 </html>

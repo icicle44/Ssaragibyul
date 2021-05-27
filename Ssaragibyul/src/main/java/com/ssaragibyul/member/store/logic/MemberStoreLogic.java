@@ -24,7 +24,10 @@ public class MemberStoreLogic implements MemberStore{
 	public int checkIdDup(String userId) {
 		return sqlSession.selectOne("memberMapper.checkIdDup", userId);
 	}
-
+	// 닉네임 새로고침
+	public String refreshNickName() {
+		return sqlSession.selectOne("memberMapper.refreshNick");
+	}
 	// 사용자 등록
 	@Override
 	public int insertMember(Member member) {

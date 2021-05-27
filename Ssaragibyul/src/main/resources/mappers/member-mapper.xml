@@ -26,6 +26,10 @@
 		SELECT COUNT(*) FROM MEMBER WHERE USER_ID = #{userId }
 	</select>	
 	
+	<select id="refreshNick" resultType ="string">
+		WITH RANDOMTBL AS (SELECT * FROM (SELECT MNG_NO , NAME_KO FROM INDEPENDENCE LEFT OUTER JOIN MEMBER USING(MNG_NO) WHERE USER_ID IS NULL) ORDER BY DBMS_RANDOM.VALUE) SELECT * FROM RANDOMTBL WHERE ROWNUM = 1
+	</select>
+	
 	<insert id="insertMember" parameterType="Member">
 		INSERT INTO MEMBER VALUES(#{userId},#{userPw},#{nickName},#{userName},#{userEmail},#{userPhone},#{userAddr},#{birthday},SYSDATE, SYSDATE, #{mCode},#{mngNo})
 	</insert>

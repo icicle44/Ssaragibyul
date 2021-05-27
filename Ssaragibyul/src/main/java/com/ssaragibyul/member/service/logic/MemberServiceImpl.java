@@ -31,7 +31,11 @@ public class MemberServiceImpl implements MemberService {
 	public int checkIdDup(String userId) {
 		return mStore.checkIdDup(userId);
 	}
-
+	// nickname 새로고침
+	@Override
+	public String refreshNickName() {
+		return mStore.refreshNickName();
+	}
 	// 사용자 등록 
 	@Override
 	public int registerMember(Member member) {
