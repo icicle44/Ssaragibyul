@@ -11,7 +11,7 @@ public class HistoryFile {
 	private String filePath;
 	private Date uploadTime;
 	private int siteNo;
-	
+
 	public HistoryFile() {}
 
 	public int getFileNo() {

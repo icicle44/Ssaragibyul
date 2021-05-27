@@ -31,7 +31,6 @@ import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.history.domain.History;
-import com.ssaragibyul.history.domain.HistoryFile;
 import com.ssaragibyul.history.service.HistoryService;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.independence.service.IndependenceService;
@@ -336,7 +335,7 @@ public class AdminController {
 										@ModelAttribute History history,
 										@RequestParam(value="uploadFile", required = false) MultipartFile uploadFile,
 										HttpServletRequest request) {
-		HistoryFile historyFile = new HistoryFile();
+//		HistoryFile historyFile = new HistoryFile();
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile, request);
 			if(renameFileName != null) {
