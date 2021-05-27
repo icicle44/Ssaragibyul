@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.admin.service.AdminService;
-import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Reply;
@@ -230,10 +229,10 @@ public class AdminController {
 	}
 
 	// 신고 상세보기
-	public Board reportDetail() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	public Board reportDetail() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 	// 신고 삭제하기
 	public String reportDelete() {

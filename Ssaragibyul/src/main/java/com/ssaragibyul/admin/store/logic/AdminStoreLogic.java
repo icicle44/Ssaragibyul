@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.admin.store.AdminStore;
-import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
@@ -132,23 +131,23 @@ public class AdminStoreLogic implements AdminStore{
 		return 0;
 	}
 
-	@Override
-	public ArrayList<Board> selectReportAll(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Board selectOneReport(int boardNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Board> selectSearchReport(Search search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public ArrayList<Board> selectReportAll(PageInfo pi) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public Board selectOneReport(int boardNo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ArrayList<Board> selectSearchReport(Search search) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 	@Override
 	public int deleteReport(int BoardNo) {

@@ -25,7 +25,6 @@ float:right;
 </style>
 </head>
 <body>
-
 	<div class="container col-md-12">
 		<div class="row">
 			<section class="sideBar col-md-6">이미지 불러올 자리</section>

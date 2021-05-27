@@ -1,7 +1,6 @@
 package com.ssaragibyul.admin.store;
 import java.util.ArrayList;
 
-import com.ssaragibyul.common.Board;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
@@ -54,11 +53,11 @@ public interface AdminStore {
 	public int deleteDonation(int donationNo);
 	
 	// 신고 게시물 리스트
-	public ArrayList<Board> selectReportAll(PageInfo pi);
-	// 신고 상세보기
-	public Board selectOneReport(int boardNo);
-	// 신고 검색
-	public ArrayList<Board> selectSearchReport(Search search);
+//	public ArrayList<Board> selectReportAll(PageInfo pi);
+//	// 신고 상세보기
+//	public Board selectOneReport(int boardNo);
+//	// 신고 검색
+//	public ArrayList<Board> selectSearchReport(Search search);
 	// 신고 삭제하기
 	public int deleteReport(int BoardNo);
 	
