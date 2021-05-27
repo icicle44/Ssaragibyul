@@ -2,6 +2,9 @@ package com.ssaragibyul.point.domain;
 
 import java.sql.Timestamp;
 
+import org.springframework.stereotype.Component;
+
+@Component("Point")
 public class Point {
 	
 	private int pntListNo; // PK

@@ -30,6 +30,7 @@ import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.message.service.MessageService;
+import com.ssaragibyul.point.service.PointService;
 
 //추가할 것: 페이징, 읽음여부 업데이트 메소드, httpsession
 @Controller
@@ -37,6 +38,9 @@ public class MessageController {
 
 	@Autowired
 	private MessageService msgService;
+	
+	@Autowired
+	private PointService pntService;
 	
 	//insert, update(delete용), delete, select, searchselect
 	//insert1: 1대1 쪽지, insert2: 관리자공지 쪽지
@@ -81,12 +85,22 @@ public class MessageController {
 		
 		int msgResult = msgService.registerMemMessage(message);
 		if(msgResult > 0) {
-			/////////////////선물포인트가 0이 아닌 경우, 포인트내역 insert 메소드 호출하기!(posi, neg 둘다 호출)
-			//if(message.getPresentPoint != 0 )
-			return "success";
+			if(message.getPresentPoint() > 0) {
+				int pntNegResult = pntService.registerNegPoint(message);
+				int pntPosResult = pntService.registerPosPoint(message);
+				if(pntNegResult > 0 && pntPosResult > 0) {
+					return "success";
+				}else {
+					return "fail";
+				}
+			}else {
+				return "success";
+			}
 		}else {
 			return "fail";
 		}
+		/////////////////선물포인트가 0이 아닌 경우, 포인트내역 insert 메소드 호출하기!(posi, neg 둘다 호출)
+		//if(message.getPresentPoint != 0 )
 	}
 	
 ///////////////////////완!!!(관리자 마이페이지와 조율 및 연동!!!)

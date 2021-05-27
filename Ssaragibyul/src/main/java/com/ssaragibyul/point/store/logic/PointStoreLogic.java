@@ -18,6 +18,11 @@ public class PointStoreLogic implements PointStore{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@Override
+	public int insertPoint(Point point) {
+		return sqlSession.insert("pointMapper.insertPoint", point);
+	}
+	
 	//증가 포인트 등록 - 충전
 	@Override
 	public int insertChargePoint(Point point) {
@@ -35,8 +40,7 @@ public class PointStoreLogic implements PointStore{
 	//감소 포인트 등록 - 선물함, 펀딩참여, 기부참여
 	@Override
 	public int insertNegPoint(Point point) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("pointMapper.insertNegPoint", point);
 	}
 
 	//포인트 내역 리스트 출력

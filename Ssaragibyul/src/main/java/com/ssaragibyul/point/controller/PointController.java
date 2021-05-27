@@ -102,13 +102,13 @@ public class PointController {
 		return result;
 	}
 	
-	//포인트 증가내역 등록-선물받음
-	public int posPointRegister(Message message, int eventCode, int varAmount) {
-		Point point = new Point();
-		
-		int result = pService.registerPosPoint(point);
-		return result;
-	}
+//	//포인트 증가내역 등록-선물받음
+//	public int posPointRegister(Message message, int eventCode, int varAmount) {
+//		Point point = new Point();
+//		
+//		int result = pService.registerPosPoint(point);
+//		return result;
+//	}
 	
 	//포인트내역 등록-감소용(펀딩참여, 기부참여, 선물함)
 	//펀딩참여: 아이디(기존), 사용포인트(기존), 펀딩번호(기존), 이벤트유형코드
@@ -116,28 +116,28 @@ public class PointController {
 	//선물함: 보낸사람(기존), 선물포인트(기존), 받는사람아이디(기존), 이벤트유형코드
 	
 	//포인트 감소내역 등록-펀딩 참여용
-	public int negPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
-		Point point = new Point();
-		
-		int result = pService.registerNegPoint(point);
-		return 0;
-	}
+//	public int negPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
+//		Point point = new Point();
+//		
+//		int result = pService.registerNegPoint(point);
+//		return 0;
+//	}
 	
-	//포인트 감소내역 등록-기부 참여용
-	public int negPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
-		Point point = new Point();
-		
-		int result = pService.registerNegPoint(point);
-		return 0;
-	}
+//	//포인트 감소내역 등록-기부 참여용
+//	public int negPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
+//		Point point = new Point();
+//		
+//		int result = pService.registerNegPoint(point);
+//		return 0;
+//	}
 	
 	//포인트 감소내역 등록-선물함
-	public int negPointRegister(Message message, int eventCode, int varAmount) {
-		Point point = new Point();
-		
-		int result = pService.registerNegPoint(point);
-		return result;
-	}
+//	public int negPointRegister(Message message, int eventCode, int varAmount) {
+//		Point point = new Point();
+//		
+//		int result = pService.registerNegPoint(point);
+//		return result;
+//	}
 	
 	//포인트 사용내역 출력(전체, 펀딩, 기부, 선물, 방문인증, 충전) //펀딩-기부 UNIONALL
 	//아직 차감안된 포인트내역도 나오게 해야함

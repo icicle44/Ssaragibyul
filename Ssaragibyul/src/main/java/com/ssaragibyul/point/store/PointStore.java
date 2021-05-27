@@ -8,6 +8,8 @@ import com.ssaragibyul.point.domain.PointAndProject;
 
 public interface PointStore {
 
+	public int insertPoint(Point point);
+	
 	public int insertChargePoint(Point point);
 	public int insertPosPoint(Point point);
 

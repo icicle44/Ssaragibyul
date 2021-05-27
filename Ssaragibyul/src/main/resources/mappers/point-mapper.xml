@@ -33,6 +33,12 @@
 		SELECT PNTLIST_NO, EVENT_NO, A.USER_ID, OPP_USER_ID, VAR_TIME, EVENT_CODE, VAR_TYPE, VAR_AMOUNT, SUBJECT, PROJECT_NO, NICKNAME FROM PANDD A LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER)B ON(A.OPP_USER_ID = B.USER_ID) WHERE A.USER_ID=#{userId} ORDER BY VAR_TIME DESC
 	</select>
 
+	<insert id="insertPoint" parameterType="Point">
+		<selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
+			SELECT MAX(MSG_NO) FROM MESSAGE
+		</selectKey>
+		INSERT INTO POINT VALUES(SEQ_POINT.NEXTVAL, #{eventNo}, #{userId}, #{oppUserId}, LOCALTIMESTAMP, #{eventCode}, #{varType}, #{varAmount})
+	</insert>
 
 
 
