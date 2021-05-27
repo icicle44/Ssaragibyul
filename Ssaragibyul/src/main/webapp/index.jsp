@@ -59,7 +59,7 @@
 	</header>
       <div style="width: 100%; height: 1100px;">
 <%-- 		<%@include file="introduce.jsp" %> --%>
-                <section class="site-section darken-bg" id="section-home">
+ <!--                <section class="site-section darken-bg" id="section-home">
         <div class="container" style="margin-top: 500px;">
           <div class="row justify-content-center">
             <div class="col-md-8">
@@ -79,7 +79,7 @@
         </div>
       </section>
       </div> 
-      
+       -->
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
  		<div class="container-fluid">
