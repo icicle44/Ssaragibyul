@@ -35,7 +35,9 @@
 
 	<insert id="insertPoint" parameterType="Point">
 		<selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
-			SELECT MAX(MSG_NO) FROM MESSAGE
+			<!-- <if test="#{eventCode}.toString() == '4'"> -->
+				SELECT MAX(MSG_NO) FROM MESSAGE
+			<!-- </if> -->
 		</selectKey>
 		INSERT INTO POINT VALUES(SEQ_POINT.NEXTVAL, #{eventNo}, #{userId}, #{oppUserId}, LOCALTIMESTAMP, #{eventCode}, #{varType}, #{varAmount})
 	</insert>

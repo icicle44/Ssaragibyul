@@ -84,23 +84,11 @@ public class MessageController {
 		//jsp에서 <a href=경로?${member.userId}>나 hidden으로 받는사람 아이디? 닉네임? 가져오기!
 		
 		int msgResult = msgService.registerMemMessage(message);
-		if(msgResult > 0) {
-			if(message.getPresentPoint() > 0) {
-				int pntNegResult = pntService.registerNegPoint(message);
-				int pntPosResult = pntService.registerPosPoint(message);
-				if(pntNegResult > 0 && pntPosResult > 0) {
-					return "success";
-				}else {
-					return "fail";
-				}
-			}else {
-				return "success";
-			}
+		if(msgResult >0) {
+			return "success";
 		}else {
 			return "fail";
 		}
-		/////////////////선물포인트가 0이 아닌 경우, 포인트내역 insert 메소드 호출하기!(posi, neg 둘다 호출)
-		//if(message.getPresentPoint != 0 )
 	}
 	
 ///////////////////////완!!!(관리자 마이페이지와 조율 및 연동!!!)

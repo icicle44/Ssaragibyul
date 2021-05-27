@@ -13,16 +13,37 @@ import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.service.MessageService;
 import com.ssaragibyul.message.store.MessageStore;
+import com.ssaragibyul.point.service.PointService;
 
 @Service
 public class MessageServiceImpl implements MessageService{
 	
 	@Autowired
 	private MessageStore msgStore;
+	@Autowired
+	private PointService pntService;
 	
 	@Override
 	public int registerMemMessage(Message message) {
-		return msgStore.insertMemMessage(message);
+		int result = 0;
+		int msgResult = msgStore.insertMemMessage(message);
+		if(msgResult > 0) {
+			if(message.getPresentPoint() > 0) {
+				int pntNegResult = pntService.registerNegPoint(message);
+				int pntPosResult = pntService.registerPosPoint(message);
+				
+				if (pntNegResult > 0 && pntPosResult > 0) {
+					result = msgResult + pntNegResult + pntPosResult;
+					return result;
+				}else {
+					return result;
+				}
+			}else {
+				return msgResult;
+			}
+		}else {
+			return msgResult;
+		}
 	}
 
 	@Override

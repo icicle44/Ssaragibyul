@@ -38,16 +38,13 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerPosPoint(FundingLog fundLog) {
 		
-		//String userId = fundLog.getUserId();
-		//int varAmount = fundLog.getFundingPoint();
-		//Point point = new Point(userId, 1, 1, varAmount);
 		point.setUserId(fundLog.getUserId());
 		point.setEventCode(1);
 		point.setVarType(1);
 		point.setVarAmount(fundLog.getFundingPoint() * -1);
 		
 		int result = pStore.insertPoint(point);
-		return 0;
+		return result;
 	}
 	//포인트 증가내역 등록-선물받음
 	@Override
