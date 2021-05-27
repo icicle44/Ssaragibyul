@@ -8,8 +8,14 @@
 
 <%@include file="/header.jsp"%>
 <style>
+body{
+	text-align:left;
+}
 .container{
 padding: 5em;
+}
+.form{
+	margin-top: 5em;
 }
 .input{
 	border:none;
@@ -18,18 +24,42 @@ padding: 5em;
 	boder-left:0px; 
 	boder-bottom:0px;" */
 }
+
 span{
 float:right;
 }
 
+/* 이미지 */
+.product-title {
+    text-align:center;
+    display:table;
+    width:30em;
+    height:30em;
+}
+
+.product-img-div {
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.product-img {
+    max-width:35em;
+    max-height:40em;
+}
 </style>
 </head>
 <body>
 	<div class="container col-md-12">
 		<div class="row">
-			<section class="sideBar col-md-6">이미지 불러올 자리</section>
 			<section class="sideBar col-md-6">
-			<form action="visitRegister.do" method="post" enctype="multipart/form-data">
+				<div class="product-title">
+			        <div class="product-img-div">
+			            <img class="product-img" id="img" />
+			        </div>
+		        </div>
+			</section>
+			<section class="sideBar col-md-6">
+			<form class="form" action="visitRegister.do" method="post" enctype="multipart/form-data">
 				<div class="register-header">
 					<select name="siteNo">
 						<option value="none">=== 선택 ===</option>
@@ -42,8 +72,9 @@ float:right;
 				<hr>
 				<div class="register-contents">
 					<input type="text" class="input" name="visitTitle" placeholder="제목">
-					<input type="text" value="${loginUser.nickName }" readonly>
+					<span>${loginUser.nickName }</span>
 					<input type="hidden" name="userId" value="${loginUser.userId }">
+					<hr>
 					<div id="editor" >
 						<p>입력값</p>
 					</div>
@@ -51,7 +82,7 @@ float:right;
 				</div>
 				<hr>
 				<div class="register-footer">
-					<input type="file" size="50" name="uploadFile">
+					<input type="file" id="input_img" size="50" name="uploadFile">
 					<button type="reset" class="button button-danger">취소</button>
 					<button type="submit" onclick="regist()">등록</button>
 					<!--  <button type="submit" class="button button-primary">등록</button> -->
@@ -67,6 +98,34 @@ float:right;
 		console.log(editor.textContent);
 		$("#visitContents").val(editor.textContent);
 	}
+	  
+    var sel_file;
+    
+    $(document).ready(function() {
+        $("#input_img").on("change", handleImgFileSelect);
+    }); 
+
+    function handleImgFileSelect(e) {
+        var files = e.target.files;
+        var filesArr = Array.prototype.slice.call(files);
+
+        filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+                alert("확장자는 이미지 확장자만 가능합니다.");
+                return;
+            }
+
+            sel_file = f;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+        });
+    }
+
+
 /* 	$(".button").on("click",function(){
         var contents = $(#contents).html()
         var inLength = $(this).val().length;
@@ -75,7 +134,10 @@ float:right;
     }); */
      
     	BalloonEditor
-		.create( document.querySelector( '#editor' ) )
+		.create( document.querySelector( '#editor' ), {
+			// 플러그인 제거
+			
+		} )
 		.then( editor => {
 			window.editor = editor;
 		})

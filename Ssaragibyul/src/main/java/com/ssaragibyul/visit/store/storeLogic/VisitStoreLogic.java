@@ -22,9 +22,8 @@ public class VisitStoreLogic implements VisitStore{
 	}
 
 	@Override
-	public ArrayList<Visit> selectAllList(PageInfo pi) {
-		
-		return null;
+	public ArrayList<Visit> selectAllList() {
+		return (ArrayList)session.selectList("visitMapper.selectAll");
 	}
 
 	@Override

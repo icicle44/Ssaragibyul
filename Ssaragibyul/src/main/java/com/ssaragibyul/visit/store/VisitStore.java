@@ -8,7 +8,7 @@ import com.ssaragibyul.visit.domain.Visit;
 
 public interface VisitStore {
 	public int selectListCount();
-	public ArrayList<Visit> selectAllList(PageInfo pi);
+	public ArrayList<Visit> selectAllList();
 	public int addReadCount(int visitNo);
 	
 	public Visit selectOne(int visitNo);

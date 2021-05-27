@@ -15,7 +15,9 @@
 		<result property="renameFilename" column="RENAME_FILENAME"/>
 		<result property="uploadTime" column="UPLOAD_TIME"/>
 	</resultMap>
-
+	<select id="selectAll" resultMap="visitResultMap">
+		SELECT * FROM VISIT JOIN VISIT_FILE USING(VISIT_NO) ORDER BY VISIT_NO DESC
+	</select>
 
 	<insert id="insertVisit">
 		INSERT ALL 

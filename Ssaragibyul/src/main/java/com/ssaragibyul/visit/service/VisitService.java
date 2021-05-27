@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -19,7 +20,7 @@ public interface VisitService {
 	 * @return
 	 */
 	// 이런 주석과는 다른
-	public ArrayList<Visit> printAll(PageInfo pi);
+	public ArrayList<Visit> printAll();
 	
 	/**
 	 * 게시물 상세 조회시 조회수 증가
@@ -81,4 +82,6 @@ public interface VisitService {
 	 * @return
 	 */
 	public int removeReply(Reply reply);
+
+	public int getListCnt(Map<String, String> param);
 }

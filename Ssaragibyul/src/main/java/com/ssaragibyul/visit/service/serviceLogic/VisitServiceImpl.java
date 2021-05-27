@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.service.serviceLogic;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,9 @@ public class VisitServiceImpl implements VisitService{
 	}
 
 	@Override
-	public ArrayList<Visit> printAll(PageInfo pi) {
+	public ArrayList<Visit> printAll() {
 		
-		return null;
+		return vStore.selectAllList();
 	}
 
 	@Override
@@ -114,5 +115,11 @@ public class VisitServiceImpl implements VisitService{
 		int likes = 0;
 
 		return likes;
+	}
+
+	@Override
+	public int getListCnt(Map<String, String> param) {
+		
+		return 0;
 	}
 }

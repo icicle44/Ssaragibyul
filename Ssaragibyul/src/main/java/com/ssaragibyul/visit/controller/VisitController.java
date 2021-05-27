@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,9 +33,17 @@ public class VisitController {
 	private VisitService vService;
 	
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
-	public String vivisListView() {
-		return "visit/visitList";
+	public ModelAndView vivisListView(ModelAndView mv, Visit visit) {
+		ArrayList<Visit> vList = vService.printAll();
+		System.out.println("controller, vList : " + vList);
+		if(visit != null) {
+			mv.addObject("vList", vList).setViewName("visit/visitList");
+		}else {
+			mv.addObject("msg","게시글 조회 실패").setViewName("common/errorPage");
+		}
+	    return mv;
 	}
+
 //	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
 //	public ModelAndView visitListView(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
 //		
@@ -43,8 +52,12 @@ public class VisitController {
 	
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
-		
-		
+		Visit visit = vService.printOne(visitNo);
+		if(visit != null) {
+			mv.addObject("visit", visit).setViewName("visit/visitListView");
+		}else {
+			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	// 게시글 등록화면
