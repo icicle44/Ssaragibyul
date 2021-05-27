@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -501,15 +502,15 @@
 									<div class="card-title">회원관리</div>
 									<div class="d-flex flex-wrap justify-content-around pb-2 pt-4">
 										<div class="px-2 pb-2 pb-md-0 text-center">
-											<div id="circles-1"></div>
+											<div id="circles-1">${ newMember }</div>
 											<h6 class="fw-bold mt-3 mb-0">신규회원</h6>
 										</div>
 										<div class="px-2 pb-2 pb-md-0 text-center">
-											<div id="circles-2"></div>
+											<div id="circles-2">${allMember }</div>
 											<h6 class="fw-bold mt-3 mb-0">전체회원</h6>
 										</div>
 										<div class="px-2 pb-2 pb-md-0 text-center">
-											<div id="circles-3"></div>
+											<div id="circles-3">${deletMember }</div>
 											<h6 class="fw-bold mt-3 mb-0">탈퇴회원</h6>
 										</div>
 									</div>

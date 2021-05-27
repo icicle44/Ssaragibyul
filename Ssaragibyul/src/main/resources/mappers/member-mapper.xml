@@ -85,7 +85,7 @@
 	</select>   
 	
 	<select id="selectAllMemberCount" resultType = "_int">
-	   SELECT COUNT(*) FROM MEMBER WHERE NOT M_CODE = 2 AND NOT M_CODE = 1;
+	   SELECT COUNT(*) FROM MEMBER WHERE NOT M_CODE = 2 AND NOT M_CODE = 1
 	</select>   
 	
 </mapper>

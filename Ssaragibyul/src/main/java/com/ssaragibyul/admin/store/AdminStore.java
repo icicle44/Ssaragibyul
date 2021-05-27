@@ -13,15 +13,19 @@ import com.ssaragibyul.visit.domain.Visit;
 public interface AdminStore {
 
 	// 전체회원수 조회
-	public int selectAllMemberCount(int MemberNo);
+	public int selectAllMemberCount();
 	// 오늘 새로 가입한 회원 수 조회
-	public int selectTodayMemberCount(int MemberNo);
+	public int selectTodayMemberCount();
 	// 전체 신고건 조회
-	public int selectAllReportCount(int accu);
+	public int selectAllReportCount();
 	// 미확인 신고건 수 조회
-	public int selectUnprocessedReport(int processing);
+	public int selectUnprocessedReport();
 	// 별보러가자 게시판 현황
-	public int selectVisitbrdCount(int commNo);
+	public int selectVisitbrdCount();
+	// 탈퇴한 회원 수 조회
+	public int slelectCountDeleteMember();
+	// 신고 쪽지 수 조회
+	public int selectReportAllCount();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> selectAll(PageInfo pi);
@@ -92,5 +96,9 @@ public interface AdminStore {
 	
 	// 페이징
 	public int selectListCount();
+	public int selectHistoyListCount();
+	public int selectFundingListCount();
+	public int selectDonationListCount();
+	
 
 }

@@ -395,7 +395,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="forms/forms.html">
+										<a href="adminHistoryList.do">
 											<span class="sub-item">별들의 발자취</span>
 										</a>
 									</li>

@@ -26,9 +26,17 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="resources/css/admin/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/admin/atlantis.min.css">
+<!-- 	<link rel="stylesheet" type="text/css" href="/resources/css/mypage/userUpdate.css"> -->
 
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
+	
+	<style>
+		.btn-outline-secondary {
+			margin: 5px;
+		}
+	</style>
+	
 </head>
 <body>
 	<div class="wrapper">
@@ -77,6 +85,12 @@
 									                  <input type="text" name="userId" id="userId" value="${ member.userId }" readonly>
 									               </td>
 									            </tr>
+<!-- 									            <tr>
+					                                <td>* 비밀번호</td>
+					                                <td>
+					                                    <input type="password" name="userPw" id="userPw" placeholder="비밀번호를 입력하세요" required>
+					                                </td>
+					                            </tr> -->
 									            <tr>
 									               <td>* 이름</td>
 									               <td><input type="text" name="userName" value="${ member.userName }" ></td>
@@ -93,17 +107,41 @@
 									               <td>* 전화번호</td>
 									               <td><input type="text" name="userPhone" value="${ member.userPhone }"></td>
 									            </tr>
-									           <tr>
-									               <td>* 주소</td>
-									               <td><input type="text" name="userAddr" value="${ member.userAddr }"></td>
-									            </tr>
+					                            <c:forTokens items="${ loginUser.userAddr }" delims="," var="addr" varStatus="status">
+					               					<c:if test="${ status.index eq 0 }">
+						                            <tr>
+						                                <td>우편번호</td>
+						                            </tr>
+						                            <tr>
+						                                <td>
+						                                    <input type="text" name="post"  class="postcodify_postcode5" value="${addr }">
+						                                    <button type="button" class="btn btn-outline-secondary" id="postcodify_search_button" style="width: 50px; height:30px; text-align: center;">검색</button>
+						                                </td>
+						                            </tr>
+						                            </c:if>
+					          						<c:if test="${ status.index eq 1 }">
+						                            <tr>
+						                                <td>
+						                                    <input type="text" name="address1" class="postcodify_address" value="${addr }">
+						                                </td>
+						                            </tr>
+						                            </c:if>
+						                            <c:if test="${status.index eq 2 }">
+						                            <tr>
+						                                <td>
+						                                    <input type="text" name="address2" class="postcodify_extra_info" value="${addr }">
+						                                </td>
+						                            </tr>
+						                            </c:if>
+					                            </c:forTokens>
 											</tbody>
 										</table>
-										</form>
 											<div>
-												<input type="submit" class="btn btn-outline-secondary float-right" value="수정하기"> 
+												<input type="submit" class="btn btn-outline-secondary float-right" value="수정하기" id="update"> 
+												<input type="button" class="btn btn-outline-secondary float-right" value="취소" id="reset-btn" onclick="updateReset()">
 												<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminMemberDelete.do?userId=${member.userId}';">삭제하기</button>
 											</div>
+										</form>
 									</div>
 								</div>
 							</div>
@@ -134,6 +172,27 @@
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="resources/js/admin/setting-demo2.js"></script>
+	
+    <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
 
+	<script>
+	
+		    $(function() {
+		        $("#postcodify_search_button").postcodifyPopUp();
+		     });
+            function updateReset(){
+        	if(!confirm("정보 수정을 취소하시겠습니까?")) {
+           		return false;
+       		}
+       		history.back();
+            }
+      
+			$(document).ready(function(){
+			  $('#delete-btn').click(function(){
+			  	confirm('정말로 탈퇴하시겠습니까?');
+			  		return false;
+			  });
+			});
+	</script>
 </body>
 </html>

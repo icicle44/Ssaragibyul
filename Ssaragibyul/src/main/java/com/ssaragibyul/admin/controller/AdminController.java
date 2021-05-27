@@ -29,12 +29,14 @@ import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.history.service.HistoryService;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.independence.service.IndependenceService;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.message.controller.MessageController;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.message.domain.MessageAndNick;
@@ -66,19 +68,38 @@ public class AdminController {
 	
 	@Autowired
 	private VisitService vService;
+	
+	@Autowired
+	private MemberService mService;
 
 	//히스토리랑 히스토리파일이랑 나눠져있어서 어캐해야되는지 모르겠어요!!
 	
 	// 관리자 메인페이지 들어가기
 	@RequestMapping(value="adminMain.do", method = RequestMethod.GET)
-	public String adminMain() {
-		return "admin/adminMain";
+	public ModelAndView adminMain(ModelAndView mv) {
+		
+		int allMember = aService.printAllMemberCount();		//전체회원 수 카운트(탈퇴, 관리자 제외)
+		int newMemeber = aService.printTodayMemberCount(); // 오늘 가입한 회원 수
+		int deleteMember = aService.getCountDeleteMember(); //탈퇴한 회원수 카운트
+		
+		//int reportAll = aService.printReportAllCount();
+		
+		mv.addObject("allMember", allMember);
+		mv.addObject("newMember", newMemeber);
+		mv.addObject("deleteMember", deleteMember);
+		
+		//mv.addObject("reportAll", reportAll); //신고쪽지 보기
+		
+		mv.setViewName("admin/adminMain");
+		return mv;
 	}
-	
+
 	// 전체 회원 수
-	public int memberAllCount(ModelAndView mv) {
-		// TODO Auto-generated method stub
-		return 0;
+	@RequestMapping(value="adminMemberAllCount.do", method = RequestMethod.GET)
+	public int memberAllCount(ModelAndView mv, @RequestParam("userId") String userId) {
+		int result = aService.printAllMemberCount();
+		
+		return result;
 	}
 
 	// 오늘 새로 가입한 회원 수 조회
@@ -140,16 +161,19 @@ public class AdminController {
 
 	// 회원 수정하기
 	@RequestMapping(value="daminMemberModify.do", method = RequestMethod.POST)
-	public ModelAndView memberModifyView(ModelAndView mv,
-										HttpServletRequest request,
-										@ModelAttribute Member member) {
+	public String memberModifyView(@ModelAttribute Member member,
+										@RequestParam("post") String post, 
+										@RequestParam("address1")String address1, 
+										@RequestParam("address2") String address2,
+										Model model) {
+		member.setUserAddr(post + ", " + address1 + ", " + address2);
 		int result = aService.modifyMember(member);
 		if(result > 0) {
-			mv.setViewName("redirect:adminMemberListView.do");
+			return "admin/adminMemberListView";
 		} else {
-			mv.addObject("msg", "회원 정보 수정에 실패하였습니다.");
+			model.addAttribute("msg","정보 수정 실패");
+			return "common/errorPage";
 		}
-		return mv;
 	}
 
 	// 회원 탈퇴하기
@@ -192,9 +216,20 @@ public class AdminController {
 	}
 
 	// 펀딩 상세보기
-	public Funding fundingDetail() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminFundingDetail.do", method = RequestMethod.POST)
+	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		// 게시글 상세 조회
+		Funding funding = fService.printOne(projectNo);
+		FundingFile fundingFile = fService.printOneFile(projectNo);
+		if ((funding != null)&&(fundingFile != null)) {
+			// 메소드 체이닝 방식
+			mv.addObject("fundingFile", fundingFile);
+			mv.addObject("funding", funding).setViewName("admin/adminFundingDetail");
+		} else {
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
 	}
 	
 	// 펀딩 삭제하기
@@ -204,9 +239,13 @@ public class AdminController {
 	}
 
 	//기부 리스트 출력
-	public ModelAndView doantionListView() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminDonationListView.do", method = RequestMethod.GET)
+	public ModelAndView doantionListView(ModelAndView mv, Object Pagination) {
+		int cuurentPage = 0;
+		int listCount = dService.getListCount();
+		PageInfo pi = null;
+		ArrayList<Donation> dList = dService.PrintAll(pi);
+		return mv;
 	}
 
 	// 기부 상세보기
@@ -270,6 +309,7 @@ public class AdminController {
 		return null;
 	}
 
+	// 독립유공자 공훈록 리스트
 	@RequestMapping(value="adminIndependenceList.do", method=RequestMethod.GET)
 	public ModelAndView independenceList(ModelAndView mv, @RequestParam(value="page", required=false) Integer page) {
 		int currentPage = (page != null) ? page : 1;
@@ -305,14 +345,26 @@ public class AdminController {
 	
 	// 별들의발자취 리스트
 	@RequestMapping(value="adminHistoryList.do", method = RequestMethod.GET)
-	public ModelAndView histoyListView(ModelAndView mv) {
-		// TODO Auto-generated method stub
+	public ModelAndView histoyListView(ModelAndView mv,
+										@RequestParam(value="page", required = false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount = aService.getHistoryListCount();/////////////////////history 셀릭트 카운트 완성되면 고치기!!!!
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<History> hList = aService.pringAllHistoy(pi);
+		if(!hList.isEmpty()) {
+			mv.addObject("hList", hList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminHistoryListView");
+		} else {
+			mv.addObject("msg", "별들의 발자취 리스트 조회에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 
 	// 기념관 상세보기
 	@RequestMapping(value="adminHistoryDetail.do", method = RequestMethod.GET)
-	public History histoyDetail(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
+	public ModelAndView histoyDetail(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
 		History histoy = hService.printOne(siteNo);
 		if(histoy != null) {
 			mv.addObject("histoy", histoy).setViewName("admin/adminHistoryDetailView");
@@ -320,7 +372,7 @@ public class AdminController {
 			mv.addObject("msg", "별들의 발자취 리스트 조회 실패!");
 			mv.setViewName("common/errorPage");
 		}
-		return null;
+		return mv;
 	}
 	
 	// 별들의 발자취 리스트 등록화면
@@ -335,12 +387,11 @@ public class AdminController {
 										@ModelAttribute History history,
 										@RequestParam(value="uploadFile", required = false) MultipartFile uploadFile,
 										HttpServletRequest request) {
-//		HistoryFile historyFile = new HistoryFile();
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile, request);
 			if(renameFileName != null) {
-				//historyFile.setOriginarFilename(originarFilename);
-				//history.setRenameFilename(renameFileName);
+				history.setOriginarFilename(uploadFile.getOriginalFilename());
+				history.setRenameFilename(renameFileName);
 			}
 		}
 		// 디비에 데이터를 저장하는 작업
@@ -359,7 +410,7 @@ public class AdminController {
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\";
+		String savePath = root + "\\huploadFiles";
 		
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
@@ -413,13 +464,13 @@ public class AdminController {
 		if(reloadFile != null && !reloadFile.isEmpty()) {
 			// 파일변수가 없어서!!확인요망!!ㅠㅠ
 			if(history.getSiteName() != "") {
-				//deleteFile(history.getRenameFilename(), request);
+				deleteFile(history.getRenameFilename(), request);
 			}
 			// 새 파일 업로드
 			String renameFileName = saveFile(reloadFile, request);
 			if(renameFileName != null) {
-				//history.setOriginalFilename(reloadFile.getOriginalFilename());
-				//history.setRenameFilename(renameFileName);
+				history.setOriginarFilename(reloadFile.getOriginalFilename());
+				history.setRenameFilename(renameFileName);
 			}
 		}
 		// DB수정
@@ -439,7 +490,7 @@ public class AdminController {
 								HttpServletRequest request) {
 		// 업로드된 파일 삭제
 		if(renameFilename != "") {
-			//deleteFile(renameFilename, request);
+			deleteFile(renameFilename, request);
 		}
 		
 		// 디비에 데이터 업데이트
@@ -455,7 +506,7 @@ public class AdminController {
 	//기념관 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\";
+		String savePath = root + "\\huploadFiles";
 		File file = new File(savePath + "\\" + fileName);
 		if(file.exists()) {
 			file.delete();

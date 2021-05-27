@@ -25,34 +25,38 @@ public class AdminStoreLogic implements AdminStore{
 	private SqlSession sqlSession;
 
 	@Override
-	public int selectAllMemberCount(int MemberNo) {
+	public int selectAllMemberCount() {
+		return sqlSession.selectOne("memberMapper.selectAllMemberCount");
+	}
+
+	@Override
+	public int selectTodayMemberCount() {
+		return sqlSession.selectOne("memberMapper.selectNewMemberCount");
+	}
+
+	@Override
+	public int selectAllReportCount() {
+		return sqlSession.selectOne("messageMapper.selectAllReportCount");
+	}
+
+	@Override
+	public int selectUnprocessedReport() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int selectTodayMemberCount(int MemberNo) {
+	public int selectVisitbrdCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
 
 	@Override
-	public int selectAllReportCount(int accu) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int slelectCountDeleteMember() {
+		return sqlSession.selectOne("memberMapper.selectDeleteMemberCount");
 	}
 
-	@Override
-	public int selectUnprocessedReport(int processing) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int selectVisitbrdCount(int commNo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public ArrayList<Member> selectAll(PageInfo pi) {
@@ -175,8 +179,9 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public ArrayList<History> pringAllHistoy(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("historyMapper.adminSelectAllList", null, rowBounds);
 	}
 
 	@Override
@@ -238,6 +243,28 @@ public class AdminStoreLogic implements AdminStore{
 		return sqlSession.selectOne("memberMapper.selectListCount");
 	}
 
+	@Override
+	public int selectHistoyListCount() {
+		return sqlSession.selectOne("historyMapper.selectHistoryListCount");
+	}
+
+	@Override
+	public int selectFundingListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("fundingMapper.selectFundingListCount");
+	}
+
+	@Override
+	public int selectDonationListCount() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("donationMapper.selectDonationListCount");
+	}
+
+	@Override
+	public int selectReportAllCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 }

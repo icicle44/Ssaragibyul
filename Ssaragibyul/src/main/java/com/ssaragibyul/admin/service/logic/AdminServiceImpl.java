@@ -22,31 +22,33 @@ public class AdminServiceImpl implements AdminService{
 	private AdminStore aStore;
 
 	@Override
-	public int printAllMemberCount(int MemberNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int printAllMemberCount() {
+		return aStore.selectAllMemberCount();
 	}
 
 	@Override
-	public int printTodayMemberCount(int MemberNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int printTodayMemberCount() {
+		return aStore.selectTodayMemberCount();
 	}
 
 	@Override
-	public int printReportAllCount(int accu) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int printReportAllCount() {
+		return aStore.selectAllReportCount();
 	}
 
 	@Override
-	public int printUnprocessedReport(int processing) {
+	public int printUnprocessedReport() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public int getCountDeleteMember() {
+		return aStore.slelectCountDeleteMember();
+	}
 
 	@Override
-	public int printVisitbrdCount(int commNo) {
+	public int printVisitbrdCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -168,8 +170,7 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<History> pringAllHistoy(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return aStore.pringAllHistoy(pi);
 	}
 
 	@Override
@@ -230,5 +231,25 @@ public class AdminServiceImpl implements AdminService{
 	public int getListCount() {
 		return aStore.selectListCount();
 	}
+
+	@Override
+	public int getHistoryListCount() {
+		// TODO Auto-generated method stub
+		return aStore.selectHistoyListCount();
+	}
+
+	@Override
+	public int getFundingListCount() {
+		// TODO Auto-generated method stub
+		return aStore.selectFundingListCount();
+	}
+
+	@Override
+	public int getDonationListCount() {
+		// TODO Auto-generated method stub
+		return aStore.selectDonationListCount();
+	}
+
+
 
 }

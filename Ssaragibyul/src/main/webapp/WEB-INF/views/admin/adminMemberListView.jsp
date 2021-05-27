@@ -116,9 +116,6 @@
 											</c:forEach>
 											</tbody>
 										</table>
-											<div>
-												<button type="button" class="btn btn-outline-secondary float-right" onclick="#">등록하기</button>
-											</div>
 									</div>
 								</div>
 							</div>

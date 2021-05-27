@@ -210,8 +210,6 @@
 					
 					</table> 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">수정</button>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">삭제</button>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
 					</div>
 				</div> 
