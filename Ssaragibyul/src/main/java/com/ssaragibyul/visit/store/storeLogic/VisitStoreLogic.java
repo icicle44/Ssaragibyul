@@ -2,6 +2,8 @@ package com.ssaragibyul.visit.store.storeLogic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
@@ -11,6 +13,8 @@ import com.ssaragibyul.visit.store.VisitStore;
 @Repository
 public class VisitStoreLogic implements VisitStore{
 
+	@Autowired
+	SqlSession session;
 	@Override
 	public int selectListCount() {
 		
@@ -38,7 +42,7 @@ public class VisitStoreLogic implements VisitStore{
 	@Override
 	public int insertVisit(Visit visit) {
 		
-		return 0;
+		return session.insert("visitMapper.insertVisit", visit);
 	}
 
 	@Override

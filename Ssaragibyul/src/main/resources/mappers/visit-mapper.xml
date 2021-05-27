@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="visitMapper">
+	<resultMap type="Visit" id="visitResultMap">
+		<id property="visitNo" column="VISIT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="siteNo" column="SITE_NO"/>
+		<result property="visitTitle" column="VISIT_TITLE"/>
+		<result property="visitContents" column="VISIT_CONTENTS"/>
+		<result property="vCreateDate" column="V_CREATE_DATE"/>
+		<result property="vUpdateDate" column="V_UPDATE_DATE"/>
+		<result property="visitCount" column="VISIT_COUNTE"/>
+	</resultMap>
+
+
+	<insert id="insertVisit">
+		INSERT INTO VISIT VALUES(SEQ_VISIT.NEXTVAL, #{userId }, #{siteNo }, #{visitTitle }, #{visitContents }, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+</mapper>

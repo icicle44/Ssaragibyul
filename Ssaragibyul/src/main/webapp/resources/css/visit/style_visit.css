@@ -418,7 +418,7 @@ button:hover {
   color: #FFF
 }
 .btn-2::after {
-  height: 110%;
+  height: 130%;
   left: 0;
   top: 0;
   width: 0;

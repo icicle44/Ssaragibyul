@@ -2,15 +2,19 @@ package com.ssaragibyul.visit.service.serviceLogic;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.service.VisitService;
+import com.ssaragibyul.visit.store.VisitStore;
 @Service
 public class VisitServiceImpl implements VisitService{
 
+	@Autowired
+	VisitStore vStore;
 	@Override
 	public int getListCount() {
 		
@@ -37,8 +41,7 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public int registerVisit(Visit visit) {
-		
-		return 0;
+		return vStore.insertVisit(visit);
 	}
 
 	@Override

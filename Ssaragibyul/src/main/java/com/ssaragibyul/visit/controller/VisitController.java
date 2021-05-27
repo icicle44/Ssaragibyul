@@ -1,6 +1,9 @@
 package com.ssaragibyul.visit.controller;
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +56,25 @@ public class VisitController {
 	// 게시글 등록
 	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)
 	public ModelAndView visitRegister(ModelAndView mv,@ModelAttribute Visit visit,@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) {
-
+		// 서버에 파일 저장
+		if(!uploadFile.getOriginalFilename().equals("")) {
+			String renameFileName = saveFile(uploadFile,request);
+			if(renameFileName != null) {
+				visit.setOriginalFilename(uploadFile.getOriginalFilename());
+				visit.setRenameFilename(renameFileName);
+			}
+		}
+		// 디비에 데이터 저장
+		int result = 0;
+		String path = "";
+		result = vService.registerVisit(visit);
+		if(result > 0) {
+			path = "redirect:visitList.do";
+		}else {
+			mv.addObject("msg", "방문 인증글 등록 실패");
+			path = "common/errorPage";
+		}
+		mv.setViewName(path);
 		return mv;
 	}
 	
@@ -78,8 +99,28 @@ public class VisitController {
 	}
 	// 파일저장
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
-
-		return "";
+		// 파일 저장 경로 설정
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = root + "\\vUploadFiles";
+		// 저장 폴더 선택
+		File folder = new File(savePath);
+		// 폴더 없으면 자동 생성
+		if(!folder.exists()) {
+			folder.mkdir();
+		}
+		// 파일명 변경하기
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String originalFileName =file.getOriginalFilename();
+		String renameFileName =sdf.format(new Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		String filePath = folder + "\\" + renameFileName;
+		// 파일저장
+		try {
+			file.transferTo(new File(filePath));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		} 
+		return renameFileName;
 	}
 	// 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
