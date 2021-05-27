@@ -61,7 +61,7 @@
 	</header>
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<main class="main-content">
-    <form action="fundingJoin1.do" method="post">
+    <form action="fundingJoin.do" method="post">
     <input type="hidden" name="projectNo" value="${funding.projectNo }">
     <input type="submit" class="getstarted" value="펀딩하기">
     </form>

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>펀딩 참여2</title>
+<title>펀딩 완료</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -53,10 +53,7 @@
 
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a class="nav-link" style="color: #F1512F"><strong>펀딩 리워드 선택</strong></a></li>
-				<li><a class="nav-link">리워드 선택 확인</a></li>
-				<li><a class="nav-link">카드/배송정보 입력</a></li>
-				<li><a class="nav-link">결제 내역 확인</a></li>
+				<li><a class="nav-link" style="color: #F1512F"><strong>결제 내역 확인</strong></a></li>
 			</ul>
 		</div>
 	</header>
@@ -64,6 +61,8 @@
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 	<br><br><br><br><br><br><br><br><br><br><br>
+		펀딩 참여 완료!!!!!
+		
 	${funding.projectNo }<br>
 	${funding.optionPrice }원<br>
 	${funding.productName }<br>

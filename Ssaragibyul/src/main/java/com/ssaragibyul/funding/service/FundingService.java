@@ -39,7 +39,7 @@ public interface FundingService {
 
 	public int registerProject(Funding funding, FundingFile fundingFile);
 	
-	public int registerFundingLog(FundingLog fundingLog);
+	public int registerFundingLog(FundingLog fundingLog, Funding funding);
 
 	public int modifyProject(Funding funding);
 

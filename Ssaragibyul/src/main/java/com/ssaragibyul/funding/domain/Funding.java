@@ -26,9 +26,7 @@ public class Funding {
 
 	
 	
-	public int getProjectNo() {
-		return projectNo;
-	}
+	
 	
 public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
 			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
@@ -53,7 +51,9 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 		this.deleiveryDate = deleiveryDate;
 	}
 
-
+	public int getProjectNo() {
+	return projectNo;
+	}
 
 	public void setProjectNo(int projectNo) {
 		this.projectNo = projectNo;
@@ -186,6 +186,7 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 	public void setDeleiveryDate(Date deleiveryDate) {
 		this.deleiveryDate = deleiveryDate;
 	}
+	
 
 	@Override
 	public String toString() {

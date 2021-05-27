@@ -41,6 +41,8 @@ public interface FundingStore {
 	public int insertProjectLog(FundingLog fundingLog);
 
 	public int updateProject(Funding funding);
+	
+	public int updateProject_SumMoney(Funding funding);
 
 	public int deleteProject(int projectNo);
 

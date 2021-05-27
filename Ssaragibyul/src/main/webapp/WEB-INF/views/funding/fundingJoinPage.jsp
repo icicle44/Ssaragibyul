@@ -113,11 +113,12 @@
 
 			<section id="sectionSuggest3">
 			<br><br><br><br>
-				<form action="fundingJoin2.do" method="post">
+				<form action="fundingJoinComplete.do" method="post">
 					<input type="text" name="qunatity" class="getNumber"><br>
 					<input type="text" name="fundingPoint" class="getResult"><br>
-	    			<input type="hidden" name="projectNo" value="${funding.projectNo }">
-	   				<input type="hidden" name="userId" value="${loginUser.userId }">
+	    			<input type="text" name="projectNo" value="${funding.projectNo }">
+	   				<input type="text" name="userId" value="${loginUser.userId }">
+	   				<input type="text" name="sumMoney" class="getResult">
 	   				<input type="text" name="receiverAddr">
 	   				<input type="text" name="receiverName">
 	   				<input type="text" name="receiverPhone">

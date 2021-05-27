@@ -107,6 +107,15 @@ public class FundingStoreLogic implements FundingStore{
 	int result = sqlSession.insert("fundingMapper.insertFundingFile", fundingFile);
 	return result;
 	}
+	
+	
+	
+	@Override
+	public int updateProject_SumMoney(Funding funding) {
+		int result = sqlSession.update("fundingMapper.updateFundingAddMoney", funding);
+		return result;
+	}
+	
 	@Override
 	public int updateProject(Funding funding) {
 		// TODO Auto-generated method stub

@@ -80,13 +80,13 @@ public class FundingController {
 	 }
 	 
 		
-		@RequestMapping(value = "fundingJoin1.do", method =  RequestMethod.POST )
+		@RequestMapping(value = "fundingJoin.do", method =  RequestMethod.POST )
 		public ModelAndView fundingJoin1(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 			// 게시글 상세 조회
 			Funding funding = fService.printOne(projectNo);
 			if (funding != null) {
 				// 메소드 체이닝 방식
-				mv.addObject("funding", funding).setViewName("funding/fundingJoinPage1");
+				mv.addObject("funding", funding).setViewName("funding/fundingJoinPage");
 			} else {
 				mv.addObject("msg", "펀딩 참여 실패");
 				mv.setViewName("common/errorPage");
@@ -94,11 +94,11 @@ public class FundingController {
 			return mv;
 		}
 		
-		 @RequestMapping(value="fundingJoin2.do", method = RequestMethod.POST )
-		 public String fundingJoin2(@ModelAttribute FundingLog fundingLog) { 
-			 int result = fService.registerFundingLog(fundingLog);
+		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
+		 public String fundingJoin2(@ModelAttribute FundingLog fundingLog, Funding funding) { 
+			 int result = fService.registerFundingLog(fundingLog, funding);
 			 if(result > 0) {
-				 return "funding/fundingJoinPage2";
+				 return "funding/fundingJoinCompleteView";
 				 //메소드!?!?!?!?!?!?!?@!?!?!?!?!?!?!?!?
 			 }else {
 				 return "common/errorPage";

@@ -100,9 +100,13 @@ public class FundingSerivceImpl implements FundingService {
 		return fResult;
 	}
 	@Override
-	public int registerFundingLog(FundingLog fundingLog) {
+	public int registerFundingLog(FundingLog fundingLog, Funding funding) {
 		int result = fStore.insertProjectLog(fundingLog);
-		return result;
+		int fResult = 0;
+		if(result>0) {
+			fResult = fStore.updateProject_SumMoney(funding);
+		}
+		return fResult;
 	}
 
 	@Override

@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:aop="http://www.springframework.org/schema/aop"
-	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
-	
-	<!-- Root Context: defines shared resources visible to all other web components -->
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:aop="http://www.springframework.org/schema/aop"
+   xmlns:tx="http://www.springframework.org/schema/tx"
+   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+   
+   <!-- Root Context: defines shared resources visible to all other web components -->
 
 <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-	<property name="driverClassName"	value="oracle.jdbc.driver.OracleDriver"></property>
-	<property name="url"				value="jdbc:oracle:thin:@ricestar123.cc5cgjgpqdkw.us-east-2.rds.amazonaws.com:1521:RICESTAR"></property>
-	<property name="username"			value="admin"></property>
-	<property name="password"			value="admin123"></property>
+   <property name="driverClassName"   value="oracle.jdbc.driver.OracleDriver"></property>
+   <property name="url"            value="jdbc:oracle:thin:@ricestar123.cc5cgjgpqdkw.us-east-2.rds.amazonaws.com:1521:RICESTAR"></property>
+   <property name="username"         value="admin"></property>
+   <property name="password"         value="admin123"></property>
 </bean>
 
 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
-	<property name="dataSource" ref="dataSource"></property>
+   <property name="configLocation" value="classpath:mybatis-config.xml"></property>
+   <property name="dataSource" ref="dataSource"></property>
 </bean>
 
 <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-	<constructor-arg ref="sqlSession"></constructor-arg>
+   <constructor-arg ref="sqlSession"></constructor-arg>
 </bean>
 
 <!-- 트랜잭션 -->
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property> <!-- name은 매개변수이름이므로 정해진 이름을 써야함 -->
-	</bean>
-	
-	<tx:advice id="txAdvice" transaction-manager="transactionManager"> <!-- 위에 bean으로 등록한 객체의 아이디를 적어 transaction manager로 어떤 객체를 쓸건지 알려줌 -->
-		<tx:attributes>
-			<tx:method name="print*" read-only="true"/> 
-			<tx:method name="register*" rollback-for="Exception"/> <!-- register로 시작하는 메소드면 트랜잭션 동작 -->
-			<tx:method name="modify*" rollback-for="Exception"/>
-			<tx:method name="remove*" rollback-for="Exception"/>
-			<tx:method name="delete*" rollback-for="Exception"/>
-			<tx:method name="update*" rollback-for="Exception"/>			
-		</tx:attributes>
-	</tx:advice>
-	
-	<aop:config proxy-target-class="true">
-		<aop:pointcut expression="execution(* com.ssaragibyul..*Impl.*(..))" id="serviceMethod"/>
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
-	</aop:config>
-	
+   <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+      <property name="dataSource" ref="dataSource"></property> <!-- name은 매개변수이름이므로 정해진 이름을 써야함 -->
+   </bean>
+   
+   <tx:advice id="txAdvice" transaction-manager="transactionManager"> <!-- 위에 bean으로 등록한 객체의 아이디를 적어 transaction manager로 어떤 객체를 쓸건지 알려줌 -->
+      <tx:attributes>
+         <tx:method name="print*" read-only="true"/> 
+         <tx:method name="register*" rollback-for="Exception"/> <!-- register로 시작하는 메소드면 트랜잭션 동작 -->
+         <tx:method name="modify*" rollback-for="Exception"/>
+         <tx:method name="remove*" rollback-for="Exception"/>
+         <tx:method name="delete*" rollback-for="Exception"/>
+         <tx:method name="update*" rollback-for="Exception"/>         
+      </tx:attributes>
+   </tx:advice>
+   
+   <aop:config proxy-target-class="true">
+      <aop:pointcut expression="execution(* com.ssaragibyul..*Impl.*(..))" id="serviceMethod"/>
+      <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethod"/>
+   </aop:config>
+   
 <!-- 파일업로드 관련 bean 등록, MultipartResolver -->
 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-	<property name="maxUploadSize" value="100000000"></property>
-	<property name="maxInMemorySize" value="100000000"></property>
+   <property name="maxUploadSize" value="100000000"></property>
+   <property name="maxInMemorySize" value="100000000"></property>
 </bean>
 <!-- 
-	1. maxUploadSize : 한 요청당 업로드가 허용되는 최대용량을 바이트 단위로 설정
-	, -1은 제한이 없다는 뜻이고 프로퍼티를 지정하지 않을 때 기본값
-	2. maxInMemorySize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는
-	바이트 단위 최대용량
-	기본값은 10240 바이트
-	1MB => 1000000 Byte, (KB, MB, GB, TB)
+   1. maxUploadSize : 한 요청당 업로드가 허용되는 최대용량을 바이트 단위로 설정
+   , -1은 제한이 없다는 뜻이고 프로퍼티를 지정하지 않을 때 기본값
+   2. maxInMemorySize : 디스크에 저장하지 않고 메모리에 유지하도록 허용하는
+   바이트 단위 최대용량
+   기본값은 10240 바이트
+   1MB => 1000000 Byte, (KB, MB, GB, TB)
  -->
  </beans>

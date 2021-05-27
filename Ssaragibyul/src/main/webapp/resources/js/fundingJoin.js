@@ -9,7 +9,5 @@ $(function() {
 		
 		$(".getNumber").val(sendNumber);
 		$(".getResult").val(result);
-		
-		console.log();
 	});
 });
