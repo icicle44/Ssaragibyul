@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pointMapper">
+	<resultMap type="Point" id="pointResultMap">
+		<id property="pntListNo" column="PNTLIST_NO"/>
+		<result property="eventNo" column="EVENT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="oppUserId" column="OPP_USER_ID"/>
+		<result property="varTime" column="VAR_TIME"/>
+		<result property="eventCode" column="EVENT_CODE"/>
+		<result property="varType" column="VAR_TYPE"/>
+		<result property="varAmount" column="VAR_AMOUNT"/>
+	</resultMap>
+	<resultMap type="PointAndProject" id="pointProjectResultMap">
+		<id property="pntListNo" column="PNTLIST_NO"/>
+		<result property="eventNo" column="EVENT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="oppUserId" column="OPP_USER_ID"/>
+		<result property="varTime" column="VAR_TIME"/>
+		<result property="eventCode" column="EVENT_CODE"/>
+		<result property="varType" column="VAR_TYPE"/>
+		<result property="varAmount" column="VAR_AMOUNT"/>
+		<result property="subject" column="SUBJECT"/>
+		<result property="projectNo" column="PROJEC_NO"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<select id="selectPointList" parameterType="string" resultMap="pointProjectResultMap">
+		WITH PANDD AS ((SELECT PNTLIST_NO, EVENT_NO, USER_ID, OPP_USER_ID, VAR_TIME, EVENT_CODE, VAR_TYPE, VAR_AMOUNT, SUBJECT, F_PROJECT_NO AS PROJECT_NO FROM ((SELECT * FROM POINT LEFT OUTER JOIN (SELECT DOFUND_NO, F_PROJECT_NO, SUBJECT FROM DO_FUNDING A LEFT OUTER JOIN FUNDING_PROJECT B ON(F_PROJECT_NO = F_PROJECT_NO2))
+		ON(EVENT_NO = DOFUND_NO) WHERE EVENT_CODE = 1) UNION (SELECT * FROM POINT LEFT OUTER JOIN (SELECT DODONAT_NO, D_PROJECT_NO, SUBJECT FROM DO_DONATION A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO))
+		ON(EVENT_NO = DODONAT_NO) WHERE EVENT_CODE = 2))) UNION (SELECT A.*, NULL AS SUBJECT, NULL AS PROJECT_NO FROM POINT A WHERE NOT EVENT_CODE IN(1, 2)))
+		SELECT PNTLIST_NO, EVENT_NO, A.USER_ID, OPP_USER_ID, VAR_TIME, EVENT_CODE, VAR_TYPE, VAR_AMOUNT, SUBJECT, PROJECT_NO, NICKNAME FROM PANDD A LEFT OUTER JOIN (SELECT USER_ID, NICKNAME FROM MEMBER)B ON(A.OPP_USER_ID = B.USER_ID) WHERE A.USER_ID=#{userId} ORDER BY VAR_TIME DESC
+	</select>
+
+
+
+
+
+
+</mapper>

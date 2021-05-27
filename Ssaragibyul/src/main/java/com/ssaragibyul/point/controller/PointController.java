@@ -17,6 +17,7 @@ import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.point.service.PointService;
@@ -142,15 +143,27 @@ public class PointController {
 	//아직 차감안된 포인트내역도 나오게 해야함
 	@RequestMapping(value="pointList.do", method=RequestMethod.GET)
 	public ModelAndView PointList(ModelAndView mv,
-								@RequestParam(value="page", required=false) Integer page,
-								HttpSession session) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		int currentPage = (page != null)? page : 1;
-		int listCount = pService.getListCount(loginUser.getUserId());
-		PageInfo pi = new PageInfo();
-		//PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<PointAndProject> ppList = pService.printAll(pi, loginUser.getUserId());
-		
+								HttpSession session,
+								@RequestParam(value="page", required=false) Integer page) {
+		if(session != null && (Member)session.getAttribute("loginUser") != null) {		
+			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+			int currentPage = (page != null)? page : 1;
+			int listCount = pService.getListCount(userId);
+			PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+			ArrayList<PointAndProject> ppList = pService.printAll(pi, userId);
+			System.out.println(ppList.get(0).toString());
+			
+			if(!ppList.isEmpty()) {
+				mv.addObject("pointList", ppList);
+			}else {
+				mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+			}
+			mv.addObject("pi", pi);
+			mv.setViewName("point/pointListView");
+		}else {
+			mv.addObject("msg", "로그인이 필요합니다.");
+			mv.setViewName("member/login");
+		}
 		return mv;
 	}
 	

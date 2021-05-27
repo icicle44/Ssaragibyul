@@ -13,7 +13,7 @@
 <title>싸라기별</title>
 </head>
 <body>
-	<%-- <jsp:include page="../../../header.jsp"/> --%>
+	<jsp:include page="../../../header.jsp"/>
 	<main id=main>
 		<section class="wrapper-left sideBar col-md-3" id="menubar">
 			<a href="recMsgList.do">전체 내역</a><hr>
@@ -55,9 +55,9 @@
 							<c:forEach items="${pointList}" var="point" varStatus="index">
 								<tr>
 									<td>${index.count }</td>
-									<td><fmt:formatDate value="${point.varTime }" pattern="yyyy.MM.dd HH:mm" id="date"/>${point.}</td>
+									<td><fmt:formatDate value="${point.varTime }" pattern="yyyy.MM.dd"/></td>
 									
-									<!-- 내용 -->
+									<!-- 내용: 각 상세보기로 링크 -->
 									<c:if test="${point.eventCode == 0}">
 										<td>${point.varAmount } 원을 충전하셨습니다.</td>									
 									</c:if>
@@ -76,23 +76,57 @@
 									<c:if test="${point.eventCode == 3}">										
 										<td>[별 보러 가자] 게시 후 적립되었습니다.</td>									
 									</c:if>
+									<c:url var="PresentSend" value="msgDetail.do">
+										<c:param name="msgNo" value="${point.eventNo }"></c:param>
+										<c:param name="nickName" value="${point.nickName }"></c:param>
+										<c:param name="flag" value="send"></c:param>
+									</c:url>
+									<c:url var="PresentReceive" value="msgDetail.do">
+										<c:param name="msgNo" value="${point.eventNo }"></c:param>
+										<c:param name="nickName" value="${point.nickName }"></c:param>
+										<c:param name="flag" value="rec"></c:param>
+									</c:url>
 									<c:if test="${point.eventCode == 4 && point.varType == 1}">										
-										<td>${point.nickName }님께 선물하셨습니다.</td>									
+										<td><a href="#" onclick="msgPopup('${PresentSend }');">${point.nickName }님께 선물하셨습니다.</a></td>								
 									</c:if>
 									<c:if test="${point.eventCode == 4 && point.varType == 0}">										
-										<td>${point.nickName }님께 선물받으셨습니다.</td>									
+										<td><a href="#" onclick="msgPopup('${PresentReceive }');">${point.nickName }님께 선물받으셨습니다.</a></td>									
 									</c:if>
 									
 									<!-- 포인트 -->
-									<c:if test="${point.varType == 0 }">
-										<span id="plus">${point.varAmount }</span>
-									</c:if>
-									<c:if test="${point.varType == 1 }">
-										<span id="minus">${point.varAmount * -1 }</span>
-									</c:if>
+									<td>
+										<c:if test="${point.varType == 0 }">
+											<span id="plus">${point.varAmount }</span>
+											<div><fmt:formatDate value="${point.varTime }" pattern="HH:mm"/></div>
+										</c:if>
+										<c:if test="${point.varType == 1 }">
+											<span id="minus">${point.varAmount * -1 }</span>
+											<div><fmt:formatDate value="${point.varTime }" pattern="HH:mm"/></div>
+										</c:if>
+									</td>
 								</tr>
 							</c:forEach>
 						</c:if>
+						<!-- search -->
+						<tr><td colspan="4">
+							<section id="search">
+								<div align="center">
+									<form action="msgSearch.do" method="post">
+										<input type="hidden" name="flag" value="${flag }">
+										<select name="searchCondition">
+											<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
+											<c:if test="${flag != 'notice'}">
+												<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
+											</c:if>
+											<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
+											<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
+										</select>
+										<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
+										<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
+									</form>
+								</div>
+							</section>
+						</td></tr>
 						<!-- 페이징 -->
 						<tr id="paging">
 							<td colspan="4" style="border-top:hidden;">
@@ -137,14 +171,12 @@
 
 		</section>
 
-	<%-- <jsp:include page="../../../footer.jsp"/> --%>
+	<jsp:include page="../../../footer.jsp"/>
 	</main>	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
-		
-	
-		
-		/* 쪽지작성창, 쪽지상세보기창 팝업 */
+
+		/* 선물 쪽지창 팝업 */
 		function msgPopup(msgUrl) {
 			if(${sessionScope.loginUser ne null}) {
 				var popupX = (window.screen.width/2)-265;

@@ -86,10 +86,17 @@ table td {
 
 #plus {
 	color: blue;
+	font-weight: bolder;
 }
 
 #minus {
-	color: greean;
+	color: green;
+	font-weight: bolder;
+}
+
+span+div {
+	font-size: 13px;
+	font-color: #d9e4e8;
 }
 
 /*전체, 선물, 관리자*/
@@ -116,11 +123,4 @@ button[type=submit] {
 #search-window {
 	width: 100px;
 	display: inline-block;
-}
-
-#qna-msg {
-	position: fixed;
-	bottom: 1%;
-	right: 1%;
-	z-index: 999;
 }

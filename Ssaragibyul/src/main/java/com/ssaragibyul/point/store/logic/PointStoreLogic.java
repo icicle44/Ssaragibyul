@@ -2,6 +2,7 @@ package com.ssaragibyul.point.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import com.ssaragibyul.point.store.PointStore;
 public class PointStoreLogic implements PointStore{
 
 	@Autowired
-	private SqlSession splSession;
+	private SqlSession sqlSession;
 	
 	//증가 포인트 등록 - 충전
 	@Override
@@ -41,8 +42,9 @@ public class PointStoreLogic implements PointStore{
 	//포인트 내역 리스트 출력
 	@Override
 	public ArrayList<PointAndProject> selectAll(PageInfo pi, String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
+		return (ArrayList)sqlSession.selectList("pointMapper.selectPointList", userId, rowBounds);
 	}
 	//포인트 내역 갯수(페이징용)
 	@Override
