@@ -35,13 +35,26 @@
 
 	<insert id="insertPoint" parameterType="Point">
 		<selectKey keyProperty="eventNo" resultType="int" order="BEFORE">
-			<!-- <if test="#{eventCode}.toString() == '4'"> -->
+			<if test="eventCode == 1">
+				SELECT MAX(DOFUND_NO) FROM DO_FUNDING
+			</if>
+			<if test="eventCode == 2">
+				SELECT MAX(DODONAT_NO) FROM DO_DONATION
+			</if>
+			<if test="eventCode == 3">
+				SELECT MAX(VISIT_NO) FROM VISIT
+			</if>
+			<if test="eventCode == 4">
 				SELECT MAX(MSG_NO) FROM MESSAGE
-			<!-- </if> -->
+			</if>
 		</selectKey>
 		INSERT INTO POINT VALUES(SEQ_POINT.NEXTVAL, #{eventNo}, #{userId}, #{oppUserId}, LOCALTIMESTAMP, #{eventCode}, #{varType}, #{varAmount})
 	</insert>
-
+	<insert id="insertFundCancelPoint" parameterType="_int">
+		INSERT ALL
+		INTO POINT VALUES(SEQ_POINT.NEXTVAL, EVENT_NO, USER_ID, '', LOCALTIMESTAMP, 1, 0, VAR_AMOUNT)
+		SELECT DOFUND_NO AS EVENT_NO, USER_ID, FUNDING_POINT AS VAR_AMOUNT FROM DO_FUNDING WHERE DOFUND_NO = #{doFundNo}
+	</insert>
 
 
 

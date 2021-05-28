@@ -8,16 +8,17 @@ import com.ssaragibyul.point.domain.PointAndProject;
 
 public interface PointStore {
 
-	public int insertPoint(Point point);
-	
 	public int insertChargePoint(Point point);
-	public int insertPosPoint(Point point);
-
-	public int insertNegPoint(Point point);
+	public int insertPoint(Point point);
+	public int insertFundCancelPoint(int doFundNo);
 
 	public ArrayList<PointAndProject> selectAll(PageInfo pi, String userId);
 	public int getListCount(String userId);
 
 	public int getMyPoint(String userId);
+	
+	//안씀
+	public int insertPosPoint(Point point);
+	public int insertNegPoint(Point point);
 
 }

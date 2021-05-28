@@ -74,14 +74,12 @@ public class MessageController {
 		return mv;
 	}
 	
-//////////////////////포인트만 추가하면 됨(쪽지 보내는 페이지에 url생성 및 onclick 연결!!!)
+	//완
 	//1:1 쪽지 등록(회원, 관리자 모두 사용)
 	@ResponseBody
 	@RequestMapping(value="registerMemMsg.do", method=RequestMethod.POST)
 	public String registerMemMessage(@ModelAttribute Message message
 										, ModelAndView mv) {
-		//jsp에서 session memberId 잊지말고 가져오기!
-		//jsp에서 <a href=경로?${member.userId}>나 hidden으로 받는사람 아이디? 닉네임? 가져오기!
 		
 		int msgResult = msgService.registerMemMessage(message);
 		if(msgResult >0) {
