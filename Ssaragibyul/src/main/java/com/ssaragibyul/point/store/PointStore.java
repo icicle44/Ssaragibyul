@@ -11,6 +11,7 @@ public interface PointStore {
 	public int insertChargePoint(Point point);
 	public int insertPoint(Point point);
 	public int insertFundCancelPoint(int doFundNo);
+	public int insertDonateCancelPoint(int donateNo);
 
 	public ArrayList<PointAndProject> selectAll(PageInfo pi, String userId);
 	public int getListCount(String userId);

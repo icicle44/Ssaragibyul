@@ -252,12 +252,9 @@
 		</foreach>
 			AND SEND_DELETE_YN = 1 AND REC_DELETE_YN = 1 AND PRESENT_POINT=0
 	</delete>
-
-
-
-
-
-
-
-
+	
+	<select id="selectCountNewMessage" resultMap="messageResultMap">
+    	SELECT MSG_NO, SENDER_ID, RECEIVER_ID, MSG_TITLE, REG_DATE, MSG_TYPE FROM (SELECT * FROM MESSAGE ORDER BY REG_DATE DESC) WHERE ROWNUM &lt;= 6
+    </select>
+    
 </mapper>

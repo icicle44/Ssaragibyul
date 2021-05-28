@@ -8,14 +8,18 @@ import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
+import com.ssaragibyul.visit.domain.Visit;
 
 public interface PointService {
 
 	//증가포인트 내역
 	public int registerChargePoint(Point point);
 	
-	public int registerPosPoint(int doFundNo);
+	public int registerPosFundPoint(int doFundNo);
+	public int registerPosDonatePoint(int donateNo);
+	public int registerPosPoint(Visit visit);
 	public int registerPosPoint(Message message);
+	
 
 	//감소포인트 내역
 	public int registerNegPoint(FundingLog fundLog);

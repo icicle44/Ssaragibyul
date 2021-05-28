@@ -13,6 +13,7 @@ import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.point.store.PointStore;
+import com.ssaragibyul.visit.domain.Visit;
 
 @Service
 public class PointServiceImpl implements PointService{
@@ -35,12 +36,32 @@ public class PointServiceImpl implements PointService{
 		return pntStore.insertPosPoint(point);
 	}
 	
+	//포인트 증가내역 등록-방문인증용
+	@Override
+	public int registerPosPoint(Visit visit) {
+		
+		point.setUserId(visit.getUserId());
+		point.setEventCode(3);
+		point.setVarType(0);
+		point.setVarAmount(500);
+		
+		int result = pntStore.insertPoint(point);
+		return result;
+	}	
+	
 	//포인트 증가내역 등록-펀딩 취소용
 	@Override
-	public int registerPosPoint(int doFundNo) {
+	public int registerPosFundPoint(int doFundNo) {
 		
 		int result = pntStore.insertFundCancelPoint(doFundNo);
+		return result;
+	}
+	
+	//포인트 증가내역 등록-기부 취소용
+	@Override
+	public int registerPosDonatePoint(int donateNo) {
 		
+		int result = pntStore.insertDonateCancelPoint(donateNo);
 		return result;
 	}
 

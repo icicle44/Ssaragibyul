@@ -36,6 +36,13 @@ public class PointStoreLogic implements PointStore{
 	public int insertFundCancelPoint(int doFundNo) {
 		return sqlSession.insert("pointMapper.insertFundCancelPoint", doFundNo);
 	}
+	
+	//기부 취소시 내역 등록
+	@Override
+	public int insertDonateCancelPoint(int donateNo) {
+		return sqlSession.insert("pointMapper.insertDonateCancelPoint", donateNo);
+	}
+	
 	//////////////////증가 포인트 등록 - 방문인증, 선물받음, 펀딩취소, 기부취소
 	@Override
 	public int insertPosPoint(Point point) {
@@ -56,11 +63,11 @@ public class PointStoreLogic implements PointStore{
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());		
 		return (ArrayList)sqlSession.selectList("pointMapper.selectPointList", userId, rowBounds);
 	}
+	
 	//포인트 내역 갯수(페이징용)
 	@Override
 	public int getListCount(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("pointMapper.selectListCount", userId);
 	}
 
 	//내포인트 출력

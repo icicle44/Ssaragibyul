@@ -77,12 +77,12 @@ public class PointController {
 	////////////////안돼면 가장 최근 시퀀스값 알아오는 메소드 만들어서 내부에서 호출, point객체에 세팅하고 넘기기
 	
 	//포인트 증가내역 등록-방문인증용
-	public int posPointRegister(Visit visit, int eventCode) {
-		Point point = new Point();
-		point.setVarAmount(500);
-		int result = pService.registerPosPoint(point);
-		return result;
-	}
+//	public int posPointRegister(Visit visit, int eventCode) {
+//		Point point = new Point();
+//		point.setVarAmount(500);
+//		int result = pService.registerPosPoint(point);
+//		return result;
+//	}
 	
 	//포인트 증가내역 등록-펀딩 취소용
 //	public int posPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
@@ -94,13 +94,13 @@ public class PointController {
 //	}
 	
 	//포인트 증가내역 등록-기부 취소용
-	public int posPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
-		//selectkey에도 if문 사용
-		Point point = new Point();
-		
-		int result = pService.registerPosPoint(point);
-		return result;
-	}
+//	public int posPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
+//		//selectkey에도 if문 사용
+//		Point point = new Point();
+//		
+//		int result = pService.registerPosPoint(point);
+//		return result;
+//	}
 	
 //	//포인트 증가내역 등록-선물받음
 //	public int posPointRegister(Message message, int eventCode, int varAmount) {
@@ -177,7 +177,7 @@ public class PointController {
 	//@RequestMapping(value="myPoint", method= {RequestMethod.GET, RequestMethod.POST})
 	public int getMyPoint(HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
+		//메소드 2개필요. 전체사용내역반영된 금액 & 예약중인 금액
 		int myPoint = pService.getMyPoint(loginUser.getUserId());
 		return myPoint;
 	}

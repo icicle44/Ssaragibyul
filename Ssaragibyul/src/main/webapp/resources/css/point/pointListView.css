@@ -124,3 +124,63 @@ button[type=submit] {
 	width: 100px;
 	display: inline-block;
 }
+
+#modal {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.8);
+	top:0;
+	left: 0;
+	display: none;
+}
+
+#modal_content{
+  width:500px;
+  height:500px;
+  background:#fff;
+  border-radius:10px;
+  position:relative;
+  top:50%;
+  left:50%;
+  margin-top:-200px;
+  margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box;
+  padding:10px 0px;
+  line-height:23px;
+  cursor:pointer;
+}
+
+#modal #total {
+	width: 500px;
+	height: 500px;
+	padding: 0px;
+}
+
+#modal .write-upper {
+	padding: 5px 10px;
+	text-align: left;
+}
+#modal .write-middle {
+	padding: 5px 10px;
+}
+#modal .write-lower {
+	padding: 10px 10px;
+}
+#modal td, #modal th {
+	padding: 5px;
+}
+#modal #btnTr {
+	display: none;
+}
+
+
+
+
+
+
+
+
+
+

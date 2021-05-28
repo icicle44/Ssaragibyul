@@ -87,10 +87,12 @@
 										<c:param name="flag" value="rec"></c:param>
 									</c:url>
 									<c:if test="${point.eventCode == 4 && point.varType == 1}">										
-										<td><a href="#" onclick="msgPopup('${PresentSend }');">${point.nickName }님께 선물하셨습니다.</a></td>								
+										<td><a href="#" onclick="msgModal('${PresentSend }');">${point.nickName }님께 선물하셨습니다.</a></td>								
+									
+									<%-- <a href="#" onclick="msgPopup('${PresentSend }');"> --%>
 									</c:if>
 									<c:if test="${point.eventCode == 4 && point.varType == 0}">										
-										<td><a href="#" onclick="msgPopup('${PresentReceive }');">${point.nickName }님께 선물받으셨습니다.</a></td>									
+										<td><a href="#" onclick="msgModal('${PresentReceive }');">${point.nickName }님께 선물받으셨습니다.</a></td>									
 									</c:if>
 									
 									<!-- 포인트 -->
@@ -167,9 +169,12 @@
 					</tbody>
 				</table>
 			</section>
-
-
 		</section>
+		<div id="modal">
+			<div id="modal_content">
+				
+			</div>
+		</div>
 
 	<jsp:include page="../../../footer.jsp"/>
 	</main>	
@@ -187,6 +192,12 @@
 			}
 		}
 		
+		/* 모달창 */
+		function msgModal(msgUrl) {
+			$("#modal #modal_content").load(msgUrl);
+			$("#modal").fadeIn();
+		}
+		
 		$(function() {
 			/* submenu 노출 */
 			$("#showSubMenu").on("click", function() {
@@ -197,6 +208,11 @@
 					$("#subMenu").hide();
 					$("#showSubMenu").text(" + ");				
 				}
+			});
+			
+			/* 모달창 닫기 */
+			$("#modal_content").on("click", function() {
+				$("#modal").fadeOut();
 			});
 		});
 		

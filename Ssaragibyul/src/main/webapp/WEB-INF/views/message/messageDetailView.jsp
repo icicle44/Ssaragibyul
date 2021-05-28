@@ -57,13 +57,15 @@
 							</tr>
 							<tr><td colspan="2"><hr></tr>
 							<tr>
-								<td colspan="2" align="center">${message.msgContents }</td>
+								<td colspan="2" align="center" height="110px">${message.msgContents }</td>
 							</tr>
 							<tr><td colspan="2"><hr></tr>
-							<tr>
+							<tr id="btnTr">
 								<!-- 버튼 -->
 								<td colspan="2" align="right">
-									<input type="button" value="삭제하기" id="deleteBtn">
+									<c:if test="${message.msgType != 0 || (message.msgType == 0 && loginUser.userId == 'admin') }">
+										<input type="button" value="삭제하기" id="deleteBtn">
+									</c:if>
 									&nbsp;&nbsp;&nbsp;<input type="button" value="돌아가기" id="backBtn">
 								</td>
 							</tr>
