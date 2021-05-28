@@ -85,13 +85,13 @@ public class PointController {
 	}
 	
 	//포인트 증가내역 등록-펀딩 취소용
-	public int posPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
-		//selectkey에도 if문 사용
-		Point point = new Point();
-		
-		int result = pService.registerPosPoint(point);
-		return result;
-	}
+//	public int posPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
+//		//selectkey에도 if문 사용
+//		Point point = new Point();
+//		
+//		int result = pService.registerPosPoint(point);
+//		return result;
+//	}
 	
 	//포인트 증가내역 등록-기부 취소용
 	public int posPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
