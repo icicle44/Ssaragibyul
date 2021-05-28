@@ -33,7 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 	// nickname 새로고침
 	@Override
-	public String refreshNickName() {
+	public Member refreshNickName() {
 		return mStore.refreshNickName();
 	}
 	// 사용자 등록 

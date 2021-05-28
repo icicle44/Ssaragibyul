@@ -1,6 +1,9 @@
 package com.ssaragibyul.member.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 
@@ -67,17 +72,12 @@ public class MemberController {
 	}
 	// 닉네임 새로고침
 	@ResponseBody
-	@RequestMapping(value="nickRefresh.do", method=RequestMethod.GET)
-	public String refreshNickname(Model model) {
-		String nickName = mService.refreshNickName();
-		System.out.println("nickName in controller : " + nickName);
-		if(nickName != null) {
-			model.addAttribute("nickName", nickName);
-			return "member/memberJoin";
-		}else {
-			model.addAttribute("msg", "닉네임 새로고침 실패");
-			return "common/errorPage";
-		}
+	@RequestMapping(value="nickRefresh.do", method= {RequestMethod.GET,RequestMethod.POST})
+	public void refreshNickname(Model model, HttpServletResponse response) throws JsonIOException, IOException {
+		Member member = mService.refreshNickName();
+		System.out.println("nickName in controller : " + member);
+		Gson gson = new Gson();
+		gson.toJson(member, response.getWriter());
 	}
 	// 회원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)

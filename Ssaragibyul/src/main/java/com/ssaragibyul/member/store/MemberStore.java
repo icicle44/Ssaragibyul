@@ -10,5 +10,5 @@ public interface MemberStore {
 	public int updateMember(Member member);
 	public int removeMember(String userId);
 	public String searchId(Member member);
-	public String refreshNickName();
+	public Member refreshNickName();
 }

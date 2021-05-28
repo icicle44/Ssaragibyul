@@ -25,7 +25,7 @@ public class MemberStoreLogic implements MemberStore{
 		return sqlSession.selectOne("memberMapper.checkIdDup", userId);
 	}
 	// 닉네임 새로고침
-	public String refreshNickName() {
+	public Member refreshNickName() {
 		return sqlSession.selectOne("memberMapper.refreshNick");
 	}
 	// 사용자 등록
