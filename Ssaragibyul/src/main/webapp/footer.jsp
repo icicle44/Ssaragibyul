@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<link rel="stylesheet" href="resources/css/style_footer.css" type="text/css"/>
 <footer class="bd-footer pt-3 mt-5 bg-eg6 text-sm-start" >
    <div class="container">
 	   <div class="row">
@@ -45,75 +48,25 @@
 			</div>
 		</div>
    </div>
+   
+   <!-- 문의하기(모든페이지적용) -->
+	<c:url var="qnaMsg" value="msgWriterView.do">
+		<c:param name="receiverId" value="admin"></c:param>
+		<c:param name="msgType" value="3"></c:param>
+		<c:param name="nickName" value="관리자"></c:param>
+	</c:url>
+	<img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px" onclick="msgPopup('${qnaMsg}');" style="cursor:pointer;"/>
+   
+   <script>
+	/* 쪽지작성창, 쪽지상세보기창 팝업 */
+	function msgPopup(msgUrl) {
+		if(${sessionScope.loginUser ne null}) {
+			var popupX = (window.screen.width/2)-265;
+			var popupY = (window.screen.height/2)-232.5;
+			window.open(msgUrl, "msgWriteForm", "height=400, width=500, left="+popupX+", top="+popupY+", resizable=no");				
+		}else {
+			location.href="login.do";
+		}
+	}
+   </script>
 </footer>
-<!-- <!DOCTYPE html>
-<html lang="ko">
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
-<body>
-<div class="footer-top container" >
-	<div class="row" style="font-family: 'Noto Serif KR', serif;">
-			<div class="col-4">
-				<a href="/index.jsp" class="logo d-flex align-items-center" style="text-decoration: none;"> <img
-					src="/resources/img/favicon.png" alt="logo">
-					<span id="starLogo"><b>싸라기별</b></sapn>
-				</a>
-				<p style="font-size: 10px;">
-					서울 중구 남대문로 120 대일빌딩 2F, 3F
-					통신판매업신고 : 2021-서울중구-0615 |<br>
-					사업자등록번호 : 100-10-1010100 | 
-					벤처인증기업 : 제 202105081427 
-				<p>
-			</div>
-			<div class="col-4">
-				<h4>
-					<b>사이트 소개</b>
-				</h4>
-				<br>
-				<h6>
-					<b>싸라기별이란?</b>
-				</h6>
-				<h6>
-					<b>자주 묻는 질문</b>
-				</h6>
-			</div>
-			<div class="col-4">
-				<h4>
-					<b>이용 약관</b>
-				</h4>
-				<br>
-				<h6>
-					<b>회원가입 기본약관</b>
-				</h6>
-				<h6>
-					<b>펀딩 이용약관</b>
-				</h6>
-				<h6>
-					<b>기부 이용약관</b>
-				</h6>
-				<h6>
-					<b>개인정보 처리방침(펀딩)</b>
-				</h6>
-				<h6>
-					<b>개인정보 처리방침(기부)</b>
-				</h6>
-			</div>
-		</div>
-		<div class="row justify-content-center">
-			<div class="col-md-12 text-center py-5">
-				<p>
-					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script>
-					All rights reserved | made <i
-						class="icon-heart text-danger" aria-hidden="true"></i> by <a
-						href="https://colorlib.com" target="_blank">Spectrum</a>
-					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-				</p>
-			</div>
-		</div>
-	</div>
-
-</body>
-</html> -->

@@ -223,19 +223,19 @@
 		<!-- <a href="#" onclick="msgPopup('msgWriterView.do');">공지 작성창으로 이동</a> -->
 		
 		<!-- 문의하기(모든페이지적용) -->
-		<c:url var="qnaMsg" value="msgWriterView.do">
+		<%-- <c:url var="qnaMsg" value="msgWriterView.do">
 			<c:param name="receiverId" value="admin"></c:param>
 			<c:param name="msgType" value="3"></c:param>
 			<c:param name="nickName" value="관리자"></c:param>
 		</c:url>
-		<img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px" onclick="msgPopup('${qnaMsg}');" style="cursor:pointer;"/>
+		<img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px" onclick="msgPopup('${qnaMsg}');" style="cursor:pointer;"/> --%>
 	</main>
 	<jsp:include page="../../../footer.jsp"/>
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		/* 쪽지작성창, 쪽지상세보기창 팝업 */
-		function msgPopup(msgUrl) {
+/* 		function msgPopup(msgUrl) {
 			if(${sessionScope.loginUser ne null}) {
 				var popupX = (window.screen.width/2)-265;
 				var popupY = (window.screen.height/2)-232.5;
@@ -243,7 +243,7 @@
 			}else {
 				location.href="login.do";
 			}
-		}
+		} */
 		
 		$(function(){
 			/* 체크박스 전체 체크/해제 */

@@ -106,9 +106,9 @@ button[type=submit] {
 	display: inline-block;
 }
 
-#qna-msg {
+/* #qna-msg {
 	position: fixed;
 	bottom: 1%;
 	right: 1%;
 	z-index: 999;
-}
+} */
