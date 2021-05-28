@@ -111,7 +111,11 @@
 						if(data == "success") {
 							alert("쪽지가 전달되었습니다.");							
 							self.close();
-							opener.location.href="sendMsgList.do";
+							if(senderId != "admin") {
+								opener.location.href="sendMsgList.do";								
+							} else {
+								opener.location.href="adminSendMessageList.do";
+							}
 						}else {
 							alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
 						}
@@ -145,6 +149,7 @@
 						if(data == "success") {
 							alert("공지가 전달되었습니다.");							
 							self.close();
+							
 							opener.location.href="sendMsgList.do";
 						}else {
 							alert("죄송합니다. 공지 전달을 실패하였습니다.");
