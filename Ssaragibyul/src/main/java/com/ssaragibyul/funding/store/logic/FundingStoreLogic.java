@@ -6,14 +6,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
-import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.store.FundingStore;
+
 @Repository
 public class FundingStoreLogic implements FundingStore{
 
@@ -209,6 +208,30 @@ public class FundingStoreLogic implements FundingStore{
 	public Funding printOneSuggest(int projectNo) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public ArrayList<Reply> selectAllReply(int projectNo) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectReplyList", projectNo);
+	}
+	
+	@Override
+	public int insertReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("fundingMapper.insertReply", reply);
+	}
+
+
+	@Override
+	public int updateReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("fundingMapper.updateReply", reply);
+	}
+
+	@Override
+	public int deleteReply(Reply reply) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("fundingMapper.deleteReply", reply);
 	}
 
 }

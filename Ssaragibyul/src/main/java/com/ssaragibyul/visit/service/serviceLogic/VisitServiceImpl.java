@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.service.serviceLogic;
 
 import java.util.ArrayList;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,17 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.service.VisitService;
 import com.ssaragibyul.visit.store.VisitStore;
+
+
+
+
+
+
+
 @Service
 public class VisitServiceImpl implements VisitService{
 
+	
 	@Autowired
 	VisitStore vStore;
 	@Override

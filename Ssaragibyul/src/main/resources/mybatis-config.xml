@@ -14,6 +14,7 @@
 		<typeAlias type="com.ssaragibyul.funding.domain.Funding" alias="Funding"/>
 		<typeAlias type="com.ssaragibyul.funding.domain.FundingFile" alias="FundingFile"/>
 		<typeAlias type="com.ssaragibyul.funding.domain.FundingLog" alias="FundingLog"/>
+		<typeAlias type="com.ssaragibyul.common.Reply" alias="FundingReply"/>
 		<typeAlias type="com.ssaragibyul.visit.domain.Visit" alias="Visit"/>
 		<typeAlias type="com.ssaragibyul.point.domain.Point" alias="Point"/>
 		<typeAlias type="com.ssaragibyul.point.domain.PointAndProject" alias="PointAndProject"/>
@@ -28,6 +29,5 @@
 		<mapper resource="mappers/visit-mapper.xml"></mapper>
 		<mapper resource="mappers/point-mapper.xml"></mapper>
 		<mapper resource="mappers/history-mapper.xml"></mapper>
-		
 	</mappers>
 </configuration>

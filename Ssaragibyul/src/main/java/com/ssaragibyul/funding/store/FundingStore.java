@@ -2,9 +2,7 @@ package com.ssaragibyul.funding.store;
 
 import java.util.ArrayList;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
-import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
@@ -75,6 +73,15 @@ public interface FundingStore {
 	public Funding printOneSuggest(int projectNo);
 	
 	public int insertProjectFile(FundingFile fundingFile);
+	
+	public ArrayList<Reply> selectAllReply(int projectNo);
+	
+	public int insertReply(Reply reply);
+	
+	public int updateReply(Reply reply);
+	
+	public int deleteReply(Reply reply);
+	
 }
 
 

@@ -50,6 +50,16 @@
 		<result property="receiverName" column="RECEIVER"></result>
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
 	</resultMap>
+	
+	<resultMap type="FundingReply" id="FundingReplyResultMap">
+		<id property="replyNo" column="COMM_NO"></id>
+		<result property="no" column="F_PROJECT_NO"></result>
+		<result property="userId" column="USER_ID"></result>
+		<result property="nick" column="NICK_NAME"></result>
+		<result property="contents" column="COMM_CONTENTS"></result>
+		<result property="replyType" column="BOARD_TYPE"></result>
+		<result property="enrollDate" column="ENROLL_DATE"></result>
+	</resultMap>
 
 	<insert id="insertFunding" parameterType="Funding">
 		INSERT INTO
@@ -96,6 +106,36 @@
 		WHERE
 		F_PROJECT_NO = #{projectNo }
 	</update>
+		
+		
+	
+	<!-- 댓글 관련 insertReply -->
+	<insert id="insertReply">
+		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },'닉네임', #{contents }, '펀딩상세', SYSDATE)
+	</insert>
+	
+
+	<select id="selectReplyList" resultMap="FundingReplyResultMap">
+		SELECT * FROM FUNDING_COMMENTS
+		WHERE
+		F_PROJECT_NO  = #{projectNo }
+		ORDER BY COMM_NO DESC
+	</select>
+
+	<update id="updateReply"> UPDATE FUNDING_COMMENTS SET COMM_CONTENTS = #{contents }
+		WHERE F_PROJECT_NO = #{no } AND COMM_NO = #{replyNo }
+	</update>
+
+	<delete id="deleteReply"> DELETE FUNDING_COMMENTS WHERE F_PROJECT_NO =
+		#{no } AND COMM_NO = #{replyNo }
+	</delete>
+
+	
+		
+		
+		
+		
+		
 		
 		
 		<!-- 

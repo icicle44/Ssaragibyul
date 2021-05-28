@@ -24,17 +24,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
-import com.ssaragibyul.common.Search;
-import com.ssaragibyul.donation.domain.Donation;
-import com.ssaragibyul.donation.domain.DonationLike;
-import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
-import com.ssaragibyul.visit.domain.Visit;
 // 깃 확인용 주석
 
 @Controller
@@ -232,17 +227,71 @@ public class FundingController {
 
 	}
 	
+	
+	
+
 	@ResponseBody
-	@RequestMapping(value="addComments.do", method=RequestMethod.POST)
-	public String addComments(@ModelAttribute Reply reply, HttpSession session) {
-			
-	return "";
+	@RequestMapping(value = "addComment.do", method = RequestMethod.POST)
+	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		reply.setUserId(loginUser.getUserId());
+		int result = fService.registerReply(reply);
+		if (result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	// 400, jsp-Controller / 404, Controller url->console / 500, 서버 내부 오류(console)
+	@ResponseBody
+	@RequestMapping(value="modifyComment.do", method=RequestMethod.POST)
+	public String modifyReply(@ModelAttribute Reply reply) {
+		
+		int result = fService.modifyReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "deleteComment.do", method = RequestMethod.GET)
+	public String removeReply(@ModelAttribute Reply reply) {
+		int result = fService.removeReply(reply);
+		if (result > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+
+	@RequestMapping(value = "commentList.do", method = RequestMethod.GET)
+	public void getReplyList(HttpServletResponse response, @RequestParam("projectNo") int projectNo) throws Exception {
+		ArrayList<Reply> rList = fService.printAllReply(projectNo);
+		if (!rList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yy-MM-dd").create(); // 날짜 포맷 변경!
+			gson.toJson(rList, response.getWriter());
+		} else {
+			System.out.println("데이터가 없습니다.");
+		}
 	}
 	
-	@RequestMapping(value="CommentsList.do", method=RequestMethod.GET)
-	public void CommentsList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
-
-	}
+	
+//	
+//	@RequestMapping(value="addComments.do", method=RequestMethod.POST)
+//	public String addComments(@ModelAttribute Reply reply, HttpSession session) {
+//			
+//	return "";
+//	}
+//	
+//	
+//	
+//	@RequestMapping(value="CommentsList.do", method=RequestMethod.GET)
+//	public void CommentsList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
+//
+//	}
 	
 	public void RecommendList(@RequestParam("dProjectNo.do") int projectNo) {
 		ArrayList<Funding> fList = fService.printAllRecommend(projectNo);

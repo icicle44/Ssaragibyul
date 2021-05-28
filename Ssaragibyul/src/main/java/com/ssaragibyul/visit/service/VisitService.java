@@ -3,7 +3,6 @@ package com.ssaragibyul.visit.service;
 import java.util.ArrayList;
 import java.util.Map;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 

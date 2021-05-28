@@ -5,20 +5,22 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
-import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
+import com.ssaragibyul.point.service.PointService;
+
 @Service
 public class FundingSerivceImpl implements FundingService {
 	
 	@Autowired
 	private FundingStoreLogic fStore;
+	@Autowired
+	private PointService pntService;
 
 	@Override
 	public int getListCountFuncing() {
@@ -102,12 +104,18 @@ public class FundingSerivceImpl implements FundingService {
 	public int registerFundingLog(FundingLog fundingLog, Funding funding) {
 		int result = fStore.insertProjectLog(fundingLog);
 		int fResult = 0;
-		if(result>0) {
-			fResult = fStore.updateProject_SumMoney(funding);
-		}
-		return fResult;
+		 int pntResult = 0;
+	      if(result>0) {
+		         fResult = fStore.updateProject_SumMoney(funding);
+		         if(fResult > 0) {
+		            pntResult = pntService.registerNegPoint(fundingLog);
+		         }
+		      }
+		return pntResult;
 	}
-
+	
+	
+	
 	@Override
 	public int modifyProject(Funding funding) {
 		// TODO Auto-generated method stub
@@ -209,5 +217,25 @@ public class FundingSerivceImpl implements FundingService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	@Override
+	public ArrayList<Reply> printAllReply(int projectNo) {
+		return fStore.selectAllReply(projectNo);
+	}
+
+	@Override
+	public int registerReply(Reply reply) {
+		return fStore.insertReply(reply);
+	}
+
+	@Override
+	public int modifyReply(Reply reply) {
+		return fStore.updateReply(reply);
+	}
+
+	@Override
+	public int removeReply(Reply reply) {
+		return fStore.deleteReply(reply);
+	}
+	
 
 }
