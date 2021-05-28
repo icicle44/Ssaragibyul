@@ -441,7 +441,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="sendMsgList.do">
+										<a href="adminSendMessageList.do">
 											<span class="sub-item">보낸 쪽지함</span>
 										</a>
 									</li>

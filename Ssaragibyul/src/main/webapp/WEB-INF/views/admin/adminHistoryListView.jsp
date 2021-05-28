@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>기념관 리스트</title>
+<title>별들의 발자취 리스트</title>
 <%@include file="/header.jsp" %>
 <link rel="stylesheet" href="/resources/css/independence/style_independence.css">
 <!-- Font -->
@@ -16,7 +16,7 @@
 <body>
 <div class="container-fluid col-md-12" >
 <section class="contents col-md-8">
-		<div class="intro">[독립유공자 공적조서]는</div>
+		<div class="intro">별들의 발자취 리스트</div>
 		<div class="search">
 		검색창
 		</div>

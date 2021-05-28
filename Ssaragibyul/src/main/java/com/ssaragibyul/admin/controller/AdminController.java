@@ -95,11 +95,8 @@ public class AdminController {
 	}
 
 	// 전체 회원 수
-	@RequestMapping(value="adminMemberAllCount.do", method = RequestMethod.GET)
 	public int memberAllCount(ModelAndView mv, @RequestParam("userId") String userId) {
-		int result = aService.printAllMemberCount();
-		
-		return result;
+		return 0;
 	}
 
 	// 오늘 새로 가입한 회원 수 조회
@@ -610,9 +607,32 @@ public class AdminController {
 	}
 
 	// 보낸쪽지함
-	public Message sendMessage() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminSendMessageList.do", method = RequestMethod.GET)
+	public ModelAndView sendMessage(ModelAndView mv,
+									HttpSession session,
+									@RequestParam(value="page", required=false) Integer page) {
+			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+			String flag = "send";
+			
+			HashMap<String, String> cntMap = new HashMap<String, String>();
+			cntMap.put("flag", flag);
+			cntMap.put("userId", userId);
+			int currentPage = (page != null)? page : 1;
+			int listCount = msgService.getMsgListCount(cntMap);
+			PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+	
+			ArrayList<MessageAndNick> sMList = msgService.printAllsMsg(pi, userId);
+			if(!sMList.isEmpty()) {
+				mv.addObject("msgList", sMList);
+				
+			}else {
+				mv.addObject("tblMsg", "보낸 쪽지가 없습니다.");			
+			}
+			mv.addObject("pi", pi);
+			mv.addObject("flag", flag);
+			mv.setViewName("admin/adminSendMessageList");
+		return mv;
 	}
+	
 }
 

@@ -139,7 +139,7 @@
 											<div>
 												<input type="submit" class="btn btn-outline-secondary float-right" value="수정하기" id="update"> 
 												<input type="button" class="btn btn-outline-secondary float-right" value="취소" id="reset-btn" onclick="updateReset()">
-												<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminMemberDelete.do?userId=${member.userId}';">삭제하기</button>
+												<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminMemberDelete.do?userId=${member.userId}';">탈퇴</button>
 											</div>
 										</form>
 									</div>
