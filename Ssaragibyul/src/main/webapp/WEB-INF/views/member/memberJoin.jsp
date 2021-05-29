@@ -80,11 +80,14 @@
 					<td>* 닉네임</td>
 				</tr>
 				<tr>
-					<td><input type="text" min="10" max="100" name="nickName"
+					<td>
+						<input type="text" min="10" max="100" name="nickName"
 						id="nickName" placeholder="버튼을 눌러주세요" readonly>
+						<input type="hidden" name="mngNo" id="mngNo">
 						<button type="button" id="refresh">
 							<img src="/resources/img/member/refresh_img.png" id="refresh-img">
-						</button></td>
+						</button>
+					</td>
 				</tr>
 				<tr>
 					<td>생년월일</td>
@@ -191,6 +194,8 @@
 				success : function(data) {
 					if (data != null) {
 						$("#nickName").val(data.nickName);
+						$("#mngNo").val(data.mngNo);
+						console.log(data);
 					} else {
 						alert("버튼을 다시 눌러주세요");
 					}
@@ -200,6 +205,10 @@
 				}
 			});
 		});
+		
+		
+		
+
 		$("#userId").on("blur", function() {
 			var userId = $("#userId").val();
 			$.ajax({
@@ -237,7 +246,7 @@
 			var idreg = /^[a-z][a-z|A-Z|0-9]{4,12}$/;
 			var pwdreg = /^[a-z|A-Z|0-9]{6,12}$/;
 			var emailreg = /^[a-z|A-Z|0-9]{2,}@[a-z]+\.[a-z]+$/;
-			var phonereg = /^[0-9]{8,}/;
+			var phonereg = /^[0-9]{11,}/;
 
 			// 아이디 유효성검사
 			if (!idreg.test(id.value)) {
@@ -269,7 +278,7 @@
 			}
 
 			if (!phonereg.test(phone.value)) {
-				alert("전화번호는 숫자만 입력할 수 있습니다.");
+				alert("전화번호는 숫자만 입력할 수 있으며\n반드시 11자리를 입력해 주세요.");
 				phone.focus();
 				return false;
 			}

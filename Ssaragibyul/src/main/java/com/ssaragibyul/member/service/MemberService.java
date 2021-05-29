@@ -1,10 +1,12 @@
 package com.ssaragibyul.member.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 
 public interface MemberService {
@@ -14,5 +16,6 @@ public interface MemberService {
 	public int registerMember(Member member); // 회원가입
 	public int modifyMember(Member member); // 회원 수정
 	public int removeMember(String userId); // 회원 탈퇴
-	public String searchId(Member member);
+	public String searchId(HashMap<String, String>param); // 아이디 찾기
+	public Independence mypage(String userId); //마이페이지에 독랍유공자 정보 띄우는 것
 }

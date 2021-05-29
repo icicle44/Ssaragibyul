@@ -1,6 +1,7 @@
 package com.ssaragibyul.member.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,13 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 
@@ -70,15 +74,17 @@ public class MemberController {
 	public String idDuplicateCheck(@RequestParam("userId") String userId) {
 		return String.valueOf(mService.checkIdDup(userId));
 	}
+	
 	// 닉네임 새로고침
 	@ResponseBody
 	@RequestMapping(value="nickRefresh.do", method= {RequestMethod.GET,RequestMethod.POST})
 	public void refreshNickname(Model model, HttpServletResponse response) throws JsonIOException, IOException {
 		Member member = mService.refreshNickName();
-		System.out.println("nickName in controller : " + member);
 		Gson gson = new Gson();
 		gson.toJson(member, response.getWriter());
 	}
+	
+	
 	// 회원등록
 	@RequestMapping(value="memberRegister.do", method=RequestMethod.POST)
 	public String memberRegister(@ModelAttribute Member member, 
@@ -89,6 +95,7 @@ public class MemberController {
 								@RequestParam("mm") String mm, 
 								@RequestParam("dd")String dd,
 								Model model) {
+	System.out.println(member.toString());
 	member.setUserAddr(post + ", " + address1 + ", " + address2);
 	member.setBirthday(yy + "/" + mm + "/" + dd);
 	int result = mService.registerMember(member);
@@ -107,9 +114,16 @@ public class MemberController {
 	
 	// 아이디 찾기
 	@RequestMapping(value="idFind.do", method = RequestMethod.GET)
-	public String searchId(@ModelAttribute Member member) {
-		String result = mService.searchId(member);
+	public String searchId(HttpServletRequest request, Model model) {
+		
+		HashMap<String,String> param = new HashMap<String,String>();
+		param.put("userName", request.getParameter("userName"));
+		param.put("userEmail", request.getParameter("userEmail"));
+		
+		String result = mService.searchId(param);
+		System.out.println(result);
 		if (result != null ) {
+			model.addAttribute("userId", result);
 			return "member/idCheck";
 		}else {
 			return "common.errorPage";
@@ -156,8 +170,15 @@ public class MemberController {
 
 	// 마이페이지 뷰
 	@RequestMapping(value="myPage.do", method=RequestMethod.GET)
-	public String myInfoView(Member member) {
-		return "mypage/myPageMain";
+	public String myInfoView(Member member, HttpSession session, Model model) {
+		String userId = ((Member)session.getAttribute("loginUser")).getUserId(); // member 객체로 강제 변환!
+		Independence independence = mService.mypage(userId);
+		if (independence != null) {
+			model.addAttribute("independence", independence);
+			return "mypage/myPageMain";
+		}
+		model.addAttribute("msg","정보 수정 실패");
+		return "common/errorPage";   
 	}
 	
 	
@@ -165,6 +186,30 @@ public class MemberController {
 	@RequestMapping(value="userUpdate.do", method=RequestMethod.GET)
 	public String updateView(Member member) {
 		return "mypage/userUpdate";
+	}
+	
+	// 참여한 펀딩 프로젝트 페이지
+	@RequestMapping(value="myFunding.do", method=RequestMethod.GET)
+	public String myFundingView(Member member) {
+		return "mypage/myFunding";
+	}
+	
+	// 참여한 기부 프로젝트 페이지
+	@RequestMapping(value="myDonation.do", method=RequestMethod.GET)
+	public String myDonationView(Member member) {
+		return "mypage/myDonation";
+	}
+	
+	// 제안한 펀딩 프로젝트 페이지
+	@RequestMapping(value="proposeFunding.do", method=RequestMethod.GET)
+	public String proposeFunding(Member member) {
+		return "mypage/ProposeFunding";
+	}
+	
+	// 제안한 기부프로젝트 페이지
+	@RequestMapping(value="proposeDonaion.do", method=RequestMethod.GET)
+	public String proposeDonation(Member member) {
+		return "mypage/ProposeDonation";
 	}
 	
 	// 정보수정

@@ -13,17 +13,17 @@
     <header>
     	<jsp:include page="../../../header.jsp"/>
     </header>
-    <form action="idCheck.do" method="post">
+    <form action="login.do" method="post">
         <div class="contents">
             <h2 align="center" id="h2">아이디 확인</h2>
             <div class="findId">
                 <div id="coment1">
                     <p id="start">회원님의 아이디는</p>
-                    <p id="userId">${memberId}</p>
+                    <p id="userId">${userId}</p>
                     <p id="end">입니다.</p>
                 </div>
                 <div class="btn">
-                    <input type="submit" value="로그인하기" id="loginBtn" onclick="location.href='login.do';">
+                    <input type="submit" value="로그인하기" id="loginBtn">
                 </div>
             </div>
         </div>

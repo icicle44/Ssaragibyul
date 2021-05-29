@@ -2,6 +2,7 @@ package com.ssaragibyul.member.service.logic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.member.store.MemberStore;
@@ -31,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	public int checkIdDup(String userId) {
 		return mStore.checkIdDup(userId);
 	}
+	
 	// nickname 새로고침
 	@Override
 	public Member refreshNickName() {
@@ -54,8 +57,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public String searchId(Member member){
-		return mStore.searchId(member);
+	public String searchId(HashMap<String, String>param){
+		return mStore.searchId(param);
+	}
+
+	@Override
+	public Independence mypage(String userId) {
+		return mStore.mypage(userId);
 	}
 
 	/*

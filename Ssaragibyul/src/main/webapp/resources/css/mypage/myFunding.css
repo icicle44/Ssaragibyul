@@ -1,0 +1,260 @@
+@charset "UTF-8";
+
+body{
+    width: auto;
+    height: 800px;
+    margin : auto;
+}
+
+/*해더 부분*/
+header{
+    width: auto;
+    height: 100px;
+    padding-top: 70px;
+    margin : auto;
+}
+
+.background{
+    height:1100px;
+    margin : auto;
+    padding-top: 80px;
+    background: linear-gradient(rgb(70, 70, 70) 32%, #fff 10% );
+}
+
+.contents{
+    height: auto;
+    padding-top: 80px;
+}
+
+.contents .kind{
+    width: auto;
+    height: 30px;
+}
+
+.contents .kind #k1{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 85px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: white;
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(235, 92, 1);
+    padding-top: 10px;
+    border: 2px solid rgb(174, 174, 174);
+}
+
+.contents .kind #k2{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(238, 238, 238);
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(174, 174, 174);
+    padding-top: 12px;
+}
+
+.leftMenu{
+    border: 3px solid black;
+    margin-left: 70px;
+    width: 18%;
+    height: 900px;
+    margin-top: 10px;
+    float: left;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+.rightCon{
+    border: 3px solid black;
+    margin-right: 70px;
+    width: 71%;
+    height: 900px;
+    float: right;
+    border: 1px solid white;
+    border-radius: 20px 20px 20px 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+#h2{
+	padding-top: 40px;
+	font-weight: 600;
+    font-size: 28px;
+}
+
+/*상단*/
+
+
+.f-top{
+    width: auto;
+    height: 30px;
+    margin: 30px 60px;
+}
+.f-top .count{
+    float: left;
+    width: 40%;
+    height: auto;
+}
+.f-top .count #num{
+    float: left;
+    padding-right: 5px;
+    font-size: 19px;
+    font-weight: 550;
+    color: rgb(235, 92, 1);
+}
+.f-top .count #p-count{
+    padding-right: 5px;
+    font-size: 19px;
+    font-weight: 550;
+    color: rgb(51, 51, 51);
+}
+
+
+.f-top .category{
+    float: right;
+    width: auto;
+    height: auto;
+    
+}
+.f-top .category #divide{
+    width: 110px;
+    height: 35px;
+    text-align: center;
+    border: 2px solid rgb(224, 224, 224);
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(91, 91, 91);
+}
+#divide #op{
+    border: 2px solid rgb(127, 127, 127);
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: bold;
+    color: rgb(91, 91, 91);
+}
+
+/*메인*/
+
+.f-cont{
+    width: auto;
+    height: 300px;
+    margin: 20px 60px;
+}
+
+
+.f-cont .funding #img{
+    margin-right: 20px;
+    box-shadow: 2px solid blick;
+    border-radius: 20px;
+}
+
+#f-img{
+    position: relative;
+    width: 450px;
+    height: 250px;
+}
+#hart-img{
+    position: absolute;
+    margin-left: -45px;
+    margin-top: 5px;
+    width: 40px;
+    height: 40px;
+}
+
+/*제목*/
+
+.title{
+    width: 500px;
+    height: 120px;
+    margin-left: 20px;
+}
+
+.title #title-1{
+    width: 100%;
+    height: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(129, 97, 97);
+}
+
+.title #title-2{
+    font-size: 19px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: rgb(51, 51, 51);
+}
+
+
+.pay-status{
+    margin-top: -50px;
+    margin-left: 20px;
+    margin-bottom: 80px;
+    height: 30px;
+    width: auto;
+}
+
+.pay-status span{
+    height: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(241, 196, 15);
+}
+
+/*누적현황 - 남은 기간*/
+.accrue{
+    width: 460px;
+    padding-top: 10px;
+    margin-left: 20px;
+}
+.accrue #sum{
+    float: left;
+    padding-right: 5px;
+    font-weight: bold;
+    font-size: 17px;
+    
+}
+.accrue #achieve{
+    float: left;
+    font-weight: bold;
+    font-size: 17px;
+    padding-right: 10px;
+    color: rgb(235, 92, 1);
+}
+
+.accrue #time{
+    float: right;
+    margin-right: -40px;
+}
+
+.accrue #time img{
+    float: left;
+    padding-right: 5px;
+}
+
+.accrue #time span{
+    padding-top: -10px;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(51, 51, 51);
+}
+
+/*달성률 그래프*/
+
+.graph{
+    height: 5px;
+    width: auto;
+    margin-top: 30px;
+    margin-left: 20px;
+    margin-bottom: 5px;
+    background-color: rgb(190, 190, 190);
+}

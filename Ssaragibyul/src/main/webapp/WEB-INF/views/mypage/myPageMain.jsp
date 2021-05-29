@@ -25,8 +25,11 @@
         <c:if test="${!empty sessionScope.loginUser}">
         <div class="rightCon">
             <div class="r-title">
-                <div id="my-nick">나의 닉네임 : 독립운동가</div>
-                <div id="nickname">${loginUser.nickName }</div>
+                <div id="nickname">${independence.nameKo }</div>
+                <div id="my-nick">님의 별</div>
+                <div id="star-img">
+                	<img src="/resources/img/mypage/star-img6.png" id="star">
+                </div>
             </div>
             <div class="inform1">
                 <img src="/resources/img/mypage/table-icon.png" id="icon">
@@ -34,21 +37,21 @@
                 <table>
                     <tr>
                         <td id="t">한글 이름</td>
-                        <td>한용운</td>
+                        <td>${independence.nameKo }</td>
                         <td id="t">한자 이름</td>
-                        <td>韓龍雲</td>
+                        <td>${independence.nameCh }</td>
                     </tr>
                     <tr>
                         <td id="t">생년월일</td>
-                        <td>1876-08-29</td>
+                        <td>${independence.birthday }</td>
                         <td id="t">사망월일</td>
-                        <td>1944-05-09</td>
+                        <td>${independence.lastday }</td>
                     </tr>
                     <tr>
                         <td id="t">성별</td>
-                        <td>남</td>
+                        <td>${independence.sex }</td>
                         <td id="t">본적</td>
-                        <td>충청남도 홍산</td>
+                        <td>${independence.registerLarge } ${independence.registerMid }</td>
                     </tr>
                 </table>
             </div>
@@ -58,11 +61,11 @@
                 <table>
                     <tr>
                         <td id="t">운동계열</td>
-                        <td>3·1 운동</td>
+                        <td>${independence.activityLine }</td>
                         <td id="t">포상년도</td>
-                        <td>1962</td>
+                        <td>${independence.prizedYear }</td>
                         <td id="t">훈격</td>
-                        <td>대한민국장</td>
+                        <td>${independence.prizeClass }</td>
                     </tr>
                 </table>
             </div>
@@ -71,9 +74,7 @@
                 <div id="peaple-inform">공적개요</div>
                 <div id="inform-con">
                     <span>
-                    1. 기미독립운동 때 불교계대표로 33인 중 1인임
-                    2. 3년 징역을 받았고 문학운동과 불교혁신운동에 진력하다가
-                    3. 1944년 5월 9일 서울 성북동 심우장 자택에서 사망하였음
+                    ${independence.achievement }
                     </span>
                 </div>
             </div>
@@ -81,7 +82,6 @@
         </c:if>
     </div>
     </div>
-        
     <footer>
     <jsp:include page="../../../footer.jsp"/>
     </footer>

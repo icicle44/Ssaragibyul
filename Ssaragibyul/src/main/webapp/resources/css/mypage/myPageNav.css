@@ -111,11 +111,14 @@ ul{
 	text-decoration:none;
     background-color:rgb(245, 245, 245);
 } 
+
 .menu-v1:hover>a{
     font-weight:bold;
     text-decoration:none;
     color:  rgb(235, 92, 1);
 } 
+
+
 .menu-v1 .submenu{ 
     text-decoration:none;
     margin-top:7px; 
@@ -128,10 +131,4 @@ ul{
 	color:  rgb(235, 92, 1);
 }
 
-.menu-v1 .submenu li:hover{ 
-    text-decoration:none;
-    background-color:rgb(245, 245, 245);
-    color:  rgb(235, 92, 1);
-    font-size: 18px;
-    font-weight: 600;
-} 
+ 

@@ -11,9 +11,18 @@
 		<script>
 		$(document).ready(function(){ 
             /*menu v1*/ 
-            $(".menu-v1").mouseover(function(){ $(this).children(".submenu").stop().slideDown(); }); $(".menu-v1").mouseleave(function(){ $(this).children(".submenu").stop().slideUp(); }); 
-            /*menu v2*/
-            $(".menu-v2").mouseover(function(){ $(this).children(".submenu").show(200); }); $(".menu-v2").mouseleave(function(){ $(this).children(".submenu").hide(200); }); });
+            $(".menu-v1").mouseover(function(){ 
+            	$(this).children(".submenu").stop().slideDown();
+            }); 
+            $(".menu-v1").mouseleave(function(){ 
+            	$(this).children(".submenu").stop().slideUp(); 
+           	}); 
+            
+			$('.submenu').click(function () {
+	            $(this).toggleClass("active"); //addCss("active");
+	        });
+		});
+		
 		</script>
 </head>
 <body>
@@ -43,16 +52,16 @@
          <ul id="nav-v1"> 
              <li class="menu-v1"><a href="userUpdate.do">내 정보 수정</a>         
              </li> 
-             <li class="menu-v1"><a href="#">참여한 프로젝트  ▾</a> 
+             <li class="menu-v1"><a href="myFunding.do">참여한 프로젝트  ▾</a> 
                  <ul class="submenu"> 
-                     <li><a href="#">펀딩</a></li> 
-                     <li><a href="#">기부</a></li> 
+                     <li><a href="myFunding.do">펀딩</a></li> 
+                     <li><a href="myDonation.do">기부</a></li> 
                  </ul> 
              </li> 
-             <li class="menu-v1"><a href="#">제안한 프로젝트  ▾</a> 
+             <li class="menu-v1"><a href="proposeFunding.do">제안한 프로젝트  ▾</a> 
                  <ul class="submenu"> 
-                     <li><a href="#">펀딩</a></li> 
-                     <li><a href="#">기부</a></li> 
+                     <li><a href="proposeFunding.do">펀딩</a></li> 
+                     <li><a href="proposeDonaion.do">기부</a></li> 
                  </ul> 
              </li> 
              <li class="menu-v1"><a href="#">관심 프로젝트  ▾</a> 

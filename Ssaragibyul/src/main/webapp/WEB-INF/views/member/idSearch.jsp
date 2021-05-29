@@ -7,7 +7,6 @@
 <title>회원가입 페이지</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/idSearch.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
     <body>
     <header>
@@ -26,7 +25,7 @@
                 <input type="email" name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요.">
             </div>
             <div class="btn">
-            	<input type="button" value="아이디 찾기"  id="idSearch" onclick='location.href="idFind.do?userName=userName & userEmail=userEmail";'>
+            	<input type="button" value="아이디 찾기"  id="idSearch" onclick="fnIdFind()">
             </div>
             <div>
                 <p id="pwSearch"><a href="pwSearch.do" id="pwSearch">비밀번호 찾기</a></p>    
@@ -36,10 +35,16 @@
     <footer>
     	<jsp:include page="../../../footer.jsp"/>
     </footer>
-    	<script>
-	    	$(window).load(function(){
-	    		$("#idSearch").click();
-	    	})
-    	</script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    
+   	<script>
+   	
+    	function fnIdFind() {
+    		var userName = $("#userName").val();
+    		var userEmail = $("#userEmail").val();
+    		
+    		location.href = "idFind.do?userName="+userName+"&userEmail="+userEmail;
+    	}
+   	</script>
     </body>
 </html>

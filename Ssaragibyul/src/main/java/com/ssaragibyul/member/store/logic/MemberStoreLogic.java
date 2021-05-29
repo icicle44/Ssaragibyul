@@ -1,9 +1,12 @@
 package com.ssaragibyul.member.store.logic;
 
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.store.MemberStore;
 
@@ -48,8 +51,14 @@ public class MemberStoreLogic implements MemberStore{
 
 	// 아이디 찾기
 	@Override
-	public String searchId(Member member) {
-		return sqlSession.selectOne("memberMapper.idSearch", member);
+	public String searchId(HashMap<String, String>param) {
+		return sqlSession.selectOne("memberMapper.idSearch", param);
+	}
+
+	// 독립 유공자 정보 마이페이지에 띄워주기
+	@Override
+	public Independence mypage(String userId) {
+		return sqlSession.selectOne("memberMapper.myPageView", userId);
 	}
 
 	/*

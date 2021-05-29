@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-	
-	<!-- 맴버 -->
+
 	<resultMap type="Member" id="memberResultMap">
 		<id property="userId" column="USER_ID"></id>
 		<result property="userPw" column="USER_PW"></result>
@@ -17,24 +16,6 @@
 		<result property="mCode" column="M_CODE"></result>
 		<result property="mngNo" column="MNG_NO"></result>
 	</resultMap>
-
-	<!-- 독립유공자 -->
-	<resultMap type="independence" id="independenceMap">
-		<id property="independenceNo" column="MNG_NO"/>
-		<result property="nameKo" column="NAME_KO"/>
-		<result property="nameCh" column="NAME_CH"/>
-		<result property="birthday" column="BIRTHDAY"/>
-		<result property="lastday" column="LASTDAY"/>
-		<result property="sex" column="SEX"/>
-		<result property="registerLarge" column="REGISTER_LARGE_DIV"/>
-		<result property="registerMid" column="REGISTER_MID_DIV"/>
-		<result property="activityLine" column="ACTIVITY_LINE"/>
-		<result property="prizeClass" column="PRIZED_CLASS"/>
-		<result property="prizedYear" column="PRIZED_YEAR"/>
-		<result property="achievement" column="ACHIEVEMENT_KO"/>
-	</resultMap>
-	
-	
 
 	<select id="selectOneMember" parameterType="Member" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
@@ -54,7 +35,7 @@
 	</insert>
 	
 	<!-- 아이디 찾기 -->
- 	<select id="idSearch"  parameterType="hashMap" resultType="String">
+ 	<select id="idSearch"  parameterType="String" resultType="String">
 		SELECT * FROM MEMBER
 		WHERE USER_NAME = #{userName } AND USER_EMAIL = #{userEmail } 
 	</select>
@@ -69,12 +50,6 @@
 		DELETE MEMBER WHERE USER_ID = #{userId }
 	</delete> 
 	
-	<!-- 독립 유공자 정보 마이페이지에 띄워주는 것 -->
- 	<select id="myPageView"  parameterType="Independence" resultMap="independenceMap">
-		SELECT *
-		FROM INDEPENDENCE
-		WHERE MNG_NO=(SELECT MNG_NO FROM MEMBER WHERE USER_ID = #{userId })
-	</select>
 	
 	<!-- 관리자용 -->
 	

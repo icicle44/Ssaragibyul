@@ -112,7 +112,7 @@
                         </tr>
                     </table>
                     <div id="delete">
-                       <input type="button" value="탈퇴하기" onclick="location.href='memberDelete.do?userId=${loginUser.userId}';" id="delete-btn">
+                       <input type="button" value="탈퇴하기" onclick="fnUserDelete()" id="delete-btn">
                     </div>
                 </div>
             </form>
@@ -135,15 +135,14 @@
        		}
        		history.back();
             }
-      
-			$(document).ready(function(){
-		  		$('#delete-btn').click(function(){
-		  			if(!confirm('정말로 탈퇴하시겠습니까?')){
-		  				return false;
-		  			}
-	  				history.back();
-				});
-			});
+            
+            function fnUserDelete() {
+            	if(!confirm('정말로 탈퇴하시겠습니까?')){
+	  				return false;
+	  			}
+            	var userId = '${ loginUser.userId }';
+            	location.href="memberDelete.do?userId="+ userId;
+            }
 	</script>
     </body>
 </html>
