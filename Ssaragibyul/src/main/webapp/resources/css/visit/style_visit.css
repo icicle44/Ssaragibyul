@@ -1,9 +1,9 @@
-/* div, article, section {
+/*     div, article, section {
     border: 1px solid black;
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}  */
+}     */
 body * {
   box-sizing: border-box;
   text-align: center;
@@ -41,6 +41,125 @@ body * {
 	text-align: center;
 }
 
+/* 디테일 부분-------------------------------------------------------- */
+
+
+/*해더 부분*/
+header{
+    width: auto;
+    height: 100px;
+    padding-top: 70px;
+    margin : auto;
+}
+
+.background{
+    height:1000px;
+    margin : auto;
+    padding-top: 80px;
+    background: linear-gradient(rgb(70, 70, 70) 32%, #fff 10% );
+}
+
+.title{
+    position: relative;
+    padding-top: 60px;
+}
+
+#title{
+	font-weight: 600;
+    color: white;
+}
+
+#reeting{
+	font-weight: 600;
+    color: white;
+    padding-top: 10px;
+}
+
+.contents{
+    height: auto;
+    padding-top: 30px;
+}
+
+.rightCon{
+    border: 3px solid black;
+    margin-top: 3em;
+    width: 100%;
+    height: 19em;
+    float: right;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+
+/*오른쪽 내용*/
+
+.r-title{
+    margin: 0;
+    padding-top: 2em;
+    font-weight: 300;
+}
+.r-title #title{
+	color: #464646;
+    float: left;
+	height: 100%;
+	width: 70%;
+	padding-left:0.5em;
+	text-align: left;
+	padding-bottom: 1em;
+}
+.r-title #nickname{
+	float: right;
+    padding-right: 4em;
+    padding-top: 1em;
+    font-size: 20px;   
+    color: rgb(174, 174, 174); 
+}
+
+."content"{
+    margin-left: 50px;
+}
+#icon{
+    width: 35px;
+    height: 25px;
+    float: left;
+    padding-right: 10px
+}
+
+table{
+    width: 100%;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 25px;
+}
+
+#t{
+    background-color: rgb(220, 220, 220);  
+}
+
+.info{
+    padding-top: 3em;
+}
+.info td{
+	width: 5em;
+}
+.reply-container{
+    padding-top: 15px;
+}
+
+.reply-container #reply{
+    width: 100%;
+    height: inherit;
+    padding: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    border: 3px solid rgb(204, 204, 204);
+}
+                                    
+
+/* 리스트의 그리드 부분----------------------------------------- */
 .js .grid--loaded::after {
 	opacity: 0;
 }

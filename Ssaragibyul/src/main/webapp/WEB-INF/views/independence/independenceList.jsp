@@ -155,6 +155,10 @@
 
 	</section>
 </div>
-
+<script>
+$("div").on("click", function(){
+	alert($("this").attr('class'));
+	
+</script>
 </body>
 </html>

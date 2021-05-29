@@ -10,6 +10,7 @@ public class Visit {
 	private String visitTitle;
 	private String visitContents;
 	private int visitCount;
+	private int likes;
 	private Date vCreateDate;
 	private Date vUpdateDate;
 	private String originalFilename;
@@ -67,6 +68,14 @@ public class Visit {
 	public void setVisitCount(int visitCount) {
 		this.visitCount = visitCount;
 	}
+	
+	public int getLikes() {
+		return likes;
+	}
+
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
 
 	public Date getvCreateDate() {
 		return vCreateDate;
@@ -111,8 +120,9 @@ public class Visit {
 	@Override
 	public String toString() {
 		return "Visit [visitNo=" + visitNo + ", userId=" + userId + ", siteNo=" + siteNo + ", visitTitle=" + visitTitle
-				+ ", visitContents=" + visitContents + ", visitCount=" + visitCount + ", vCreateDate=" + vCreateDate
-				+ ", vUpdateDate=" + vUpdateDate + ", originalFilename=" + originalFilename
-				+ ", renameFilename=" + renameFilename + ", uploadTime=" + uploadTime + "]";
+				+ ", visitContents=" + visitContents + ", visitCount=" + visitCount + ", likes=" + likes
+				+ ", vCreateDate=" + vCreateDate + ", vUpdateDate=" + vUpdateDate + ", originalFilename="
+				+ originalFilename + ", renameFilename=" + renameFilename + ", uploadTime=" + uploadTime + "]";
 	}
+	
 }

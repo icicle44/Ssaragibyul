@@ -51,7 +51,7 @@
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
 	</resultMap>
 	
-	<resultMap type="FundingReply" id="FundingReplyResultMap">
+	<resultMap type="Reply" id="FundingReplyResultMap">
 		<id property="replyNo" column="COMM_NO"></id>
 		<result property="no" column="F_PROJECT_NO"></result>
 		<result property="userId" column="USER_ID"></result>

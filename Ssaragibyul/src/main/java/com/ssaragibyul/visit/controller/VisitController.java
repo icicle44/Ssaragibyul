@@ -1,6 +1,7 @@
  package com.ssaragibyul.visit.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -21,8 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
+import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.service.VisitService;
 
@@ -148,16 +153,30 @@ public class VisitController {
 	@ResponseBody
 	@RequestMapping(value="addReply.do", method=RequestMethod.POST)
 	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
-
-		return "fail";
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		reply.setUserId(loginUser.getUserId());
+		int result = vService.registerReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	// 댓글목록
+	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
+	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception{
+		ArrayList<Reply> rList = vService.printAllReply(visitNo);
+		if(!rList.isEmpty()) {
+			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			gson.toJson(rList, response.getWriter());
+		}else {
+			
+		}
 	}
 	// 댓글삭제
-	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
-	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
-		
-		
-	}
-	@RequestMapping(value="noticeSearch.do", method=RequestMethod.GET)
+	
+	// 검색
+	@RequestMapping(value="visitSearch.do", method=RequestMethod.GET)
 	public String visitSearch(@ModelAttribute Search search, Model model) {
 		
 		// 2개의 값을 하나에 담아서 보내는 방법

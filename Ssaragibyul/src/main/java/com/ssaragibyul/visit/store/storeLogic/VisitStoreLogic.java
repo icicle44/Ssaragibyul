@@ -57,15 +57,14 @@ public class VisitStoreLogic implements VisitStore{
 	}
 
 	@Override
-	public ArrayList<Reply> selectAllReply(int VisitNo) {
+	public ArrayList<Reply> selectAllReply(int visitNo) {
 		
-		return null;
+		return (ArrayList)session.selectList("visitMapper.selectReply", visitNo);
 	}
 
 	@Override
 	public int insertReply(Reply reply) {
-		
-		return 0;
+		return session.insert("visitMapper.insertReply", reply);
 	}
 
 	@Override

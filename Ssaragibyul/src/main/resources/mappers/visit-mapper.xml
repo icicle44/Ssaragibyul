@@ -15,14 +15,39 @@
 		<result property="renameFilename" column="RENAME_FILENAME"/>
 		<result property="uploadTime" column="UPLOAD_TIME"/>
 	</resultMap>
+	<resultMap type="Reply" id="replyResultMap">
+		<id property="replyNo" column="REPLY_NO"/>
+		<result property="no" column="VISIT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="nick" column="NICKNAME"/>
+		<result property="contents" column="CONTENTS"/>
+		<result property="enrollDate" column="REG_DATE"/>
+	</resultMap>
+	
 	<select id="selectAll" resultMap="visitResultMap">
 		SELECT * FROM VISIT JOIN VISIT_FILE USING(VISIT_NO) ORDER BY VISIT_NO DESC
 	</select>
-
+	
+	<select id="selectVisitListCount" resultType="_int">
+      SELECT COUNT(*) FROM HISTORY
+    </select>
+    
 	<insert id="insertVisit">
 		INSERT ALL 
 		INTO VISIT VALUES(SEQ_VISIT.NEXTVAL, #{userId }, #{siteNo }, #{visitTitle }, #{visitContents }, DEFAULT, DEFAULT, DEFAULT)
 		INTO VISIT_FILE VALUES(SEQ_VISIT_FILE.NEXTVAL, #{originalFilename }, #{renameFilename }, #{uploadTime }, SEQ_VISIT.NEXTVAL)
 		SELECT * FROM DUAL
 	</insert>
+	
+	
+	<!--  댓글 -->
+	<select id="selectReply">
+		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID)
+	</select>
+	
+	
+	<insert id="insertReply">
+		INSERT INTO VISIT_REPLY(SEQ_VISIT_REPLY, #{userId }, #{contents }, #{enrollDate }, #{visitNo })
+	</insert>
+	
 </mapper>

@@ -68,14 +68,12 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public ArrayList<Reply> printAllReply(int visitNo) {
-		
-		return null;
+		return vStore.selectAllReply(visitNo);
 	}
 
 	@Override
 	public int registerReply(Reply reply) {
-		
-		return 0;
+		return vStore.insertReply(reply);
 	}
 
 	@Override
