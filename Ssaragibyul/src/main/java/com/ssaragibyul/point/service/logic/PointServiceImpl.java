@@ -30,12 +30,6 @@ public class PointServiceImpl implements PointService{
 		return pntStore.insertChargePoint(point);
 	}
 	
-	/////////////////////증가 포인트 등록 - 방문인증, 선물받음, 펀딩취소, 기부취소
-	@Override
-	public int registerPosPoint(Point point) {
-		return pntStore.insertPosPoint(point);
-	}
-	
 	//포인트 증가내역 등록-방문인증용
 	@Override
 	public int registerPosPoint(Visit visit) {
@@ -77,14 +71,6 @@ public class PointServiceImpl implements PointService{
 		
 		int result = pntStore.insertPoint(point);
 		return result;
-	}
-	
-	
-	//////////////감소 포인트 등록 - 선물함, 펀딩참여, 기부참여
-	@Override
-	public int registerNegPoint(Point point) {
-		// TODO Auto-generated method stub
-		return pntStore.insertNegPoint(point);
 	}
 	
 	//포인트 감소내역 등록-펀딩 참여용
@@ -142,6 +128,19 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int getMyPoint(String userId) {
 		return pntStore.getMyPoint(userId);
+	}
+	
+	/////////////////////증가 포인트 등록 - 방문인증, 선물받음, 펀딩취소, 기부취소
+	@Override
+	public int registerPosPoint(Point point) {
+		return pntStore.insertPosPoint(point);
+	}
+	
+	//////////////감소 포인트 등록 - 선물함, 펀딩참여, 기부참여
+	@Override
+	public int registerNegPoint(Point point) {
+		// TODO Auto-generated method stub
+		return pntStore.insertNegPoint(point);
 	}
 	
 }

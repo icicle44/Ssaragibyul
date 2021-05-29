@@ -46,11 +46,12 @@ public class PointAndProject extends Point{
 	@Override
 	public String toString() {
 		return "PointAndProject [subject=" + subject + ", projectNo=" + projectNo + ", nickName=" + nickName
-				+ ", getPntListNo()=" + getPntListNo() + ", getEventNo()=" + getEventNo() + ", getUserId()="
-				+ getUserId() + ", getOppUserId()=" + getOppUserId() + ", getVarTime()=" + getVarTime()
-				+ ", getEventCode()=" + getEventCode() + ", getVarType()=" + getVarType() + ", getVarAmount()="
-				+ getVarAmount() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()="
-				+ hashCode() + "]";
+				+ ", getPntListNo()=" + getPntListNo() + ", getEventNo()=" + getEventNo() + ", getEventNoCharge()="
+				+ getEventNoCharge() + ", getUserId()=" + getUserId() + ", getOppUserId()=" + getOppUserId()
+				+ ", getVarTime()=" + getVarTime() + ", getEventCode()=" + getEventCode() + ", getVarType()="
+				+ getVarType() + ", getVarAmount()=" + getVarAmount() + ", getBuyerEmail()=" + getBuyerEmail()
+				+ ", getReceiptUrl()=" + getReceiptUrl() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

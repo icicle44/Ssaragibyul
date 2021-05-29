@@ -15,7 +15,9 @@
 <body>
 	<jsp:include page="../../../header.jsp"/>
 	<main id=main>
+
 		<section class="wrapper-left sideBar col-md-3" id="menubar">
+			<input type="button" value="충전하기" id="chargeBtn" onClick="window.open('chargePointView.do')"><br>
 			<a href="recMsgList.do">전체 내역</a><hr>
 			<span id="showSubMenu"> + </span>
 			<div id="subMenu">
@@ -39,7 +41,7 @@
 				<table align="center">
 					<thead>
 						<tr style="border-bottom:hidden;">
-							<th>번호</th>
+							<th>내역번호</th>
 							<th>일시</th>
 							<th>내용</th>
 							<th>포인트</th>
@@ -54,12 +56,12 @@
 						<c:if test="${!empty pointList}">
 							<c:forEach items="${pointList}" var="point" varStatus="index">
 								<tr>
-									<td>${index.count }</td>
+									<td>${point.pntListNo }</td>
 									<td><fmt:formatDate value="${point.varTime }" pattern="yyyy.MM.dd"/></td>
 									
 									<!-- 내용: 각 상세보기로 링크 -->
 									<c:if test="${point.eventCode == 0}">
-										<td>${point.varAmount } 원을 충전하셨습니다.</td>									
+										<td><a href=${point.receiptUrl } target="_blank">${point.varAmount } 원을 충전하셨습니다.</a></td>									
 									</c:if>
 									<c:if test="${point.eventCode == 1 && point.varType == 1}">										
 										<td>[${point.subject }]에 펀딩하셨습니다.</td>									
@@ -195,7 +197,9 @@
 		/* 모달창 */
 		function msgModal(msgUrl) {
 			$("#modal #modal_content").load(msgUrl);
+			setTimeout(function(){
 			$("#modal").fadeIn();
+			}, 500)
 		}
 		
 		$(function() {
@@ -213,6 +217,7 @@
 			/* 모달창 닫기 */
 			$("#modal_content").on("click", function() {
 				$("#modal").fadeOut();
+				$("#modal #modal_content").empty();
 			});
 		});
 		

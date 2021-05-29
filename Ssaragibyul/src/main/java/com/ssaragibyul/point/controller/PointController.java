@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.common.PageInfo;
@@ -27,7 +28,7 @@ import com.ssaragibyul.visit.domain.Visit;
 public class PointController {
 
 	@Autowired
-	private PointService pService;
+	private PointService pntService;
 	
 	//<insert>
 	//결제정보 insert / 포인트 충전 insert (내가)
@@ -39,105 +40,32 @@ public class PointController {
 	//선물함 insert(해당쪽지번호 같이 insert) (내가)
 	//선물받음 insert(해당쪽지번호 같이 insert) (내가)
 	
-	//<select>
-	//포인트 내역리스트 select
-	// - 조인이랑 where 조건으로 프로젝트 제목, 예약인지 지불됐는지 가져와서 뿌려줌
-	// - jsp에서 if문으로 문구변경
-	//잔여 포인트 조회 select(sum)
-	
-	//<delete> 없음
-	//<update> 없음
-	
-	//point insert문 안에서 selectkey, select last_number(동적쿼리로 시퀀스명 변경) 사용
-	
-	//포인트내역 등록-충전용
-	@RequestMapping(value="chargePoint.do", method=RequestMethod.POST)
-	public ModelAndView chargePointRegister(ModelAndView mv, int varAmount, HttpSession session) {
-		//결제화면.jsp에서 ajax에 json(varAmount:결제금액)으로 넘겨옴
-		Member loginUser = (Member)session.getAttribute("loginUser"); //login담당자에게 setAttribute 명칭 물어보기
-		Point point = new Point(loginUser.getUserId(), varAmount);
-		//나머지는 쿼리문에서 적기(이벤트번호는 충전용 seq만들어서 처리)
-		int result = pService.registerChargePoint(point);
+	//충전하기 화면 이동
+	@RequestMapping(value="chargePointView.do", method=RequestMethod.GET)
+	public ModelAndView chargePointView(ModelAndView mv,
+										HttpSession session) {
+		//message: 공지외-receiverId, msgType / 공지-msgType
+		if(session != null && (Member)session.getAttribute("loginUser") != null) {
+			mv.setViewName("point/chargePointView");
+		} else {
+			mv.setViewName("member/login");
+		}
 		return mv;
 	}
-	
-	//항목 중 기존은 ModelAttribute로 담아온 값에서 꺼내쓰기
-	//나머지는 RequestParam 매개변수 추가해달라고 하기
-	//넘길때는 point 객체에 담아서 넘기면 공통
-	//매퍼에서 selectkey, insert 쿼리문에 이벤트유형코드 조건으로 동적 쿼리 걸기
-	
-	//포인트내역 등록-증가용(방문인증, 선물받음, 펀딩/기부 참여취소)
-	//방문인증: 아이디(기존), 이벤트유형코드(hidden)
-	//펀딩 참여취소: 펀딩번호(name=eventNo으로), 아이디(기존), 이벤트유형코드, 펀딩했던포인트(name = varAmount로) <c:url사용>
-	//기부 참여취소: 기부번호(name=eventNo으로), 아이디(기존), 이벤트유형코드, 펀딩했던포인트(name = varAmount로) <c:url사용>
-	// - 참여취소는 selectkey안해도 됨
-	//선물받음: 받은사람아이디(기존), 선물포인트(기존), 보낸사람아이디(기존), 이벤트유형코드
-
-	////////////////selectkey에 if문쓰고 펀딩,기부는 selectkey 쿼리문 적용안되게 하기.
-	////////////////안돼면 가장 최근 시퀀스값 알아오는 메소드 만들어서 내부에서 호출, point객체에 세팅하고 넘기기
-	
-	//포인트 증가내역 등록-방문인증용
-//	public int posPointRegister(Visit visit, int eventCode) {
-//		Point point = new Point();
-//		point.setVarAmount(500);
-//		int result = pService.registerPosPoint(point);
-//		return result;
-//	}
-	
-	//포인트 증가내역 등록-펀딩 취소용
-//	public int posPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
-//		//selectkey에도 if문 사용
-//		Point point = new Point();
-//		
-//		int result = pService.registerPosPoint(point);
-//		return result;
-//	}
-	
-	//포인트 증가내역 등록-기부 취소용
-//	public int posPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
-//		//selectkey에도 if문 사용
-//		Point point = new Point();
-//		
-//		int result = pService.registerPosPoint(point);
-//		return result;
-//	}
-	
-//	//포인트 증가내역 등록-선물받음
-//	public int posPointRegister(Message message, int eventCode, int varAmount) {
-//		Point point = new Point();
-//		
-//		int result = pService.registerPosPoint(point);
-//		return result;
-//	}
-	
-	//포인트내역 등록-감소용(펀딩참여, 기부참여, 선물함)
-	//펀딩참여: 아이디(기존), 사용포인트(기존), 펀딩번호(기존), 이벤트유형코드
-	//기부참여: 아이디(기존), 사용포인트(기존), 기부번호(기존), 이벤트유형코드
-	//선물함: 보낸사람(기존), 선물포인트(기존), 받는사람아이디(기존), 이벤트유형코드
-	
-	//포인트 감소내역 등록-펀딩 참여용
-//	public int negPointRegister(FundingLog fundLog, int eventCode, int varAmount) {
-//		Point point = new Point();
-//		
-//		int result = pService.registerNegPoint(point);
-//		return 0;
-//	}
-	
-//	//포인트 감소내역 등록-기부 참여용
-//	public int negPointRegister(DonationLog donateLog, int eventCode, int varAmount) {
-//		Point point = new Point();
-//		
-//		int result = pService.registerNegPoint(point);
-//		return 0;
-//	}
-	
-	//포인트 감소내역 등록-선물함
-//	public int negPointRegister(Message message, int eventCode, int varAmount) {
-//		Point point = new Point();
-//		
-//		int result = pService.registerNegPoint(point);
-//		return result;
-//	}
+	//포인트내역 등록-충전용
+	@ResponseBody
+	@RequestMapping(value="chargePoint.do", method=RequestMethod.POST)
+	public String chargePointRegister(@ModelAttribute Point point) {
+		//결제화면.jsp에서 ajax에 json(varAmount:결제금액)으로 넘겨옴
+		point.setEventCode(0);
+		point.setVarType(0);
+		int result = pntService.registerChargePoint(point);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	
 	//포인트 사용내역 출력(전체, 펀딩, 기부, 선물, 방문인증, 충전) //펀딩-기부 UNIONALL
 	//아직 차감안된 포인트내역도 나오게 해야함
@@ -148,10 +76,9 @@ public class PointController {
 		if(session != null && (Member)session.getAttribute("loginUser") != null) {		
 			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 			int currentPage = (page != null)? page : 1;
-			int listCount = pService.getListCount(userId);
+			int listCount = pntService.getListCount(userId);
 			PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
-			ArrayList<PointAndProject> ppList = pService.printAll(pi, userId);
-			System.out.println(ppList.get(0).toString());
+			ArrayList<PointAndProject> ppList = pntService.printAll(pi, userId);
 			
 			if(!ppList.isEmpty()) {
 				mv.addObject("pointList", ppList);
@@ -178,7 +105,7 @@ public class PointController {
 	public int getMyPoint(HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		//메소드 2개필요. 전체사용내역반영된 금액 & 예약중인 금액
-		int myPoint = pService.getMyPoint(loginUser.getUserId());
+		int myPoint = pntService.getMyPoint(loginUser.getUserId());
 		return myPoint;
 	}
 	

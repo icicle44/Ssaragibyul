@@ -21,8 +21,7 @@ public class PointStoreLogic implements PointStore{
 	//증가 포인트 등록 - 충전
 	@Override
 	public int insertChargePoint(Point point) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("pointMapper.insertCharge", point);
 	}
 
 	//포인트 등록 공통사용(충전제외)
