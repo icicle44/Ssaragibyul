@@ -311,14 +311,13 @@
 									$tr.append($rCreateDate);
 									$tableBody.append($tr);
 								}
-							}		
+							}
 						},
 						error : function() {
 
 						}
 					});
-							// 작성 후 내용 초기화
-							$("#rContent").val(""); // 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
+
 						} else {
 							alert("댓글 등록 실패");
 						}
@@ -327,6 +326,8 @@
 
 					}
 				});
+				// 작성 후 내용 초기화
+				rContent = $(this).closest("td").prev().children("textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
 				});
 			});
 		</script>
