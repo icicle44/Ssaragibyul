@@ -39,10 +39,6 @@ public interface PointService {
 	
 	//내포인트 조회
 	public MyPoint getMyPoint(String userId);
-	
-	//안씀
-	public int registerPosPoint(Point point);
-	public int registerNegPoint(Point point);
 
 	
 

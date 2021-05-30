@@ -44,19 +44,6 @@ public class PointStoreLogic implements PointStore{
 	public int insertDonateCancelPoint(int donateNo) {
 		return sqlSession.insert("pointMapper.insertDonateCancelPoint", donateNo);
 	}
-	
-	//////////////////증가 포인트 등록 - 방문인증, 선물받음, 펀딩취소, 기부취소
-	@Override
-	public int insertPosPoint(Point point) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	///////////////////////감소 포인트 등록 - 선물함, 펀딩참여, 기부참여
-	@Override
-	public int insertNegPoint(Point point) {
-		return sqlSession.insert("pointMapper.insertNegPoint", point);
-	}
 
 	//포인트 내역 리스트 출력
 	@Override
@@ -72,6 +59,7 @@ public class PointStoreLogic implements PointStore{
 		return sqlSession.selectOne("pointMapper.selectListCount", userId);
 	}
 	
+	//포인트 내역 검색리스트 출력
 	@Override
 	public ArrayList<PointAndProject> selectSearchList(PageInfo pi, SearchMsg search) {
 		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
@@ -79,6 +67,7 @@ public class PointStoreLogic implements PointStore{
 		return (ArrayList)sqlSession.selectList("pointMapper.selectSearchList", search, rowBounds);
 	}
 
+	//포인트 내역 검색리스트 갯수(페이징용)
 	@Override
 	public int getSearchListCount(SearchMsg search) {
 		return sqlSession.selectOne("pointMapper.selectSearchCount", search);

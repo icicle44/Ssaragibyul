@@ -3,9 +3,11 @@ body {
 	color: gray;
 	font-weight: 400;
 	font-size: 1rem;
-	background: #FFFFFF
+	background: #FFFFFF;
 }
-
+.main-menu{
+	font-family: 'Noto Sans KR', sans-serif;	
+}
 ::-moz-selection {
 	background: #000;
 	color: #fff
@@ -19,15 +21,16 @@ body {
 a {
 	-webkit-transition: .3s all ease;
 	-o-transition: .3s all ease;
-	transition: .3s all ease
+	transition: .3s all ease;
+	font-family: 'Noto Serif KR', serif;
 }
 
 a:hover {
 	text-decoration: none
 }
 
-.h1, .h2, .h3, .h4, .h5, h1, h2, h3, h4, h5 {
-	font-family: "Oswald", arial, sans-serif
+h1, h2, h3, h4, h5, P {
+	font-family: 'Noto Serif KR', serif;
 }
 
 .border-2 {

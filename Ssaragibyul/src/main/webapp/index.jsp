@@ -315,7 +315,7 @@
 				data-stellar-background-ratio="0.5" id="section-bio">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-7 text-center">
-						<h1 class="text-white heading text-uppercase" data-aos="fade-up">싸라기별 프로젝트 제안하기</h1>
+						<h1 class="text-white heading text-uppercase" data-aos="fade-up" style="font-family: 'Noto Sans KR', sans-serif;">프로젝트 제안하기</h1>
 						<p class="lead text-white mb-5" data-aos="fade-up"
 							data-aos-delay="100">당신의 마음을 함께 해주세요.</p>
 						<p data-aos="fade-up" data-aos-delay="100">
@@ -429,70 +429,9 @@
 				</div>
 			</section>
 
-<!-- 			<section class="site-section darken-bg" id="section-contact">
-				<div class="container">
-					<div class="row justify-content-center">
-						<div class="col-md-8">
-							<h2 class="text-white mb-5 heading">Contact</h2>
-
-							<form action="#">
-
-
-
-								<div class="row form-group">
-									<div class="col-md-6 mb-3 mb-md-0">
-										<label class="text-white" for="fname">First Name</label> <input
-											type="text" id="fname" class="form-control">
-									</div>
-									<div class="col-md-6">
-										<label class="text-white" for="lname">Last Name</label> <input
-											type="text" id="lname" class="form-control">
-									</div>
-								</div>
-
-								<div class="row form-group">
-
-									<div class="col-md-12">
-										<label class="text-white" for="email">Email</label> <input
-											type="email" id="email" class="form-control">
-									</div>
-								</div>
-
-								<div class="row form-group">
-
-									<div class="col-md-12">
-										<label class="text-white" for="subject">Subject</label> <input
-											type="subject" id="subject" class="form-control">
-									</div>
-								</div>
-
-								<div class="row form-group mb-5">
-									<div class="col-md-12">
-										<label class="text-white" for="message">Message</label>
-										<textarea name="message" id="message" cols="30" rows="7"
-											class="form-control"
-											placeholder="Write your notes or questions here..."></textarea>
-									</div>
-								</div>
-
-								<div class="row form-group">
-									<div class="col-md-12">
-										<input type="submit" value="Send Message"
-											class="btn btn-primary btn-md text-white">
-									</div>
-								</div>
-
-
-							</form>
-						</div>
-					</div>
-				</div>
-			</section> -->
-
  		<%@include file="footer.jsp" %>
 	</main>
 
-	<!-- .site-wrap -->
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

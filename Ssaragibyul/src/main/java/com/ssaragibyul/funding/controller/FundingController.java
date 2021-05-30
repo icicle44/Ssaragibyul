@@ -36,127 +36,51 @@ import com.ssaragibyul.member.domain.Member;
 @Controller
 public class FundingController {
 
-	// 깃 확인용
 	@Autowired
-	private FundingService fService;
+	private FundingService fService;	//펀딩 서비스 관련 빈 자동 생성(오토 와이어드)
 	
-	@RequestMapping(value = "fundingListView.do", method = RequestMethod.GET)
-	public ModelAndView fundingListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
-
-		return mv;
-	}
 	 @RequestMapping(value="/fundingIndex.do", method=RequestMethod.GET)
 	 public String fundingIndex() {
 		 return "../../index";
-	 }
-	
+	 } // 인덱스(첫 사이트 접속 페이지)
+//																			 fundingList 기존 주석 백업
+//	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
+//	 public String fundingList(Model model) {
+//		 ArrayList<Funding> fList = fService.printAllProject();   
+//		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();		
+//		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {				
+//				model.addAttribute("fList", fList);
+//				model.addAttribute("fListFile", fListFile);
+//				return "funding/fundingList";
+//			}else {
+//				model.addAttribute("msg", "펀딩 목록조회 실패");
+//				return "common/errorPage";
+//			}
+//		}//펀딩 리스트 불러오는 컨트롤러(펀딩 페이지) funding, fundingFile(사진이름값 저장) 2개다 불러옴.
+//	 
 	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
 	 public String fundingList(Model model) {
-		 ArrayList<Funding> fList = fService.printAllProject();   
-		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();		
-		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {				
-				model.addAttribute("fList", fList);
-					model.addAttribute("fListFile", fListFile);
+		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
 				return "funding/fundingList";
 			}else {
 				model.addAttribute("msg", "펀딩 목록조회 실패");
 				return "common/errorPage";
 			}
-		}
-	 
-	 
-	 @RequestMapping(value="fundingAccusation.do", method=RequestMethod.POST)
-		public ModelAndView fundingAccusation(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-			// 게시글 상세 조회
-			Funding funding = fService.printOne(projectNo);
-			if (funding != null) {
-				// 메소드 체이닝 방식
-				mv.addObject("funding", funding).setViewName("funding/accusationPage");
-			} else {
-				mv.addObject("msg", "펀딩 참여 실패");
-				mv.setViewName("common/errorPage");
-			}
-			return mv;
-		}
-	 
-	 @RequestMapping(value="accusationRegister.do", method = RequestMethod.POST )
-	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport) { 
-		 int result = fService.accusationRegister(fundingReport);
-		 if(result > 0) {
-			 return "redirect:fundingDetial.do";
-		 }else {
-			 return "common/errorPage";
-		 }
-	 }
-
+		}//2개 테이블 조인해서 불러옴. 캐어려움 ㅡㅜㅠ
+	
 	 @RequestMapping(value="suggestPage.do", method=RequestMethod.GET)
 	 public String SuggestMain() {
 		 return "common/suggestPage";
-	 }
+	 } //header 에 있는 제안하기 눌렀을때 '제안'페이지로 이동 하는 컨트롤러
 	 						
 	 @RequestMapping(value="fundingSuggest.do", method=RequestMethod.GET)
-	 public String FsuggestMain() {
+	 public String fundingSuggestMain() {
 		 return "funding/fundingSuggest";
-	 }
+	 }	// 제안 페이지에서 펀딩을 눌렀을때 '펀딩-제안' 페이지로 이동 하는 컨트롤러
 	 
 		
-		@RequestMapping(value = "fundingJoin.do", method =  RequestMethod.POST )
-		public ModelAndView fundingJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-			// 게시글 상세 조회
-			Funding funding = fService.printOne(projectNo);
-			if (funding != null) {
-				// 메소드 체이닝 방식
-				mv.addObject("funding", funding).setViewName("funding/fundingJoinPage");
-			} else {
-				mv.addObject("msg", "펀딩 참여 실패");
-				mv.setViewName("common/errorPage");
-			}
-			return mv;
-		}
-		
-		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
-		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) { 
-			 int result = fService.registerFundingLog(fundingLog, funding);
-			 if(result > 0) {
-				 return "funding/fundingJoinCompleteView";
-				 //메소드!?!?!?!?!?!?!?@!?!?!?!?!?!?!?!?
-			 }else {
-				 return "common/errorPage";
-			 }
-		 }
-
-		 
-
-		/*
-		 * @RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET,
-		 * RequestMethod.POST }) public ModelAndView fundingDetail(ModelAndView
-		 * mv, @RequestParam("projectNo") int projectNo) {
-		 * 
-		 * return mv; }
-		 */
-	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-		fService.addreadCountHit(projectNo); 
-		
-		Funding funding = fService.printOne(projectNo);
-		FundingFile fundingFile = fService.printOneFile(projectNo);
-		
-		if ((funding != null)&&(fundingFile != null)) {
-			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
-		} else {
-			mv.addObject("msg", "펀딩 상세 조회 실패!");
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}
-
-
-	@RequestMapping(value = "fundingWriteView.do", method = RequestMethod.GET)
-	public String fundingOfferView() {
-		return "";
-	}
-	
 	 @RequestMapping(value="fundingRegister.do", method = RequestMethod.POST)
 	 public String fundingRegister(@ModelAttribute Funding funding, FundingFile fundingFile, 
 			 					   @RequestParam(value="uploadFileMain", required=false) MultipartFile uploadFileMain,
@@ -173,36 +97,26 @@ public class FundingController {
 				}
 			}
 		if(!uploadFileSub1.getOriginalFilename().equals("")) {
-			// eclipse 워크스페이스에 파일 저장하는 부분을 적는데
-			// 너무 길어지니까 saveFile 메소드로 빼서 작성
 			String filePath = saveFile(uploadFileSub1, request);
 			if(filePath != null) {
 				fundingFile.setFileSub1Name(uploadFileSub1.getOriginalFilename());
 			}
 		}
 		if(!uploadFileSub2.getOriginalFilename().equals("")) {
-			// eclipse 워크스페이스에 파일 저장하는 부분을 적는데
-			// 너무 길어지니까 saveFile 메소드로 빼서 작성
 			String filePath = saveFile(uploadFileSub2, request);
 			if(filePath != null) {
 				fundingFile.setFileSub2Name(uploadFileSub2.getOriginalFilename());
 			}
 		}
-		 int result = fService.registerProject(funding, fundingFile);
+		 int result = fService.registerProject(funding, fundingFile);  //serviceImpl에서 store 메소드 2개 씀.
 		 if(result > 0) {
 			 return "redirect:fundingIndex.do";
 		 }else {
 			 model.addAttribute("msg", "제안 등록 실패!!");
 			 return "common/errorPage";
 		 }
-	 }
-
-
-//	@RequestMapping(value = "fundingRegister.do", method = RequestMethod.POST)
-//	public ModelAndView fundingRegister(ModelAndView mv, @ModelAttribute Funding funding, @RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile, HttpServletRequest request) {
-//
-//		return mv;
-//	}
+	 }		//제안하기(펀딩)에서 마지막 '작성 완료' 버튼 눌렀을시 업로드한 파일 및 데이더틀 해당 테이블에 입력해주는 컨트롤러_ funding , fundingFile 2개 동시에 입력.
+	 		//사진은 3개라서 3개의 uploadeFile 메소드를 만들었지만 다중파일업로드로 바꿔야 할지도?
 
 	 public String saveFile(MultipartFile file, HttpServletRequest request) {
 			// 파일 저장 경로 설정
@@ -227,32 +141,105 @@ public class FundingController {
 			}
 			// 파일경로 리턴
 			return filePath;
+		}		//위의 펀딩 레지스터에 이어서 쓰는 이미지 파일 자체를 이클립스 경로 내에 저장하는 별도의 파일 저장 메소드.
+
+
+	 
+		@RequestMapping(value = "fundingUpdate.do", method = RequestMethod.POST)
+		public ModelAndView fundingUpdate(ModelAndView mv, HttpServletRequest request, 
+				@ModelAttribute Funding funding, @RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
+		
+			return mv;
 		}
 
-	@RequestMapping(value = "fundingModifyView.do")
-	public ModelAndView fundingModifyView(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		// 게시글 삭제(실제로는 상태 업데이트?)
+		@RequestMapping(value = "fundingDelete.do", method = RequestMethod.GET)
+		public String fundingDelete(Model model, @RequestParam("projectNo") int projectNo, 
+				@RequestParam("renameFilename") String renameFilename, HttpServletRequest request) {
+		
+			return "";
+		}
 
+		public void deleteFile(String fileName, HttpServletRequest request) {
+
+		}   //펀딩 수정 삭제 파일 삭제 등등 해야하는거. 일단 후순위로 미뤄둠... 프론트 먼저..
+		
+	 
+	 
+		
+	
+
+
+	 
+		
+		@RequestMapping(value = "fundingJoin.do", method =  RequestMethod.POST )
+		public ModelAndView fundingJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+			// 게시글 상세 조회
+			Funding funding = fService.printOne(projectNo);
+			if (funding != null) {
+				// 메소드 체이닝 방식
+				mv.addObject("funding", funding).setViewName("funding/fundingJoinPage");
+			} else {
+				mv.addObject("msg", "펀딩 참여 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}		//펀딩 참여 페이지로 이동
+		
+		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
+		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) { 
+			 int result = fService.registerFundingLog(fundingLog, funding); //serviceImpl에서 store 메소드 2개 씀. + 선미누나가 추가한 포인트 내역 업데이트 메소드도 있음.
+			 if(result > 0) {
+				 return "funding/fundingJoinCompleteView";
+			 }else {
+				 return "common/errorPage";
+			 }
+		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
+
+		 
+
+	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		fService.addreadCountHit(projectNo); 
+		
+		Funding funding = fService.printOne(projectNo);
+		FundingFile fundingFile = fService.printOneFile(projectNo);
+		
+		if ((funding != null)&&(fundingFile != null)) {
+			mv.addObject("fundingFile", fundingFile);
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
+		} else {
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
-	}
+	}			//펀딩 상세 페이지
 
-	@RequestMapping(value = "fundingUpdate.do", method = RequestMethod.POST)
-	public ModelAndView fundingUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Funding funding, @RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
 	
-		return mv;
-	}
+	 @RequestMapping(value="fundingAccusation.do", method=RequestMethod.POST)
+		public ModelAndView fundingAccusation(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+			// 게시글 상세 조회
+			Funding funding = fService.printOne(projectNo);
+			if (funding != null) {
+				// 메소드 체이닝 방식
+				mv.addObject("funding", funding).setViewName("funding/accusationPage");
+			} else {
+				mv.addObject("msg", "펀딩 참여 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}		//펀딩 신고하기 페이지로 이동.
+	 
+	 @RequestMapping(value="accusationRegister.do", method = RequestMethod.POST )
+	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport) { 
+		 int result = fService.accusationRegister(fundingReport);
+		 if(result > 0) {
+			 return "funding/fundingJoinCompleteView";
+		 }else {
+			 return "common/errorPage";
+		 }
+	 }		//펀딩 신고 완료 리턴되는 페이지는 아직 임시_아마 신고하고 바로 해당 프로젝트 상세 페이지로 돌아가야 할텐데 어떻게 할지 모르겠음 흐음.;. 
 
-	// 게시글 삭제(실제로는 상태 업데이트)
-	@RequestMapping(value = "fundingDelete.do", method = RequestMethod.GET)
-	public String fundingDelete(Model model, @RequestParam("projectNo") int projectNo, @RequestParam("renameFilename") String renameFilename, HttpServletRequest request) {
-	
-		return "";
-	}
-
-	public void deleteFile(String fileName, HttpServletRequest request) {
-
-	}
-	
-	
 	
 	
 	@ResponseBody
@@ -265,9 +252,11 @@ public class FundingController {
 			return "success";
 		} else {
 			return "fail";
-		}
+		}	//댓글 작성
 	}
-	// 400, jsp-Controller / 404, Controller url->console / 500, 서버 내부 오류(console)
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value="modifyComment.do", method=RequestMethod.POST)
 	public String modifyReply(@ModelAttribute Reply reply) {
@@ -279,7 +268,7 @@ public class FundingController {
 			return "fail";
 		}
 		
-	}
+	}	//댓글 수정
 
 	@ResponseBody
 	@RequestMapping(value = "deleteComment.do", method = RequestMethod.GET)
@@ -290,7 +279,7 @@ public class FundingController {
 		} else {
 			return "fail";
 		}
-	}
+	}	//댓글 삭제
 
 	@RequestMapping(value = "commentList.do", method = RequestMethod.GET)
 	public void getReplyList(HttpServletResponse response, @RequestParam("projectNo") int projectNo) throws Exception {
@@ -301,40 +290,20 @@ public class FundingController {
 		} else {
 			System.out.println("데이터가 없습니다.");
 		}
-	}
-	
-	
-//	
-//	@RequestMapping(value="addComments.do", method=RequestMethod.POST)
-//	public String addComments(@ModelAttribute Reply reply, HttpSession session) {
-//			
-//	return "";
-//	}
-//	
-//	
-//	
-//	@RequestMapping(value="CommentsList.do", method=RequestMethod.GET)
-//	public void CommentsList(HttpServletResponse response, @RequestParam("projectNo") int boarprojectNodNo) throws Exception {
-//
-//	}
-	
-	public void RecommendList(@RequestParam("dProjectNo.do") int projectNo) {
-		ArrayList<Funding> fList = fService.printAllRecommend(projectNo);
-		
-	}
-	
+	}	//댓글 목록
+
 	@RequestMapping(value="fundingLikeAdd.do", method = RequestMethod.POST)
 	 public String fundingLikeAdd(@ModelAttribute Funding funding, FundingLike fundingLike, 
 			 					  HttpServletRequest request,
 			 					  Model model) { 
 		 int result = fService.fundingLikeRegister(funding, fundingLike);
 		 if(result > 0) {
-			 return "redirect:fundingDetial.do";
+			 return "funding/fundingJoinCompleteView";
 		 }else {
 			 model.addAttribute("msg", "좋아요 등록 실패!!");
 			 return "common/errorPage";
 		 }
-	 }
+	 } // 좋아요 해당 테이블 인서트 및 펀딩프로젝트 테이블에도 좋아요 숫자 업데이트 ↓ 아래거는 어떻게 할지 생각중.
 		
 	
 	
@@ -368,10 +337,11 @@ public class FundingController {
 	}
 	public String ReportView(FundingReport fReport) {
 		return "";
-	}
+	}										//이거 쓰는건가? ㅋㅋㅋ
 	
 	public String fundingPay() {
 		return "";
 	}
 	
 }
+//400, jsp-Controller / 404, Controller url->console / 500, 서버 내부 오류(console)

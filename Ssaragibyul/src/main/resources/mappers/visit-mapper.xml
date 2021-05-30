@@ -5,10 +5,11 @@
 	<resultMap type="Visit" id="visitResultMap">
 		<id property="visitNo" column="VISIT_NO"/>
 		<result property="userId" column="USER_ID"/>
+		<result property="nickName" column="NICKNAME"/>
 		<result property="siteNo" column="SITE_NO"/>
 		<result property="visitTitle" column="VISIT_TITLE"/>
 		<result property="visitContents" column="VISIT_CONTENTS"/>
-		<result property="visitCount" column="VISIT_COUNTE"/>
+		<result property="visitCount" column="VISIT_COUNT"/>
 		<result property="vCreateDate" column="V_CREATE_DATE"/>
 		<result property="vUpdateDate" column="V_UPDATE_DATE"/>
 		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
@@ -25,11 +26,11 @@
 	</resultMap>
 	
 	<select id="selectAll" resultMap="visitResultMap">
-		SELECT * FROM VISIT JOIN VISIT_FILE USING(VISIT_NO) ORDER BY VISIT_NO DESC
+		SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) ORDER BY VISIT_NO DESC
 	</select>
 	
-	<select id="selectVisitListCount" resultType="_int">
-      SELECT COUNT(*) FROM HISTORY
+	<select id="selectVisitListCount" resultType="_int" resultMap="visitResultMap">
+      SELECT COUNT(*) FROM VISIT
     </select>
     
 	<insert id="insertVisit">
@@ -41,13 +42,13 @@
 	
 	
 	<!--  댓글 -->
-	<select id="selectReply">
-		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID)
+	<select id="selectReply" resultMap="replyResultMap">
+		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID) WHERE VISIT_NO = #{no }
 	</select>
 	
 	
 	<insert id="insertReply">
-		INSERT INTO VISIT_REPLY(SEQ_VISIT_REPLY, #{userId }, #{contents }, #{enrollDate }, #{visitNo })
+		INSERT INTO VISIT_REPLY VALUES (SEQ_VISIT_REPLY.NEXTVAL, #{userId }, #{contents }, SYSDATE, #{no })
 	</insert>
 	
 </mapper>

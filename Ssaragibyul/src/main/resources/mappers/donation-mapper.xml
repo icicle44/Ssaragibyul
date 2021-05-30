@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- 나혜님꺼
+<!-- 나혜님이 추가하라 한거 나중에 주석 풀어야함.
    <select id="selectDonationListCount" resultType="_int">
       SELECT COUNT(*) FROM DONATION
     </select> -->

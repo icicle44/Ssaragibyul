@@ -122,9 +122,9 @@
 	    			<input type="text" name="projectNo" value="${funding.projectNo }"><br>
 	   				<input type="text" name="userId" value="${loginUser.userId }"><br>
 	   				<input type="text" name="sumMoney" class="getResult2"><br>
-	   				<input type="text" name="receiverAddr"><br>
-	   				<input type="text" name="receiverName"><br>
-	   				<input type="text" name="receiverPhone"><br>
+	   				<input type="text" name="receiverAddr">주소<br>
+	   				<input type="text" name="receiverName">이름<br>
+	   				<input type="text" name="receiverPhone">번호<br>
 	    			<input type="submit" class="getstarted" value="예약완료">
     			</form>
 			</section>

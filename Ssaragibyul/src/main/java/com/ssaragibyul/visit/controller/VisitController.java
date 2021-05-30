@@ -1,7 +1,6 @@
  package com.ssaragibyul.visit.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.member.domain.Member;
@@ -40,7 +38,6 @@ public class VisitController {
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
 	public ModelAndView vivisListView(ModelAndView mv, Visit visit) {
 		ArrayList<Visit> vList = vService.printAll();
-		System.out.println("controller, vList : " + vList);
 		if(visit != null) {
 			mv.addObject("vList", vList).setViewName("visit/visitList");
 		}else {
@@ -153,24 +150,29 @@ public class VisitController {
 	@ResponseBody
 	@RequestMapping(value="addReply.do", method=RequestMethod.POST)
 	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
+		System.out.println("컨트롤러 들어옴=============================");
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		reply.setUserId(loginUser.getUserId());
+		System.out.println("reply : " + reply);
 		int result = vService.registerReply(reply);
+		System.out.println("result : " + result);
 		if(result > 0) {
 			return "success";
 		}else {
 			return "fail";
 		}
 	}
+	
 	// 댓글목록
 	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
-	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception{
+	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
 		ArrayList<Reply> rList = vService.printAllReply(visitNo);
+		System.out.println("controller, rList(댓글목록) : "+rList);
 		if(!rList.isEmpty()) {
-			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+			Gson gson = new GsonBuilder().create(); // 날짜 포맷 변경(DB에서 가져온 날짜를 원하는 형태로 하여 jason으로 바꿔줌)
 			gson.toJson(rList, response.getWriter());
 		}else {
-			
+
 		}
 	}
 	// 댓글삭제

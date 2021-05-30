@@ -95,7 +95,7 @@
 											</c:url>											
 										</c:if>
 										
-										<td><a href="#" onclick="msgPopup('${msgWriteUrl4}');">${message.nickName } 선생</a></td>
+										<td><a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">${message.nickName } 선생</a></td>
 									</c:if>
 									<c:if test="${message.msgType == 0}">
 										<!-- Message 객체 사용 -->
@@ -116,7 +116,7 @@
 										</c:url>
 									</c:if>					
 									<td>
-										<a href="#" onclick="msgPopup('${msgDetail }');">${message.msgTitle }</a>
+										<a href="#" onclick="msgPopup('${msgDetail }'); return false;">${message.msgTitle }</a>
 										<%-- <c:if test="${flag == 'rec' && message.readYn == 0 && message.msgType != 0}">
 											<sup><span class="badge rounded-pill bg-light text-dark" style="color:#7daabb;">새쪽지</span></sup>
 										</c:if> --%>
@@ -220,7 +220,7 @@
 			</section>
 		</section>
 		<!-- 관리자 공지보내기 연습 -->
-		<!-- <a href="#" onclick="msgPopup('msgWriterView.do');">공지 작성창으로 이동</a> -->
+		<!-- <a href="#" onclick="msgPopup('msgWriterView.do'); return false;">공지 작성창으로 이동</a> -->
 		
 		<!-- 문의하기(모든페이지적용) -->
 		<%-- <c:url var="qnaMsg" value="msgWriterView.do">

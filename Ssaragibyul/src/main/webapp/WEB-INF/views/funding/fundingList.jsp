@@ -27,15 +27,19 @@
 
 </head>
 <style>
-/* .a_pj {
+.a_pj {
 	margin:auto;
 	width: 270px;
 	border: 1px dotted lightgray;
 	margin-bottom: 30px;
 	padding: 10px;
 	font-size:12px;
-	
-} */
+}
+.gridmain > * {
+  float: left;  
+  width: 25%;
+  font-size:12px;
+}
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -265,22 +269,57 @@
 
 <br><br><br><br><br><br><br>
 
-			<div class="gridmain" style="padding-top:10px;">
-				<c:forEach var="p" items="${fList}">				
-					<div>
-						<table class="a_pj" >
-							<tr>
-								<td colspan="2"><a>${p.subjectName}</a></td>
-							</tr>
-						
-						</table>
-						
-					</div>
-				</c:forEach>	
-		</div>
+	<div class="gridmain">
+		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
+			<div>	
+			<table class="a_pj">
+					<tr>
+						<td id="heart_css"><span>${p.likeCount}</span></td>
+					</tr>
+					<tr>
+						<td colspan="2"><a href="<c:url value="project${p.projectNo}"/>" >
+						<img id="pj_mainimg" src="resources/upLoadFile/${p.fundingFile.fileMainName}" width="300px" height="225px"></a></td>
+					</tr>
+					<tr>
+						<td colspan="2" height="30px" id="sub_css"><a href="<c:url value="project${p.subjectName}"/>">${p.subjectName}</a></td>
+					<tr>
+					<tr>
+						<td></td>
+						<td id="name_css">
+						<a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${p.productName}</a></td>
+					</tr>
+					<%-- <tr>
+						<td colspan="2" id="bar_td">
+							<c:if test="${p.percent > 99}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="100%" fill="#fe6f61"></rect>
+								</svg>
+							</c:if>
+							<c:if test="${p.percent < 100}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="${p.percent}%" fill="#fe6f61"></rect>
+								</svg>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td id="dday_css">
+						<img src="images/calendar.png">
+						<c:if test="${p.dday < 1}"><b>마감</b></c:if>
+						<c:if test="${p.dday > 1}"><b>${p.dday}</b>일 남음</c:if>
+						</td>
+						<td id="sum_css"><b><fmt:formatNumber value="${p.sum}" pattern="#,###"/>원</b>
+						<span id="percent_css">${p.percent}%</span></td>
+					</tr> --%>
+				</table>
+				</div>
+			 </c:forEach> 
+			 </div>
 
 
-<br><br><br><br><br><br><br>
+<br><br><br><br>
 
 	<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
 		<tr>
@@ -289,8 +328,9 @@
 			<th>리워드</th>
 			<th>종료일</th>
 			<th>첨부파일</th>
+			<th>사진</th>
 		</tr>
-		<c:forEach items="${fList }" var="funding">
+		<c:forEach items="${fListandFile }" var="funding" varStatus="status">
 			<tr>
 				<td align="center">${funding.projectNo }</td>
 				<td align="center">
@@ -302,21 +342,25 @@
 				<td align="center">${funding.productName }</td>
 				<td align="center">${funding.finDate }</td>
 				<td align="center">${funding.startDate }</td>
+				<td align="center">${funding.fundingFile.fileNo }</td>
+				
 <%-- 				<td align="center"><img src="resources/upLoadFile/${fListFile.fileMainName } "/> </td> --%>
 			</tr>
 			
 		</c:forEach>
-	</table>
+		</table>
+		<br>
+		
 		<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
 		<tr>
 			<th>사진</th>
 		</tr>
-			<c:forEach items="${fListFile }" var="File">
+			<c:forEach items="${fListandFile }" var="File">
 		<tr>	
-			<td><img src="resources/upLoadFile/${File.fileMainName } "/></td> 
+			<td><img src="resources/upLoadFile/${File.fundingFile.fileMainName } "/></td> 
 		</tr>
 				</c:forEach>
-		</table>
+		</table> 
 	<%-- 
 	<c:forEach items="${fListFile }" var="fundingFile">
 		<img src="resources/upLoadFile/${fundingFile.fileMainName } "/>
