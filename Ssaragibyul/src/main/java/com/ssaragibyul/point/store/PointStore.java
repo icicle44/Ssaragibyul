@@ -12,19 +12,17 @@ import com.ssaragibyul.point.domain.PointAndProject;
 public interface PointStore {
 
 	public int insertChargePoint(Point point);
+	
 	public int insertPoint(Point point);
 	public int insertFundCancelPoint(int doFundNo);
 	public int insertDonateCancelPoint(int donateNo);
 
 	public ArrayList<PointAndProject> selectAll(PageInfo pi, String userId);
 	public int getListCount(String userId);
+	
 	public ArrayList<PointAndProject> selectSearchList(PageInfo pi, SearchMsg search);
 	public int getSearchListCount(SearchMsg search);	
 	
 	public MyPoint getMyPoint(String userId);
-	
-	//안씀
-	public int insertPosPoint(Point point);
-	public int insertNegPoint(Point point);
 	
 }

@@ -59,11 +59,12 @@ public class PointController {
 		}
 		return mv;
 	}
+	
 	//포인트내역 등록-충전용
 	@ResponseBody
 	@RequestMapping(value="chargePoint.do", method=RequestMethod.POST)
 	public String chargePointRegister(@ModelAttribute Point point) {
-		//결제화면.jsp에서 ajax에 json(varAmount:결제금액)으로 넘겨옴
+		
 		point.setEventCode(0);
 		point.setVarType(0);
 		int result = pntService.registerChargePoint(point);
@@ -74,8 +75,7 @@ public class PointController {
 		}
 	}
 	
-	//포인트 사용내역 출력(전체, 펀딩, 기부, 선물, 방문인증, 충전) //펀딩-기부 UNIONALL
-	//아직 차감안된 포인트내역도 나오게 해야함
+	//포인트 사용내역 출력(전체, 펀딩, 기부, 선물, 방문인증, 충전)
 	@RequestMapping(value="pointList.do", method=RequestMethod.GET)
 	public ModelAndView PointList(ModelAndView mv,
 								HttpSession session,
@@ -89,8 +89,10 @@ public class PointController {
 			
 			if(!ppList.isEmpty()) {
 				mv.addObject("pointList", ppList);
+				mv.addObject("flag", 9);
 			}else {
 				mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+				mv.addObject("flag", 9);
 			}
 			mv.addObject("pi", pi);
 			mv.setViewName("point/pointListView");
@@ -107,8 +109,10 @@ public class PointController {
 								ModelAndView mv,
 								@ModelAttribute SearchMsg search,
 								@RequestParam(value="page", required=false) Integer page) throws JsonIOException, IOException {
-		Gson gson = new Gson();
+		/* Gson gson = new Gson(); */
 		if(session != null && (Member)session.getAttribute("loginUser") != null) {		
+			System.out.println(search.getFlag());
+			System.out.println(search.getSearchValue());
 			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 			search.setUserId(userId);
 			int currentPage = (page != null)? page : 1;
@@ -118,8 +122,10 @@ public class PointController {
 			
 			if(!ppList.isEmpty()) {
 					mv.addObject("pointList", ppList);
+					mv.addObject("flag", ppList.get(0).getEventCode());
 				}else {
 					mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+					mv.addObject("flag", 9);
 				}
 				mv.addObject("pi", pi);
 				mv.setViewName("point/pointListView");

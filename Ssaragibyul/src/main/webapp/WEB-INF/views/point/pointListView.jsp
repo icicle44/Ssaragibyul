@@ -64,7 +64,7 @@
 											${point.varAmount } 원을 충전하셨습니다.<br>
 											<span>결제내역 발송 ${point.buyerEmail }</span>
 										</td>									
-										<td><a href="#" onclick="receiptPopup('${point.receiptUrl }');"><span>영수증</span></a></td>
+										<td><a href="#" onclick="receiptPopup('${point.receiptUrl }'); return false;"><span>영수증</span></a></td>
 									</c:if>
 									<c:if test="${point.eventCode == 1 && point.varType == 1}">										
 										<td>[${point.subject }]에 펀딩하셨습니다.</td>
@@ -123,12 +123,12 @@
 										<c:param name="flag" value="rec"></c:param>
 									</c:url>
 									<c:if test="${point.eventCode == 4 && point.varType == 1}">										
-										<td><a href="#" onclick="msgModal('${PresentSend }');">${point.nickName }님께 선물하셨습니다.</a></td>								
+										<td><a href="#" onclick="msgModal('${PresentSend }'); return false;">${point.nickName }님께 선물하셨습니다.</a></td>								
 										<td></td>
-									<%-- <a href="#" onclick="msgPopup('${PresentSend }');"> --%>
+									<%-- <a href="#" onclick="msgPopup('${PresentSend }');  return false;"> --%>
 									</c:if>
 									<c:if test="${point.eventCode == 4 && point.varType == 0}">										
-										<td><a href="#" onclick="msgModal('${PresentReceive }');">${point.nickName }님께 선물받으셨습니다.</a></td>									
+										<td><a href="#" onclick="msgModal('${PresentReceive }'); return false;">${point.nickName }님께 선물받으셨습니다.</a></td>									
 										<td></td>
 									</c:if>
 									
@@ -151,20 +151,13 @@
 							<td colspan="5">
 								<section id="search">
 									<div align="center">
-										<form action="msgSearch.do" method="post">
+										<form action="pointSearch.do" method="post">
 											<input type="hidden" name="flag" value="${flag }">
-											<select name="searchCondition">
-												<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
-												<c:if test="${flag != 'notice'}">
-													<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
-												</c:if>
-												<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
-												<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
-											</select>
-											<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
+											<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">											
 											<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
 										</form>
 									</div>
+									
 								</section>
 							</td>
 						</tr>
