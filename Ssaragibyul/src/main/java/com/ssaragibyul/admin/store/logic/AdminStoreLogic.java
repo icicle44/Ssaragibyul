@@ -280,5 +280,4 @@ public class AdminStoreLogic implements AdminStore{
 		return (ArrayList)sqlSession.selectList("messageMapper.selectCountNewRecMessage");
 	}
 
-
 }

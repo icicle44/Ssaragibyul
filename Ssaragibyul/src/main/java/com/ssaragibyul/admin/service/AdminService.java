@@ -102,7 +102,6 @@ public interface AdminService {
 	// 별보러가자 삭제
 	public int removeVisit(int visitNo);
 	
-	
 	// 페이징
 	public int getListCount();
 	public int getHistoryListCount();

@@ -108,6 +108,5 @@ public interface AdminStore {
 	public int selectVisitListCount();
 
 
-	
 
 }

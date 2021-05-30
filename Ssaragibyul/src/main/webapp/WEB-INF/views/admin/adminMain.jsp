@@ -292,7 +292,6 @@
 				</div>
 			</div>
 		</div>
-		
 		<!-- End Custom template -->
 	</div>
 	<!--   Core JS Files   -->

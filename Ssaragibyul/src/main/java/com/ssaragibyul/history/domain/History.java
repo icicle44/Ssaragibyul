@@ -24,7 +24,6 @@ public class History {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public int getSiteNo() {
 		return siteNo;
 	}

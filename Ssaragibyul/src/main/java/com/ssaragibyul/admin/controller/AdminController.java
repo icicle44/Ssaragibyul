@@ -661,6 +661,5 @@ public class AdminController {
 			mv.setViewName("admin/adminSendMessageList");
 		return mv;
 	}
-	
 }
 

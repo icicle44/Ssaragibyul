@@ -24,7 +24,6 @@
            SELECT * FROM HISTORY ORDER BY SITE_NO DESC
     </select>
 
-
    <select id="selectHistoryListCount" resultType="_int">
       SELECT COUNT(*) FROM HISTORY
     </select>

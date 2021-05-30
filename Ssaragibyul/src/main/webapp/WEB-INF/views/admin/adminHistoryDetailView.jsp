@@ -154,7 +154,7 @@
 	<script src="resources/js/admin/setting-demo2.js"></script>
 	
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-
+    
 	<script>
 	
 		    $(function() {

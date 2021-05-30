@@ -151,7 +151,7 @@
 													</c:if>
 												</td>
 											</tr>
-											</table>
+										</table>
 									</div>
 								</div>
 							</div>
