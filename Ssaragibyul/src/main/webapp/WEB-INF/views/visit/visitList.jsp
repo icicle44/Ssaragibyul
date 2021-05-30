@@ -84,10 +84,9 @@
 														<!-- 댓글 등록 -->
 														<table align="center" width="500" cellspacing="0">
 															<tr>
-																<input type="hidden" name="visitNo" value="${vList.visitNo }">
 																<td><textarea rows="3" cols="55" id="rContent" name="contents"></textarea></td>
 																<td>
-																	<button class="rSubmit" id="${vList.visitNo }" onclick="regist(this.id)">버튼</button>
+																	<button id="rSubmit" value="${vList.visitNo }">버튼</button>
 																</td>
 															</tr>
 														</table>
@@ -219,12 +218,70 @@
 			});
 			
 			$(function() {
+				// 댓글 목록 조회1
 				var visitNo = "";
-				$("img").click(function() {
-					$("#rtb tbody").html("");
-					visitNo= $(this).attr("id");
-					alert(visitNo);
+				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
+					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
+					visitNo= $(this).attr("id"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
+					/* alert(visitNo); */
 					$.ajax({
+						url : "replyList.do",
+						type : "get",
+						data : {
+							"visitNo" : visitNo
+						},
+						dataType : "json",
+						success : function(data) {
+
+							var $tableBody = $("#rtb tbody");
+							$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
+							var $tr;
+							var $rWriter;
+							var $rContent;
+							var $rCreateDate;
+							$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시. 아직 적용 안됨///
+
+							if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
+								for ( var i in data) { 
+									$tr = $("<tr>");
+									$rWriter = $("<td width='100'>").text(
+											data[i].nick);
+									$rContent = $("<td>").text(data[i].contents);
+									$rCreateDate = $("<td width='100'>").text(
+											data[i].enrollDate);
+									$tr.append($rWriter);
+									$tr.append($rContent);
+									$tr.append($rCreateDate);
+									$tableBody.append($tr);
+								}
+							}		
+						},
+						error : function() {
+
+						}
+					});
+				});
+				
+				// 댓글 등록
+				var visitNo = "";
+				var rContent = "";
+				$(document).on('click','#rSubmit', function () { // 등록버튼을 클릭하면 아래 코드 실행
+					visitNo = $(this).attr("value"); // 클릭한 버튼의 value값을 가져옴
+					/* alert(visitNo); */
+					rContent = $(this).closest("td").prev().children("textarea").val(); // 클릭한 버튼 근처의 textarea를 가져옴
+				
+				$.ajax({
+					url : "addReply.do",
+					type : "post",
+					data : {
+						"no" : visitNo,
+						"contents" : rContent
+					},
+					success : function(data) {
+						if (data == "success") {
+							// 댓글 목록 조회2
+							// 등록 버튼 누를 때 visitNo을 가져가서 댓글 목록 다시 불러옴
+						$.ajax({
 						url : "replyList.do",
 						type : "get",
 						data : {
@@ -260,27 +317,6 @@
 
 						}
 					});
-				});
-			});
-			function regist(){
-				var visitNo = "";
-				$(".rSubmit").click(function() {
-					visitNo= $(this).attr("id");
-					alert(visitNo);
-					});
-				var rContent = $(".rContent").val();
-				
-				$.ajax({
-					url : "addReply.do",
-					type : "post",
-					data : {
-						"no" : visitNo,
-						"contents" : rContent
-					},
-					success : function(data) {
-						if (data == "success") {
-							// 댓글 불러오기
-							getReplyList();
 							// 작성 후 내용 초기화
 							$("#rContent").val(""); // 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
 						} else {
@@ -290,8 +326,9 @@
 					error : function() {
 
 					}
-				})
-			}
+				});
+				});
+			});
 		</script>
 </body>
 
