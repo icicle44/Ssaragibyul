@@ -60,6 +60,25 @@
 		<result property="replyType" column="BOARD_TYPE"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
 	</resultMap>
+	
+	<resultMap type="FundingReport" id="FundingReportResultMap">
+		<id property="accuFundingNo" column="ACCU_FUND_NO"></id>
+		<result property="userId" column="USER_ID"></result>
+		<result property="reportCode" column="REPORT_CODE"></result>
+		<result property="reportContent" column="REPORT_CONTENT"></result>
+		<result property="processing" column="PROCESSING"></result>
+		<result property="accusationDate" column="ACCUSATION_DATE"></result>
+		<result property="projectNo" column="F_PROJECT_NO"></result>
+	</resultMap>
+
+	<resultMap type="FundingLike" id="FundingLikeResultMap">
+		<id property="likeNo" column="LIKE_NO"></id>
+		<result property="userId" column="USER_ID"></result>
+		<result property="likeYn" column="LIKE_YN"></result>
+		<result property="projectNo" column="F_PROJECT_NO"></result>
+	</resultMap>
+
+
 
 	<insert id="insertFunding" parameterType="Funding">
 		INSERT INTO
@@ -130,12 +149,29 @@
 		#{no } AND COMM_NO = #{replyNo }
 	</delete>
 
-	
+	<!-- 신고하기 -->
+	<insert id="reportInsert" parameterType="FundingReport">
+		INSERT INTO
+		FUNDING_ACCUSATION
+		VALUES(SEQ_FUND_ACCUSATION_NO.NEXTVAL,#{userId},#{reportCode},#{reportContent},DEFAULT,SYSDATE,#{projectNo})
+	</insert>
 		
 		
 		
 		
-		
+			<!-- 좋아요 테이블 인서트   -->
+	<insert id="insertProjectLike" parameterType="FundingLike">
+		INSERT INTO
+		FUNDING_LIKE
+		VALUES(SEQ_FUND_LIKE_NO.NEXTVAL,#{userId},DEFAULT,#{projectNo})
+	</insert>
+		<!-- 좋아요 업데이트 펀딩프로젝트 테이블 -->
+	<update id="updateFundingProjectLikeCol" parameterType="Funding">
+		UPDATE FUNDING_PROJECT SET LIKE_COUNT = LIKE_COUNT + 1
+		WHERE
+		F_PROJECT_NO = #{projectNo }
+	</update>
+
 		
 		
 		<!-- 
@@ -156,4 +192,5 @@
 	  <select id="selectFundingListCount" resultType="_int">
       SELECT COUNT(*) FROM FUNDING
     </select>
+    
 </mapper>

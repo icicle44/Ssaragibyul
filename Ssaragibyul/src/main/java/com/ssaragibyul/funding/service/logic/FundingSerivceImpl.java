@@ -9,7 +9,9 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
 import com.ssaragibyul.point.service.PointService;
@@ -100,6 +102,18 @@ public class FundingSerivceImpl implements FundingService {
 		}
 		return fResult;
 	}
+	
+	@Override
+	public int fundingLikeRegister(Funding funding, FundingLike fundingLike) {
+		int result = fStore.updateProject_Like(funding);
+		int fResult = 0;
+		if(result>0) {
+			fResult = fStore.insertProjectLike(fundingLike);
+		}
+		return fResult;
+	}
+	
+	
 	@Override
 	public int registerFundingLog(FundingLog fundingLog, Funding funding) {
 		int result = fStore.insertProjectLog(fundingLog);
@@ -115,6 +129,10 @@ public class FundingSerivceImpl implements FundingService {
 	}
 	
 	
+	@Override
+	public int accusationRegister(FundingReport fundingReport) {
+		return fStore.accusationInsert(fundingReport);
+	}
 	
 	@Override
 	public int modifyProject(Funding funding) {

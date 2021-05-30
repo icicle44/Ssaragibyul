@@ -10,7 +10,9 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.store.FundingStore;
 
 @Repository
@@ -234,4 +236,16 @@ public class FundingStoreLogic implements FundingStore{
 		return sqlSession.delete("fundingMapper.deleteReply", reply);
 	}
 
+	public int accusationInsert(FundingReport fundingReport) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("fundingMapper.reportInsert", fundingReport);
+	}
+
+	
+	public int updateProject_Like(Funding funding) {
+		return sqlSession.update("fundingMapper.updateFundingProjectLikeCol", funding);
+	}	
+	public int insertProjectLike(FundingLike fundingLike) {
+		return sqlSession.insert("fundingMapper.insertProjectLike", fundingLike);
+	}
 }

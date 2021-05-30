@@ -26,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
@@ -63,6 +64,30 @@ public class FundingController {
 			}
 		}
 	 
+	 
+	 @RequestMapping(value="fundingAccusation.do", method=RequestMethod.POST)
+		public ModelAndView fundingAccusation(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+			// 게시글 상세 조회
+			Funding funding = fService.printOne(projectNo);
+			if (funding != null) {
+				// 메소드 체이닝 방식
+				mv.addObject("funding", funding).setViewName("funding/accusationPage");
+			} else {
+				mv.addObject("msg", "펀딩 참여 실패");
+				mv.setViewName("common/errorPage");
+			}
+			return mv;
+		}
+	 
+	 @RequestMapping(value="accusationRegister.do", method = RequestMethod.POST )
+	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport) { 
+		 int result = fService.accusationRegister(fundingReport);
+		 if(result > 0) {
+			 return "redirect:fundingDetial.do";
+		 }else {
+			 return "common/errorPage";
+		 }
+	 }
 
 	 @RequestMapping(value="suggestPage.do", method=RequestMethod.GET)
 	 public String SuggestMain() {
@@ -229,7 +254,7 @@ public class FundingController {
 	
 	
 	
-
+	
 	@ResponseBody
 	@RequestMapping(value = "addComment.do", method = RequestMethod.POST)
 	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
@@ -297,6 +322,21 @@ public class FundingController {
 		ArrayList<Funding> fList = fService.printAllRecommend(projectNo);
 		
 	}
+	
+	@RequestMapping(value="fundingLikeAdd.do", method = RequestMethod.POST)
+	 public String fundingLikeAdd(@ModelAttribute Funding funding, FundingLike fundingLike, 
+			 					  HttpServletRequest request,
+			 					  Model model) { 
+		 int result = fService.fundingLikeRegister(funding, fundingLike);
+		 if(result > 0) {
+			 return "redirect:fundingDetial.do";
+		 }else {
+			 model.addAttribute("msg", "좋아요 등록 실패!!");
+			 return "common/errorPage";
+		 }
+	 }
+		
+	
 	
 	public void changeLikeStatus() {
 

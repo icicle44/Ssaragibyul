@@ -6,7 +6,9 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
+import com.ssaragibyul.funding.domain.FundingReport;
 
 public interface FundingService {
 
@@ -79,6 +81,10 @@ public interface FundingService {
 	public int modifyReply(Reply reply);
 
 	public int removeReply(Reply reply);
+
+	public int accusationRegister(FundingReport fundingReport);
+
+	public int fundingLikeRegister(Funding funding, FundingLike fundingLike);
 	
 }
 

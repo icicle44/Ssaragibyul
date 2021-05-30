@@ -26,6 +26,17 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 
 </head>
+<style>
+/* .a_pj {
+	margin:auto;
+	width: 270px;
+	border: 1px dotted lightgray;
+	margin-bottom: 30px;
+	padding: 10px;
+	font-size:12px;
+	
+} */
+</style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
 	
@@ -253,9 +264,23 @@
 
 
 <br><br><br><br><br><br><br>
-<script>
 
-</script>
+			<div class="gridmain" style="padding-top:10px;">
+				<c:forEach var="p" items="${fList}">				
+					<div>
+						<table class="a_pj" >
+							<tr>
+								<td colspan="2"><a>${p.subjectName}</a></td>
+							</tr>
+						
+						</table>
+						
+					</div>
+				</c:forEach>	
+		</div>
+
+
+<br><br><br><br><br><br><br>
 
 	<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
 		<tr>

@@ -182,11 +182,22 @@
 	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<main class="main-content">
+	<form action="fundingLikeAdd.do" method="post">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="좋아요 ♥">
+    </form>
+	
+	<form action="fundingAccusation.do" method="post">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="신고하기">
+    </form>
+		
+		
     <form action="fundingJoin.do" method="post">
     <input type="hidden" name="projectNo" value="${funding.projectNo }">
     <input type="submit" class="getstarted" value="펀딩하기">
     </form>
-	<a class="getstarted scrollto" href="fundingAccusation.do" style="text-decoration: none;">신고하기</a>
+
 	<br><br><br>
 			<table align="center" width="450" border="1">
 			<tr>
