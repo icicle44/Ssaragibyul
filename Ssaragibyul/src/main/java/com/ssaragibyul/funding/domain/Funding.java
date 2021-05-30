@@ -22,12 +22,44 @@ public class Funding {
 	private int projectCode;
 	private Date deleiveryDate;
 	
+	private FundingFile fundingFile;
+	
+	
 	public Funding() {}
 
 	
 	
 	
 	
+public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
+			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
+			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate,
+			FundingFile fundingFile) {
+		super();
+		this.projectNo = projectNo;
+		this.userId = userId;
+		this.subjectName = subjectName;
+		this.productName = productName;
+		this.goalMoney = goalMoney;
+		this.sumMoney = sumMoney;
+		this.optionPrice = optionPrice;
+		this.optionLimit = optionLimit;
+		this.startDate = startDate;
+		this.finDate = finDate;
+		this.projectStory = projectStory;
+		this.productContent = productContent;
+		this.warningIntro = warningIntro;
+		this.likeCount = likeCount;
+		this.hitsCount = hitsCount;
+		this.projectCode = projectCode;
+		this.deleiveryDate = deleiveryDate;
+		this.fundingFile = fundingFile;
+	} // 펀딩 파일 추가 버젼.
+
+
+
+
+		//기존 거
 public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
 			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
 			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate) {
@@ -50,6 +82,9 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 		this.projectCode = projectCode;
 		this.deleiveryDate = deleiveryDate;
 	}
+
+
+
 
 	public int getProjectNo() {
 	return projectNo;
@@ -185,6 +220,14 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 
 	public void setDeleiveryDate(Date deleiveryDate) {
 		this.deleiveryDate = deleiveryDate;
+	}
+	
+	public FundingFile getFundingFile() {
+		return fundingFile;
+	}
+
+	public void setFundingFile(FundingFile fundingFile) {
+		this.fundingFile = fundingFile;
 	}
 	
 

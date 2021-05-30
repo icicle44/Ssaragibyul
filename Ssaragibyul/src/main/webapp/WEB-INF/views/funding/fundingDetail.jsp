@@ -182,7 +182,9 @@
 	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 	<main class="main-content">
+	${loginUser.userId }
 	<form action="fundingLikeAdd.do" method="post">
+	<input type="hidden" name="userId" value="${loginUser.userId }">
     <input type="hidden" name="projectNo" value="${funding.projectNo }">
     <input type="submit" class="getstarted" value="좋아요 ♥">
     </form>

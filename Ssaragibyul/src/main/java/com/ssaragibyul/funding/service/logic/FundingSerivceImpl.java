@@ -22,7 +22,11 @@ public class FundingSerivceImpl implements FundingService {
 	@Autowired
 	private FundingStoreLogic fStore;
 	@Autowired
-	private PointService pntService;
+	private PointService pntService; // 선미누나가 한거_ 포인트 서비스 에서 메소드 불러와서 seirviceImpl에서 사용.
+	
+	//기존에 만들어놨던거 거의 안씀... 나중에 지울 예정. 처음에 클래스 다이어그램할때 기부쪽 클래스왜 최대한 맞췄는데 오재승 개인으로 추가 한게 많음. 삭제 한거는 없음.
+	
+	
 
 	@Override
 	public int getListCountFuncing() {
@@ -67,11 +71,18 @@ public class FundingSerivceImpl implements FundingService {
 	
 	
 
+//	@Override
+//	public ArrayList<Funding> printAllProject() {
+//		ArrayList<Funding> fList = fStore.printAllProject();
+//		return fList;					//기존거 백업
+//	}
+					// NEW
 	@Override
 	public ArrayList<Funding> printAllProject() {
-		ArrayList<Funding> fList = fStore.printAllProject();
-		return fList;
+		ArrayList<Funding> fListandFile = fStore.printAllProject();
+		return fListandFile;
 	}
+	
 	@Override
 	public ArrayList<FundingFile> printAllProjectFile() {
 		ArrayList<FundingFile> fListFile = fStore.printAllProjectFile();
@@ -101,7 +112,7 @@ public class FundingSerivceImpl implements FundingService {
 			fResult = fStore.insertProjectFile(fundingFile);
 		}
 		return fResult;
-	}
+	}						//한 컨트롤러에서 2개의 store메소드 사용 컨트롤러에서 써두 되고 서비스IMPI에서 써두 됨.
 	
 	@Override
 	public int fundingLikeRegister(Funding funding, FundingLike fundingLike) {

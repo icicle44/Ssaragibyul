@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fundingMapper">
-
+<!--펀딩프로젝트 테이블  -->
 	<resultMap type="Funding" id="fundingResultMap">
 		<id property="projectNo" column="F_PROJECT_NO"></id>
 		<result property="userId" column="USER_ID"></result>
@@ -20,8 +20,9 @@
 		<result property="hitsCount" column="HITS_COUNT"></result>
 		<result property="projectCode" column="PROJECT_CODE"></result>
 		<result property="deleiveryDate" column="DELIVERY_DATE"></result>
-	</resultMap>
-
+		<collection property="fundingFile" resultMap="fundingFileResultMap" />
+	</resultMap><!-- JOIN시 collection 필수  join 아니면 안쓰임-->
+<!--펀딩 파일 테이블  -->
 	<resultMap type="FundingFile" id="fundingFileResultMap">
 		<id property="fileNo" column="FILE_NO"></id>
 		<result property="videoUrl" column="FILE_VIDEO_URL"></result>
@@ -37,7 +38,7 @@
 		<result property="uploadTime" column="UPLOAD_TIME"></result>
 		<result property="projectNo" column="F_PROJECT_NO"></result>
 	</resultMap>
-	
+<!--펀딩 내역 테이블  -->
 	<resultMap type="FundingLog" id="FundingLogResultMap">
 		<id property="doFundNo" column="DOFUND_NO"></id>
 		<result property="userId" column="USER_ID"></result>
@@ -50,7 +51,7 @@
 		<result property="receiverName" column="RECEIVER"></result>
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
 	</resultMap>
-	
+<!-- 댓글 테이블  -->
 	<resultMap type="Reply" id="FundingReplyResultMap">
 		<id property="replyNo" column="COMM_NO"></id>
 		<result property="no" column="F_PROJECT_NO"></result>
@@ -60,7 +61,7 @@
 		<result property="replyType" column="BOARD_TYPE"></result>
 		<result property="enrollDate" column="ENROLL_DATE"></result>
 	</resultMap>
-	
+<!-- 댓글 신고하기 테이블  -->
 	<resultMap type="FundingReport" id="FundingReportResultMap">
 		<id property="accuFundingNo" column="ACCU_FUND_NO"></id>
 		<result property="userId" column="USER_ID"></result>
@@ -70,7 +71,7 @@
 		<result property="accusationDate" column="ACCUSATION_DATE"></result>
 		<result property="projectNo" column="F_PROJECT_NO"></result>
 	</resultMap>
-
+<!-- 펀딩 좋아요 테이블  -->
 	<resultMap type="FundingLike" id="FundingLikeResultMap">
 		<id property="likeNo" column="LIKE_NO"></id>
 		<result property="userId" column="USER_ID"></result>
@@ -79,19 +80,21 @@
 	</resultMap>
 
 
-
+<!--펀딩 제안하기 입력 쿼리문 -->
 	<insert id="insertFunding" parameterType="Funding">
 		INSERT INTO
 		FUNDING_PROJECT
 		VALUES(SEQ_FUNDINGNO.NEXTVAL,#{userId},#{subjectName},#{productName},#{goalMoney},DEFAULT,#{optionPrice},#{optionLimit},SYSDATE,
 		#{finDate},#{projectStory},#{productContent},#{warningIntro},DEFAULT,DEFAULT,0,#{deleiveryDate})
 	</insert>
+<!--펀딩 제안하기 할때 같이 작동하는 펀딩 파일 입력 쿼리문  -->
 	<insert id="insertFundingFile" parameterType="FundingFile">
 		INSERT INTO
 		FUNDING_FILE
 		VALUES(SEQ_FUNDINFILENO.NEXTVAL,#{videoUrl},#{fileMainName},NULL,'AAA',
 		#{fileSub1Name},NULL,'BBB',#{fileSub2Name},NULL,'CCC',SYSTIMESTAMP,SEQ_FUNDINGNO.CURRVAL)
-	</insert>
+	</insert> <!-- namm 제외 경로, 사진사이즈 어디다 쓰는지 몰라서 일단 문자열(AAA,CCC) 처리 -->
+<!--펀딩 참여하기 결제를 통해 펀딩 내역 추가 쿼리문  -->	
 	<insert id="insertFundingLog" parameterType="FundingLog">
 		INSERT INTO
 		DO_FUNDING
@@ -99,27 +102,38 @@
 		,#{receiverAddr},#{receiverName},#{receiverPhone})
 	</insert>
 	
-	
+<!-- 펀딩 리스트 상세 _ 하나만 출력 쿼리문 -->
 	<select id="selectOne" resultMap="fundingResultMap">
 		SELECT * FROM FUNDING_PROJECT WHERE F_PROJECT_NO = #{projectNo}
 	</select>
+<!-- 펀딩 리스트 상세 (파일_사진)_ 하나만 출력 쿼리문 -->
 	<select id="selectOneFile" resultMap="fundingFileResultMap">
 		SELECT * FROM FUNDING_FILE WHERE F_PROJECT_NO = #{projectNo}
 	</select>
-	<select id="selectFundingList" resultMap="fundingResultMap">
+
+<!--펀링 리스트 메인 arrayList 전체 출력 쿼리문       백업용 남김 -->
+<!-- 	<select id="selectFundingList" resultMap="fundingResultMap">
 		SELECT * FROM FUNDING_PROJECT
 		ORDER BY F_PROJECT_NO DESC
+	</select> -->
+	
+<!--펀링 리스트 메인 + 파일(사진) 테이블 동시 JOIN 출력 쿼리문 _ 사용즁-->	
+	<select id="selectFundingList" resultMap="fundingResultMap">
+		SELECT * FROM FUNDING_PROJECT, FUNDING_FILE
+		WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC
 	</select>
-		<select id="selectFundingFileList" resultMap="fundingFileResultMap">
+<!--펀링 리스트 메인 파일(사진) arrayList 전체 출력 쿼리문   지금 안씀-->
+	<select id="selectFundingFileList" resultMap="fundingFileResultMap">
 		SELECT * FROM FUNDING_FILE
 		ORDER BY F_PROJECT_NO DESC
 	</select>
-
+<!--펀딩 참여시 프로젝트_펀딩 테이블에 누적 금액 컬럼 금액 추가 +  하는 쿼리문  -->
 	<update id="updateFundingAddMoney" parameterType="Funding"> 
 		UPDATE FUNDING_PROJECT SET SUM_MONEY = (SUM_MONEY + #{sumMoney})
 		WHERE
 		F_PROJECT_NO = #{projectNo}
 	</update> 
+<!--펀딩 상세 페이지 조회수 증가 쿼리문  -->
 	<update id="updateCount" parameterType="Funding">
 		UPDATE FUNDING_PROJECT SET HITS_COUNT = HITS_COUNT + 1
 		WHERE
@@ -129,27 +143,28 @@
 		
 	
 	<!-- 댓글 관련 insertReply -->
+	<!-- 댓글 입력  -->
 	<insert id="insertReply">
 		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },'닉네임', #{contents }, '펀딩상세', SYSDATE)
 	</insert>
-	
-
+	<!-- 댓글 출력  -->
 	<select id="selectReplyList" resultMap="FundingReplyResultMap">
 		SELECT * FROM FUNDING_COMMENTS
 		WHERE
 		F_PROJECT_NO  = #{projectNo }
 		ORDER BY COMM_NO DESC
 	</select>
-
+	<!-- 댓글 수정  -->
 	<update id="updateReply"> UPDATE FUNDING_COMMENTS SET COMM_CONTENTS = #{contents }
 		WHERE F_PROJECT_NO = #{no } AND COMM_NO = #{replyNo }
 	</update>
-
+	<!-- 댓글 삭제  -->
 	<delete id="deleteReply"> DELETE FUNDING_COMMENTS WHERE F_PROJECT_NO =
 		#{no } AND COMM_NO = #{replyNo }
 	</delete>
 
-	<!-- 신고하기 -->
+
+	<!-- 신고하기 입력 -->
 	<insert id="reportInsert" parameterType="FundingReport">
 		INSERT INTO
 		FUNDING_ACCUSATION
@@ -157,15 +172,13 @@
 	</insert>
 		
 		
-		
-		
-			<!-- 좋아요 테이블 인서트   -->
+			<!-- 좋아요 테이블에 좋아요 내역 추가 쿼리문 -->
 	<insert id="insertProjectLike" parameterType="FundingLike">
 		INSERT INTO
 		FUNDING_LIKE
 		VALUES(SEQ_FUND_LIKE_NO.NEXTVAL,#{userId},DEFAULT,#{projectNo})
 	</insert>
-		<!-- 좋아요 업데이트 펀딩프로젝트 테이블 -->
+		<!-- 펀딩 프로젝트 테이블에 있는 좋아요 컬럼 숫자 추가 업데이트. 위의 쿼리문과 동시 실행-->
 	<update id="updateFundingProjectLikeCol" parameterType="Funding">
 		UPDATE FUNDING_PROJECT SET LIKE_COUNT = LIKE_COUNT + 1
 		WHERE
@@ -175,7 +188,7 @@
 		
 		
 		<!-- 
-		
+		 삭제용 예시 그냥 내비둠
 		<delete id="deleteMember" parameterType="Member"> DELETE 
 		MEMBER WHERE USER_ID = #{userId } </delete> 
 		
@@ -183,7 +196,7 @@
 		
 		
 		
-			<!--나혜님꺼 -->
+			<!--나혜님이 추가한거 -->
 	<select id="selectAllList" resultMap="fundingResultMap">
 		SELECT * FROM FUNDING_PROJECT
 		ORDER BY F_PROJECT_NO DESC
