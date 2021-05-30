@@ -82,11 +82,26 @@ public class AdminController {
 		int newMemeber = aService.printTodayMemberCount(); // 오늘 가입한 회원 수
 		int deleteMember = aService.getCountDeleteMember(); //탈퇴한 회원수 카운트
 		
-		//int reportAll = aService.printReportAllCount();
+		//int reportAll = aService.printReportAllCount(); //신고게시글 수 카운트
+		// 오늘의 신고 게시글 수 카운
+		
+		//별보러가자 게시글 현황
+		
+		// 최근 보낸 쪽지 6개만
+		ArrayList<Message> nmList = aService.getCountNewMessage();
+		// 최근 받은 쪽지 6개만
+		ArrayList<Message> rmList = aService.getCountNewRecMessage();
+		
+		// 기부 현황
+		
+		//펀딩 현황
 		
 		mv.addObject("allMember", allMember);
 		mv.addObject("newMember", newMemeber);
 		mv.addObject("deleteMember", deleteMember);
+		
+		mv.addObject("newSendMessage", nmList);
+		mv.addObject("newrecMessage", rmList);
 		
 		//mv.addObject("reportAll", reportAll); //신고쪽지 보기
 		
@@ -122,7 +137,7 @@ public class AdminController {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 	// 회원 전체 리스트 가져오기
 	@RequestMapping(value="adminMemberListView.do", method = RequestMethod.GET)
 	public ModelAndView memberListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
@@ -294,7 +309,7 @@ public class AdminController {
 		}
 	}
 
-	// 신고 댓글보기
+	// 신고 게시판보기
 	public ModelAndView replyListView() {
 		// TODO Auto-generated method stub
 		return null;
@@ -347,7 +362,7 @@ public class AdminController {
 		int currentPage = (page != null) ? page : 1;
 		int listCount = aService.getHistoryListCount();/////////////////////history 셀릭트 카운트 완성되면 고치기!!!!
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<History> hList = aService.pringAllHistoy(pi);
+		ArrayList<History> hList = hService.printAll(pi);
 		if(!hList.isEmpty()) {
 			mv.addObject("hList", hList);
 			mv.addObject("pi", pi);
@@ -511,9 +526,21 @@ public class AdminController {
 	}
 
 	// 별보러가자 리스트
-	public ModelAndView visitListView() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminVisitList.do", method = RequestMethod.GET)
+	public ModelAndView visitListView(ModelAndView mv, @RequestParam(value = "page", required = false) Integer page) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount = aService.getVisitListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<Visit> vList = vService.printAll();
+		if (!vList.isEmpty()) {
+			mv.addObject("vList", vList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminVisitListView");
+		} else {
+			mv.addObject("msg", "별들의 발자취 리스트 조회에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 	// 별보러가자 상세보기

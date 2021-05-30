@@ -8,6 +8,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
 
 public interface AdminStore {
@@ -26,6 +27,11 @@ public interface AdminStore {
 	public int slelectCountDeleteMember();
 	// 신고 쪽지 수 조회
 	public int selectReportAllCount();
+	// 최근 보낸 쪽지 뿌리기
+	public ArrayList<Message> selectCountNewMessage();
+	// 최근 받은 쪽지 뿌리기
+	public ArrayList<Message> selectCountNewRecMessage();
+	
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> selectAll(PageInfo pi);
@@ -99,6 +105,9 @@ public interface AdminStore {
 	public int selectHistoyListCount();
 	public int selectFundingListCount();
 	public int selectDonationListCount();
+	public int selectVisitListCount();
+
+
 	
 
 }

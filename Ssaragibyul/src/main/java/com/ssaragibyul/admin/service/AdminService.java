@@ -13,6 +13,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
 
 public interface AdminService {
@@ -29,6 +30,10 @@ public interface AdminService {
 	public int printUnprocessedReport();
 	// 별보러가자 게시판 현황
 	public int printVisitbrdCount();
+	// 최근 보낸 메시지 6개 출력하기
+	public ArrayList<Message> getCountNewMessage();
+	// 최근 받음 메시지 6개 출력하기
+	public ArrayList<Message> getCountNewRecMessage();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);
@@ -103,5 +108,7 @@ public interface AdminService {
 	public int getHistoryListCount();
 	public int getFundingListCount();
 	public int getDonationListCount();
+	public int getVisitListCount();
+	
 	
 }

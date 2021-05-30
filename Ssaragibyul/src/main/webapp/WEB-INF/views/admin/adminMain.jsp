@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -177,10 +179,12 @@
 								</div>
 								<div class="card-body">
 									<ol class="activity-feed">
+									<c:forEach items="${newSendMessage }" var="nsmList" >
 										<li class="feed-item feed-item-secondary">
-											<time class="date" datetime="9-25">Sep 25</time>
-											<span class="text">회원ID <a href="#">"쪽지제목"</a></span>
+											<time class="date" datetime="9-25">${nsmList.msgNo}</time>
+											<span class="text">${nsmList.senderId }<a href="#">${nsmList.msgTitle }</a></span>
 										</li>
+									</c:forEach>
 										<li class="feed-item feed-item-success">
 											<time class="date" datetime="9-24">Sep 24</time>
 											<span class="text">전체 <a href="#">"공지사항"</a></span>
@@ -215,19 +219,21 @@
 									</div>
 								</div>
 								<div class="card-body">
+								<c:forEach items="${newrecMessage }" var="nrmList">
 									<div class="d-flex">
 										<div class="avatar avatar-online">
-											<span class="avatar-title rounded-circle border border-white bg-info">J</span>
+											<span class="avatar-title rounded-circle border border-white bg-info">${fn:substring(nrmList.senderId,1,1) }</span>
 										</div>
 										<div class="flex-1 ml-3 pt-1">
-											<h6 class="text-uppercase fw-bold mb-1">회원 ID <span class="text-warning pl-3">제목</span></h6>
-											<span class="text-muted">본문 내용 조금만 가져오기</span>
+											<h6 class="text-uppercase fw-bold mb-1">${nrmList.senderId } <span class="text-warning pl-3">${nrmList.msgTitle }</span></h6>
+											<span class="text-muted">${nrmList.msgContents }</span>
 										</div>
 										<div class="float-right pt-1">
-											<small class="text-muted">8:40 PM</small>
+											<small class="text-muted"><fmt:formatDate value="${nrmList.regDate }" pattern="MM.dd HH:mm"/></small>
 										</div>
 									</div>
 									<div class="separator-dashed"></div>
+									</c:forEach>
 									<div class="d-flex">
 										<div class="avatar avatar-offline">
 											<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
@@ -330,6 +336,8 @@
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
 	<script src="resources/js/admin/setting-demo.js"></script>
 	<script src="resources/js/admin/demo.js"></script>
+	
+	<!-- 회원관리 차트 -->
 	<script>
 		Circles.create({
 			id:'circles-1',
@@ -376,6 +384,7 @@
 			styleText:true
 		})
 
+		/* 신고관리 차트 */
 		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
@@ -415,6 +424,7 @@
 			}
 		});
 
+		/* 펀딩제안현황 차트 */
 		$('#lineChart').sparkline([105,103,123,100,95,105,115], {
 			type: 'line',
 			height: '70',

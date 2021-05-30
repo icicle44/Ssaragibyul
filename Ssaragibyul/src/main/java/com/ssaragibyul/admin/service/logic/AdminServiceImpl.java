@@ -14,6 +14,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
 @Service
 public class AdminServiceImpl implements AdminService{
@@ -53,6 +54,17 @@ public class AdminServiceImpl implements AdminService{
 		return 0;
 	}
 
+	@Override
+	public ArrayList<Message> getCountNewMessage() {
+		return aStore.selectCountNewMessage();
+	}
+
+	@Override
+	public ArrayList<Message> getCountNewRecMessage() {
+		// TODO Auto-generated method stub
+		return aStore.selectCountNewRecMessage();
+	}
+	
 	@Override
 	public ArrayList<Member> printAll(PageInfo pi) {
 		return aStore.selectAll(pi);
@@ -205,7 +217,6 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<Visit> printAllVisit(PageInfo pi) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -248,6 +259,12 @@ public class AdminServiceImpl implements AdminService{
 	public int getDonationListCount() {
 		// TODO Auto-generated method stub
 		return aStore.selectDonationListCount();
+	}
+
+	@Override
+	public int getVisitListCount() {
+		// TODO Auto-generated method stub
+		return aStore.selectVisitListCount();
 	}
 
 

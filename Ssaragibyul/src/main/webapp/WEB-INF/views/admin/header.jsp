@@ -46,17 +46,17 @@
 					</div>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item toggle-nav-search hidden-caret">
-							<a class="nav-link" data-toggle="collapse" href="#search-nav" role="button" aria-expanded="false" aria-controls="search-nav">
+							<a class="nav-link" data-toggle="collapse" href="#" role="button" aria-expanded="false" aria-controls="search-nav">
 								<i class="fa fa-search"></i>
 							</a>
 						</li>
-						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link dropdown-toggle" href="#" id="messageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					 	<li class="nav-item dropdown hidden-caret">
+							<a class="nav-link dropdown-toggle" href="adminMessageList.do" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-envelope"></i>
 							</a>
-							<ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown">
-								<li>
-									<div class="dropdown-title d-flex justify-content-between align-items-center">
+							<!-- <ul class="dropdown-menu messages-notif-box animated fadeIn" aria-labelledby="messageDropdown"> -->
+<!--								<li>
+ 									<div class="dropdown-title d-flex justify-content-between align-items-center">
 										Messages 									
 										<a href="#" class="small">Mark all as read</a>
 									</div>
@@ -114,11 +114,12 @@
 											</a>
 										</div>
 									</div>
-								</li>
-								<li>
+								</li> -->
+<!-- 								<li>
 									<a class="see-all" href="javascript:void(0);">See all messages<i class="fa fa-angle-right"></i> </a>
-								</li>
-							</ul>
+								</li> -->
+								 
+							<!-- </ul> -->
 						</li>
 						<li class="nav-item dropdown hidden-caret">
 							<a class="nav-link dropdown-toggle" href="#" id="notifDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

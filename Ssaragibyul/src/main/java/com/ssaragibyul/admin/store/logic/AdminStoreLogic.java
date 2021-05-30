@@ -15,6 +15,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
 
 import jdk.nashorn.internal.ir.annotations.Reference;
@@ -264,6 +265,23 @@ public class AdminStoreLogic implements AdminStore{
 	public int selectReportAllCount() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int selectVisitListCount() {
+		return sqlSession.selectOne("visitMapper.selectVisitListCount");
+	}
+
+	@Override
+	public ArrayList<Message> selectCountNewMessage() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("messageMapper.selectCountNewMessage");
+	}
+
+	@Override
+	public ArrayList<Message> selectCountNewRecMessage() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("messageMapper.selectCountNewRecMessage");
 	}
 
 

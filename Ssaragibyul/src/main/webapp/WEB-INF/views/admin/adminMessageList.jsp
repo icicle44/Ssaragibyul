@@ -70,9 +70,7 @@
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-										<table id="basic-datatables" class="table table-hover" >
-										<button type="button" class="btn btn-outline-warning" style="height: 31px; margin-bottom: 30px;" onclick="#">삭제
-										</button>
+										<table class="table table-hover" >
 											<thead>
 												<tr style="border-bottom:hidden;">
 													<th>번호</th>
@@ -80,10 +78,10 @@
 													<th>쪽지 제목</th>
 													<th>받은 날짜</th>
 													<c:if test="${flag=='rec' }">
-														<th width="100px"></th>
+														<th width="120px">수신확인</th>
 													</c:if>
 													<c:if test="${flag=='send' }">
-														<th width="100px">수신확인</th>
+														<th width="120px">수신확인</th>
 													</c:if>
 													<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
 												</tr>
@@ -151,6 +149,62 @@
 												</c:if>
 											</tbody>
 										</table>
+										<button type="submit" class="btn btn-outline-warning float-right" id="deleteArrBtn" >삭제
+											</button>
+											<br><br>
+										 <table style="margin: auto; text-align: center;">
+												<!-- 페이징 -->
+												<tr class="text-center">
+													<td colspan="6" style="border-top:hidden;">
+														<!-- 변수선언 -->
+														<c:if test="${flag=='notice'}">
+															<c:set var="pageUrl" value="noticeMsgList.do"/>
+														</c:if>
+														<c:if test="${flag=='rec' }">
+															<c:set var="pageUrl" value="adminMessageList.do"/>
+														</c:if>
+														<c:if test="${flag=='send' }">
+															<c:set var="pageUrl" value="adminSendMessageList.do"/>
+														</c:if>
+														<!-- 이전 -->
+														<c:url var="before" value="${pageUrl}">
+															<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+														</c:url>
+														<c:if test="${pi.listCount ne 0 }">
+															<c:if test="${pi.currentPage <= 1 }">
+																[이전]&nbsp;
+															</c:if>
+															<c:if test="${pi.currentPage > 1 }">
+																<a href="${before }">[이전]</a>&nbsp;
+															</c:if>
+														</c:if>
+														<!-- 페이지 -->
+														<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
+															<c:url var="pagination" value="${pageUrl}">
+																<c:param name="page" value="${p}"></c:param>
+															</c:url>
+															<c:if test="${p eq pi.currentPage}">
+																[${p}]
+															</c:if>
+															<c:if test="${p ne pi.currentPage}">
+																<a href="${pagination }">${p}</a>&nbsp;
+															</c:if>
+														</c:forEach>
+														<!-- 다음 -->
+														<c:url var="after" value="${pageUrl}">
+															<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+														</c:url>
+														<c:if test="${pi.listCount ne 0 }">
+															<c:if test="${pi.currentPage >= pi.maxPage}">
+																[다음]&nbsp;
+															</c:if>
+															<c:if test="${pi.currentPage < pi.maxPage}">
+																<a href="${after}">[다음]</a>&nbsp;
+															</c:if>
+														</c:if>
+													</td>
+												</tr>
+											</table>
 									</div>
 								</div>
 							</div>
@@ -165,6 +219,8 @@
 	<script src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
 	<script src="resources/js/admin/core/popper.min.js"></script>
 	<script src="resources/js/admin/core/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 	<!-- jQuery UI -->
 	<script src="resources/js/admin/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
@@ -183,53 +239,6 @@
 	<script src="resources/js/admin/setting-demo2.js"></script>
 
 	<script>
-		$(document).ready(function() {
-			$('#basic-datatables').DataTable({
-			});
-	
-			$('#multi-filter-select').DataTable( {
-				"pageLength": 5,
-				initComplete: function () {
-					this.api().columns().every( function () {
-						var column = this;
-						var select = $('<select class="form-control"><option value=""></option></select>')
-						.appendTo( $(column.footer()).empty() )
-						.on( 'change', function () {
-							var val = $.fn.dataTable.util.escapeRegex(
-								$(this).val()
-								);
-	
-							column
-							.search( val ? '^'+val+'$' : '', true, false )
-							.draw();
-						} );
-	
-						column.data().unique().sort().each( function ( d, j ) {
-							select.append( '<option value="'+d+'">'+d+'</option>' )
-						} );
-					} );
-				}
-			});
-	
-			// Add Row
-			$('#add-row').DataTable({
-				"pageLength": 5,
-			});
-	
-			var action = '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-	
-			$('#addRowButton').click(function() {
-				$('#add-row').dataTable().fnAddData([
-					$("#addName").val(),
-					$("#addPosition").val(),
-					$("#addOffice").val(),
-					action
-					]);
-				$('#addRowModal').modal('hide');
-	
-			});
-		});
-		
 		/* 쪽지작성창, 쪽지상세보기창 팝업 */
 		function msgPopup(msgUrl) {
 			if(${sessionScope.loginUser ne null}) {
@@ -255,6 +264,48 @@
 				var cnt = $("input[name=chk]:checked").length;
 				if(cnt == $("input[name=chk]").length) {
 					$("#checkAll").prop("checked", true);
+				}
+			});
+			/* List View에서 삭제하기 */
+			$("#deleteArrBtn").on("click", function(){
+				var cnt = $("input[name=chk]:checked").length;
+				var msgNoArr = new Array();
+				$("input[name=chk]:checked").each(function(){
+					msgNoArr.push($(this).val());
+				});
+				console.log(msgNoArr.toString());
+				console.log(cnt);
+				if(cnt == 0) {
+					alert("선택된 쪽지가 없습니다.");
+				}else {
+					var url = "";
+					if(${flag eq "rec"}) {
+						url = "recMsgDelete.do";
+					}else if(${flag eq "send"}) {
+						url = "sendMsgDelete.do";
+					}
+					var conf = confirm("정말 삭제하시겠습니까?");
+					console.log(url);
+					if(conf == true) {
+						$.ajax({
+							url: url,
+							type: "post",
+							data:{"msgNoArr" : msgNoArr},
+							success: function(data){
+								if(data=="success") {
+									alert("삭제하였습니다.");
+									location.reload(true);
+								}else {
+									alert("삭제에 실패하였습니다.");
+								}
+							},
+							error: function(){
+								alert("삭제에 실패하였습니다.");
+							}
+						});
+					}else {
+						self.close();
+					}
 				}
 			});
 		});
