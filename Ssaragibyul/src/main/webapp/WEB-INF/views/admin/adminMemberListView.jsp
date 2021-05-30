@@ -116,6 +116,41 @@
 											</c:forEach>
 											</tbody>
 										</table>
+										<!-- 페이징 -->
+										<table style="height : 50px; text-align: center; font-size: 12px;">
+											<tr align="center" height="20" >
+												<td colspan="8">
+													<!-- 이전 --> 
+													<c:url var="before" value="adminMemberListView.do">
+														<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
+													</c:url> 
+													<c:if test="${pi.currentPage <= 1 }">
+														[이전]&nbsp;
+													</c:if> 
+													<c:if test="${pi.currentPage > 1 }">
+														<a href="${before }">[이전]</a>&nbsp;
+													</c:if>
+													<!-- 페이지 --> <c:forEach var="p" begin="${pi.startPage }"
+														end="${pi.endPage }">
+														<c:url var="pagination" value="adminMemberListView.do">
+															<c:param name="page" value="${p }"></c:param>
+														</c:url>
+														<c:if test="${p eq pi.currentPage }">
+															<font color="red" size="3">[${p }]</font>
+														</c:if>
+														<c:if test="${p ne pi.currentPage }">
+															<a href="${pagination }">${p }</a>&nbsp;
+														</c:if>
+													</c:forEach> <!-- 다음 --> <c:url var="after" value="adminMemberListView.do">
+														<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+													</c:url> <c:if test="${pi.currentPage >= pi.maxPage }">
+														[다음]&nbsp;
+													</c:if> <c:if test="${pi.currentPage < pi.maxPage }">
+														<a href="${after }">[다음]</a>&nbsp;
+													</c:if>
+												</td>
+											</tr>
+											</table>
 									</div>
 								</div>
 							</div>

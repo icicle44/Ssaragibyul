@@ -47,7 +47,7 @@
 							</div>
 							<div class="ml-md-auto py-2 py-md-0">
 								<a href="#" class="btn btn-white btn-border btn-round mr-2" onclick="msgPopup('msgWriterView.do')">공지하기</a>
-								<a href="#" class="btn btn-secondary btn-round">기념관 등록하기</a>
+								<a href="adminHistoryWriteView.do" class="btn btn-secondary btn-round">기념관 등록하기</a>
 							</div>
 						</div>
 					</div>
@@ -182,7 +182,7 @@
 									<c:forEach items="${newSendMessage }" var="nsmList" >
 										<li class="feed-item feed-item-secondary">
 											<time class="date" datetime="9-25">${nsmList.msgNo}</time>
-											<span class="text">${nsmList.senderId }<a href="#">${nsmList.msgTitle }</a></span>
+											<span class="text">${nsmList.receiverId }<a href="#">${nsmList.msgTitle }</a></span>
 										</li>
 									</c:forEach>
 										<li class="feed-item feed-item-success">
@@ -219,10 +219,10 @@
 									</div>
 								</div>
 								<div class="card-body">
-								<c:forEach items="${newrecMessage }" var="nrmList">
+								<c:forEach items="${newrecMessage }" var="nrmList" varStatus="index">
 									<div class="d-flex">
 										<div class="avatar avatar-online">
-											<span class="avatar-title rounded-circle border border-white bg-info">${fn:substring(nrmList.senderId,1,1) }</span>
+											<span class="avatar-title rounded-circle border border-white bg-info">${index.count }</span>
 										</div>
 										<div class="flex-1 ml-3 pt-1">
 											<h6 class="text-uppercase fw-bold mb-1">${nrmList.senderId } <span class="text-warning pl-3">${nrmList.msgTitle }</span></h6>

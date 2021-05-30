@@ -3,17 +3,20 @@
 
 <mapper namespace="historyMapper">
 	<resultMap type="History" id="historyResultMap">
-<!-- 		<id property="visitNo" column="VISIT_NO"/>
-		<result property="userId" column="USER_ID"/>
-		<result property="siteNo" column="SITE_NO"/>
-		<result property="visitTitle" column="VISIT_TITLE"/>
-		<result property="visitContents" column="VISIT_CONTENTS"/>
-		<result property="visitCount" column="VISIT_COUNTE"/>
-		<result property="vCreateDate" column="V_CREATE_DATE"/>
-		<result property="vUpdateDate" column="V_UPDATE_DATE"/>
-		<result property="originalFilename" column="ORIGINAL_FILENAME"/>
-		<result property="renameFilename" column="RENAME_FILENAME"/>
-		<result property="uploadTime" column="UPLOAD_TIME"/> -->
+ 		<id property="siteNo" column="SITE_NO"/>
+		<result property="siteName" column="SITE_NAME"/>
+		<result property="siteType" column="SITE_TYPE"/>
+		<result property="siteContents" column="SITE_CONTENTS"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="siteAddr" column="SITE_ADDR"/>
+		<result property="hCreateDate" column="H_CREATE_DATE"/>
+		<result property="hUpdateDate" column="H_UPDATE_DATE"/>
+		<result property="hStatus" column="H_STATUS"/>
+		<result property="fileNo" column="FILE_NO"/> 
+		<result property="originarFilename" column="ORIGINAR_FILENAME"/> 
+		<result property="renameFilename" column="RENAME_FILENAME"/> 
+		<result property="uploadTime" column="UPLOAD_TIME"/> 
 	</resultMap>
 
 
@@ -25,4 +28,22 @@
    <select id="selectHistoryListCount" resultType="_int">
       SELECT COUNT(*) FROM HISTORY
     </select>
+    
+    <select id="selectOneHistory" resultMap="historyResultMap">
+    	SELECT * FROM HISTORY WHERE SITE_NO = #{siteNo} AND H_STATUS = 'Y'
+    </select>
+    
+    <insert id="inserHistory" parameterType="History">
+    	INSERT INTO HISTORY
+    	VALUES(SEQ_HISTORY.NEXTVAL, #{siteName}, #{siteType}, #{siteContents}, #{latitude}, #{longitude}, #{siteAddr}, DEFAULT, DEFAULT, DEFAULT, SEQ_HISTORY_FILE.NEXTVAL, #{originarFilename}, #{renameFilename}, #{uploadTime})
+    </insert>
+    
+    <update id="updateHistory" >
+    	UPDATE HISTORY SET SITE_NAME= #{siteName}, SITE_TYPE = #{siteType}, SITE_CONTENTS= #{siteContents}, LATITUDE = #{latitude}, LONGITUDE = #{longitude} ,SITE_ADDR = #{siteAddr}, H_UPDATE_DATE = SYSDATE, ORIGINAR_FILENAME = #{originarFilename}, RENAME_FILENAME = #{renameFilename}, UPLOAD_TIME = SYSDATE WHERE SITE_NO = #{siteNo}
+    </update>
+    
+    <update id="deleteHistory" parameterType="_int">
+    	UPDATE HISTORY
+    	SET H_STATUS = 'N' WHERE SITE_NO = #{siteNo}
+    </update>
 </mapper>

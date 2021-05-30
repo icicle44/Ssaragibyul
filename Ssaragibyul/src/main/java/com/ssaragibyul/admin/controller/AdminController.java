@@ -218,7 +218,7 @@ public class AdminController {
 		if(!fList.isEmpty()) {
 			mv.addObject("fList", fList);
 			mv.addObject("pi", pi);
-			mv.setViewName("admin/fundingListView");
+			mv.setViewName("admin/adminFundingListView");
 		} else {
 			mv.addObject("msg", "펀딩 리스트 출력에 실패하였습니다.");
 			mv.setViewName("common/errorPage");
@@ -363,6 +363,7 @@ public class AdminController {
 		int listCount = aService.getHistoryListCount();/////////////////////history 셀릭트 카운트 완성되면 고치기!!!!
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<History> hList = hService.printAll(pi);
+		System.out.println("pi" + pi + " / " + hList);
 		if(!hList.isEmpty()) {
 			mv.addObject("hList", hList);
 			mv.addObject("pi", pi);
@@ -409,7 +410,7 @@ public class AdminController {
 		// 디비에 데이터를 저장하는 작업
 		int result = 0;
 		String path = "";
-		result = hService.registerHistory(history);
+		result = aService.registerHistory(history);
 		if(result > 0) {
 			path = "redirect:adminHistoryDetail.do?siteNo="+history.getSiteNo();
 		} else {
@@ -422,7 +423,7 @@ public class AdminController {
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\huploadFiles";
+		String savePath = root + "\\hUpdateDate";
 		
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
@@ -457,12 +458,12 @@ public class AdminController {
 
 	// 게시글 수정화면
 	@RequestMapping(value="adminModifyView.do")
-	public ModelAndView historyModifyView(ModelAndView mv, @RequestParam("getSiteNo") int getSiteNo) {
-		History history = hService.printOne(getSiteNo);
+	public ModelAndView historyModifyView(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
+		History history = aService.printOneHistoy(siteNo);
 		if(history != null) {
 			mv.addObject("history", history).setViewName("admin/adminHistoryUpdateView");
 		} else {
-			mv.addObject("msg", "별들의 발자취 수정이 실패하였습니다.").setViewName("common/errorPage");
+			mv.addObject("msg", "별들의 발자취 수정 화면 접근에 실패하였습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -486,7 +487,7 @@ public class AdminController {
 			}
 		}
 		// DB수정
-		int result = hService.modifyHistory(history);
+		int result = aService.modifyHistory(history);
 		if(result > 0) {
 			mv.setViewName("redirect: adminHistoryList.do");
 		} else {
@@ -506,7 +507,7 @@ public class AdminController {
 		}
 		
 		// 디비에 데이터 업데이트
-		int result = hService.removeHistory(siteNo);
+		int result = aService.removeHistory(siteNo);
 		if(result > 0) {
 			return "redirect:adminHistoryList.do";
 		} else {

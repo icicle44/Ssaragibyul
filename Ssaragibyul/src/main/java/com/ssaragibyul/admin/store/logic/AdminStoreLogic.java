@@ -186,9 +186,8 @@ public class AdminStoreLogic implements AdminStore{
 	}
 
 	@Override
-	public History selectOneHistoy(int mngNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public History selectOneHistoy(int SiteNo) {
+		return sqlSession.selectOne("historyMapper.selectOneHistory", SiteNo);
 	}
 
 	@Override
@@ -199,20 +198,17 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public int insertHistory(History history) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.insert("historyMapper.inserHistory", history);
 	}
 
 	@Override
 	public int updateHistory(History history) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.update("historyMapper.updateHistory", history);
 	}
 
 	@Override
-	public int deleteHistory(int mngNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteHistory(int siteNo) {
+		return sqlSession.update("historyMapper.deleteHistory", siteNo);
 	}
 
 	@Override

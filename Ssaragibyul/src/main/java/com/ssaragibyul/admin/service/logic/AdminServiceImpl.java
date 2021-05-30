@@ -186,9 +186,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public History printOneHistoy(int mngNo) {
-		// TODO Auto-generated method stub
-		return null;
+	public History printOneHistoy(int siteNo) {
+		return aStore.selectOneHistoy(siteNo);
 	}
 
 	@Override
@@ -199,20 +198,17 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public int registerHistory(History history) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.insertHistory(history);
 	}
 
 	@Override
 	public int modifyHistory(History history) {
-		// TODO Auto-generated method stub
-		return 0;
+		return aStore.updateHistory(history);
 	}
 
 	@Override
-	public int removeHistory(int mngNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeHistory(int siteNo) {
+		return aStore.deleteHistory(siteNo);
 	}
 
 	@Override

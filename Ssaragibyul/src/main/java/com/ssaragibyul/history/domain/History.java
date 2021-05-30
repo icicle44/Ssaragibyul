@@ -6,7 +6,8 @@ import java.sql.Timestamp;
 public class History {
 	private int siteNo;
 	private String siteName;
-	private String stieType;
+	private String siteType;
+	private String siteContents;
 	private int latitude;
 	private int longitude;
 	private String siteAddr;
@@ -44,13 +45,23 @@ public class History {
 	}
 
 
-	public String getStieType() {
-		return stieType;
+	public String getSiteType() {
+		return siteType;
 	}
 
 
-	public void setStieType(String stieType) {
-		this.stieType = stieType;
+	public void setSiteType(String siteType) {
+		this.siteType = siteType;
+	}
+
+
+	public String getSiteContents() {
+		return siteContents;
+	}
+
+
+	public void setSiteContents(String siteContents) {
+		this.siteContents = siteContents;
 	}
 
 
@@ -156,10 +167,11 @@ public class History {
 
 	@Override
 	public String toString() {
-		return "History [siteNo=" + siteNo + ", siteName=" + siteName + ", stieType=" + stieType + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", siteAddr=" + siteAddr + ", hCreateDate=" + hCreateDate
-				+ ", hUpdateDate=" + hUpdateDate + ", hStatus=" + hStatus + ", fileNo=" + fileNo + ", originarFilename="
-				+ originarFilename + ", renameFilename=" + renameFilename + ", uploadTime=" + uploadTime + "]";
+		return "History [siteNo=" + siteNo + ", siteName=" + siteName + ", siteType=" + siteType + ", siteContents="
+				+ siteContents + ", latitude=" + latitude + ", longitude=" + longitude + ", siteAddr=" + siteAddr
+				+ ", hCreateDate=" + hCreateDate + ", hUpdateDate=" + hUpdateDate + ", hStatus=" + hStatus + ", fileNo="
+				+ fileNo + ", originarFilename=" + originarFilename + ", renameFilename=" + renameFilename
+				+ ", uploadTime=" + uploadTime + "]";
 	}
 
 }

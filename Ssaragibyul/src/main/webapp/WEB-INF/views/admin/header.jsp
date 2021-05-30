@@ -180,10 +180,10 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown hidden-caret">
-							<a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+							<a class="nav-link" href="logout.do">
 								<i class="icon-logout"></i>
 							</a>
-							<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
+<!-- 							<div class="dropdown-menu quick-actions quick-actions-info animated fadeIn">
 								<div class="quick-actions-header">
 									<span class="title mb-1">Quick Actions</span>
 									<span class="subtitle op-8">Shortcuts</span>
@@ -230,10 +230,10 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</li>
 						<li class="nav-item dropdown hidden-caret">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="adminMain.do" aria-expanded="false">
 								<div class="avatar-sm">
 									<img src="resources/img/admin/profile.jpg" alt="..." class="avatar-img rounded-circle">
 								</div>
@@ -363,7 +363,7 @@
 							<div class="collapse" id="sidebarLayouts">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="#">
+										<a href="adminFundingList.do">
 											<span class="sub-item">펀딩 관리</span>
 										</a>
 									</li>
