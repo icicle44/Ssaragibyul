@@ -1,6 +1,7 @@
 package com.ssaragibyul.point.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.message.domain.SearchMsg;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.point.store.PointStore;
@@ -68,12 +71,23 @@ public class PointStoreLogic implements PointStore{
 	public int getListCount(String userId) {
 		return sqlSession.selectOne("pointMapper.selectListCount", userId);
 	}
+	
+	@Override
+	public ArrayList<PointAndProject> selectSearchList(PageInfo pi, SearchMsg search) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("pointMapper.selectSearchList", search, rowBounds);
+	}
+
+	@Override
+	public int getSearchListCount(SearchMsg search) {
+		return sqlSession.selectOne("pointMapper.selectSearchCount", search);
+	}
 
 	//내포인트 출력
 	@Override
-	public int getMyPoint(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public MyPoint getMyPoint(String userId) {
+		return sqlSession.selectOne("pointMapper.selectMyPoint", userId);
 	}
 
 }

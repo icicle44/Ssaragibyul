@@ -9,14 +9,18 @@ public class PointAndProject extends Point{
 	//private int successNo; //펀딩, 기부 프로젝트 번호
 	private int projectNo;
 	private String nickName; //oppUserId의 닉네임
+	private int money; //누적금액-목표금액
+	private double fdate; // 오늘날짜-종료일
 	
 	public PointAndProject() {}
 
-	public PointAndProject(String subject, int projectNo, String nickName) {
+	public PointAndProject(String subject, int projectNo, String nickName, int money, double fdate) {
 		super();
 		this.subject = subject;
 		this.projectNo = projectNo;
 		this.nickName = nickName;
+		this.money = money;
+		this.fdate = fdate;
 	}
 
 	public String getSubject() {
@@ -43,15 +47,31 @@ public class PointAndProject extends Point{
 		this.nickName = nickName;
 	}
 
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
+	}
+
+	public double getFdate() {
+		return fdate;
+	}
+
+	public void setFdate(double fdate) {
+		this.fdate = fdate;
+	}
+
 	@Override
 	public String toString() {
 		return "PointAndProject [subject=" + subject + ", projectNo=" + projectNo + ", nickName=" + nickName
-				+ ", getPntListNo()=" + getPntListNo() + ", getEventNo()=" + getEventNo() + ", getEventNoCharge()="
-				+ getEventNoCharge() + ", getUserId()=" + getUserId() + ", getOppUserId()=" + getOppUserId()
-				+ ", getVarTime()=" + getVarTime() + ", getEventCode()=" + getEventCode() + ", getVarType()="
-				+ getVarType() + ", getVarAmount()=" + getVarAmount() + ", getBuyerEmail()=" + getBuyerEmail()
-				+ ", getReceiptUrl()=" + getReceiptUrl() + ", toString()=" + super.toString() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", money=" + money + ", fdate=" + fdate + ", getPntListNo()=" + getPntListNo() + ", getEventNo()="
+				+ getEventNo() + ", getEventNoCharge()=" + getEventNoCharge() + ", getUserId()=" + getUserId()
+				+ ", getOppUserId()=" + getOppUserId() + ", getVarTime()=" + getVarTime() + ", getEventCode()="
+				+ getEventCode() + ", getVarType()=" + getVarType() + ", getVarAmount()=" + getVarAmount()
+				+ ", getBuyerEmail()=" + getBuyerEmail() + ", getReceiptUrl()=" + getReceiptUrl() + ", toString()="
+				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 
 }

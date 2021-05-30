@@ -332,7 +332,7 @@ public class MessageController {
 			}
 			int currentPage = (page != null)? page : 1;
 			int listCount = msgService.getSearchListCount(search);
-			System.out.println(listCount);
+			
 			PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
 			
 			ArrayList<MessageAndNick> searchMsgList = msgService.printSearchList(pi, search);

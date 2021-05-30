@@ -13,7 +13,9 @@
 	<section class="card-body bg-white mt-0 shadow" >
 		<p>충전 금액 선택</p>
 		<br>
-		<label class="box-radio-input"><input type="radio" name="varAmount" value="100"><span> 5,000원</span></label>
+		<label class="box-radio-input"><input type="radio" name="varAmount" value="100"><span> 100원</span></label>
+		
+		<label class="box-radio-input"><input type="radio" name="varAmount" value="5000"><span> 5,000원</span></label>
 		<label class="box-radio-input"><input type="radio" name="varAmount" value="10000"><span> 10,000원</span></label>
 		<label class="box-radio-input"><input type="radio" name="varAmount" value="15000"><span> 15,000원</span></label>
 		<label class="box-radio-input"><input type="radio" name="varAmount" value="20000"><span> 20,000원</span></label>

@@ -1,8 +1,11 @@
 package com.ssaragibyul.point.store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.message.domain.SearchMsg;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 
@@ -15,11 +18,13 @@ public interface PointStore {
 
 	public ArrayList<PointAndProject> selectAll(PageInfo pi, String userId);
 	public int getListCount(String userId);
-
-	public int getMyPoint(String userId);
+	public ArrayList<PointAndProject> selectSearchList(PageInfo pi, SearchMsg search);
+	public int getSearchListCount(SearchMsg search);	
+	
+	public MyPoint getMyPoint(String userId);
 	
 	//안씀
 	public int insertPosPoint(Point point);
 	public int insertNegPoint(Point point);
-
+	
 }

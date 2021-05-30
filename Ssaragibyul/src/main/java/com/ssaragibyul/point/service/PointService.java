@@ -1,11 +1,14 @@
 package com.ssaragibyul.point.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.SearchMsg;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.visit.domain.Visit;
@@ -30,12 +33,20 @@ public interface PointService {
 	public ArrayList<PointAndProject> printAll(PageInfo pi, String userId);
 	public int getListCount(String userId);
 
+	//포인트내역 검색 리스트 출력
+	public ArrayList<PointAndProject> printSearchList(PageInfo pi, SearchMsg search);
+	public int getSearchListCount(SearchMsg search);
+	
 	//내포인트 조회
-	public int getMyPoint(String userId);
+	public MyPoint getMyPoint(String userId);
 	
 	//안씀
 	public int registerPosPoint(Point point);
 	public int registerNegPoint(Point point);
+
+	
+
+	
 
 
 

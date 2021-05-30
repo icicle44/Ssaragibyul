@@ -18,15 +18,14 @@
 
 		<section class="wrapper-left sideBar col-md-3" id="menubar">
 			<input type="button" value="충전하기" id="chargeBtn" onClick="window.open('chargePointView.do')"><br>
-			<a href="recMsgList.do">전체 내역</a><hr>
+			<a href="pointList.do">전체 내역</a><hr>
 			<span id="showSubMenu"> + </span>
 			<div id="subMenu">
-				<a href="sendMsgList.do">충전 내역</a><hr>
-				<a href="sendMsgList.do">펀딩 내역</a><hr>
-				<a href="noticeMsgList.do">기부 내역</a><hr>
-				<a href="noticeMsgList.do">별 보러 가자</a><hr>
-				<a href="noticeMsgList.do">선물한 내역</a><hr>
-				<a href="noticeMsgList.do">선물 받은 내역</a><hr>
+				<a href="pointSearch.do?searchCondition=0">충전 내역</a><hr>
+				<a href="pointSearch.do?searchCondition=1">펀딩 내역</a><hr>
+				<a href="pointSearch.do?searchCondition=2">기부 내역</a><hr>
+				<a href="pointSearch.do?searchCondition=3">별 보러 가자</a><hr>
+				<a href="pointSearch.do?searchCondition=4">선물 내역</a><hr>
 			</div>			
 		</section>
 
@@ -43,7 +42,7 @@
 						<tr style="border-bottom:hidden;">
 							<th>내역번호</th>
 							<th>일시</th>
-							<th>내용</th>
+							<th colspan="2">내용</th>
 							<th>포인트</th>
 						</tr>
 					</thead>
@@ -61,22 +60,57 @@
 									
 									<!-- 내용: 각 상세보기로 링크 -->
 									<c:if test="${point.eventCode == 0}">
-										<td><a href=${point.receiptUrl } target="_blank">${point.varAmount } 원을 충전하셨습니다.</a></td>									
+										<td>
+											${point.varAmount } 원을 충전하셨습니다.<br>
+											<span>결제내역 발송 ${point.buyerEmail }</span>
+										</td>									
+										<td><a href="#" onclick="receiptPopup('${point.receiptUrl }');"><span>영수증</span></a></td>
 									</c:if>
 									<c:if test="${point.eventCode == 1 && point.varType == 1}">										
-										<td>[${point.subject }]에 펀딩하셨습니다.</td>									
+										<td>[${point.subject }]에 펀딩하셨습니다.</td>
+										<c:if test="${point.money >= 0 && point.fdate > 0 }">
+											<td>프로젝트 종료(성공)</td>
+										</c:if>
+										<c:if test="${point.money < 0 && point.fdate > 0 }">
+											<td>프로젝트 종료</td>
+										</c:if>
+										<c:if test="${point.fdate <= 0}">
+											<td>프로젝트 진행 중</td>
+										</c:if>					
 									</c:if>
 									<c:if test="${point.eventCode == 1 && point.varType == 0}">										
-										<td>[${point.subject }] 펀딩 취소하셨습니다.</td>									
+										<td>[${point.subject }] 펀딩 취소하셨습니다.</td>
+										<c:if test="${point.money >= 0 && point.fdate > 0 }">
+											<td>프로젝트 종료(성공)</td>
+										</c:if>
+										<c:if test="${point.money < 0 && point.fdate > 0 }">
+											<td>프로젝트 종료</td>
+										</c:if>
+										<c:if test="${point.fdate <= 0}">
+											<td>프로젝트 진행 중</td>
+										</c:if>								
 									</c:if>
 									<c:if test="${point.eventCode == 2 && point.varType == 1}">										
-										<td>[${point.subject }]에 기부하셨습니다.</td>									
+										<td>[${point.subject }]에 기부하셨습니다.</td>
+										<c:if test="${point.fdate > 0 }">
+											<td>프로젝트 종료</td>
+										</c:if>
+										<c:if test="${point.fdate <= 0}">
+											<td>프로젝트 진행 중</td>
+										</c:if>
 									</c:if>
 									<c:if test="${point.eventCode == 2 && point.varType == 0}">										
-										<td>[${point.subject }] 기부 취소하셨습니다.</td>									
+										<td>[${point.subject }] 기부 취소하셨습니다.</td>	
+										<c:if test="${point.fdate > 0 }">
+											<td>프로젝트 종료</td>
+										</c:if>
+										<c:if test="${point.fdate <= 0}">
+											<td>프로젝트 진행 중</td>
+										</c:if>						
 									</c:if>
 									<c:if test="${point.eventCode == 3}">										
-										<td>[별 보러 가자] 게시 후 적립되었습니다.</td>									
+										<td>[별 보러 가자] 게시 후 적립되었습니다.</td>
+										<td></td>								
 									</c:if>
 									<c:url var="PresentSend" value="msgDetail.do">
 										<c:param name="msgNo" value="${point.eventNo }"></c:param>
@@ -90,11 +124,12 @@
 									</c:url>
 									<c:if test="${point.eventCode == 4 && point.varType == 1}">										
 										<td><a href="#" onclick="msgModal('${PresentSend }');">${point.nickName }님께 선물하셨습니다.</a></td>								
-									
+										<td></td>
 									<%-- <a href="#" onclick="msgPopup('${PresentSend }');"> --%>
 									</c:if>
 									<c:if test="${point.eventCode == 4 && point.varType == 0}">										
 										<td><a href="#" onclick="msgModal('${PresentReceive }');">${point.nickName }님께 선물받으셨습니다.</a></td>									
+										<td></td>
 									</c:if>
 									
 									<!-- 포인트 -->
@@ -112,28 +147,30 @@
 							</c:forEach>
 						</c:if>
 						<!-- search -->
-						<tr><td colspan="4">
-							<section id="search">
-								<div align="center">
-									<form action="msgSearch.do" method="post">
-										<input type="hidden" name="flag" value="${flag }">
-										<select name="searchCondition">
-											<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
-											<c:if test="${flag != 'notice'}">
-												<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
-											</c:if>
-											<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
-											<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
-										</select>
-										<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
-										<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
-									</form>
-								</div>
-							</section>
-						</td></tr>
+						<tr>
+							<td colspan="5">
+								<section id="search">
+									<div align="center">
+										<form action="msgSearch.do" method="post">
+											<input type="hidden" name="flag" value="${flag }">
+											<select name="searchCondition">
+												<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
+												<c:if test="${flag != 'notice'}">
+													<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
+												</c:if>
+												<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
+												<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
+											</select>
+											<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
+											<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
+										</form>
+									</div>
+								</section>
+							</td>
+						</tr>
 						<!-- 페이징 -->
 						<tr id="paging">
-							<td colspan="4" style="border-top:hidden;">
+							<td colspan="5" style="border-top:hidden;">
 								<!-- 이전 -->
 								<c:url var="before" value="pointList.do">
 									<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
@@ -172,6 +209,8 @@
 				</table>
 			</section>
 		</section>
+		
+		<!-- 모달 -->
 		<div id="modal">
 			<div id="modal_content">
 				
@@ -183,12 +222,12 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 
-		/* 선물 쪽지창 팝업 */
-		function msgPopup(msgUrl) {
+		/* 영수증 팝업 */
+		function receiptPopup(url) {
 			if(${sessionScope.loginUser ne null}) {
-				var popupX = (window.screen.width/2)-265;
-				var popupY = (window.screen.height/2)-232.5;
-				window.open(msgUrl, "msgWriteForm", "height=400, width=500, left="+popupX+", top="+popupY+", resizable=no");				
+				var popupX = (window.screen.width/2)-207.5;
+				var popupY = (window.screen.height/2)-382.5;
+				window.open(url, "msgWriteForm", "height=765, width=415, left="+popupX+", top="+popupY+", resizable=no");				
 			}else {
 				location.href="login.do";
 			}
@@ -201,6 +240,23 @@
 			$("#modal").fadeIn();
 			}, 500)
 		}
+		
+/* 		function searchList(eventCode) {
+			$.ajax({
+				url: "pointSearch.do",
+				type: "post",
+				data: {"searchCondition" : eventCode},
+				dataType: "json",
+				success: function(data) {
+					var pointList = data['pointList'];
+					//console.log(data['pointList'][0].pntListNo);
+					//console.log(data['pointList'].length);
+					//console.log(data['pi'].listCount);
+					//${request.setAttribute(pointList)}
+				
+				}
+			});
+		} */
 		
 		$(function() {
 			/* submenu 노출 */

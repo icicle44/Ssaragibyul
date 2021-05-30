@@ -1,6 +1,7 @@
 package com.ssaragibyul.point.service.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,8 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.message.domain.Message;
+import com.ssaragibyul.message.domain.SearchMsg;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.point.service.PointService;
@@ -124,9 +127,21 @@ public class PointServiceImpl implements PointService{
 		return pntStore.getListCount(userId);
 	}
 
+	//포인트 내역 검색 리스트 출력
+	@Override
+	public ArrayList<PointAndProject> printSearchList(PageInfo pi, SearchMsg search) {
+		return pntStore.selectSearchList(pi, search);
+	}
+
+	//포인트 내역 검색 리스트 갯수(페이징용)
+	@Override
+	public int getSearchListCount(SearchMsg search) {
+		return pntStore.getSearchListCount(search);
+	}
+	
 	//내포인트 출력
 	@Override
-	public int getMyPoint(String userId) {
+	public MyPoint getMyPoint(String userId) {
 		return pntStore.getMyPoint(userId);
 	}
 	

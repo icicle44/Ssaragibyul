@@ -1,7 +1,10 @@
 package com.ssaragibyul.point.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.message.domain.PaginationMsg;
+import com.ssaragibyul.message.domain.SearchMsg;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
 import com.ssaragibyul.point.service.PointService;
@@ -94,6 +101,50 @@ public class PointController {
 		return mv;
 	}
 	
+	@RequestMapping(value="pointSearch.do", method={RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView PointListSearch(HttpSession session,
+								HttpServletResponse response,
+								ModelAndView mv,
+								@ModelAttribute SearchMsg search,
+								@RequestParam(value="page", required=false) Integer page) throws JsonIOException, IOException {
+		Gson gson = new Gson();
+		if(session != null && (Member)session.getAttribute("loginUser") != null) {		
+			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
+			search.setUserId(userId);
+			int currentPage = (page != null)? page : 1;
+			int listCount = pntService.getSearchListCount(search);
+			PageInfo pi = PaginationMsg.getPageInfo(currentPage, listCount);
+			ArrayList<PointAndProject> ppList = pntService.printSearchList(pi, search);
+			
+			if(!ppList.isEmpty()) {
+					mv.addObject("pointList", ppList);
+				}else {
+					mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+				}
+				mv.addObject("pi", pi);
+				mv.setViewName("point/pointListView");
+			}else {
+				mv.addObject("msg", "로그인이 필요합니다.");
+				mv.setViewName("member/login");
+			}
+			return mv;
+			
+//			if(!ppList.isEmpty()) {
+//				HashMap<String, Object> searchList = new HashMap<String, Object>();
+//				searchList.put("pointList", ppList);
+//				searchList.put("pi", pi);
+//				gson.toJson(searchList, response.getWriter());
+//			}else {
+//				String tblMsg = "포인트 사용내역이 없습니다.";
+//				gson.toJson(tblMsg, response.getWriter());
+//			}
+//		}else {
+//			String msg = "로그인이 필요합니다.";
+//			gson.toJson(msg, response.getWriter());
+//		}
+		
+	}
+	
 	//로그인 시 상단표시: 로그인 메소드에서 호출하여 session에 같이 담기
 	//펀딩/기부 참여하기 버튼 누를 때 최대금액 체크 기능
 	//마이페이지 왼쪽, 포인트내역 페이지 왼쪽
@@ -101,11 +152,15 @@ public class PointController {
 	//잔여포인트 출력 //펀딩-기부 UNIONALL
 	//조건 더 걸어서 정말 차감된것만 반영되게 해야함
 	//펀딩은 목표금액<누적금액 조건 들어감/기부는 금액조건 안들어감!!! 주의!!!
-	//@RequestMapping(value="myPoint", method= {RequestMethod.GET, RequestMethod.POST})
-	public int getMyPoint(HttpSession session) {
+	@RequestMapping(value="myPoint.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public MyPoint getMyPoint(HttpSession session) {
 		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
 		//메소드 2개필요. 전체사용내역반영된 금액 & 예약중인 금액
-		int myPoint = pntService.getMyPoint(loginUser.getUserId());
+		MyPoint myPoint = pntService.getMyPoint(userId);
+		System.out.println(myPoint.getTotal());
+		System.out.println(myPoint.getReserved());
+		System.out.println(myPoint.getTotal()-myPoint.getReserved());
 		return myPoint;
 	}
 	
