@@ -33,7 +33,6 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public ArrayList<Visit> printAll() {
-		
 		return vStore.selectAllList();
 	}
 

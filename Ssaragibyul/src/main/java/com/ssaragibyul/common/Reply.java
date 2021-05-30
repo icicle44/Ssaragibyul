@@ -15,22 +15,12 @@ public class Reply {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
-
-
-
-
 	public Reply(int no, String userId, String contents) {
 		super();
 		this.no = no;
 		this.userId = userId;
 		this.contents = contents;
 	}
-
-
-
-
-
 
 	public int getReplyNo() {
 		return replyNo;

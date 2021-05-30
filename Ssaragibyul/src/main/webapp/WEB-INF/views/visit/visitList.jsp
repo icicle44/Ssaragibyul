@@ -15,8 +15,8 @@
 <meta name="author" content="Codrops" />
 
 <%@include file="/header.jsp"%>
-<!-- <link rel="stylesheet" type="text/css"
-	href="/resources/fonts/visit/font-awesome-4.3.0/css/font-awesome.min.css" /> -->
+<link rel="stylesheet" type="text/css"
+	href="/resources/fonts/visit/font-awesome-4.3.0/css/font-awesome.min.css" />
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
 	rel="stylesheet">
@@ -60,12 +60,11 @@
 							<div class="grid__item" data-size="1280x857">
 								<a id="grid" href="/resources/vUploadFiles/${vList.renameFilename }" class="img-wrap">
 								<img id="${vList.visitNo }" src="/resources/vUploadFiles/${vList.renameFilename }" alt="${vList.originalFilename }" />
-									<div class="description description--grid" id="${vList.visitNo }">
-									<input type="hidden" id="no-catcher" value="${vList.visitNo }">
+									<div class="description description--grid">
 										<div class="rightCon">
 											<div class="r-title col-md-12"">
 												<div id="title">${vList.visitTitle }/ ${vList.visitNo }번글</div>
-												<div id="nickname">${loginUser.nickName }</div>
+												<div id="nickname">${vList.nickName }</div>
 												<table class="info">
 													<tr>
 														<td id="t"><a href="#"><i class="far fa-heart"></i></a></td>
@@ -77,35 +76,34 @@
 														<td>${vList.vUpdateDate }</td>
 													</tr>
 												</table>
-												<div class="content" id="${vList.visitNo }">${vList.visitContents }</div>
+												<div class="content" >${vList.visitContents }</div>
 											</div>
 											<hr>
-											<div class="reply-container">
-												<div id="reply">
-													<!-- 댓글 등록 -->
-													<table align="center" width="500" border="1"
-														cellspacing="0">
-														<tr>
-															<td><textarea rows="3" cols="55" id="rContent"></textarea></td>
-															<td>
-																<button id="rSubmit">등록하기</button>
-															</td>
-														</tr>
-													</table>
-													<!-- 댓글 목록 -->
-													<table align="center" width="500" border="1"
-														cellspacing="0" id="rtb">
-														<thead>
+												<div class="reply-container">
+													<div id="reply">
+														<!-- 댓글 등록 -->
+														<table align="center" width="500" cellspacing="0">
 															<tr>
-																<!-- 댓글 갯수 -->
-																<td colspan="2"><b id="rCount">2</b></td>
+																<input type="hidden" name="visitNo" value="${vList.visitNo }">
+																<td><textarea rows="3" cols="55" id="rContent" name="contents"></textarea></td>
+																<td>
+																	<button class="rSubmit" id="${vList.visitNo }" onclick="regist(this.id)">버튼</button>
+																</td>
 															</tr>
-														</thead>
-														<tbody></tbody>
-													</table>
+														</table>
+														<!-- 댓글 목록 -->
+														<table align="center" width="500" border="1" cellspacing="0" id="rtb">
+															<thead>
+																<tr>
+																	<!-- 댓글 갯수 -->
+																	<td colspan="2"><b id="rCount"></b></td>
+																</tr>
+															</thead>
+															<tbody></tbody>
+														</table>
+													</div>
+													<div id="inform-con"></div>
 												</div>
-												<div id="inform-con"></div>
-											</div>
 										</div>
 
 									</div> </a>
@@ -137,7 +135,7 @@
 		<script src="/resources/js/visit/classie.js"></script>
 		<script src="/resources/js/visit/main.js"></script>
 		<script>
-			(function() {
+			$(function() {
 				var support = {
 					transitions : Modernizr.csstransitions
 				},
@@ -218,31 +216,45 @@
 										});
 							}
 						});
-			})();
+			});
+			
 			$(function() {
-				getReplyList();// 처음 페이지 떴을 때 댓글 목록 불러오는 메소드를 자동실행되도록 함
-				$("img").on("click", function(){
-			  		alert($("img").attr('id'));	  
-				}); 
-				$("#rSubmit").on("click", function() {
-					var visitNo = $("input[type=hidden]").val();
-					var rContent = $("#rContent").val();
+				var visitNo = "";
+				$("img").click(function() {
+					$("#rtb tbody").html("");
+					visitNo= $(this).attr("id");
+					alert(visitNo);
 					$.ajax({
-						url : "addReply.kh",
-						type : "post",
+						url : "replyList.do",
+						type : "get",
 						data : {
-							"refBoardNo" : boardNo,
-							"replyContent" : rContent
+							"visitNo" : visitNo
 						},
+						dataType : "json",
 						success : function(data) {
-							if (data == "success") {
-								// 댓글 불러오기
-								getReplyList();
-								// 작성 후 내용 초기화
-								$("#rContent").val(""); // 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
-							} else {
-								alert("댓글 등록 실패");
-							}
+
+							var $tableBody = $("#rtb tbody");
+							$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
+							var $tr;
+							var $rWriter;
+							var $rContent;
+							var $rCreateDate;
+							$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
+
+							if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
+								for ( var i in data) { 
+									$tr = $("<tr>");
+									$rWriter = $("<td width='100'>").text(
+											data[i].nick);
+									$rContent = $("<td>").text(data[i].contents);
+									$rCreateDate = $("<td width='100'>").text(
+											data[i].enrollDate);
+									$tr.append($rWriter);
+									$tr.append($rContent);
+									$tr.append($rCreateDate);
+									$tableBody.append($tr);
+								}
+							}		
 						},
 						error : function() {
 
@@ -250,45 +262,35 @@
 					});
 				});
 			});
-			function getReplyList() {
-				var visitNo = $("input[type=hidden]").val();
+			function regist(){
+				var visitNo = "";
+				$(".rSubmit").click(function() {
+					visitNo= $(this).attr("id");
+					alert(visitNo);
+					});
+				var rContent = $(".rContent").val();
+				
 				$.ajax({
-					url : "replyList.do",
-					type : "get",
+					url : "addReply.do",
+					type : "post",
 					data : {
-						"visitNo" : visitNo
+						"no" : visitNo,
+						"contents" : rContent
 					},
-					dataType : "json",
 					success : function(data) {
-
-						var $tableBody = $("#rtb tbody");
-						$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
-						var $tr;
-						var $rWriter;
-						var $rContent;
-						var $rCreateDate;
-						$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시					
-
-						if (data.length > 0) {
-							for ( var i in data) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
-								$tr = $("<tr>");
-								$rWriter = $("<td width='100'>").text(
-										data[i].nick);
-								$rContent = $("<td>").text(data[i].contents);
-								$rCreateDate = $("<td width='100'>").text(
-										data[i].enrollDate);
-								$tr.append($rWriter);
-								$tr.append($rContent);
-								$tr.append($rCreateDate);
-								$tableBody.append($tr);
-							}
+						if (data == "success") {
+							// 댓글 불러오기
+							getReplyList();
+							// 작성 후 내용 초기화
+							$("#rContent").val(""); // 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
+						} else {
+							alert("댓글 등록 실패");
 						}
 					},
 					error : function() {
 
 					}
-				});
-
+				})
 			}
 		</script>
 </body>

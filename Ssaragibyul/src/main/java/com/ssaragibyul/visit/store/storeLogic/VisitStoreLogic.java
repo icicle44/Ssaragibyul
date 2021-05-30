@@ -40,7 +40,6 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Override
 	public int insertVisit(Visit visit) {
-		
 		return session.insert("visitMapper.insertVisit", visit);
 	}
 
@@ -58,7 +57,6 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Override
 	public ArrayList<Reply> selectAllReply(int visitNo) {
-		
 		return (ArrayList)session.selectList("visitMapper.selectReply", visitNo);
 	}
 

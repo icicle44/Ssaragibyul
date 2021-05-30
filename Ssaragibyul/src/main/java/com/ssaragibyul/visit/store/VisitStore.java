@@ -14,9 +14,9 @@ public interface VisitStore {
 	public Visit selectOne(int visitNo);
 	public int insertVisit(Visit visit);
 	public int updateVisit(Visit visit);
-	public int deleteVisit(int VisitNo);
+	public int deleteVisit(int visitNo);
 	
-	public ArrayList<Reply> selectAllReply(int VisitNo);
+	public ArrayList<Reply> selectAllReply(int visitNo);
 	public int insertReply(Reply reply);
 	public int updateReply(Reply reply);
 	public int deleteReply(Reply reply);

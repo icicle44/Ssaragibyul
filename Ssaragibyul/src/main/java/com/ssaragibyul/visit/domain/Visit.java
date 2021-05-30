@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 public class Visit {
 	private int visitNo;
 	private String userId;
+	private String nickName;
 	private int siteNo;
 	private String visitTitle;
 	private String visitContents;
@@ -35,6 +36,14 @@ public class Visit {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public int getSiteNo() {
@@ -119,10 +128,11 @@ public class Visit {
 
 	@Override
 	public String toString() {
-		return "Visit [visitNo=" + visitNo + ", userId=" + userId + ", siteNo=" + siteNo + ", visitTitle=" + visitTitle
-				+ ", visitContents=" + visitContents + ", visitCount=" + visitCount + ", likes=" + likes
-				+ ", vCreateDate=" + vCreateDate + ", vUpdateDate=" + vUpdateDate + ", originalFilename="
-				+ originalFilename + ", renameFilename=" + renameFilename + ", uploadTime=" + uploadTime + "]";
+		return "Visit [visitNo=" + visitNo + ", userId=" + userId + ", nickName=" + nickName + ", siteNo=" + siteNo
+				+ ", visitTitle=" + visitTitle + ", visitContents=" + visitContents + ", visitCount=" + visitCount
+				+ ", likes=" + likes + ", vCreateDate=" + vCreateDate + ", vUpdateDate=" + vUpdateDate
+				+ ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename + ", uploadTime="
+				+ uploadTime + "]";
 	}
-	
+
 }
