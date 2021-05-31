@@ -1,9 +1,9 @@
-/*     div, article, section {
+    div, article, section {
     border: 1px solid black;
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}     */
+}     
 body * {
   box-sizing: border-box;
   text-align: center;

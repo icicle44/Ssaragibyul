@@ -77,6 +77,18 @@
 													</tr>
 												</table>
 												<div class="content" >${vList.visitContents }</div>
+												<div class="button-wrapper">
+													<c:url var="vModify" value="visitModifyView.do">
+														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
+													</c:url>
+													<c:url var="vDelete" value="visitDelete.do">
+														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
+														<c:param name="renameFilename" value="${board.renameFilename }"></c:param>
+													</c:url>
+													<a href="${vModify }">수정 페이지로 이동</a> &nbsp;
+													<a href="${vDelete }">삭제하기</a>
+												
+												</div>
 											</div>
 											<hr>
 												<div class="reply-container">
@@ -86,7 +98,7 @@
 															<tr>
 																<td><textarea rows="3" cols="55" id="rContent" name="contents"></textarea></td>
 																<td>
-																	<button id="rSubmit" value="${vList.visitNo }">버튼</button>
+																	<button id="rSubmit" value="${vList.visitNo }">댓글 등록</button>
 																</td>
 															</tr>
 														</table>
@@ -95,7 +107,7 @@
 															<thead>
 																<tr>
 																	<!-- 댓글 갯수 -->
-																	<td colspan="2"><b id="rCount"></b></td>
+																	<td colspan="2"><b id="rCount${vList.visitNo }"></b></td>
 																</tr>
 															</thead>
 															<tbody></tbody>
@@ -218,48 +230,12 @@
 			});
 			
 			$(function() {
-				// 댓글 목록 조회1
 				var visitNo = "";
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					visitNo= $(this).attr("id"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
 					/* alert(visitNo); */
-					$.ajax({
-						url : "replyList.do",
-						type : "get",
-						data : {
-							"visitNo" : visitNo
-						},
-						dataType : "json",
-						success : function(data) {
-
-							var $tableBody = $("#rtb tbody");
-							$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
-							var $tr;
-							var $rWriter;
-							var $rContent;
-							var $rCreateDate;
-							$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시. 아직 적용 안됨///
-
-							if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
-								for ( var i in data) { 
-									$tr = $("<tr>");
-									$rWriter = $("<td width='100'>").text(
-											data[i].nick);
-									$rContent = $("<td>").text(data[i].contents);
-									$rCreateDate = $("<td width='100'>").text(
-											data[i].enrollDate);
-									$tr.append($rWriter);
-									$tr.append($rContent);
-									$tr.append($rCreateDate);
-									$tableBody.append($tr);
-								}
-							}		
-						},
-						error : function() {
-
-						}
-					});
+					getReplyList(visitNo);// 댓글 목록 조회1
 				});
 				
 				// 댓글 등록
@@ -281,43 +257,8 @@
 						if (data == "success") {
 							// 댓글 목록 조회2
 							// 등록 버튼 누를 때 visitNo을 가져가서 댓글 목록 다시 불러옴
-						$.ajax({
-						url : "replyList.do",
-						type : "get",
-						data : {
-							"visitNo" : visitNo
-						},
-						dataType : "json",
-						success : function(data) {
-
-							var $tableBody = $("#rtb tbody");
-							$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
-							var $tr;
-							var $rWriter;
-							var $rContent;
-							var $rCreateDate;
-							$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
-
-							if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
-								for ( var i in data) { 
-									$tr = $("<tr>");
-									$rWriter = $("<td width='100'>").text(
-											data[i].nick);
-									$rContent = $("<td>").text(data[i].contents);
-									$rCreateDate = $("<td width='100'>").text(
-											data[i].enrollDate);
-									$tr.append($rWriter);
-									$tr.append($rContent);
-									$tr.append($rCreateDate);
-									$tableBody.append($tr);
-								}
-							}
-						},
-						error : function() {
-
-						}
-					});
-
+							// visitNo를 특정할 수 없기 때문에 이를 자동으로 보내고 받을 수 없어서 목록 조회 2번하는 것
+							getReplyList(visitNo);
 						} else {
 							alert("댓글 등록 실패");
 						}
@@ -330,6 +271,96 @@
 				rContent = $(this).closest("td").prev().children("textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
 				});
 			});
+
+			function getReplyList(visitNo){
+				$.ajax({
+					url : "replyList.do",
+					type : "get",
+					data : {
+						"visitNo" : visitNo
+					},
+					dataType : "json",
+					success : function(data) {
+
+						var $tableBody = $("#rtb tbody");
+						$tableBody.html("");// 비워주기를 해야 두번씩 안나옴
+						var $tr;
+						var $rWriter;
+						var $rContent;
+						var $rCreateDate;
+						var $btnArea;
+ 						$('#'+'rCount'+visitNo).text("댓글 ("+data.length+")"); // 아직 안됨
+
+						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
+							for ( var i in data) { 
+								$tr = $("<tr>");
+								$rWriter = $("<td width='100'>").text(
+										data[i].nick);
+								$rContent = $("<td>").text(data[i].contents);
+								$rCreateDate = $("<td width='100'>").text(
+										data[i].enrollDate);
+								$btnArea = $("<td>")
+								.append("<a href='#' onclick='modifyReply(this,"+visitNo+","+data[i].replyNo+",\""+data[i].contents+"\");'>수정 </a>")							
+								.append("<a href='#' onclick='removeReply("+visitNo+","+data[i].replyNo+");'> 삭제</a>");
+								$tr.append($rWriter);
+								$tr.append($rContent);
+								$tr.append($rCreateDate);
+								$tr.append($btnArea);
+								$tableBody.append($tr);
+							}
+						}		
+					},
+					error : function() {
+
+					}
+				});
+			}
+			function modifyReply(obj, visitNo, replyNo, contents) {
+				$trModify = $("<tr>");
+				$trModify.append("<td colspan='3'><input type='text' id='modifyReply' size='50' value='"+contents+"'></td>");
+				$trModify.append("<td><button onclick='modifyReplyCommit("+visitNo+","+replyNo+",\""+contents+"\")'>수정완료</button></td>");
+				$(obj).parent().parent().after($trModify);
+			}
+			function modifyReplyCommit(visitNo, replyNo, contents) {
+				var modifiedContent = $("#modifyReply").val();
+				$.ajax({
+					url : "modifyReply.do",
+					type : "post",
+					data : { 
+						"replyNo" : replyNo, 
+						"contents" : modifiedContent 
+					},
+					success : function(data) {
+						if(data == "success") {
+							getReplyList(visitNo);
+						}else{
+							alert("댓글 수정 실패!");
+						}
+					},
+					error : function() {
+						alert("서버 통신 실패!");
+					}
+				});
+				
+			}
+			function removeReply(visitNo, replyNo) {
+				// /deleteReply.kh?refBoardNo="+boardNo+"&replyNo="+data[i].replyNo+"
+				$.ajax({
+					url : "deleteReply.do",
+					type : "get",
+					data : {"replyNo" : replyNo },
+					success : function(data) {
+						if(data == "success"){
+							getReplyList(visitNo); // 목록조회3
+						}else {
+							alert("댓글 조회 실패!");
+						}
+					},
+					error : function() {
+						
+					}
+				});
+			}
 		</script>
 </body>
 

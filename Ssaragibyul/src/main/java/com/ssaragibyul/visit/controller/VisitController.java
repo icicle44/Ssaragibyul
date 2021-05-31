@@ -101,21 +101,56 @@ public class VisitController {
 	// 게시글 수정화면
 	@RequestMapping(value="visitModifyView.do")
 	public ModelAndView visitModifyView(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
-
+		Visit visit = vService.printOne(visitNo);
+		if(visit != null) {
+			mv.addObject("visit", visit).setViewName("visit/visitModify");
+		}else {
+			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	// 게시글 수정
 	@RequestMapping(value="visitUpdate.do", method=RequestMethod.POST)
 	public ModelAndView visitUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Visit visit, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
-
+		// 파일 삭제 후 업로드
+		if(reloadFile != null && !reloadFile.isEmpty()) {
+			// 기존 파일 삭제
+			if( visit.getOriginalFilename() != "") {
+				deleteFile(visit.getRenameFilename(), request);
+			}
+			// 새 파일 업로드
+			String renameFilename = saveFile(reloadFile, request);
+			if(renameFilename != null) {
+				visit.setOriginalFilename(reloadFile.getOriginalFilename());
+				visit.setRenameFilename(renameFilename);
+			}
+		}
+		// DB 수정
+		int result = vService.modifyVisit(visit);
+		if(result > 0) {
+			mv.setViewName("redirect:visitList.do");
+		}else {
+			mv.addObject("msg", "게시글 수정 실패").setViewName("common/errorPage");
+		}
 		return mv;
 	}
 	
 	// 게시글 삭제
 	@RequestMapping(value="visitDelete.do", method=RequestMethod.GET)
 	public String visitDelete(Model model, @RequestParam("visitNo") int visitNo,@RequestParam("renameFilename") String renameFilename,HttpServletRequest request) {
-
-		return "common/errorPage";
+		// 업로드된 파일 삭제
+		if(renameFilename != "") {
+			deleteFile(renameFilename, request);
+		}
+		
+		// 디비에 데이터 업데이트
+		int result = vService.removeVisit(visitNo);
+		if(result > 0) {
+			return "redirect:visitList.do";
+		}else {
+			model.addAttribute("msg", "게시글 삭제 실패");
+			return "common/errorPage";
+		}
 	}
 	// 파일저장
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -175,8 +210,29 @@ public class VisitController {
 
 		}
 	}
+	// 댓글수정
+	@ResponseBody
+	@RequestMapping(value="modifyReply.do", method=RequestMethod.POST)
+	public String modifyReply(@ModelAttribute Reply reply) {
+		int result = vService.modifyReply(reply);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	// 댓글삭제
-	
+	@ResponseBody
+	@RequestMapping(value="deleteReply.do", method=RequestMethod.GET)
+	public String removeReply(@RequestParam("replyNo") int replyNo ) {
+		int result = vService.removeReply(replyNo);
+		System.out.println("replyNo : " + replyNo + "result : " + result);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
 	// 검색
 	@RequestMapping(value="visitSearch.do", method=RequestMethod.GET)
 	public String visitSearch(@ModelAttribute Search search, Model model) {

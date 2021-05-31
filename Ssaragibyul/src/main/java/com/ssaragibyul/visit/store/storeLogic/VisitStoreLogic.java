@@ -34,8 +34,7 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Override
 	public Visit selectOne(int visitNo) {
-		
-		return null;
+		return session.selectOne("visitMapper.selectOne", visitNo);
 	}
 
 	@Override
@@ -50,9 +49,8 @@ public class VisitStoreLogic implements VisitStore{
 	}
 
 	@Override
-	public int deleteVisit(int VisitNo) {
-		
-		return 0;
+	public int deleteVisit(int visitNo) {
+		return session.delete("visitMapper.deleteVisit", visitNo);
 	}
 
 	@Override
@@ -67,14 +65,12 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Override
 	public int updateReply(Reply reply) {
-		
-		return 0;
+		return session.update("visitMapper.updateReply", reply);
 	}
 
 	@Override
-	public int deleteReply(Reply reply) {
-		
-		return 0;
+	public int deleteReply(int replyNo) {
+		return session.delete("visitMapper.deleteReply", replyNo);
 	}
 	// Review 좋아요 유무 체크
 	public int checkLikes(int visitNo, String userId) {

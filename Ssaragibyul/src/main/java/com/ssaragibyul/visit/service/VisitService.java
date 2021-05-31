@@ -80,7 +80,7 @@ public interface VisitService {
 	 * @param reply
 	 * @return
 	 */
-	public int removeReply(Reply reply);
+	public int removeReply(int replyNo);
 
 	public int getListCnt(Map<String, String> param);
 }

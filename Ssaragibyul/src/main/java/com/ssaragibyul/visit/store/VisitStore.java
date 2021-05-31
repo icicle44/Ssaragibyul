@@ -19,5 +19,5 @@ public interface VisitStore {
 	public ArrayList<Reply> selectAllReply(int visitNo);
 	public int insertReply(Reply reply);
 	public int updateReply(Reply reply);
-	public int deleteReply(Reply reply);
+	public int deleteReply(int replyNo);
 }

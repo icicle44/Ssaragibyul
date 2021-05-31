@@ -44,8 +44,7 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public Visit printOne(int visitNo) {
-		
-		return null;
+		return vStore.selectOne(visitNo);
 	}
 
 	@Override
@@ -61,8 +60,7 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public int removeVisit(int visitNo) {
-		
-		return 0;
+		return vStore.deleteVisit(visitNo);
 	}
 
 	@Override
@@ -77,14 +75,13 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public int modifyReply(Reply reply) {
-		
-		return 0;
+		return vStore.updateReply(reply);
 	}
 
 	@Override
-	public int removeReply(Reply reply) {
+	public int removeReply(int replyNo) {
 		
-		return 0;
+		return vStore.deleteReply(replyNo);
 	}
 	// 조회수 증가
 	public int addHitsCount(int visitNo) { 
@@ -128,4 +125,5 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
+
 }

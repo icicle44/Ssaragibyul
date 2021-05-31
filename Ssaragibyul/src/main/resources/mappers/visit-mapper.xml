@@ -28,6 +28,10 @@
 	<select id="selectAll" resultMap="visitResultMap">
 		SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) ORDER BY VISIT_NO DESC
 	</select>
+		
+	<select id="selectOne" resultMap="visitResultMap">
+		SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) WHERE VISIT_NO = #{visitNo } 
+	</select>
 	
 	<select id="selectVisitListCount" resultType="_int" resultMap="visitResultMap">
       SELECT COUNT(*) FROM VISIT
@@ -41,14 +45,26 @@
 	</insert>
 	
 	
+	<delete id="deleteVisit" parameterType="_int">
+		DELETE VISIT WHERE VISIT_NO = #{visitNo }
+	</delete>
+	
+	
 	<!--  댓글 -->
 	<select id="selectReply" resultMap="replyResultMap">
-		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID) WHERE VISIT_NO = #{no }
+		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID) WHERE VISIT_NO = #{no } ORDER BY REPLY_NO DESC
 	</select>
 	
 	
 	<insert id="insertReply">
-		INSERT INTO VISIT_REPLY VALUES (SEQ_VISIT_REPLY.NEXTVAL, #{userId }, #{contents }, SYSDATE, #{no })
+		INSERT INTO VISIT_REPLY VALUES (SEQ_VISIT_REPLY.NEXTVAL, #{userId }, #{contents }, LOCALTIMESTAMP, #{no })
 	</insert>
 	
+	<update id="updateReply">
+		UPDATE VISIT_REPLY SET CONTENTS = #{contents } WHERE REPLY_NO = #{replyNo }
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE VISIT_REPLY WHERE REPLY_NO = #{replyNo }
+	</delete>
 </mapper>
