@@ -23,22 +23,35 @@
 <link rel="stylesheet" href="/resources/css/aos.css">
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
 
-<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/styleFundingList.css">
 
 </head>
 <style>
 .a_pj {
 	margin:auto;
-	width: 270px;
-	border: 1px dotted lightgray;
+	width: 400px;
 	margin-bottom: 30px;
 	padding: 10px;
 	font-size:12px;
 }
+
 .gridmain > * {
   float: left;  
-  width: 25%;
+  width: 33%;
   font-size:12px;
+}
+.select{
+	margin : auto;
+}
+.btn{
+margin: auto;
+}
+.#name_css{
+	text-align: left; 
+	padding-right:10px; 
+	font-weight:bold; 
+	font-size:12px; 
+	color:DimGray;
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -76,96 +89,77 @@
 
 			<div style="height: 1080px; padding-top: 200px;">
 				<section class="row align-items-stretch photos " id="section-funding1">
-					<h2>진행중 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
-				 <select name = "chose1" class="select">
-					          <option value = "money_list" selected>모금액 순</option>
-					          <option value = "news_list">최신글 순</option>
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;진행중 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name = "chose1" class="select">
+					          <option value = "news_list" selected>최신글 순</option>
+					          <option value = "money_list">모금액 순</option>
 					          <option value = "like_list">좋아요 순</option>
 				</select>
-					<div class="col-12">
+					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch">
-
-
-							<!-- 펀딩 프로젝트-->
-					
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-								<a href="/resources/img/images/img_7.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_7.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="100">
-								<a href="/resources/img/images/img_8.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_8.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="200">
-								<a href="/resources/img/images/img_9.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_9.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-							</div>
-
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-								<a href="/resources/img/images/img_10.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_10.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="100">
-								<a href="/resources/img/images/img_1.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_1.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="200" style="padding-bottom: 200px;">
-								<a href="/resources/img/mages/img_2.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_2.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>(funding.subject)</p>
-								
-							</div>
-				
+				<div class="gridmain">
+		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+			<table class="a_pj">
+				<tr>
+					<td> <a href="resources/upLoadFile/${p.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
+					<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" class="img-fluid">
+						<div class="photo-text-more">
+						<span class="icon icon-search">${p.subjectName}"</span>
 						</div>
-						
-					</div>
+								</a></td>
+				
+				</tr>
+<%-- 					<tr>
+						<td colspan="2"><a href="<c:url value="project${p.projectNo}"/>" >
+						<img id="pj_mainimg" src="resources/upLoadFile/${p.fundingFile.fileMainName}" style="width: 440px; height: 300px !important;"> </a></td>
+					</tr> --%>
+					<tr>
+						<td id="heart_css"><span>좋아요 : ${p.likeCount}</span></td>
+					</tr>
+					<tr>
+						<td colspan="2" height="30px" id="sub_css"><a href="<c:url value="project${p.subjectName}"/>">${p.subjectName}</a></td>
+					<tr>
+					<tr>
+						<td></td>
+						<td id="name_css">
+						<a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${p.productName}</a></td>
+					</tr>
+					<%-- <tr>
+						<td colspan="2" id="bar_td">
+							<c:if test="${p.percent > 99}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="100%" fill="#fe6f61"></rect>
+								</svg>
+							</c:if>
+							<c:if test="${p.percent < 100}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="${p.percent}%" fill="#fe6f61"></rect>
+								</svg>
+							</c:if>
+						</td>
+					</tr>
+					<tr>
+						<td id="dday_css">
+						<img src="images/calendar.png">
+						<c:if test="${p.dday < 1}"><b>마감</b></c:if>
+						<c:if test="${p.dday > 1}"><b>${p.dday}</b>일 남음</c:if>
+						</td>
+						<td id="sum_css"><b><fmt:formatNumber value="${p.sum}" pattern="#,###"/>원</b>
+						<span id="percent_css">${p.percent}%</span></td>
+					</tr> --%>
+				</table>
+				</div>
+			 </c:forEach> 
+			 </div>
+
+				
+
+
+	</div></div>
 			<button class="btn">프로젝트 더 보기</button> 
-					
 				</section>
 				<!-- #section-funding -->
 				
@@ -174,10 +168,10 @@
 			<br><br><br><br><br><br>
 			<!-- 기부 프로젝트 -->
 			<section class="row align-items-stretch photos" id="section-funding2">
-			<h2>종료된 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
-						 <select name = "chose2" class="select">
-					          <option value = "money_list" selected>모금액 순</option>
-					          <option value = "news_list">최신글 순</option>
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료된 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select name = "chose2" class="select">
+					          <option value = "news_list" selected>최신글 순</option>
+					          <option value = "money_list">모금액 순</option>
 					          <option value = "like_list">좋아요 순</option>
 				</select>
 				<div class="col-12">
@@ -185,8 +179,8 @@
 
 						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 							<a href="/resources/img/images/img_4.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_4.jpg" alt="Image"
+								class="d-block photo-item" data-fancybox="gallery"> 
+								<img src="/resources/img/images/img_4.jpg" alt="Image"
 								class="img-fluid">
 								<div class="photo-text-more">
 									<span class="icon icon-search">프로젝트 이름</span>
@@ -268,38 +262,58 @@
 
 
 <br><br><br><br><br><br><br>
-
-	<div class="gridmain">
+<section class="row align-items-stretch photos " id="section-funding3">
+					<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시발 프로젝트</h2><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				&nbsp;&nbsp;
+				<select name = "chose1" class="select">
+					          <option value = "news_list" selected>최신글 순</option>
+					          <option value = "money_list">모금액 순</option>
+					          <option value = "like_list">좋아요 순</option>
+				</select>
+				<br>
+					<div class="col-12 justify-content-center">
+						<div class="row align-items-stretch">
+				<div class="gridmain">
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
-			<div>	
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 			<table class="a_pj">
-					<tr>
-						<td id="heart_css"><span>${p.likeCount}</span></td>
+				<tr>
+					<td> 
+					    <a href="resources/upLoadFile/${p.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
+						<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" 
+						class="img-fluid" style="width:400px;, height:300px;">
+						<div class="photo-text-more">
+						<span class="icon icon-search">${p.subjectName}"</span>
+						</div></a></td>
+		 			</tr>
+		 			<tr>
+						<td align = "right"><img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${p.likeCount}</span></td>
 					</tr>
+
 					<tr>
-						<td colspan="2"><a href="<c:url value="project${p.projectNo}"/>" >
-						<img id="pj_mainimg" src="resources/upLoadFile/${p.fundingFile.fileMainName}" width="300px" height="225px"></a></td>
+						<td>
+						<c:url var="fDetail" value="fundingDetail.do">
+						<c:param name="projectNo" value="${p.projectNo }"></c:param>
+						</c:url> 
+						<a href="${fDetail }" style="font-size : 1.5em">${p.subjectName }</a>
+						</td>
 					</tr>
-					<tr>
-						<td colspan="2" height="30px" id="sub_css"><a href="<c:url value="project${p.subjectName}"/>">${p.subjectName}</a></td>
-					<tr>
-					<tr>
-						<td></td>
-						<td id="name_css">
-						<a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${p.productName}</a></td>
-					</tr>
-					<%-- <tr>
+						<%--c:if test="${p.likeCount > 99}"> 
+					<c:if test="${p.likeCount < 100}">--%>
+					 <tr>
 						<td colspan="2" id="bar_td">
-							<c:if test="${p.percent > 99}">
+							<c:if test="${p.sumMoney >99}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="100%" fill="#fe6f61"></rect>
+									<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
 								</svg>
 							</c:if>
-							<c:if test="${p.percent < 100}">
+			
+							<c:if test="${p.sumMoney < 100}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="${p.percent}%" fill="#fe6f61"></rect>
+									<rect x="0" y="0" height="2" width="${p.likeCount}%" fill="#FF8000"></rect>
 								</svg>
 							</c:if>
 						</td>
@@ -307,66 +321,25 @@
 					<tr>
 						<td id="dday_css">
 						<img src="images/calendar.png">
-						<c:if test="${p.dday < 1}"><b>마감</b></c:if>
-						<c:if test="${p.dday > 1}"><b>${p.dday}</b>일 남음</c:if>
+						<c:if test="${p.likeCount < 1}"><b>마감</b></c:if>
+						<c:if test="${p.likeCount > 1}"><b>${p.likeCount}</b>일 남음</c:if>
 						</td>
-						<td id="sum_css"><b><fmt:formatNumber value="${p.sum}" pattern="#,###"/>원</b>
-						<span id="percent_css">${p.percent}%</span></td>
-					</tr> --%>
+						<td id="sum_css"><b><fmt:formatNumber value="${p.likeCount}" pattern="#,###"/>원</b>
+						<span id="percent_css">${p.likeCount}%</span></td>
+					</tr>
 				</table>
 				</div>
 			 </c:forEach> 
 			 </div>
 
-
-<br><br><br><br>
-
-	<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
-		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>리워드</th>
-			<th>종료일</th>
-			<th>첨부파일</th>
-			<th>사진</th>
-		</tr>
-		<c:forEach items="${fListandFile }" var="funding" varStatus="status">
-			<tr>
-				<td align="center">${funding.projectNo }</td>
-				<td align="center">
-				<c:url var="fDetail" value="fundingDetail.do">
-						<c:param name="projectNo" value="${funding.projectNo }"></c:param>
-					</c:url> 
-					<a href="${fDetail }">${funding.subjectName }</a>
-				</td>
-				<td align="center">${funding.productName }</td>
-				<td align="center">${funding.finDate }</td>
-				<td align="center">${funding.startDate }</td>
-				<td align="center">${funding.fundingFile.fileNo }</td>
 				
-<%-- 				<td align="center"><img src="resources/upLoadFile/${fListFile.fileMainName } "/> </td> --%>
-			</tr>
-			
-		</c:forEach>
-		</table>
-		<br>
-		
-		<table align="center" width="600" border="1" cellspacing="0" style="clear:right;">
-		<tr>
-			<th>사진</th>
-		</tr>
-			<c:forEach items="${fListandFile }" var="File">
-		<tr>	
-			<td><img src="resources/upLoadFile/${File.fundingFile.fileMainName } "/></td> 
-		</tr>
-				</c:forEach>
-		</table> 
-	<%-- 
-	<c:forEach items="${fListFile }" var="fundingFile">
-		<img src="resources/upLoadFile/${fundingFile.fileMainName } "/>
-	</c:forEach> <img src="resources/upLoadFile/${fListFile[0].fileMainName } "/> 
-						<img src="resources/upLoadFile/${fListFile[1].fileMainName } "/>
- --%>
+
+
+	</div></div>
+			<button class="btn">프로젝트 더 보기</button> 
+				</section>
+				<!-- #section-funding -->
+
  		<%@include file="../../../footer.jsp" %>
 	</main>
 
