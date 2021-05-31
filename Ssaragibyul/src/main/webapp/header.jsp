@@ -80,6 +80,23 @@
 					<div>
 						<a class="nav-link" href="logout.do">로그아웃</a> 
 						<a class="nav-link" href="myPage.do">마이페이지</a>
+						
+						<a class="nav-link" href="noticeMsgList.do" style="font-size:15px; font-weight:600;">
+							<img src="resources/img/message/bell.png" width="25px">
+							<sup><span class="nav-link badge rounded-pill" id="noticeCount" style="width:11px;height:11px;border-radius:50%;background-color:#EB5C01;display:none;">
+								<%-- <c:if test="${sessionScope.notiCount != 0}">
+									${notiCount }
+								</c:if> --%>
+							</span></sup>
+						</a>
+						
+						<a class="nav-link" href="recMsgList.do" style="font-size:15px; font-weight:600;">
+							쪽지
+							<sup><span class="nav-link badge rounded-pill" id="msgCount" style="width:15px;height:15px;border-radius:50%;font-size:11px;padding:2px;color:white;background-color:#EB5C01;">${sessionScope.msgCount }</span></sup>	
+						</a>
+						<span class="nav-link" id="myPoint-reserved">예약 중 ${sessionScope.myPoint.reserved*-1 }</span>
+						<span class="nav-link" id="myPoint-total">${sessionScope.myPoint.total }</span>
+						<a class="nav-link" href="pointList.do" style="font-size:15px; font-weight:600;">포인트</a>
 					</div>
 				</c:if>
 				
@@ -91,5 +108,64 @@
 <script type="text/javascript" src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+	$(function(){
+		
+		if(${sessionScope.loginUser != null}) {
+			$.ajax({
+				url: "myPoint.do",
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data != null){
+						$("#myPoint-total").text(data.total);
+						$("#myPoint-reserved").text("예약 중:" + data.reserved*-1);
+					}
+				},
+				error: function(){
+					console.log("fail");
+				}
+			});
+		}
+		
+		if(${sessionScope.loginUser != null}) {
+			$.ajax({
+				url: "recMsgCnt.do",
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data != null){
+						$("#msgCount").text(data);
+					}
+				},
+				error: function(){
+					console.log("fail");
+				}
+			});
+		}
+		
+		if(${sessionScope.loginUser != null}) {
+			$.ajax({
+				url: "notiMsgCnt.do",
+				type: "post",
+				dataType: "json",
+				success: function(data){
+					if(data > 0){
+						$("#noticeCount").show();
+					}else {
+						$("#noticeCount").hide();
+					}
+				},
+				error: function(){
+					console.log("fail");
+				}
+			});
+		}
+		
+		
+	})
+
+</script>
   </body>
 </html>

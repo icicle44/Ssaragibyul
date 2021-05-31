@@ -19,15 +19,15 @@
 					<span id="table-title">쪽지 보내기</span>
 				</div>
 			</section>
-			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3)}">
+			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.receiverId=='admin')}">
 				<section class="write-middle">
 					<div id="point-present">
 						<div id="show-present">포인트 선물하기</div>
 						<div id="present-window">
 							<img src="" width="">
 							<span>선물할 포인트</span>&nbsp;&nbsp;&nbsp;
-							<input id="point-num" type="number" name="presentPoint" min="0" max="" placeholder="">
-							<br><span>선물 가능 포인트 </span>
+							<input id="point-num" type="number" name="presentPoint" min="0" max=${myPoint.total } placeholder="숫자만 입력(1000)">
+							<br><span>선물 가능 포인트 ${myPoint.total }</span>
 						</div>
 					</div>
 				</section>
@@ -41,7 +41,7 @@
 							</tr>
 							<tr>
 								<th>제목</th>
-								<td><input type="text" id="msgTitle" name="msgTitle"></td>
+								<td><input type="text" id="msgTitle" name="msgTitle" required></td>
 							</tr>
 							<tr>
 								<th>내용</th>
@@ -50,7 +50,7 @@
 							<tr><td colspan="2"><hr></tr>
 							<tr>
 								<td colspan="2" align="center">
-									<textarea id="msgContents" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요"></textarea>
+									<textarea id="msgContents" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요" required></textarea>
 								</td>
 							</tr>
 							<tr><td colspan="2"><hr></tr>
@@ -88,42 +88,55 @@
 			$("#sendClose").on("click", function(){
 				var senderId = '${loginUser.userId}';
 				var receiverId = '${message.receiverId}'; /* 넘어온 멤버/관리자의 아이디로 */
+				var presentPoint;
 				var msgTitle = $("#msgTitle").val();
 				var msgContents = $("#msgContents").val();
-				if($("#point-num").val() != "") {
-					var presentPoint = $("#point-num").val();
-				}else {
-					var presentPoint = 0;					
-				}
 				var msgType = '${message.msgType}';
+				var myPoint = parseInt('${myPoint.total}');
 				
-				$.ajax({
-					url: "registerMemMsg.do",
-					type: "post",
-					data: {"senderId":senderId,
-							"receiverId":receiverId,
-							"msgTitle": msgTitle,
-							"msgContents": msgContents,
-							"presentPoint": presentPoint,
-							"msgType": msgType
-							},
-					success: function(data){
-						if(data == "success") {
-							alert("쪽지가 전달되었습니다.");							
-							self.close();
-							if(senderId != "admin") {
-								opener.location.href="sendMsgList.do";								
-							} else {
-								opener.location.href="adminSendMessageList.do";
+				if(msgTitle == "") {
+					alert("제목을 입력하세요");
+				}else if(msgContents == "") {
+					alert("내용을 입력하세요");
+				}else if($("#point-num").val() != "") {
+					if(parseInt($("#point-num").val()) > myPoint || parseInt($("#point-num").val()) < 0) {
+						alert("선물 가능한 포인트를 확인해주세요")
+					}else {
+						presentPoint = $("#point-num").val();
+					}
+				}else {
+					presentPoint = 0;
+				}
+				
+				if(msgTitle != "" && msgContents != "" && presentPoint >= 0) {
+					$.ajax({
+						url: "registerMemMsg.do",
+						type: "post",
+						data: {"senderId":senderId,
+								"receiverId":receiverId,
+								"msgTitle": msgTitle,
+								"msgContents": msgContents,
+								"presentPoint": presentPoint,
+								"msgType": msgType
+								},
+						success: function(data){
+							if(data == "success") {
+								alert("쪽지가 전달되었습니다.");							
+								self.close();
+								if(senderId != "admin") {
+									opener.location.href="sendMsgList.do";								
+								} else {
+									opener.location.href="adminSendMessageList.do";
+								}
+							}else {
+								alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
 							}
-						}else {
+						},
+						error: function(){
 							alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
 						}
-					},
-					error: function(){
-						alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
-					}
-				});
+					});
+				}
 			});
 			
 			/* 공지-전체에게 보내기 누르면 insert 후 닫기 */

@@ -30,6 +30,7 @@ import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.message.service.MessageService;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.service.PointService;
 
 //추가할 것: 페이징, 읽음여부 업데이트 메소드, httpsession
@@ -63,7 +64,10 @@ public class MessageController {
 		if(session != null && (Member)session.getAttribute("loginUser") != null) {
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			message.setSenderId(loginUser.getUserId());
+			
+			MyPoint myPoint = pntService.getMyPoint(loginUser.getUserId());
 			mv.addObject("message", message);
+			mv.addObject("myPoint", myPoint);
 			/* 쪽지 받을 사람 닉네임 */
 			mv.addObject("nickName", nickName);
 			mv.setViewName("message/messageWriteForm");
@@ -77,7 +81,7 @@ public class MessageController {
 	//완
 	//1:1 쪽지 등록(회원, 관리자 모두 사용)
 	@ResponseBody
-	@RequestMapping(value="registerMemMsg.do", method=RequestMethod.POST)
+	@RequestMapping(value="registerMemMsg.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String registerMemMessage(@ModelAttribute Message message
 										, ModelAndView mv) {
 		
