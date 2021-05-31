@@ -158,16 +158,18 @@ public class PointController {
 	//잔여포인트 출력 //펀딩-기부 UNIONALL
 	//조건 더 걸어서 정말 차감된것만 반영되게 해야함
 	//펀딩은 목표금액<누적금액 조건 들어감/기부는 금액조건 안들어감!!! 주의!!!
+	@ResponseBody
 	@RequestMapping(value="myPoint.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public MyPoint getMyPoint(HttpSession session) {
+	public void getMyPoint(HttpSession session, HttpServletResponse response) throws JsonIOException, IOException {
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
-		//메소드 2개필요. 전체사용내역반영된 금액 & 예약중인 금액
 		MyPoint myPoint = pntService.getMyPoint(userId);
+		session.setAttribute("myPoint", myPoint);
 		System.out.println(myPoint.getTotal());
 		System.out.println(myPoint.getReserved());
 		System.out.println(myPoint.getTotal()-myPoint.getReserved());
-		return myPoint;
+		Gson gson = new Gson();
+		gson.toJson(myPoint, response.getWriter());
 	}
 	
 }

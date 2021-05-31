@@ -30,6 +30,7 @@ import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.message.service.MessageService;
+import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.service.PointService;
 
 //추가할 것: 페이징, 읽음여부 업데이트 메소드, httpsession
@@ -63,7 +64,10 @@ public class MessageController {
 		if(session != null && (Member)session.getAttribute("loginUser") != null) {
 			Member loginUser = (Member)session.getAttribute("loginUser");
 			message.setSenderId(loginUser.getUserId());
+			
+			MyPoint myPoint = pntService.getMyPoint(loginUser.getUserId());
 			mv.addObject("message", message);
+			mv.addObject("myPoint", myPoint);
 			/* 쪽지 받을 사람 닉네임 */
 			mv.addObject("nickName", nickName);
 			mv.setViewName("message/messageWriteForm");
