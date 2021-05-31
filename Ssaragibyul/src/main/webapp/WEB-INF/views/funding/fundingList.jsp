@@ -53,6 +53,9 @@ margin: auto;
 	font-size:12px; 
 	color:DimGray;
 }
+.nothing{
+ color:white;
+}
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
