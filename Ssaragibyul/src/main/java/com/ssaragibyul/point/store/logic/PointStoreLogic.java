@@ -30,6 +30,7 @@ public class PointStoreLogic implements PointStore{
 	//포인트 등록 공통사용(충전제외)
 	@Override
 	public int insertPoint(Point point) {
+		System.out.println(point.getOppUserId());
 		return sqlSession.insert("pointMapper.insertPoint", point);
 	}
 	

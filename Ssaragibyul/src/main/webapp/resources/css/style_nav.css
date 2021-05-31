@@ -170,9 +170,125 @@ section {
   background: #FB5C06;
 }
 
-/* #noticeCount {
-	display: none;
+
+/* 쪽지, 포인트, 공지사항 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300&display=swap');
+
+#btn {
+	position: fixed;
+	--top: 96.5px;
+	bottom: 10px;
+	left: 15px;
+	z-index: 9999;
+	padding: 3px 15px;
+}
+#toggle-display {
+	height: 25px;
+	width: 25px;
+	background-color: #EB5C01;
+	border-radius: 50px;
+	margin: 0px;
+	color: #EB5C01;
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+	vertical-align: center;
+	box-shadow: -3px 1.5px 3px #ffdfc8;
+}
+#myinfo {
+	position: fixed;
+	--top: 96.5px;
+	bottom: 30px;
+	left: 40px;
+	z-index: 9998;
+	padding: 3px 10px 3px 10px;
+	background-color:rgba(235,92,1,0.1);
+	margin: 0px;
+	border-radius: 5px;
+	transition: all 0.3s;
+	display:none;
+}
+
+#toggleBtn {
+    position: fixed;
+    left: -9999px;
+}
+
+#toggleBtn:checked ~ #myinfo {
+	position: fixed;
+	--top: 96.5px;
+	bottom: 30px;
+	left: 40px;
+	z-index: 9998;
+	padding: 3px 10px 3px 10px;
+	background-color:rgba(235,92,1,0.05);
+	border-radius: 5px;
+	margin: 0px;
+	display: block;
+	animation: fadein 1.5s;
+}
+
+@keyframes fadein {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.msg-area {
+	display: inline-block;
+	position: relative;
+	margin: 5px 20px 5px 20px;
+}
+.notice-area {
+	display: inline-block;
+	position: relative;
+	margin: 5px 20px 5px 20px;
+}
+#noticeCount {
+	float:left;
+	position: absolute;
+	width:30px;
+	height:28px;
+	left: 1px;
+	bottom: 6px;
+	z-index:9999;
+}
+#msgCount {
+	float:left;
+	position: absolute;
+	width:30px;
+	height:28px;
+	left: 11px;
+	bottom: 16px;
+	z-index:9999;
+}
+
+#myPoint-total {
+	font-family: Noto Serif KR;
+	color: #585858;
+	font-size: 14px;
+}
+#myPoint-reserved {
+	font-family: Noto Serif KR;
+	color: #585858;
+	font-size: 11px;
+	padding-left: 60px;
+}
+/* #box {
+	width: 0px;
+	opacity: 0;
+	background-color:red;
+	transition: all 0.3s;
+}
+
+#toggleBtn:checked ~ #box {
+	width: 100%;
+	opacity:1;
+	background-color:blue;
+	
+	
 } */
-
-
-

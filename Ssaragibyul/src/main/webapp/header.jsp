@@ -80,29 +80,49 @@
 					<div>
 						<a class="nav-link" href="logout.do">로그아웃</a> 
 						<a class="nav-link" href="myPage.do">마이페이지</a>
-						
-						<a class="nav-link" href="noticeMsgList.do" style="font-size:15px; font-weight:600;">
-							<img src="resources/img/message/bell.png" width="25px">
-							<sup><span class="nav-link badge rounded-pill" id="noticeCount" style="width:11px;height:11px;border-radius:50%;background-color:#EB5C01;display:none;">
-								<%-- <c:if test="${sessionScope.notiCount != 0}">
-									${notiCount }
-								</c:if> --%>
-							</span></sup>
-						</a>
-						
-						<a class="nav-link" href="recMsgList.do" style="font-size:15px; font-weight:600;">
-							쪽지
-							<sup><span class="nav-link badge rounded-pill" id="msgCount" style="width:15px;height:15px;border-radius:50%;font-size:11px;padding:2px;color:white;background-color:#EB5C01;">${sessionScope.msgCount }</span></sup>	
-						</a>
-						<span class="nav-link" id="myPoint-reserved">예약 중 ${sessionScope.myPoint.reserved*-1 }</span>
-						<span class="nav-link" id="myPoint-total">${sessionScope.myPoint.total }</span>
-						<a class="nav-link" href="pointList.do" style="font-size:15px; font-weight:600;">포인트</a>
-					</div>
+					</div>				
 				</c:if>
 				
 			</div>
 		</div>
-	</nav> 
+	</nav>
+	
+	<!-- 포인트, 쪽지, 공지 -->
+	<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId !='admin'}">
+		
+		<div id="btn">
+		<input type="checkbox" id="toggleBtn">
+		<label for="toggleBtn" class="toggleBtn" id="toggle-display"> + </label>
+		
+		<div id="myinfo">
+			<!-- 포인트 -->
+			<a class="" href="pointList.do" style="font-size:15px; font-weight:600; text-decoration:none;">포인트</a>
+			&nbsp;&nbsp;&nbsp;<span class="point-num" id="myPoint-total">${sessionScope.myPoint.total }</span>
+			<br><sup><span class="point-num" id="myPoint-reserved">진행 중 ${sessionScope.myPoint.reserved*-1 }</span></sup>
+			<br>
+			<!-- 쪽지 -->
+			<div class=msg-area>		
+				<a class="" href="recMsgList.do" style="font-size:15px; font-weight:600;">
+					<img src="resources/img/message/myinfo-message.png" width="20px">
+				</a>
+				<span class=" badge rounded-pill" id="msgCount" style="width:15px;height:15px;border-radius:50%;font-size:11px;padding:2px;color:white;background-color:#EB5C01;">
+					${sessionScope.msgCount }
+				</span>
+			</div>
+			<!-- 공지사항 -->
+			<div class=notice-area>
+				<a class="" href="noticeMsgList.do" style="font-size:15px; font-weight:600;">
+					<img src="resources/img/message/bell.png" width="21px" height="23px">
+				</a>
+				<span class="nav-link badge rounded-pill" id="noticeCount" style="width:11px;height:11px;border-radius:50%;color:#EB5C01;font-size:10px;background-color:#EB5C01;display:none;">
+					<c:if test="${sessionScope.notiCount != 0}">
+						${notiCount }
+					</c:if>
+				</span>
+			</div>
+		</div>
+		</div>
+	</c:if>
 <script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/balloon/ckeditor.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script type="text/javascript" src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
@@ -111,7 +131,7 @@
 
 <script>
 	$(function(){
-		
+		/* 포인트 */
 		if(${sessionScope.loginUser != null}) {
 			$.ajax({
 				url: "myPoint.do",
@@ -120,7 +140,7 @@
 				success: function(data){
 					if(data != null){
 						$("#myPoint-total").text(data.total);
-						$("#myPoint-reserved").text("예약 중:" + data.reserved*-1);
+						$("#myPoint-reserved").text("예약 중 " + data.reserved*-1);
 					}
 				},
 				error: function(){
@@ -128,7 +148,7 @@
 				}
 			});
 		}
-		
+		/* 쪽지 */
 		if(${sessionScope.loginUser != null}) {
 			$.ajax({
 				url: "recMsgCnt.do",
@@ -144,7 +164,7 @@
 				}
 			});
 		}
-		
+		/* 공지쪽지 */
 		if(${sessionScope.loginUser != null}) {
 			$.ajax({
 				url: "notiMsgCnt.do",
@@ -163,8 +183,7 @@
 			});
 		}
 		
-		
-	})
+	});
 
 </script>
   </body>

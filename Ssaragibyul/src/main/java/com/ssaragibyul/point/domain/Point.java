@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component("Point")
 public class Point {
 	
-	private int pntListNo; // PK
+	private long pntListNo; // PK
 	private int eventNo; // 이벤트 번호
 	private long eventNoCharge; // 충전용 이벤트 번호
 	private String userId; // 포인트 소유자 ID
@@ -21,7 +21,7 @@ public class Point {
 
 	public Point() {}
 
-	public Point(int pntListNo, int eventNo, long eventNoCharge, String userId, String oppUserId, Timestamp varTime,
+	public Point(long pntListNo, int eventNo, long eventNoCharge, String userId, String oppUserId, Timestamp varTime,
 			int eventCode, int varType, int varAmount, String buyerEmail, String receiptUrl) {
 		super();
 		this.pntListNo = pntListNo;
@@ -37,11 +37,11 @@ public class Point {
 		this.receiptUrl = receiptUrl;
 	}
 
-	public int getPntListNo() {
+	public long getPntListNo() {
 		return pntListNo;
 	}
 
-	public void setPntListNo(int pntListNo) {
+	public void setPntListNo(long pntListNo) {
 		this.pntListNo = pntListNo;
 	}
 
@@ -130,15 +130,8 @@ public class Point {
 		return "Point [pntListNo=" + pntListNo + ", eventNo=" + eventNo + ", eventNoCharge=" + eventNoCharge
 				+ ", userId=" + userId + ", oppUserId=" + oppUserId + ", varTime=" + varTime + ", eventCode="
 				+ eventCode + ", varType=" + varType + ", varAmount=" + varAmount + ", buyerEmail=" + buyerEmail
-				+ ", receiptUrl=" + receiptUrl + "]";
+				+ ", receiptUrl=" + receiptUrl + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ ", toString()=" + super.toString() + "]";
 	}
-
-//	public Point(String userId, int varAmount) {
-//		super();
-//		this.userId = userId;
-//		this.varAmount = varAmount;
-//	}
-
-
 	
 }
