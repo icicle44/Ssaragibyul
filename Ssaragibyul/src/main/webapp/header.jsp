@@ -103,7 +103,7 @@
 			<!-- 쪽지 -->
 			<div class=msg-area>		
 				<a class="" href="recMsgList.do" style="font-size:15px; font-weight:600;">
-					<img src="resources/img/message/myinfo-message.png" width="20px">
+					<img src="resources/img/message/myinfo-message.svg" width="30px">
 				</a>
 				<span class=" badge rounded-pill" id="msgCount" style="width:15px;height:15px;border-radius:50%;font-size:11px;padding:2px;color:white;background-color:#EB5C01;">
 					${sessionScope.msgCount }
@@ -112,7 +112,7 @@
 			<!-- 공지사항 -->
 			<div class=notice-area>
 				<a class="" href="noticeMsgList.do" style="font-size:15px; font-weight:600;">
-					<img src="resources/img/message/bell.png" width="21px" height="23px">
+					<img src="resources/img/message/myinfo-bell.svg" width="30px">
 				</a>
 				<span class="nav-link badge rounded-pill" id="noticeCount" style="width:11px;height:11px;border-radius:50%;color:#EB5C01;font-size:10px;background-color:#EB5C01;display:none;">
 					<c:if test="${sessionScope.notiCount != 0}">

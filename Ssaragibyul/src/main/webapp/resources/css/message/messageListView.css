@@ -64,7 +64,9 @@ table td {
 	color: #2b686e;
   	padding: 10px 0;
   	vertical-align: middle;
-  	
+}
+table a {
+	text-decoration: none;
 }
 
 .td-small {

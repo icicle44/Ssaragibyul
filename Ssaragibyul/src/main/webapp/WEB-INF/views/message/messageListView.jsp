@@ -133,7 +133,7 @@
 									<c:if test="${message.msgType == 0 }">
 										<td class="td-small"></td>
 									</c:if>
-									<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }">${message.msgNo }</td>					
+									<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }"></td>					
 								</tr>
 							</c:forEach>
 						</c:if>
