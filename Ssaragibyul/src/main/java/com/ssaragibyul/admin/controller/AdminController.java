@@ -295,12 +295,13 @@ public class AdminController {
 	@RequestMapping(value="adminDeleteReply.do", method = RequestMethod.GET)
 	public String replyRemove(@ModelAttribute Reply reply) {
 		int result = 0; 
+		int replyNo = reply.getReplyNo();
 		if(reply.getReplyType() == "funding") {
 			result = fService.removeCommnets(reply);
 		} else if(reply.getReplyType() == "donation") {
 			//result = dService.removeCommnets(reply);
 		} else if(reply.getReplyType() == "visit") {
-			result = vService.removeReply(reply);
+			result = vService.removeReply(replyNo);
 		}
 		if(result > 0) {
 			return "success";
