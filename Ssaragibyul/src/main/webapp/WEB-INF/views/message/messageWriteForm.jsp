@@ -88,26 +88,27 @@
 			$("#sendClose").on("click", function(){
 				var senderId = '${loginUser.userId}';
 				var receiverId = '${message.receiverId}'; /* 넘어온 멤버/관리자의 아이디로 */
-				var presentPoint = 0;
+				var presentPoint;
 				var msgTitle = $("#msgTitle").val();
 				var msgContents = $("#msgContents").val();
 				var msgType = '${message.msgType}';
-				var myPoint = '${myPoint.total}'
-				console.log(presentPoint);
-				if(presentPoint != null) {
-					presentPoint
-				}
-					
-					
-					
-					&& presentPoint > 0 && presentPoint > myPoint) {
-					alert("선물 가능한 포인트를 확인해주세요");			
-				}else if(msgTitle == "") {
+				var myPoint = parseInt('${myPoint.total}');
+				
+				if(msgTitle == "") {
 					alert("제목을 입력하세요");
 				}else if(msgContents == "") {
 					alert("내용을 입력하세요");
+				}else if($("#point-num").val() != "") {
+					if(parseInt($("#point-num").val()) > myPoint || parseInt($("#point-num").val()) < 0) {
+						alert("선물 가능한 포인트를 확인해주세요")
+					}else {
+						presentPoint = $("#point-num").val();
+					}
 				}else {
-					
+					presentPoint = 0;
+				}
+				
+				if(msgTitle != "" && msgContents != "" && presentPoint >= 0) {
 					$.ajax({
 						url: "registerMemMsg.do",
 						type: "post",

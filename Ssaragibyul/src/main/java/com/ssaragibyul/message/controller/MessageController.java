@@ -81,7 +81,7 @@ public class MessageController {
 	//완
 	//1:1 쪽지 등록(회원, 관리자 모두 사용)
 	@ResponseBody
-	@RequestMapping(value="registerMemMsg.do", method=RequestMethod.POST)
+	@RequestMapping(value="registerMemMsg.do", method={RequestMethod.GET, RequestMethod.POST})
 	public String registerMemMessage(@ModelAttribute Message message
 										, ModelAndView mv) {
 		
