@@ -149,7 +149,7 @@ float : right;
 					<input type="search" name="key" class="scan">&nbsp;
 					<input type="submit" class="scan" value="검색">
 				</form>
-			
+			<!--  JS, 리다이렉트 URL -->
 		   			   <select name = "chose1" class="select">
 				       <option value = "news_list" selected>최신글 순</option>
 				       <option value = "money_list">모금액 순</option>
