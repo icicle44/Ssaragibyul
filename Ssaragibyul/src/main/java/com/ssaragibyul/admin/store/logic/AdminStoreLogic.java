@@ -280,4 +280,10 @@ public class AdminStoreLogic implements AdminStore{
 		return (ArrayList)sqlSession.selectList("messageMapper.selectCountNewRecMessage");
 	}
 
+	@Override
+	public ArrayList<Visit> selectCountPostVisit() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("visitMapper.selectCountPostVisit");
+	}
+
 }

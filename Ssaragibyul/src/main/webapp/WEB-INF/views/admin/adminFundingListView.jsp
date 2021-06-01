@@ -106,7 +106,7 @@
                                                <c:forEach items="${fList }" var="list">
 												<tr>
 													<td align="center">${list.projectNo }</td>
-													<td align="center"><a href="#modal_open${list.projectNo }" data-toggle="modal">${list.userId }</a></td>
+													<td align="center">${list.userId }</td>
 													<td align="center">${list.subjectName }</td>
 													<td align="center">${list.goalMoney }</td>
 													<td align="center">${list.sumMoney }</td>

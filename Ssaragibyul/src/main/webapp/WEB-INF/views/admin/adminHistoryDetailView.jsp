@@ -58,13 +58,13 @@
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">기념관 게시판 관리</a>
+								<a href="adminIndependenceList.do">기념관 관리</a>
 							</li>
 							<li class="separator">
 								<i class="flaticon-right-arrow"></i>
 							</li>
 							<li class="nav-item">
-								<a href="#">별들의 발자취</a>
+								<a href="adminHistoryList.do">별들의 발자취</a>
 							</li>
 						</ul>
 					</div>
@@ -72,7 +72,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title text-center">${ history.siteNo }번 별들의 발자취 상세보기</h4>
+									<h4 class="card-title text-center">${ histoy.siteNo }번 별들의 발자취 상세보기</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -80,48 +80,43 @@
 											<tbody>
                                                <tr>
 									               <td>사적지 이름</td>
-									               <td>${ history.siteName }</td>
+									               <td>${ histoy.siteName }</td>
 									            </tr>
 									            <tr>
 					                                <td>사적지 유형</td>
-					                                <td>${ history.stieType }</td>
+					                                <td>${ histoy.siteType }</td>
 					                            </tr>
 						                        <tr>
 						                            <td>주소</td>
-						                            <td>${ history.siteAddr }</td>
+						                            <td>${ histoy.siteAddr }</td>
 						                        </tr>
 									            <tr>
 									               <td>설명</td>
-									               <td>${ history.siteContents }</td>
+									               <td>${ histoy.siteContents }</td>
 									            </tr>
 									            <tr>
 									               <td>첨부파일</td>
 									               <td>
-														<c:if test="${!empty history.originalFilename }">
-															${ history.originalFilename }
+														<c:if test="${!empty histoy.originarFilename }">
+															${ histoy.originarFilename }
 														</c:if>
 													</td>
 									            </tr>
-									            <tr>
-													<td colspan="2" align="center">
-										 				<c:url var="hModify" value="adminModifyView.do">
-															<c:param name="siteNo" value="${history.siteNo }"></c:param>
-														</c:url>
-														<%-- 
-														<c:url var="hDelete" value="adminHistoryDelete.do">
-															<c:param name="siteNo" value="${history.siteNo }"></c:param>
-															<c:param name="renameFilename" value="${history.originalFilename }"></c:param>
-														</c:url>
-														 --%>
-														<a href="${hModify}">수정 페이지로 이동</a>&nbsp;
-														<div id="delete">
-															<input type="button" value="삭제하기" onclick="fnUserDelete()" id="delete-btn">
-															<%-- <a href="${hDelete}">삭제하기</a> --%>
-														</div>
-													</td>
-												</tr>
 											</tbody>
 										</table>
+										<div>
+										 	<c:url var="hModify" value="adminModifyView.do">
+												<c:param name="siteNo" value="${histoy.siteNo }"></c:param>
+											</c:url>
+											<c:url var="hDelete" value="adminHistoryDelete.do">
+												<c:param name="siteNo" value="${histoy.siteNo }"></c:param>
+												<c:param name="renameFilename" value="${histoy.originarFilename }"></c:param>
+											</c:url>
+											<button class="btn btn-outline-secondary float-right"><a href="${hModify}">수정 페이지로 이동</a></button>&nbsp;
+											<button class="btn btn-outline-secondary float-right"><a href="${hDelete}">삭제하기</a></button>
+<%-- 											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminModifyView.do?siteNo=${history.siteNo}';">수정하기</button>
+											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminHistoryDelete.do?siteNo=${history.siteNo}';">삭제하기</button>  --%>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -156,19 +151,7 @@
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
     
 	<script>
-	
-		    $(function() {
-		        $("#postcodify_search_button").postcodifyPopUp();
-		     });
-      
-			$(document).ready(function(){
-			  $('#delete-btn').click(function(){
-			  	confirm('정말로 탈퇴하시겠습니까?');
-			  		return false;
-			  });
-          	var siteNo = '${ history.siteNo }';
-        	location.href="adminHistoryDelete.do?siteNo="+ siteNo;
-			});
+
 	</script>
 </body>
 </html>

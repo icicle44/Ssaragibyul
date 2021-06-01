@@ -34,6 +34,8 @@ public interface AdminService {
 	public ArrayList<Message> getCountNewMessage();
 	// 최근 받음 메시지 6개 출력하기
 	public ArrayList<Message> getCountNewRecMessage();
+	// 별보러가자 현황 요일별로 출력
+	public ArrayList<Visit> getCountPostVisit();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);

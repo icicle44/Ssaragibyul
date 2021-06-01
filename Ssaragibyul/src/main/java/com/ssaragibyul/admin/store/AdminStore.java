@@ -31,6 +31,8 @@ public interface AdminStore {
 	public ArrayList<Message> selectCountNewMessage();
 	// 최근 받은 쪽지 뿌리기
 	public ArrayList<Message> selectCountNewRecMessage();
+	// 지난주 별보러가자 게시글 현황
+	public ArrayList<Visit> selectCountPostVisit();
 	
 	
 	// 회원 전체 리스트 가져오기
@@ -106,6 +108,7 @@ public interface AdminStore {
 	public int selectFundingListCount();
 	public int selectDonationListCount();
 	public int selectVisitListCount();
+
 
 
 

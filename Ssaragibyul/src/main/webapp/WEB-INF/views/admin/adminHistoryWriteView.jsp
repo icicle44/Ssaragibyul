@@ -12,6 +12,7 @@
 
 	<!-- Fonts and icons -->
 	<script src="resources/js/admin/plugin/webfont/webfont.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -21,6 +22,8 @@
 			}
 		});
 	</script>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
 
 	<!-- CSS Files -->
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
@@ -36,7 +39,19 @@
 			margin: 5px;
 		}
 	</style>
-	
+	<style type="text/css">
+   .centerText table {
+      margin : auto;
+   }
+   span.guide {
+      display : none;
+      font-size : 12px;
+      top : 12px;
+      right : 10px;
+   }
+   span.ok{color:green}
+   span.error{color:red}
+   </style>
 </head>
 <body>
 	<div class="wrapper">
@@ -76,20 +91,32 @@
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
-									<form action="adminHistoryWriteView.do" method="post" enctype="multipart/form-data">
-										<table class="table table-hover" >
+									<form action="adminHistoryRegister.do" method="post" enctype="multipart/form-data">
+										<table class="table" >
 											<tbody>
                                                <tr>
 									               <td>사적지 이름</td>
 									               <td>
-									                  <input type="text" size="50" name="siteName" id="siteName">
+									                  <input type="text" size="50" name="siteName">
 									               </td>
 									            </tr>
 									            <tr>
 					                                <td>사적지 유형</td>
 					                                <td>
-					                                    <input type="text" size="50" name="stieType" id="stieType">
+					                                    <input type="text" size="50" name="siteType">
 					                                </td>
+					                            </tr>
+					                            <tr>
+					                            	<td>위도</td>
+					                            	<td>
+					                            		<input type="number" size="50" name="latitude">
+					                            	</td>
+					                            </tr>
+					                            <tr>
+					                            	<td>경도</td>
+					                            	<td>
+					                            		<input type="number" size="50" name="longitude">
+					                            	</td>
 					                            </tr>
 					                            <c:forTokens items="${ history.siteAddr }" delims="," var="addr" varStatus="status">
 					               					<c:if test="${ status.index eq 0 }">
@@ -119,12 +146,27 @@
 						                            </c:if>
 					                            </c:forTokens>
 									            <tr>
+									               <td>우편번호</td>
+									               <td>
+									                  <input type="text" name="post" class="postcodify_postcode5" size="6">
+									                  <button type="button" id="postcodify_search_button">검색</button>
+									               </td>
+									            </tr>
+									            <tr>
+									               <td>도로명 주소</td>
+									               <td><input type="text" name="address1" class="postcodify_address"></td>
+									            </tr>
+									            <tr>
+									               <td>상세 주소</td>
+									               <td><input type="text" name="address2" class="postcodify_extra_info"></td>
+									            </tr>
+									            <tr>
 									               <td>설명</td>
 									               <td><textarea rows="7" cols="50" name="siteContents"></textarea></td>
 									            </tr>
 									            <tr>
 									               <td>첨부파일</td>
-									               <td><input type="file" size="50" name="hUpdateDate"></td>
+									               <td><input type="file" size="50" name="uploadFile"></td>
 									            </tr>
 											</tbody>
 										</table>
@@ -185,6 +227,7 @@
 			  		return false;
 			  });
 			});
+			
 	</script>
 </body>
 </html>

@@ -20,6 +20,28 @@ public class History {
 	private Timestamp uploadTime;
 
 	
+	
+	
+	public History(int siteNo, String siteName, String siteType, String siteContents, int latitude, int longitude,
+			String siteAddr, Date hCreateDate, Date hUpdateDate, String hStatus, int fileNo, String originarFilename,
+			String renameFilename, Timestamp uploadTime) {
+		super();
+		this.siteNo = siteNo;
+		this.siteName = siteName;
+		this.siteType = siteType;
+		this.siteContents = siteContents;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.siteAddr = siteAddr;
+		this.hCreateDate = hCreateDate;
+		this.hUpdateDate = hUpdateDate;
+		this.hStatus = hStatus;
+		this.fileNo = fileNo;
+		this.originarFilename = originarFilename;
+		this.renameFilename = renameFilename;
+		this.uploadTime = uploadTime;
+	}
+
 	public History() {
 		// TODO Auto-generated constructor stub
 	}

@@ -21,20 +21,20 @@
 
 
    <select id="adminSelectAllList" resultMap="historyResultMap">
-           SELECT * FROM HISTORY ORDER BY SITE_NO DESC
+           SELECT * FROM HISTORY WHERE H_STATUS = 'Y' ORDER BY SITE_NO DESC
     </select>
 
    <select id="selectHistoryListCount" resultType="_int">
-      SELECT COUNT(*) FROM HISTORY
+      SELECT COUNT(*) FROM HISTORY WHERE H_STATUS = 'Y'
     </select>
     
     <select id="selectOneHistory" resultMap="historyResultMap">
     	SELECT * FROM HISTORY WHERE SITE_NO = #{siteNo} AND H_STATUS = 'Y'
     </select>
     
-    <insert id="inserHistory" parameterType="History">
+    <insert id="inserHistory" useGeneratedKeys="true" keyProperty="siteNo" keyColumn="SITE_NO" parameterType="History">
     	INSERT INTO HISTORY
-    	VALUES(SEQ_HISTORY.NEXTVAL, #{siteName}, #{siteType}, #{siteContents}, #{latitude}, #{longitude}, #{siteAddr}, DEFAULT, DEFAULT, DEFAULT, SEQ_HISTORY_FILE.NEXTVAL, #{originarFilename}, #{renameFilename}, #{uploadTime})
+    	VALUES(SEQ_HISTORY.NEXTVAL, #{siteName}, #{siteType}, #{siteContents}, #{latitude}, #{longitude}, #{siteAddr}, SYSDATE, SYSDATE, DEFAULT, SEQ_HISTORY_FILE.NEXTVAL, #{originarFilename}, #{renameFilename}, SYSDATE)
     </insert>
     
     <update id="updateHistory" >

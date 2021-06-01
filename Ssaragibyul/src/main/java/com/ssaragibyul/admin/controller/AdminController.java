@@ -86,11 +86,13 @@ public class AdminController {
 		// 오늘의 신고 게시글 수 카운
 		
 		//별보러가자 게시글 현황
-		
+		ArrayList<Visit> vList = aService.getCountPostVisit();
 		// 최근 보낸 쪽지 6개만
 		ArrayList<Message> nmList = aService.getCountNewMessage();
 		// 최근 받은 쪽지 6개만
 		ArrayList<Message> rmList = aService.getCountNewRecMessage();
+		System.out.println(vList);
+
 		
 		// 기부 현황
 		
@@ -363,7 +365,7 @@ public class AdminController {
 		int currentPage = (page != null) ? page : 1;
 		int listCount = aService.getHistoryListCount();/////////////////////history 셀릭트 카운트 완성되면 고치기!!!!
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
-		ArrayList<History> hList = hService.printAll(pi);
+		ArrayList<History> hList = aService.pringAllHistoy(pi);
 		System.out.println("pi" + pi + " / " + hList);
 		if(!hList.isEmpty()) {
 			mv.addObject("hList", hList);
@@ -379,11 +381,12 @@ public class AdminController {
 	// 기념관 상세보기
 	@RequestMapping(value="adminHistoryDetail.do", method = RequestMethod.GET)
 	public ModelAndView histoyDetail(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
-		History histoy = hService.printOne(siteNo);
+		History histoy = aService.printOneHistoy(siteNo);
+		System.out.println("히스토리야 널이니???" + histoy);
 		if(histoy != null) {
 			mv.addObject("histoy", histoy).setViewName("admin/adminHistoryDetailView");
 		} else {
-			mv.addObject("msg", "별들의 발자취 리스트 조회 실패!");
+			mv.addObject("msg", "별들의 발자취 상세보기 조회 실패!");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
@@ -396,11 +399,16 @@ public class AdminController {
 	}
 	
 	// 기념관 등록하기
-	@RequestMapping(value="adminHistoryRegister.kh", method=RequestMethod.POST)
+	@RequestMapping(value="adminHistoryRegister.do", method=RequestMethod.POST)
 	public ModelAndView histoyRegister(ModelAndView mv,
 										@ModelAttribute History history,
+										@RequestParam("post") String post,
+										@RequestParam("address1") String address1, 
+										@RequestParam("address2") String address2,
 										@RequestParam(value="uploadFile", required = false) MultipartFile uploadFile,
 										HttpServletRequest request) {
+		System.out.println("난 투스트링이야"+history.toString());
+		history.setSiteAddr(post + ", " + address1 + ", " + address2);
 		if(!uploadFile.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(uploadFile, request);
 			if(renameFileName != null) {
@@ -412,6 +420,9 @@ public class AdminController {
 		int result = 0;
 		String path = "";
 		result = aService.registerHistory(history);
+		System.out.println("리저트값"+result);
+		
+		
 		if(result > 0) {
 			path = "redirect:adminHistoryDetail.do?siteNo="+history.getSiteNo();
 		} else {
@@ -424,7 +435,7 @@ public class AdminController {
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\hUpdateDate";
+		String savePath = root + "\\upLoadFile";
 		
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
@@ -474,6 +485,9 @@ public class AdminController {
 	public ModelAndView historyUpdate(ModelAndView mv,
 										HttpServletRequest request,
 										@ModelAttribute History history,
+										@RequestParam("post") String post,
+										@RequestParam("address1") String address1, 
+										@RequestParam("address2") String address2,
 										@RequestParam(value="reloadFile", required = false) MultipartFile reloadFile ) {
 		if(reloadFile != null && !reloadFile.isEmpty()) {
 			// 파일변수가 없어서!!확인요망!!ㅠㅠ
@@ -488,6 +502,7 @@ public class AdminController {
 			}
 		}
 		// DB수정
+		history.setSiteAddr(post + ", " + address1 + ", " + address2); 
 		int result = aService.modifyHistory(history);
 		if(result > 0) {
 			mv.setViewName("redirect: adminHistoryList.do");
@@ -520,7 +535,7 @@ public class AdminController {
 	//기념관 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\huploadFiles";
+		String savePath = root + "\\upLoadFile";
 		File file = new File(savePath + "\\" + fileName);
 		if(file.exists()) {
 			file.delete();

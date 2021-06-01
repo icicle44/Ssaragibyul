@@ -263,5 +263,11 @@ public class AdminServiceImpl implements AdminService{
 		return aStore.selectVisitListCount();
 	}
 
+	@Override
+	public ArrayList<Visit> getCountPostVisit() {
+		// TODO Auto-generated method stub
+		return aStore.selectCountPostVisit();
+	}
+
 
 }

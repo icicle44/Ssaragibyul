@@ -123,7 +123,7 @@
 								</div>
 								<div class="card-body">
 									<div class="chart-container" style="min-height: 375px">
-										<canvas id="statisticsChart"></canvas>
+										<canvas id="myChart"></canvas>
 									</div>
 									<div id="myChartLegend"></div>
 								</div>
@@ -145,7 +145,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="card">
+<!-- 							<div class="card">
 								<div class="card-body pb-0">
 									<div class="h1 fw-bold float-right text-warning">+7%</div>
 									<h2 class="mb-2">213</h2>
@@ -154,7 +154,7 @@
 										<div id="lineChart"></div>
 									</div>
 								</div>
-							</div>
+							</div> -->
 						</div>
 					</div>
                     
@@ -421,6 +421,33 @@
 					}]
 				},
 			}
+		});
+		
+		/* 별 보러가자 게시글 현황 */
+		var ctx = document.getElementById('myChart').getContext('2d');
+		var myChart = new Chart(ctx, {
+		    type: 'line',
+		    data: {
+		        labels: ['월', '화', '수', '목', '금', '토', '일'],
+		        datasets: [{
+		            label: '별 보러가자 게시글 현황',
+		            data: [12, 19, 3, 5, 2, 3, 5],
+		            backgroundColor: [
+		                'rgba(255, 206, 86, 0.2)',
+		            ],
+		            borderColor: [
+		                'rgba(255, 206, 86, 1)',
+		            ],
+		            borderWidth: 1
+		        }]
+		    },
+		    options: {
+		        scales: {
+		            y: {
+		                beginAtZero: true
+		            }
+		        }
+		    }
 		});
 
 		/* 펀딩제안현황 차트 */
