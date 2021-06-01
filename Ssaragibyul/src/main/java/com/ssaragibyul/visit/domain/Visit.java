@@ -8,6 +8,7 @@ public class Visit {
 	private String userId;
 	private String nickName;
 	private int siteNo;
+	private String siteName;
 	private String visitTitle;
 	private String visitContents;
 	private int visitCount;
@@ -53,7 +54,13 @@ public class Visit {
 	public void setSiteNo(int siteNo) {
 		this.siteNo = siteNo;
 	}
+	public String getSiteName() {
+		return siteName;
+	}
 
+	public void setSiteName(String siteName) {
+		this.siteName = siteName;
+	}
 	public String getVisitTitle() {
 		return visitTitle;
 	}
@@ -129,10 +136,9 @@ public class Visit {
 	@Override
 	public String toString() {
 		return "Visit [visitNo=" + visitNo + ", userId=" + userId + ", nickName=" + nickName + ", siteNo=" + siteNo
-				+ ", visitTitle=" + visitTitle + ", visitContents=" + visitContents + ", visitCount=" + visitCount
-				+ ", likes=" + likes + ", vCreateDate=" + vCreateDate + ", vUpdateDate=" + vUpdateDate
-				+ ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename + ", uploadTime="
-				+ uploadTime + "]";
+				+ ", siteName=" + siteName + ", visitTitle=" + visitTitle + ", visitContents=" + visitContents
+				+ ", visitCount=" + visitCount + ", likes=" + likes + ", vCreateDate=" + vCreateDate + ", vUpdateDate="
+				+ vUpdateDate + ", originalFilename=" + originalFilename + ", renameFilename=" + renameFilename
+				+ ", uploadTime=" + uploadTime + "]";
 	}
-
 }

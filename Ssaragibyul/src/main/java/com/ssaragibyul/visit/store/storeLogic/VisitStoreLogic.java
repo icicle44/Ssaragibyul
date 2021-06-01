@@ -3,6 +3,7 @@ package com.ssaragibyul.visit.store.storeLogic;
 import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.tomcat.util.modeler.ParameterInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,23 +16,34 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Autowired
 	SqlSession session;
+	
 	@Override
 	public int selectListCount() {
 		
 		return 0;
 	}
-
+	// 글 목록 가져오기
 	@Override
 	public ArrayList<Visit> selectAllList() {
 		return (ArrayList)session.selectList("visitMapper.selectAll");
 	}
-
+	// 조회수 증가
 	@Override
-	public int addReadCount(int visitNo) {
-		
-		return 0;
+	public int addHitsCount(int visitNo) {
+		return session.update("visitMapper.updateHitCount", visitNo);
 	}
-
+	/*
+	 * // 조회수 가져오기
+	 * 
+	 * @Override public String getHitsCount(int visitNo) { return
+	 * session.selectList("visitMapper.selectHitCount", visitNo)+""; }
+	 */
+	@Override
+	public String getHitsCount(int visitNo) {
+		
+		return null;
+	}
+	// 글 하나 가져오기
 	@Override
 	public Visit selectOne(int visitNo) {
 		return session.selectOne("visitMapper.selectOne", visitNo);
@@ -44,10 +56,12 @@ public class VisitStoreLogic implements VisitStore{
 
 	@Override
 	public int updateVisit(Visit visit) {
-		
-		return 0;
+		return session.update("visitMapper.updateVisit", visit);
 	}
-
+	@Override
+	public int updateVisitFile(Visit visit) {
+		return session.update("visitMapper.updateVisitFile", visit);
+	}
 	@Override
 	public int deleteVisit(int visitNo) {
 		return session.delete("visitMapper.deleteVisit", visitNo);
@@ -102,4 +116,6 @@ public class VisitStoreLogic implements VisitStore{
 
 		return likes;
 	}
+
+
 }

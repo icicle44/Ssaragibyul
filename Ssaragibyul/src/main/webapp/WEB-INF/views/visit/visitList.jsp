@@ -59,7 +59,7 @@
 						<c:forEach items="${vList }" var="vList">
 							<div class="grid__item" data-size="1280x857">
 								<a id="grid" href="/resources/vUploadFiles/${vList.renameFilename }" class="img-wrap">
-								<img id="${vList.visitNo }" src="/resources/vUploadFiles/${vList.renameFilename }" alt="${vList.originalFilename }" />
+								<img class="${vList.visitCount }"id="${vList.visitNo }" src="/resources/vUploadFiles/${vList.renameFilename }" alt="${vList.originalFilename }" />
 									<div class="description description--grid">
 										<div class="rightCon">
 											<div class="r-title col-md-12"">
@@ -67,12 +67,11 @@
 												<div id="nickname">${vList.nickName }</div>
 												<table class="info">
 													<tr>
-														<td id="t"><a href="#"><i class="far fa-heart"></i></a></td>
+														<td class="t"><a href="#"><i class="far fa-heart"></i></a></td>
 														<!-- <i class="fas fa-heart"></i> -->
 														<td>${vList.likes }</td>
-														<td id="t">조회수</td>
-														<td>${vList.visitCount }</td>
-														<td id="t">작성일자</td>
+														<td class="t count" id="${vList.visitCount }">조회수</td>
+														<td class="t">작성일자</td>
 														<td>${vList.vUpdateDate }</td>
 													</tr>
 												</table>
@@ -233,8 +232,11 @@
 				var visitNo = "";
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
+					$(".count").next().remove();
 					visitNo= $(this).attr("id"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
-					/* alert(visitNo); */
+					visitCount = Number($(this).attr("class"))+1;
+					alert(visitCount);
+					addHitsCount(visitNo, visitCount);
 					getReplyList(visitNo);// 댓글 목록 조회1
 				});
 				
@@ -264,7 +266,7 @@
 						}
 					},
 					error : function() {
-
+						alert("서버 통신 실패!(댓글등록)");
 					}
 				});
 				// 작성 후 내용 초기화
@@ -308,10 +310,15 @@
 								$tr.append($btnArea);
 								$tableBody.append($tr);
 							}
+						}else{
+							$tr = $("<tr>");
+							$td = $("<td>").text("댓글이 없습니다.")
+							$tr.append($rWriter);
+							$tableBody.append($tr);
 						}		
 					},
 					error : function() {
-
+						/* alert("서버 통신 실패(댓글 목록 조회)!"); */
 					}
 				});
 			}
@@ -338,7 +345,7 @@
 						}
 					},
 					error : function() {
-						alert("서버 통신 실패!");
+						alert("서버 통신 실패(댓글 수정)!");
 					}
 				});
 				
@@ -357,8 +364,26 @@
 						}
 					},
 					error : function() {
-						
+						alert("서버 통신 실패(댓글 삭제)!");
 					}
+				});
+			}
+			function addHitsCount(visitNo, visitCount){
+				$.ajax({
+					url : "addHitsCount.do",
+					type :"get",
+					data : {"visitNo" : visitNo},
+					success : function(data){
+						if( data == "success"){
+							$(".count").after($("<td>").text(visitCount));
+						}else{
+							console.log("");
+						}
+					},
+					error : function(request,status,error){
+						alert("code:" + request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					}
+						
 				});
 			}
 		</script>

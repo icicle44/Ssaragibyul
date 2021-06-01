@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,12 +47,6 @@ public class VisitController {
 	    return mv;
 	}
 
-//	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
-//	public ModelAndView visitListView(ModelAndView mv,@RequestParam(value="page", required=false) Integer page) {
-//		
-//		return "visit/visitList";
-//	}
-	
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		Visit visit = vService.printOne(visitNo);
@@ -112,10 +107,12 @@ public class VisitController {
 	// 게시글 수정
 	@RequestMapping(value="visitUpdate.do", method=RequestMethod.POST)
 	public ModelAndView visitUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Visit visit, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+		System.out.println("=============================게시글 수정 controller 들어옴");
+		System.out.println("RenameFilename : " + visit.getRenameFilename());
 		// 파일 삭제 후 업로드
 		if(reloadFile != null && !reloadFile.isEmpty()) {
 			// 기존 파일 삭제
-			if( visit.getOriginalFilename() != "") {
+			if( visit.getRenameFilename() != "") {
 				deleteFile(visit.getRenameFilename(), request);
 			}
 			// 새 파일 업로드
@@ -179,7 +176,14 @@ public class VisitController {
 	}
 	// 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
-		
+		System.out.println("deleteFile, filename : "+fileName);
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		System.out.println("deleteFile, root : " + root);
+		String savePath = root + "\\vUploadFiles";
+		File file = new File(savePath + "\\" + fileName);
+		if(file.exists()) {
+			file.delete();
+		}
 	}
 	// 댓글등록
 	@ResponseBody
@@ -242,10 +246,18 @@ public class VisitController {
 		// 2. HashMap 사용하기
 			return "common/errorPage";
 		}
-	public int addHitsCount(int visitNo) {
-		int result = 0;
-		
-		return result;
+	// 조회수 증가
+	@ResponseBody
+	@RequestMapping(value="addHitsCount.do", method=RequestMethod.GET)
+	public String addHitsCount(@RequestParam("visitNo") int visitNo) {
+		System.out.println("========================조회수 controller");
+		int hitCount = vService.addHitsCount(visitNo);
+		System.out.println("조회수 hitCount : " + hitCount);
+		if(hitCount > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	public int checkLikes(int visitNo, String userId) {
 		int result = 0;

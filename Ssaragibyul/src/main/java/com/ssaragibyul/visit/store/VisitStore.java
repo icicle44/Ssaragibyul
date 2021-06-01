@@ -9,11 +9,12 @@ import com.ssaragibyul.visit.domain.Visit;
 public interface VisitStore {
 	public int selectListCount();
 	public ArrayList<Visit> selectAllList();
-	public int addReadCount(int visitNo);
-	
+	public int addHitsCount(int visitNo);
+	public String getHitsCount(int visitNo);
 	public Visit selectOne(int visitNo);
 	public int insertVisit(Visit visit);
 	public int updateVisit(Visit visit);
+	public int updateVisitFile(Visit visit);
 	public int deleteVisit(int visitNo);
 	
 	public ArrayList<Reply> selectAllReply(int visitNo);

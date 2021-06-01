@@ -1,9 +1,9 @@
-    div, article, section {
+/*     div, article, section {
     border: 1px solid black;
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}     
+}     */ 
 body * {
   box-sizing: border-box;
   text-align: center;
@@ -136,7 +136,7 @@ table{
     padding-bottom: 25px;
 }
 
-#t{
+.t{
     background-color: rgb(220, 220, 220);  
 }
 

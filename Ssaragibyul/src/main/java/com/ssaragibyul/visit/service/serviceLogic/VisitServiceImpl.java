@@ -37,12 +37,6 @@ public class VisitServiceImpl implements VisitService{
 	}
 
 	@Override
-	public int addReadCount(int visitNo) {
-		
-		return 0;
-	}
-
-	@Override
 	public Visit printOne(int visitNo) {
 		return vStore.selectOne(visitNo);
 	}
@@ -54,8 +48,8 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public int modifyVisit(Visit visit) {
-		
-		return 0;
+		vStore.updateVisit(visit);
+		return vStore.updateVisitFile(visit);
 	}
 
 	@Override
@@ -85,10 +79,10 @@ public class VisitServiceImpl implements VisitService{
 	}
 	// 조회수 증가
 	public int addHitsCount(int visitNo) { 
-		int result = 0;
-
-		return result;
+		/* return vStore.getHitsCount(visitNo) ; */
+		return vStore.addHitsCount(visitNo);
 	}
+	
 	// Review 좋아요 유무 체크
 	public int checkLikes(int visitNo, String userId) {
 		int result =0;

@@ -27,6 +27,26 @@
 	
 	<select id="selectAll" resultMap="visitResultMap">
 		SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) ORDER BY VISIT_NO DESC
+		<!-- History 하고 나서 -->		
+<!--SELECT
+    VISIT_NO,
+    USER_ID,
+    NICKNAME,
+    SITE_NO,
+    SITE_NAME,
+    VISIT_TITLE,
+    VISIT_CONTENTS,
+    VISIT_COUNT,
+    V_CREATE_DATE,
+    V_UPDATE_DATE,
+    ORIGINAL_FILENAME,
+    VISIT_FILE.RENAME_FILENAME,
+    VISIT_FILE.UPLOAD_TIME
+FROM
+         VISIT
+    JOIN VISIT_FILE USING ( VISIT_NO )
+    JOIN MEMBER USING ( USER_ID )
+    JOIN HISTORY USING ( SITE_NO ); -->
 	</select>
 		
 	<select id="selectOne" resultMap="visitResultMap">
@@ -36,6 +56,16 @@
 	<select id="selectVisitListCount" resultType="_int" resultMap="visitResultMap">
       SELECT COUNT(*) FROM VISIT
     </select>
+
+	<update id="updateHitCount">
+		UPDATE VISIT
+		SET VISIT_COUNT = VISIT_COUNT+1
+		WHERE VISIT_NO = #{visitNo }
+	</update>    
+    
+    <select id="selectHitCount" resultMap="visitResultMap">
+    	SELECT VISIT_COUNT FROM VISIT WHERE VISIT_NO = ${visitNo }
+    </select>
     
 	<insert id="insertVisit">
 		INSERT ALL 
@@ -44,6 +74,17 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	<update id="updateVisit">
+		UPDATE VISIT 
+		SET VISIT_TITLE = #{visitTitle }, VISIT_CONTENTS = #{visitContents }, V_UPDATE_DATE = SYSDATE
+		WHERE VISIT_NO = #{visitNo } 
+	</update>
+	
+	<update id="updateVisitFile">
+		UPDATE VISIT_FILE
+		SET ORIGINAL_FILENAME = #{originalFilename }, RENAME_FILENAME = #{renameFilename } 
+		WHERE VISIT_NO = #{visitNo }
+	</update>
 	
 	<delete id="deleteVisit" parameterType="_int">
 		DELETE VISIT WHERE VISIT_NO = #{visitNo }

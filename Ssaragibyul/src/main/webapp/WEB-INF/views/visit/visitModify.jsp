@@ -55,21 +55,19 @@ float:right;
 				<div class="product-title">
 			        <div class="product-img-div">
 			            <img class="product-img" id="img" />
+			            <img class="product-img" id="pre-img" src="/resources/vUploadFiles/${visit.renameFilename }">
 			        </div>
 		        </div>
 			</section>
 			<section class="sideBar col-md-6">
-			<form class="form" action="visitRegister.do" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="boardNo" value="${visit.visitNo}">
+			<form class="form" action="visitUpdate.do" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="visitNo" value="${visit.visitNo}">
 				<input type="hidden" name="originalFilename" value="${visit.originalFilename }">
 				<input type="hidden" name="renameFilename" value="${visit.renameFilename }">
 				
 				<div class="register-header">
 					<select name="siteNo">
-						<option value="none">=== 선택 ===</option>
-						<option value="1">공원</option>
-						<option value="2">생가</option>
-						<option value="3">기념관</option>
+						<option value="${visit.siteNo }"></option>
 					</select>
 					<span>방문인증되었습니다.</span>
 				</div>
@@ -86,7 +84,7 @@ float:right;
 				</div>
 				<hr>
 				<div class="register-footer">
-					<input type="file" id="input_img" size="50" name="uploadFile">
+					<input type="file" id="input_img" size="50" name="reloadFile">
 					<button type="reset" class="button button-danger">취소</button>
 					<button type="submit" onclick="regist()">등록</button>
 					<!--  <button type="submit" class="button button-primary">등록</button> -->
@@ -123,6 +121,7 @@ float:right;
 
             var reader = new FileReader();
             reader.onload = function(e) {
+            	$("#pre-img").hide();
                 $("#img").attr("src", e.target.result);
             }
             reader.readAsDataURL(f);

@@ -26,7 +26,7 @@ public interface VisitService {
 	 * @param pi
 	 * @return
 	 */
-	public int addReadCount(int visitNo);
+	public int addHitsCount(int visitNo);
 	
 	/**
 	 * 게시물 상세 조회
@@ -83,4 +83,6 @@ public interface VisitService {
 	public int removeReply(int replyNo);
 
 	public int getListCnt(Map<String, String> param);
+
+	
 }
