@@ -229,6 +229,12 @@ section {
 	animation: fadein 1.5s;
 }
 
+/* #toggleBtn:not(:checked) ~ #myinfo {
+	
+	display: none;
+	animation: fadeout 1.5s;
+} */
+
 @keyframes fadein {
     from {
         opacity: 0;
@@ -237,6 +243,15 @@ section {
         opacity: 1;
     }
 }
+
+/* @keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+} */
 
 .msg-area {
 	display: inline-block;

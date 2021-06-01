@@ -32,6 +32,9 @@
 					</div>
 				</section>
 			</c:if>
+			<c:if test="${(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.receiverId=='admin')}">
+				<input id="point-num" type="hidden" name="presentPoint" value="0">
+			</c:if>
 			<section class="write-lower">
 				<div id="message-Write-Form">
 					<table border="1" align="center" width="490px">
@@ -106,7 +109,7 @@
 					}
 				}else {
 					presentPoint = 0;
-				}
+				}					
 				
 				if(msgTitle != "" && msgContents != "" && presentPoint >= 0) {
 					$.ajax({

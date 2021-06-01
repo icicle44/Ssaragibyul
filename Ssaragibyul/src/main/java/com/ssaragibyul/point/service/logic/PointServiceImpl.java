@@ -24,8 +24,8 @@ public class PointServiceImpl implements PointService{
 	@Autowired
 	private PointStore pntStore;
 	
-	@Autowired
-	private Point point;
+//	@Autowired
+//	private Point point;
 	
 	//증가 포인트 등록 - 충전
 	@Override
@@ -37,6 +37,7 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerPosPoint(Visit visit) {
 		
+		Point point = new Point();
 		point.setUserId(visit.getUserId());
 		point.setEventCode(3);
 		point.setVarType(0);
@@ -66,6 +67,7 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerPosPoint(Message message) {
 		
+		Point point = new Point();		
 		point.setUserId(message.getReceiverId());
 		point.setOppUserId(message.getSenderId());
 		point.setEventCode(4);
@@ -80,11 +82,12 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerNegPoint(FundingLog fundLog) {
 		
+		Point point = new Point();
 		point.setUserId(fundLog.getUserId());
 		point.setEventCode(1);
 		point.setVarType(1);
 		point.setVarAmount(fundLog.getFundingPoint() * -1);
-		
+		System.out.println(point.getOppUserId());
 		int result = pntStore.insertPoint(point);
 		return result;
 	}
@@ -93,6 +96,7 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerNegPoint(DonationLog donateLog) {
 		
+		Point point = new Point();
 		point.setUserId(donateLog.getUserId());
 		point.setEventCode(2);
 		point.setVarType(1);
@@ -106,6 +110,7 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public int registerNegPoint(Message message) {
 		
+		Point point = new Point();
 		point.setUserId(message.getSenderId());
 		point.setOppUserId(message.getReceiverId());
 		point.setEventCode(4);

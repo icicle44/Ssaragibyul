@@ -10,215 +10,222 @@
 <link rel="stylesheet" href="resources/css/message/messageListView.css" type="text/css"/>
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
  -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 <title>싸라기별</title>
 </head>
 <body>
 	<jsp:include page="../../../header.jsp"/>
 	<main id=main>
-		<section class="wrapper-left sideBar col-md-3" id="menubar">
-			<a href="recMsgList.do">받은 쪽지함</a><hr>
-			<a href="sendMsgList.do">보낸 쪽지함</a><hr>
-			<a href="noticeMsgList.do">공지 쪽지함</a><hr>			
-		</section>
-
-		<section class="wrapper-right contents col-md-9" id="msg-table">
-
-			<section class="" id="table-upper">
-				<div id="title-area">
-					<c:if test="${flag=='notice'}">
-						<span id="table-title">공지사항</span>
-					</c:if>
-					<c:if test="${flag=='rec'}">
-						<span id="table-title">받은 쪽지함</span>
-					</c:if>
-					<c:if test="${flag=='send'}">
-						<span id="table-title">보낸 쪽지함</span>
-					</c:if>
-				</div>
-				<div id="sort-box">
-					<c:if test="${flag != 'notice'}">
-						<form action=""	method="get">		
-							<select name="searchCondition" id="sort">
-								<option value="allUpper" <c:if test="${search.searchCondition eq 'allUpper' }">selected</c:if>>전체</option>
-								<option value="present" <c:if test="${search.searchCondition eq 'present' }">selected</c:if>>선물</option>
-								<option value="admin" <c:if test="${search.searchCondition eq 'admin' }">selected</c:if>>관리자</option>				
-							</select>
-						</form>				
-					</c:if>
-				</div>
+		<section class="blank"></section>
+		<section class="wrapper-all">
+			<section class="wrapper-left sideBar col-md-3" id="menubar">
+				<a href="recMsgList.do">받은 쪽지함</a><hr size="10px">
+				<a href="sendMsgList.do">보낸 쪽지함</a><hr size="10px">
+				<a href="noticeMsgList.do">공지 쪽지함</a><hr size="10px">			
 			</section>
-			<section id="table-around">
-		<!-- <section class="" id="message-table"> -->
-				<table align="center">
-					<thead>
-						<tr style="border-bottom:hidden;">
-							<th>${search.searchCondition}번호</th>
-							<th>닉네임</th>
-							<th>쪽지 제목</th>
-							<th>날짜</th>
-							<c:if test="${flag=='rec' }">
-								<th width="100px"></th>
-							</c:if>
-							<c:if test="${flag=='send' }">
-								<th width="100px">수신확인</th>
-							</c:if>
-							<c:if test="${flag=='notice' }">
-								<td></td>
-							</c:if>
-							<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${empty msgList}">
-							<tr>
-								<td>${tblMsg}</td>
-							</tr>
+	
+			<section class="wrapper-right contents col-md-9" id="msg-table">
+	
+				<section class="" id="table-upper">
+					<div id="title-area">
+						<c:if test="${flag=='notice'}">
+							<span id="table-title">공지사항</span>
 						</c:if>
-						<c:if test="${!empty msgList}">
-							<c:forEach items="${msgList}" var="message" varStatus="index">
-								<tr>
-									<td>${index.count }</td>
-									<c:if test="${message.msgType != 0}">
-										<!-- MessageAndNick객체 사용 -->
-										<c:if test="${flag=='rec'}">
-											<c:url var="msgWriteUrl4" value="msgWriterView.do">
-												<c:param name="receiverId" value="${message.senderId }"></c:param>
-												<c:param name="msgType" value="4"></c:param>
-												<c:param name="nickName" value="${message.nickName }"></c:param>
-											</c:url>
-										</c:if>
-										<c:if test="${flag=='send'}">
-											<c:url var="msgWriteUrl4" value="msgWriterView.do">
-												<c:param name="receiverId" value="${message.receiverId }"></c:param>
-												<c:param name="msgType" value="4"></c:param>
-												<c:param name="nickName" value="${message.nickName }"></c:param>
-											</c:url>											
-										</c:if>
-										
-										<td><a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">${message.nickName } 선생</a></td>
-									</c:if>
-									<c:if test="${message.msgType == 0}">
-										<!-- Message 객체 사용 -->
-										<td>관리자</td>
-									</c:if>
-									<c:if test="${message.msgType != 0}">
-										<c:url var="msgDetail" value="msgDetail.do">
-											<c:param name="msgNo" value="${message.msgNo }"></c:param>
-											<c:param name="nickName" value="${message.nickName }"></c:param>
-											<c:param name="flag" value="${flag }"></c:param>
-										</c:url>
-									</c:if>
-									<c:if test="${message.msgType == 0}">
-										<c:url var="msgDetail" value="msgDetail.do">
-											<c:param name="msgNo" value="${message.msgNo }"></c:param>
-											<c:param name="nickName" value=""></c:param>
-											<c:param name="flag" value="${flag }"></c:param>
-										</c:url>
-									</c:if>					
-									<td>
-										<a href="#" onclick="msgPopup('${msgDetail }'); return false;">${message.msgTitle }</a>
-										<%-- <c:if test="${flag == 'rec' && message.readYn == 0 && message.msgType != 0}">
-											<sup><span class="badge rounded-pill bg-light text-dark" style="color:#7daabb;">새쪽지</span></sup>
-										</c:if> --%>
-									</td>
-									<td class="td-small"><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
-									<c:if test= "${message.msgType != 0 }">
-										<c:if test="${message.readYn == 1 }">
-											<td id=${message.msgNo } class="td-small">읽음</td>
-										</c:if>
-										<c:if test="${message.readYn == 0 }">
-											<td id=${message.msgNo } class="td-small">읽지 않음</td>
-										</c:if>
-									</c:if>
-									<c:if test="${message.msgType == 0 }">
-										<td class="td-small"></td>
-									</c:if>
-									<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }"></td>					
-								</tr>
-							</c:forEach>
+						<c:if test="${flag=='rec'}">
+							<span id="table-title">받은 쪽지함</span>
 						</c:if>
-						<!-- 삭제하기 -->
-						<tr>
-							<td colspan="5"></td>
-							<td>
-								<button type="submit" id="deleteArrBtn">
-									<img src="/resources/img/message/delIcon.png" alt="delIcon" width="25px">
-								</button>
-							</td>
-						</tr>
-						<!-- 페이징 -->
-						<tr>
-							<td colspan="6" style="border-top:hidden;">
-								<!-- 변수선언 -->
-								<c:if test="${flag=='notice'}">
-									<c:set var="pageUrl" value="noticeMsgList.do"/>
-								</c:if>
+						<c:if test="${flag=='send'}">
+							<span id="table-title">보낸 쪽지함</span>
+						</c:if>
+					</div>
+					<div class="sort-div" align="right">
+						<div id="sort-box" align="right">
+							<c:if test="${flag != 'notice'}">
+								<form action=""	method="get">		
+									<select name="searchCondition" class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort">
+										<option value="allUpper" <c:if test="${search.searchCondition eq 'allUpper' }">selected</c:if>>전체</option>
+										<option value="present" <c:if test="${search.searchCondition eq 'present' }">selected</c:if>>선물</option>
+										<option value="admin" <c:if test="${search.searchCondition eq 'admin' }">selected</c:if>>관리자</option>				
+									</select>
+								</form>				
+							</c:if>
+						</div>
+					</div>
+				</section>
+				<section id="table-around">
+			<!-- <section class="" id="message-table"> -->
+					<table align="center">
+						<thead>
+							<tr style="border-bottom:hidden;">
+								<th>${search.searchCondition}번호</th>
+								<th>닉네임</th>
+								<th width="300px">제목</th>
+								<th>날짜</th>
 								<c:if test="${flag=='rec' }">
-									<c:set var="pageUrl" value="recMsgList.do"/>
+									<th width="100px"></th>
 								</c:if>
 								<c:if test="${flag=='send' }">
-									<c:set var="pageUrl" value="sendMsgList.do"/>
+									<th width="100px">수신확인</th>
 								</c:if>
-								<!-- 이전 -->
-								<c:url var="before" value="${pageUrl}">
-									<c:param name="page" value="${pi.currentPage - 1}"></c:param>
-								</c:url>
-								<c:if test="${pi.listCount ne 0 }">
-									<c:if test="${pi.currentPage <= 1 }">
-										[이전]&nbsp;
-									</c:if>
-									<c:if test="${pi.currentPage > 1 }">
-										<a href="${before }">[이전]</a>&nbsp;
-									</c:if>
+								<c:if test="${flag=='notice' }">
+									<td></td>
 								</c:if>
-								<!-- 페이지 -->
-								<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
-									<c:url var="pagination" value="${pageUrl}">
-										<c:param name="page" value="${p}"></c:param>
-									</c:url>
-									<c:if test="${p eq pi.currentPage}">
-										[${p}]
-									</c:if>
-									<c:if test="${p ne pi.currentPage}">
-										<a href="${pagination }">${p}</a>&nbsp;
-									</c:if>
-								</c:forEach>
-								<!-- 다음 -->
-								<c:url var="after" value="${pageUrl}">
-									<c:param name="page" value="${pi.currentPage + 1}"></c:param>
-								</c:url>
-								<c:if test="${pi.listCount ne 0 }">
-									<c:if test="${pi.currentPage >= pi.maxPage}">
-										[다음]&nbsp;
-									</c:if>
-									<c:if test="${pi.currentPage < pi.maxPage}">
-										<a href="${after}">[다음]</a>&nbsp;
-									</c:if>
-								</c:if>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-			<section id="search">
-				<div align="center">
-					<form action="msgSearch.do" method="post">
-						<input type="hidden" name="flag" value="${flag }">
-						<select name="searchCondition">
-							<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
-							<c:if test="${flag != 'notice'}">
-								<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
+								<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty msgList}">
+								<tr>
+									<td>${tblMsg}</td>
+								</tr>
 							</c:if>
-							<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
-							<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
-						</select>
-						<input id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
-						<button id="search-btn" type="submit"><img src="resources/img/searchimg.svg" alt="search"></button>
-					</form>
-				</div>
-				<!-- </section> -->
+							<c:if test="${!empty msgList}">
+								<c:forEach items="${msgList}" var="message" varStatus="index">
+									<tr>
+										<td>${index.count }</td>
+										<c:if test="${message.msgType != 0}">
+											<!-- MessageAndNick객체 사용 -->
+											<c:if test="${flag=='rec'}">
+												<c:url var="msgWriteUrl4" value="msgWriterView.do">
+													<c:param name="receiverId" value="${message.senderId }"></c:param>
+													<c:param name="msgType" value="4"></c:param>
+													<c:param name="nickName" value="${message.nickName }"></c:param>
+												</c:url>
+											</c:if>
+											<c:if test="${flag=='send'}">
+												<c:url var="msgWriteUrl4" value="msgWriterView.do">
+													<c:param name="receiverId" value="${message.receiverId }"></c:param>
+													<c:param name="msgType" value="4"></c:param>
+													<c:param name="nickName" value="${message.nickName }"></c:param>
+												</c:url>											
+											</c:if>
+											
+											<td><a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">${message.nickName } 선생</a></td>
+										</c:if>
+										<c:if test="${message.msgType == 0}">
+											<!-- Message 객체 사용 -->
+											<td>관리자</td>
+										</c:if>
+										<c:if test="${message.msgType != 0}">
+											<c:url var="msgDetail" value="msgDetail.do">
+												<c:param name="msgNo" value="${message.msgNo }"></c:param>
+												<c:param name="nickName" value="${message.nickName }"></c:param>
+												<c:param name="flag" value="${flag }"></c:param>
+											</c:url>
+										</c:if>
+										<c:if test="${message.msgType == 0}">
+											<c:url var="msgDetail" value="msgDetail.do">
+												<c:param name="msgNo" value="${message.msgNo }"></c:param>
+												<c:param name="nickName" value=""></c:param>
+												<c:param name="flag" value="${flag }"></c:param>
+											</c:url>
+										</c:if>					
+										<td>
+											<a href="#" onclick="msgModal('${msgDetail }'); return false;">${message.msgTitle }</a>
+											<%-- <c:if test="${flag == 'rec' && message.readYn == 0 && message.msgType != 0}">
+												<sup><span class="badge rounded-pill bg-light text-dark" style="color:#7daabb;">새쪽지</span></sup>
+											</c:if> --%>
+										</td>
+										<td class="td-small"><fmt:formatDate value="${message.regDate }" pattern="yyyy.MM.dd HH:mm"/></td>
+										<c:if test= "${message.msgType != 0 }">
+											<c:if test="${message.readYn == 1 }">
+												<td id=${message.msgNo } class="td-small">읽음</td>
+											</c:if>
+											<c:if test="${message.readYn == 0 }">
+												<td id=${message.msgNo } class="td-small">읽지 않음</td>
+											</c:if>
+										</c:if>
+										<c:if test="${message.msgType == 0 }">
+											<td class="td-small"></td>
+										</c:if>
+										<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }"></td>					
+									</tr>
+								</c:forEach>
+							</c:if>
+							<!-- 삭제하기 -->
+							<tr>
+								<td colspan="5"></td>
+								<td style="padding:3px">
+									<button type="submit" id="deleteArrBtn">
+										<img src="/resources/img/message/delIcon.png" alt="delIcon" width="25px">
+									</button>
+								</td>
+							</tr>
+							<!-- 페이징 -->
+							<tr>
+								<td colspan="6" id="page-td">
+									<!-- 변수선언 -->
+									<c:if test="${flag=='notice'}">
+										<c:set var="pageUrl" value="noticeMsgList.do"/>
+									</c:if>
+									<c:if test="${flag=='rec' }">
+										<c:set var="pageUrl" value="recMsgList.do"/>
+									</c:if>
+									<c:if test="${flag=='send' }">
+										<c:set var="pageUrl" value="sendMsgList.do"/>
+									</c:if>
+									<!-- 이전 -->
+									<c:url var="before" value="${pageUrl}">
+										<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+									</c:url>
+									<c:if test="${pi.listCount ne 0 }">
+										<c:if test="${pi.currentPage <= 1 }">
+											<font>&laquo;</font>
+										</c:if>
+										<c:if test="${pi.currentPage > 1 }">
+											<a href="${before }">&laquo;</a>
+										</c:if>
+									</c:if>
+									<!-- 페이지 -->
+									<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
+										<c:url var="pagination" value="${pageUrl}">
+											<c:param name="page" value="${p}"></c:param>
+										</c:url>
+										<c:if test="${p eq pi.currentPage}">
+											<font color="#EB5C01">${p}</font>
+										</c:if>
+										<c:if test="${p ne pi.currentPage}">
+											<a href="${pagination }">${p}</a>
+										</c:if>
+									</c:forEach>
+									<!-- 다음 -->
+									<c:url var="after" value="${pageUrl}">
+										<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+									</c:url>
+									<c:if test="${pi.listCount ne 0 }">
+										<c:if test="${pi.currentPage >= pi.maxPage}">
+											<font>&raquo;</font>
+										</c:if>
+										<c:if test="${pi.currentPage < pi.maxPage}">
+											<a href="${after}">&raquo;</a>
+										</c:if>
+									</c:if>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section id="search">
+					<div align="center">
+						<form action="msgSearch.do" method="post">
+							<input type="hidden" name="flag" value="${flag }">
+							<select name="searchCondition" class="form-select form-select-sm" aria-label=".form-select-sm example" id="searchCondition">
+								<option value="allLower" <c:if test="${search.searchCondition eq 'allLower' }">selected</c:if>>전체</option>
+								<c:if test="${flag != 'notice'}">
+									<option value="nickName" <c:if test="${search.searchCondition eq 'nickName' }">selected</c:if>>닉네임</option>
+								</c:if>
+								<option value="msgTitle" <c:if test="${search.searchCondition eq 'msgTitle' }">selected</c:if>>제목</option>
+								<option value="msgContents" <c:if test="${search.searchCondition eq 'msgContents' }">selected</c:if>>내용</option>							
+							</select>
+							<input class="form-control form-control-sm" aria-label=".form-control-sm example" id="search-window" type="text" size="3" name="searchValue" value="${search.searchValue }">
+							<button id="search-btn" type="submit">찾기</button>
+						</form>
+					</div>
+					<!-- </section> -->
+				</section>
 			</section>
 		</section>
+
 		<!-- 관리자 공지보내기 연습 -->
 		<!-- <a href="#" onclick="msgPopup('msgWriterView.do'); return false;">공지 작성창으로 이동</a> -->
 		
@@ -229,12 +236,19 @@
 			<c:param name="nickName" value="관리자"></c:param>
 		</c:url>
 		<img id="qna-msg" src="/resources/img/qna_message_text.png" width="130px" onclick="msgPopup('${qnaMsg}');" style="cursor:pointer;"/> --%>
+
+		<!-- 모달 -->
+		<div id="modal">
+			<div id="modal_content">
+				
+			</div>
+		</div>
 	</main>
 	<jsp:include page="../../../footer.jsp"/>
 	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>
-		/* 쪽지작성창, 쪽지상세보기창 팝업 */
+		/* 쪽지작성창, 쪽지상세보기창 팝업 - footer로 이동*/
 /* 		function msgPopup(msgUrl) {
 			if(${sessionScope.loginUser ne null}) {
 				var popupX = (window.screen.width/2)-265;
@@ -244,6 +258,14 @@
 				location.href="login.do";
 			}
 		} */
+		
+		/* 모달창 */
+		function msgModal(msgUrl) {
+			$("#modal #modal_content").load(msgUrl);
+			setTimeout(function(){
+			$("#modal").fadeIn();
+			}, 500)
+		}
 		
 		$(function(){
 			/* 체크박스 전체 체크/해제 */
@@ -302,6 +324,12 @@
 						self.close();
 					}
 				}
+			});
+			
+			/* 모달창 닫기 */
+			$("#modal_content").on("click", function() {
+				$("#modal").fadeOut();
+				$("#modal #modal_content").empty();
 			});
 		});
 		

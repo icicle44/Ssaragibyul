@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
-@Component("Point")
 public class Point {
 	
 	private long pntListNo; // PK
