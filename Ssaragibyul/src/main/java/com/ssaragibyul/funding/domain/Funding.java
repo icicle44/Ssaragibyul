@@ -21,6 +21,8 @@ public class Funding {
 	private int hitsCount;
 	private int projectCode;
 	private Date deleiveryDate;
+	private int percent;
+	private int leftDate;
 	
 	private FundingFile fundingFile;
 	
@@ -31,6 +33,45 @@ public class Funding {
 	
 	
 	
+	
+	
+	
+	
+public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
+			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
+			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate, int percent,
+			int leftDate, FundingFile fundingFile) {
+		super();
+		this.projectNo = projectNo;
+		this.userId = userId;
+		this.subjectName = subjectName;
+		this.productName = productName;
+		this.goalMoney = goalMoney;
+		this.sumMoney = sumMoney;
+		this.optionPrice = optionPrice;
+		this.optionLimit = optionLimit;
+		this.startDate = startDate;
+		this.finDate = finDate;
+		this.projectStory = projectStory;
+		this.productContent = productContent;
+		this.warningIntro = warningIntro;
+		this.likeCount = likeCount;
+		this.hitsCount = hitsCount;
+		this.projectCode = projectCode;
+		this.deleiveryDate = deleiveryDate;
+		this.percent = percent;
+		this.leftDate = leftDate;
+		this.fundingFile = fundingFile;
+	}//최종
+
+
+
+
+
+
+
+
+
 public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
 			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
 			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate,
@@ -222,14 +263,26 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 		this.deleiveryDate = deleiveryDate;
 	}
 	
+	public int getPercent() {
+		return percent;
+	}
+
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+	
+	public int getLeftDate() {
+		return leftDate;
+	}
+
+	public void setLeftDate(int leftDate) {
+		this.leftDate = leftDate;
+	}
+	
+	
 	public FundingFile getFundingFile() {
 		return fundingFile;
 	}
-
-	public void setFundingFile(FundingFile fundingFile) {
-		this.fundingFile = fundingFile;
-	}
-	
 
 	@Override
 	public String toString() {
@@ -238,8 +291,24 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 				+ ", optionPrice=" + optionPrice + ", optionLimit=" + optionLimit + ", startDate=" + startDate
 				+ ", finDate=" + finDate + ", projectStory=" + projectStory + ", productContent=" + productContent
 				+ ", warningIntro=" + warningIntro + ", likeCount=" + likeCount + ", hitsCount=" + hitsCount
-				+ ", projectCode=" + projectCode + ", deleiveryDate=" + deleiveryDate + "]";
+				+ ", projectCode=" + projectCode + ", deleiveryDate=" + deleiveryDate + ", percent=" + percent
+				+ ", leftDate=" + leftDate + ", fundingFile=" + fundingFile + "]";
+	}
+
+
+
+
+
+
+
+
+
+	public void setFundingFile(FundingFile fundingFile) {
+		this.fundingFile = fundingFile;
+	}
+	
+
+	
 	}
 	
 	
-}
