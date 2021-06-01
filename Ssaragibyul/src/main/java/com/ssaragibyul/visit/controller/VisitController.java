@@ -1,6 +1,7 @@
  package com.ssaragibyul.visit.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -13,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -251,14 +251,16 @@ public class VisitController {
 	@RequestMapping(value="addHitsCount.do", method=RequestMethod.GET)
 	public String addHitsCount(@RequestParam("visitNo") int visitNo) {
 		System.out.println("========================조회수 controller");
-		int hitCount = vService.addHitsCount(visitNo);
+		Integer hitCount = vService.addHitsCount(visitNo);
 		System.out.println("조회수 hitCount : " + hitCount);
-		if(hitCount > 0) {
-			return "success";
+		if(hitCount != null) {
+			return hitCount.toString();
 		}else {
 			return "fail";
 		}
 	}
+	
+	
 	public int checkLikes(int visitNo, String userId) {
 		int result = 0;
 		return result;

@@ -60,11 +60,11 @@ FROM
 	<update id="updateHitCount">
 		UPDATE VISIT
 		SET VISIT_COUNT = VISIT_COUNT+1
-		WHERE VISIT_NO = #{visitNo }
+		WHERE VISIT_NO = #{visitNo}
 	</update>    
     
     <select id="selectHitCount" resultMap="visitResultMap">
-    	SELECT VISIT_COUNT FROM VISIT WHERE VISIT_NO = ${visitNo }
+    	SELECT VISIT_COUNT FROM VISIT WHERE VISIT_NO = #{visitNo}
     </select>
     
 	<insert id="insertVisit">

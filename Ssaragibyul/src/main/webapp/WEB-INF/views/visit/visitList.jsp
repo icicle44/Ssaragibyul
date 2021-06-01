@@ -51,8 +51,9 @@
 
 			<section class="contents col-md-9">
 				<div class="button-container">
-					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
-						인증하기</button>
+				<c:if test="${ loginUser.userId != null  }">
+					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문 인증하기</button>
+				</c:if>
 				</div>
 				<div class="content">
 					<div class="grid">
@@ -70,7 +71,7 @@
 														<td class="t"><a href="#"><i class="far fa-heart"></i></a></td>
 														<!-- <i class="fas fa-heart"></i> -->
 														<td>${vList.likes }</td>
-														<td class="t count" id="${vList.visitCount }">조회수</td>
+														<td class="t count" >조회수</td>
 														<td class="t">작성일자</td>
 														<td>${vList.vUpdateDate }</td>
 													</tr>
@@ -84,8 +85,9 @@
 														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
 														<c:param name="renameFilename" value="${board.renameFilename }"></c:param>
 													</c:url>
-													<a href="${vModify }">수정 페이지로 이동</a> &nbsp;
-													<a href="${vDelete }">삭제하기</a>
+													<%-- <c:if test="${ loginUser.userId eq vList.userId }" --%>
+														<a href="${vModify }">수정 페이지로 이동</a> &nbsp;
+														<a href="${vDelete }">삭제하기</a>
 												
 												</div>
 											</div>
@@ -120,7 +122,14 @@
 							</div>
 						</c:forEach>
 					</div>
-
+						<br>
+					<div id="more_btn_div" align="center">
+					<hr>
+						<a id="more_btn_a" href="javascript:moreContent('more_list', 10);" >
+							<b>더보기(More)</b>
+						</a>
+					<hr>
+					</div>
 
 					<!-- /grid -->
 					<div class="preview">
@@ -145,6 +154,7 @@
 		<script src="/resources/js/visit/classie.js"></script>
 		<script src="/resources/js/visit/main.js"></script>
 		<script>
+		/*  그리드 시작  */
 			$(function() {
 				var support = {
 					transitions : Modernizr.csstransitions
@@ -227,17 +237,18 @@
 							}
 						});
 			});
-			
+		/* 그리드 끝 */
+		/* 이미지 클릭 시 동작 */
 			$(function() {
 				var visitNo = "";
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					$(".count").next().remove();
 					visitNo= $(this).attr("id"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
-					visitCount = Number($(this).attr("class"))+1;
-					alert(visitCount);
+					visitCount = Number($(this).attr("class")); 
 					addHitsCount(visitNo, visitCount);
 					getReplyList(visitNo);// 댓글 목록 조회1
+					console.log(visitNo + ' - ' + visitCount);
 				});
 				
 				// 댓글 등록
@@ -291,7 +302,7 @@
 						var $rContent;
 						var $rCreateDate;
 						var $btnArea;
- 						$('#'+'rCount'+visitNo).text("댓글 ("+data.length+")"); // 아직 안됨
+ 						$('#'+'rCount'+visitNo).text("댓글 ("+data.length+")"); // 아직 안됨//////////////
 
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) { 
@@ -312,7 +323,7 @@
 							}
 						}else{
 							$tr = $("<tr>");
-							$td = $("<td>").text("댓글이 없습니다.")
+							$td = $("<td>").text("댓글이 없습니다.")///////////////////
 							$tr.append($rWriter);
 							$tableBody.append($tr);
 						}		
@@ -322,6 +333,7 @@
 					}
 				});
 			}
+			// 댓글 수정
 			function modifyReply(obj, visitNo, replyNo, contents) {
 				$trModify = $("<tr>");
 				$trModify.append("<td colspan='3'><input type='text' id='modifyReply' size='50' value='"+contents+"'></td>");
@@ -350,6 +362,7 @@
 				});
 				
 			}
+			// 댓글 삭제
 			function removeReply(visitNo, replyNo) {
 				// /deleteReply.kh?refBoardNo="+boardNo+"&replyNo="+data[i].replyNo+"
 				$.ajax({
@@ -368,16 +381,17 @@
 					}
 				});
 			}
+			// 조회수 증가
 			function addHitsCount(visitNo, visitCount){
 				$.ajax({
 					url : "addHitsCount.do",
 					type :"get",
 					data : {"visitNo" : visitNo},
 					success : function(data){
-						if( data == "success"){
-							$(".count").after($("<td>").text(visitCount));
+						if( data === "fail"){
+							console.log("Unexpected result : null");
 						}else{
-							console.log("");
+							$(".count").after($("<td>").text(data));
 						}
 					},
 					error : function(request,status,error){
@@ -386,6 +400,56 @@
 						
 				});
 			}
+			
+			 function moreContent(id, cnt){
+			    	var grid = 'grid__item';
+			    	var list_length = $("."+grid).length; //list 갯수
+			    	alert(list_length);
+ 			    	var aname = id+"_btn";
+			    	
+			    	$('#startCount').val(list_length);
+			    	$('#viewCount').val(cnt);
+			    	
+			   	    $.ajax({
+			   	        type    :   "post",
+			   	        url     :   "/getMoreContents_ajax.do",
+			   	        data    :   $('#searchTxtForm').serialize(),
+			   	        dataType:   "json",
+			   	        success :   function(result) {
+			   	                       if(result.resultCnt > 0){
+			   	                    	   var list = result.resultList;
+			   	                    		   if(resultVO.title != '') {
+			   	                    			 $('#'+aname).attr('href',"javascript:moreContent('"+id+"', "+cnt+");");
+			   	                    			   getMoreList(list);
+			   	                    		   }else{
+			   	                    			$("#"+id+"_div").remove();
+			   	                    		   }
+			   	                    	   }else{
+			   	                    	   
+			   	                       }
+			   	                    },
+			   	        error   :   function(request,status,error){
+			   	                    alert("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			   	                    }
+			   	    });
+			   	    
+			   	    function getMoreList(list){
+			   	    	
+			   	    	var content = "";
+			   	    	var length = list.length;
+			   	    	for(i=0; i<list.length; i++){
+			   	    		var resultVO = list[i];
+			   	    		if(resultVO.title != ''){
+				   	    		content += "<tr>";
+				   	   	    	content += "<td>"+resultVO.title+"</td>";
+				   	   	    	content += "<td>"+resultVO.reg_date+"</td>";
+				   	 	    	content += "</tr>";
+			   	    		}
+			   	    	}
+			   	    	 $("#more_list tr:last").after(content); 
+			             // id가 more_list 인 tr의 마지막에 content 값을 추가함
+			   	    } 
+			 };
 		</script>
 </body>
 

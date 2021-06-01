@@ -74,13 +74,17 @@ public class VisitServiceImpl implements VisitService{
 
 	@Override
 	public int removeReply(int replyNo) {
-		
 		return vStore.deleteReply(replyNo);
 	}
 	// 조회수 증가
-	public int addHitsCount(int visitNo) { 
-		/* return vStore.getHitsCount(visitNo) ; */
-		return vStore.addHitsCount(visitNo);
+	public Integer addHitsCount(int visitNo) { 
+		System.out.println(" addHitsCount param: " + visitNo);
+		int resAhc = vStore.addHitsCount(visitNo);
+		System.out.println(" resAhc : " + resAhc);
+		Integer r = vStore.getHitsCount(visitNo);
+		System.out.println(" addHitsCount result: " + r);
+		return r;
+		//return vStore.addHitsCount(visitNo);
 	}
 	
 	// Review 좋아요 유무 체크

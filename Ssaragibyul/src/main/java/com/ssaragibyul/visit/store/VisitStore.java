@@ -10,7 +10,7 @@ public interface VisitStore {
 	public int selectListCount();
 	public ArrayList<Visit> selectAllList();
 	public int addHitsCount(int visitNo);
-	public String getHitsCount(int visitNo);
+	public Integer getHitsCount(int visitNo);
 	public Visit selectOne(int visitNo);
 	public int insertVisit(Visit visit);
 	public int updateVisit(Visit visit);

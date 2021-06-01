@@ -32,17 +32,16 @@ public class VisitStoreLogic implements VisitStore{
 	public int addHitsCount(int visitNo) {
 		return session.update("visitMapper.updateHitCount", visitNo);
 	}
-	/*
-	 * // 조회수 가져오기
-	 * 
-	 * @Override public String getHitsCount(int visitNo) { return
-	 * session.selectList("visitMapper.selectHitCount", visitNo)+""; }
-	 */
-	@Override
-	public String getHitsCount(int visitNo) {
-		
-		return null;
-	}
+	
+	 // 조회수 가져오기
+	 @Override public Integer getHitsCount(int visitNo) {
+		 //System.out.println(" getHitsCount param : " + visitNo);
+		 Visit result = session.selectOne("visitMapper.selectHitCount", visitNo);
+		 //System.out.println(" getHitsCount result : " + result.toString());
+		 return result.getVisitCount();
+	 }
+	 
+
 	// 글 하나 가져오기
 	@Override
 	public Visit selectOne(int visitNo) {

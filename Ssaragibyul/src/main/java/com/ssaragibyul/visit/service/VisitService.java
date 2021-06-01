@@ -26,7 +26,7 @@ public interface VisitService {
 	 * @param pi
 	 * @return
 	 */
-	public int addHitsCount(int visitNo);
+	public Integer addHitsCount(int visitNo);
 	
 	/**
 	 * 게시물 상세 조회
