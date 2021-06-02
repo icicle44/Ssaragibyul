@@ -45,12 +45,12 @@
      </div>
      </c:if>
      <div id="logout">
-         <input type="button" value="로그아웃" id="btn" onclick="location.href='logout.do';">
+         <input type="button" value="로그아웃" id="logout-btn" onclick="location.href='logout.do';">
      </div>
      <div class="nav">
          <!--세로형 1--> 
          <ul id="nav-v1"> 
-             <li class="menu-v1"><a href="userUpdate.do">내 정보 수정</a>         
+             <li class="menu-v1"><a href="pwConfirm.do">내 정보 수정</a>         
              </li> 
              <li class="menu-v1"><a href="myFunding.do">참여한 프로젝트  ▾</a> 
                  <ul class="submenu"> 
@@ -64,16 +64,16 @@
                      <li><a href="proposeDonaion.do">기부</a></li> 
                  </ul> 
              </li> 
-             <li class="menu-v1"><a href="#">관심 프로젝트  ▾</a> 
+             <li class="menu-v1"><a href="likeFunding.do">관심 프로젝트  ▾</a> 
                  <ul class="submenu"> 
-                     <li><a href="#">펀딩</a></li> 
-                     <li><a href="#">기부</a></li>
+                     <li><a href="likeFunding.do">펀딩</a></li> 
+                     <li><a href="likeDonation.do">기부</a></li>
                  </ul> 
              </li>
-             <li class="menu-v1"><a href="#">내가 쓴 댓글 / 게시물   ▾</a> 
+             <li class="menu-v1"><a href="myPostList.do">내가 쓴 게시물 / 댓글   ▾</a> 
                  <ul class="submenu"> 
-                     <li><a href="#">댓글</a></li> 
-                     <li><a href="#">게시물</a></li>
+                     <li><a href="myPostList.do">게시물</a></li> 
+                     <li><a href="myCommentList.do">댓글</a></li>
                  </ul> 
              </li> 
          </ul> 

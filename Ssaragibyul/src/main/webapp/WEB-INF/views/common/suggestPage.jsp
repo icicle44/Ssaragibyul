@@ -46,7 +46,7 @@
 <!-- <div class="back3"></div> -->
 	<div class="blur back2">
 		${loginUser.userId }
-	<button class="suggestBtn" onclick="location.href='DONATION">기부</button>
+	<button class="suggestBtn" onclick="location.href='donationSuggest.do'">기부</button>
 	</div>
 	
 	<br>	<br>	<br>	<br>	<br>	<br>

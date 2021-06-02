@@ -28,7 +28,7 @@
                 <div id="nickname">${independence.nameKo }</div>
                 <div id="my-nick">님의 별</div>
                 <div id="star-img">
-                	<img src="/resources/img/mypage/star-img6.png" id="star">
+                	<img src="/resources/img/mypage/star-img4.png" id="star">
                 </div>
             </div>
             <div class="inform1">

@@ -12,6 +12,9 @@ public interface DonationStore{
 
 	public int getListCount();
 
+	// 기부 리스트
+	public ArrayList<Donation> printAllProject();
+	
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
 	public Donation printOne(int dProjectNo);
@@ -45,5 +48,6 @@ public interface DonationStore{
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
 	
 }

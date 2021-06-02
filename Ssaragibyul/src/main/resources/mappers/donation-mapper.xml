@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="donationMapper">
+	<!-- 기부 -->
+	<resultMap type="Donation" id="donationResultMap">
+		<id property="projectNo" column="D_POJECT_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="subjectName" column="SUBJECT"/>
+		<result property="productName" column="PRODUCT_NAME"/>
+		<result property="goalMoney" column="GOAL_MONEY"/>
+		<result property="sumMoney" column="SUM_MONEY"/>
+		<result property="optionPrice" column="OPTION_PRICE"/>
+		<result property="optionLimit" column="OPTION_LIMIT"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="finDate" column="FIN_DATE"/>
+		<result property="projectStory" column="PROJ_STORY"/>
+		<result property="productContent" column="PRODUCT_CONTENT"/>
+		<result property="warningIntro" column="WARNING_INTRO"/>
+		<result property="likeCount" column="LIKE_COUNT"/>
+		<result property="hitsCount" column="HITS_COUNT"/>
+		<result property="projectCode" column="PROJECT_CODE"/>
+		<result property="deleiveryDate" column="DELIVERY_DATE"/>
+		<collection property="donationFile" resultMap="donationFileResultMap"></collection>
+	</resultMap>
+	
+	<!-- 기부 파일 -->
+	<resultMap type="DonationFile" id="donationFileResultMap">
+		<id property="fileNo" column="FILE_NO"/>
+		<result property="videoUrl" column="FILE_VIDEO_URL"/>
+		<result property="fileMainName" column="FILE_MAIN_NAME"/>
+		<result property="fileMainSize" column="FILE_MAIN_SIZE"/>
+		<result property="fileMainPath" column="FILE_MAIN_PATH"/>
+		<result property="fileSub1Name" column="FILE_SUB1_NAME"/>
+		<result property="fileSub1Size" column="FILE_SUB1_SIZE"/>
+		<result property="fileSub1Path" column="FILE_SUB1_PATH"/>
+		<result property="fileSub2Name" column="FILE_SUB2_NAME"/>
+		<result property="fileSub2Size" column="FILE_SUB2_SIZE"/>
+		<result property="fileSub2Path" column="FILE_SUB2_PATH"/>
+		<result property="uploadTime" column="UPLOAD_TIME"/>
+		<result property="projectNo" column="F_PROJECT_NO"/>
+	</resultMap>
+	
+	
+	<!-- 기부 내역 -->
+	<resultMap type="DonationLog" id="DonationLogResultMap">
+		<id property="donationNo" column="DONATION_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="donationPoint" column="DONATION_POINT"/>
+		<result property="qunatity" column="QUNATITY"/>
+		<result property="donateDate" column="DOANTE_DATE"/>
+		<result property="cancleYn" column="CANCLE_YN"/>
+		<result property="receiverAddr" column="RECEIVER_ADDR"/>
+		<result property="dProjectNo" column="D_PROJECT_NO"/>
+		<result property="receiverName" column="RECEIVER"/>
+		<result property="receiverPhone" column="RECEIVER_PHONE"/>
+	</resultMap>
+	
+	<!-- 기부 좋아요 -->
+	<resultMap type="DonationLike" id="DonationLikeResultMap">
+		<id property="likeNo" column="LIKE_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="likeYn" column="LIKE_YN"/>
+		<result property="projectNo" column="D_PROJECT_NO"/>
+	</resultMap>
+	
+	<!-- 댓글 -->
+	<resultMap type="Reply" id="FundingReplyResultMap">
+		<id property="commNo" column="COMM_NO"/>
+		<result property="usreId" column="USER_ID"/>
+		<result property="commTitle" column="COMM_TITLE"/>
+		<result property="commContents" column="COMM_CONTENTS"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="dProjectNo" column="D_PROJECT_NO"/>
+		<result property="nickName" column="NICK_NAME"/>
+	</resultMap>
+	
+	<!-- 댓글 신고 -->
+	<resultMap type="DonationReport" id="DonationReportResultMap">
+		<id property="accuDonNo" column="ACCU_DON_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="reportCode" column="REPORT_CODE"/>
+		<result property="reportContent" column="REPORT_CONTENT"/>
+		<result property="processing" column="PROCESSING"/>
+		<result property="accusationDate" column="ACCUSATION_DATE"/>
+		<result property="dProjectNo" column="D_PROJECT_NO"/>
+	</resultMap>
 
-<!-- 나혜님이 추가하라 한거 나중에 주석 풀어야함.
-   <select id="selectDonationListCount" resultType="_int">
-      SELECT COUNT(*) FROM DONATION
-    </select> -->
+
+    <!--기부 리스트-->
+ 	<select id="selectDonationList" resultMap="donationResultMap">
+		SELECT * FROM DONATION, DONATION_FILE
+		WHERE DONATION.D_PROJECT_NO = DONATION.D_PROJECT_NO ORDER BY 1 DESC
+	</select> 
+
+
+	<!-- 관리자용 -->
+	<select id="selectDonationListCount" resultType="_int">
+	   SELECT COUNT(*) FROM DONATION
+	</select>
+    
+</mapper>

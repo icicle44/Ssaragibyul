@@ -18,6 +18,14 @@ public class DonationServiceImpl implements DonationService{
 	@Autowired
 	private DonationStore dStore;
 
+	// 기부 리스트
+	@Override
+	public ArrayList<Donation> printAllProject() {
+		ArrayList<Donation> dListandFile = dStore.printAllProject();
+		return dListandFile;
+	}
+	
+	
 	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
 		return dStore.addLikeCount(dProjectNo, dLike);
@@ -125,5 +133,6 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

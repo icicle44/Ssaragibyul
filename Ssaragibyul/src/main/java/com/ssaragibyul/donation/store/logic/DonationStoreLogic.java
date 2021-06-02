@@ -2,6 +2,9 @@ package com.ssaragibyul.donation.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
@@ -9,9 +12,19 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.store.DonationStore;
+
 @Repository
 public class DonationStoreLogic implements DonationStore{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
 
+	// 기부리스트
+	@Override
+	public ArrayList<Donation> printAllProject() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationList");
+	}
+	
 	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
 		return dProjectNo;
@@ -120,5 +133,6 @@ public class DonationStoreLogic implements DonationStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

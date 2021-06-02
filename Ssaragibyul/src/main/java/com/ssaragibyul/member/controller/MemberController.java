@@ -182,6 +182,12 @@ public class MemberController {
 	}
 	
 	
+	// 정보 수정 비밀번호 확인 페이지
+	@RequestMapping(value="pwConfirm.do", method=RequestMethod.GET)
+	public String pwConfirm() {
+		return "member/pwConfirm";
+	}
+	
 	// 정보 수정 페이지
 	@RequestMapping(value="userUpdate.do", method=RequestMethod.GET)
 	public String updateView(Member member) {
@@ -210,6 +216,30 @@ public class MemberController {
 	@RequestMapping(value="proposeDonaion.do", method=RequestMethod.GET)
 	public String proposeDonation(Member member) {
 		return "mypage/ProposeDonation";
+	}
+	
+	// 좋아한 펀딩 프로젝트 페이지
+	@RequestMapping(value="likeFunding.do", method=RequestMethod.GET)
+	public String likeFunding(Member member) {
+		return "mypage/likeFunding";
+	}
+	
+	// 좋아한 기부 프로젝트 페이지
+	@RequestMapping(value="likeDonation.do", method=RequestMethod.GET)
+	public String likeDonation(Member member) {
+		return "mypage/likeDonation";
+	}
+	
+	// 내가 쓴 게시물 페이지
+	@RequestMapping(value="myPostList.do", method=RequestMethod.GET)
+	public String postList(Member member) {
+		return "mypage/myPostList";
+	}
+	
+	// 내가 쓴 댓글 페이지
+	@RequestMapping(value="myCommentList.do", method=RequestMethod.GET)
+	public String commentList(Member member) {
+		return "mypage/myCommentList";
 	}
 	
 	// 정보수정

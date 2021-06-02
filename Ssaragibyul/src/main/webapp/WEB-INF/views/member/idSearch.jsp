@@ -38,7 +38,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
     
    	<script>
-   	
     	function fnIdFind() {
     		var userName = $("#userName").val();
     		var userEmail = $("#userEmail").val();

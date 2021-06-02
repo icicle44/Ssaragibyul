@@ -10,6 +10,7 @@ import com.ssaragibyul.donation.domain.DonationLike;
 public interface DonationService {
 
 	public int addLikeCount(int dProjectNo, DonationLike dLike);
+	public ArrayList<Donation> printAllProject(); // 기부 리스트
 
 	public int getListCount();
 
@@ -46,6 +47,7 @@ public interface DonationService {
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
 
 
 }
