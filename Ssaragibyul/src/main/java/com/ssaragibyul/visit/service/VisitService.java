@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.ssaragibyul.common.Reply;
@@ -18,8 +19,10 @@ public interface VisitService {
 	 * @param pi
 	 * @return
 	 */
-	// 이런 주석과는 다른
 	public ArrayList<Visit> printAll();
+	
+	// 스크롤하여 게시글 추가조회
+	public List<Visit> printScroll(Integer visitNoToStart);
 	
 	/**
 	 * 게시물 상세 조회시 조회수 증가

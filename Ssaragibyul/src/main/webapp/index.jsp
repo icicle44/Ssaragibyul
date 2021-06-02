@@ -8,7 +8,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicons -->
-<link href="/resources/img/favicon.png" rel="icon">
+<link href="/resources/img/favicon.svg" rel="icon">
   
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">

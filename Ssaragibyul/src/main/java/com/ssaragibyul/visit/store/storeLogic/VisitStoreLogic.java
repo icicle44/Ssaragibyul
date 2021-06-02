@@ -1,12 +1,12 @@
 package com.ssaragibyul.visit.store.storeLogic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.store.VisitStore;
@@ -24,7 +24,12 @@ public class VisitStoreLogic implements VisitStore{
 	// 글 목록 가져오기
 	@Override
 	public ArrayList<Visit> selectAllList() {
-		return (ArrayList)session.selectList("visitMapper.selectAll");
+		return (ArrayList)session.selectList("visitMapper.selectScroll");
+	}
+	// 글 목록 추가 가져오기
+	@Override
+	public List<Visit> selectScroll(Integer visitNoToStart) {
+		return session.selectList("visitMapper.selectAll", visitNoToStart);
 	}
 	// 조회수 증가
 	@Override
