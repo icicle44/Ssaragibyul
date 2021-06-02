@@ -10,7 +10,7 @@
 
 <title>싸라기별</title>
 </head>
-<body onload="window.resizeTo(530,500)">
+<body onload="window.resizeTo(535,580)">
 	<main id="main">
 		<section id="total">
 			<section class="write-upper">
@@ -18,7 +18,8 @@
 					<span id="table-title">쪽지 보기</span>
 				</div>
 			</section>
-			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3)}">
+			<section id="table-around">
+			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.presentPoint == 0)}">
 				<section class="write-middle">
 					<div id="point-present">
 						<c:if test="${message.presentPoint != 0 }">
@@ -34,17 +35,17 @@
 			</c:if>
 			<section class="write-lower">
 				<div id="message-Write-Form">
-					<table border="1" align="center" width="490px">
+					<table align="center" width="490px">
 							<c:if test="${flag=='send' }">
 								<tr>
 									<th>받으신 분</th>
-									<td>${nickName} 선생 ${message.receiverId }</td>
+									<td>${nickName} 님의 별</td>
 								</tr>
 							</c:if>
 							<c:if test="${flag=='rec' }">
 								<tr>
 									<th>보내신 분</th>
-									<td>${nickName} 선생 ${message.senderId }</td>
+									<td>${nickName} 님의 별</td>
 								</tr>
 							</c:if>
 							<tr>
@@ -52,17 +53,14 @@
 								<td>${message.msgTitle }</td>
 							</tr>
 							<tr>
-								<th>내용</th>
-								<td></td>
+								<th colspan="2">내&nbsp;&nbsp;&nbsp;용</th>
 							</tr>
-							<tr><td colspan="2"><hr></tr>
 							<tr>
-								<td colspan="2" align="center" height="110px">${message.msgContents }</td>
+								<td colspan="2" align="center" height="180px">${message.msgContents }</td>
 							</tr>
-							<tr><td colspan="2"><hr></tr>
 							<tr id="btnTr">
 								<!-- 버튼 -->
-								<td colspan="2" align="right">
+								<td colspan="2" align="right" style="border-top:hidden;">
 									<c:if test="${message.msgType != 0 || (message.msgType == 0 && loginUser.userId == 'admin') }">
 										<input type="button" value="삭제하기" id="deleteBtn">
 									</c:if>
@@ -74,6 +72,7 @@
 							<input type="hidden" name="msgType" value=""> -->
 					</table>
 				</div>
+			</section>
 			</section>
 		</section>	
 	</main>
@@ -109,9 +108,11 @@
 						complete: function(){
 							if(${flag eq "rec"}){
 								self.close();
+								/* location.reload("recMsgList.do"); */
 								opener.location.reload("recMsgList.do");								
 							}else if(${flag eq "send"}) {
 								self.close();
+								/* location.reload("sendMsgList.do"); */
 								opener.location.reload("sendMsgList.do");	
 							}
 						}
@@ -133,9 +134,11 @@
 				} */
 				if(${flag eq "rec"}){
 					self.close();
+					/* location.reload("recMsgList.do"); */
 					opener.location.reload("recMsgList.do");								
 				}else if(${flag eq "send"}) {
 					self.close();
+					/* location.reload("sendMsgList.do"); */
 					opener.location.reload("sendMsgList.do");	
 				}
 			}

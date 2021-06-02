@@ -5,12 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/message/messageWriteForm.css" type="text/css">
+<link rel="stylesheet" href="resources/css/message/messageWriteForm.css?ver=1" type="text/css">
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <title>싸라기별</title>
 </head>
-<body onload="window.resizeTo(530,500)">
+<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.receiverId=='admin')}">
+	<body onload="window.resizeTo(532,633)">	
+</c:if>
+<c:if test="${(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.receiverId=='admin')}">
+	<body onload="window.resizeTo(532,536)">
+</c:if>
 	<main id="main">
 			<!-- msgType, 게시글 작성자 ID, 닉네임, 관리자 ID 넘겨받아서 if문으로 폼변경해주고, DB에 갈때도 넘기기 -->
 		<section id="total">
@@ -19,15 +24,15 @@
 					<span id="table-title">쪽지 보내기</span>
 				</div>
 			</section>
+			<section id="table-around">
 			<c:if test="${!(message.msgType==0 || message.msgType==1 || message.msgType==3 || message.receiverId=='admin')}">
 				<section class="write-middle">
 					<div id="point-present">
 						<div id="show-present">포인트 선물하기</div>
 						<div id="present-window">
-							<img src="" width="">
-							<span>선물할 포인트</span>&nbsp;&nbsp;&nbsp;
-							<input id="point-num" type="number" name="presentPoint" min="0" max=${myPoint.total } placeholder="숫자만 입력(1000)">
-							<br><span>선물 가능 포인트 ${myPoint.total }</span>
+							<span>선물할 포인트</span>&nbsp;
+							<input type="number" id="point-num" name="presentPoint" min="0" max=${myPoint.total } placeholder="숫자 입력">
+							<br><span id="possible-text">선물 가능 포인트 ${myPoint.total }</span>
 						</div>
 					</div>
 				</section>
@@ -37,39 +42,34 @@
 			</c:if>
 			<section class="write-lower">
 				<div id="message-Write-Form">
-					<table border="1" align="center" width="490px">
-							<tr>
-								<th>받으시는 분</th>
-								<td>${nickName} 선생 ${message.receiverId }</td>
-							</tr>
-							<tr>
-								<th>제목</th>
-								<td><input type="text" id="msgTitle" name="msgTitle" required></td>
-							</tr>
-							<tr>
-								<th>내용</th>
-								<td></td>
-							</tr>
-							<tr><td colspan="2"><hr></tr>
-							<tr>
-								<td colspan="2" align="center">
-									<textarea id="msgContents" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요" required></textarea>
-								</td>
-							</tr>
-							<tr><td colspan="2"><hr></tr>
-							<tr>
-								<!-- 버튼 -->
-								<td colspan="2" align="right">
-									<input type="button" value="보내기" id="sendClose">
-									&nbsp;&nbsp;&nbsp;<input type="button" value="창닫기" onclick="self.close();">
-									<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="공지전송" id="sendCloseNotice"> -->
-								</td>
-							</tr>
-	<!-- 						<input type="hidden" name="senderId" value="">
-							<input type="hidden" name="receiverId" value="">
-							<input type="hidden" name="msgType" value=""> -->
+					<table align="center" width="490px">
+						<tr>
+							<th>받으시는 분</th>
+							<td>${nickName} 님의 별</td>
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td width="300px"><input type="text" id="msgTitle" name="msgTitle" placeholder="제목을 입력해주세요." required></td>
+						</tr>
+						<tr height="15px">
+							<th colspan="2" style="border-bottom:hidden;">내&nbsp;&nbsp;&nbsp;용</th>
+						</tr>
+						<tr>
+							<td colspan="2" align="center">
+								<textarea id="msgContents" name="msgContents" cols="60" rows="10" placeholder="내용을 입력해주세요." required></textarea>
+							</td>
+						</tr>
+						<tr>
+							<!-- 버튼 -->
+							<td colspan="2" align="right" style="border-top:hidden;">
+								<input type="button" value="보내기" id="sendClose">
+								&nbsp;&nbsp;&nbsp;<input type="button" value="창닫기" onclick="self.close();">
+								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="공지전송" id="sendCloseNotice"> -->
+							</td>
+						</tr>
 					</table>
 				</div>
+			</section>
 			</section>
 		</section>	
 	</main>
@@ -83,7 +83,7 @@
 					$("#show-present").css("color", "#EB5C01");
 				}else {
 					$("#present-window").hide();
-					$("#show-present").css("color", "#464646");					
+					$("#show-present").css("color", "#327A81");					
 				}
 			});
 			

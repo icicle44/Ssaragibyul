@@ -283,7 +283,7 @@ button[type=submit] {
 
 #modal_content{
   width:500px;
-  height:500px;
+  height:450px;
   background:#fff;
   border-radius:10px;
   position:relative;
@@ -298,10 +298,20 @@ button[type=submit] {
   cursor:pointer;
 }
 
-#modal #total {
+/* #modal #total {
 	width: 500px;
 	height: 500px;
 	padding: 0px;
+} */
+
+#modal #table-around {
+	border: 1px solid #327a81;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 0px;
+	max-width: calc(100% - 1em);
+	margin: 1em auto;
+	overflow: hidden;
 }
 
 #modal .write-upper {

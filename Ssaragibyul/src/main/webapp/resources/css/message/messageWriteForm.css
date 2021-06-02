@@ -7,20 +7,96 @@ body{
 }
 
 div, article, section {
-    border: 1px solid black;
+    --border: 1px solid black;
     box-sizing: border-box;
     --font-family: 'Noto Serif KR', serif;
-    color: #464646;
+    --color: #464646;
+}
+
+#total {
+	--margin: 15px;	
+}
+
+#title-area {
+	margin-bottom: 15px;
+	padding-left: 15px;
+}
+
+#table-around {
+	width: 1000px;
+	max-width: calc(100% - 1em);
+	margin: 1em auto;
+	overflow: hidden;
+	border: 1px solid #327a81;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 0px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	--border: hidden;
+}
+
+table th {
+	background-color: #F5F5F5;
+	color: #327a81;
+	padding: 15px;
+	align: center;
+	font-weight: 300;
+  	border: 0.5px solid #d9e4e8;
+  	line-height: 1em;
+}
+
+table td {
+	color: #464646;
+  	padding: 10px 15px;
+  	vertical-align: middle;
+  	font-size: 15px;
+  	line-height: 1em;
+  	border: 0.5px solid #d9e4e8;
+}
+
+input[type=number] {
+	height: 21px;
+	width: 300px;
+	border: 1px solid #327A81;
+	border-radius: 3px;
+	font-size: 13px;
+	appearance: none;
+	width: 150px;
+}
+
+input[type=number]:focus {
+	outline: none;
+}
+
+input[type=text] {
+	height: 21px;
+	width: 250px;
+	border: hidden;
+	font-size: 15px;
+	font-family: 'Noto Serif KR', serif;
+}
+
+input[type=text]:focus {
+	outline: none;
 }
 
 textarea {
 	resize: none;
 	border: none;
+	padding: 15px 10px;
+}
+
+textarea:focus {
+	outline: none;
 }
 
 #total {
 	--display: table-cell;
-	--bertical-align: middle;
+	--vertical-align: middle;
 	width: 500px;
 }
 
@@ -32,6 +108,13 @@ textarea {
 
 #point-present {
 	text-align: right;
+	background-color: #F5F5F5;
+	padding: 10px;
+	line-height: 1.6em;
+}
+
+#show-present {
+	color: #327A81;
 }
 
 #show-present:hover {
@@ -41,12 +124,13 @@ textarea {
 
 #present-window {
 	display: none;
+	color: #327A81;
 }
 
-
-#point-num {
-	appearance: none;
-	width: 100px;
+#possible-text {
+	color: gray;
+	font-size:13px;
+	letter-spacing:1px;
 }
 
 #point-num::-webkit-outer-spin-button,
@@ -54,6 +138,30 @@ textarea {
 	-webkit-appearance: none;
 }
 
-#show-present{
+.btn-area {
+	padding-right: 30px;
+}
 
+input[type=button]:first-child {
+	background-color: #EB5C01;
+	border-radius: 3px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	width: 60px;
+	height: 25px;
+	margin: 0px;
+	font-size: 12px;
+}
+
+input[type=button]:nth-child(2) {
+	background-color: #464646;
+	border-radius: 3px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	width: 60px;
+	height: 25px;
+	margin: 0px;
+	font-size: 12px;
 }

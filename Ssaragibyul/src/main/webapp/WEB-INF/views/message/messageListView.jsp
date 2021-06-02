@@ -57,7 +57,7 @@
 					<table align="center">
 						<thead>
 							<tr style="border-bottom:hidden;">
-								<th>${search.searchCondition}번호</th>
+								<th>번호</th>
 								<th>닉네임</th>
 								<th width="300px">제목</th>
 								<th>날짜</th>
@@ -100,7 +100,7 @@
 												</c:url>											
 											</c:if>
 											
-											<td><a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">${message.nickName } 선생</a></td>
+											<td><a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">${message.nickName } 님의 별</a></td>
 										</c:if>
 										<c:if test="${message.msgType == 0}">
 											<!-- Message 객체 사용 -->
@@ -121,7 +121,7 @@
 											</c:url>
 										</c:if>					
 										<td>
-											<a href="#" onclick="msgModal('${msgDetail }'); return false;">${message.msgTitle }</a>
+											<a href="#" onclick="msgPopup('${msgDetail }'); return false;">${message.msgTitle }</a>
 											<%-- <c:if test="${flag == 'rec' && message.readYn == 0 && message.msgType != 0}">
 												<sup><span class="badge rounded-pill bg-light text-dark" style="color:#7daabb;">새쪽지</span></sup>
 											</c:if> --%>

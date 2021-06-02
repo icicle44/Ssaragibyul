@@ -8,7 +8,7 @@
 	   <div class="row">
 	   		<div class="col-4">
 			<a href="/index.jsp" class="logo d-flex" style="text-decoration: none;"> <img src="/resources/img/favicon.png" alt="logo">
-				<span id="starLogo"><h3>싸라기별</h3></sapn>
+				<span id="starLogo"><h3>싸라기별</h3></span>
 			</a>
 				<p style="font-size: 11px;">
 					서울 중구 남대문로 120 대일빌딩 2F, 3F<br>
@@ -61,9 +61,9 @@
 	/* 쪽지작성창, 쪽지상세보기창 팝업 */
 	function msgPopup(msgUrl) {
 		if(${sessionScope.loginUser ne null}) {
-			var popupX = (window.screen.width/2)-265;
-			var popupY = (window.screen.height/2)-232.5;
-			window.open(msgUrl, "msgWriteForm", "height=400, width=500, left="+popupX+", top="+popupY+", resizable=no");				
+			var popupX = (window.screen.width/2)-266;
+			var popupY = (window.screen.height/2)-268;
+			window.open(msgUrl, "msgWriteForm", "height=400, width=500, left="+popupX+", top="+popupY+", resizable=no");								
 		}else {
 			location.href="login.do";
 		}
