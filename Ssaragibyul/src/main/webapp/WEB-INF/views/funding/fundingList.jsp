@@ -25,11 +25,12 @@
 
 <link rel="stylesheet" href="/resources/css/styleFundingList.css">
 
+
 </head>
 <style>
-.a_pj {
+.display {
 	margin:auto;
-	width: 400px;
+	width: 402px;
 	margin-bottom: 30px;
 	padding: 10px;
 	font-size:12px;
@@ -37,8 +38,8 @@
 
 .gridmain > * {
   float: left;  
-  width: 33%;
-  height: 55%;
+  width: 20%;
+  height: 35%;
   font-size:12px;
 }
 .btn{
@@ -92,19 +93,8 @@ width : 1540px;
 }
 </style>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$('#chose1').val('news_list').prop("selected",true){
-			 return "fundingIndex.do";
-		}
-		$('#chose1').val('money_list').prop("selected",true){
-			 return "location.onfundingIndex.do";
-		}
-		
-		$('#chose1').val('like_list').prop("selected",true){
-			 return "redirect:fundingIndex.do";
-		}
-	});
+<script>
+/* ㅠㅜㅠㅜㅠㅜ  */
 </script>
 
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -129,12 +119,6 @@ width : 1540px;
 			</ul>
 		</div>
 	</header>
-<%--       							<c:forEach items="${fList }" var="funding">
-							<tr>
-				<td align="center">${funding.subject }</td></tr>
-				<tr>
-					</c:forEach>
- --%>
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 		<div class="container-fluid">
@@ -156,19 +140,17 @@ width : 1540px;
 				</form>
 			<!--  JS, 리다이렉트 URL -->
 					</div>
-
-
 					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch">
 						
 				<div class="gridmain">
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
 			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-			<table class="a_pj">
+			<table class="display" id="example">
 				<tr>
 					<td> 
 					    <a href="resources/upLoadFile/${p.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
-						<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
+						<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
 						<div class="photo-text-more">
 						<span class="icon icon-search">${p.subjectName}"</span>
 						</div></a></td>
@@ -218,16 +200,21 @@ width : 1540px;
 			 </div>
 		</div>
 	</div>
-	<br><br><br>
-	<br><br><br>
-	<br><br><br>
-	<br><br><br>
-			<button class="btn">프로젝트 더 보기</button> 
+	<br>
+	<!--  -->
+	<br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br>
+
+	<hr>	
+	
+	<hr>		
+ <button class="btn">프로젝트 더 보기</button>
 				</section>
+				<!--  -->
 				<!-- #section-funding -->
 				<section class="row align-items-stretch photos " id="section-funding2">
 				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<a id="headFont">종료된 프로젝트</a><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
+				<a id="headFont">종료된 프로젝트</a></div><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
 		    	<div id="pj_search">
 		   		   <select id = "chose2" class="select" onchange="location.href=this.value">
 		   		       <option value = "" selected>선택</option>
@@ -303,15 +290,17 @@ width : 1540px;
 	<br><br><br>
 	<br><br><br>
 	<br><br><br>
-	<br><br><br>
+	<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<button class="btn">프로젝트 더 보기</button> 
 				</section>
 	<br>
 	<br>
 		<br>
-	<br>
 
  		<%@include file="../../../footer.jsp" %>
+	
 	</main>
 
 	<!-- .site-wrap -->
@@ -334,6 +323,7 @@ width : 1540px;
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
+		<script src="/resources/js/fundingList.js"></script>
 
 </body>
 </html>

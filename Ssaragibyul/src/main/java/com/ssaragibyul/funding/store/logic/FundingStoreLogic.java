@@ -66,7 +66,8 @@ public class FundingStoreLogic implements FundingStore{
 	@Override
 	public ArrayList<Funding> printAllProject() {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList");
-	}
+	}//row bounds
+	
 	
 	public ArrayList<Funding> printAllProjectEnd() {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingListEnd");
