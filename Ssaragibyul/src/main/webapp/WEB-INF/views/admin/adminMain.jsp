@@ -338,6 +338,7 @@
 	
 	<!-- 회원관리 차트 -->
 	<script>
+		
 		Circles.create({
 			id:'circles-1',
 			radius:45,
@@ -424,14 +425,18 @@
 		});
 		
 		/* 별 보러가자 게시글 현황 */
+		var starArr = [];
+		<c:forEach items="${visitStat }" var="star" varStatus="status">
+			starArr[${status.index}] = ${star.visitStatCount };
+		</c:forEach>
 		var ctx = document.getElementById('myChart').getContext('2d');
 		var myChart = new Chart(ctx, {
 		    type: 'line',
 		    data: {
-		        labels: ['월', '화', '수', '목', '금', '토', '일'],
+		        labels: [ '월', '화', '수', '목', '금', '토', '일'],
 		        datasets: [{
 		            label: '별 보러가자 게시글 현황',
-		            data: [12, 19, 3, 5, 2, 3, 5],
+		            data: starArr,
 		            backgroundColor: [
 		                'rgba(255, 206, 86, 0.2)',
 		            ],

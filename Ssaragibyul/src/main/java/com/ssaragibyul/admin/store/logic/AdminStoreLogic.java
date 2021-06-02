@@ -17,8 +17,7 @@ import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
-
-import jdk.nashorn.internal.ir.annotations.Reference;
+import com.ssaragibyul.visit.domain.VisitStat;
 @Repository
 public class AdminStoreLogic implements AdminStore{
 	
@@ -281,7 +280,7 @@ public class AdminStoreLogic implements AdminStore{
 	}
 
 	@Override
-	public ArrayList<Visit> selectCountPostVisit() {
+	public ArrayList<VisitStat> selectCountPostVisit() {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("visitMapper.selectCountPostVisit");
 	}

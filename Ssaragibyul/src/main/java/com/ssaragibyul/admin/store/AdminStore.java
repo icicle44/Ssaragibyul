@@ -10,6 +10,7 @@ import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitStat;
 
 public interface AdminStore {
 
@@ -32,7 +33,7 @@ public interface AdminStore {
 	// 최근 받은 쪽지 뿌리기
 	public ArrayList<Message> selectCountNewRecMessage();
 	// 지난주 별보러가자 게시글 현황
-	public ArrayList<Visit> selectCountPostVisit();
+	public ArrayList<VisitStat> selectCountPostVisit();
 	
 	
 	// 회원 전체 리스트 가져오기

@@ -15,6 +15,7 @@ import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitStat;
 
 public interface AdminService {
 
@@ -35,7 +36,7 @@ public interface AdminService {
 	// 최근 받음 메시지 6개 출력하기
 	public ArrayList<Message> getCountNewRecMessage();
 	// 별보러가자 현황 요일별로 출력
-	public ArrayList<Visit> getCountPostVisit();
+	public ArrayList<VisitStat> getCountPostVisit();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);

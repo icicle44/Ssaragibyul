@@ -16,6 +16,7 @@ import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitStat;
 @Service
 public class AdminServiceImpl implements AdminService{
 	
@@ -264,7 +265,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public ArrayList<Visit> getCountPostVisit() {
+	public ArrayList<VisitStat> getCountPostVisit() {
 		// TODO Auto-generated method stub
 		return aStore.selectCountPostVisit();
 	}

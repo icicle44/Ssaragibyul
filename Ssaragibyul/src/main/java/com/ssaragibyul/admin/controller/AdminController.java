@@ -6,14 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import com.ssaragibyul.admin.service.AdminService;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Pagination;
@@ -43,6 +50,7 @@ import com.ssaragibyul.message.domain.MessageAndNick;
 import com.ssaragibyul.message.domain.PaginationMsg;
 import com.ssaragibyul.message.service.MessageService;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitStat;
 import com.ssaragibyul.visit.service.VisitService;
 
 @Controller
@@ -86,14 +94,19 @@ public class AdminController {
 		// 오늘의 신고 게시글 수 카운
 		
 		//별보러가자 게시글 현황
-		ArrayList<Visit> vList = aService.getCountPostVisit();
+		ArrayList<VisitStat> vList = aService.getCountPostVisit();
 		// 최근 보낸 쪽지 6개만
 		ArrayList<Message> nmList = aService.getCountNewMessage();
 		// 최근 받은 쪽지 6개만
 		ArrayList<Message> rmList = aService.getCountNewRecMessage();
-		System.out.println(vList);
-
+		System.out.println("vList입니다 - " + vList);
 		
+		String visitStat = vList.get(0).getVisitDay().toString();
+		
+		for (VisitStat message : vList) {
+			System.out.println(message.getVisitStatCount());			
+		}
+
 		// 기부 현황
 		
 		//펀딩 현황
@@ -107,9 +120,55 @@ public class AdminController {
 		
 		//mv.addObject("reportAll", reportAll); //신고쪽지 보기
 		
+		mv.addObject("visitStat", vList);
+		
 		mv.setViewName("admin/adminMain");
 		return mv;
 	}
+	
+	// 관리자 메인 별보러가자 게시글 현황 그래프 자료
+	@ResponseBody
+	@RequestMapping(value="visitStat.do", method = RequestMethod.GET) 
+	public ArrayList<HashMap<String, String>> visitStat(HttpServletResponse response) {
+		
+		//ArrayList<VisitStat> vList = aService.getCountPostVisit();
+		ArrayList<VisitStat> vList = new ArrayList<VisitStat>();
+		vList = aService.getCountPostVisit();
+		
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+		
+		for(int i = 0; i < vList.size(); i++) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put(vList.get(i).getVisitDay(), vList.get(i).getVisitStatCount());
+			list.add(map);
+		}
+			System.out.println(list);
+			return list;
+		
+		//HashMap<String, Object> result = new HashMap<String, Object>();
+		//sonObject resultJSON = new JsonObject();
+		
+	}
+	
+//	// 관리자 메인 별보러가자 게시글 현황 그래프 자료
+//	@RequestMapping(value="visitStat.do", method = RequestMethod.GET) 
+//	public @RequestBody void visitStat(@RequestParam(value="vList[]") List<String> examList) {
+//		
+//		//ArrayList<VisitStat> vList = aService.getCountPostVisit();
+//		List<VisitStat> vList = new ArrayList<VisitStat>();
+//		vList = aService.getCountPostVisit();
+//		
+//		HashMap<String, Object> result = new HashMap<String, Object>();
+//		
+		//sonObject resultJSON = new JsonObject();
+		
+		//Gson gson = gson.toJson(vList, response.getWriter());
+		
+//		if(!vList.isEmpty()) {
+//		} else {
+//			System.out.println("데이터가 없습니다.");
+//		}
+//	}
 
 	// 전체 회원 수
 	public int memberAllCount(ModelAndView mv, @RequestParam("userId") String userId) {
