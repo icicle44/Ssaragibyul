@@ -60,7 +60,7 @@
 							<div class="grid__item" data-size="1280x857">
 								<a id="grid"
 									href="/resources/vUploadFiles/${vList.renameFilename }"
-									class="img-wrap"> <img id="${vList.visitNo }"
+									class="img-wrap"> <img data-visitNo="${vList.visitNo }"
 									src="/resources/vUploadFiles/${vList.renameFilename }"
 									alt="${vList.originalFilename }" />
 									<div class="description description--grid">
@@ -242,11 +242,10 @@
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					$(".count").next().remove();
-					visitNo = $(this).attr("id"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
-					visitCount = Number($(this).attr("class"));
-					addHitsCount(visitNo, visitCount);
+					visitNo = $(this).attr("data-visitNo"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
+					addHitsCount(visitNo);
 					getReplyList(visitNo);// 댓글 목록 조회1
-					console.log(visitNo + ' - ' + visitCount);
+					console.log(visitNo);
 				});
 
 				// 댓글 등록
@@ -398,7 +397,7 @@
 				});
 			};
 			// 조회수 증가
-			function addHitsCount(visitNo, visitCount) {
+			function addHitsCount(visitNo) {
 				$.ajax({
 					url : "addHitsCount.do",
 					type : "get",
