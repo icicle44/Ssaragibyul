@@ -298,18 +298,23 @@ button[type=submit] {
   cursor:pointer;
 }
 
-/* #modal #total {
+#modal #total {
 	width: 500px;
 	height: 500px;
 	padding: 0px;
-} */
+}
+
+#modal #point-present {
+	padding-right: 15px;
+}
 
 #modal #table-around {
 	border: 1px solid #327a81;
 	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 	border-radius: 10px;
 	padding: 0px;
-	max-width: calc(100% - 1em);
+	height: 350px;
+	max-width: calc(100% - 2em);
 	margin: 1em auto;
 	overflow: hidden;
 }
@@ -319,14 +324,30 @@ button[type=submit] {
 	text-align: left;
 }
 #modal .write-middle {
-	padding: 5px 10px;
+	padding: 0px 0px;
 }
 #modal .write-lower {
-	padding: 10px 10px;
+	padding: 0px;
 }
 #modal td, #modal th {
-	padding: 5px;
+	padding: 10px;
 }
+
+#modal tr:first-child td {
+	padding: 10px;
+	border-top: 1px solid #d9e4e8;
+}
+
+#modal th:last-child {
+	padding: 10px;
+	border-bottom: hidden;
+}
+
+#modal td:last-child {
+	border-top: hidden;
+	border-bottom: hidden;
+}
+
 #modal #btnTr {
 	display: none;
 }
