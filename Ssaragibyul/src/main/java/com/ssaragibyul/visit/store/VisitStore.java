@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.store;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -9,6 +10,7 @@ import com.ssaragibyul.visit.domain.Visit;
 public interface VisitStore {
 	public int selectListCount();
 	public ArrayList<Visit> selectAllList();
+	public List<Visit> selectScroll(Integer visitNoToStart);
 	public int addHitsCount(int visitNo);
 	public Integer getHitsCount(int visitNo);
 	public Visit selectOne(int visitNo);

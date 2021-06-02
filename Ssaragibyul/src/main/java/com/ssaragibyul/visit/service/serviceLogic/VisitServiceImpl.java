@@ -1,13 +1,12 @@
 package com.ssaragibyul.visit.service.serviceLogic;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.service.VisitService;
@@ -30,10 +29,14 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
-
 	@Override
 	public ArrayList<Visit> printAll() {
 		return vStore.selectAllList();
+	}
+
+	@Override
+	public List<Visit> printScroll(Integer visitNoToStart) {
+		return vStore.selectScroll(visitNoToStart);
 	}
 
 	@Override

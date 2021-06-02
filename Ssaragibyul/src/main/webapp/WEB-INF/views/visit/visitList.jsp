@@ -57,15 +57,15 @@
 				<div class="content">
 					<div class="grid">
 						<c:forEach items="${vList }" var="vList">
-							<div class="grid__item" data-size="1280x857">
-								<a id="grid"
-									href="/resources/vUploadFiles/${vList.renameFilename }"
-									class="img-wrap"> <img data-visitNo="${vList.visitNo }"
+							<div class="grid__item" data-size="1280x857" data-no="${vList.visitNo }">
+								<a id="grid" href="/resources/vUploadFiles/${vList.renameFilename }"
+									class="img-wrap"> 
+									<img data-visitNo="${vList.visitNo }"
 									src="/resources/vUploadFiles/${vList.renameFilename }"
 									alt="${vList.originalFilename }" />
 									<div class="description description--grid">
 										<div class="rightCon">
-											<div class="r-title col-md-12"">
+											<div class="r-title col-md-12">
 												<div id="title">${vList.visitTitle }/${vList.visitNo }번글</div>
 												<div id="nickname">${vList.nickName }</div>
 												<table class="info">
@@ -86,7 +86,7 @@
 													<c:url var="vDelete" value="visitDelete.do">
 														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
 														<c:param name="renameFilename"
-															value="${board.renameFilename }"></c:param>
+															value="${visit.renameFilename }"></c:param>
 													</c:url>
 													<%-- <c:if test="${ loginUser.userId eq vList.userId }" --%>
 													<a href="${vModify }">수정 페이지로 이동</a> &nbsp; <a
@@ -152,6 +152,7 @@
 		<script src="/resources/js/visit/masonry.pkgd.min.js"></script>
 		<script src="/resources/js/visit/classie.js"></script>
 		<script src="/resources/js/visit/main.js"></script>
+		<script src="/resources/js/jquery-ui.min.js"></script>
 		<script>
 			$(function() {
 				var support = {
@@ -236,9 +237,69 @@
 						});
 			});
 			/* 그리드 끝 */
-			/* 이미지 클릭 시 동작 */
+			var visitNo = "";
+				/* ============ 스크롤 ================*/
+				// 1. 스크롤 이벤트 최초 발생
+				$(window).scroll(function(){
+					var currentScrollTop = $(window).scrollTop();
+					/* var documentHeight = $(document).height(); */
+					var visibleHeight = '1200';
+					var windowHeight = $(window).height()
+					console.log("currentScrollTop:" + currentScrollTop);
+					console.log("windowHeight" + windowHeight);
+					//console.log(currentScrollTop);
+					var lastScrollTop = 0;
+					//var easeEffect = 'easeInQuint';
+					
+				
+					/* ========= 다운 스크롤인 상태 ============ */
+					if( currentScrollTop - lastScrollTop > 0 ){
+						// down-scroll : 현재 게시글 다음의 글을 불러온다.
+						//console.log("down-scroll");
+						
+						// 2. 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
+						if (currentScrollTop >= (visibleHeight - windowHeight) ){ //② 현재스크롤의 위치가 화면의 보이는 위치보다 크다면
+				            
+							// 3. class가 scrolling인 것의 요소 중 마지막인 요소를 선택한 다음 그것의 data-no속성 값을 받아온다.
+							//		즉, 현재 뿌려진 게시글의 마지막 bno값을 읽어오는 것이다.( 이 다음의 게시글들을 가져오기 위해 필요한 데이터이다.)
+							var lastNo = $(".grid__item:last").attr("data-no");
+							alert(lastNo); 
+							
+							// 4. ajax를 이용하여 현재 뿌려진 게시글의 마지막 no를 서버로 보내어 그 다음 20개의 게시물 데이터를 받아온다. 
+							$.ajax({
+								url : 'visitScroll.do',// 요청할 서버의 url
+								type : 'post',	// 요청 method 방식 
+								/* headers : { 
+									"Content-Type" : "application/json",
+									"X-HTTP-Method-Override" : "POST"
+								}, */
+								data : { // 서버로 보낼 데이터 명시 
+									"visitNo" : lastNo
+								},
+								dataType : 'json',
+								contentType : "application/json; charset=UTF-8",
+								success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
+										alert("success");
+								},
+								error : function() {
+									console.log("서버 통신 실패(게시글 추가생성)!");
+								}
+						});// ajax
+							// 여기서 class가 listToChange인 것중 가장 처음인 것을 찾아서 그 위치로 이동하자.
+							var position = $(".grid__item").offset();// 위치 값
+							
+							// 이동  위로 부터 position.top px 위치로 스크롤 하는 것이다. 그걸 500ms 동안 애니메이션이 이루어짐.
+							//$('html,body').stop().animate({scrollTop : position.top }, 600, 'easeOutBounce);
+				
+				        };//if : 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
+						
+						// lastScrollTop을 현재 currentScrollTop으로 갱신해준다.
+						lastScrollTop = currentScrollTop;
+					};// 다운스크롤인 상태
+				});
 			$(function() {
-				var visitNo = "";
+					
+				/* ============ 이미지 클릭 시 동작 ================*/
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					$(".count").next().remove();
@@ -251,10 +312,7 @@
 				// 댓글 등록
 				var visitNo = "";
 				var rContent = "";
-				$(document).on(
-						'click',
-						'#rSubmit',
-						function() { // 등록버튼을 클릭하면 아래 코드 실행
+				$(document).on('click','#rSubmit', function() { // 등록버튼을 클릭하면 아래 코드 실행
 							visitNo = $(this).attr("value"); // 클릭한 버튼의 value값을 가져옴
 							/* alert(visitNo); */
 							rContent = $(this).closest("td").prev().children(
@@ -284,8 +342,8 @@
 							// 작성 후 내용 초기화
 							rContent = $(this).closest("td").prev().children(
 									"textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
-						});
-			});
+						})
+				});
 
 			function getReplyList(visitNo) {
 				$.ajax({
@@ -374,7 +432,7 @@
 					}
 				});
 
-			}
+			};
 			// 댓글 삭제
 			function removeReply(visitNo, replyNo) {
 				// /deleteReply.kh?refBoardNo="+boardNo+"&replyNo="+data[i].replyNo+"

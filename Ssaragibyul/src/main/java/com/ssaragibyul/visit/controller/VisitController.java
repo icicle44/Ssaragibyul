@@ -1,11 +1,11 @@
  package com.ssaragibyul.visit.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,9 +36,8 @@ public class VisitController {
 	
 	@Autowired
 	private VisitService vService;
-	
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
-	public ModelAndView vivisListView(ModelAndView mv, Visit visit) {
+	public ModelAndView visitListView(ModelAndView mv, Visit visit) {
 		ArrayList<Visit> vList = vService.printAll();
 		if(visit != null) {
 			mv.addObject("vList", vList).setViewName("visit/visitList");
@@ -45,6 +45,21 @@ public class VisitController {
 			mv.addObject("msg","게시글 조회 실패").setViewName("common/errorPage");
 		}
 	    return mv;
+	}
+	@ResponseBody 
+	@RequestMapping(value = "visitScroll.do", method = {
+			RequestMethod.POST }/* ,headers = {"Accept=application/json"} */)
+	public void visitListScroll(HttpServletResponse response,@RequestBody Visit visit)throws Exception {
+		System.out.println("==================scroll 컨트롤러 들어옴");
+		System.out.println("Scroll, visitNo : " + visit.getVisitNo());
+		Integer visitNoToStart = (visit.getVisitNo()-1); 
+		List<Visit> addList = vService.printScroll(visitNoToStart);
+		if(!addList.isEmpty()) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(addList, response.getWriter());
+		}else {
+			
+		}
 	}
 
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -208,7 +223,7 @@ public class VisitController {
 		ArrayList<Reply> rList = vService.printAllReply(visitNo);
 		System.out.println("controller, rList(댓글목록) : "+rList);
 		if(!rList.isEmpty()) {
-			Gson gson = new GsonBuilder().create(); // 날짜 포맷 변경(DB에서 가져온 날짜를 원하는 형태로 하여 jason으로 바꿔줌)
+			Gson gson = new GsonBuilder().create(); 
 			gson.toJson(rList, response.getWriter());
 		}else {
 
