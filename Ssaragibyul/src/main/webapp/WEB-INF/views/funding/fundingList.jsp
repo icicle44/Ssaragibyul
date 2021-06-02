@@ -41,9 +41,6 @@
   height: 55%;
   font-size:12px;
 }
-.select{
-	margin : auto;
-}
 .btn{
 margin: auto;
 }
@@ -88,12 +85,28 @@ width : 1540px;
 #frmpj{
 }
 .scan{
-float : right;
+	float:right;
 }
 #headFont{
 	font-size:30px;
 }
 </style>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#chose1').val('news_list').prop("selected",true){
+			 return "fundingIndex.do";
+		}
+		$('#chose1').val('money_list').prop("selected",true){
+			 return "location.onfundingIndex.do";
+		}
+		
+		$('#chose1').val('like_list').prop("selected",true){
+			 return "redirect:fundingIndex.do";
+		}
+	});
+</script>
+
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
 	
@@ -130,35 +143,24 @@ float : right;
 				<section class="row align-items-stretch photos " id="section-funding1">
 				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a id="headFont">진행중 프로젝트</a></div>	<!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
-		   <div></div>
 		   	<div id="pj_search">
-				<form action="fundingSearch.do" method="get" >
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					펀딩 검색하기 : 
-					<input type="search" name="key" class="scan">&nbsp;
+		   		   <select id = "chose1" class="select" onchange="location.href=this.value">
+		   		   	 <option value = "" selected>선택</option>
+				       <option value = "fundingList.do">최신글 순</option>
+				       <option value = "fundingSelectMoney.do">모금액 순</option>
+				       <option value = "fundingSelectLike.do">좋아요 순</option>
+				</select>
+				<form action="fundingSearch_1.do" method="get" >
+					<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
 					<input type="submit" class="scan" value="검색">
 				</form>
 			<!--  JS, 리다이렉트 URL -->
-		   			   <select name = "chose1" class="select">
-				       <option value = "news_list" selected>최신글 순</option>
-				       <option value = "money_list">모금액 순</option>
-				       <option value = "like_list">좋아요 순</option>
-				</select>
 					</div>
+
 
 					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch">
+						
 				<div class="gridmain">
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
 			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
@@ -226,51 +228,58 @@ float : right;
 				<section class="row align-items-stretch photos " id="section-funding2">
 				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a id="headFont">종료된 프로젝트</a><!-- <!--  --><!-- //////////////////////////////////////////////////////////////////////////////////////////// --><!--  --> <!-- -->
-		   			   <select name = "chose1" class="select">
-				       <option value = "news_list" selected>최신글 순</option>
-				       <option value = "money_list">모금액 순</option>
-				       <option value = "like_list">좋아요 순</option>
-				</select></div>
-				<br>
+		    	<div id="pj_search">
+		   		   <select id = "chose2" class="select" onchange="location.href=this.value">
+		   		       <option value = "" selected>선택</option>
+				       <option value = "fundingList.do" >최신글 순</option>
+				       <option value = "fundingSelectMoneyEnd.do">모금액 순</option>
+				       <option value = "fundingSelectLikeEnd.do">좋아요 순</option>
+				</select>
+				<form action="fundingSearch_2.do" method="get" >
+					<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
+					<input type="submit" class="scan" value="검색">
+				</form>
+			<!--  JS, 리다이렉트 URL -->
+					</div>
 					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch">
 				<div class="gridmain">
-		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
+		 <c:forEach var="e" items="${fListandFileEnd}" varStatus="status"> 
 			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 			<table class="a_pj">
 				<tr>
 					<td> 
-					    <a href="resources/upLoadFile/${p.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
-						<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
+					    <a href="resources/upLoadFile/${e.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
+						<img src="resources/upLoadFile/${e.fundingFile.fileMainName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
 						<div class="photo-text-more">
-						<span class="icon icon-search">${p.subjectName}"</span>
+						<span class="icon icon-search">${e.subjectName}"</span>
 						</div></a></td>
 		 			</tr>
 		 			<tr>
 						<td align = "right"><img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${p.likeCount}</span></td>
+						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${e.likeCount}</span></td>
 					</tr>
 					<tr>
 						<td>
 						<c:url var="fDetail" value="fundingDetail.do">
-						<c:param name="projectNo" value="${p.projectNo }"></c:param>
+						<c:param name="projectNo" value="${e.projectNo }"></c:param>
 						</c:url> 
-						<a href="${fDetail }" style="font-size : 1.5em">${p.subjectName }</a>
+						<a href="${fDetail }" style="font-size : 1.5em">${e.subjectName }</a>
 						</td>
 					</tr>
 				 <tr>
 				<td colspan="2" id="bar_td">
-							<c:if test="${p.percent >99}">
+							<c:if test="${e.percent >99}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
 									<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
 								</svg>
 							</c:if>
 			
-							<c:if test="${p.percent < 100}">
+							<c:if test="${e.percent < 100}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="${p.percent}%" fill="#FF8000"></rect>
+									<rect x="0" y="0" height="2" width="${e.percent}%" fill="#FF8000"></rect>
 								</svg>
 							</c:if>
 						</td>
@@ -278,11 +287,11 @@ float : right;
 				    <tr>
 						<td id="dday_css">
 						<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
-						<c:if test="${p.leftDate < 1}"><b>마감</b></c:if>
-						<c:if test="${p.leftDate > 1}"><b>${p.leftDate}</b>일 남음</c:if>
+						<c:if test="${e.leftDate < 1}"><b>마감</b></c:if>
+						<c:if test="${e.leftDate > 1}"><b>${p.leftDate}</b>일 남음</c:if>
 						</td>
-						<td id="sum_css"><b><fmt:formatNumber value="${p.sumMoney}" pattern="#,###"/>원 , </b>
-						<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${p.percent}%</span>
+						<td id="sum_css"><b><fmt:formatNumber value="${e.sumMoney}" pattern="#,###"/>원 , </b>
+						<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${e.percent}%</span>
 					</td>
 					</tr> 
 				</table>
@@ -299,6 +308,9 @@ float : right;
 				</section>
 	<br>
 	<br>
+		<br>
+	<br>
+
  		<%@include file="../../../footer.jsp" %>
 	</main>
 

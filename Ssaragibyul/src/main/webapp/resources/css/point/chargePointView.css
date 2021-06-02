@@ -7,7 +7,7 @@ body{
 }
 
 div, article, section {
-    border: 1px solid black;
+    --border: 1px solid black;
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
@@ -15,14 +15,94 @@ div, article, section {
 
 .blank {
 	width: 100%;
-	height: 81px;
+	height: 195px;
 }
 .card-body {
-	margin: 100px;
+	border: 1px solid #adc5cd;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 100px;
+	border-radius: 10px;
+	width: 390px;
+}
+
+#money-btn {
+	text-align: center;
 }
 
 p:first-child {
-	font-size: 1.1em;
+	font-size: 1em;
 	font-weight: bold;
 	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
+.box-radio-input input[type="radio"] {
+	display: none;
+	margin: 10px;
+}
+
+.box-blank-input input[type="radio"] {
+	display: none;
+	margin: 10px;
+}
+.box-radio-input input[type="radio"] + span{
+	--border: 1px solid black;
+	display: inline-block;
+	width: 79px;
+	height: 32px;
+	margin: 6px;
+	border-radius: 5px;
+	text-align: center;
+	line-height: 31px;
+	background-color: #feb07c;
+	color: white;
+	cursor: pointer;
+}
+
+.box-radio-input:hover input[type="radio"] + span{
+	width: 81px;
+	height: 34px;
+	line-height: 33px;
+	font-size: 101%;
+	margin: 5px;
+}
+
+/* .box-radio-input:active {
+	background-color: #EB5C01;
+} */
+
+.box-radio-input
+input[type="radio"]:checked + span {
+	background-color: #EB5C01;
+}
+
+/* .box-radio-input:clicked {
+	background-color: #EB5C01;
+} */
+
+.box-blank-input {
+	width: 80px;
+	height: 33px;
+	margin: 5px;
+	border-radius: 5px;
+	color: white;	
+}
+
+button[type=button]:last-child {
+	color: white;
+	border: none;
+	width: 90%;
+	height: 35px;
+	border-radius: 5px;
+	background-color: #949494;
+	cursor: pointer;
+}
+
+button[type=button]:last-child:hover {
+	background-color: #383838;
+}
+button[type=button]:last-child:focus {
+	outline: none;
 }

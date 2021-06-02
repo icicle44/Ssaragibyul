@@ -3,6 +3,7 @@ package com.ssaragibyul.funding.store;
 import java.util.ArrayList;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
@@ -27,6 +28,7 @@ public interface FundingStore {
 	public int addreadCountHit(int projectNo);
 
 	public ArrayList<Funding> printAllProject();
+	public ArrayList<Funding> printAllProjectEnd();
 	
 	public ArrayList<FundingFile> printAllProjectFile();
 
@@ -89,6 +91,14 @@ public interface FundingStore {
 	public int updateProject_Like(Funding funding);
 	
 	public int insertProjectLike(FundingLike fundingLike);
+	
+	public ArrayList<Funding> selectSearchList_1(Search search);
+	public ArrayList<Funding> selectSearchList_2(Search search);
+	
+	public ArrayList<Funding> printAllProjectByMoney();
+	public ArrayList<Funding> printAllProjectByLike();
+	public ArrayList<Funding> printAllProjectByMoneyEnd();
+	public ArrayList<Funding> printAllProjectByLikeEnd();
 }
 
 
