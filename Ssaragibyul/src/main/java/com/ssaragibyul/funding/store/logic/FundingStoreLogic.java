@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
@@ -66,6 +67,11 @@ public class FundingStoreLogic implements FundingStore{
 	public ArrayList<Funding> printAllProject() {
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList");
 	}
+	
+	public ArrayList<Funding> printAllProjectEnd() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingListEnd");
+	}
+	
 	
 	@Override
 	public ArrayList<FundingFile> printAllProjectFile() {
@@ -248,4 +254,31 @@ public class FundingStoreLogic implements FundingStore{
 	public int insertProjectLike(FundingLike fundingLike) {
 		return sqlSession.insert("fundingMapper.insertProjectLike", fundingLike);
 	}
+
+	public ArrayList<Funding> selectSearchList_1(Search search) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectSearchList_1", search);
+	}
+
+	public ArrayList<Funding> selectSearchList_2(Search search) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectSearchList_2", search);
+	}
+
+	public ArrayList<Funding> printAllProjectByMoney() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList_Money");
+	}
+
+	public ArrayList<Funding> printAllProjectByLike() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingList_Like");
+	}
+
+	public ArrayList<Funding> printAllProjectByMoneyEnd() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingListEnd_Money");
+	}
+
+	public ArrayList<Funding> printAllProjectByLikeEnd() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingListEnd_Like");
+	}
+
+
+	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingComments;
 import com.ssaragibyul.funding.domain.FundingFile;
@@ -82,6 +83,13 @@ public class FundingSerivceImpl implements FundingService {
 		ArrayList<Funding> fListandFile = fStore.printAllProject();
 		return fListandFile;
 	}
+	@Override
+	public ArrayList<Funding> printAllProjectEnd() {
+		ArrayList<Funding> fListandFileEnd = fStore.printAllProjectEnd();
+		return fListandFileEnd;
+	}
+	
+	
 	
 	@Override
 	public ArrayList<FundingFile> printAllProjectFile() {
@@ -266,5 +274,39 @@ public class FundingSerivceImpl implements FundingService {
 		return fStore.deleteReply(reply);
 	}
 	
+	@Override
+	public ArrayList<Funding> printSearchAll_1(Search search) {
+		ArrayList<Funding> searchList1 = fStore.selectSearchList_1(search);
+		return searchList1;
+	}
+	
+	@Override
+	public ArrayList<Funding> printSearchAll_2(Search search) {
+		ArrayList<Funding> searchList2 = fStore.selectSearchList_2(search);
+		return searchList2;
+	}
+		
+	@Override
+	public ArrayList<Funding> printAllProjectForMoney() {
+		ArrayList<Funding> fListandFile = fStore.printAllProjectByMoney();
+		return fListandFile;
+	}
+	
+	@Override
+	public ArrayList<Funding> printAllProjectForLike() {
+		ArrayList<Funding> fListandFile = fStore.printAllProjectByLike();
+		return fListandFile;
+	}
+	
+	@Override
+	public ArrayList<Funding> printAllProjectEndForMoeny() {
+		ArrayList<Funding> fListandFile = fStore.printAllProjectByMoneyEnd();
+		return fListandFile;
+	}
 
+	@Override
+	public ArrayList<Funding> printAllProjectEndForLike() {
+		ArrayList<Funding> fListandFile = fStore.printAllProjectByLikeEnd();
+		return fListandFile;
+	}
 }

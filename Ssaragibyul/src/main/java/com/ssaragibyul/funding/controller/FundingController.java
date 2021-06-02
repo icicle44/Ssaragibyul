@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
@@ -61,8 +62,10 @@ public class FundingController {
 	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
 	 public String fundingList(Model model) {
 		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
 		 if(!fListandFile.isEmpty()) {				
 				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
 				return "funding/fundingList";
 			}else {
 				model.addAttribute("msg", "펀딩 목록조회 실패");
@@ -304,8 +307,6 @@ public class FundingController {
 			 return "common/errorPage";
 		 }
 	 } // 좋아요 해당 테이블 인서트 및 펀딩프로젝트 테이블에도 좋아요 숫자 업데이트 ↓ 아래거는 어떻게 할지 생각중.
-		
-	
 	
 	public void changeLikeStatus() {
 
@@ -342,6 +343,98 @@ public class FundingController {
 	public String fundingPay() {
 		return "";
 	}
+	
+	
+	
+	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
+	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
+		if(!searchList1.isEmpty()) {
+			model.addAttribute("fListandFileEnd", fListandFileEnd);
+			model.addAttribute("fListandFile", searchList1);
+			model.addAttribute("search", search);
+			return "funding/fundingList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
+	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
+		if(!searchList2.isEmpty()) {
+			model.addAttribute("fListandFile", fListandFile);
+			model.addAttribute("fListandFileEnd", searchList2);
+			model.addAttribute("search", search);
+			return "funding/fundingList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	 @RequestMapping(value="fundingSelectMoney.do", method=RequestMethod.GET)
+	 public String fundingSelectMoney(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectForMoney();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
+	 
+	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
+	 public String fundingSelectLike(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
+	 
+	 @RequestMapping(value="fundingSelectMoneyEnd.do", method=RequestMethod.GET)
+	 public String fundingSelectMoneyEnd(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndForMoeny();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
+	 
+	 @RequestMapping(value="fundingSelectLikeEnd.do", method=RequestMethod.GET)
+	 public String fundingSelectLikeEnd(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndForLike();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
 	
 }
 //400, jsp-Controller / 404, Controller url->console / 500, 서버 내부 오류(console)
