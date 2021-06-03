@@ -26,7 +26,7 @@
 		<result property="buyerEmail" column="BUYER_EMAIL"/>
 		<result property="receiptUrl" column="RECEIPT_URL"/>
 		<result property="subject" column="SUBJECT"/>
-		<result property="projectNo" column="PROJEC_NO"/>
+		<result property="projectNo" column="PROJECT_NO"/>
 		<result property="nickName" column="NICKNAME"/>
 		<result property="money" column="MONEY"/>
 		<result property="fdate" column="FDATE"/>
@@ -35,6 +35,17 @@
 		<id property="id" column="ID"/>
 		<result property="total" column="TOTAL"/>
 		<result property="reserved" column="RESERVED"/>
+	</resultMap>
+	<resultMap type="com.ssaragibyul.point.domain.PointForChart" id="pointChartResultMap">
+		<id property="id" column="ID"/>
+		<result property="fundTotal" column="FUND_TOTAL"/>
+		<result property="fundReserved" column="FUND_RESERVED"/>
+		<result property="donationTotal" column="DONATION_TOTAL"/>
+		<result property="donationReserved" column="DONATION_RESERVED"/>
+		<result property="visitTotal" column="VISIT_TOTAL"/>
+		<result property="takePresentTotal" column="TAKE_PRESENT_TOTAL"/>
+		<result property="givePresentTotal" column="GIVE_PRESENT_TOTAL"/>
+		<result property="chargeTotal" column="CHARGE_TOTAL"/>
 	</resultMap>
 	
 	<select id="selectPointList" parameterType="string" resultMap="pointProjectResultMap">
@@ -106,6 +117,30 @@
 		ON(EVENT_NO = DOFUND_NO) WHERE EVENT_CODE = 1) UNION (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT JOIN (SELECT * FROM DO_DONATION JOIN (SELECT * FROM DONATION WHERE FIN_DATE > SYSDATE AND PROJECT_CODE = 0) USING(D_PROJECT_NO))
 		ON(EVENT_NO = DODONAT_NO) WHERE EVENT_CODE = 2)) WHERE USER_ID = #{userId})
 		USING(ID)
+		]]>
+	</select>
+	
+	<select id="selectPointChart" resultMap="pointChartResultMap">
+	<![CDATA[
+		SELECT * FROM (SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS FUND_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT JOIN (SELECT * FROM DO_FUNDING JOIN (SELECT * FROM FUNDING_PROJECT WHERE NOT(GOAL_MONEY > SUM_MONEY AND FIN_DATE < SYSDATE) AND PROJECT_CODE = 0) ON(F_PROJECT_NO2 = F_PROJECT_NO))
+		ON(EVENT_NO = DOFUND_NO)) WHERE USER_ID = #{userId} AND EVENT_CODE = 1)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS FUND_RESERVED FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT JOIN (SELECT * FROM DO_FUNDING JOIN (SELECT * FROM FUNDING_PROJECT WHERE FIN_DATE > SYSDATE AND PROJECT_CODE = 0) ON(F_PROJECT_NO2 = F_PROJECT_NO))
+		ON(EVENT_NO = DOFUND_NO) WHERE USER_ID = #{userId} AND EVENT_CODE = 1)) USING(ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS DONATION_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT JOIN (SELECT * FROM DO_DONATION JOIN (SELECT * FROM DONATION WHERE NOT(GOAL_MONEY > SUM_MONEY AND FIN_DATE < SYSDATE) AND PROJECT_CODE = 0) USING(D_PROJECT_NO))
+		ON(EVENT_NO = DODONAT_NO)) WHERE USER_ID = #{userId} AND EVENT_CODE = 2) USING (ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS DONATION_RESERVED FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT JOIN (SELECT * FROM DO_DONATION JOIN (SELECT * FROM DONATION WHERE FIN_DATE > SYSDATE AND PROJECT_CODE = 0) USING(D_PROJECT_NO))
+		ON(EVENT_NO = DODONAT_NO) WHERE USER_ID = #{userId} AND EVENT_CODE = 2)) USING(ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS VISIT_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT WHERE USER_ID = #{userId} AND EVENT_CODE = 3)) USING (ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS TAKE_PRESENT_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT WHERE USER_ID = #{userId} AND EVENT_CODE = 4 AND VAR_TYPE = 0)) USING(ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS GIVE_PRESENT_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT WHERE USER_ID = #{userId} AND EVENT_CODE = 4 AND VAR_TYPE = 1)) USING(ID)
+		JOIN
+		(SELECT #{userId} AS ID, SUM(VAR_AMOUNT) AS CHARGE_TOTAL FROM (SELECT PNTLIST_NO, USER_ID, VAR_AMOUNT, EVENT_CODE FROM POINT WHERE USER_ID = #{userId} AND EVENT_CODE = 0)) USING(ID)
 		]]>
 	</select>
 	

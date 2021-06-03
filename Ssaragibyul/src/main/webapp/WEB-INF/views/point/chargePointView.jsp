@@ -80,7 +80,7 @@
                     },
                 });
 	            alert(msg);
-	            opener.location.reload(true);
+	            opener.location.reload("pointList.do");
 	            self.close();
             } else {
                 var msg = '결제에 실패하였습니다.\n';

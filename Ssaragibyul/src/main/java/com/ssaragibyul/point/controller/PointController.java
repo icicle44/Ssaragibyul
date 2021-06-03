@@ -28,6 +28,7 @@ import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
+import com.ssaragibyul.point.domain.PointForChart;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.visit.domain.Visit;
 
@@ -91,7 +92,7 @@ public class PointController {
 				mv.addObject("pointList", ppList);
 				mv.addObject("flag", 9);
 			}else {
-				mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+				mv.addObject("tblMsg", "포인트 내역이 없습니다.");
 				mv.addObject("flag", 9);
 			}
 			mv.addObject("pi", pi);
@@ -111,8 +112,6 @@ public class PointController {
 								@RequestParam(value="page", required=false) Integer page) throws JsonIOException, IOException {
 		/* Gson gson = new Gson(); */
 		if(session != null && (Member)session.getAttribute("loginUser") != null) {		
-			System.out.println(search.getFlag());
-			System.out.println(search.getSearchValue());
 			String userId = ((Member)session.getAttribute("loginUser")).getUserId();
 			search.setUserId(userId);
 			int currentPage = (page != null)? page : 1;
@@ -122,9 +121,11 @@ public class PointController {
 			
 			if(!ppList.isEmpty()) {
 					mv.addObject("pointList", ppList);
+					mv.addObject("search", search);
 					mv.addObject("flag", ppList.get(0).getEventCode());
 				}else {
-					mv.addObject("tblMsg", "포인트 사용내역이 없습니다.");
+					mv.addObject("search", search);
+					mv.addObject("tblMsg", "포인트 내역이 없습니다.");
 					mv.addObject("flag", 9);
 				}
 				mv.addObject("pi", pi);
@@ -165,11 +166,22 @@ public class PointController {
 		String userId = loginUser.getUserId();
 		MyPoint myPoint = pntService.getMyPoint(userId);
 		session.setAttribute("myPoint", myPoint);
-		System.out.println(myPoint.getTotal());
-		System.out.println(myPoint.getReserved());
-		System.out.println(myPoint.getTotal()-myPoint.getReserved());
+		
 		Gson gson = new Gson();
 		gson.toJson(myPoint, response.getWriter());
+	}
+	
+	@RequestMapping(value="pointChart.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView getPointForChart(HttpSession session, ModelAndView mv) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		System.out.println(loginUser.toString());
+		String userId = loginUser.getUserId();
+		PointForChart pointForChart = pntService.getPointForChart(userId);
+		if(pointForChart != null) {
+			mv.addObject("pointForChart", pointForChart);
+			mv.setViewName("point/pointChart");
+		}
+		return mv;
 	}
 	
 }

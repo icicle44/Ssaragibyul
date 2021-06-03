@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+#chart-area {
+	padding: 10px 0 0 0;
+	margin-top: 10px;
+}
+
+#barChart {
+	margin-left: 60px;
+}
+#chartUsed {
+	float: left;
+}
+
+#chartEarn {
+	margin-left: 500px;
+}

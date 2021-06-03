@@ -11,6 +11,7 @@ import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
+import com.ssaragibyul.point.domain.PointForChart;
 import com.ssaragibyul.visit.domain.Visit;
 
 public interface PointService {
@@ -39,6 +40,9 @@ public interface PointService {
 	
 	//내포인트 조회
 	public MyPoint getMyPoint(String userId);
+
+	//차트용 포인트 조회
+	public PointForChart getPointForChart(String userId);
 
 	
 

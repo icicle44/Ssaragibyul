@@ -11,6 +11,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
 <title>싸라기별</title>
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 	<jsp:include page="../../../header.jsp"/>
@@ -26,7 +27,9 @@
 					<a href="pointSearch.do?searchCondition=2" class="sub">기부 내역</a><br><br>
 					<a href="pointSearch.do?searchCondition=3" class="sub">별 보러 가자</a><br><br>
 					<a href="pointSearch.do?searchCondition=4" class="sub">선물 내역</a><br><br>
-				</div>			
+					<a href="#" id="nav-chart" onclick="chartModal('pointChart.do'); return false;">차트 보기</a>
+					<!-- <a href="pointChart.do">차트 보기</a> -->
+				</div>	
 			</section>
 	
 			<section class="wrapper-right contents col-md-9" id="msg-table">
@@ -72,7 +75,7 @@
 											<td><button id="receiptbtn" onclick="receiptPopup('${point.receiptUrl }'); return false;">영수증</button></td>										
 										</c:if>
 										<c:if test="${point.eventCode == 1 && point.varType == 1}">										
-											<td>[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.</td>
+											<td><a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.</a></td>
 											<c:if test="${point.money >= 0 && point.fdate > 0 }">
 												<td>프로젝트 종료(성공)</td>
 											</c:if>
@@ -84,7 +87,7 @@
 											</c:if>					
 										</c:if>
 										<c:if test="${point.eventCode == 1 && point.varType == 0}">										
-											<td>[ ${point.subject } ] <span class="bold-text">펀딩</span> 취소하셨습니다.</td>
+											<td><a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span> 취소하셨습니다.</a></td>
 											<c:if test="${point.money >= 0 && point.fdate > 0 }">
 												<td>프로젝트 종료(성공)</td>
 											</c:if>
@@ -157,43 +160,104 @@
 							<!-- 페이징 -->
 							<tr id="paging">
 								<td colspan="5" id="page-td">
-									<!-- 이전 -->
-									<c:url var="before" value="pointList.do">
-										<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
-									</c:url>
-									<c:if test="${pi.currentPage <= 1 }">
-										<font>&laquo;</font>
-									</c:if>
-									<c:if test="${pi.currentPage > 1 }">
-										<a href="${before }">&laquo;</a>
-									</c:if>
-									<!-- 페이지 -->
-									<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-										<c:url var="pagination" value="pointList.do">
-											<c:param name="page" value="${p }"></c:param>
+									<!-- 전체리스트 페이징 -->
+									<c:if test="${empty search }">
+										<!-- 이전 -->
+										<c:url var="before" value="pointList.do">
+											<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 										</c:url>
-										<c:if test="${p eq pi.currentPage }">
-											<font color="#EB5C01">${p }</font>
+										<c:if test="${pi.currentPage <= 1 }">
+											<font>&laquo;</font>
 										</c:if>
-										<c:if test="${p ne pi.currentPage }">
-											<a href="${pagination }">${p }</a>
+										<c:if test="${pi.currentPage > 1 }">
+											<a href="${before }">&laquo;</a>
 										</c:if>
-									</c:forEach>
-									<!-- 다음 -->
-									<c:url var="after" value="pointList.do">
-										<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-									</c:url>				
-									<c:if test="${pi.currentPage >= pi.maxPage }">
-										<font>&raquo;</font>
+										<!-- 페이지 -->
+										<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+											<c:url var="pagination" value="pointList.do">
+												<c:param name="page" value="${p }"></c:param>
+											</c:url>
+											<c:if test="${p eq pi.currentPage }">
+												<font color="#EB5C01">${p }</font>
+											</c:if>
+											<c:if test="${p ne pi.currentPage }">
+												<a href="${pagination }">${p }</a>
+											</c:if>
+										</c:forEach>
+										<!-- 다음 -->
+										<c:url var="after" value="pointList.do">
+											<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+										</c:url>				
+										<c:if test="${pi.currentPage >= pi.maxPage }">
+											<font>&raquo;</font>
+										</c:if>
+										<c:if test="${pi.currentPage < pi.maxPage }">
+											<a href="${after }">&raquo;</a>
+										</c:if>
 									</c:if>
-									<c:if test="${pi.currentPage < pi.maxPage }">
-										<a href="${after }">&raquo;</a>
+									
+									<!-- 검색리스트 페이징 -->
+									<c:if test="${!empty search }">
+										<!-- 이전 -->
+										<c:url var="before" value="pointSearch.do">
+											<c:param name="flag" value="${flag }"></c:param>
+											<c:if test="${search.searchCondition != null }">
+												<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+											</c:if>
+											<c:if test="${search.searchValue != null }">
+												<c:param name="searchValue" value="${search.searchValue }"></c:param>
+											</c:if>
+											<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
+										</c:url>
+										<c:if test="${pi.currentPage <= 1 }">
+											<font>&laquo;</font>
+										</c:if>
+										<c:if test="${pi.currentPage > 1 }">
+											<a href="${before }">&laquo;</a>
+										</c:if>
+										<!-- 페이지 -->
+										<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+											<c:url var="pagination" value="pointSearch.do">
+												<c:param name="flag" value="${flag }"></c:param>
+												<c:if test="${search.searchCondition != null }">
+													<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+												</c:if>
+												<c:if test="${search.searchValue != null }">
+													<c:param name="searchValue" value="${search.searchValue }"></c:param>
+												</c:if>
+												<c:param name="page" value="${p }"></c:param>
+											</c:url>
+											<c:if test="${p eq pi.currentPage }">
+												<font color="#EB5C01">${p }</font>
+											</c:if>
+											<c:if test="${p ne pi.currentPage }">
+												<a href="${pagination }">${p }</a>
+											</c:if>
+										</c:forEach>
+										<!-- 다음 -->
+										<c:url var="after" value="pointSearch.do">
+											<c:param name="flag" value="${flag }"></c:param>
+											<c:if test="${search.searchCondition != null }">
+												<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+											</c:if>
+											<c:if test="${search.searchValue != null }">
+												<c:param name="searchValue" value="${search.searchValue }"></c:param>
+											</c:if>
+											<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
+										</c:url>				
+										<c:if test="${pi.currentPage >= pi.maxPage }">
+											<font>&raquo;</font>
+										</c:if>
+										<c:if test="${pi.currentPage < pi.maxPage }">
+											<a href="${after }">&raquo;</a>
+										</c:if>
 									</c:if>
 								</td>
 							</tr>
 						</tbody>
 					</table>
 				</section>
+				
 				<!-- search -->
 				<section id="search">
 					<div align="center">
@@ -218,6 +282,9 @@
 			<div id="modal_content">
 				
 			</div>
+			<div id="chartModal_content">
+			
+			</div>
 		</div>
 
 	<jsp:include page="../../../footer.jsp"/>
@@ -239,6 +306,13 @@
 		/* 모달창 */
 		function msgModal(msgUrl) {
 			$("#modal #modal_content").load(msgUrl);
+			setTimeout(function(){
+			$("#modal").fadeIn();
+			}, 500)
+		}
+		
+		function chartModal(url) {
+			$("#modal #chartModal_content").load(url);
 			setTimeout(function(){
 			$("#modal").fadeIn();
 			}, 500)
@@ -277,6 +351,10 @@
 			$("#modal_content").on("click", function() {
 				$("#modal").fadeOut();
 				$("#modal #modal_content").empty();
+			});
+			$("#chartModal_content").on("click", function() {
+				$("#modal").fadeOut();
+				$("#modal #chartModal_content").empty();
 			});
 		});
 		

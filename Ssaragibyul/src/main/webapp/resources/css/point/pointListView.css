@@ -51,6 +51,10 @@ div, article, section {
 	font-size: 14px;
 }
 
+#nav-chart {
+	font-size : 16px;
+}
+
 .wrapper-right {
 	float: left;
 	width: 80%;
@@ -104,6 +108,7 @@ table a:hover {
 	color: #EB5C01;
 	text-decoration: none;
 	font-size: 16px;
+	padding: 3px;
 }
 
 tbody>tr td:nth-child(1) {
@@ -282,8 +287,13 @@ button[type=submit] {
 }
 
 #modal_content{
-  width:500px;
-  height:450px;
+  /* width:500px;
+  height:450px; */
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  display: table;
   background:#fff;
   border-radius:10px;
   position:relative;
@@ -300,8 +310,8 @@ button[type=submit] {
 
 #modal #total {
 	width: 500px;
-	height: 500px;
-	padding: 0px;
+	height: 430px;
+	padding: 0;
 }
 
 #modal #point-present {
@@ -350,4 +360,22 @@ button[type=submit] {
 
 #modal #btnTr {
 	display: none;
+}
+
+#chartModal_content {
+  width: auto;
+  height: auto;
+  display: table;
+  background:#fff;
+  border-radius:10px;
+  position:relative;
+  top:40%;
+  left:40%;
+  margin-top:-200px;
+  margin-left:-200px;
+  text-align:center;
+  box-sizing:border-box;
+  padding:10px 0px;
+  line-height:23px;
+  cursor:pointer;
 }

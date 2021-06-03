@@ -154,51 +154,103 @@
 							<!-- 페이징 -->
 							<tr>
 								<td colspan="6" id="page-td">
+									<!-- 전체리스트 페이징-->
+									<c:if test="${empty search }">
 									<!-- 변수선언 -->
-									<c:if test="${flag=='notice'}">
-										<c:set var="pageUrl" value="noticeMsgList.do"/>
-									</c:if>
-									<c:if test="${flag=='rec' }">
-										<c:set var="pageUrl" value="recMsgList.do"/>
-									</c:if>
-									<c:if test="${flag=='send' }">
-										<c:set var="pageUrl" value="sendMsgList.do"/>
-									</c:if>
-									<!-- 이전 -->
-									<c:url var="before" value="${pageUrl}">
-										<c:param name="page" value="${pi.currentPage - 1}"></c:param>
-									</c:url>
-									<c:if test="${pi.listCount ne 0 }">
-										<c:if test="${pi.currentPage <= 1 }">
-											<font>&laquo;</font>
+										<c:if test="${flag=='notice'}">
+											<c:set var="pageUrl" value="noticeMsgList.do"/>
 										</c:if>
-										<c:if test="${pi.currentPage > 1 }">
-											<a href="${before }">&laquo;</a>
+										<c:if test="${flag=='rec' }">
+											<c:set var="pageUrl" value="recMsgList.do"/>
 										</c:if>
-									</c:if>
-									<!-- 페이지 -->
-									<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
-										<c:url var="pagination" value="${pageUrl}">
-											<c:param name="page" value="${p}"></c:param>
+										<c:if test="${flag=='send' }">
+											<c:set var="pageUrl" value="sendMsgList.do"/>
+										</c:if>
+										<!-- 이전 -->
+										<c:url var="before" value="${pageUrl}">
+											<c:param name="page" value="${pi.currentPage - 1}"></c:param>
 										</c:url>
-										<c:if test="${p eq pi.currentPage}">
-											<font color="#EB5C01">${p}</font>
+										<c:if test="${pi.listCount ne 0 }">
+											<c:if test="${pi.currentPage <= 1 }">
+												<font>&laquo;</font>
+											</c:if>
+											<c:if test="${pi.currentPage > 1 }">
+												<a href="${before }">&laquo;</a>
+											</c:if>
 										</c:if>
-										<c:if test="${p ne pi.currentPage}">
-											<a href="${pagination }">${p}</a>
+										<!-- 페이지 -->
+										<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
+											<c:url var="pagination" value="${pageUrl}">
+												<c:param name="page" value="${p}"></c:param>
+											</c:url>
+											<c:if test="${p eq pi.currentPage}">
+												<font color="#EB5C01">${p}</font>
+											</c:if>
+											<c:if test="${p ne pi.currentPage}">
+												<a href="${pagination }">${p}</a>
+											</c:if>
+										</c:forEach>
+										<!-- 다음 -->
+										<c:url var="after" value="${pageUrl}">
+											<c:param name="page" value="${pi.currentPage + 1}"></c:param>
+										</c:url>
+										<c:if test="${pi.listCount ne 0 }">
+											<c:if test="${pi.currentPage >= pi.maxPage}">
+												<font>&raquo;</font>
+											</c:if>
+											<c:if test="${pi.currentPage < pi.maxPage}">
+												<a href="${after}">&raquo;</a>
+											</c:if>
 										</c:if>
-									</c:forEach>
-									<!-- 다음 -->
-									<c:url var="after" value="${pageUrl}">
-										<c:param name="page" value="${pi.currentPage + 1}"></c:param>
-									</c:url>
-									<c:if test="${pi.listCount ne 0 }">
-										<c:if test="${pi.currentPage >= pi.maxPage}">
-											<font>&raquo;</font>
+	
 										</c:if>
-										<c:if test="${pi.currentPage < pi.maxPage}">
-											<a href="${after}">&raquo;</a>
+									<!-- 검색리스트 페이징 -->
+									<c:if test="${!empty search }">
+										<!-- 이전 -->
+										<c:url var="before" value="msgSearch.do">
+											<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+											<c:param name="searchValue" value="${search.searchValue }"></c:param>
+											<c:param name="flag" value="${flag }"></c:param>
+											<c:param name="page" value="${pi.currentPage - 1}"></c:param>
+										</c:url>
+										<c:if test="${pi.listCount ne 0 }">
+											<c:if test="${pi.currentPage <= 1 }">
+												<font>&laquo;</font>
+											</c:if>
+											<c:if test="${pi.currentPage > 1 }">
+												<a href="${before }">&laquo;</a>
+											</c:if>
 										</c:if>
+										<!-- 페이지 -->
+										<c:forEach var="p" begin="${pi.startPage}" end="${pi.endPage }">
+											<c:url var="pagination" value="msgSearch.do">
+												<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+												<c:param name="searchValue" value="${search.searchValue }"></c:param>
+												<c:param name="flag" value="${flag }"></c:param>
+												<c:param name="page" value="${p}"></c:param>
+											</c:url>
+											<c:if test="${p eq pi.currentPage}">
+												<font color="#EB5C01">${p}</font>
+											</c:if>
+											<c:if test="${p ne pi.currentPage}">
+												<a href="${pagination }">${p}</a>
+											</c:if>
+										</c:forEach>
+										<!-- 다음 -->
+										<c:url var="after" value="msgSearch.do">
+											<c:param name="searchCondition" value="${search.searchCondition }"></c:param>
+											<c:param name="searchValue" value="${search.searchValue }"></c:param>
+											<c:param name="flag" value="${flag }"></c:param>
+											<c:param name="page" value="${pi.currentPage + 1}"></c:param>					
+										</c:url>
+										<c:if test="${pi.listCount ne 0 }">
+											<c:if test="${pi.currentPage >= pi.maxPage}">
+												<font>&raquo;</font>
+											</c:if>
+											<c:if test="${pi.currentPage < pi.maxPage}">
+												<a href="${after}">&raquo;</a>
+											</c:if>
+										</c:if>										
 									</c:if>
 								</td>
 							</tr>

@@ -14,6 +14,7 @@ import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
+import com.ssaragibyul.point.domain.PointForChart;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.point.store.PointStore;
 import com.ssaragibyul.visit.domain.Visit;
@@ -148,6 +149,12 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public MyPoint getMyPoint(String userId) {
 		return pntStore.getMyPoint(userId);
+	}
+
+	//차트용 포인트 조회
+	@Override
+	public PointForChart getPointForChart(String userId) {
+		return pntStore.getPointForChart(userId);
 	}
 	
 }

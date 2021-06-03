@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="/resources/css/message/messageWriteForm.css" type="text/css"/>
+<link rel="stylesheet" href="/resources/css/message/messageWriteForm.css?ver=1" type="text/css"/>
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <title>싸라기별</title>
@@ -56,7 +56,7 @@
 								<th colspan="2">내&nbsp;&nbsp;&nbsp;용</th>
 							</tr>
 							<tr>
-								<td colspan="2" align="center" height="180px">${message.msgContents }</td>
+								<td colspan="2" align="left" height="180px" style="vertical-align:top">${message.msgContents }</td>
 							</tr>
 							<tr id="btnTr">
 								<!-- 버튼 -->

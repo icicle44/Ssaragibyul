@@ -8,6 +8,7 @@ import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.domain.Point;
 import com.ssaragibyul.point.domain.PointAndProject;
+import com.ssaragibyul.point.domain.PointForChart;
 
 public interface PointStore {
 
@@ -24,5 +25,7 @@ public interface PointStore {
 	public int getSearchListCount(SearchMsg search);	
 	
 	public MyPoint getMyPoint(String userId);
+
+	public PointForChart getPointForChart(String userId);
 	
 }
