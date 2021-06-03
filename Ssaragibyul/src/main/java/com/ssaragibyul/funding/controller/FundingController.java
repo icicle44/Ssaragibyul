@@ -251,7 +251,7 @@ public class FundingController {
 		if ((funding != null)&&(fundingFile != null)) {
 			mv.addObject("fundingLike", fundingLike);
 			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail3");
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail2");
 		} else {
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
 			mv.setViewName("common/errorPage");
