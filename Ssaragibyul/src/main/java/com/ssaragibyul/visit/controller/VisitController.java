@@ -46,20 +46,25 @@ public class VisitController {
 		}
 	    return mv;
 	}
-	@ResponseBody 
-	@RequestMapping(value = "visitScroll.do", method = {
-			RequestMethod.POST }/* ,headers = {"Accept=application/json"} */)
-	public void visitListScroll(HttpServletResponse response,@RequestBody Visit visit)throws Exception {
+	// 글목록 스크롤
+	@RequestMapping(value = "visitScroll.do", method = RequestMethod.GET)
+	public void visitListScroll(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
 		System.out.println("==================scroll 컨트롤러 들어옴");
-		System.out.println("Scroll, visitNo : " + visit.getVisitNo());
-		Integer visitNoToStart = (visit.getVisitNo()-1); 
+		System.out.println("Scroll, visitNo : " + visitNo);
+		Integer visitNoToStart = visitNo; 
+		int lastNo = checkLastNo();
+		System.out.println("checkLastNo : " + lastNo);
 		List<Visit> addList = vService.printScroll(visitNoToStart);
+		Gson gson = new GsonBuilder().create(); 
+		gson.toJson(addList, response.getWriter());
+
+		/*
 		if(!addList.isEmpty()) {
-			Gson gson = new GsonBuilder().create();
-			gson.toJson(addList, response.getWriter());
+			return addList;
 		}else {
-			
+			return null;
 		}
+		*/
 	}
 
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
@@ -274,7 +279,12 @@ public class VisitController {
 			return "fail";
 		}
 	}
-	
+	public Integer checkLastNo() {
+		Integer result = 0;
+		result = vService.printLastNo();
+		System.out.println("result : " + result);
+		return result;
+	}
 	
 	public int checkLikes(int visitNo, String userId) {
 		int result = 0;

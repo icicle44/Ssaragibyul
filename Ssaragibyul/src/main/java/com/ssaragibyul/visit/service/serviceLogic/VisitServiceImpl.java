@@ -30,6 +30,11 @@ public class VisitServiceImpl implements VisitService{
 		return 0;
 	}
 	@Override
+	public Integer printLastNo() {
+		System.out.println("vStore.selectLastNo" + vStore.selectLastNo());
+		return vStore.selectLastNo();
+	}
+	@Override
 	public ArrayList<Visit> printAll() {
 		return vStore.selectAllList();
 	}
@@ -126,5 +131,6 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
+
 
 }

@@ -25,26 +25,96 @@
 		<result property="enrollDate" column="REG_DATE"/>
 	</resultMap>
 	<select id="selectAll" resultMap="visitResultMap">
-			SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) ORDER BY VISIT_NO DESC
+		SELECT 
+		    D.VISIT_NO,
+		    D.USER_ID,
+		    D.NICKNAME,
+		    D.SITE_NO,
+		    D.VISIT_TITLE,
+		    D.VISIT_CONTENTS,
+		    D.V_CREATE_DATE,
+		    D.V_UPDATE_DATE,
+		    D.ORIGINAL_FILENAME,
+		    D.RENAME_FILENAME,
+		    D.UPLOAD_TIME 
+		FROM
+		(
+		SELECT     
+		    A.VISIT_NO,
+		    A.USER_ID,
+		    C.NICKNAME,
+		    A.SITE_NO,
+		    A.VISIT_TITLE,
+		    A.VISIT_CONTENTS,
+		    A.V_CREATE_DATE,
+		    A.V_UPDATE_DATE,
+		    B.ORIGINAL_FILENAME,
+		    B.RENAME_FILENAME,
+		    B.UPLOAD_TIME 
+		FROM
+		    VISIT       A,
+		    VISIT_FILE  B,
+		    MEMBER      C
+		WHERE A.USER_ID = C.USER_ID
+		    AND    A.VISIT_NO = B.VISIT_NO
+		      ORDER BY A.VISIT_NO DESC
+		      )D
+		    WHERE ROWNUM &lt;= 6
 	</select>
 	<select id="selectScroll" resultMap="visitResultMap">
-		SELECT 
-			VISIT_NO, 
-			USER_ID, 
-			NICKNAME, 
-			SITE_NO, 
-			VISIT_TITLE, 
-			VISIT_CONTENTS, 
-			VISIT_COUNT, 
-			V_CREATE_DATE, 
-			V_UPDATE_DATE, 
-			ORIGINAL_FILENAME, 
-			RENAME_FILENAME, 
-			UPLOAD_TIME 
-		FROM VISIT 
-		JOIN VISIT_FILE USING(VISIT_NO)
-		JOIN MEMBER USING(USER_ID)
-       	ORDER BY VISIT_NO DESC
+		
+		SELECT
+			E.VISIT_NO,
+		    E.USER_ID,
+		    E.NICKNAME,
+		    E.SITE_NO,
+		    E.VISIT_TITLE,
+		    E.VISIT_CONTENTS,
+		    E.V_CREATE_DATE,
+		    E.V_UPDATE_DATE,
+		    E.ORIGINAL_FILENAME,
+		    E.RENAME_FILENAME,
+		    E.UPLOAD_TIME 
+		FROM
+			(
+			SELECT 
+			    D.VISIT_NO,
+			    D.USER_ID,
+			    D.NICKNAME,
+			    D.SITE_NO,
+			    D.VISIT_TITLE,
+			    D.VISIT_CONTENTS,
+			    D.V_CREATE_DATE,
+			    D.V_UPDATE_DATE,
+			    D.ORIGINAL_FILENAME,
+			    D.RENAME_FILENAME,
+			    D.UPLOAD_TIME 
+			FROM
+				(
+				SELECT     
+				    A.VISIT_NO,
+				    A.USER_ID,
+				    C.NICKNAME,
+				    A.SITE_NO,
+				    A.VISIT_TITLE,
+				    A.VISIT_CONTENTS,
+				    A.V_CREATE_DATE,
+				    A.V_UPDATE_DATE,
+				    B.ORIGINAL_FILENAME,
+				    B.RENAME_FILENAME,
+				    B.UPLOAD_TIME 
+				FROM
+				    VISIT       A,
+				    VISIT_FILE  B,
+				    MEMBER      C
+				WHERE A.USER_ID = C.USER_ID
+				    AND    A.VISIT_NO = B.VISIT_NO
+				      ORDER BY A.VISIT_NO DESC
+				      )D
+		    WHERE VISIT_NO &lt; #{visitNo }
+		    )E
+		    WHERE ROWNUM &lt;= 5
+		    
 		<!-- History 하고 나서 -->		
 		<!-- WHERE VISIT_NO &lt; #{visitNo }-20 -->
 <!--SELECT
@@ -71,7 +141,22 @@ FROM
 	<select id="selectOne" resultMap="visitResultMap">
 		SELECT VISIT_NO, USER_ID, NICKNAME, SITE_NO, VISIT_TITLE, VISIT_CONTENTS, VISIT_COUNT, V_CREATE_DATE, V_UPDATE_DATE, ORIGINAL_FILENAME, RENAME_FILENAME, UPLOAD_TIME FROM VISIT JOIN VISIT_FILE USING(VISIT_NO)JOIN MEMBER USING(USER_ID) WHERE VISIT_NO = #{visitNo } 
 	</select>
-	
+	<select id="selectLastNo" resultMap="visitResultMap">
+		SELECT
+            VISIT_NO
+        FROM
+            (SELECT 
+		    	VISIT_NO
+			FROM
+				(SELECT     
+				    VISIT_NO
+				FROM
+				    VISIT       
+				 ORDER BY VISIT_NO asc
+			     ) 
+            )
+        WHERE ROWNUM = 1
+	</select>
 	<select id="selectVisitListCount" resultType="_int" resultMap="visitResultMap">
       SELECT COUNT(*) FROM VISIT
     </select>

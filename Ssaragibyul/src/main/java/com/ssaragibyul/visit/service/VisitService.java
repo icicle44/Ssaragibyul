@@ -87,5 +87,7 @@ public interface VisitService {
 
 	public int getListCnt(Map<String, String> param);
 
+	public Integer printLastNo();
+
 	
 }

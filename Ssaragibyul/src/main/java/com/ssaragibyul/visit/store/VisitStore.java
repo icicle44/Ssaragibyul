@@ -23,4 +23,5 @@ public interface VisitStore {
 	public int insertReply(Reply reply);
 	public int updateReply(Reply reply);
 	public int deleteReply(int replyNo);
+	public Integer selectLastNo();
 }

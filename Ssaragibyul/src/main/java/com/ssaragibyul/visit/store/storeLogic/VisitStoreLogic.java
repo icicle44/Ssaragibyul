@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,7 @@ import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.store.VisitStore;
 @Repository
 public class VisitStoreLogic implements VisitStore{
+	private final Logger log = LoggerFactory.getLogger(VisitStoreLogic.class);
 
 	@Autowired
 	SqlSession session;
@@ -24,16 +27,25 @@ public class VisitStoreLogic implements VisitStore{
 	// 글 목록 가져오기
 	@Override
 	public ArrayList<Visit> selectAllList() {
-		return (ArrayList)session.selectList("visitMapper.selectScroll");
+		return (ArrayList)session.selectList("visitMapper.selectAll");
 	}
 	// 글 목록 추가 가져오기
 	@Override
 	public List<Visit> selectScroll(Integer visitNoToStart) {
-		return session.selectList("visitMapper.selectAll", visitNoToStart);
+		return session.selectList("visitMapper.selectScroll", visitNoToStart);
+	}
+	// 처음 쓴 글 번호 가져오기
+	@Override
+	public Integer selectLastNo() {
+		Visit v = session.selectOne("visitMapper.selectLastNo");
+		Integer vNo = v.getVisitNo();
+		log.debug("selectlastNo: " + vNo);
+		return vNo; 
 	}
 	// 조회수 증가
 	@Override
 	public int addHitsCount(int visitNo) {
+		log.debug("session.update('visitMapper.updateHitCount', visitNo)"+ session.update("visitMapper.updateHitCount", visitNo));
 		return session.update("visitMapper.updateHitCount", visitNo);
 	}
 	
@@ -119,6 +131,5 @@ public class VisitStoreLogic implements VisitStore{
 
 		return likes;
 	}
-
 
 }

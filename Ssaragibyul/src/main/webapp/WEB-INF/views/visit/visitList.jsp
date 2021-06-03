@@ -60,8 +60,7 @@
 							<div class="grid__item" data-size="1280x857" data-no="${vList.visitNo }">
 								<a id="grid" href="/resources/vUploadFiles/${vList.renameFilename }"
 									class="img-wrap"> 
-									<img data-visitNo="${vList.visitNo }"
-									src="/resources/vUploadFiles/${vList.renameFilename }"
+									<img data-visitNo="${vList.visitNo }" src="/resources/vUploadFiles/${vList.renameFilename }"
 									alt="${vList.originalFilename }" />
 									<div class="description description--grid">
 										<div class="rightCon">
@@ -155,150 +154,8 @@
 		<script src="/resources/js/jquery-ui.min.js"></script>
 		<script>
 			$(function() {
-				var support = {
-					transitions : Modernizr.csstransitions
-				},
-				// transition end event name
-				transEndEventNames = {
-					'WebkitTransition' : 'webkitTransitionEnd',
-					'MozTransition' : 'transitionend',
-					'OTransition' : 'oTransitionEnd',
-					'msTransition' : 'MSTransitionEnd',
-					'transition' : 'transitionend'
-				}, transEndEventName = transEndEventNames[Modernizr
-						.prefixed('transition')], onEndTransition = function(
-						el, callback) {
-					var onEndCallbackFn = function(ev) {
-						if (support.transitions) {
-							if (ev.target != this)
-								return;
-							this.removeEventListener(transEndEventName,
-									onEndCallbackFn);
-						}
-						if (callback && typeof callback === 'function') {
-							callback.call(this);
-						}
-					};
-					if (support.transitions) {
-						el.addEventListener(transEndEventName, onEndCallbackFn);
-					} else {
-						onEndCallbackFn();
-					}
-				};
-
-				new GridFx(
-						document.querySelector('.grid'),
-						{
-							imgPosition : {
-								x : -0.5,
-								y : 1
-							},
-							onOpenItem : function(instance, item) {
-								instance.items
-										.forEach(function(el) {
-											if (item != el) {
-												var delay = Math.floor(Math
-														.random() * 50);
-												el.style.WebkitTransition = 'opacity .5s '
-														+ delay
-														+ 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s '
-														+ delay
-														+ 'ms cubic-bezier(.7,0,.3,1)';
-												el.style.transition = 'opacity .5s '
-														+ delay
-														+ 'ms cubic-bezier(.7,0,.3,1), transform .5s '
-														+ delay
-														+ 'ms cubic-bezier(.7,0,.3,1)';
-												el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
-												el.style.transform = 'scale3d(0.1,0.1,1)';
-												el.style.opacity = 0;
-											}
-										});
-							},
-							onCloseItem : function(instance, item) {
-								instance.items
-										.forEach(function(el) {
-											if (item != el) {
-												el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
-												el.style.transition = 'opacity .4s, transform .4s';
-												el.style.WebkitTransform = 'scale3d(1,1,1)';
-												el.style.transform = 'scale3d(1,1,1)';
-												el.style.opacity = 1;
-
-												onEndTransition(
-														el,
-														function() {
-															el.style.transition = 'none';
-															el.style.WebkitTransform = 'none';
-														});
-											}
-										});
-							}
-						});
-			});
-			/* 그리드 끝 */
-			var visitNo = "";
-				/* ============ 스크롤 ================*/
-				// 1. 스크롤 이벤트 최초 발생
-				$(window).scroll(function(){
-					var currentScrollTop = $(window).scrollTop();
-					/* var documentHeight = $(document).height(); */
-					var visibleHeight = '1200';
-					var windowHeight = $(window).height()
-					console.log("currentScrollTop:" + currentScrollTop);
-					console.log("windowHeight" + windowHeight);
-					//console.log(currentScrollTop);
-					var lastScrollTop = 0;
-					//var easeEffect = 'easeInQuint';
-					
+				makeGrid();
 				
-					/* ========= 다운 스크롤인 상태 ============ */
-					if( currentScrollTop - lastScrollTop > 0 ){
-						// down-scroll : 현재 게시글 다음의 글을 불러온다.
-						//console.log("down-scroll");
-						
-						// 2. 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
-						if (currentScrollTop >= (visibleHeight - windowHeight) ){ //② 현재스크롤의 위치가 화면의 보이는 위치보다 크다면
-				            
-							// 3. class가 scrolling인 것의 요소 중 마지막인 요소를 선택한 다음 그것의 data-no속성 값을 받아온다.
-							//		즉, 현재 뿌려진 게시글의 마지막 bno값을 읽어오는 것이다.( 이 다음의 게시글들을 가져오기 위해 필요한 데이터이다.)
-							var lastNo = $(".grid__item:last").attr("data-no");
-							alert(lastNo); 
-							
-							// 4. ajax를 이용하여 현재 뿌려진 게시글의 마지막 no를 서버로 보내어 그 다음 20개의 게시물 데이터를 받아온다. 
-							$.ajax({
-								url : 'visitScroll.do',// 요청할 서버의 url
-								type : 'post',	// 요청 method 방식 
-								/* headers : { 
-									"Content-Type" : "application/json",
-									"X-HTTP-Method-Override" : "POST"
-								}, */
-								data : { // 서버로 보낼 데이터 명시 
-									"visitNo" : lastNo
-								},
-								dataType : 'json',
-								contentType : "application/json; charset=UTF-8",
-								success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
-										alert("success");
-								},
-								error : function() {
-									console.log("서버 통신 실패(게시글 추가생성)!");
-								}
-						});// ajax
-							// 여기서 class가 listToChange인 것중 가장 처음인 것을 찾아서 그 위치로 이동하자.
-							var position = $(".grid__item").offset();// 위치 값
-							
-							// 이동  위로 부터 position.top px 위치로 스크롤 하는 것이다. 그걸 500ms 동안 애니메이션이 이루어짐.
-							//$('html,body').stop().animate({scrollTop : position.top }, 600, 'easeOutBounce);
-				
-				        };//if : 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
-						
-						// lastScrollTop을 현재 currentScrollTop으로 갱신해준다.
-						lastScrollTop = currentScrollTop;
-					};// 다운스크롤인 상태
-				});
-			$(function() {
-					
 				/* ============ 이미지 클릭 시 동작 ================*/
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
@@ -343,8 +200,230 @@
 							rContent = $(this).closest("td").prev().children(
 									"textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
 						})
-				});
+			});
+			/* 그리드 끝 */
+			var visitNo = "";
+				/* ============ 스크롤 ================*/
+				// 1. 스크롤 이벤트 최초 발생
+				$(window).scroll(function(){
+					var listLength = $(".grid__item").length;
+					var currentScrollTop = Math.ceil($(window).scrollTop());
+					/* var documentHeight = $(document).height(); */
+					var visibleHeight = '600';
+					var windowHeight = $(window).height()
+					console.log("currentScrollTop:" + currentScrollTop);
+					console.log("windowHeight" + windowHeight);
+					//console.log(currentScrollTop);
+					var lastScrollTop = 0;
+					//var easeEffect = 'easeInQuint';
+					console.log("게시글수:"+listLength);
 
+					var scrollPosition = windowHeight + currentScrollTop;
+					var docHeight = $(document).height();
+					
+					var remainingHeight = (docHeight - scrollPosition);
+					
+					
+					/* ========= 다운 스크롤인 상태 ============ */
+					if( currentScrollTop - lastScrollTop > 0 ){
+						console.log('=========================================');
+						console.log('visibleHeight : ' +visibleHeight);
+						console.log('currentScrollTop : ' +currentScrollTop);
+						console.log('scrollPosition : ' +scrollPosition);
+						console.log('windowHeight : ' +windowHeight);
+						console.log('lastScrollTop : ' +lastScrollTop);
+						console.log('docHeight : ' + docHeight);
+						console.log(' calc value : ' + (docHeight - scrollPosition));
+						console.log(' calc value2 : ' + ((docHeight - scrollPosition)/docHeight));
+						console.log('=========================================');
+
+
+						// down-scroll : 현재 게시글 다음의 글을 불러온다.
+						//console.log("down-scroll");
+						// 2. 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
+//						if (currentScrollTop >= (visibleHeight - windowHeight) ){ //② 현재스크롤의 위치가 화면의 보이는 위치보다 크다면
+						if (remainingHeight === 0){ //② 현재스크롤의 위치가 화면의 보이는 위치보다 크다면
+							// 3. class가 scrolling인 것의 요소 중 마지막인 요소를 선택한 다음 그것의 data-no속성 값을 받아온다.
+							//		즉, 현재 뿌려진 게시글의 마지막 bno값을 읽어오는 것이다.( 이 다음의 게시글들을 가져오기 위해 필요한 데이터이다.)
+							var lastNo = $(".grid__item:last").attr("data-no");
+							/* alert(lastNo);  */
+							console.log(lastNo);
+							// 4. ajax를 이용하여 현재 뿌려진 게시글의 마지막 no를 서버로 보내어 그 다음 20개의 게시물 데이터를 받아온다. 
+							
+							$.ajax({
+								url : "visitScroll.do",// 요청할 서버의 url
+								type : "GET",	// 요청 method 방식 
+								data : { // 서버로 보낼 데이터 명시 
+									"visitNo" : lastNo
+								},
+								dataType : "json",
+								success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
+									var str = "";
+									// 5. 받아온 데이터가 ""이거나 null이 아닌 경우에 DOM handling을 해준다.
+									if(data.length === 0){// 6. 만약 서버로 부터 받아온 데이터가 없으면 그냥 아무것도 하지말까..??
+										alert("더 불러올 데이터가 없습니다.");
+									}//if : data != ""
+									else{//6. 서버로부터 받아온 data가 list이므로 이 각각의 원소에 접근하려면 each문을 사용한다. 
+										console.log(JSON.stringify(data));
+										
+										$.each(data, function (index, item){
+										// 7. 새로운 데이터를 갖고 html코드형태의 문자열을 만들어준다.
+										
+												str +=  "<div class='grid__item' data-size='1280x857' data-no='"+item.visitNo+"'style='position: absolute;'>" 
+												str	+=	 	"<a id='grid' href='/resources/vUploadFiles/"+ item.renameFilename +"' class='img-wrap'>" 
+												str	+=			"<img data-visitNo='" + item.visitNo +"' src='/resources/vUploadFiles/"+ item.renameFilename +"'/>"
+												str	+=			"<div class='description description--grid'>"
+												str	+=				"<div class='rightCon'>"
+												str	+=					"<div class='r-title col-md-12'>"
+												str	+=						"<div id='title'>"+item.visitTitle +"</div>"
+												str	+=						"<div id='nickname'>"+item.nickName + "</div>";
+												str	+=						"<table class='info'>"
+												str	+=							"<tr>"
+												str	+=								"<td class='t'><a href='#'><i class='far fa-heart'></i></a></td>"
+												str	+=								"<td>"+item.likes+"</td>"
+												str	+=								"<td class='t count'>조회수</td>"
+												str	+=								"<td class='t'>작성일자</td>"
+												str	+=								"<td>"+item.vUpdateDate+"</td>"
+												str	+=							"</tr>"
+												str	+=						"</table>"
+												str	+=						"<div class='content'>"+item.visitContens+"</div>"
+												str	+=						"<div class='button-wrapper'>"
+												str	+=							"<c:url var='vModify' value='visitModifyView.do'>"
+												str	+=								"<c:param name='visitNo' value='"+item.visitNo+"'></c:param>"
+												str	+=							"</c:url>"
+												str	+=							"<c:url var='vDelete' value='visitDelete.do'>"
+												str	+=								"<c:param name='visitNo' value='"+item.visitNo+"'></c:param>"
+												str	+=								"<c:param name='renameFilename' value='"+item.renameFilename"'></c:param>"
+												str	+=							"</c:url>"
+												str	+=							"<a href='${vModify }'>수정 페이지로 이동</a> &nbsp; "
+												str	+=							"<a href='${vDelete }'>삭제하기</a>"
+												str	+=						"</div>"
+												str	+=					"</div> <hr>"
+												str	+=				"<div class='reply-container'>"
+												str	+=					"<div id='reply'>"
+												str	+=						"<table align='center' width='500' cellspacing='0'>"
+												str	+=							"<tr>"
+												str	+=								"<td><textarea rows='3' cols='55' id='rContent' name='contents'></textarea></td>"
+												str	+=								"<td><button id='rSubmit' value='"+item.visitNo+"'>버튼</button></td>"
+												str	+=							"</tr>"
+												str	+=						"</table>"
+												str	+=						"<table align='center' width='500' border='1' cellspacing='0' id='rtb'>"
+												str	+=							"<thead>"
+												str	+=								"<tr>"
+												str	+=									"<td colspan='2'><b id='rCount'></b></td>"
+												str	+=								"</tr>"
+												str	+=							"</thead>"
+												str	+=							"<tbody></tbody>"
+												str	+=						"</table>" 
+												str	+=					"</div>"
+												str	+=					"<div id='inform-con'></div>"
+												str	+=				"</div></div></div>"
+												str	+=			"</a></div>";
+												});// each 
+												
+												// 8. 이전까지 뿌려졌던 데이터를 비워주고, <th>헤더 바로 밑에 위에서 만든 str을  뿌려준다.
+												// $(".grid").empty();// 셀렉터 태그 안의 모든 텍스트를 지운다.
+												str += "<!-- END OF $.each -->"
+												$(".grid:last").append(str);
+												makeGrid();
+										}
+									}
+								});// ajax
+							// 여기서 class가 listToChange인 것중 가장 처음인 것을 찾아서 그 위치로 이동하자.
+							var position = $(".grid__item").offset();// 위치 값
+							// 이동  위로 부터 position.top px 위치로 스크롤 하는 것이다. 그걸 500ms 동안 애니메이션이 이루어짐.
+				
+				        };//if : 현재 스크롤의 top 좌표가  > (게시글을 불러온 화면 height - 윈도우창의 height) 되는 순간
+						
+						// lastScrollTop을 현재 currentScrollTop으로 갱신해준다.
+ 					};// 다운스크롤인 상태
+				});
+			// 그리드 고정
+			function makeGrid(){
+				
+				var support = {
+						transitions : Modernizr.csstransitions
+					},
+					// transition end event name
+					transEndEventNames = {
+						'WebkitTransition' : 'webkitTransitionEnd',
+						'MozTransition' : 'transitionend',
+						'OTransition' : 'oTransitionEnd',
+						'msTransition' : 'MSTransitionEnd',
+						'transition' : 'transitionend'
+					}, transEndEventName = transEndEventNames[Modernizr
+							.prefixed('transition')], onEndTransition = function(
+							el, callback) {
+						var onEndCallbackFn = function(ev) {
+							if (support.transitions) {
+								if (ev.target != this)
+									return;
+								this.removeEventListener(transEndEventName,
+										onEndCallbackFn);
+							}
+							if (callback && typeof callback === 'function') {
+								callback.call(this);
+							}
+						};
+						if (support.transitions) {
+							el.addEventListener(transEndEventName, onEndCallbackFn);
+						} else {
+							onEndCallbackFn();
+						}
+					};
+
+						new GridFx(
+								document.querySelector('.grid'),
+								{
+									imgPosition : {
+										x : -0.5,
+										y : 1
+									},
+									onOpenItem : function(instance, item) {
+										instance.items
+												.forEach(function(el) {
+													if (item != el) {
+														var delay = Math.floor(Math
+																.random() * 50);
+														el.style.WebkitTransition = 'opacity .5s '
+																+ delay
+																+ 'ms cubic-bezier(.7,0,.3,1), -webkit-transform .5s '
+																+ delay
+																+ 'ms cubic-bezier(.7,0,.3,1)';
+														el.style.transition = 'opacity .5s '
+																+ delay
+																+ 'ms cubic-bezier(.7,0,.3,1), transform .5s '
+																+ delay
+																+ 'ms cubic-bezier(.7,0,.3,1)';
+														el.style.WebkitTransform = 'scale3d(0.1,0.1,1)';
+														el.style.transform = 'scale3d(0.1,0.1,1)';
+														el.style.opacity = 0;
+													}
+												});
+										},
+										onCloseItem : function(instance, item) {
+											instance.items
+													.forEach(function(el) {
+														if (item != el) {
+															el.style.WebkitTransition = 'opacity .4s, -webkit-transform .4s';
+															el.style.transition = 'opacity .4s, transform .4s';
+															el.style.WebkitTransform = 'scale3d(1,1,1)';
+															el.style.transform = 'scale3d(1,1,1)';
+															el.style.opacity = 1;
+			
+															onEndTransition(
+																	el,
+																	function() {
+																		el.style.transition = 'none';
+																		el.style.WebkitTransform = 'none';
+																	});
+														}
+													});
+										}
+								});
+						
+			}
+			// 댓글 목록 조회
 			function getReplyList(visitNo) {
 				$.ajax({
 					url : "replyList.do",
