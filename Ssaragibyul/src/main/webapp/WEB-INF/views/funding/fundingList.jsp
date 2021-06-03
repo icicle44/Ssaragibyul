@@ -35,11 +35,14 @@
 	padding: 10px;
 	font-size:12px;
 }
-
+#fuck{
+	width: 550px;
+	height : 550px;
+}
 .gridmain > * {
   float: left;  
-  width: 20%;
-  height: 35%;
+  width: 30%;
+  height: 30%;
   font-size:12px;
 }
 .btn{
@@ -93,12 +96,8 @@ width : 1540px;
 }
 </style>
 
-<script>
-/* ㅠㅜㅠㅜㅠㅜ  */
-</script>
 
-<body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="200">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
 	
 	<%-- <%@include file="introduce.jsp" %> --%>
 <%@include file="../../../header.jsp" %>
@@ -145,7 +144,7 @@ width : 1540px;
 						
 				<div class="gridmain">
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
-			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "fuck">
 			<table class="display" id="example">
 				<tr>
 					<td> 
@@ -202,13 +201,9 @@ width : 1540px;
 	</div>
 	<br>
 	<!--  -->
-	<br><br><br><br><br><br><br>
-	<br><br><br><br><br><br><br>
-
-	<hr>	
-	
-	<hr>		
- <button class="btn">프로젝트 더 보기</button>
+	<br><br><br><br><br><br><br>	
+ <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
+ 
 				</section>
 				<!--  -->
 				<!-- #section-funding -->
@@ -232,7 +227,7 @@ width : 1540px;
 						<div class="row align-items-stretch">
 				<div class="gridmain">
 		 <c:forEach var="e" items="${fListandFileEnd}" varStatus="status"> 
-			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-no=${e.projectNo }>
 			<table class="a_pj">
 				<tr>
 					<td> 
@@ -287,22 +282,64 @@ width : 1540px;
 			 </div>
 		</div>
 	</div>
-	<br><br><br>
-	<br><br><br>
-	<br><br><br>
-	<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="btn">프로젝트 더 보기</button> 
+	<br>
+	<!--  -->
+	<br><br><br><br><br><br><br>	
+	
+<!--  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button> -->
+<button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button>
 				</section>
 	<br>
 	<br>
-		<br>
+	<br>
 
  		<%@include file="../../../footer.jsp" %>
 	
 	</main>
-
+<!-- 	  											내가 해야 하는 AJAX ! 
+	$("div:last").attr("data-no")
+	var lastNo
+	<script>
+	function getMoreFundingList() {
+		var projectNo = '${funding.projectNo }'
+		$.ajax({
+			url : "fundingListMore.do",  
+			type : "post",
+			data : { "projectNo(Cont)" : projectNo },
+			dataType : "json",
+			success : function(data) {
+				var $tableBody = $("#rtb tbody");
+				$tableBody.html(""); // 비워주기
+				var $tr;
+				var $rWriter;
+				var $rContent;
+				var $rCreateDate;
+				var $btnArea;
+				$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
+				if(data.length > 0) {
+					for(var i in data) {
+						$tr = $("<tr>");
+						$rWriter = $("<td width='100'>").text(data[i].userId);
+						$rContent = $("<td>").text(data[i].contents);
+						$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
+						$btnArea = $("<td>")
+						.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");'>수정 </a>")							
+						.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");'> 삭제</a>");
+						$tr.append($rWriter);
+						$tr.append($rContent);
+						$tr.append($rCreateDate);
+						$tr.append($btnArea);
+						$tableBody.append($tr);
+					}
+				}
+			},
+			error : function() {
+				alert("죽어!");
+			}
+		});
+	}
+	</script>
+ -->  
 	<!-- .site-wrap -->
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

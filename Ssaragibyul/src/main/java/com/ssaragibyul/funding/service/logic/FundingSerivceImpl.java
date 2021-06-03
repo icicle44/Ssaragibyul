@@ -83,6 +83,7 @@ public class FundingSerivceImpl implements FundingService {
 		ArrayList<Funding> fListandFile = fStore.printAllProject();
 		return fListandFile;
 	}
+	
 	@Override
 	public ArrayList<Funding> printAllProjectEnd() {
 		ArrayList<Funding> fListandFileEnd = fStore.printAllProjectEnd();
@@ -300,13 +301,39 @@ public class FundingSerivceImpl implements FundingService {
 	
 	@Override
 	public ArrayList<Funding> printAllProjectEndForMoeny() {
-		ArrayList<Funding> fListandFile = fStore.printAllProjectByMoneyEnd();
-		return fListandFile;
+		ArrayList<Funding> fListandFileEnd = fStore.printAllProjectByMoneyEnd();
+		return fListandFileEnd;
 	}
 
 	@Override
 	public ArrayList<Funding> printAllProjectEndForLike() {
-		ArrayList<Funding> fListandFile = fStore.printAllProjectByLikeEnd();
+		ArrayList<Funding> fListandFileEnd = fStore.printAllProjectByLikeEnd();
+		return fListandFileEnd;
+	}
+	
+	@Override
+	public ArrayList<Funding> printAllProjectLimit() {
+		ArrayList<Funding> fListandFile = fStore.printAllProjectLimit();
 		return fListandFile;
 	}
+	
+	@Override
+	public ArrayList<Funding> printAllProjectEndLimit() {
+		ArrayList<Funding> fListandFileEnd = fStore.printAllProjectEndLimit();
+		return fListandFileEnd;
+	}
+	
+	@Override
+	public ArrayList<FundingLike> printOneLike(int projectNo) {
+		return fStore.selectOneLike(projectNo);
+	}
+	
+	@Override
+	public Funding printOneCombine(int projectNo) {
+		return fStore.selectOneCombine(projectNo);
+	}
+	
+	
+	
+	
 }

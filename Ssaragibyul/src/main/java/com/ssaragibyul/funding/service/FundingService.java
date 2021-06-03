@@ -99,6 +99,13 @@ public interface FundingService {
 	public ArrayList<Funding> printAllProjectEndForMoeny();
 
 	public ArrayList<Funding> printAllProjectEndForLike();
+	
+	public ArrayList<Funding> printAllProjectLimit();
+	public ArrayList<Funding> printAllProjectEndLimit();
+
+	public ArrayList<FundingLike>  printOneLike(int projectNo);
+
+	public Funding printOneCombine(int projectNo);
 
 
 	

@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
@@ -44,25 +49,25 @@ public class FundingController {
 	 public String fundingIndex() {
 		 return "../../index";
 	 } // 인덱스(첫 사이트 접속 페이지)
-//																			 fundingList 기존 주석 백업
-//	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
-//	 public String fundingList(Model model) {
-//		 ArrayList<Funding> fList = fService.printAllProject();   
-//		 ArrayList<FundingFile> fListFile = fService.printAllProjectFile();		
-//		 if((!fList.isEmpty())&&(!fListFile.isEmpty())) {				
-//				model.addAttribute("fList", fList);
-//				model.addAttribute("fListFile", fListFile);
-//				return "funding/fundingList";
-//			}else {
-//				model.addAttribute("msg", "펀딩 목록조회 실패");
-//				return "common/errorPage";
-//			}
-//		}//펀딩 리스트 불러오는 컨트롤러(펀딩 페이지) funding, fundingFile(사진이름값 저장) 2개다 불러옴.
-//	 
+
 	 @RequestMapping(value="fundingList.do", method=RequestMethod.GET)
 	 public String fundingList(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectLimit();
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndLimit();
+		 if(!fListandFile.isEmpty()) {
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+		}//2개 테이블 조인해서 불러옴. 캐어려움 ㅡㅜㅠ 
+	 
+	 @RequestMapping(value="fundingListFullPro.do", method=RequestMethod.GET)
+	 public String fundingListFullPro(Model model) {
 		 ArrayList<Funding> fListandFile = fService.printAllProject();   
-		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndLimit();   
 		 if(!fListandFile.isEmpty()) {				
 				model.addAttribute("fListandFile", fListandFile);
 				model.addAttribute("fListandFileEnd", fListandFileEnd);
@@ -71,7 +76,21 @@ public class FundingController {
 				model.addAttribute("msg", "펀딩 목록조회 실패");
 				return "common/errorPage";
 			}
-		}//2개 테이블 조인해서 불러옴. 캐어려움 ㅡㅜㅠ
+		}
+	 
+	 @RequestMapping(value="fundingListFullEnd.do", method=RequestMethod.GET)
+	 public String fundingListFullEnd(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectLimit();
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+		}
 	
 	 @RequestMapping(value="suggestPage.do", method=RequestMethod.GET)
 	 public String SuggestMain() {
@@ -200,23 +219,46 @@ public class FundingController {
 		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
 
 		 
-
+//	원본
+//	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
+//	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+//		fService.addreadCountHit(projectNo); 
+//		
+//		Funding funding = fService.printOne(projectNo);
+//		FundingFile fundingFile = fService.printOneFile(projectNo);
+//		
+//		if ((funding != null)&&(fundingFile != null)) {
+//			mv.addObject("fundingFile", fundingFile);
+//			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
+//		} else {
+//			mv.addObject("msg", "펀딩 상세 조회 실패!");
+//			mv.setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}			//펀딩 상세 페이지
+	
+		 // 좋아요 추가
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 		fService.addreadCountHit(projectNo); 
 		
 		Funding funding = fService.printOne(projectNo);
+		
 		FundingFile fundingFile = fService.printOneFile(projectNo);
+
+		ArrayList<FundingLike>  fundingLike = fService.printOneLike(projectNo);
 		
 		if ((funding != null)&&(fundingFile != null)) {
+			mv.addObject("fundingLike", fundingLike);
 			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail3");
 		} else {
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
 	}			//펀딩 상세 페이지
+
 
 	
 	 @RequestMapping(value="fundingAccusation.do", method=RequestMethod.POST)

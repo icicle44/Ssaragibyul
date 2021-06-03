@@ -280,6 +280,21 @@ public class FundingStoreLogic implements FundingStore{
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingListEnd_Like");
 	}
 
+	public ArrayList<Funding> printAllProjectLimit() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectAllFundProjectLimit");
+	}
+
+	public ArrayList<Funding> printAllProjectEndLimit() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectAllFundProjectEndLimit");
+	}
+
+	public ArrayList<FundingLike> selectOneLike(int projectNo) {
+		return  (ArrayList)sqlSession.selectList("fundingMapper.selectOneLike", projectNo);
+	}
+
+	public Funding selectOneCombine(int projectNo) {
+		return sqlSession.selectOne("fundingMapper.selectOneCombine", projectNo);
+	}
 
 	
 }

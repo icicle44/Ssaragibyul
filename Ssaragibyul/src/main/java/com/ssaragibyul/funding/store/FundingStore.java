@@ -99,6 +99,11 @@ public interface FundingStore {
 	public ArrayList<Funding> printAllProjectByLike();
 	public ArrayList<Funding> printAllProjectByMoneyEnd();
 	public ArrayList<Funding> printAllProjectByLikeEnd();
+	public ArrayList<Funding> printAllProjectLimit();
+	public ArrayList<Funding> printAllProjectEndLimit();
+	
+	public ArrayList<FundingLike> selectOneLike(int projectNo);
+	public Funding selectOneCombine(int projectNo);
 }
 
 

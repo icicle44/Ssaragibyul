@@ -82,7 +82,8 @@
                     <div class="row form-group mb-5">
                       <div class="col-md-12">
                         <label  for="message">Message</label> 
-                        <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="신고사유를 적어주세여요" name="reportContent"></textarea>
+                       <textarea name="reportContent" rows="6" cols="30" wrap="virtual" placeholder="신고사유를 적어주세여요"></textarea>		
+                        <!-- <textarea name="message" id="message" cols="30" rows="7" class="form-control" placeholder="신고사유를 적어주세여요" name="reportContent"></textarea> -->
                       </div>
                     </div>
                     <input type="hidden" value="${funding.projectNo }" name="projectNo">
