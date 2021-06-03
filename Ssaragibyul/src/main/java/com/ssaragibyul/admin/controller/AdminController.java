@@ -289,7 +289,7 @@ public class AdminController {
 	}
 
 	// 펀딩 상세보기
-	@RequestMapping(value="adminFundingDetail.do", method = RequestMethod.POST)
+	@RequestMapping(value="adminFundingDetail.do", method = RequestMethod.GET)
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 		// 게시글 상세 조회
 		Funding funding = fService.printOne(projectNo);
@@ -306,6 +306,7 @@ public class AdminController {
 	}
 	
 	// 펀딩 삭제하기
+	@RequestMapping(value="adminFundingDelete.do")
 	public String fundingDelete() {
 		// TODO Auto-generated method stub
 		return null;
@@ -441,7 +442,7 @@ public class AdminController {
 	@RequestMapping(value="adminHistoryDetail.do", method = RequestMethod.GET)
 	public ModelAndView histoyDetail(ModelAndView mv, @RequestParam("siteNo") int siteNo) {
 		History histoy = aService.printOneHistoy(siteNo);
-		System.out.println("히스토리야 널이니???" + histoy);
+		//System.out.println("히스토리야 널이니???" + histoy);
 		if(histoy != null) {
 			mv.addObject("histoy", histoy).setViewName("admin/adminHistoryDetailView");
 		} else {
@@ -620,15 +621,36 @@ public class AdminController {
 	}
 
 	// 별보러가자 상세보기
-	public Visit visitDetail() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminVisitDetail.do", method = RequestMethod.GET)
+	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
+		Visit visit = aService.printOneVisit(visitNo);
+		if(visit != null) {
+			mv.addObject("visit", visit).setViewName("admin/adminVisitDetailView");
+		} else {
+			mv.addObject("msg", "별보러 가자 상세보기가 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 	// 별보러가자 삭제
-	public String visitDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminVisitDelete.do", method = RequestMethod.GET)
+	public String visitDelete(Model model, @RequestParam("visitNo") int visitNo,
+								@RequestParam("renameFilename") String renameFilename,
+								HttpServletRequest request) {
+		// 업로드된 파일 삭제
+		if(renameFilename != "") {
+			deleteFile(renameFilename, request);
+		}
+		
+		// 디비에 데이터 업데이트
+		int result = aService.removeVisit(visitNo);
+		if(result > 0) {
+			return "redirect:adminVisitList.do";
+		} else {
+			model.addAttribute("msg", "별보러가자 삭제 실패");
+			return "common/errorPage";
+		}
 	}
 
 	// 받은 쪽지함 리스트

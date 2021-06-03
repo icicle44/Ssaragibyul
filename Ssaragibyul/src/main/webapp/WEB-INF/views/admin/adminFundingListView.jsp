@@ -107,7 +107,12 @@
 												<tr>
 													<td align="center">${list.projectNo }</td>
 													<td align="center">${list.userId }</td>
-													<td align="center">${list.subjectName }</td>
+													<td align="center">
+														<c:url var="fDetail" value="adminFundingDetail.do">
+															<c:param name="projectNo" value="${list.projectNo }"></c:param>
+														</c:url>
+													<a href="${fDetail}">${list.subjectName }</a>
+													</td>
 													<td align="center">${list.goalMoney }</td>
 													<td align="center">${list.sumMoney }</td>
 													<td align="center">${list.startDate }</td>

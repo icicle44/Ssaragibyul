@@ -294,6 +294,9 @@
 		</div>
 		<!-- End Custom template -->
 	</div>
+	</div>
+	</div>
+	</div>
 	<!--   Core JS Files   -->
 	<script src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
 	<script src="resources/js/admin/core/popper.min.js"></script>

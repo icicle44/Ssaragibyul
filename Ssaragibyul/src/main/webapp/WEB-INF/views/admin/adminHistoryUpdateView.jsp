@@ -92,8 +92,20 @@
 									            <tr>
 					                                <td>사적지 유형</td>
 					                                <td>
-					                                    <input type="text" size="50" name="stieType" value="${history.stieType }">
+					                                    <input type="text" size="50" name="siteType" value="${history.siteType }">
 					                                </td>
+					                            </tr>
+					                            <tr>
+					                            	<td>위도</td>
+					                            	<td>
+					                            		<input type="number" step="0.0000001" size="50" name="latitude" value="${history.latitude }">
+					                            	</td>
+					                            </tr>
+					                            <tr>
+					                            	<td>경도</td>
+					                            	<td>
+					                            		<input type="number" step="0.0000001" size="50" name="longitude" value="${history.longitude }">
+					                            	</td>
 					                            </tr>
 					                            <c:forTokens items="${ history.siteAddr }" delims="," var="addr" varStatus="status">
 					               					<c:if test="${ status.index eq 0 }">

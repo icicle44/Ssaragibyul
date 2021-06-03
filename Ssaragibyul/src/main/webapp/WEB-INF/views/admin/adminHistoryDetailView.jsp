@@ -35,6 +35,11 @@
 		.btn-outline-secondary {
 			margin: 5px;
 		}
+		
+		#map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
 	</style>
 	
 </head>
@@ -78,6 +83,11 @@
 									<div class="table-responsive">
 										<table class="table table-hover" >
 											<tbody>
+												<tr>
+													<td colspan="2" style="text-align: center;">
+														<img alt="" src="resources/upLoadFile/${histoy.renameFilename }">
+													</td>
+												</tr>
                                                <tr>
 									               <td>사적지 이름</td>
 									               <td>${ histoy.siteName }</td>
@@ -85,6 +95,14 @@
 									            <tr>
 					                                <td>사적지 유형</td>
 					                                <td>${ histoy.siteType }</td>
+					                            </tr>
+					                            <tr>
+					                            	<td>지도</td>
+					                            	<td>					
+					                            	<input type="hidden" id="lat" value="${histoy.latitude}" >	               
+					                            	<input type="hidden" id="lng" value="${histoy.longitude}" >	               
+					                            		<div id="map"></div>
+					                            	</td>
 					                            </tr>
 						                        <tr>
 						                            <td>주소</td>
@@ -151,6 +169,44 @@
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
     
 	<script>
+	function initMap() {
+
+		  // The location of Uluru
+		  //var lat = document.getElementById("lat").value;
+		  //var lng = document.getElementById("lng").value;
+		  var latitude = Number($('#lat').val());
+		  var longitude = Number($('#lng').val());
+		  console.log(latitude + ", " + longitude);
+		 
+		  var uluru = {lat: latitude, lng: longitude};
+
+		  // The map, centered at Uluru
+
+		  var map = new google.maps.Map(
+
+		      document.getElementById('map'), {zoom: 15, center: uluru});
+
+		  // The marker, positioned at Uluru
+
+		  var marker = new google.maps.Marker({position: uluru, map: map});
+
+		}
+
+		    </script>
+
+		    <!--Load the API from the specified URL
+
+		    * The async attribute allows the browser to render the page while the API loads
+
+		    * The key parameter will contain your own API key (which is not needed for this tutorial)
+
+		    * The callback parameter executes the initMap() function
+
+		    -->
+
+		    <script async defer
+
+		    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyTc2MMJwLr1q-4zJKrWn9gUx1OYmyIS8&callback=initMap">
 
 	</script>
 </body>

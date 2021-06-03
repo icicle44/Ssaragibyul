@@ -414,7 +414,7 @@
 							<div class="collapse" id="tables">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="#">
+										<a href="adminVisitList.do">
 											<span class="sub-item">별 보러 가자 리스트</span>
 										</a>
 									</li>

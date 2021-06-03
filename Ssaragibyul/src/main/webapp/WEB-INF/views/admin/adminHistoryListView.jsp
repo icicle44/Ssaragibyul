@@ -115,12 +115,14 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										<button type="button" class="btn btn-warning float-right" onclick="location.href='adminHistoryWriteView.do';">등록하기</button>
 										<!-- 페이징 -->
 										<table style="height : 50px; text-align: center; font-size: 12px;">
 											<tr align="center" height="20" >
 												<td colspan="8">
 													<!-- 이전 --> 
-													<c:url var="before" value="adminHistoryList.do">
+													<c:url var="before" value="adminHistoryLis
+													t.do">
 														<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 													</c:url> 
 													<c:if test="${pi.currentPage <= 1 }">

@@ -109,13 +109,13 @@
 					                            <tr>
 					                            	<td>위도</td>
 					                            	<td>
-					                            		<input type="number" size="50" name="latitude">
+					                            		<input type="number" step="0.0000001" size="50" name="latitude">
 					                            	</td>
 					                            </tr>
 					                            <tr>
 					                            	<td>경도</td>
 					                            	<td>
-					                            		<input type="number" size="50" name="longitude">
+					                            		<input type="number" step="0.0000001" size="50" name="longitude">
 					                            	</td>
 					                            </tr>
 					                            <c:forTokens items="${ history.siteAddr }" delims="," var="addr" varStatus="status">

@@ -31,7 +31,6 @@
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
 </head>
 <body>
-<!-- 로고들이 다 안나와요 ㅠㅠ -->
 	<div class="wrapper">
 		<%@include file="header.jsp" %>
 
@@ -79,8 +78,7 @@
 												<option value="content"
 													<c:if test="${search.searchCondition == 'content' }">selected</c:if>>내용</option>
 											</select> <input type="text" name="searchValue"
-												value="${ search.searchValue }"> <input
-												type="submit" value="검색">
+												value="${ search.searchValue }"> <input type="submit" value="검색">
 										</form>
 									</div>
 								</div>
