@@ -82,15 +82,14 @@
 				<li><a class="nav-link" style="color: #000061"><strong>프로젝트 만들기</strong></a></li>
 				<li><a href="#sectionSuggest1" class="nav-link">1. 기본정보</a></li>
 				<li><a href="#sectionSuggest2" class="nav-link">2. 스토리</a></li>
-				<li><a href="#sectionSuggest3" class="nav-link">3. 리워드</a></li>
-				<li><a href="#sectionSuggest4" class="nav-link">4. 안내사항</a></li>
+				<li><a href="#sectionSuggest4" class="nav-link">3. 안내사항</a></li>
 			</ul>
 		</div>
 	</header>
 	
 
 	<main class="main-content">
-		<form action="fundingRegister.do" method="post" enctype="multipart/form-data">
+		<form action="donationRegister.do" method="post" enctype="multipart/form-data">
 		<br><br><br><br> <br><br><br><br>
 
 			<section id="sectionSuggest1">
@@ -130,7 +129,7 @@
 						<td>대표 이미지</td>
 					</tr>
 					<tr>
-						<td><input type="file" name="uploadFileMain"></td>
+						<td><input type="file" name="uploadFile"></td>
 					</tr>
 				</table>
 				<br><br><br><br><br><br><br>
@@ -154,7 +153,7 @@
 					</tr>
 					<tr>
 						<td> <input type="file" name="uploadFileSub1">  
-						    <input type="file" name="uploadFileSub2"></td>
+						    <input type="file" name="uploadFileSud2"></td>
 					</tr>
 					<tr>
 						<td>프로젝트 스토리</td>
@@ -175,42 +174,7 @@
 
 			<br><br><br><br><br><br><br><br><br>
 
-			<section id="sectionSuggest3">
-			<br><br><br><br>
-				<table width="550" cellspacing="10" class="sug">
-					<tr>
-						<td>리워드 금액</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="optionPrice"></td>
-					</tr>
-					<tr>
-						<td>리워드 제공 가능 수</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="optionLimit"></td>
-					</tr>
-					<tr>
-						<td>리워드 제목</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="productName"></td>
-					</tr>
-					<tr>
-						<td>리워드 내용</td>
-					</tr>
-					<tr>
-						<td>
-							<textarea name="productContent" rows="6" cols="30" wrap="virtual"></textarea>
-						</td>
-					</tr>
-				</table>
-				<br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest4" style="text-decoration: none;">다음단계</a>
-			</section>
-
-			<br><br><br><br><br><br><br><br>
-
+			
 			<section id="sectionSuggest4">
 				<br><br><br><br>
 				<table width="550" cellspacing="10" class="sug">
@@ -244,7 +208,7 @@
 
 		</form>
 		<!-- 
-		<a class="getstarted scrollto" href="fundingList.do"
+		<a class="getstarted scrollto" href="donationList.do"
 			style="text-decoration: none;">뭘 쓰지</a>
 		 -->
 		

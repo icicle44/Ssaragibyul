@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="donationMapper">
+
 	<!-- 기부 -->
 	<resultMap type="Donation" id="donationResultMap">
 		<id property="projectNo" column="D_POJECT_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="subjectName" column="SUBJECT"/>
-		<result property="productName" column="PRODUCT_NAME"/>
 		<result property="goalMoney" column="GOAL_MONEY"/>
 		<result property="sumMoney" column="SUM_MONEY"/>
-		<result property="optionPrice" column="OPTION_PRICE"/>
-		<result property="optionLimit" column="OPTION_LIMIT"/>
 		<result property="startDate" column="START_DATE"/>
 		<result property="finDate" column="FIN_DATE"/>
 		<result property="projectStory" column="PROJ_STORY"/>
-		<result property="productContent" column="PRODUCT_CONTENT"/>
 		<result property="warningIntro" column="WARNING_INTRO"/>
 		<result property="likeCount" column="LIKE_COUNT"/>
 		<result property="hitsCount" column="HITS_COUNT"/>
 		<result property="projectCode" column="PROJECT_CODE"/>
-		<result property="deleiveryDate" column="DELIVERY_DATE"/>
+		
 		<collection property="donationFile" resultMap="donationFileResultMap"></collection>
 	</resultMap>
 	
@@ -39,7 +36,6 @@
 		<result property="uploadTime" column="UPLOAD_TIME"/>
 		<result property="projectNo" column="F_PROJECT_NO"/>
 	</resultMap>
-	
 	
 	<!-- 기부 내역 -->
 	<resultMap type="DonationLog" id="DonationLogResultMap">
@@ -86,13 +82,30 @@
 	</resultMap>
 
 
+	<!-- ============== -->
+
+
     <!--기부 리스트-->
  	<select id="selectDonationList" resultMap="donationResultMap">
 		SELECT * FROM DONATION, DONATION_FILE
 		WHERE DONATION.D_PROJECT_NO = DONATION.D_PROJECT_NO ORDER BY 1 DESC
 	</select> 
-
-
+	
+	<!-- 기부 제안 등록 -->
+	<insert id="insertDonation" parameterType="Donation">
+		INSERT INTO DONATION
+		VALUES(SEQ_DONATION_NO.NEXTVAL, #{userId}, #{subjectName}, #{goalMoney}, DEFAULT, SYSDATE,
+		#{finDate}, #{projectStory}, #{warningIntro}, DEFAULT, DEFAULT, 1)
+	</insert>
+	
+	<!-- 기부 제안 파일 등록 -->
+	<insert id="insertDonationFile" parameterType="DonationFile">
+		INSERT INTO
+		DONATION_FILE
+		VALUES(SEQ_DONATION_FILE_NO.NEXTVAL,#{videoUrl},#{fileName},NULL,'AAA',
+		#{fileSub1Name},NULL,'BBB',#{fileSub2Name},NULL,'CCC',SYSTIMESTAMP,SEQ_DONATION_NO.CURRVAL)
+	</insert>
+	
 	<!-- 관리자용 -->
 	<select id="selectDonationListCount" resultType="_int">
 	   SELECT COUNT(*) FROM DONATION

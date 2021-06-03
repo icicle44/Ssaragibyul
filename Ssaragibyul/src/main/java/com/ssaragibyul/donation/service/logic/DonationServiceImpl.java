@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
+import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
+import com.ssaragibyul.funding.domain.Funding;
 
 @Service
 public class DonationServiceImpl implements DonationService{
@@ -25,6 +27,24 @@ public class DonationServiceImpl implements DonationService{
 		return dListandFile;
 	}
 	
+	// 기부 리스트
+	@Override
+	public ArrayList<Donation> printAllProjectEnd() {
+		ArrayList<Donation> dListandFileEnd = dStore.printAllProjectEnd();
+		return dListandFileEnd;
+	}
+
+	// 기부 제안 등록
+	// 한 개의 컨트롤러에서 두 개의 store메소드 사용, Controller or ServiceImol에서 사용 가능.
+	@Override
+	public int registerDonation(Donation donation, DonationFile donationFile) {
+		int result = dStore.insertDonation(donation);
+		int dResult = 0;
+		if (result > 0) {
+			dResult = dStore.insertDonation(donationFile);
+		}
+		return dResult;
+	}
 	
 	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
@@ -50,11 +70,6 @@ public class DonationServiceImpl implements DonationService{
 		return null;
 	}
 
-	@Override
-	public int registerDonation(Donation donation) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int modifyDonation(Donation donation) {
@@ -133,6 +148,9 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
 
 
 }

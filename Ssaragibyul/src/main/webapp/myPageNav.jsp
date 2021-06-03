@@ -41,7 +41,8 @@
      </div>
      <div id="rest-point">
          <span id="point">잔여포인트 : </span>
-         <span id="point-num">100,000원</span>
+         <span id="point-num">${myPoint.total }</span>
+         <span id="point-num">예약중 : ${myPoint.reserved *-1 }</span>
      </div>
      </c:if>
      <div id="logout">

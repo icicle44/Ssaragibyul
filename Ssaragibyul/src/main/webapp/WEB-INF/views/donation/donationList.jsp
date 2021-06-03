@@ -123,7 +123,7 @@ margin: auto;
 					<tr>
 						<td></td>
 						<td id="name_css">
-							<a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${d.productName}</a>
+							<%-- <a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${d.productName}</a> --%>
 						</td>
 					</tr>
 				</table>
@@ -215,7 +215,7 @@ margin: auto;
 
 			<br><br><br><br><br><br><br>
 			<section class="row align-items-stretch photos " id="section-funding3">
-				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;시발 프로젝트</h2>&nbsp;&nbsp;
+				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료된 프로젝트</h2>&nbsp;&nbsp;
 				<select name = "chose1" class="select">
           			<option value = "news_list" selected>최신글 순</option>
 		          	<option value = "money_list">모금액 순</option>

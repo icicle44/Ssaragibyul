@@ -23,13 +23,17 @@ import com.google.gson.JsonIOException;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
+import com.ssaragibyul.point.domain.MyPoint;
+import com.ssaragibyul.point.service.PointService;
 
 @Controller
 public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
-
+	
+	@Autowired
+	private PointService pntService;
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
@@ -173,8 +177,12 @@ public class MemberController {
 	public String myInfoView(Member member, HttpSession session, Model model) {
 		String userId = ((Member)session.getAttribute("loginUser")).getUserId(); // member 객체로 강제 변환!
 		Independence independence = mService.mypage(userId);
+		MyPoint myPoint = pntService.getMyPoint(userId);
 		if (independence != null) {
 			model.addAttribute("independence", independence);
+			if(myPoint != null) {
+				model.addAttribute("myPoint", myPoint);
+			}
 			return "mypage/myPageMain";
 		}
 		model.addAttribute("msg","정보 수정 실패");

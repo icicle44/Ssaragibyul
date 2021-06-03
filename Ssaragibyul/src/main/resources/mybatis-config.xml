@@ -23,6 +23,12 @@
 		<typeAlias type="com.ssaragibyul.point.domain.PointAndProject" alias="PointAndProject"/>
 		<typeAlias type="com.ssaragibyul.history.domain.History" alias="History"/>
 		<typeAlias type="com.ssaragibyul.point.domain.MyPoint" alias="MyPoint"/>
+		
+      <typeAlias type="com.ssaragibyul.donation.domain.Donation" alias="Donation"/>
+      <typeAlias type="com.ssaragibyul.donation.domain.DonationFile" alias="DonationFile"/>
+      <typeAlias type="com.ssaragibyul.donation.domain.DonationLog" alias="DonationLog"/>
+      <typeAlias type="com.ssaragibyul.donation.domain.DonationReport" alias="DonationReport"/>
+      <typeAlias type="com.ssaragibyul.donation.domain.DonationLike" alias="DonationLike"/>
 	</typeAliases>
 	
 	<mappers>
@@ -33,5 +39,6 @@
 		<mapper resource="mappers/visit-mapper.xml"></mapper>
 		<mapper resource="mappers/point-mapper.xml"></mapper>
 		<mapper resource="mappers/history-mapper.xml"></mapper>
+      	<mapper resource="mappers/donation-mapper.xml"></mapper>
 	</mappers>
 </configuration>

@@ -5,20 +5,24 @@ import java.util.ArrayList;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
+import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 
 public interface DonationService {
 
-	public int addLikeCount(int dProjectNo, DonationLike dLike);
 	public ArrayList<Donation> printAllProject(); // 기부 리스트
 
+	public ArrayList<Donation> printAllProjectEnd(); // 기부 리스트
+
+	public int registerDonation(Donation donation, DonationFile donationFile); // 기부 제안 등록
+	
 	public int getListCount();
 
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
 	public Donation printOne(int dProjectNo);
+	public int addLikeCount(int dProjectNo, DonationLike dLike);
 
-	public int registerDonation(Donation donation);
 
 	public int modifyDonation(Donation donation);
 
@@ -47,6 +51,7 @@ public interface DonationService {
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
+import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.store.DonationStore;
 
@@ -26,11 +27,30 @@ public class DonationStoreLogic implements DonationStore{
 	}
 	
 	@Override
+	public ArrayList<Donation> printAllProjectEnd() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationListEnd");
+	}
+
+	// 기부 제안 등록
+	@Override
+	public int insertDonation(Donation donation) {
+		return sqlSession.insert("donationMapper.insertDonation", donation);
+	}
+	
+	// 기부 제안 파일 등록
+	@Override
+	public int insertDonation(DonationFile donationFile) {
+		return sqlSession.insert("donationMapper.insertDonationFile", donationFile);
+	}
+	
+	
+	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
 		return dProjectNo;
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 	@Override
 	public int getListCount() {
@@ -133,6 +153,9 @@ public class DonationStoreLogic implements DonationStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
 
 
 }
