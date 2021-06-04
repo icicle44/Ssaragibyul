@@ -45,7 +45,6 @@ public class VisitStoreLogic implements VisitStore{
 	// 조회수 증가
 	@Override
 	public int addHitsCount(int visitNo) {
-		log.debug("session.update('visitMapper.updateHitCount', visitNo)"+ session.update("visitMapper.updateHitCount", visitNo));
 		return session.update("visitMapper.updateHitCount", visitNo);
 	}
 	

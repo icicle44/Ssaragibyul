@@ -154,55 +154,21 @@
 		<script src="/resources/js/jquery-ui.min.js"></script>
 		<script>
 			$(function() {
+				var visitNo = "";
 				makeGrid();
-				
 				/* ============ 이미지 클릭 시 동작 ================*/
 				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					$(".count").next().remove();
 					visitNo = $(this).attr("data-visitNo"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
+					registReply(visitNo);
 					addHitsCount(visitNo);
 					getReplyList(visitNo);// 댓글 목록 조회1
 					console.log(visitNo);
 				});
-
-				// 댓글 등록
-				var visitNo = "";
-				var rContent = "";
-				$(document).on('click','#rSubmit', function() { // 등록버튼을 클릭하면 아래 코드 실행
-							visitNo = $(this).attr("value"); // 클릭한 버튼의 value값을 가져옴
-							/* alert(visitNo); */
-							rContent = $(this).closest("td").prev().children(
-									"textarea").val(); // 클릭한 버튼 근처의 textarea를 가져옴
-
-							$.ajax({
-								url : "addReply.do",
-								type : "post",
-								data : {
-									"no" : visitNo,
-									"contents" : rContent
-								},
-								success : function(data) {
-									if (data == "success") {
-										// 댓글 목록 조회2
-										// 등록 버튼 누를 때 visitNo을 가져가서 댓글 목록 다시 불러옴
-										// visitNo를 특정할 수 없기 때문에 이를 자동으로 보내고 받을 수 없어서 목록 조회 2번하는 것
-										getReplyList(visitNo);
-									} else {
-										alert("댓글 등록 실패");
-									}
-								},
-								error : function() {
-									alert("서버 통신 실패!(댓글등록)");
-								}
-							});
-							// 작성 후 내용 초기화
-							rContent = $(this).closest("td").prev().children(
-									"textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
-						})
+				
 			});
 			/* 그리드 끝 */
-			var visitNo = "";
 				/* ============ 스크롤 ================*/
 				// 1. 스크롤 이벤트 최초 발생
 				$(window).scroll(function(){
@@ -447,11 +413,9 @@
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) {
 								$tr = $("<tr>");
-								$rWriter = $("<td width='100'>").text(
-										data[i].nick);
+								$rWriter = $("<td width='100'>").text(data[i].nick);
 								$rContent = $("<td>").text(data[i].contents);
-								$rCreateDate = $("<td width='100'>").text(
-										data[i].enrollDate);
+								$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
 								$btnArea = $("<td>").append(
 										"<a href='#' onclick='modifyReply(this,"
 												+ visitNo + ","
@@ -471,7 +435,7 @@
 						} else {
 							$tr = $("<tr>");
 							$td = $("<td>").text("댓글이 없습니다.")///////////////////
-							$tr.append($rWriter);
+							$tr.append($td);
 							$tableBody.append($tr);
 						}
 					},
@@ -480,6 +444,40 @@
 					}
 				});
 			}
+			// 댓글 등록
+			function registReply(visitNo){
+				var rContent = "";
+				$(document).on('click','#rSubmit', function() { // 등록버튼을 클릭하면 아래 코드 실행
+							//alert(visitNo);
+							rContent = $(this).closest("td").prev().children(
+									"textarea").val(); // 클릭한 버튼 근처의 textarea를 가져옴
+
+							$.ajax({
+								url : "addReply.do",
+								type : "post",
+								data : {
+									"no" : visitNo,
+									"contents" : rContent
+								},
+								success : function(data) {
+									if (data == "success") {
+										// 댓글 목록 조회2
+										// 등록 버튼 누를 때 visitNo을 가져가서 댓글 목록 다시 불러옴
+										// visitNo를 특정할 수 없기 때문에 이를 자동으로 보내고 받을 수 없어서 목록 조회 2번하는 것
+										getReplyList(visitNo);
+									} else {
+										alert("댓글 등록 실패");
+									}
+								},
+								error : function() {
+									alert("서버 통신 실패!(댓글등록)");
+								}
+							});
+							// 작성 후 내용 초기화
+							rContent = $(this).closest("td").prev().children(
+									"textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
+						});
+			};
 			// 댓글 수정
 			function modifyReply(obj, visitNo, replyNo, contents) {
 				$trModify = $("<tr>");
@@ -525,7 +523,7 @@
 						if (data == "success") {
 							getReplyList(visitNo); // 목록조회3
 						} else {
-							alert("댓글 조회 실패!");
+							alert("댓글이 없습니다");
 						}
 					},
 					error : function() {

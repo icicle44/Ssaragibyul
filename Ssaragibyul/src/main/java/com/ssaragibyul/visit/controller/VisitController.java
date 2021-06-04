@@ -231,7 +231,7 @@ public class VisitController {
 			Gson gson = new GsonBuilder().create(); 
 			gson.toJson(rList, response.getWriter());
 		}else {
-
+			
 		}
 	}
 	// 댓글수정
