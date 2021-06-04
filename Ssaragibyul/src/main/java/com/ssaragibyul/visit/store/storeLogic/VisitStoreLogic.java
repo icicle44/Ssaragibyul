@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitLike;
 import com.ssaragibyul.visit.store.VisitStore;
 @Repository
 public class VisitStoreLogic implements VisitStore{
@@ -80,55 +81,41 @@ public class VisitStoreLogic implements VisitStore{
 	public int deleteVisit(int visitNo) {
 		return session.delete("visitMapper.deleteVisit", visitNo);
 	}
-
+	// 댓글 목록 조회
 	@Override
 	public ArrayList<Reply> selectAllReply(int visitNo) {
 		return (ArrayList)session.selectList("visitMapper.selectReply", visitNo);
 	}
-
+	// 댓글 등록
 	@Override
 	public int insertReply(Reply reply) {
 		return session.insert("visitMapper.insertReply", reply);
 	}
-
+	// 댓글 수정
 	@Override
 	public int updateReply(Reply reply) {
 		return session.update("visitMapper.updateReply", reply);
 	}
-
+	// 댓글 삭제
 	@Override
 	public int deleteReply(int replyNo) {
 		return session.delete("visitMapper.deleteReply", replyNo);
 	}
-	// Review 좋아요 유무 체크
-	public int checkLikes(int visitNo, String userId) {
-		int result =0;
-
-		return result;
+	// 좋아요 증가
+	@Override
+	public int plusLikesCount(VisitLike likes) {
+		return session.insert("visitMapper.plusLikesCount", likes);
 	}
-	// 좋아요 0일때 plus
-	public int plusLikesReview(String userId, int visitNo) {
-		int result = 0;
-
-		return result;
+	// 좋아요 감소
+	@Override
+	public int minusLikesCount(VisitLike likes) {
+		return session.delete("visitMapper.minusLikesCount", likes);
 	}
-	// 좋아요 0보다 클때 plus
-	public int updateLikesCountReview(int visitNo, String userId, String state) {
-		int likes = 0;
-
-		return likes;
+	// 좋아요 수 가져오기
+	@Override
+	public int getLikes(VisitLike likes) {
+		return session.selectOne("visitMapper.getLikes", likes);
 	}
-	// 좋아요 minus
-	public int minusLikesReview(String userId, int visitNo, String state) {
-		int likes = 0;
 
-		return likes;
-	}
-	// 좋아요 수
-	public int getLikes(String userId, int visitNo) {
-		int likes = 0;
-
-		return likes;
-	}
 
 }

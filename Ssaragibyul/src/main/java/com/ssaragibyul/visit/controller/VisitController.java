@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +28,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitLike;
 import com.ssaragibyul.visit.service.VisitService;
 
 @Controller
@@ -279,34 +279,24 @@ public class VisitController {
 			return "fail";
 		}
 	}
+	// 마지막 목록의 visitNo 가져오기
 	public Integer checkLastNo() {
 		Integer result = 0;
 		result = vService.printLastNo();
 		System.out.println("result : " + result);
 		return result;
 	}
-	
-	public int checkLikes(int visitNo, String userId) {
-		int result = 0;
-		return result;
+	@RequestMapping(value="plusLikesCount.do",method=RequestMethod.GET)
+	public void plusLikesCount(VisitLike likes) {
+		vService.plusLikesCount(likes);
 	}
-	public int updateLikesCount(int visitNo, String userId, String state) {
-		int result = 0;
-		return result;
+	@RequestMapping(value="minusLikesCount.do",method=RequestMethod.GET)
+	public void minusLikesCount(VisitLike likes) {
+		vService.minusLikesCount(likes);
 	}
-	public int plusLikesCount(String userId, int visitNo) {
+	public int getLikes(VisitLike likes) {
 		int result = 0;
-		
+		result = vService.getLikes(likes);
 		return result;
-	}
-	public int minusLikesCount(String userId, int visitNo, String state) {
-		int result = 0;
-		
-		return result;
-	}
-	public int getLikes(String userId, int visitNo) {
-		int likes = 0;
-
-		return likes;
 	}
 }

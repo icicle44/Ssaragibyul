@@ -74,7 +74,7 @@
 												<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">${vList.nickName } 님의 별</a></div>
 												<table class="info">
 													<tr>
-														<td class="t"><a href="#"><i class="far fa-heart"></i></a></td>
+														<td class="t"><a href="plusLikes()"><i class="far fa-heart"></i></a></td>
 														<!-- <i class="fas fa-heart"></i> -->
 														<td>${vList.likes }</td>
 														<td class="t count">조회수</td>
@@ -301,6 +301,7 @@
 												$(".grid:last").append(str);
 												console.log($("div[class^='a']"));
 												makeGrid();
+												location.reload();
 												click();
 										}
 									}
@@ -328,6 +329,25 @@
 					return visitNo;
 				});
 			};
+			function refresh(){
+		        // ajax option
+		        var ajaxOption = {
+		                url : url,
+		                async : true,
+		                type : "POST",
+		                dataType : "html",
+		                cache : false
+		        };
+		        
+		        $.ajax(ajaxOption).done(function(data){
+		            // Contents 영역 삭제
+		            $('#bodyContents').children().remove();
+		            // Contents 영역 교체
+		            $('#bodyContents').html(data);
+		        });
+
+				
+			}
 			// 그리드 고정
 			function makeGrid(){
 				
@@ -557,6 +577,15 @@
 					}
 				});
 			};
+/* 			// 좋아요 추가
+			function plusLikes(){
+				
+			}
+			// 좋아요 취소
+			function minusLikes(){
+				
+			} */
+			
 			// 조회수 증가
 			function addHitsCount(visitNo) {
 				$.ajax({

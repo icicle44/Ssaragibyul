@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitLike;
 import com.ssaragibyul.visit.service.VisitService;
 import com.ssaragibyul.visit.store.VisitStore;
 
@@ -89,36 +90,26 @@ public class VisitServiceImpl implements VisitService{
 		return r;
 		//return vStore.addHitsCount(visitNo);
 	}
-	
-	// Review 좋아요 유무 체크
-	public int checkLikes(int visitNo, String userId) {
-		int result =0;
 
-		return result;
-	}
 	// 좋아요 0일때 plus
 	public int plusLikesReview(String userId, int visitNo) {
 		int result = 0;
 
 		return result;
 	}
-	// 좋아요 0보다 클때 plus
-	public int updateLikesCountReview(int visitNo, String userId, String state) {
-		int likes = 0;
-
-		return likes;
+	// 좋아요 plus
+	@Override
+	public int plusLikesCount(VisitLike likes) {
+		return vStore.plusLikesCount(likes);
 	}
 	// 좋아요 minus
-	public int minusLikesReview(String userId, int visitNo, String state) {
-		int likes = 0;
-
-		return likes;
+	@Override
+	public int minusLikesCount(VisitLike likes) {
+		return vStore.minusLikesCount(likes);
 	}
 	// 좋아요 수
-	public int getLikes(String userId, int visitNo) {
-		int likes = 0;
-
-		return likes;
+	public int getLikes(VisitLike likes) {
+		return vStore.getLikes(likes);
 	}
 
 	@Override
@@ -126,6 +117,7 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
+
 
 
 }

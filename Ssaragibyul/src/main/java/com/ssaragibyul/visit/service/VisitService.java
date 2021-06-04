@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitLike;
 
 public interface VisitService {
 	/**
@@ -88,6 +89,12 @@ public interface VisitService {
 	public int getListCnt(Map<String, String> param);
 
 	public Integer printLastNo();
+
+	public int plusLikesCount(VisitLike likes);
+	
+	public int minusLikesCount(VisitLike likes);
+
+	public int getLikes(VisitLike likes);
 
 	
 }

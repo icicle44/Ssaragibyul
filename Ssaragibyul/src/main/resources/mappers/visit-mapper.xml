@@ -24,6 +24,12 @@
 		<result property="contents" column="CONTENTS"/>
 		<result property="enrollDate" column="REG_DATE"/>
 	</resultMap>
+	<resultMap type="VisitLike" id="likeResultMap">
+		<id property="likeNo" column="LIKE_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="likeYn" column="LIKES_YN"/>
+		<result property="visitNo" column="VISIT_NO"/>
+	</resultMap>
 	<resultMap type="VisitStat" id="visitStatResultMap">
     	<result property="visitDay" column="VISIT_DAY"/>
         <result property="visitStatCount" column="VISIT_STAT_COUNT"/>
@@ -166,21 +172,6 @@ FROM
       SELECT COUNT(*) FROM VISIT
     </select>
     
-    <select id="selectCountPostVisit" resultMap="visitStatResultMap">
-      SELECT DAY_NAME "VISIT_DAY", NVL(STAT_COUNT, 0) "VISIT_STAT_COUNT" FROM (
-      SELECT DAY, COUNT(*) "STAT_COUNT" FROM(
-      SELECT TO_CHAR(V_CREATE_DATE, 'D') "DAY_ORDER", CASE
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '1' THEN '일'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '2' THEN '월'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '3' THEN '화'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '4' THEN '수'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '5' THEN '목'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '6' THEN '금'
-      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '7' THEN '토'
-      END "DAY"
-      FROM VISIT ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) RIGHT OUTER JOIN DAY_LEVEL ON DAY = DAY_NAME
-    </select>
-    
 	<update id="updateHitCount">
 		UPDATE VISIT
 		SET VISIT_COUNT = VISIT_COUNT+1
@@ -232,4 +223,33 @@ FROM
 	<delete id="deleteReply">
 		DELETE VISIT_REPLY WHERE REPLY_NO = #{replyNo }
 	</delete>
+	
+	<!-- 좋아요  -->
+    <insert id="plusLikesCount">
+    	INSERT INTO VISIT_LIKES VALUES(SEQ_VISIT_LIKES.NEXTVAL, #{userId }, 'Y', #{visitNo })
+    </insert>
+    
+    <delete id="minusLikesCount">
+    	DELETE VISIT_LIKES WHERE VISIT_NO = #{visitNo } AND USER_ID = #{userId } 
+    </delete>
+    
+    <select id="getLIkes" resultMap="likeResultMap">
+    	SELECT COUNT (*) FROM VISIT_LIKE WHERE USER_ID = #{userId } AND VISIT_NO = #{visitNo } 
+    </select>
+    
+	<!-- Status -->
+	<select id="selectCountPostVisit" resultMap="visitStatResultMap">
+      SELECT DAY_NAME "VISIT_DAY", NVL(STAT_COUNT, 0) "VISIT_STAT_COUNT" FROM (
+      SELECT DAY, COUNT(*) "STAT_COUNT" FROM(
+      SELECT TO_CHAR(V_CREATE_DATE, 'D') "DAY_ORDER", CASE
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '1' THEN '일'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '2' THEN '월'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '3' THEN '화'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '4' THEN '수'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '5' THEN '목'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '6' THEN '금'
+      WHEN TO_CHAR(V_CREATE_DATE, 'D') = '7' THEN '토'
+      END "DAY"
+      FROM VISIT ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) RIGHT OUTER JOIN DAY_LEVEL ON DAY = DAY_NAME
+    </select>
 </mapper>

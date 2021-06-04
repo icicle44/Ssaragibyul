@@ -6,6 +6,7 @@ import java.util.List;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.domain.VisitLike;
 
 public interface VisitStore {
 	public int selectListCount();
@@ -24,4 +25,8 @@ public interface VisitStore {
 	public int updateReply(Reply reply);
 	public int deleteReply(int replyNo);
 	public Integer selectLastNo();
+	
+	public int plusLikesCount(VisitLike likes);
+	public int minusLikesCount(VisitLike likes);
+	public int getLikes(VisitLike likes);
 }
