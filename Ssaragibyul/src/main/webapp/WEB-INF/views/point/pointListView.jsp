@@ -36,7 +36,7 @@
 	
 				<section class="" id="table-upper">
 					<div id="title-area">
-						<span id="table-title">포인트 내역</span>
+						<span id="table-title-point">포인트 내역</span>
 					</div>
 					<div class="charge-div" align="right">
 						<div id="charge-box" align="right">
@@ -116,8 +116,11 @@
 												<td>프로젝트 진행 중</td>
 											</c:if>						
 										</c:if>
-										<c:if test="${point.eventCode == 3}">										
-											<td>[<span class="bold-text">별 보러 가자</span>] 게시 후 적립되었습니다.</td>
+										<c:url var="visitDetail" value="pointVisitDetail.do">
+											<c:param name="visitNo" value="${point.eventNo }"></c:param>
+										</c:url>
+										<c:if test="${point.eventCode == 3}">							
+											<td><a href="#" onclick="msgModal('${visitDetail }'); return false;">[ <span class="bold-text">별 보러 가자</span> ] 게시 후 적립되었습니다.</a></td>
 											<td></td>								
 										</c:if>
 										<c:url var="PresentSend" value="msgDetail.do">
@@ -282,6 +285,9 @@
 			<div id="modal_content">
 				
 			</div>
+			<div id="visitModal_content">
+			
+			</div>
 			<div id="chartModal_content">
 			
 			</div>
@@ -311,11 +317,16 @@
 			}, 500)
 		}
 		
+		function visitModal(url) {
+			$("#modal #visitModal_content").load(url);
+			setTimeout(function(){
+				$("#modal").fadeIn();
+			}, 500)
+		}
+		
 		function chartModal(url) {
 			$("#modal #chartModal_content").load(url);
-			setTimeout(function(){
 			$("#modal").fadeIn();
-			}, 500)
 		}
 		
 /* 		function searchList(eventCode) {
@@ -351,6 +362,10 @@
 			$("#modal_content").on("click", function() {
 				$("#modal").fadeOut();
 				$("#modal #modal_content").empty();
+			});
+			$("#visitModal_content").on("click", function() {
+				$("#modal").fadeOut();
+				$("#modal #visitModal_content").empty();
 			});
 			$("#chartModal_content").on("click", function() {
 				$("#modal").fadeOut();

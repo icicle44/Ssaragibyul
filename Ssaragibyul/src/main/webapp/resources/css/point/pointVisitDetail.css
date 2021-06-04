@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@200;300&display=swap');
+
+body{
+	font-family: 'Noto Serif KR', serif;
+}
+
+div, article, section {
+    --border: 1px solid black;
+    box-sizing: border-box;
+    --font-family: 'Noto Serif KR', serif;
+    --color: #464646;
+}
+
+#modal #title-area {
+	margin-top: 15px;
+	padding-left: 15px;
+}
+
+#modal #table-around {
+	width: 1000px;
+	max-width: calc(100% - 1em);
+	margin: 1em auto;
+	overflow: hidden;
+	border: 1px solid #327a81;
+	box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+	border-radius: 10px;
+	padding: 0px;
+}
+
+#modal table {
+	width: 100%;
+	border-collapse: collapse;
+	border: hidden;
+}
+
+#modal table td {
+	color: #464646;
+  	padding: 10px 15px;
+  	vertical-align: middle;
+  	font-size: 15px;
+  	line-height: 1em;
+  	text-align: left;
+  	height: 30px;
+}
+
+#modal table tr:first-child, tr:nth-child(2) {
+	background-color: #F5F5F5;
+
+}
+
+#modal table tr:first-child td:first-child {
+	text-align: center;
+}
+
+#modal table tr:first-child td:nth-child(2) {
+	text-align: left;
+	vertical-align: middle;
+	width: 65%;
+	height: 60px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+#modal table tr:last-child td {
+	border-top: hidden;
+	text-align: right;
+}
+
+#modal textarea {
+	resize: none;
+	border: none;
+	padding: 15px 10px;
+}
+
+#modal textarea:focus {
+	outline: none;
+}
+
+#modal #total {
+	--display: table-cell;
+	--vertical-align: middle;
+	width: 650px;
+}
+
+#modal #table-title {
+	font-size: 25px;
+	font-weight: bold;
+	color: #EB5C01;
+}

@@ -18,12 +18,16 @@ import com.ssaragibyul.point.domain.PointForChart;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.point.store.PointStore;
 import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.service.VisitService;
 
 @Service
 public class PointServiceImpl implements PointService{
 
 	@Autowired
 	private PointStore pntStore;
+	
+	@Autowired
+	private VisitService vService;
 	
 //	@Autowired
 //	private Point point;
@@ -155,6 +159,12 @@ public class PointServiceImpl implements PointService{
 	@Override
 	public PointForChart getPointForChart(String userId) {
 		return pntStore.getPointForChart(userId);
+	}
+
+	//별보러가자 게시글 상세 조회
+	@Override
+	public Visit printVisitOne(int visitNo) {
+		return vService.printOne(visitNo);
 	}
 	
 }

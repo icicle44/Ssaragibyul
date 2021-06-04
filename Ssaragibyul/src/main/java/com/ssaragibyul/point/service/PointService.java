@@ -44,6 +44,9 @@ public interface PointService {
 	//차트용 포인트 조회
 	public PointForChart getPointForChart(String userId);
 
+	//별보러가자 게시글 상세 조회
+	public Visit printVisitOne(int visitNo);
+
 	
 
 	

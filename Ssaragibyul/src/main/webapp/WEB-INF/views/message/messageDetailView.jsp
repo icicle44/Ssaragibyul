@@ -38,29 +38,30 @@
 					<table align="center" width="490px">
 							<c:if test="${flag=='send' }">
 								<tr>
-									<th>받으신 분</th>
-									<td>${nickName} 님의 별</td>
+									<th class="write-Form-th">받으신 분</th>
+									<td class="write-Form-td">${nickName} 님의 별</td>
 								</tr>
 							</c:if>
 							<c:if test="${flag=='rec' }">
 								<tr>
-									<th>보내신 분</th>
-									<td>${nickName} 님의 별</td>
+									<th class="write-Form-th">보내신 분</th>
+									<td class="write-Form-td">${nickName} 님의 별</td>
 								</tr>
 							</c:if>
 							<tr>
-								<th>제목</th>
-								<td>${message.msgTitle }</td>
+								<th class="write-Form-th">제목</th>
+								<td class="write-Form-td">${message.msgTitle }</td>
 							</tr>
 							<tr>
-								<th colspan="2">내&nbsp;&nbsp;&nbsp;용</th>
+								<th colspan="2" class="write-Form-th">내&nbsp;&nbsp;&nbsp;용</th>
 							</tr>
 							<tr>
-								<td colspan="2" align="left" height="180px" style="vertical-align:top">${message.msgContents }</td>
+								<td colspan="2" align="left" height="180px" class="write-Form-td" style="vertical-align:top">
+									<textarea cols="60" rows="10" readonly onfocus="this.blur();">${message.msgContents }</textarea></td>
 							</tr>
 							<tr id="btnTr">
 								<!-- 버튼 -->
-								<td colspan="2" align="right" style="border-top:hidden;">
+								<td colspan="2" align="right" class="write-Form-td" style="border-top:hidden;">
 									<c:if test="${message.msgType != 0 || (message.msgType == 0 && loginUser.userId == 'admin') }">
 										<input type="button" value="삭제하기" id="deleteBtn">
 									</c:if>

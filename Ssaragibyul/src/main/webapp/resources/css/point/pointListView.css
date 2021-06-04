@@ -107,8 +107,10 @@ table a {
 table a:hover {
 	color: #EB5C01;
 	text-decoration: none;
-	font-size: 16px;
-	padding: 3px;
+	font-size: 15px;
+}
+table a:hover .bold-text {
+	color: #EB5C01;
 }
 
 tbody>tr td:nth-child(1) {
@@ -138,7 +140,7 @@ tbody>tr td:nth-child(4) {
 	padding-left: 30px;
 }
 
-#table-title {
+#table-title-point {
 	font-size: 23px;
 	font-weight: bold;
 }
@@ -357,7 +359,9 @@ button[type=submit] {
 	border-top: hidden;
 	border-bottom: hidden;
 }
-
+#modal tr:nth-child(2) td {
+	border-bottom: 1px solid #d9e4e8;
+}
 #modal #btnTr {
 	display: none;
 }

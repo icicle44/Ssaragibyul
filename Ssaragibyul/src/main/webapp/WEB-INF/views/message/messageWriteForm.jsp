@@ -44,15 +44,15 @@
 				<div id="message-Write-Form">
 					<table align="center" width="490px">
 						<tr>
-							<th>받으시는 분</th>
-							<td>${nickName} 님의 별</td>
+							<th class="write-Form-th">받으시는 분</th>
+							<td class="write-Form-td">${nickName} 님의 별</td>
 						</tr>
 						<tr>
-							<th>제목</th>
-							<td width="300px"><input type="text" id="msgTitle" name="msgTitle" placeholder="제목을 입력해주세요." required></td>
+							<th class="write-Form-th">제목</th>
+							<td class="write-Form-td" width="300px"><input type="text" id="msgTitle" name="msgTitle" placeholder="제목을 입력해주세요." required></td>
 						</tr>
 						<tr height="15px">
-							<th colspan="2" style="border-bottom:hidden;">내&nbsp;&nbsp;&nbsp;용</th>
+							<th class="write-Form-th" colspan="2" style="border-bottom:hidden;">내&nbsp;&nbsp;&nbsp;용</th>
 						</tr>
 						<tr>
 							<td colspan="2" align="center">
@@ -61,7 +61,7 @@
 						</tr>
 						<tr>
 							<!-- 버튼 -->
-							<td colspan="2" align="right" style="border-top:hidden;">
+							<td colspan="2" align="right" class="write-Form-td" style="border-top:hidden;">
 								<input type="button" value="보내기" id="sendClose">
 								&nbsp;&nbsp;&nbsp;<input type="button" value="창닫기" onclick="self.close();">
 								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="공지전송" id="sendCloseNotice"> -->

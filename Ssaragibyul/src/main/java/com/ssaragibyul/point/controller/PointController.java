@@ -173,15 +173,32 @@ public class PointController {
 	
 	@RequestMapping(value="pointChart.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getPointForChart(HttpSession session, ModelAndView mv) {
-		Member loginUser = (Member)session.getAttribute("loginUser");
-		System.out.println(loginUser.toString());
-		String userId = loginUser.getUserId();
-		PointForChart pointForChart = pntService.getPointForChart(userId);
-		if(pointForChart != null) {
-			mv.addObject("pointForChart", pointForChart);
-			mv.setViewName("point/pointChart");
+		if(session != null && (Member)session.getAttribute("loginUser") != null) {	
+			Member loginUser = (Member)session.getAttribute("loginUser");
+			System.out.println(loginUser.toString());
+			String userId = loginUser.getUserId();
+			PointForChart pointForChart = pntService.getPointForChart(userId);
+			if(pointForChart != null) {
+				mv.addObject("pointForChart", pointForChart);
+				mv.setViewName("point/pointChart");
+			}		
+		}else {
+			mv.addObject("msg", "로그인이 필요합니다.");
+			mv.setViewName("member/login");
 		}
 		return mv;
 	}
 	
+	@RequestMapping(value="pointVisitDetail.do", method= RequestMethod.GET)
+	public ModelAndView pointVisitDetail(@RequestParam("visitNo") int visitNo, ModelAndView mv) {
+		Visit visit = pntService.printVisitOne(visitNo);
+		if(visit != null) {
+			mv.addObject("visit", visit);
+			mv.setViewName("point/pointVisitDetail");
+		}else {
+			mv.addObject("msg", "'별 보러 가자' 게시글 상세보기에 실패하였습니다.");
+			mv.setViewName("point/pointListView");
+		}
+		return mv;
+	}
 }
