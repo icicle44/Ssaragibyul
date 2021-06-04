@@ -5,9 +5,8 @@
 <html lang="ko">
 <head>
 <title>펀딩 상세</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
@@ -24,11 +23,9 @@
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
-
-
-
 </head>
-<style>
+<script type="text/javascript" src="/resources/js/html5gallery.js"></script>
+<style type="text/css">
 .sug {
 	margin: auto;
 }
@@ -44,22 +41,189 @@
 	border-radius: 4px;
 	color: #fff;
 }
+
+div.guide {margin:12px 24px;}
+div.guide span {color:#ff0000; font:italic 14px Arial, Helvetica, sans-serif;}
+div.guide p {color:#000000; font:14px Arial, Helvetica, sans-serif;}
+div.guide pre {color:#990000;}
+div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
+
+.format{
+	float : left;
+	width : 500px;
+	height : 400px;
+}
 </style>
-<body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="200">
+
+
+
+	
+	
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
 	<%-- <%@include file="introduce.jsp" %> --%>
 	<%@include file="../../../header.jsp" %>
 
-	<header class="header-bar d-flex align-items-center site-navbar-target"
-		data-aos="fade-right">
 
-		<div class="d-inline-block d-lg-none ml-md-0 ml-auto py-3"
-			style="position: relative; top: 3px;">
-			<a href="#" class="site-menu-toggle js-menu-toggle text-white"><span
-				class="icon-menu h3"></span></a>
-		</div>
+	
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+	<h2>${funding.subjectName }</h2>
+	
+	<br>
+	<div class="format">
+	<!-- A wrapper DIV to center the Gallery -->
+	<div style="text-align:center; padding: 8px 40px;">
+
+    <!-- Define the Div for Gallery -->
+    <!-- 1. Add class html5gallery to the Div -->
+    <!-- 2. Define parameters with HTML5 data tags -->
+	<div style="display:none;" class="html5gallery" data-skin="gallery" data-width="500" data-height="400">
+		<a href="http://www.youtube.com/embed/YE7VzlLtp-4"><img src="http://img.youtube.com/vi/YE7VzlLtp-4/2.jpg" alt="Youtube Video"></a>
+		<a href="resources/img/SuggestMain_01_Funding.png"><img src="resources/img/SuggestMain_01_Funding.png" alt="Tulips"></a>
+		<a href="resources/img/SuggestMain_02_Donation.png"><img src="resources/img/SuggestMain_02_Donation.png" alt="Colourful Tulips"></a>
+
 		
-	</header>
+	
+	</div>
+
+</div>
+</div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+	<main class="main-content">
+	${loginUser.userId }  , ${fundingLike[0].likeYn }   , ${fundingLike[1].likeYn }
+	<form action="fundingLikeAdd.do" method="post">
+	<input type="hidden" name="userId" value="${loginUser.userId }">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="좋아요 ♥">
+    </form>
+	
+	<form action="fundingAccusation.do" method="post">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="신고하기">
+    </form>
+		
+		
+    <form action="fundingJoin.do" method="post">
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="submit" class="getstarted" value="펀딩하기">
+    </form>
+
+	<br><br><br>
+			<table align="center" width="450" border="1">
+			<tr>
+			<td> 	<url var="fDetail" value="fundingDetail.do">
+			                     </url>
+			</td>
+		
+			</tr>
+			
+		<tr>
+			<td width="80">번호</td>
+			<td>${funding.projectNo } </td>
+		</tr>
+		<tr>
+			<td>제목</td>
+			<td>${funding.userId }</td>
+		</tr>
+		<tr>
+			<td>작성자</td>
+			<td>${funding.subjectName }</td>
+		</tr>
+		<tr>
+			<td>작성날짜</td>
+			<td>${funding.productName }</td>
+		</tr>
+		<tr>
+			<td>조회수</td>
+			<td>${funding.hitsCount }</td>
+		</tr>
+		<tr height="300">
+			<td>내용</td>
+			<td>${funding.goalMoney }</td>
+		</tr>		
+		<tr>
+		<td>첨부파일</td>
+			<td>${funding.sumMoney }</td>
+		</tr>	
+		<tr>
+		<td>사진1</td>
+			<td><img src="/resources/upLoadFile/${fundingFile.fileMainName } "/></td>
+		</tr>	
+		<tr>
+			<td>사진2</td>
+			<td><img src="/resources/upLoadFile/${fundingFile.fileSub1Name } "/></td>
+		</tr>	
+		<tr>
+		<td>사진3</td>
+			<td><img src="/resources/upLoadFile/${fundingFile.fileSub2Name } "/></td>
+		</tr>
+		<tr>
+		<td>스토리끼야오!</td>
+		<td>${funding.projectStory }</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<br>
+	
+		<!-- 댓글 등록 -->
+	<table align="center" width="500" border="1" cellspacing="0">
+		<tr>
+			<td><textarea rows="3" cols="40" id="rContent"></textarea></td>
+			<td>
+				<button id="rSubmit">댓글 등록</button>
+			</td>
+		</tr>
+	</table>
+	
+	<!-- 댓글 목록 -->
+	<table align="center" width="500" border="1" cellspacing="0" id="rtb">
+		<thead>
+			<tr>
+				<!-- 댓글 갯수 -->
+				<td colspan="2"><b id="rCount"></b></td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	
+	
+	
+	
+	<br>
+		<%@include file="../../../footer.jsp" %>
+	</main>
+
+
+
+
+
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="/resources/js/jquery-3.3.1.min.js"></script>
+ 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/jquery-ui.js"></script>
+	<script src="/resources/js/popper.min.js"></script>
+	<script src="/resources/js/bootstrap.min.js"></script>
+	<script src="/resources/js/owl.carousel.min.js"></script>
+	<script src="/resources/js/jquery.stellar.min.js"></script>
+	<script src="/resources/js/jquery.countdown.min.js"></script>
+	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
+	<script src="/resources/js/aos.js"></script>
+
+	<script src="/resources/js/jquery.fancybox.min.js"></script>
+
+	<script src="/resources/js/main.js"></script>
+		<script src="/resources/js/fundingList.js"></script>
+		
 	<script>
 	$(function() {
 			getReplyList();
@@ -180,107 +344,6 @@
 			});
 		} 
 	</script>
-	
-<br><br><br><br><br><br><br><br><br><br><br><br>
-	<main class="main-content">
-	${loginUser.userId }  , ${fundingLike[0].likeYn }   , ${fundingLike[1].likeYn }
-	<form action="fundingLikeAdd.do" method="post">
-	<input type="hidden" name="userId" value="${loginUser.userId }">
-    <input type="hidden" name="projectNo" value="${funding.projectNo }">
-    <input type="submit" class="getstarted" value="좋아요 ♥">
-    </form>
-	
-	<form action="fundingAccusation.do" method="post">
-    <input type="hidden" name="projectNo" value="${funding.projectNo }">
-    <input type="submit" class="getstarted" value="신고하기">
-    </form>
-		
-		
-    <form action="fundingJoin.do" method="post">
-    <input type="hidden" name="projectNo" value="${funding.projectNo }">
-    <input type="submit" class="getstarted" value="펀딩하기">
-    </form>
 
-	<br><br><br>
-			<table align="center" width="450" border="1">
-			<tr>
-			<td> 	<url var="fDetail" value="fundingDetail.do">
-			                     </url>
-			</td>
-		
-			</tr>
-			
-		<tr>
-			<td width="80">번호</td>
-			<td>${funding.projectNo } </td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td>${funding.userId }</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
-			<td>${funding.subjectName }</td>
-		</tr>
-		<tr>
-			<td>작성날짜</td>
-			<td>${funding.productName }</td>
-		</tr>
-		<tr>
-			<td>조회수</td>
-			<td>${funding.hitsCount }</td>
-		</tr>
-		<tr height="300">
-			<td>내용</td>
-			<td>${funding.goalMoney }</td>
-		</tr>		
-		<tr>
-		<td>첨부파일</td>
-			<td>${funding.sumMoney }</td>
-		</tr>	
-		<tr>
-		<td>사진1</td>
-			<td><img src="resources/upLoadFile/${fundingFile.fileMainName } "/></td>
-		</tr>	
-		<tr>
-			<td>사진2</td>
-			<td><img src="resources/upLoadFile/${fundingFile.fileSub1Name } "/></td>
-		</tr>	
-				<tr>
-		<td>사진3</td>
-			<td><img src="resources/upLoadFile/${fundingFile.fileSub2Name } "/></td>
-		</tr>
-	</table>
-	<br>
-	<br>
-	<br>
-	
-		<!-- 댓글 등록 -->
-	<table align="center" width="500" border="1" cellspacing="0">
-		<tr>
-			<td><textarea rows="3" cols="40" id="rContent"></textarea></td>
-			<td>
-				<button id="rSubmit">댓글 등록</button>
-			</td>
-		</tr>
-	</table>
-	
-	<!-- 댓글 목록 -->
-	<table align="center" width="500" border="1" cellspacing="0" id="rtb">
-		<thead>
-			<tr>
-				<!-- 댓글 갯수 -->
-				<td colspan="2"><b id="rCount"></b></td>
-			</tr>
-		</thead>
-		<tbody></tbody>
-	</table>
-	
-	
-	
-	
-	<br>
-		<%@include file="../../../footer.jsp" %>
-	</main>
 </body>
 </html>

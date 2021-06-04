@@ -99,10 +99,27 @@ public class FundingController {
 	 						
 	 @RequestMapping(value="fundingSuggest.do", method=RequestMethod.GET)
 	 public String fundingSuggestMain() {
-		 return "funding/fundingSuggest";
+		 return "funding/fundingSuggest2";
 	 }	// 제안 페이지에서 펀딩을 눌렀을때 '펀딩-제안' 페이지로 이동 하는 컨트롤러
 	 
 		
+	 
+
+	 
+		// 텍스트 에디터 입력시 파일 저장   // 다른 조원 꺼 예시로 둠 실제로 안씀.
+	   @RequestMapping(value="fundingRegister_Editer.do", method=RequestMethod.POST)
+	   public void saveBoardImage(HttpServletRequest request, HttpServletResponse response, 
+	         @RequestParam("uploadImage") MultipartFile uploadImage) throws Exception {
+	      
+	      String savePath = request.getSession().getServletContext().getRealPath("resources") + "\\upLoadFile_Editer";
+	      String fiStoredName = saveImageFile(uploadImage, savePath);
+	      
+	      // 텍스트 에디터에 저장정보 보내주기
+	      String image = "/resources/upLoadFile_Editer/" + fiStoredName;
+	      Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	      gson.toJson(image, response.getWriter());
+	   }
+	 
 	 @RequestMapping(value="fundingRegister.do", method = RequestMethod.POST)
 	 public String fundingRegister(@ModelAttribute Funding funding, FundingFile fundingFile, 
 			 					   @RequestParam(value="uploadFileMain", required=false) MultipartFile uploadFileMain,
@@ -139,7 +156,39 @@ public class FundingController {
 		 }
 	 }		//제안하기(펀딩)에서 마지막 '작성 완료' 버튼 눌렀을시 업로드한 파일 및 데이더틀 해당 테이블에 입력해주는 컨트롤러_ funding , fundingFile 2개 동시에 입력.
 	 		//사진은 3개라서 3개의 uploadeFile 메소드를 만들었지만 다중파일업로드로 바꿔야 할지도?
+	 
+	 
+	 ///Image 이름 변경 및 에디터용
+	   public String saveImageFile(MultipartFile file, String savePath) {
+		      
+		      // 저장폴더 선택
+		      File folder = new File(savePath);
+		      
+		      // 폴더가 없을 경우 자동 생성 (한번만 만들면 됨!)
+		      if(!folder.exists()) {
+		         folder.mkdir();
+		      }
+		      
+		      // 파일명 변경하기
+		      SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmSS");
+		      String originalFilename = file.getOriginalFilename();
+		      String renameFilename = sdf.format(new Date(System.currentTimeMillis())) + "." + originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
+		      
+		      String filePath = folder + "\\" + renameFilename;
+		      
+		      // 파일 저장
+		      try {
+		         file.transferTo(new File(filePath));
+		      } catch (IllegalStateException e) {
+		         e.printStackTrace();
+		      } catch (IOException e) {
+		         e.printStackTrace();
+		      }
+		      
+		      return renameFilename;
+		   }
 
+	   	//기존
 	 public String saveFile(MultipartFile file, HttpServletRequest request) {
 			// 파일 저장 경로 설정
 			String root = request.getSession().getServletContext().getRealPath("resources");
@@ -251,7 +300,7 @@ public class FundingController {
 		if ((funding != null)&&(fundingFile != null)) {
 			mv.addObject("fundingLike", fundingLike);
 			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail2");
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail4");
 		} else {
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
 			mv.setViewName("common/errorPage");

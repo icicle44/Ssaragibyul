@@ -1,0 +1,1420 @@
+술술술~ with KakaoTalk Chats
+Date Saved : 2021-04-07 15:07:22
+
+--------------- 2021년 4월 5일 월요일 ---------------
+[오재승] [오전 9:14] Photo
+[오재승] [오전 9:14] 롯데월드 벚꽃~
+[김민진] [오전 9:15] 나 일요일날 저기 다녀옴~!!
+[김민진] [오전 9:15] 저기 폐쇄여서 못들어가~~~~!!ㅜㅠ
+[홍찬희] [오전 9:15] 헐,,,,,,
+[홍찬희] [오전 9:15] 못드가여,,?
+[홍찬희] [오전 9:15] 가려고 했는데,,,,
+[김민진] [오전 9:16] 응ㅜㅠ 아예 못들어가게 다 막아놔서... 사람들 다 차도쪽으로 걷기만 하더라구ㅜㅠ
+[김민진] [오전 9:16] 담주까지 폐쇄ㅜㅠ
+[홍찬희] [오전 9:16] 오엠쥐,,,,,,,,,,,,,,,,
+[오재승] [오전 9:16] 확진자 나왔나 보넹 ㅜㅠ
+[홍찬희] [오전 9:16] 헉스,,,,,,,,,,,,,,,,,,,,,
+[김나혜] [오전 9:17] 벚꽃놀이하는곳 다 폐쇄한다그랫엉
+[김나혜] [오전 9:17] 인천도 공원이란 공원은 다 폐쇄한데
+[홍찬희] [오전 9:18] Emoticons
+[홍찬희] [오전 9:18] 벚꽃도 못보고ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ
+[김나혜] [오전 9:19] 아파트ㄱ단지에서봐 ㅋㅋㅋ그게 젤예뻐
+[오재승] [오전 9:20] ㅠㅠㅜㅜㅠㅠㅜ
+[김다빈] [오전 9:21] Photo
+[김다빈] [오전 9:21] 우리집앞
+[김다빈] [오전 9:21] 다죽어써..
+[오재승] [오전 9:23] Rain 이 나쁜놈 ㅂㄷㅂㄷ
+[김다빈] [오전 9:23] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 9:23] 그거해줘
+[김다빈] [오전 9:23] 이시끼이거
+[오재승] [오전 9:24] 2 shit KI !
+[김다빈] [오전 9:25] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김나혜] [오전 10:33] 서블릿과 DAO 부탁드립니당...
+[김다빈] [오전 10:34] package notice.model.dao;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
+import common.JDBCTemplate;
+import notice.model.vo.Notice;
+
+public class NoticeDAO {
+
+   public ArrayList<Notice> selectAllList(Connection conn) {
+      Statement stmt = null;
+      ResultSet rset = null;
+      String query = "SELECT * FROM NOTICE";
+      ArrayList<Notice> nList = null;
+      
+      try {
+         stmt = conn.createStatement();
+         rset = stmt.executeQuery(query);
+         
+         if(rset != null) {
+            nList = new ArrayList<Notice>();
+            
+            while(rset.next()) {
+               Notice notice = new Notice();
+               
+               notice.setNoticeNo(rset.getInt("NOTICENO"));
+               notice.setSubject(rset.getString("SUBJECT"));
+               notice.setContents(rset.getString("CONTENTS"));
+               notice.setUserId(rset.getString("USERID"));
+               notice.setRegDate(rset.getDate("REGDATE"));
+               
+               nList.add(notice);
+            }
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         JDBCTemplate.close(rset);
+         JDBCTemplate.close(stmt);
+      }
+      
+      return nList;
+   }
+
+}
+[김다빈] [오전 10:35] dao
+[김다빈] [오전 10:35] package notice.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
+
+@WebServlet("/notice/list")
+public class NoticeListServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+       
+    public NoticeListServlet() {
+        super();
+    }
+
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      ArrayList<Notice> nList = new NoticeService().printAllList();
+      if(!nList.isEmpty()) {
+         request.setAttribute("nList", nList);
+         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
+         view.forward(request, response);
+      } else {
+         // WEB-INF에 있는 자원들은 url을 통한 직접 접근 불가능
+         // 이렇게 /notice/list를 처리하는 서블릿을 만들고
+         // 서블릿 안에서 RequsetDispatcher를 통해서 WEB-INF 안에 자원에 접근할 수 있어야 한다.
+         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeError.html");
+         view.forward(request, response);
+      }
+   }
+
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      doGet(request, response);
+   }
+
+}
+[김다빈] [오전 10:35] 서블ㄹ시
+[김다빈] [오전 10:35] 릿
+[김나혜] [오전 10:36] NoticeService좀!!
+[김나혜] [오전 10:36] 잘못보냇구만
+[김다빈] [오전 10:37] package notice.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.JDBCTemplate;
+import notice.model.dao.NoticeDAO;
+import notice.model.vo.Notice;
+
+public class NoticeService {
+
+   private JDBCTemplate factory;
+   
+   public NoticeService() {
+      factory = JDBCTemplate.getConnection();
+   }
+   
+   public ArrayList<Notice> printAllList() {
+      Connection conn = null;
+      ArrayList<Notice> nList = null;
+      
+      try {
+         conn = factory.createConnection();
+         nList = new NoticeDAO().selectAllList(conn);
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         JDBCTemplate.close(conn);
+      }
+      
+      return nList;
+   }
+
+}
+[김다빈] [오전 10:37] 서비스
+[오재승] [오전 10:38] 감사합니다
+[홍찬희] [오전 10:39] 오냐~~!!!
+[오재승] [오전 10:39] Emoticons
+[김나혜] [오전 10:39] 다빈이는 사랑입니다
+[김나혜] [오전 10:39] Emoticons
+[김다빈] [오전 10:39] Emoticons
+[오우철] [오전 11:07] 나만 이틀 까였넼ㅋㅋㅋ
+[오우철] [오전 11:08] 그래도 30 들어와서 다행쓰
+[오재승] [오전 11:09] 출석률 90%까진 다 주나봐영
+[오재승] [오전 11:10] 굳굳
+[오우철] [오전 11:12] Photo
+[오우철] [오전 11:12] 6월 15일 종강
+[오우철] [오전 11:12] 6월15일 이후 생일 빠이
+[오우철] [오전 11:12] 생축없음
+[홍찬희] [오전 11:12] 헐 너무해
+[홍찬희] [오전 11:12] 근데 저거 모야
+[홍찬희] [오전 11:12] ㅇㅅㅇ
+[오우철] [오전 11:13] 우리반게시판 돈주는거
+[홍찬희] [오전 11:13] 아하
+[오우철] [오전 11:13] 생일들 앞에 있길래...
+[홍찬희] [오전 11:13] 아랑 재승오빤 축하해주삼
+[홍찬희] [오전 11:13] 종강이랑 넘 가깝자나
+[홍찬희] [오전 11:13] 선물도 주삼
+[오우철] [오전 11:13] 한수접어서 로재승까지 ㅇㅈ
+[홍찬희] [오전 11:14] Emoticons
+[홍찬희] [오전 11:14] Emoticons
+[홍찬희] [오전 11:14] Emoticons
+[오우철] [오전 11:14] 15일날 종강하고 바로 짐싸서 가평 펜션 잡고 12시에 생파 각
+[홍찬희] [오전 11:14] 어후 너무 좋은 생각임
+[홍찬희] [오전 11:14] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:14] 침낭하나 챙겨가야겠다
+[오우철] [오전 11:14] 그냥 때리면 아프니까
+[오우철] [오전 11:14] 로재승 멍석말이 각
+[홍찬희] [오전 11:15] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ난 연장 챙길래><
+[오재승] [오전 11:16] ????
+[오재승] [오전 11:16] 2개월 동안 근육 열심히 키우겟쉼더..; ㅜ
+[오재승] [오전 11:16] ㅠㅜㅠㅜ
+[김다빈] [오전 11:16] 내생일은?
+[오재승] [오전 11:19] 내년 2월?
+[오재승] [오전 11:19] 노력해보마!
+[김다빈] [오전 11:19] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:19] 장난이야
+[오우철] [오전 11:19] 헐키
+[김다빈] [오전 11:20] 우또리는
+[김다빈] [오전 11:20] 1월인데?
+[오우철] [오전 11:20] 깜놀 저거 사진에 없다는줄
+[오우철] [오전 11:20] 우또리는 119
+[김다빈] [오전 11:20] 우와
+[김다빈] [오전 11:20] 역싀
+[김다빈] [오전 11:20] 연예인은달랑
+[오우철] [오전 11:20] 소방차로 데뷔했어야했는데...
+[오우철] [오전 11:21] (사실 소방차 세대 아님)
+[홍찬희] [오전 11:21] 구급차 세대를 만들어보삼
+[김다빈] [오전 11:22] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:22] 홍차니
+[오우철] [오전 11:22] ㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:22] 미쳣따
+[오우철] [오전 11:22] 안녕하세요 구급차입니다
+[김다빈] [오전 11:22] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:22] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:22] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:22] 우리는 구급차예요!!!
+[홍찬희] [오전 11:23] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:23] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:23] 아 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:24] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:24] 짜증낰ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:24] Emoticons
+[오우철] [오전 11:24] 데뷔 명은 M 으로 해야겠다
+[김다빈] [오전 11:24] 오ㅑ?
+[김다빈] [오전 11:24] 오우철인데
+[김다빈] [오전 11:24] 왜엠이야
+[오우철] [오전 11:24] 제가 여러분의 에밉니다!
+[김다빈] [오전 11:24] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:24] 및ㅅㄴ
+[김다빈] [오전 11:24] 미쳣냐곸ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:25] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:25] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:25] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ아 진짜 미쳣나굨ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:26] M2
+[김다빈] [오전 11:28] 모야
+[홍찬희] [오전 11:29] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ아 이 방 사람들 다 정상 아닌거 같앜ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:29] 3명이상 모이면 한명은 또라이라잖아
+[오우철] [오전 11:29] 문제는 나는 혼자 있어도 또라이라는거지...
+[오우철] [오전 11:30] 하...
+[오재승] [오전 11:30] Emoticons
+[홍찬희] [오전 11:30] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ인줭ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:30] 오빠 오늘 왜 캠 안켜
+[오우철] [오전 11:30] 몬생겨서...
+[김다빈] [오전 11:30] 오우철고파ㅜ
+[홍찬희] [오전 11:30] 오우철고파 정말,,
+[오우철] [오전 11:30] 엄마가 20살때 우철아 코 할래? 했을 때 남자가 무슨 성형이야 하면서 거절한 내가 밉다
+[김다빈] [오전 11:30] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:30] 그때면 엄마돈으로 했을텐데
+[오재승] [오전 11:31] 지금 하면 본인돈 ㅜㅠ
+[오우철] [오전 11:31] 해달라 하니까 니가 벌어서 니가해라
+[홍찬희] [오전 11:31] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:31] 아 ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 11:31] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:31] 엄마돈으로 코했으면
+[오우철] [오전 11:31] 눈은 싼데...
+[오우철] [오전 11:32] https://www.youtube.com/watch?v=yfGVA0lIjZY
+[김다빈] [오전 11:33] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:33] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:33] 수요일에 만나면 불러줘><
+[김다빈] [오전 11:33] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:33] 강남역 10번출구~
+[오우철] [오전 11:33] 압구정역 4번 출구~
+[오우철] [오전 11:34] 엄머머머~ 코러스 넣어줄 로재승 구함
+[김다빈] [오전 11:34] 신동엽도햇댘ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:39] 엄머머머~
+[김다빈] [오전 11:39] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:39] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[이혜성] [오후 12:51] 맛 점 하 세 요 ~
+[김나혜] [오후 12:53] 맛점#
+[오재승] [오후 12:53] 마점하세용
+[박다인] [오후 12:53] 맛점하세여
+[김민진] [오후 2:06] This message was deleted.
+[김민진] [오후 2:07] 올 오재승 프사~~~ 멋진데!!?
+[김다빈] [오후 2:07] ??
+[김다빈] [오후 2:07] 이상한사람많아진짜
+[김다빈] [오후 2:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김민진] [오후 2:08] 나 도라이네
+[김민진] [오후 2:08] 진짜
+[김민진] [오후 2:08] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김민진] [오후 2:08] 정신차려라 김민진
+[김민진] [오후 2:09] 5명이 봤지만
+[김민진] [오후 2:09] 삭제했따!
+[오재승] [오후 2:09] ???
+[오재승] [오후 2:09] 뭐지
+[오재승] [오후 2:09] 궁금해><
+[김다빈] [오후 2:11] 오재승바보라고해써
+[김민진] [오후 2:11] 맞아!
+[오재승] [오후 2:14] 바보 맞으니까 ㅇㅈ .... ㅜㅠ
+[오재승] [오후 2:14] Emoticons
+[김다빈] [오후 2:14] 바보오짱
+[오재승] [오후 2:15] ㅠㅜ
+[오우철] [오후 2:16] 올
+[오우철] [오후 2:16] This message was deleted.
+[오재승] [오후 2:17] 다같이 찍은거즁
+[오우철] [오후 2:17] 아 아니네
+[홍찬희] [오후 2:17] 오잉
+[홍찬희] [오후 2:17] 뭔데??
+[오우철] [오후 2:17] Emoticons
+[홍찬희] [오후 2:17] 재승이 프사 뭔데
+[김나혜] [오후 2:18] 그 일하는곳에서 찍엇누?
+[오우철] [오후 2:18] 잉 혜성이 눈 비빌때 고양이 같았어
+[오우철] [오후 2:18] 졸귀
+[오재승] [오후 2:19] ??
+[오재승] [오후 2:19] 지금 프사?
+[오재승] [오후 2:19] 헝가리임 ㅇㅇ
+[오재승] [오후 2:19] 부다페스트
+[오우철] [오후 2:19] 쌤 호차니 캠 안켜요
+[오우철] [오후 2:19] 출근 고정 시켜요
+[김나혜] [오후 2:19] 줌에서 채팅하자
+[오우철] [오후 2:20] 쌤 다빈이 자리 비웠어요
+[김다빈] [오후 2:22] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 2:23] 캠 켜떠여,,,,
+[홍찬희] [오후 2:23] ㅎㅎ,,,,
+[김다빈] [오후 2:23] 아싸이버ㅏㄴ엔켯다
+[김다빈] [오후 2:23] 물뜬고야,,,ㅎㅎ
+[오재승] [오후 3:13] Photo
+[홍찬희] [오후 3:31] 어노테이션 부분 보여주랑,,
+[홍찬희] [오후 3:31] 왜 오류뜨지
+[김다빈] [오후 3:33] 어노테이션부분이모야?
+[김다빈] [오후 3:33] 서블릿?
+[오재승] [오후 3:33] 어노테이션이 뭐징
+[홍찬희] [오후 3:34] ㅓ네
+[홍찬희] [오후 3:34] jsp
+[홍찬희] [오후 3:34] 부분!
+[오재승] [오후 3:34] <%@page import="notice.model.vo.Notice"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%
+       Notice notice = (Notice)request.getAttribute("notice");
+    %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>공지사항 수정</title>
+</head>
+<body>
+   <h1>공지사항 수정</h1>
+   <form action = "/notice/modify" method="post">
+      <input type = "text" value= "<%= notice.getSubject() %>" name="subject"><br><br>
+      <textarea rows="30" cols="100" name="content"><%= notice.getContents() %></textarea><br><br>
+      <input type = "submit" value = "수정완료">
+      <input type = "reset" value = "취소">
+   </form>
+</body>
+</html>
+[오재승] [오후 3:34] 고레요?
+[김다빈] [오후 3:34] 으악졋당
+[오재승] [오후 3:34] Photo
+[오재승] [오후 3:34] 으하하하
+[김다빈] [오후 3:34] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 3:35] Photo
+[홍찬희] [오후 3:35] 왜 오류뜨지
+[김나혜] [오후 3:35] 임포트 하셧슴ㅁ까
+[이혜성] [오후 3:35] 임포트 안하신거
+[김다빈] [오후 3:35] 임포트
+[이혜성] [오후 3:35] 아니예용?
+[김다빈] [오후 3:35] 헐
+[김다빈] [오후 3:35] 무서워
+[김다빈] [오후 3:35] 방금봣어?
+[김다빈] [오후 3:35] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 3:35] 진짜빠르당
+[김나혜] [오후 3:35] 못봣져
+[김다빈] [오후 3:35] 아니
+[김나혜] [오후 3:35] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 3:35] 진짜빨라서놀라써
+[김다빈] [오후 3:35] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 3:35] 와우
+[김나혜] [오후 3:35] 호다닥쳣지
+[홍찬희] [오후 3:35] 감쟈해여
+[오우철] [오후 4:06] Photo
+[김다빈] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:07] 미쳣냐
+[김다빈] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] 아 빵터졌넼ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오후 4:07] ㅋㅋ
+[김다빈] [오후 4:07] 진짴ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[이혜성] [오후 4:07] ㅁㅊㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] 난 뒤에는 오재승인가 했다
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:07] 존잘이자나ㅜ
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] 한참 생각했어
+[홍찬희] [오후 4:07] 뒤엔 누구지
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:07] 왜케새침해?
+[홍찬희] [오후 4:07] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:07] 아 왜캐 웃기냨ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:08] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오후 4:08] Photo
+[김다빈] [오후 4:08] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:08] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:08] 뭐냐곸ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:08] 왜그러냐곸ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오후 4:09] Photo
+[오우철] [오후 4:09] 우리 오늘부터 1일이다
+[홍찬희] [오후 4:09] 어후,,,,ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:09] 맨 얼굴도 보여주삼><
+[김다빈] [오후 4:12] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 4:12] 보여주삼><
+[오우철] [오후 4:12] This message was deleted.
+[오우철] [오후 4:12] "치명적"
+[홍찬희] [오후 4:13] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 4:13] 아니 오우철 얼굴을 보여주삼
+[오우철] [오후 4:13] This message was deleted.
+[홍찬희] [오후 4:13] 오우철 아님 !!!
+[오우철] [오후 4:13] ㅎ
+[김다빈] [오후 4:14] 아
+[김다빈] [오후 4:14] 못봣어ㅜ
+[김다빈] [오후 4:14] 흑
+[오재승] [오후 7:59] Emoticons
+--------------- 2021년 4월 6일 화요일 ---------------
+[오재승] [오전 9:07] QR QR QR QR QR
+[김나혜] [오전 9:09] 햇지 허헣
+[오재승] [오전 9:11] ㅋㅋㅋ
+[오재승] [오전 9:11] 저희 모두 QR 조심합시더~
+[오재승] [오전 9:40] 민진누나 원픽 ㅋㅋ 
+[김민진] [오전 9:42] ...진짜 왜그래ㅜㅠ
+[오재승] [오전 10:20] 지금 뭐하는거징? 수정하는거에여?
+[오재승] [오전 10:20] 딴짓하다보니 봉식쌤이 몇분쨰 말이 없내
+[오재승] [오전 10:20] 뭐하면 되나여?
+[오재승] [오전 10:21] 아 그냥 이어서 하는건가
+[홍찬희] [오전 10:21] 웅
+[홍찬희] [오전 10:21] 마쟈
+[오재승] [오전 10:21] Emoticons
+[김다빈] [오전 11:02] 오우철캠왜안켜?
+[김다빈] [오전 11:02] 잔뜩기대하고왓는뎅
+[홍찬희] [오전 11:02] 선생님 오우철 캠 안켜요
+[오재승] [오전 11:02] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:02] 줌에서 ㄱㄱㄱ
+[김민진] [오전 11:48] 혹시 지금 학원 나가 계시면
+[김민진] [오전 11:48] NoticeListServlet이랑
+[김민진] [오전 11:48] NoticeService
+[김민진] [오전 11:48] 코드 좀 줄 사람...
+[김민진] [오전 11:48] 나 계속 빨간불인데 왜그러지...
+[김다빈] [오전 11:50] 원격할거얌?
+[오재승] [오전 11:50] 띠용
+[김다빈] [오전 11:50] 보냉?
+[오재승] [오전 11:50] Service
+[오재승] [오전 11:50] package notice.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.JDBCTemplate;
+import notice.model.dao.NoticeDAO;
+import notice.model.vo.Notice;
+import notice.model.vo.PageData;
+
+public class NoticeService{
+   private JDBCTemplate factory;
+   
+   public NoticeService() {
+      factory = JDBCTemplate.getConnection();
+   }
+   
+//   public ArrayList<Notice> printAllList(int currentPage){//매개변수 추가 _ 수정
+      public PageData printAllList(int currentPage){
+      Connection conn = null;
+//      ArrayList<Notice> nList = null; 2개 한꺼번에 넘길거라 무쓸모
+//      String pageNavi = null;// 추가
+      PageData pd = new PageData();
+      try {
+         conn = factory.createConnection();
+         pd.setNoticeList( new NoticeDAO().selectAllList(conn, currentPage));
+         pd.setPageNavi(new NoticeDAO().getPageNavi(conn, currentPage));   //pd 변수(객체) 안에  객체 집어넣기
+         
+//         nList = new NoticeDAO().selectAllList(conn, currentPage);
+//         pageNavi = new NoticeDAO().getPageNavi(conn, currentPage); //추가   _  후에 삭제됨 ㅎ 
+         //pageNavi란 ? 1 2 3 4 5 6 7 8 9 10
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return pd; // 반드시 리턴..? 클래스 쓰게 되면 리턴은 PD로!
+      //메소드는 두개의 값을 리턴할 수 없음. 그래서 2개의 값을 저장하는 클래스를 만들고  _ PageDate.java
+      //클래스의 인스턴스에 값을 저장해서 리턴할거임.
+   }
+
+   public Notice printOne(int noticeNo) {
+      Connection conn = null;
+      Notice notice = null;
+      
+      try {
+         conn = factory.createConnection();
+         notice = new NoticeDAO().selectOne(conn, noticeNo);
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return notice;
+   }
+
+   public int registerNotice(Notice notice) {
+      Connection conn = null;
+      int result = 0;
+      
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().insertNotice(conn, notice);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         }else {
+            JDBCTemplate.rollback(conn);
+         }
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return result;
+   }
+
+   public int deleteNotice(int noticeNo) {
+      Connection conn = null;
+      int result = 0;
+      
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().deleteNotice(conn, noticeNo);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         }else {
+            JDBCTemplate.rollback(conn);
+         }
+         
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }
+      return result;
+   }
+
+   public int modifyNotice(Notice notice) {
+      Connection conn = null;
+      int result = 0;
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().updateNotice(conn, notice);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         }else {
+            JDBCTemplate.rollback(conn);
+         }
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return result;
+   }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[오재승] [오전 11:50] 아
+[오재승] [오전 11:50] 내꺼 주석 개판이라
+[오재승] [오전 11:50] 다빈이꺼 보는거 좋을거같에여
+[오재승] [오전 11:50] 다빈님 ㄱㄱㄱㄱ
+[김다빈] [오전 11:50] 나주석안썻어
+[오재승] [오전 11:50] 그게 더 깔끔해서 좋을거같은데
+[오재승] [오전 11:50] ㅋㅋㅋ
+[홍찬희] [오전 11:51] 내꺼 줄게
+[오재승] [오전 11:51] 서블렛
+[김다빈] [오전 11:51] 오재승주석귀여워
+[오재승] [오전 11:51] package notice.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import notice.model.service.NoticeService;
+import notice.model.vo.Notice;
+import notice.model.vo.PageData;
+
+/**
+ * Servlet implementation class NoticeListServlet
+ */
+@WebServlet("/notice/list")
+public class NoticeListServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public NoticeListServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+//      HttpSession session = request.getSession(); //로그인한 사용자니까 세션에거정보 가져오자 //write엣 ㅓ추가 로그인해야함 들어가게됨
+//      if(session != null && (session.getAttribute("userId")) != null) {    임시조치
+         int currentPage = 0;
+         if(request.getParameter("currentPage") == null) {
+            currentPage = 1;
+         }else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+         }
+         PageData pageData = new NoticeService().printAllList(currentPage);
+         ArrayList<Notice> nList = pageData.getNoticeList(); //페이지데이터 안에 있는 어레이리스트 부럴ㅇ옴!! _ 꺼냄!
+         String papeNavi = pageData.getPageNavi();
+         if(!nList.isEmpty()) {
+            request.setAttribute("nList", nList); 
+            request.setAttribute("papeNavi", papeNavi); 
+            RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
+            view.forward(request, response);
+         }else {
+         // WEB-INF 안에 있는 자원들은 url을 통한 직접접근 안돼여!!
+         //이렇게 /notice/list를 처리하는 서블릿을 만들고 서블릿 ㅏㅇㄴ에서
+         //RequestDispacther 를 통햇 WEB-INF 안의 자원에 집근 가능!!!   그냥 senddirect는 안돼염!
+         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeError.html");
+         view.forward(request, response);
+         }
+//      }else {
+//         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/serviceFailed.html");
+//         view.forward(request, response); //wirte에서 추가    임시조치
+//      }
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
+
+}
+[오재승] [오전 11:51] 찬희께 젤 좋아여!
+[홍찬희] [오전 11:51] package notice.model.service;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import common.JDBCTemplate;
+import notice.model.dao.NoticeDAO;
+import notice.model.vo.Notice;
+import notice.model.vo.PageData;
+
+public class NoticeService {
+   
+   private JDBCTemplate factory;
+   
+   public NoticeService() {
+      factory = JDBCTemplate.getConnection();
+   }
+
+   public PageData printAllList(int currentPage) {
+      Connection conn = null;
+      ArrayList<Notice> nList = null;
+      String pageNavi = null;
+      PageData pd = new PageData();
+      try {
+         conn = factory.createConnection();
+         pd.setNoticeList(new NoticeDAO().selectAllList(conn, currentPage)); // 10개씩 가져온 게시글의 개수?
+         pd.setPageNavi(new NoticeDAO().getPageNavi(conn, currentPage)); // pageNavi값을 가져옴
+         // pageNavi란? 1 2 3 4 5 6 7 8 9 10 사용자가 선택할 수 있는 값
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return pd;
+      // 메소드는 두 개의 값을 리턴할 수 없음
+      // 그래서 두 개의 값을 저장하는 클래스를 만들고 클래스의 인스턴스에 값을 저장해서 리턴
+   }
+
+   public Notice printOne(int noticeNo) {
+      Connection conn = null;
+      Notice notice = null;
+      
+      try {
+         conn = factory.createConnection();
+         notice = new NoticeDAO().selectOne(conn, noticeNo);
+      } catch (SQLException e) {
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(conn);
+      }
+      return notice;
+   }
+
+   public int registerNotice(Notice notice) {
+      Connection conn = null;
+      int result = 0;
+      
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().insertNotice(conn, notice);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         } else {
+            JDBCTemplate.rollback(conn);
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         JDBCTemplate.close(conn);
+      }
+      return result;
+   }
+
+   public int deleteNotice(int noticeNo) {
+      Connection conn = null;
+      int result = 0;
+      
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().deleteNotice(conn, noticeNo);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         } else {
+            JDBCTemplate.rollback(conn);
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         JDBCTemplate.close(conn);
+      }
+      
+      return result;
+   }
+
+   public int modifyNotice(Notice notice) {
+      Connection conn = null;
+      int result = 0;
+      
+      try {
+         conn = factory.createConnection();
+         result = new NoticeDAO().updateNotice(conn, notice);
+         if(result > 0) {
+            JDBCTemplate.commit(conn);
+         } else {
+            JDBCTemplate.rollback(conn);
+         }
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } finally {
+         JDBCTemplate.close(conn);
+      }
+      return result;
+   }
+
+}
+[홍찬희] [오전 11:51] 서비스
+[홍찬희] [오전 11:51] protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      
+      //HttpSession session = request.getSession();
+      int currentPage = 0;
+         if(request.getParameter("currentPage") == null) {
+            currentPage = 1;
+         } else {
+            currentPage = Integer.parseInt(request.getParameter("currentPage"));
+         }
+      PageData pageData = new NoticeService().printAllList(currentPage);
+      ArrayList<Notice> nList = pageData.getNoticeList(); // 값을 꺼내고
+      String pageNavi = pageData.getPageNavi(); // noticeList에 보내주기 위해
+      if(!nList.isEmpty()) {
+         request.setAttribute("nList", nList);
+         request.setAttribute("pageNavi", pageNavi);
+         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeList.jsp");
+         view.forward(request, response);
+      } else {
+      // WEB-INF 안에 있는 자원들은 url을 통한 직접 접근이 안됨
+      // 이렇게 /notice/list를 처리하는 서블릿을 만들고 서블릿 안에서
+      // RequestDispatcher를 통해서 WEB-INF 안에 자원에 접근할 수 있음
+      RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/noticeError.html");
+      view.forward(request, response);
+      }
+      
+//      else {
+//         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/notice/serviceFailed.html");
+//         view.forward(request, response);
+//      }
+   }
+[홍찬희] [오전 11:52] 서블릿
+[홍찬희] [오전 11:52] 근데 나도 주석을 잘 못달았다
+[이혜성] [오전 11:53] 머리가 깨진듯이 아프다..
+[김민진] [오전 11:54] 고마워 나 혼나구왔어
+[김민진] [오전 11:54] 원인을 생각해보래
+[김민진] [오전 11:54] 띠용
+[홍찬희] [오전 11:54] 너무 어렵ㅈ다
+[김민진] [오전 11:55] 나만 어려운거 아니지..?
+[김민진] [오전 11:55] 근데 나 왜 대표로 혼남..?
+[홍찬희] [오전 11:55] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:58] ㅋㅋㅋ
+[오재승] [오전 11:58] 나도 아파서
+[오재승] [오전 11:58] 이해를 포기하고 그냥 듣는듕
+[오재승] [오전 11:58] 그래서 제가 잘 질문 안합니더
+[오재승] [오전 11:58] ㅎㅎㅎㅎ
+[오재승] [오후 12:01] qrqrqrqrqrqrqrqr
+[김다빈] [오후 12:50] 오우철나왓당
+[오재승] [오후 12:50] ㅋㅋㅋㅋㅋㅋ
+[오재승] [오후 12:50] 다들 맛점~
+[이혜성] [오후 12:50] 점심 맛있게 드세요오옹..
+[김나혜] [오후 12:51] 맛점하세염
+[박다인] [오후 12:51] 맛점하세여
+[오우철] [오후 2:03] Photo
+[김다빈] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오후 2:03] 수업듣는 방식
+[김다빈] [오후 2:03] 귀여운이혜성
+[홍찬희] [오후 2:03] 재미쩡
+[오우철] [오후 2:03] 저 작은창으로 수업듣는다
+[홍찬희] [오후 2:03] 허니버터칩 뭐냐
+[홍찬희] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 2:03] 내놔
+[홍찬희] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 2:03] 아먹짱
+[오우철] [오후 2:03] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 2:03] 낼가져와라
+[김다빈] [오후 2:03] ㅜ
+[이혜성] [오후 2:03] ..?
+[오우철] [오후 2:04] 아까 qr찍을때
+[오우철] [오후 2:04] 환~~하게 웃던데
+[오우철] [오후 2:04] 평소에 못보던 웃음
+[이혜성] [오후 2:04] Emoticons
+[오재승] [오후 2:06] 혜성이 이번주 학원 안나와서
+[오재승] [오후 2:06] 기쁜가봄 ㅜㅠㅜㅠ
+[오우철] [오후 2:06] 왜?
+[오우철] [오후 2:06] 자가격리?
+[홍찬희] [오후 2:07] 웅,,
+[이혜성] [오후 2:08] Emoticons
+[오우철] [오후 2:08] 이혜성 노래부른당
+[이혜성] [오후 2:08] ..?
+[이혜성] [오후 2:08] 그걸 어또케
+[이혜성] [오후 2:08] 알아요
+[오재승] [오후 2:09] 스파이
+[이혜성] [오후 2:09] Emoticons
+[오재승] [오후 2:09] 우철님은 모든걸 지켜본다...
+[오재승] [오후 2:09] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오후 2:12] 진짜노래불럿어?
+[김다빈] [오후 2:12] 마자이혜성
+[김다빈] [오후 2:12] 어제도줌으로노래부름
+[오우철] [오후 2:12] 그리고 수업안듣고 계속 딴짓하고 있는데?
+[김다빈] [오후 2:13] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[이혜성] [오후 2:13] Emoticons
+[이혜성] [오후 2:13] 인철님 도와주시고 계시길래..
+[오우철] [오후 2:13] ^^ 그전에도 쭉
+[이혜성] [오후 2:14] Emoticons
+[오우철] [오후 2:27] Photo
+[김민진] [오후 2:28] 이게뭐야...?
+[김민진] [오후 2:28] 무릎
+[김민진] [오후 2:28] 아
+[김민진] [오후 2:28] 혜성이 무릎
+[오우철] [오후 2:28] 난 저 자세 안돼
+[오재승] [오후 2:29] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오후 2:29] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[이혜성] [오후 2:31] 무릎 
+[이혜성] [오후 2:31] 뎃..
+[홍찬희] [오후 2:38] public String getPageNavi(Connection conn, int currentPage) { // currentPage는 사용자가 페이지 클릭한 번호
+        // 페이지의 개수를 구해야 하기 때문에
+         // 전체 게시물의 개수(recordTotalCount)를 구해야 합니다. 120개 게시물을 10개씩 보여주는 상황에서
+         // 페이지의 개수는 (pageTotalCount)  12개입니다.
+         // 124개의 게시물을 10개씩 보여줘야 한다면
+         // 페이지의 개수(pageTotalCount)는 13개여야 합니다.
+      int recordTotalCount = totalCount(conn); // 전체 게시물의 개수
+      int recordCountPerPage = 10;
+      int pageTotalCount = 0;
+      // 123개의 게시물에서 10개씩 보여준다면 3개의 게시물도 보여줘야 하니까 총 13페이지가 나옴
+      if(recordTotalCount % recordCountPerPage > 0) {
+         pageTotalCount = recordTotalCount / recordCountPerPage + 1;
+      }else {
+         pageTotalCount = recordTotalCount / recordCountPerPage;
+      }
+      // 오류 방지 코드 - 이건 진짜 오류 방지 코드임
+      if(currentPage < 1) {
+         currentPage = 1;
+      } else if(currentPage > pageTotalCount) {
+         currentPage = pageTotalCount;
+      }
+      // 현재 페이지에서 페이지의 개수를 몇 개씩 보여줄건지 정하는 변수를 naviCountPerPage
+      // int naviCountPerPage = 10;
+      // 1 2 3 4 5 6 7 8 9 10
+      // naviCountPerPage = 5;
+      // 1 2 3 4 5 
+      // currentPage, naviCountPerPage를 이용해서 startNavi와 endNavi를 구한 후에
+       // for문을 이용해서 값을 표시합니다.
+      int naviCountPerPage = 10;
+      int startNavi = ((currentPage - 1) / naviCountPerPage) * naviCountPerPage + 1;
+      // currentPage는 사용자가 선택한 값이 넘어와야 되기 때문에 매개변수로 전달 받음
+      int endNavi = startNavi + naviCountPerPage - 1;
+      // 오류 방지 코드 이거만 추가해도 12까지만 나옴 ! (12는 데이터 있는 곳까지 !)
+      if(endNavi > pageTotalCount) {
+         endNavi = pageTotalCount;
+      }
+      boolean needPrev = true;
+      boolean needNext = true;
+      if(startNavi == 1) {
+         needPrev = false;
+      }
+      if(endNavi == pageTotalCount) {
+         needNext = false;
+      }
+      StringBuilder sb = new StringBuilder(); // i의 값을 누적하기 위해(클릭을 할 수 있는 값이 쌓이게 됨)
+      if(needPrev) { // 전 값
+         sb.append("<a href='/notice/list?currentPage=" + (startNavi-1) + "'> < </a>");
+      }
+      for(int i = startNavi; i <= endNavi; i++) {
+         sb.append("<a href='/notice/list?currentPage=" + i + "'>" + i + " </a>");
+      }
+      if(needNext) { // 다음 값
+         sb.append("<a href='/notice/list?currentPage=" + (endNavi+1) + "'> > </a>");
+      }
+      return sb.toString(); 
+   }
+[이혜성] [오후 2:38] 플젝시간인가요..
+[오재승] [오후 2:38] 야수~
+[오우철] [오후 4:23] 혜성이 재밌는거 보고 있었네
+[오우철] [오후 4:23] 카메라보고 씨익 웃으면
+[오재승] [오후 4:23] ㅋㅋㅋ
+[오우철] [오후 4:23] 심쿵사 한다구
+[오재승] [오후 4:23] Photo
+[오재승] [오후 4:23] 긁적긁적
+[김다빈] [오후 4:23] 말하면
+[김다빈] [오후 4:23] 스르륵하고없어져
+[이혜성] [오후 4:24] Emoticons
+[오재승] [오후 4:24] ㅋㅋㅋㅋ
+[김나혜] [오후 5:35] 너희 들켯니..?ㅋㅋㅋ
+[오재승] [오후 5:36] 크크크킄
+[오재승] [오후 5:36] 죄송..
+[김다빈] [오후 5:50] 사겨라
+[김다빈] [오후 5:50] 짝
+[오재승] [오후 5:50] ㅋㅋㅋㅋ
+[이혜성] [오후 5:51] 고생 많으셨어용~
+[오재승] [오후 5:55] 수고많으셨습니답!
+[오재승] [오후 5:55] 내일 만나용!
+--------------- 2021년 4월 7일 수요일 ---------------
+[김나혜] [오전 9:03] ㅋㅋㅋㅋㅋㅋㅋ개떡이네 머선일이구
+[김나혜] [오전 9:03] 쌤이 어제 무슨일이있었넄ㅋㅋㅋ
+[오재승] [오전 9:04] 마시지 않았습니다
+[오재승] [오전 9:04] 오해마세요!
+[김다빈] [오전 9:13] Photo
+[김다빈] [오전 9:13] 하투
+[홍찬희] [오전 9:15] 다빈아 쉬시에 카드 좀 빌려줘
+[홍찬희] [오전 9:15] 서브웨이 사먹게
+[김다빈] [오전 9:16] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 9:16] 카드 좀,,,
+[오재승] [오전 9:16] ㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 9:16] 카드 받았으니까
+[홍찬희] [오전 9:16] 집에 갈게
+[홍찬희] [오전 9:16] 다들 잘 살고
+[김다빈] [오전 9:16] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 9:16] 나중에 기회되면 보자
+[오우철] [오전 9:17] 오예 오늘 식신 없다
+[김다빈] [오전 9:17] 야아
+[오우철] [오전 9:17] 앗
+[홍찬희] [오전 9:17] Emoticons
+[오우철] [오전 9:17] ㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 9:17] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 9:17] 이모티콘 뭐얔ㅋㅋㅋ
+[홍찬희] [오전 9:18] 오우철
+[홍찬희] [오전 9:18] 그만 먹어
+[홍찬희] [오전 9:18] 한입만,,
+[홍찬희] [오전 9:19] 아 오우철 턱받이까지 하고 먹어
+[오재승] [오전 9:19] ㅋㅋㅋㅋㅋ
+[김다빈] [오전 9:19] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김다빈] [오전 9:19] 맛잇어보인다?
+[오우철] [오전 9:20] 늘 새로워 짜릿해
+[홍찬희] [오전 9:25] 오우철꺼 한입만 먹어보고싶다
+[오우철] [오전 9:26] 알바생 되게 안흘리게 잘싸줬는데
+[오우철] [오전 9:26] 마요네즈 한줄 달라니까
+[오우철] [오전 9:26] 스위트칠리만큼 넣어버렸네
+[오우철] [오전 9:26] 너무 달아
+[홍찬희] [오전 9:31] 먹어볼래
+[신성진] [오전 9:37] 나혜야
+[신성진] [오전 9:37] 빨리 써
+[신성진] [오전 9:37] 보고 쓰게
+[신성진] [오전 9:37] 뭐해야돼
+[김나혜] [오전 9:38] 나도 몰라서...ㅎㅎ가만히..
+[신성진] [오전 9:38] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 9:39] 파일업로드서블릿.java
+[오우철] [오전 9:39] dopost 내용
+[오우철] [오전 9:39] 
+      // 1. upload 폴더에 실제 파일을 저장하는 작업
+      // MultipartRequest 객체 생성하면 파일이 저장됨.(완전편리!)
+      HttpSession session = request.getSession();
+      String fileUserId = (String) session.getAttribute("userId");
+//      String uploadFilePath = "D:\\home\\" + fileUserId;
+      String uploadFilePath = request.getServletContext().getRealPath("upload");
+      System.out.println(uploadFilePath);
+      int uploadFileSizeLimit = 5 * 1024 * 1024; // 5백만바이트이면 5MB임.
+      String encType = "UTF-8";
+      MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileSizeLimit, encType,
+            new DefaultFileRenamePolicy());
+
+      // 2. upload 폴더에 저장한 파일에 대한 정보를 DB에 저장하는 작업
+      File uploadFile = multi.getFile("upFile");
+      // multipartrequest의 인스턴스인 multi에는 upload.html에서 보낸 파일 정봐 존재하고
+      // input 태그 name 속성의 값을 getFile() 메소드에 전달하면 여러 정보가 있는 파일 객체를 가져올 수 있음.
+      String fileName = multi.getFilesystemName("upFile");
+      String filePath = uploadFile.getPath();
+      long fileSize = uploadFile.length();
+      // SimpleDateFormat, TimeStamp, Calendar 라는 세 개의 클래스 사용
+      // 내가 원하는 형식으로 바꿔주는 클래스, 타입을 맞추기 위해 사용, 오늘의 밀리세컨드까지의 정보를 가져오는 클래스
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS");
+      Timestamp uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
+      FileData fileData = new FileData();
+      fileData.setFileName(fileName);
+      fileData.setFilePath(filePath);
+      fileData.setFileSize(fileSize);
+      // 유저값은 세션에서 가져오면 됩니다
+      fileData.setFileUser(fileUserId);
+      fileData.setUploadTime(uploadTime); // FILETBL의 UPLOADTIME 컬럼의 타입은 TIMESTAMP이고 시분초를 함께 저장함.
+
+      int result = new FileService().registerFileInfo(fileData);
+
+      if (result > 0) {
+
+      } else {
+
+      }
+
+   
+[김다빈] [오전 9:39] 우또리천사다
+[오우철] [오전 9:39] 헷갈리지말라고 dopost내용 전부
+[신성진] [오전 9:42] 굿굿
+[오재승] [오전 9:43] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 9:47] 로재승로재승
+[오우철] [오전 9:47] 어제어제
+[오우철] [오전 9:47] 쌤이쌤이
+[오우철] [오전 9:47] 주신주신
+[오우철] [오전 9:47] DBDB
+[오우철] [오전 9:47] 크리에이트크리에이트 파일파일
+[오우철] [오전 9:47] 주셈주셈 달라달라 내놔내놔
+[오재승] [오전 9:47] 에엣에엣
+[오재승] [오전 9:47] 조도마뗴구사다이맛ㄴ
+[오재승] [오전 9:48] File: 02. 공지사항 SQL_UTF8.txt
+[오재승] [오전 9:48] File: 02. 공지사항 SQL.txt
+[오재승] [오전 9:48] 이것을 원하셨습니까 휴먼?
+[오재승] [오전 9:48] 근데 이거 엊그제껀데
+[오우철] [오전 9:48] 여튼....
+[오재승] [오전 9:48] 굳또
+[김다빈] [오전 9:48] CREATE TABLE FILETBL (
+    FILENAME VARCHAR2(100) NOT NULL,
+    FILEPATH VARCHAR2(100) NOT NULL,
+    FILESIZE NUMBER NOT NULL,
+    FILEUSER VARCHAR2(50),
+    UPLOADTIME TIMESTAMP PRIMARY KEY
+);
+[김다빈] [오전 9:48] 이거아니야?
+[오우철] [오전 9:49] 보쿠노 놋북니 테이브루가 츠쿠라나이
+[오재승] [오전 9:50] 아하 이거구만
+[오재승] [오전 9:50] 쏘리잇
+[오우철] [오전 9:50] 저것도 필요했어
+[오우철] [오전 10:11] Photo
+[오우철] [오전 10:11] 잘되용~
+[신성진] [오전 10:12] 찬희한테
+[신성진] [오전 10:12] 한입먹는다고했다가 맞을뻔함
+[오우철] [오전 10:12] 늘리는 방법
+[오우철] [오전 10:12] AlTER TABLE FILETBL MODIFY FILEPATH VARCHAR2(255);
+[김다빈] [오전 10:12] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[김나혜] [오전 10:13] 직관할뻔...까비... 어서 용기를 내!!!
+[신성진] [오전 10:13] 근데 한입먹음
+[신성진] [오전 10:14] 찬희님께서 넓은 아량으로 한입 하사하심
+[신성진] [오전 10:15] 아 내 파우치에 앉지마
+[신성진] [오전 10:15] 짜증나정말
+[김다빈] [오전 10:15] 나는오늘나혜직관자리
+[신성진] [오전 10:15] ㅋㅋㅋㅋㅋㅋㅋ
+[신성진] [오전 10:15] 아 소독해야지
+[김다빈] [오전 10:15] 김나혜쇼핑해요
+[김나혜] [오전 10:16] Emoticons
+[신성진] [오전 10:16] 나 요즘
+[신성진] [오전 10:16] 윗옷없어나혜야
+[신성진] [오전 10:16] 봄옷으로 하나 부탁해
+[김나혜] [오전 10:16] 어쩌라구...
+[김나혜] [오전 10:16] 선생님한테 이를꼬얌 ㅠ
+[신성진] [오전 10:16] 일러!
+[신성진] [오전 10:16] 일러!!!!!!!
+[신성진] [오전 10:16] 구경하게!!
+[김나혜] [오전 10:16] Emoticons
+[오재승] [오전 10:25] 저희
+[오재승] [오전 10:25] fileError 에는
+[오재승] [오전 10:25] 무엇을 썻나용?
+[오재승] [오전 10:25] ㅎㅎㅎ
+[신성진] [오전 10:26] 파일에러는 못봤옹
+[오우철] [오전 10:26] fileError.html
+[신성진] [오전 10:26] 뭐 썼나?
+[오우철] [오전 10:26] <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>에러 페이지</title>
+</head>
+<body>
+   <h1>파일 서비스 요청이 실패하였습니다.</h1>
+   <a href="#">시작페이지로 이동</a>
+</body>
+[오우철] [오전 10:26] uploadSuccess.jsp
+[오우철] [오전 10:26] <%@page import="file.model.vo.FileData"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+   FileData fileData = (FileData)request.getAttribute("fileData");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="refresh" content="0.1 url=/">
+<title>업로드 성공</title>
+</head>
+<body>
+   <h1>업로드 정보</h1>
+   <h3>파일 이름 : <%=fileData.getFileName()%></h3>
+   <h3>파일 경로 : <%=fileData.getFilePath()%></h3>
+   <h3>파일 사이즈 : <%=fileData.getFileSize()%></h3>
+   <h3>업로드 아이디 : <%=fileData.getFileUser()%></h3>
+   <h3>업로드 시간 : <%=fileData.getUploadTime()%></h3>
+</body>
+</html>
+[오재승] [오전 10:27] 아리가또우철상!
+[오우철] [오전 10:27] 사마로 부르거라
+[오우철] [오전 10:28] ウチョルさま
+[오재승] [오전 10:29] はい、分かりました！
+[오재승] [오전 10:29] Emoticons
+[오재승] [오전 11:06] Photo
+[오재승] [오전 11:06] FileListServlet
+[오재승] [오전 11:06] 보여주실뿐1
+[오재승] [오전 11:06] !!!!
+[오우철] [오전 11:06] 잘되시는분
+[오재승] [오전 11:06] 저 안되여
+[오재승] [오전 11:06] 크크킄
+[오우철] [오전 11:06] doget 주세요
+[오재승] [오전 11:06] dogetdoget
+[김다빈] [오전 11:06] package file.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import file.model.service.FileService;
+import file.model.vo.FileData;
+
+@WebServlet("/file/listAll")
+public class FileListServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+       
+    public FileListServlet() {
+        super();
+    }
+
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      HttpSession session = request.getSession();
+      String userId = (String)session.getAttribute("userId");
+      
+      ArrayList<FileData> list = new FileService().printFileList(userId);
+      if(!list.isEmpty()) {
+         request.setAttribute("list", list);
+         request.getRequestDispatcher("/WEB-INF/views/file/fileList.jsp").forward(request, response);
+      } else {
+         request.getRequestDispatcher("/WEB-INF/views/file/fileError.html").forward(request, response);
+      }
+   }
+
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      doGet(request, response);
+   }
+
+}
+[오재승] [오전 11:11] 하나를 고치면 오류 하나가 더 나오는 마법
+[오재승] [오전 11:11] Photo
+[오재승] [오전 11:11] 이건
+[오재승] [오전 11:11] 그냥 오탈자 문제인가융?
+[오재승] [오전 11:18] 다빈상 아리가또우!
+[오재승] [오전 11:18] Emoticons
+[김나혜] [오전 11:20] 로재승 다빈이한테 커피사라 증말 ㅋㅋㅋㅋ
+[김민진] [오전 11:20] 그니깐
+[김민진] [오전 11:20] 다빈이 오류 잘찾네!?
+[김다빈] [오전 11:21] 숨은그림찾기대장
+[김나혜] [오전 11:23] 선생님 수업시간에 쩝접대요
+[김나혜] [오전 11:23] 쟤들 쩝쩝거려요
+[김다빈] [오전 11:23] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오전 11:23] 나 오류 또생김
+[오재승] [오전 11:23] Photo
+[오재승] [오전 11:23] 이거 뭐징
+[오재승] [오전 11:24] FileUploadServlet 좀 주세요!
+[오재승] [오전 11:24] Photo
+[오재승] [오전 11:24] Emoticons
+[오재승] [오전 11:24] Emoticons
+[오재승] [오전 11:24] 부탁드립니더!
+[김나혜] [오전 11:24] package file.controller;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import file.model.service.FileService;
+import file.moder.vo.FileData;
+
+/**
+ * Servlet implementation class FileUploadServlet
+ */
+@WebServlet("/file/upload")
+public class FileUploadServlet extends HttpServlet {
+   private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public FileUploadServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      request.getRequestDispatcher("/WEB-INF/views/file/upload.html").forward(request, response);
+   }
+
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // 1. upload 폴더에 실제 파일을 저장하는 작업
+      // MultipartRequest 객체 생성하면 파일이 저장됨.(편리편리)
+      HttpSession session = request.getSession();
+      String fileUserId = (String)session.getAttribute("userId");
+      //String uploadFilePath = "D:\\home\\" + fileUserId;
+      String uploadFilePath = request.getServletContext().getRealPath("upload");
+      int uploadFileSizeLimit = 5*1024*1024;
+      String encType = "UTF-8";
+      
+      MultipartRequest multi = new MultipartRequest(request, uploadFilePath, uploadFileSizeLimit, encType, new DefaultFileRenamePolicy());
+      
+      // 2. upload폴더에 저장할 파일에 대한 정보를 DB에 저장하는 작업
+      File uploadFile = multi.getFile("upFile"); //java.io 임포트
+      // multipartrequest의 인스턴스인 multi에는 uploa.html에서 보낸 파일 정보가 존재하고
+      // input 태그 name 속성의 값을 getFile() 메소드에 전달하면 여러 정보가 있는 파일 객체를 가져올 수 있음
+      
+      String fileName = multi.getFilesystemName("upFile");
+      String filePath = uploadFile.getPath();
+      long fileSize = uploadFile.length();
+      //SimpleDateFormat, TimeStamp, Calendar 라는 세 개의 클래스 사용
+      // 내가 원하는 형식으로 바꿔주는 클래스, 타입을 맞춰주기 위해 사용,
+      // 오늘의 밀리세컨드까지의 정보를 가져오는 클래스
+      SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSS"); // 날짜데이터를 내가 원하는 형태로 바꿔줌
+      Timestamp uploadTime = Timestamp.valueOf(formatter.format(Calendar.getInstance().getTimeInMillis()));
+      FileData fileData = new FileData();
+      fileData.setFileName(fileName);
+      fileData.setFilePath(filePath);
+      fileData.setFileSize(fileSize);
+      fileData.setFileUser(fileUserId); // String fileUserId = (String)session.getAttribute("userId");
+      fileData.setUploadTime(uploadTime); // FILETBL의 UPLOADTIME 컬럼의 타임은 TIMESTAMP이고 시분초를 함께 저장함.
+      
+      int result = new FileService().registerFileInfo(fileData);
+      
+      if(result > 0) {
+         request.setAttribute("fileData", fileData);
+         request.getRequestDispatcher("/WEB-INF/views/file/uploadSuccess.jsp").forward(request, response);
+      } else {
+         request.getRequestDispatcher("/WEB-INF/views/file/fileError.html");
+      }
+
+   }
+
+}
+[김나혜] [오전 11:25] 똥멍청이야
+[김나혜] [오전 11:25] 잘좀해
+[이혜성] [오전 11:26] 강사님 지금 말씀 안하시는 중..?
+[김민진] [오전 11:27] 응!
+[김민진] [오전 11:27] 오류 고쳐주러 다니셔!
+[이혜성] [오전 11:27] 아하 ㅋㅋㅋㅋ 멈춘 줄 알았네욬ㅋ
+[김나혜] [오전 11:27] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ요기 선생님이 한 4명은 있는것같아
+[오재승] [오전 11:32] ㅋ크크킄
+[김나혜] [오전 11:37] 저기....성진오빠 자니..?
+[홍찬희] [오전 11:37] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:38] 거기까지 들리는구나
+[김나혜] [오전 11:38] 곤히 자는구나...^^
+[김나혜] [오전 11:38] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오전 11:38] 잠자는 아마조네스시대의 왕자
+[김나혜] [오전 11:38] 들숨날숨소리정도라고하지
+[홍찬희] [오전 11:38] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오전 11:38] ㅇ오우철 춤춘다
+[오재승] [오전 11:38] 머시썽
+[신성진] [오후 12:09] 미안미안 코골았어?
+[김나혜] [오후 12:18] 쏘큐트햇슴다
+[신성진] [오후 12:18] 미안합네다
+[신성진] [오후 12:18] 조심하겠습네다
+[오재승] [오후 12:19] 아닙니더 우철형님처럼 제 자리까지 소리가 들리지 않았으니
+[오재승] [오후 12:19] 괞찮습니더!
+[오재승] [오후 12:19] ㅎㅎㅎㅎ
+[신성진] [오후 12:20] Emoticons
+[오재승] [오후 12:28] Photo
+[오재승] [오후 12:28] 누가 DAO좀
+[오재승] [오후 12:28] 보여주세여!
+[김나혜] [오후 12:28] filepath = 이걸로
+[김나혜] [오후 12:28] 바꾸
+[김나혜] [오후 12:28]  -이거 아냐
+[신성진] [오후 12:28] public int deleteFile(Connection conn, String filePath, String fileUser) {
+      PreparedStatement pstmt = null;
+      int result = 0;
+      String query = "DELETE FROM FILETBL WHERE FILEPATH = ? AND FILEUSER = ?";
+      try {
+         pstmt = conn.prepareStatement(query);
+         pstmt.setString(1, filePath);
+         pstmt.setString(2, fileUser);
+         result = pstmt.executeUpdate();
+      } catch (SQLException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+      }finally {
+         JDBCTemplate.close(pstmt);
+      }
+      return result;
+   }
+[오재승] [오후 12:29] Emoticons
+[김다빈] [오후 12:29] 오류오재승
+[오재승] [오후 12:29] 힝
+[오재승] [오후 12:29] Emoticons
+[김나혜] [오후 12:30] 다빈이 닌자네 거이 
+[오재승] [오후 12:31] 신기하네
+[오재승] [오후 12:31] 왜 나한텐 안보이지
+[오재승] [오후 12:31] 코드맹인이 된 나
+[김다빈] [오후 12:32] 닌잨ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오후 12:33] 아
+[오재승] [오후 12:33] 나혜님이 먼저 찾았으
+[오재승] [오후 12:33] 내가 톡을 안봤네
+[오재승] [오후 12:33] ㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오재승] [오후 12:33] 바보오짱~
+[김나혜] [오후 12:35] 개자식^^
+[오재승] [오후 12:48] Emoticons
+[홍찬희] [오후 1:28] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 1:28] Photo
+[오우철] [오후 1:50] 근데 옛날에 허경영이 말했던 공략들 말도 안되는 소리라며 무시했던거 지금 다 시행하고 있음 ㅋㅋㅋㅋ
+[오우철] [오후 1:50] 몇수 앞을 보는 숨은 인재?!
+[홍찬희] [오후 1:52] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[홍찬희] [오후 1:52] 투표했오?
+[이혜성] [오후 1:56] Photo
+[홍찬희] [오후 1:59] ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ
+[오우철] [오후 2:14] 모두 오후시간
+[오우철] [오후 2:14] Photo
+[오재승] [오후 2:22] ??/
+[오재승] [오후 2:22] ㅋㅋㅋㅋㅋㅋㅋㅋ
+[신성진] [오후 2:34] 다빈아
+[오재승] [오후 2:39] 오오오
+[오재승] [오후 2:39] 한번에
+[오재승] [오후 2:39] 됐다
+[오재승] [오후 2:39] 감동... ㅠㅜㅜㅠ
+[이혜성] [오후 2:41] 다운로드 신기..
+[이혜성] [오후 2:41] 이해는 못했지만 신기..
+[김나혜] [오후 2:43] 다운로드 누르면 뭐됨..??
+[이혜성] [오후 2:43] 파일
+[이혜성] [오후 2:43] 다운로드 되요!
+[김나혜] [오후 2:44] 오호?ㅎㅎ

@@ -404,15 +404,22 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 			WHERE LEFT_DATE<![CDATA[ <= ]]>0 AND SUBJECT LIKE '%' || #{searchValue } || '%'
 	</select>		 
 		
-		
-			<!--나혜님이 추가한거 -->
-	<select id="selectAllList" resultMap="fundingResultMap">
-		SELECT * FROM FUNDING_PROJECT
-		ORDER BY F_PROJECT_NO DESC
-	</select>
-	
-	  <select id="selectFundingListCount" resultType="_int">
-      SELECT COUNT(*) FROM FUNDING
+    
+             <!--나혜님이 추가한거 -->
+   <select id="selectAllList" resultMap="fundingResultMap">
+      SELECT * FROM FUNDING_PROJECT
+      WHERE PROJECT_CODE = 0
+      ORDER BY F_PROJECT_NO DESC
+   </select>
+   
+     <select id="selectFundingListCount" resultType="_int">
+      SELECT COUNT(*) FROM FUNDING_PROJECT    WHERE PROJECT_CODE = 0
     </select>
+    
+    <update id="deleteAdminFunding" parameterType="_int">
+       UPDATE FUNDING_PROJECT
+       SET PROJECT_CODE = 1
+       WHERE F_PROJECT_NO = #{projectNo}
+    </update>
     
 </mapper>

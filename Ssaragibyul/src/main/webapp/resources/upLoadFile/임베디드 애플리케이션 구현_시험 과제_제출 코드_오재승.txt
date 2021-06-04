@@ -1,0 +1,170 @@
+#define A 4		//세그먼트 설정
+#define B 5
+#define C 6
+#define D 7
+#define E 8
+#define F 9 
+#define G 10
+#define DP 11
+
+
+int redLED = 2;//pin 변수
+int greenLED = 3;
+
+void setup(){
+  	pinMode(redLED, OUTPUT);//아웃풋 설정
+  	pinMode(greenLED, OUTPUT);
+    pinMode(A, OUTPUT);
+    pinMode(B, OUTPUT);
+    pinMode(C, OUTPUT);
+    pinMode(D, OUTPUT);
+    pinMode(E, OUTPUT);
+    pinMode(F, OUTPUT);
+    pinMode(G, OUTPUT);
+    pinMode(DP, OUTPUT);
+}
+
+void loop(){    
+  	segmentOFF();
+	digitalWrite(greenLED, LOW);//그린 LED off
+	digitalWrite(redLED, HIGH);//레드 LED ON
+     delay(5000);	//5초 딜레이
+  	digitalWrite(redLED, LOW); // 레드 LED OFF
+    digitalWrite(greenLED, HIGH);//그린 LED ON
+  
+      number9(); delay(1000);// 숫자마다 각 1초 딜레이
+      number8(); delay(1000);
+      number7(); delay(1000);
+      number6(); delay(1000);
+      number5(); delay(1000);
+      number4(); delay(1000);
+      number3(); delay(1000);
+      number2(); delay(1000);
+      number1(); delay(1000);
+      number0(); delay(1000);
+    digitalWrite(greenLED, LOW);
+  	digitalWrite(redLED, HIGH);
+  	 delay(1000); // 마지막 1초 추가 후 반복
+}
+  
+// 실행 세그먼트 메소드 작성 0~9. 전체 OFF까지
+  void segmentOFF(){
+    digitalWrite(A, HIGH);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(DP, HIGH);
+  }  
+  void number0()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, HIGH);
+    digitalWrite(DP, HIGH);
+  }
+  void number1()
+  {
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(DP, HIGH);
+  }
+  void number2()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number3()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number4()
+  {
+    digitalWrite(A, HIGH);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number5()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number6()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, HIGH);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number7()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, HIGH);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, HIGH);
+    digitalWrite(G, HIGH);
+    digitalWrite(DP, HIGH);
+  }
+  void number8()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, LOW);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }
+  void number9()
+  {
+    digitalWrite(A, LOW);
+    digitalWrite(B, LOW);
+    digitalWrite(C, LOW);
+    digitalWrite(D, LOW);
+    digitalWrite(E, HIGH);
+    digitalWrite(F, LOW);
+    digitalWrite(G, LOW);
+    digitalWrite(DP, HIGH);
+  }

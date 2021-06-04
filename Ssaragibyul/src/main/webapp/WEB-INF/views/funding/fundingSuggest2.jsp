@@ -35,6 +35,11 @@
 
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+
+<!-- Theme included stylesheets -->
+<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 </head>
 <style>
 .getstarted {
@@ -52,24 +57,30 @@
 
 .main-menu {
 	padding-left: 50px;
-}
+} 
 .div{
 margin : auto;
 }
+
+.ql-toolbar{
+	width : 500px;
+}
+.format{
+	width : 500px;
+	height : 400px;
+}
 </style>
 
+<script>
+
+</script>
+
+
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="200"> 
-<div id="summernote">Hello Summernote</div><!-- header 지우면 보임 다른 위치로 가면 아예 안뜸;;; 이유 모름 ㅜㅠㅜㅠㅜㅜㅠ  -->
+
 		 		<script>
-					 $('#summernote').summernote({
-					      		placeholder: 'Hello Bootstrap 4',
-					      			 tabsize: 2,
-					       		 height: 100
-					      });
+	
 				</script>
-<!-- 	<form method="post">
-	       <textarea id="summernote" name="hostIntro">       </textarea>
-	       </form> -->
 	<%-- <%@include file="introduce.jsp" %> --%>
 	<%@include file="../../../header.jsp"%> 
 	
@@ -93,9 +104,13 @@ margin : auto;
 		</div>
 	</header>
 	
+	
+	
+
+	
 
 	<main class="main-content">
-		<form action="fundingRegister.do" method="post" enctype="multipart/form-data">
+		<form action="fundingRegister.do" method="post" enctype="multipart/form-data" id="postForm">
 		<br>
 				<br>
 				<br>
@@ -105,43 +120,40 @@ margin : auto;
 				<br>
 
 			<section id="sectionSuggest1">
+			
 				<br><br><br><br>
-				<table width="550" cellspacing="10" class="sug">
-					<tr>
-						<td>프로젝트명</td>
-						<td></td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><input type="text" name="subjectName"></td>
-					</tr>
-					<tr>
-						<td>목표 금액</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="goalMoney"></td>
-					</tr>
-					<tr>
-						<td>진행 기간</td>
-					</tr>
-					<tr>
-						<td><script>let today = new Date();   
+					<div>
+						프로젝트명
+					</div>
+					<div>
+						<input type="text" name="subjectName">
+					</div>
+					<div>
+						목표 금액
+					</div>
+					<div>
+						<input type="text" name="goalMoney">
+					</div>
+					<div>
+						진행 기간
+					</div>
+					<div> <script>	 	let today = new Date();   
 
-						let year = today.getFullYear(); // 년도
-						let month = today.getMonth() + 1;  // 월
-						let date = today.getDate();  // 날짜
-						let day = today.getDay();  // 요일
+					let year = today.getFullYear(); // 년도
+					let month = today.getMonth() + 1;  // 월
+					let date = today.getDate();  // 날짜
+					let day = today.getDay();  // 요일
 
-						document.write(year + '/' + month + '/' + date)</script> ~
-						<input type="date" name="finDate"></td>
-					</tr>
-					<tr>
-						<td>대표 이미지</td>
-					</tr>
-					<tr>
-						<td><input type="file" name="uploadFileMain"></td>
-					</tr>
-				</table>
+					document.write(year + '/' + month + '/' + date)</script> ~ 	
+						<input type="date" name="finDate">
+					</div>
+					
+					<div>
+						대표 이미지
+					</div>
+					<div>
+						<input type="file" name="uploadFileMain">
+					</div>
 				<br><br><br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
 			</section>
@@ -150,32 +162,28 @@ margin : auto;
 
 			<section id="sectionSuggest2">
 							<br><br><br><br>
-				<table width="550" cellspacing="10" class="sug">
-				<tr>
-						<td>동영상 주소</td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><input type="text" name="videoUrl"></td>
-					</tr>
-					<tr>
-						<td> 이미지 등록</td>
-					</tr>
-					<tr>
-						<td> <input type="file" name="uploadFileSub1">  
-						    <input type="file" name="uploadFileSub2"></td>
-					</tr>
-					<tr>
-						<td>프로젝트 스토리</td>
-					</tr>
-					<tr>
-						<td><textarea name="projectStory" rows="6" cols="30" wrap="virtual"></textarea>							  </td>
-					</tr>
-					
-				</table>
-				
-
-				
+				<div>
+						동영상 주소
+				</div>
+					<div>
+						<input type="text" name="videoUrl">
+					</div>
+					<div>
+						 이미지 등록
+					</div>
+					<div>
+						 <input type="file" name="uploadFileSub1">  <br>
+						    <input type="file" name="uploadFileSub2">
+					</div>
+					<div>
+							프로젝트 스토리
+					</div>
+					<div>
+					<!-- 	<textarea name="projectStory" rows="6" cols="30" wrap="virtual"></textarea>s -->
+					</div>
+					<input type="hidden" name="projectStory">
+					<input type="hidden" name="uploadImage">
+					<div id="editor" class="format" ></div>
 				<br><br><br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음단계</a>
 			</section>
@@ -184,97 +192,117 @@ margin : auto;
 
 			<section id="sectionSuggest3">
 			<br><br><br><br>
-				<table width="550" cellspacing="10" class="sug">
-					<tr>
-						<td>리워드 금액</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="optionPrice"></td>
-					</tr>
-					<tr>
-						<td>리워드 제공 가능 수</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="optionLimit"></td>
-					</tr>
-					<tr>
-						<td>리워드 제목</td>
-					</tr>
-					<tr>
-						<td><input type="text" name="productName"></td>
-					</tr>
-										<tr>
-						<td>리워드 내용</td>
-					</tr>
-					<tr>
-						<td><textarea name="productContent" rows="6" cols="30" wrap="virtual"></textarea></td>
-					</tr>
-						<tr>
-						<td>배송지 필요여부</td>
-					</tr>
-					<tr>
-						<td><input type="button" name="" value="예">
+					<div>
+						리워드 금액
+					</div>
+					<div>
+						<input type="text" name="optionPrice">
+					</div>
+					<div>
+						리워드 제공 가능 수
+					</div>
+					<div>
+						<input type="text" name="optionLimit">
+					</div>
+					<div>
+						리워드 제목
+					</div>
+					<div>
+						<input type="text" name="productName">
+					</div>
+					<div>
+							리워드 내용
+					</div>
+						<div>
+						<textarea name="productContent" rows="6" cols="30" wrap="virtual"></textarea>
+						</div>
+						<div>
+							배송지 필요여부
+						</div>
+					<div>
+						<input type="button" name="" value="예"> <br>
 							<input type="button" name="" value="아니요">
-						</td>
-					</tr>
-									<tr>
-						<td>예상 배송일</td>
-					</tr>
-					<tr>
-						<td><input type="date" name="deleiveryDate"></td>
-					</tr>
-				</table>
+						</div>
+				
+									<div>	
+						예상 배송일
+					</div>
+					<div>	
+						<input type="date" name="deleiveryDate">
+						</div>
 					<br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest4"
 			style="text-decoration: none;">다음단계</a>
 			</section>
 
-		<br><br><br><br><br><br><br><br>
 
 			<section id="sectionSuggest4">
 				<br><br><br><br>
-				<table width="550" cellspacing="10" class="sug">
-					<tr>
-						<td>환불 정책 안내 사항</td>
-					</tr>
-					<tr></tr>
-					<tr>
-						<td><textarea name="warningIntro" rows="6" cols="30" wrap="virtual"></textarea></td>
-					</tr>
-					<tr>
-						<td>문의 가능한 번호</td>
-					</tr>
-					<tr>
-						<td><input type="text" name=""></td>
-					</tr>
-					<tr>
-						<td>문의 이메일</td>
-					</tr>
-					<tr>
-						<td><input type="text" name=""></td>
-					</tr>
-					<tr>
-					<td><input type="hidden" name="userId" value="${loginUser.userId }"></td>
-					</tr>
-				</table>
+				<div>
+					환불 정책 안내 사항
+				</div>
+				
+		<div>
+						<textarea name="warningIntro" rows="6" cols="30" wrap="virtual"></textarea>
+		</div>
+			<div>
+						문의 가능한 번호
+			</div>
+			<div>
+						<input type="text" name="">
+					</div>
+					<div>
+						문의 이메일
+					</div>
+					<div>
+						<input type="text" name="">
+					</div>
+					<div>
+						<input type="hidden" name="userId" value="${loginUser.userId }"></td>
+					</div>
+					
+					
 			</section>
 		<br><br><br><br><br><br>
-		<input type="submit" value="작성완료" class="getstarted scrollto" style="text-decoration: none;">
-
+		<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;">
+			
 
 		</form>
 <!-- 
 		<a class="getstarted scrollto" href="fundingList.do"
 			style="text-decoration: none;">뭘 쓰지</a>
 			 -->
+			 
+			 
+			 
+			 	<!-- Create the toolbar container -->
+<!-- Create the editor container -->
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
+			 
 		
 		<%@include file="../../../footer.jsp"%>
 	</main>
 
-
 	<!-- .site-wrap -->
 
 	<!--  	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
+
+
+<!-- Initialize Quill editor -->
+<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+<script src="/resources/js/image-upload.min.js"></script>
+<script src="/resources/js/image-resize.min.js"></script>
+<!-- <script src="//cdn.quilljs.com/1.3.6/quill.js"></script> -->
+
 
 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
@@ -292,6 +320,13 @@ margin : auto;
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
+	
+	<script src="/resources/js/fundingSug.js"></script>
+	
 
+<script>
+
+
+</script>
 </body>
 </html>
