@@ -24,14 +24,12 @@ import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
-import com.ssaragibyul.funding.domain.Funding;
 
 @Controller
 public class DonationController {
 
 	@Autowired
 	private DonationService dService;
-
 	
 	// 기부 리스트 보여주기: 테이블 2개 조인해서 불러오는 것
 	@RequestMapping(value = "donationList.do", method = RequestMethod.GET) 
@@ -48,12 +46,14 @@ public class DonationController {
 		} 
 	}
 
+	
   	// 제안하기 페이지 -> 기부 페이지로 이동 
   	@RequestMapping(value="donationSuggest.do", method=RequestMethod.GET) 
   	public String donationSuggestMain() { 
   		return "donation/donationSuggest"; 
 	}
 
+  	
   	// 제안하기 업로드(등록)
   	@RequestMapping(value = "donationRegister.do", method = RequestMethod.POST)
   	public String donationRegister(@ModelAttribute Donation donation, DonationFile donationFile,
@@ -84,26 +84,28 @@ public class DonationController {
 
   		int result = dService.registerDonation(donation, donationFile);
   		if (result > 0) {
-			return "redirect:doantionList.do";
+			return "redirect:donationList.do";
 		} else {
 			model.addAttribute("msg", "제안 등록 실패");
 		}
   		return null;	
   	}
   	
+  	
 	// 파일 저장
 	public String saveFile(MultipartFile uploaFile, HttpServletRequest request) {
 		// 파일 저장 경로 설정
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\dUploadFiles";
+		String savePath = root + "\\dUpLoadFiles";
 		// 저장 폴더 선택
 		File folder = new File(savePath);
 		// 폴더가 없을 시 자동 생성
+		
 		if (!folder.exists()) {
 			folder.mkdir();
 		}
 		String filePath = folder + "\\" + uploaFile.getOriginalFilename();
-		// 파일명 변경
+		// 파일저장
 		try {
 			uploaFile.transferTo(new File(filePath));
 		} catch (IllegalStateException e) {
@@ -118,32 +120,70 @@ public class DonationController {
 		return filePath;
 	}
 	
-	// 삭제, 수정
-  	
-  	
-	// 기부 리스트 상세 조회(dDetail)
-	public ModelAndView dDetail(ModelAndView mv, @RequestParam("dProjectNo") int dProjectNo,
-			@ModelAttribute DonationLike dLike) {
-
-		// 좋아요 카운트
-		dService.addLikeCount(dProjectNo, dLike);
-
-		// 금액 카운트..?
-		dService.goalPriceCount(dProjectNo);
-
-		// 달성률
-		dService.achieve(dProjectNo);
-
-		// 남은 기간
-		dService.dateRemain(dProjectNo);
-
-		// 참여자
-		dService.participant(dProjectNo);
-
-		// 게시물 조회
-		Donation donation = dService.printOne(dProjectNo);
+	// 기부 상세 페이지 - 
+	@RequestMapping(value = "donationDetail.do", method = { RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView donationJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		dService.addReadCountHit(projectNo);
+		Donation donation = dService.printOne(projectNo);
+		DonationFile donationFile = dService.printOneFile(projectNo);
+		ArrayList<DonationLike> donationLike = dService.printOneLike(projectNo);
+		
+		if ((donation != null)&&(donationFile != null)) {
+			mv.addObject("donationFile", donationFile);
+			mv.addObject("donationLike", donationLike);
+			mv.addObject("donation", donation).setViewName("donation/donationDetail2");
+		} else {
+			mv.addObject("msg", "기부 상세 조회 실패");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
+		
 	}
+	/*
+	// 기부 참여 페이지
+	@RequestMapping(value = "doantionJoin.do", method = RequestMethod.POST)
+	public ModelAndView dDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		Donation donation = dService.printOne(projectNo);
+		if (donation != null) {
+			// 메소드 체이닝 방식
+			mv.addObject("donation", donation).setViewName("donation/doantionJoin");
+		} else {
+			mv.addObject("msg", "기부 참여 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv; 
+	}	
+	*/
+	
+	// 좋아요 
+	@RequestMapping(value = "donationLikeAdd.do", method = RequestMethod.POST)
+	public String donationLikeAdd(@ModelAttribute Donation donation, DonationLike donationLike,
+									HttpServletRequest resuest, Model model) {
+		int result = dService.donationLikeRegister(donation, donationLike);
+		if (result > 0) {
+			return "donation/donationJoinCompleteView";
+		}else {
+			model.addAttribute("msg", "좋아요 등록 실패");
+			return "common.errorPage";
+		}
+	}
+	
+  	
+  	
+
+	/*
+	 * // 좋아요 카운트 dService.addLikeCount(dProjectNo, dLike);
+	 * 
+	 * // 금액 카운트..? dService.goalPriceCount(dProjectNo);
+	 * 
+	 * // 달성률 dService.achieve(dProjectNo);
+	 * 
+	 * // 남은 기간 dService.dateRemain(dProjectNo);
+	 * 
+	 * // 참여자 dService.participant(dProjectNo);
+	 * 
+	 * // 게시물 조회 Donation donation = dService.printOne(dProjectNo); return mv; }
+	 */
 
 	// 기부 등록화면
 	public String dWriteView() {

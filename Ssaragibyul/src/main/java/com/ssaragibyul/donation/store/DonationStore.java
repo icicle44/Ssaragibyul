@@ -24,6 +24,21 @@ public interface DonationStore{
 	
 	// 기부 제안 파일 등록
 	public int insertDonation(DonationFile donationFile);
+
+	// 좋아요1
+	public int updateLike(Donation donation);
+
+	// 좋아요2
+	public int insertLike(DonationLike donationLike);
+	
+	// 기부 상세 페이지
+	public int addReadCount(int projectNo);
+	
+	// 기부 상세 페이지
+	public DonationFile selectOneFile(int projectNo);
+	
+	// 기부 상세 페이지
+	public ArrayList<DonationLike> selectOneLike(int projectNo);
 	
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
@@ -58,6 +73,12 @@ public interface DonationStore{
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
+
+
+
+
+
 
 
 

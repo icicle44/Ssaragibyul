@@ -42,14 +42,45 @@ public class DonationStoreLogic implements DonationStore{
 	public int insertDonation(DonationFile donationFile) {
 		return sqlSession.insert("donationMapper.insertDonationFile", donationFile);
 	}
-	
-	
+
+	/*
+	// 기부 참여하기
 	@Override
-	public int addLikeCount(int dProjectNo, DonationLike dLike) {
-		return dProjectNo;
-		// TODO Auto-generated method stub
-		
+	public Donation printOne(int projectNo) {
+		return sqlSession.selectOne("doantionMapper.selectOne", projectNo);
 	}
+	*/
+	
+	// 좋아요1
+	@Override
+	public int updateLike(Donation donation) {
+		return sqlSession.update("donationMapper.updateLike", donation);
+	}
+	
+	// 좋아요2
+	@Override
+	public int insertLike(DonationLike donationLike) {
+		return sqlSession.insert("donationMapper.insertLike", donationLike);
+	}
+
+	// 기부 상세보기
+	@Override
+	public int addReadCount(int projectNo) {
+		return sqlSession.update("donationMapper.updateCount", projectNo);
+	}
+	
+	// 기부 상세보기
+	@Override
+	public DonationFile selectOneFile(int projectNo) {
+		return sqlSession.selectOne("donationMapper.selectOneFile", projectNo);
+	}
+	
+	// 기부 상세보기
+	@Override
+	public ArrayList<DonationLike> selectOneLike(int projectNo) {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectOneLike", projectNo);
+	}
+
 	
 
 	@Override
@@ -64,11 +95,6 @@ public class DonationStoreLogic implements DonationStore{
 		return null;
 	}
 
-	@Override
-	public Donation printOne(int dProjectNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int registerDonation(Donation donation) {
@@ -154,6 +180,17 @@ public class DonationStoreLogic implements DonationStore{
 		return 0;
 	}
 
+	@Override
+	public Donation printOne(int dProjectNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int addLikeCount(int dProjectNo, DonationLike dLike) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 
 

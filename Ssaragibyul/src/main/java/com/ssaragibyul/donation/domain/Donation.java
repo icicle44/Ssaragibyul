@@ -16,6 +16,8 @@ public class Donation {
 	private int likeCount;
 	private int hitsCount;
 	private int projectCode;
+	private int percent;
+	private int leftDate;
 	
 	private DonationFile donationFile;
 	
@@ -23,7 +25,7 @@ public class Donation {
 
 	public Donation(int projectNo, String userId, String subjectName, int goalMoney, int sumMoney, Date startDate,
 			Date finDate, String projectStory, String warningIntro, int likeCount, int hitsCount, int projectCode,
-			DonationFile donationFile) {
+			int percent, int leftDate, DonationFile donationFile) {
 		super();
 		this.projectNo = projectNo;
 		this.userId = userId;
@@ -37,6 +39,8 @@ public class Donation {
 		this.likeCount = likeCount;
 		this.hitsCount = hitsCount;
 		this.projectCode = projectCode;
+		this.percent = percent;
+		this.leftDate = leftDate;
 		this.donationFile = donationFile;
 	}
 
@@ -136,6 +140,22 @@ public class Donation {
 		this.projectCode = projectCode;
 	}
 
+	public int getPercent() {
+		return percent;
+	}
+
+	public void setPercent(int percent) {
+		this.percent = percent;
+	}
+
+	public int getLeftDate() {
+		return leftDate;
+	}
+
+	public void setLeftDate(int leftDate) {
+		this.leftDate = leftDate;
+	}
+
 	public DonationFile getDonationFile() {
 		return donationFile;
 	}
@@ -149,10 +169,11 @@ public class Donation {
 		return "Donation [projectNo=" + projectNo + ", userId=" + userId + ", subjectName=" + subjectName
 				+ ", goalMoney=" + goalMoney + ", sumMoney=" + sumMoney + ", startDate=" + startDate + ", finDate="
 				+ finDate + ", projectStory=" + projectStory + ", warningIntro=" + warningIntro + ", likeCount="
-				+ likeCount + ", hitsCount=" + hitsCount + ", projectCode=" + projectCode + ", donationFile="
-				+ donationFile + "]";
+				+ likeCount + ", hitsCount=" + hitsCount + ", projectCode=" + projectCode + ", percent=" + percent
+				+ ", leftDate=" + leftDate + ", donationFile=" + donationFile + "]";
 	}
 
+	
 	
 	
 }

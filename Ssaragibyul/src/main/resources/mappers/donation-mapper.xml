@@ -16,6 +16,8 @@
 		<result property="likeCount" column="LIKE_COUNT"/>
 		<result property="hitsCount" column="HITS_COUNT"/>
 		<result property="projectCode" column="PROJECT_CODE"/>
+		<result property="percent" column="PERCENT"/>
+		<result property="leftDate" column="LEFTDATE"/>
 		
 		<collection property="donationFile" resultMap="donationFileResultMap"></collection>
 	</resultMap>
@@ -24,9 +26,9 @@
 	<resultMap type="DonationFile" id="donationFileResultMap">
 		<id property="fileNo" column="FILE_NO"/>
 		<result property="videoUrl" column="FILE_VIDEO_URL"/>
-		<result property="fileMainName" column="FILE_MAIN_NAME"/>
-		<result property="fileMainSize" column="FILE_MAIN_SIZE"/>
-		<result property="fileMainPath" column="FILE_MAIN_PATH"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileSize" column="FILE_SIZE"/>
+		<result property="filePath" column="FILE_PATH"/>
 		<result property="fileSub1Name" column="FILE_SUB1_NAME"/>
 		<result property="fileSub1Size" column="FILE_SUB1_SIZE"/>
 		<result property="fileSub1Path" column="FILE_SUB1_PATH"/>
@@ -87,8 +89,19 @@
 
     <!--기부 리스트-->
  	<select id="selectDonationList" resultMap="donationResultMap">
-		SELECT * FROM DONATION, DONATION_FILE
-		WHERE DONATION.D_PROJECT_NO = DONATION.D_PROJECT_NO ORDER BY 1 DESC
+		SELECT D_PROJECT_NO,USER_ID,SUBJECT,GOAL_MONEY,SUM_MONEY,START_DATE,FIN_DATE,PROJ_STORY,WARNING_INTRO,LIKE_COUNT,PROJECT_CODE, 
+      	PERCENT,LEFT_DATE,FILE_NO,FILE_VIDEO_URL,FILE_NAME,FILE_SIZE,FILE_PATH,FILE_SUB1_NAME,FILE_SUB1_SIZE,FILE_SUB1_PATH,FILE_SUB2_NAME,FILE_SUB2_SIZE,FILE_SUB2_PATH,UPLOADTIME
+        FROM
+		(SELECT DONATION.D_PROJECT_NO, DONATION.USER_ID, DONATION.SUBJECT, DONATION.GOAL_MONEY,
+      	DONATION.SUM_MONEY, DONATION.START_DATE, DONATION.FIN_DATE, 
+       	DONATION.PROJ_STORY, DONATION.WARNING_INTRO, DONATION.LIKE_COUNT,DONATION .PROJECT_CODE,
+       	CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT,  TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE,
+       	DONATION_FILE.FILE_NO, DONATION_FILE.FILE_VIDEO_URL, DONATION_FILE.FILE_NAME, DONATION_FILE.FILE_SIZE, DONATION_FILE.FILE_PATH,
+       	DONATION_FILE.FILE_SUB1_NAME, DONATION_FILE.FILE_SUB1_SIZE, DONATION_FILE.FILE_SUB1_PATH, DONATION_FILE.FILE_SUB2_NAME, DONATION_FILE.FILE_SUB2_SIZE,
+       	DONATION_FILE.FILE_SUB2_PATH, DONATION_FILE.UPLOADTIME
+		FROM DONATION, DONATION_FILE
+		WHERE DONATION.D_PROJECT_NO = DONATION_FILE.D_PROJECT_NO ORDER BY 1 DESC)
+		WHERE LEFT_DATE > 0
 	</select> 
 	
 	<!-- 기부 제안 등록 -->
@@ -105,6 +118,45 @@
 		VALUES(SEQ_DONATION_FILE_NO.NEXTVAL,#{videoUrl},#{fileName},NULL,'AAA',
 		#{fileSub1Name},NULL,'BBB',#{fileSub2Name},NULL,'CCC',SYSTIMESTAMP,SEQ_DONATION_NO.CURRVAL)
 	</insert>
+	
+	<!--기부 상세 페이지 조회수 증가  -->
+	<update id="updateCount" parameterType="Funding">
+		UPDATE DONATION SET HITS_COUNT = HITS_COUNT + 1
+		WHERE
+		D_PROJECT_NO = #{projectNo }
+	</update>
+	
+	
+	<!-- 기부 참여하기 & 기부 참여 -->
+	<select id="selectOne" resultMap="donationResultMap">
+		SELECT * FROM DONATION WHERE D_PROJECT_NO = #{projectNo}
+	</select>
+	
+	<!-- 기부 리스트 상세 (파일_사진)_ 하나만 출력 쿼리문 -->
+	<select id="selectOneFile" resultMap="donationFileResultMap">
+		SELECT * FROM DONATION_FILE WHERE D_PROJECT_NO = #{projectNo}
+	</select>
+	
+	<!-- 기부 리스트 상세(좋아요) -->
+	<select id="selectOneList" resultMap="DonationLikeResultMap">
+		SELECT * FROM FUNDING_LIKE WHERE F_PROJECT_NO = #{projectNo}
+	</select>
+	
+	<!-- 좋아요 내역 추가 -->
+	<insert id="insertLike" parameterType="DonationLike">
+		INSERT INTO
+		DONATION_LIKE
+		VALUES(SEQ_DONATION_LIKE_NO.NEXTVAL, #{userId}, DEAULT, #{projectNo})
+	</insert>
+	
+	<!-- 좋아요 업데이트 -->
+	<update id="updateLike" parameterType="Donation">
+		UPDATE DONATION SET LIKE_COUNT = LIKE_COUNT + 1
+		WHERE D_PROJECT_NO = #{projectNo}
+	</update>
+	
+	
+	
 	
 	<!-- 관리자용 -->
 	<select id="selectDonationListCount" resultType="_int">

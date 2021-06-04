@@ -16,11 +16,20 @@ public interface DonationService {
 
 	public int registerDonation(Donation donation, DonationFile donationFile); // 기부 제안 등록
 	
+	public int donationLikeRegister(Donation donation, DonationLike donationLike); // 좋아요 카운트
+	
+	public Donation printOne(int projectNo); // 기부 상세보기
+	
+	public DonationFile printOneFile(int projectNo); // 기부 상세보기
+
+	public ArrayList<DonationLike> printOneLike(int projectNo); // 기부 상세보기 
+
+	public int addReadCountHit(int projectNo); // 기부 상세
+	
 	public int getListCount();
 
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
-	public Donation printOne(int dProjectNo);
 	public int addLikeCount(int dProjectNo, DonationLike dLike);
 
 
@@ -51,6 +60,10 @@ public interface DonationService {
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
+
+
+
 
 
 

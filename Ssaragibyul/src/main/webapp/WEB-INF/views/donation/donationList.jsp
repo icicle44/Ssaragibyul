@@ -87,215 +87,197 @@ margin: auto;
 			<!-- 기부 프로젝트 -->
 
 		<div style="height: 1080px; padding-top: 200px;">
-			<section class="row align-items-stretch photos " id="section-funding1">
-				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;진행중 프로젝트</h2>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name = "chose1" class="select">
-					<option value = "news_list" selected>최신글 순</option>
-					<option value = "money_list">모금액 순</option>
-					<option value = "like_list">좋아요 순</option>
-				</select>
+			<section class="row align-items-stretch photos " id="section-donation1">
+				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a id="headFont">진행중 프로젝트</a></div>	
+		   			<div id="pj_search">
+		   		   	<select id = "chose1" class="select" onchange="location.href=this.value">
+	   		   	 		<option value = "" selected>선택</option>
+			       		<option value = "doantionList.do">최신글 순</option>
+				       	<option value = "doantionSelectMoney.do">모금액 순</option>
+				       	<option value = "doantionSelectLike.do">좋아요 순</option>
+					</select>
+					<form action="donationSearch_1.do" method="get" >
+						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
+						<input type="submit" class="scan" value="검색">
+					</form>
+					</div>
+					<!--  JS, 리다이렉트 URL -->
 					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch">
-						<div class="gridmain">
-					
-			 	<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
-				<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-				<table class="a_pj">
-					<tr>
-						<td> 
-							<a href="resources/upLoadFile/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
-								<img src="resources/upLoadFile/${d.donationFile.fileName}" alt="Image" class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search">${d.subjectName}"</span>
+						<div class="gridmain">	
+
+				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
+								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+									<table class="display" id="example">
+										<tr>
+											<td> 
+												<a href="resources/dUpLoadFiles/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
+													<img src="resources/dUpLoadFiles/${d.donationFile.fileName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
+													<div class="photo-text-more">
+														<span class="icon icon-search">${d.subjectName}"</span>
+													</div>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td align = "right">
+												<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+												<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<c:url var="dDetail" value="donationDetail.do">
+													<c:param name="projectNo" value="${d.projectNo }"></c:param>
+												</c:url> 
+												<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" id="bar_td">
+												<c:if test="${d.percent >99}">
+													<svg id="svg">
+														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+														<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+													</svg>
+												</c:if>
+										
+												<c:if test="${d.percent < 100}">
+													<svg id="svg">
+														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+														<rect x="0" y="0" height="2" width="${d.percent}%" fill="#FF8000"></rect>
+													</svg>
+												</c:if>
+											</td>
+										</tr>
+									    <tr>
+											<td id="dday_css">
+												<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
+												<c:if test="${d.leftDate < 1}"><b>마감</b></c:if>
+												<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
+											</td>
+											<td id="sum_css">
+												<b>
+													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
+												</b>
+												<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${d.percent}%</span>
+											</td>
+										</tr> 
+									</table>
 								</div>
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td id="heart_css"><span>좋아요 : ${d.likeCount}</span></td>
-					</tr>
-					<tr>
-						<td colspan="2" height="30px" id="sub_css">
-							<a href="<c:url value="project${d.subjectName}"/>">${d.subjectName}</a>
-						</td>
-					<tr>
-					<tr>
-						<td></td>
-						<td id="name_css">
-							<%-- <a style="color:DimGray; font-size:13px; vertical-align:4.5px;" >${d.productName}</a> --%>
-						</td>
-					</tr>
-				</table>
+			 				</c:forEach> 
+						</div>
+					</div>
 				</div>
- 				</c:forEach> 
-			</div>
+				<br>
+		
+				<br><br><br><br><br><br><br>
+				<br><br><br><br><br><br><br>
 
-
-			</div></div>
-			<button class="btn">프로젝트 더 보기</button> 
+				<hr><hr>		
+				<button class="btn">프로젝트 더 보기</button> 
 			</section>
 			<!-- #section-funding -->
 				
-			</div>
-
-			<br><br><br><br><br><br>
-			<!-- 기부 프로젝트 -->
-			<section class="row align-items-stretch photos" id="section-funding2">
-				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료된 프로젝트</h2> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<select name = "chose2" class="select">
-		          	<option value = "news_list" selected>최신글 순</option>
-		          	<option value = "money_list">모금액 순</option>
-		          	<option value = "like_list">좋아요 순</option>
-				</select>
-				<div class="col-12">
-				<div class="row align-items-stretch">
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-						<a href="/resources/img/images/img_4.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_4.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search">프로젝트 이름</span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-						<a href="/resources/img/images/img_5.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_5.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search">프로젝트 이름</span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-						<a href="/resources/img/images/img_1.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_1.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search"></span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
-
-
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-						<a href="/resources/img/images/img_2.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_2.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search"></span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-						<a href="/resources/img/images/img_3.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_3.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search"></span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
-					<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-						<a href="/resources/img/images/img_6.jpg" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="/resources/img/images/img_6.jpg" alt="Image" class="img-fluid">
-							<div class="photo-text-more">
-								<span class="icon icon-search"></span>
-							</div>
-						</a>
-						<p>기부 프로젝트 이름</p>
-					</div>
+			<section class="row align-items-stretch photos " id="section-donation2">
+				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a id="headFont">종료된 프로젝트</a>
 				</div>
-			</div>
-			<button class="btn">프로젝트 더 보기</button> 
-			</section>
-			<!-- #section-donation -->
-
-
-			<br><br><br><br><br><br><br>
-			<section class="row align-items-stretch photos " id="section-funding3">
-				<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;종료된 프로젝트</h2>&nbsp;&nbsp;
-				<select name = "chose1" class="select">
-          			<option value = "news_list" selected>최신글 순</option>
-		          	<option value = "money_list">모금액 순</option>
-		          	<option value = "like_list">좋아요 순</option>
-				</select>
-				<br>
+				
+		    	<div id="pj_search">
+		    		<select id = "chose2" class="select" onchange="location.href=this.value">
+	          			<option value = "news_list" selected>최신글 순</option>
+			          	<option value = "money_list">모금액 순</option>
+			          	<option value = "like_list">좋아요 순</option>
+					</select>
+					<form action="donationSearch_2.do" method="get" >
+						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
+						<input type="submit" class="scan" value="검색">
+					</form>
+					
+					<!--  JS, 리다이렉트 URL -->
+				</div>
 				<div class="col-12 justify-content-center">
 					<div class="row align-items-stretch">
 						<div class="gridmain">
-						
-						
-		 		<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
-				<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-				<table class="a_pj">
-				<tr>
-					<td> 
-					    <a href="resources/upLoadFile/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
-							<img src="resources/upLoadFile/${d.donationFile.fileName}" alt="Image" 
-							class="img-fluid" style="width:400px;, height:300px;">
-							<div class="photo-text-more">
-								<span class="icon icon-search">${d.subjectName}"</span>
-							</div>
-						</a>
-					</td>
-	 			</tr>
-	 			<tr>
-					<td align = "right">
-						<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
-					</td>
-				</tr>
-
-				<tr>
-					<td>
-					<c:url var="dDetail" value="donationDetail.do">
-						<c:param name="projectNo" value="${d.projectNo }"></c:param>
-					</c:url> 
-					<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
-					</td>
-				</tr>
-			 	<tr>
-					<td colspan="2" id="bar_td">
-						<c:if test="${d.sumMoney >99}">
-							<svg id="svg">
-								<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-								<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
-							</svg>
-						</c:if>
-		
-						<c:if test="${d.sumMoney < 100}">
-							<svg id="svg">
-								<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-								<rect x="0" y="0" height="2" width="${d.likeCount}%" fill="#FF8000"></rect>
-							</svg>
-						</c:if>
-					</td>
-				</tr>
-				<tr>
-					<td id="dday_css">
-						<img src="images/calendar.png">
-						<c:if test="${d.likeCount < 1}"><b>마감</b></c:if>
-						<c:if test="${d.likeCount > 1}"><b>${d.likeCount}</b>일 남음</c:if>
-					</td>
-					<td id="sum_css"><b><fmt:formatNumber value="${d.likeCount}" pattern="#,###"/>원</b>
-						<span id="percent_css">${d.likeCount}%</span>
-					</td>
-				</tr>
-			</table>
-			</div>
-		 </c:forEach> 
- 		</div>
-
-
-		</div></div>
-		<button class="btn">프로젝트 더 보기</button> 
-		</section>
-			<!-- #section-funding -->
 	
-			<%@include file="../../../footer.jsp" %>
-	</main>
+				 		<c:forEach var="d" items="${dListandFileEnd}" varStatus="status"> 
+							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+								<table class="a_pj">
+									<tr>
+										<td> 
+							   				<a href="resources/dUpLoadFile/${e.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
+												<img src="resources/dUploadFiles/${e.donationFile.fileName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
+												<div class="photo-text-more">
+													<span class="icon icon-search">${e.subjectName}"</span>
+												</div>
+											</a>
+										</td>
+			 						</tr>
+		 							<tr>
+										<td align = "right">
+											<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+											<span style="color:DimGray; font-size:13px; vertical-align:1px;">${e.likeCount}</span>
+										</td>
+									</tr>
+
+									<tr>
+										<td>
+											<c:url var="dDetail" value="donationDetail.do">
+												<c:param name="projectNo" value="${e.projectNo }"></c:param>
+											</c:url> 
+											<a href="${dDetail }" style="font-size : 1.5em">${e.subjectName }</a>
+										</td>
+									</tr>
+									
+		 							<tr>
+										<td colspan="2" id="bar_td">
+											<c:if test="${e.percent >99}">
+												<svg id="svg">
+													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+													<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+												</svg>
+											</c:if>
+							
+											<c:if test="${e.percent < 100}">
+												<svg id="svg">
+													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+													<rect x="0" y="0" height="2" width="${e.percent}%" fill="#FF8000"></rect>
+												</svg>
+											</c:if>
+										</td>
+									</tr>
+									
+									<tr>
+										<td id="dday_css">
+											<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
+											<c:if test="${e.likeCount < 1}"><b>마감</b></c:if>
+											<c:if test="${e.likeCount > 1}"><b>${d.leftDate}</b>일 남음</c:if>
+										</td>
+										<td id="sum_css">
+											<td id="sum_css"><b><fmt:formatNumber value="${e.sumMoney}" pattern="#,###"/>원 , </b>
+											<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${e.percent}%</span>
+										</td>
+									</tr>
+								</table>
+							</div>
+		 				</c:forEach> 
+ 					</div>
+				</div>
+			</div>
+			<br><br><br>
+			<br><br><br>
+			<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button class="btn">프로젝트 더 보기</button> 
+		</section>
+		
+		<br><br><br>
+		
+		<%@include file="../../../footer.jsp" %>
+		</main>
 
 	<!-- .site-wrap -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

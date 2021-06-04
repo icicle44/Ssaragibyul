@@ -12,7 +12,6 @@ import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
-import com.ssaragibyul.funding.domain.Funding;
 
 @Service
 public class DonationServiceImpl implements DonationService{
@@ -46,10 +45,52 @@ public class DonationServiceImpl implements DonationService{
 		return dResult;
 	}
 	
+	/*
+	 * // 기부 상세페이지
+	 * 
+	 * @Override public int addReadCountHit(int projectNo) { return
+	 * dStore.addReadCount(projectNo); }
+	 */
+	
+	
+	//기부 상세 페이지
+	@Override
+	public DonationFile printOneFile(int projectNo) {
+		return dStore.selectOneFile(projectNo);
+	}
+	
+	@Override
+	public Donation printOne(int projectNo) {
+		return dStore.printOne(projectNo);
+	}
+	
+	@Override
+	public ArrayList<DonationLike> printOneLike(int projectNo) {
+		return dStore.selectOneLike(projectNo);
+	}
+	
+	@Override
+	public int addReadCountHit(int projectNo) {
+		return dStore.addReadCount(projectNo);
+	}
+	//////////////////////////
+
+	
+	// 좋아요 
+	@Override
+	public int donationLikeRegister(Donation donation, DonationLike donationLike) {
+		int result = dStore.updateLike(donation);
+		int dResult = 0;
+		if (result > 0) {
+			dResult = dStore.insertLike(donationLike);
+		}
+		return dResult;
+	}
+
+	// 
 	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
 		return dStore.addLikeCount(dProjectNo, dLike);
-		
 	}
 
 	@Override
@@ -63,13 +104,6 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public Donation printOne(int dProjectNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public int modifyDonation(Donation donation) {
@@ -148,6 +182,7 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 
 
