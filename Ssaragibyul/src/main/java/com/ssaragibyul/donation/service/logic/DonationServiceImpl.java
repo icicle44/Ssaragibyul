@@ -10,19 +10,33 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
+import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingLog;
+import com.ssaragibyul.point.service.PointService;
 
 @Service
 public class DonationServiceImpl implements DonationService{
 	
 	@Autowired
 	private DonationStore dStore;
+	
+	@Autowired
+	private PointService pntService;
 
+	
 	// 기부 리스트
 	@Override
 	public ArrayList<Donation> printAllProject() {
 		ArrayList<Donation> dListandFile = dStore.printAllProject();
+		return dListandFile;
+	}
+
+	@Override
+	public ArrayList<Donation> printAllProjectLimit() {
+		ArrayList<Donation> dListandFile = dStore.printAllProjectLimit();
 		return dListandFile;
 	}
 	
@@ -32,7 +46,13 @@ public class DonationServiceImpl implements DonationService{
 		ArrayList<Donation> dListandFileEnd = dStore.printAllProjectEnd();
 		return dListandFileEnd;
 	}
-
+	
+	@Override
+	public ArrayList<Donation> printAllProjectEndLimit() {
+		ArrayList<Donation> dListandFileEnd = dStore.printAllProjectEndLimit();
+		return dListandFileEnd;
+	}
+	
 	// 기부 제안 등록
 	// 한 개의 컨트롤러에서 두 개의 store메소드 사용, Controller or ServiceImol에서 사용 가능.
 	@Override
@@ -40,9 +60,24 @@ public class DonationServiceImpl implements DonationService{
 		int result = dStore.insertDonation(donation);
 		int dResult = 0;
 		if (result > 0) {
-			dResult = dStore.insertDonation(donationFile);
+			result = dStore.insertDonation(donationFile);
 		}
 		return dResult;
+	}
+	
+	// 기부 참여하기
+	@Override
+	public int registerDonationLog(Donation donation, DonationLog donationLog) {
+		int result = dStore.insertDonationLog(donationLog);
+		int dResult = 0;
+		int pntResult = 0;
+		if (result > 0) {
+			dResult = dStore.updateProject_SumMonet(donation);
+			if (dResult > 0) {
+				pntResult = pntService.registerNegPoint(donationLog);
+			}
+		}
+		return pntResult;
 	}
 	
 	/*
@@ -182,10 +217,6 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
-
-
 
 
 }

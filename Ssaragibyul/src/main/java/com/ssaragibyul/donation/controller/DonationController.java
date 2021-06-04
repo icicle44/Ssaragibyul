@@ -22,8 +22,11 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
+import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
+;
+
 
 @Controller
 public class DonationController {
@@ -35,10 +38,10 @@ public class DonationController {
 	@RequestMapping(value = "donationList.do", method = RequestMethod.GET) 
 	public String donationList(Model model) { 
 		ArrayList<Donation> dListandFile = dService.printAllProject();
-//		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();  
+		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();  
 		if (!dListandFile.isEmpty()) {
 			model.addAttribute("dListandFile", dListandFile); 
-//			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
 			return "donation/donationList"; 
 		} else { 
 			model.addAttribute("msg", "기부 목록 조회 실패");
@@ -47,6 +50,35 @@ public class DonationController {
 	}
 
 	
+	@RequestMapping(value = "donationListFullPro.do", method = RequestMethod.GET)
+	public String donationListFullPro(Model model) {
+		ArrayList<Donation> dListandFile = dService.printAllProjectLimit();
+		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
+		 if(!dListandFile.isEmpty()) {				
+			model.addAttribute("dListandFile", dListandFile);
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			return "donation/donationList";
+		}else {
+			model.addAttribute("msg", "펀딩 목록조회 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	 @RequestMapping(value="donationListFullEnd.do", method=RequestMethod.GET)
+	 public String donationListFullEnd(Model model) {
+		 ArrayList<Donation> dListandFile = dService.printAllProject();
+		 ArrayList<Donation> dListandFileEnd = dService.printAllProjectEndLimit();
+		 if(!dListandFile.isEmpty()) {				
+			model.addAttribute("dListandFile", dListandFile);
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			return "donation/donationList";
+		}else {
+			model.addAttribute("msg", "펀딩 목록조회 실패");
+			return "common/errorPage";
+		}
+	}
+	 
+	 
   	// 제안하기 페이지 -> 기부 페이지로 이동 
   	@RequestMapping(value="donationSuggest.do", method=RequestMethod.GET) 
   	public String donationSuggestMain() { 
@@ -87,8 +119,8 @@ public class DonationController {
 			return "redirect:donationList.do";
 		} else {
 			model.addAttribute("msg", "제안 등록 실패");
+			return "common/errorPage";
 		}
-  		return null;	
   	}
   	
   	
@@ -120,40 +152,54 @@ public class DonationController {
 		return filePath;
 	}
 	
-	// 기부 상세 페이지 - 
-	@RequestMapping(value = "donationDetail.do", method = { RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView donationJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+	// 기부 상세 페이지 
+	@RequestMapping(value = "donationDetail.do", method = RequestMethod.GET)
+	public ModelAndView donationdetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		System.out.println(projectNo);
+		
 		dService.addReadCountHit(projectNo);
+		
 		Donation donation = dService.printOne(projectNo);
+		
 		DonationFile donationFile = dService.printOneFile(projectNo);
+		
 		ArrayList<DonationLike> donationLike = dService.printOneLike(projectNo);
 		
 		if ((donation != null)&&(donationFile != null)) {
 			mv.addObject("donationFile", donationFile);
 			mv.addObject("donationLike", donationLike);
-			mv.addObject("donation", donation).setViewName("donation/donationDetail2");
+			mv.addObject("donation", donation).setViewName("donation/donationDetail");
 		} else {
 			mv.addObject("msg", "기부 상세 조회 실패");
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
-		
 	}
-	/*
+	
 	// 기부 참여 페이지
-	@RequestMapping(value = "doantionJoin.do", method = RequestMethod.POST)
-	public ModelAndView dDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+	@RequestMapping(value = "donationJoin.do", method = RequestMethod.POST)
+	public ModelAndView donationJoin(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
 		Donation donation = dService.printOne(projectNo);
 		if (donation != null) {
 			// 메소드 체이닝 방식
-			mv.addObject("donation", donation).setViewName("donation/doantionJoin");
+			mv.addObject("donation", donation).setViewName("donation/donationJoin");
 		} else {
 			mv.addObject("msg", "기부 참여 실패");
 			mv.setViewName("common/errorPage");
 		}
 		return mv; 
 	}	
-	*/
+	
+	//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
+	@RequestMapping(value = "donationJoinComplete.do", method = RequestMethod.POST)
+	public String donationJoincomplete(@ModelAttribute DonationLog donationLog, Donation donation ) {
+		int result = dService.registerDonationLog(donation, donationLog); // serviceImpl에서 store 메소드 2개 사용 + 포인트 내역 업데이트 메소드 추가
+		if (result > 0 ) {
+			return "donation/donationJoinCompleteView";
+		} else {
+			return "common.errorPage";
+		}
+	}
 	
 	// 좋아요 
 	@RequestMapping(value = "donationLikeAdd.do", method = RequestMethod.POST)

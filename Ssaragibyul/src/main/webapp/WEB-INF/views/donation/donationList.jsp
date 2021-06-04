@@ -75,8 +75,8 @@ margin: auto;
 
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a href="#section-funding1" class="nav-link">진행중 프로젝트</a></li>
-				<li><a href="#section-funding2" class="nav-link">종료된 프로젝트</a></li>
+				<li><a href="#section-donation1" class="nav-link">진행중 프로젝트</a></li>
+				<li><a href="#section-donation2" class="nav-link">종료된 프로젝트</a></li>
 			</ul>
 		</div>
 	</header>
@@ -176,7 +176,7 @@ margin: auto;
 				<br><br><br><br><br><br><br>
 
 				<hr><hr>		
-				<button class="btn">프로젝트 더 보기</button> 
+				<button class="btn" onclick="location.href ='donationListFullPro.do'">프로젝트 더 보기</button>
 			</section>
 			<!-- #section-funding -->
 				
@@ -187,9 +187,10 @@ margin: auto;
 				
 		    	<div id="pj_search">
 		    		<select id = "chose2" class="select" onchange="location.href=this.value">
-	          			<option value = "news_list" selected>최신글 순</option>
-			          	<option value = "money_list">모금액 순</option>
-			          	<option value = "like_list">좋아요 순</option>
+	   		   	 		<option value = "" selected>선택</option>
+			       		<option value = "doantionList.do">최신글 순</option>
+				       	<option value = "doantionSelectMoney.do">모금액 순</option>
+				       	<option value = "doantionSelectLike.do">좋아요 순</option>
 					</select>
 					<form action="donationSearch_2.do" method="get" >
 						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;

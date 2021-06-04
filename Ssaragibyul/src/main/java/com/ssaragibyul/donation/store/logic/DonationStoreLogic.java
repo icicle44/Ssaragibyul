@@ -12,6 +12,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
+import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.store.DonationStore;
 
 @Repository
@@ -25,10 +26,20 @@ public class DonationStoreLogic implements DonationStore{
 	public ArrayList<Donation> printAllProject() {
 		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationList");
 	}
+
+	@Override
+	public ArrayList<Donation> printAllProjectLimit() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationListLimit");
+	}
 	
 	@Override
 	public ArrayList<Donation> printAllProjectEnd() {
 		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationListEnd");
+	}
+	
+	@Override
+	public ArrayList<Donation> printAllProjectEndLimit() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationListEndLimit");
 	}
 
 	// 기부 제안 등록
@@ -43,13 +54,13 @@ public class DonationStoreLogic implements DonationStore{
 		return sqlSession.insert("donationMapper.insertDonationFile", donationFile);
 	}
 
-	/*
+	
 	// 기부 참여하기
 	@Override
 	public Donation printOne(int projectNo) {
-		return sqlSession.selectOne("doantionMapper.selectOne", projectNo);
+		return sqlSession.selectOne("donationMapper.selectOne", projectNo);
 	}
-	*/
+	
 	
 	// 좋아요1
 	@Override
@@ -81,7 +92,17 @@ public class DonationStoreLogic implements DonationStore{
 		return (ArrayList)sqlSession.selectList("donationMapper.selectOneLike", projectNo);
 	}
 
-	
+	@Override
+	public int insertDonationLog(DonationLog donationLog) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int updateProject_SumMonet(Donation donation) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public int getListCount() {
@@ -178,12 +199,6 @@ public class DonationStoreLogic implements DonationStore{
 	public int removeLike(int dProjectNo, DonationLike dLike) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public Donation printOne(int dProjectNo) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

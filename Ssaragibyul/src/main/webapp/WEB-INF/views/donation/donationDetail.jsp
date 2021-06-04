@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>펀딩 상세</title>
+<title>기부 상세페이지</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,16 +12,16 @@
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 
-<!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css"> -->
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/jquery-ui.css">
 <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
-<!-- <link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css"> -->
+
 <link rel="stylesheet" href="/resources/css/aos.css">
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
+
 
 
 </head>
@@ -42,12 +42,13 @@
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
-<%-- <%@include file="introduce.jsp" %> --%>
 <%@include file="../../../header.jsp" %>
 
-	<header class="header-bar d-flex align-items-center site-navbar-target" data-aos="fade-right">
+	<header class="header-bar d-flex align-items-center site-navbar-target"
+		data-aos="fade-right">
 
-		<div class="d-inline-block d-lg-none ml-md-0 ml-auto py-3" style="position: relative; top: 3px;">
+		<div class="d-inline-block d-lg-none ml-md-0 ml-auto py-3"
+			style="position: relative; top: 3px;">
 			<a href="#" class="site-menu-toggle js-menu-toggle text-white">
 				<span class="icon-menu h3"></span>
 			</a>
@@ -121,8 +122,7 @@
 						}
 					}
 				},
-				error : function() {
-					alert("!");
+			
 				}
 			});
 		}
@@ -181,7 +181,7 @@
 	
 	<br><br><br><br><br><br><br><br><br><br><br><br>
 	
-	<main class="main-content"> ${loginUser.userId }
+	<main class="main-content"> 
 		<form action="donationLikeAdd.do" method="post">
 			<input type="hidden" name="userId" value="${loginUser.userId }">
    		 	<input type="hidden" name="projectNo" value="${donation.projectNo }">
@@ -202,7 +202,7 @@
 	<table align="center" width="450" border="1">
 		<tr>
 			<td> 	
-				<url var="fDetail" value="donationDetail.do"></url>
+				<url var="dDetail" value="donationDetail.do"></url>
 			</td>
 		</tr>
 			
@@ -212,15 +212,11 @@
 		</tr>
 		<tr>
 			<td>제목</td>
-			<td>${donation.userId }</td>
-		</tr>
-		<tr>
-			<td>작성자</td>
 			<td>${donation.subjectName }</td>
 		</tr>
 		<tr>
-			<td>작성날짜</td>
-			<td>${donation.productName }</td>
+			<td>작성자</td>
+			<td>${donation.userId }</td>
 		</tr>
 		<tr>
 			<td>조회수</td>
@@ -228,7 +224,7 @@
 		</tr>
 		<tr height="300">
 			<td>내용</td>
-			<td>${donation.goalMoney }</td>
+			<td>${donation.projectStory}</td>
 		</tr>		
 		<tr>
 		<td>첨부파일</td>
@@ -237,19 +233,19 @@
 		<tr>
 			<td>사진1</td>
 			<td>
-				<img src="resources/dUpLoadFile/${donationFile.fileName } "/>
+				<img src="resources/dUpLoadFiles/${donationFile.fileName } "/>
 			</td>
 		</tr>	
 		<tr>
 			<td>사진2</td>
 			<td>
-				<img src="resources/dUpLoadFile/${donationFile.fileSub1Name } "/>
+				<img src="resources/dUpLoadFiles/${donationFile.fileSub1Name } "/>
 			</td>
 		</tr>	
 		<tr>
 			<td>사진3</td>
 			<td>
-				<img src="resources/dUpLoadFile/${donationFile.fileSub2Name } "/>
+				<img src="resources/dUpLoadFiles/${donationFile.fileSub2Name } "/>
 			</td>
 		</tr>					
 	</table>

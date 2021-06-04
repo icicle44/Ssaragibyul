@@ -7,6 +7,7 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
+import com.ssaragibyul.donation.domain.DonationLog;
 
 public interface DonationStore{
 	public int addLikeCount(int dProjectNo, DonationLike dLike);
@@ -15,6 +16,10 @@ public interface DonationStore{
 
 	// 기부 리스트
 	public ArrayList<Donation> printAllProject();
+	
+	public ArrayList<Donation> printAllProjectLimit();
+
+	public ArrayList<Donation> printAllProjectEndLimit();
 	
 	// 기부 리스트
 	public ArrayList<Donation> printAllProjectEnd();
@@ -39,6 +44,13 @@ public interface DonationStore{
 	
 	// 기부 상세 페이지
 	public ArrayList<DonationLike> selectOneLike(int projectNo);
+	
+	public int insertDonationLog(DonationLog donationLog);
+	
+	public int updateProject_SumMonet(Donation donation);
+
+	
+	////////////
 	
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
@@ -73,6 +85,10 @@ public interface DonationStore{
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+
+
+
+
 
 
 
