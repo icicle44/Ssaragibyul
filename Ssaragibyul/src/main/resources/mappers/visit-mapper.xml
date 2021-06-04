@@ -162,7 +162,7 @@ FROM
             )
         WHERE ROWNUM = 1
 	</select>
-	<select id="selectVisitListCount" resultType="_int" resultMap="visitResultMap">
+	<select id="selectVisitListCount" resultType="_int">
       SELECT COUNT(*) FROM VISIT
     </select>
     
