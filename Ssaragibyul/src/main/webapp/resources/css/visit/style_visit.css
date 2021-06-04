@@ -3,7 +3,7 @@
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}     */ 
+}       */
 body * {
   box-sizing: border-box;
   text-align: center;
@@ -62,11 +62,13 @@ header{
 .title{
     position: relative;
     padding-top: 60px;
+    font-size: 25px;
 }
 
 #title{
 	font-weight: 600;
     color: white;
+    font-size: 25px;
 }
 
 #reeting{
@@ -74,15 +76,14 @@ header{
     color: white;
     padding-top: 10px;
 }
-
 .contents{
     height: auto;
-    padding-top: 30px;
+    padding-top: 5em;
 }
 
 .rightCon{
     border: 3px solid black;
-    margin-top: 3em;
+    top: 1em;
     width: 100%;
     height: 19em;
     float: right;
@@ -90,6 +91,7 @@ header{
     border-radius: 20px;
     background-color: white;
     box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+    margin-bottom: 10em;
 }
 
 
@@ -97,8 +99,8 @@ header{
 
 .r-title{
     margin: 0;
-    padding-top: 2em;
     font-weight: 300;
+    height: auto;
 }
 .r-title #title{
 	color: #464646;
@@ -117,9 +119,6 @@ header{
     color: rgb(174, 174, 174); 
 }
 
-."content"{
-    margin-left: 50px;
-}
 #icon{
     width: 35px;
     height: 25px;
@@ -128,12 +127,13 @@ header{
 }
 
 table{
-    width: 100%;
+    width: 80%;
     height: 100%;
     font-size: 12px;
     font-weight: bold;
     text-align: center;
     padding-bottom: 25px;
+    border : none;
 }
 
 .t{
@@ -148,17 +148,22 @@ table{
 }
 .reply-container{
     padding-top: 15px;
+    
 }
 
-.reply-container #reply{
+.reply-container {
     width: 100%;
-    height: inherit;
-    padding: 10px;
-    font-size: 17px;
+    height: auto;
+    margin-top: 5em;
+    padding: 0.5em;
+    font-size: 10px;
     font-weight: bold;
-    border: 3px solid rgb(204, 204, 204);
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 7px;
 }
-                                    
+#rSubmit{
+	float: right;
+}                       
 
 /* 리스트의 그리드 부분----------------------------------------- */
 .js .grid--loaded::after {
@@ -270,7 +275,7 @@ table{
 }
 
 .description--preview {
-	font-size: 2em;
+	font-size: 15px;
 	position: absolute;
 	z-index: 140;
 	width: 100%;
@@ -507,15 +512,14 @@ table{
 	margin-right: 1em;
 	color: #404040;
 }
-button,
-button::after {
+.btn-2::after {
   -webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
   -o-transition: all 0.3s;
 	transition: all 0.3s;
 }
 
-button {
+.btn-2 {
   width: 8em;
   background: none;
   border: 4px solid #EB5C01;
@@ -527,15 +531,15 @@ button {
   text-transform: uppercase;
 }
 
-button::before,
-button::after {
+.btn-2::before,
+.btn-2::after {
   background: #EB5C01;
   content: '';
   position: absolute;
   z-index: -1;
 }
 
-button:hover {
+.btn-2:hover {
   color: #FFF
 }
 .btn-2::after {

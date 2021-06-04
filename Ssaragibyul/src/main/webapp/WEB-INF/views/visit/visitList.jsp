@@ -66,7 +66,12 @@
 										<div class="rightCon">
 											<div class="r-title col-md-12">
 												<div id="title">${vList.visitTitle }/${vList.visitNo }번글</div>
-												<div id="nickname">${vList.nickName }</div>
+												<c:url var="msgWriteUrl" value="msgWriterView.do">
+												   <c:param name="receiverId" value="${vList.userId }"></c:param>												   
+												   <c:param name="msgType" value="4"></c:param>
+												   <c:param name="nickName" value="${vList.nickName }"></c:param>
+												</c:url>
+												<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">${vList.nickName } 님의 별</a></div>
 												<table class="info">
 													<tr>
 														<td class="t"><a href="#"><i class="far fa-heart"></i></a></td>
@@ -77,7 +82,7 @@
 														<td>${vList.vUpdateDate }</td>
 													</tr>
 												</table>
-												<div class="content">${vList.visitContents }</div>
+												<div class="content">${vList.visitContents }</div><hr>
 												<div class="button-wrapper">
 													<c:url var="vModify" value="visitModifyView.do">
 														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
@@ -93,26 +98,33 @@
 
 												</div>
 											</div>
-											<hr>
+											<br>
 											<div class="reply-container">
 												<div id="reply">
 													<!-- 댓글 등록 -->
-													<table align="center" width="500" cellspacing="0">
+													<table align="center" width="500" cellspacing="0" >
 														<tr>
-															<td><textarea rows="3" cols="55" id="rContent"
-																	name="contents"></textarea></td>
-															<td>
-																<button id="rSubmit" value="${vList.visitNo }">버튼</button>
+															<td><b>댓글</b></td>
+														</tr>
+														
+														<tr>
+															<td id="replyContents">
+																<textarea rows="2" cols="100" id="rContent" name="contents"></textarea>
+																<div id="noti">(0 / 100)</div>		
+																
 															</td>
+														</tr>
+														<tr>
+															<td><button class="btn-2" id="rSubmit" value="${vList.visitNo }">등록</button></td>
 														</tr>
 													</table>
 													<!-- 댓글 목록 -->
-													<table align="center" width="500" border="1"
+													<table align="center" width="300" 
 														cellspacing="0" id="rtb">
 														<thead>
 															<tr>
 																<!-- 댓글 갯수 -->
-																<td colspan="2"><b id="rCount"></b></td>
+																<td colspan="4"><b id="rCount${vList.visitNo }"></b></td>
 															</tr>
 														</thead>
 														<tbody></tbody>
@@ -154,22 +166,18 @@
 		<script src="/resources/js/jquery-ui.min.js"></script>
 		<script>
 			$(function() {
-				var visitNo = "";
 				makeGrid();
-				/* ============ 이미지 클릭 시 동작 ================*/
-				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
-					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
-					$(".count").next().remove();
-					visitNo = $(this).attr("data-visitNo"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
-					registReply(visitNo);
-					addHitsCount(visitNo);
-					getReplyList(visitNo);// 댓글 목록 조회1
-					console.log(visitNo);
-				});
-				
+				click();
+	            $("#replyContents").on("keyup",function(){
+	                // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
+	                //var inLength = $(this).val().length;
+	                //$("#noti").html("작성가능한 글자수 : "+ (100 - inLength));
+	                alert("keyup");
+	                console.log("keyup");
+	            });
 			});
-			/* 그리드 끝 */
-				/* ============ 스크롤 ================*/
+
+			/* ============ 스크롤 ================*/
 				// 1. 스크롤 이벤트 최초 발생
 				$(window).scroll(function(){
 					var listLength = $(".grid__item").length;
@@ -252,14 +260,14 @@
 												str	+=								"<td>"+item.vUpdateDate+"</td>"
 												str	+=							"</tr>"
 												str	+=						"</table>"
-												str	+=						"<div class='content'>"+item.visitContens+"</div>"
+												str	+=						"<div class='content'>"+item.visitContents+"</div>"
 												str	+=						"<div class='button-wrapper'>"
 												str	+=							"<c:url var='vModify' value='visitModifyView.do'>"
 												str	+=								"<c:param name='visitNo' value='"+item.visitNo+"'></c:param>"
 												str	+=							"</c:url>"
 												str	+=							"<c:url var='vDelete' value='visitDelete.do'>"
 												str	+=								"<c:param name='visitNo' value='"+item.visitNo+"'></c:param>"
-												str	+=								"<c:param name='renameFilename' value='"+item.renameFilename"'></c:param>"
+												str	+=								"<c:param name='renameFilename' value='"+item.renameFilename+"'></c:param>"
 												str	+=							"</c:url>"
 												str	+=							"<a href='${vModify }'>수정 페이지로 이동</a> &nbsp; "
 												str	+=							"<a href='${vDelete }'>삭제하기</a>"
@@ -273,7 +281,7 @@
 												str	+=								"<td><button id='rSubmit' value='"+item.visitNo+"'>버튼</button></td>"
 												str	+=							"</tr>"
 												str	+=						"</table>"
-												str	+=						"<table align='center' width='500' border='1' cellspacing='0' id='rtb'>"
+												str	+=						"<table align='center' width='300' cellspacing='0' id='rtb'>"
 												str	+=							"<thead>"
 												str	+=								"<tr>"
 												str	+=									"<td colspan='2'><b id='rCount'></b></td>"
@@ -291,7 +299,9 @@
 												// $(".grid").empty();// 셀렉터 태그 안의 모든 텍스트를 지운다.
 												str += "<!-- END OF $.each -->"
 												$(".grid:last").append(str);
+												console.log($("div[class^='a']"));
 												makeGrid();
+												click();
 										}
 									}
 								});// ajax
@@ -304,6 +314,20 @@
 						// lastScrollTop을 현재 currentScrollTop으로 갱신해준다.
  					};// 다운스크롤인 상태
 				});
+			// 클릭 이벤트
+			function click(){
+				/* ============ 이미지 클릭 시 동작 ================*/
+				$("img").click(function() { // 이미지를 클릭했을 때 아래 코드가 실행되도록 함. img가 unique해서
+					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
+					$(".count").next().remove();
+					visitNo = $(this).attr("data-visitNo"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
+					addHitsCount(visitNo);
+					registReply(visitNo);
+					getReplyList(visitNo);// 댓글 목록 조회1
+					console.log(visitNo);
+					return visitNo;
+				});
+			};
 			// 그리드 고정
 			function makeGrid(){
 				
@@ -413,15 +437,16 @@
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) {
 								$tr = $("<tr>");
-								$rWriter = $("<td width='100'>").text(data[i].nick);
-								$rContent = $("<td>").text(data[i].contents);
-								$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
-								$btnArea = $("<td>").append(
+								$rWriter = $("<td width='40'>").text(data[i].nick);
+								$rContent = $("<td width='80'>").text(data[i].contents);
+								$rCreateDate = $("<td width='50'>").text(data[i].enrollDate);
+								$btnArea1 = $("<td width='10'>").append(
 										"<a href='#' onclick='modifyReply(this,"
 												+ visitNo + ","
 												+ data[i].replyNo + ",\""
 												+ data[i].contents
-												+ "\");'>수정 </a>").append(
+												+ "\");'>수정 </a>");
+								$btnArea2 = $("<td width='10'>").append(
 										"<a href='#' onclick='removeReply("
 												+ visitNo + ","
 												+ data[i].replyNo
@@ -429,7 +454,8 @@
 								$tr.append($rWriter);
 								$tr.append($rContent);
 								$tr.append($rCreateDate);
-								$tr.append($btnArea);
+								$tr.append($btnArea1);
+								$tr.append($btnArea2);
 								$tableBody.append($tr);
 							}
 						} else {

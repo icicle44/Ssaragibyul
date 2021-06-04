@@ -78,12 +78,13 @@ float:right;
 					<div id="editor" >
 						<p>입력값</p>
 					</div>
+					<div id="noti">(0 / 150)</div>	
 					<input type="hidden" id="visitContents" name="visitContents">
 				</div>
 				<hr>
 				<div class="register-footer">
 					<input type="file" id="input_img" size="50" name="uploadFile">
-					<button type="reset" class="button button-danger">취소</button>
+					<button type="reset" class="button button-danger"onclick="test()">취소</button>
 					<button type="submit" onclick="regist()">등록</button>
 					<!--  <button type="submit" class="button button-primary">등록</button> -->
 				</div>
@@ -93,18 +94,25 @@ float:right;
 		</div>
 	</div>
 	<script>
+    $(document).ready(function() {
+    	
+    	var sel_file;
+        $("#input_img").on("change", handleImgFileSelect);
+    }); 
+    $("#editor").on("keyup",function(){
+        // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
+        var inLength = $(this).text().length;
+        $("#noti").html("작성가능한 글자수 : "+ (150 - inLength));
+       
+    });
+    function test(){
+    	console.log($("#editor").html());
+    }
 	function regist() {
 		var editor = document.getElementById('editor');
 		console.log(editor.textContent);
 		$("#visitContents").val(editor.textContent);
 	}
-	  
-    var sel_file;
-    
-    $(document).ready(function() {
-        $("#input_img").on("change", handleImgFileSelect);
-    }); 
-
     function handleImgFileSelect(e) {
         var files = e.target.files;
         var filesArr = Array.prototype.slice.call(files);
@@ -135,7 +143,6 @@ float:right;
      
     	BalloonEditor
 		.create( document.querySelector( '#editor' ), {
-			// 플러그인 제거
 			
 		} )
 		.then( editor => {

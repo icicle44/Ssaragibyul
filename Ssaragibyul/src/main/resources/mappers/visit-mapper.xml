@@ -64,7 +64,7 @@
 		    AND    A.VISIT_NO = B.VISIT_NO
 		      ORDER BY A.VISIT_NO DESC
 		      )D
-		    WHERE ROWNUM &lt;= 6
+		    WHERE ROWNUM &lt;= 9
 	</select>
 	<select id="selectScroll" resultMap="visitResultMap">
 		
