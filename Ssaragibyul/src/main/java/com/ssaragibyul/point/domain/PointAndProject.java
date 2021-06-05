@@ -11,16 +11,18 @@ public class PointAndProject extends Point{
 	private String nickName; //oppUserId의 닉네임
 	private int money; //누적금액-목표금액
 	private double fdate; // 오늘날짜-종료일
+	private int projectCode;
 	
 	public PointAndProject() {}
 
-	public PointAndProject(String subject, int projectNo, String nickName, int money, double fdate) {
+	public PointAndProject(String subject, int projectNo, String nickName, int money, double fdate, int projectCode) {
 		super();
 		this.subject = subject;
 		this.projectNo = projectNo;
 		this.nickName = nickName;
 		this.money = money;
 		this.fdate = fdate;
+		this.projectCode = projectCode;
 	}
 
 	public String getSubject() {
@@ -63,15 +65,24 @@ public class PointAndProject extends Point{
 		this.fdate = fdate;
 	}
 
+	public int getProjectCode() {
+		return projectCode;
+	}
+
+	public void setProjectCode(int projectCode) {
+		this.projectCode = projectCode;
+	}
+
 	@Override
 	public String toString() {
 		return "PointAndProject [subject=" + subject + ", projectNo=" + projectNo + ", nickName=" + nickName
-				+ ", money=" + money + ", fdate=" + fdate + ", getPntListNo()=" + getPntListNo() + ", getEventNo()="
-				+ getEventNo() + ", getEventNoCharge()=" + getEventNoCharge() + ", getUserId()=" + getUserId()
-				+ ", getOppUserId()=" + getOppUserId() + ", getVarTime()=" + getVarTime() + ", getEventCode()="
-				+ getEventCode() + ", getVarType()=" + getVarType() + ", getVarAmount()=" + getVarAmount()
-				+ ", getBuyerEmail()=" + getBuyerEmail() + ", getReceiptUrl()=" + getReceiptUrl() + ", toString()="
-				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+				+ ", money=" + money + ", fdate=" + fdate + ", projectCode=" + projectCode + ", getPntListNo()="
+				+ getPntListNo() + ", getEventNo()=" + getEventNo() + ", getEventNoCharge()=" + getEventNoCharge()
+				+ ", getUserId()=" + getUserId() + ", getOppUserId()=" + getOppUserId() + ", getVarTime()="
+				+ getVarTime() + ", getEventCode()=" + getEventCode() + ", getVarType()=" + getVarType()
+				+ ", getVarAmount()=" + getVarAmount() + ", getBuyerEmail()=" + getBuyerEmail() + ", getReceiptUrl()="
+				+ getReceiptUrl() + ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + "]";
 	}
 
 }

@@ -30,6 +30,8 @@
         <typeAlias type="com.ssaragibyul.donation.domain.DonationLog" alias="DonationLog"/>
         <typeAlias type="com.ssaragibyul.donation.domain.DonationReport" alias="DonationReport"/>
         <typeAlias type="com.ssaragibyul.donation.domain.DonationLike" alias="DonationLike"/>
+
+		<typeAlias type="com.ssaragibyul.point.domain.PointForChart" alias="PointForChart"/>		
 	</typeAliases>
 	
 	<mappers>

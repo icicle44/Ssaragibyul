@@ -335,7 +335,7 @@
 					$("#checkAll").prop("checked", true);
 				}
 			});
-			/* List View에서 삭제하기 */
+			/* List View에서 삭제하기(다중) */
 			$("#deleteArrBtn").on("click", function(){
 				var cnt = $("input[name=chk]:checked").length;
 				var msgNoArr = new Array();

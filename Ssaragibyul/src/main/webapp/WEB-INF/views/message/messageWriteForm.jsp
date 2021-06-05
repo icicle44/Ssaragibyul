@@ -61,7 +61,8 @@
 						</tr>
 						<tr>
 							<!-- 버튼 -->
-							<td colspan="2" align="right" class="write-Form-td" style="border-top:hidden;">
+							<td id="contents-cnt"> (0 / 200)</td>
+							<td align="right" class="write-Form-td" style="border-top:hidden;">
 								<input type="button" value="보내기" id="sendClose">
 								&nbsp;&nbsp;&nbsp;<input type="button" value="창닫기" onclick="self.close();">
 								<!-- &nbsp;&nbsp;&nbsp;<input type="button" value="공지전송" id="sendCloseNotice"> -->
@@ -73,7 +74,7 @@
 			</section>
 		</section>	
 	</main>
-	
+
 	<script>
 		$(function() {
 			/* 포인트 선물하기 창 노출 */
@@ -124,12 +125,16 @@
 								},
 						success: function(data){
 							if(data == "success") {
-								alert("쪽지가 전달되었습니다.");							
-								self.close();
-								if(senderId != "admin") {
-									opener.location.href="sendMsgList.do";								
-								} else {
-									opener.location.href="adminSendMessageList.do";
+								var conf = confirm("쪽지가 전달되었습니다.\n보낸 편지함을 보시겠습니까?");							
+								if(conf == true) {
+									self.close();
+									if(senderId != "admin") {
+										opener.location.href="sendMsgList.do";								
+									} else {
+										opener.location.href="adminSendMessageList.do";
+									}								
+								}else {
+									self.close();
 								}
 							}else {
 								alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
@@ -139,6 +144,16 @@
 							alert("죄송합니다. 쪽지 전달을 실패하였습니다.");
 						}
 					});
+				}
+			});
+			
+			/* 쪽지 내용창 글자수 체크 */
+			$("#msgContents").on("keyup", function(){
+				$("#contents-cnt").html(" (" + $(this).val().length + " / 200)");
+				if($(this).val().length > 200) {
+					alert("최대 200자까지 입력하실 수 있습니다.");
+					$(this).val($("#msgContents").val().substring(0, 200));
+					$("#contents-cnt").html(" (200 / 200)");
 				}
 			});
 			

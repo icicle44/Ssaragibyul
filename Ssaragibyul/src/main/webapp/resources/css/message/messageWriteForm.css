@@ -72,7 +72,7 @@ input[type=number]:focus {
 
 input[type=text] {
 	height: 21px;
-	width: 250px;
+	width: 300px;
 	border: hidden;
 	font-size: 15px;
 	font-family: 'Noto Serif KR', serif;
@@ -134,6 +134,14 @@ textarea:focus {
 #point-num::-webkit-outer-spin-button,
 #point-num::-webkit-inner-spin-button {
 	-webkit-appearance: none;
+}
+
+#contents-cnt {
+	color: #464646;
+	font-family: 'Noto Serif KR';
+	font-size: 11px;
+	padding-left: 15px;
+	border-right: hidden;
 }
 
 .btn-area {

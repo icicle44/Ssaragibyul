@@ -76,45 +76,65 @@
 										</c:if>
 										<c:if test="${point.eventCode == 1 && point.varType == 1}">										
 											<td><a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.</a></td>
-											<c:if test="${point.money >= 0 && point.fdate > 0 }">
-												<td>프로젝트 종료(성공)</td>
+											<c:if test="${point.projectCode == 0 }">
+												<c:if test="${point.money >= 0 && point.fdate > 0 }">
+													<td>프로젝트 종료(성공)</td>
+												</c:if>
+												<c:if test="${point.money < 0 && point.fdate > 0 }">
+													<td class="cancel-td">프로젝트 종료(실패)</td>
+												</c:if>
+												<c:if test="${point.fdate <= 0}">
+													<td>프로젝트 진행 중</td>
+												</c:if>
 											</c:if>
-											<c:if test="${point.money < 0 && point.fdate > 0 }">
-												<td>프로젝트 종료</td>
-											</c:if>
-											<c:if test="${point.fdate <= 0}">
-												<td>프로젝트 진행 중</td>
-											</c:if>					
+											<c:if test="${point.projectCode ==1 }">
+												<td class="cancel-td">프로젝트 중단(포인트 반환)</td>
+											</c:if>			
 										</c:if>
 										<c:if test="${point.eventCode == 1 && point.varType == 0}">										
 											<td><a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span> 취소하셨습니다.</a></td>
-											<c:if test="${point.money >= 0 && point.fdate > 0 }">
-												<td>프로젝트 종료(성공)</td>
+											<c:if test="${point.projectCode == 0 }">
+												<c:if test="${point.money >= 0 && point.fdate > 0}">
+													<td>프로젝트 종료(성공)</td>
+												</c:if>
+												<c:if test="${point.money < 0 && point.fdate > 0 }">
+													<td class="cancel-td">프로젝트 종료(실패)</td>
+												</c:if>
+												<c:if test="${point.fdate <= 0}">
+													<td>프로젝트 진행 중</td>
+												</c:if>
 											</c:if>
-											<c:if test="${point.money < 0 && point.fdate > 0 }">
-												<td>프로젝트 종료</td>
-											</c:if>
-											<c:if test="${point.fdate <= 0}">
-												<td>프로젝트 진행 중</td>
-											</c:if>								
+											<c:if test="${point.projectCode ==1 }">
+												<td class="cancel-td">프로젝트 중단(포인트 반환)</td>
+											</c:if>					
 										</c:if>
 										<c:if test="${point.eventCode == 2 && point.varType == 1}">										
-											<td>[ ${point.subject } ] <span class="bold-text">기부</span>하셨습니다.</td>
-											<c:if test="${point.fdate > 0 }">
-												<td>프로젝트 종료</td>
+											<td><a href="donationDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">기부</span>하셨습니다.</a></td>
+											<c:if test="${point.projectCode == 0 }">
+												<c:if test="${point.fdate > 0 }">
+													<td>프로젝트 종료</td>
+												</c:if>
+												<c:if test="${point.fdate <= 0}">
+													<td>프로젝트 진행 중</td>
+												</c:if>
 											</c:if>
-											<c:if test="${point.fdate <= 0}">
-												<td>프로젝트 진행 중</td>
+											<c:if test="${point.projectCode ==1 }">
+												<td class="cancel-td">프로젝트 중단(포인트 반환)</td>
 											</c:if>
 										</c:if>
 										<c:if test="${point.eventCode == 2 && point.varType == 0}">										
-											<td>[ ${point.subject } ] <span class="bold-text">기부</span> 취소하셨습니다.</td>	
-											<c:if test="${point.fdate > 0 }">
-												<td>프로젝트 종료</td>
+											<td><a href="donationDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">기부</span> 취소하셨습니다.</a></td>	
+											<c:if test="${point.projectCode == 0 }">
+												<c:if test="${point.fdate > 0 }">
+													<td>프로젝트 종료</td>
+												</c:if>
+												<c:if test="${point.fdate <= 0}">
+													<td>프로젝트 진행 중</td>
+												</c:if>
 											</c:if>
-											<c:if test="${point.fdate <= 0}">
-												<td>프로젝트 진행 중</td>
-											</c:if>						
+											<c:if test="${point.projectCode ==1 }">
+												<td class="cancel-td">프로젝트 중단(포인트 반환)</td>
+											</c:if>				
 										</c:if>
 										<c:url var="visitDetail" value="pointVisitDetail.do">
 											<c:param name="visitNo" value="${point.eventNo }"></c:param>
@@ -371,6 +391,13 @@
 				$("#modal").fadeOut();
 				$("#modal #chartModal_content").empty();
 			});
+			
+			if(true) {
+				$(".cancel-td").parent("tr").css("background-color", "#c0c0c0");
+				$(".cancel-td").parent("tr").children("td").css("color", "#d1d1d1");
+				$(".cancel-td").parent("tr").children("td").children().css("color", "#d1d1d1");
+				$(".cancel-td").parent("tr").children("td").children("a").children().css("color", "#d1d1d1");
+			}
 		});
 		
 		/* 에러메시지 alert */
