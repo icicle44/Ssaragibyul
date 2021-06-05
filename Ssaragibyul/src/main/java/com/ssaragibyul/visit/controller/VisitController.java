@@ -286,14 +286,21 @@ public class VisitController {
 		System.out.println("result : " + result);
 		return result;
 	}
+	// 좋아요 추가
+	@ResponseBody
 	@RequestMapping(value="plusLikesCount.do",method=RequestMethod.GET)
-	public void plusLikesCount(VisitLike likes) {
+	public String plusLikesCount(VisitLike likes) {
 		vService.plusLikesCount(likes);
+		
+		return "";
 	}
+	// 좋아요 취소
 	@RequestMapping(value="minusLikesCount.do",method=RequestMethod.GET)
-	public void minusLikesCount(VisitLike likes) {
+	public String minusLikesCount(VisitLike likes) {
 		vService.minusLikesCount(likes);
+		return "";
 	}
+	// 좋아요 수 가져오기
 	public int getLikes(VisitLike likes) {
 		int result = 0;
 		result = vService.getLikes(likes);

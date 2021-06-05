@@ -74,7 +74,7 @@
 												<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">${vList.nickName } 님의 별</a></div>
 												<table class="info">
 													<tr>
-														<td class="t"><a href="plusLikes()"><i class="far fa-heart"></i></a></td>
+														<td class="t likes"><a href="#" id="plusLike" onclick="plusLikes()" data-no="${vList.visitNo }"><i class="far fa-heart"></i></a></td>
 														<!-- <i class="fas fa-heart"></i> -->
 														<td>${vList.likes }</td>
 														<td class="t count">조회수</td>
@@ -144,7 +144,7 @@
 					<!-- /grid -->
 					<div class="preview">
 						<button class="action action--close">
-							<i class="fa fa-times"></i><span class="text-hidden">Close</span>
+							<i class="fa fa-times" style="color:#EB5C01;"></i><span class="text-hidden">Close</span>
 						</button>
 						<div class="description description--preview"></div>
 					</div>
@@ -301,7 +301,7 @@
 												$(".grid:last").append(str);
 												console.log($("div[class^='a']"));
 												makeGrid();
-												location.reload();
+												//location.reload();
 												click();
 										}
 									}
@@ -524,7 +524,7 @@
 									"textarea").val("");// 내가 쓴 댓글 내용이 등록 버튼을 누르면서 사라지게 함
 						});
 			};
-			// 댓글 수정
+			// 댓글 수정 창
 			function modifyReply(obj, visitNo, replyNo, contents) {
 				$trModify = $("<tr>");
 				$trModify
@@ -534,6 +534,7 @@
 						+ "\")'>수정완료</button></td>");
 				$(obj).parent().parent().after($trModify);
 			}
+			// 댓글 수정
 			function modifyReplyCommit(visitNo, replyNo, contents) {
 				var modifiedContent = $("#modifyReply").val();
 				$.ajax({
@@ -577,14 +578,41 @@
 					}
 				});
 			};
-/* 			// 좋아요 추가
+			// 좋아요 추가
 			function plusLikes(){
-				
+ 				var visitNo = $(this).attr("data-no");
+ 				alert(visitNo);
+				$("a").remove("#plusLike");
+ 				$(".likes").append("<a href='#' id='minusLike' onclick='minusLikes()' data-visitNo='{vList.visitNo }'<i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
+/* 				$.ajax({
+					url : "plusLikesCount.do",
+					type : "get",
+					data : {
+						"visitNo" : visitNo,
+						"userId" : userId
+					},
+					success : function(data) {
+						if (data === "fail") {
+							console.log("Unexpected result : null");
+						} else {
+							$(".count").after($("<td>").text(data));
+						}
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+
+				}); */
 			}
 			// 좋아요 취소
 			function minusLikes(){
-				
-			} */
+ 				var visitNo = $(this).attr("data-no");
+ 				alert(visitNo);
+				$("a").remove("#plusLike");
+				//$(".likes").append("<a href='#' id='inusLike' onclick='minusLikes()' data-visitNo='{vList.visitNo }'<i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
+			}
 			
 			// 조회수 증가
 			function addHitsCount(visitNo) {
