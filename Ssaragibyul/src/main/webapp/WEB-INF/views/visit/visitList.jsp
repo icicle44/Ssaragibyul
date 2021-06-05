@@ -74,7 +74,7 @@
 												<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">${vList.nickName } 님의 별</a></div>
 												<table class="info">
 													<tr>
-														<td class="t likes"><a href="#" id="plusLike" onclick="plusLikes()" data-no="${vList.visitNo }"><i class="far fa-heart"></i></a></td>
+														<td class="t likes"><a href="#" id="plusLike" onclick="plusLikes(${vList.visitNo },'${loginUser.userId }')"><i class="far fa-heart"></i></a></td>
 														<!-- <i class="fas fa-heart"></i> -->
 														<td>${vList.likes }</td>
 														<td class="t count">조회수</td>
@@ -92,9 +92,8 @@
 														<c:param name="renameFilename"
 															value="${visit.renameFilename }"></c:param>
 													</c:url>
-													<%-- <c:if test="${ loginUser.userId eq vList.userId }" --%>
-													<a href="${vModify }">수정 페이지로 이동</a> &nbsp; <a
-														href="${vDelete }">삭제하기</a>
+													<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
+													<a href="${vDelete }"><b>[삭제하기]</b></a>
 
 												</div>
 											</div>
@@ -579,12 +578,9 @@
 				});
 			};
 			// 좋아요 추가
-			function plusLikes(){
- 				var visitNo = $(this).attr("data-no");
- 				alert(visitNo);
-				$("a").remove("#plusLike");
- 				$(".likes").append("<a href='#' id='minusLike' onclick='minusLikes()' data-visitNo='{vList.visitNo }'<i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
-/* 				$.ajax({
+ 			function plusLikes(visitNo, userId){
+ 				console.log(visitNo, userId);
+ 				$.ajax({
 					url : "plusLikesCount.do",
 					type : "get",
 					data : {
@@ -595,8 +591,10 @@
 						if (data === "fail") {
 							console.log("Unexpected result : null");
 						} else {
-							$(".count").after($("<td>").text(data));
+							$("a").remove("#plusLike");
+			 				$(".likes").append("\<a href='#' id='minusLike' onclick='minusLikes('"+visitNo+"','"+userId+"' <i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
 						}
+	
 					},
 					error : function(request, status, error) {
 						alert("code:" + request.status + "\n" + "message:"
@@ -604,15 +602,15 @@
 								+ error);
 					}
 
-				}); */
-			}
+				});
+			};
 			// 좋아요 취소
 			function minusLikes(){
  				var visitNo = $(this).attr("data-no");
  				alert(visitNo);
 				$("a").remove("#plusLike");
 				//$(".likes").append("<a href='#' id='inusLike' onclick='minusLikes()' data-visitNo='{vList.visitNo }'<i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
-			}
+			};
 			
 			// 조회수 증가
 			function addHitsCount(visitNo) {

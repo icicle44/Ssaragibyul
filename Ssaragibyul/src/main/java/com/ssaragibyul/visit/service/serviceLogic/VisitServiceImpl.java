@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
 import com.ssaragibyul.visit.service.VisitService;
@@ -20,6 +21,9 @@ public class VisitServiceImpl implements VisitService{
 	
 	@Autowired
 	VisitStore vStore;
+    @Autowired
+    private PointService pntService;
+
 	@Override
 	public int getListCount() {
 		
@@ -45,10 +49,15 @@ public class VisitServiceImpl implements VisitService{
 		return vStore.selectOne(visitNo);
 	}
 
-	@Override
-	public int registerVisit(Visit visit) {
-		return vStore.insertVisit(visit);
-	}
+   @Override
+   public int registerVisit(Visit visit) {
+      int vResult = vStore.insertVisit(visit);
+      int pntResult = 0;
+      if(vResult > 0) {
+         pntResult = pntService.registerPosPoint(visit);
+      }
+      return pntResult;
+   }
 
 	@Override
 	public int modifyVisit(Visit visit) {
@@ -91,12 +100,6 @@ public class VisitServiceImpl implements VisitService{
 		//return vStore.addHitsCount(visitNo);
 	}
 
-	// 좋아요 0일때 plus
-	public int plusLikesReview(String userId, int visitNo) {
-		int result = 0;
-
-		return result;
-	}
 	// 좋아요 plus
 	@Override
 	public int plusLikesCount(VisitLike likes) {

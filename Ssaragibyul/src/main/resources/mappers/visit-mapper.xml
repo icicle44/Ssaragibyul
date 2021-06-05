@@ -226,11 +226,11 @@ FROM
 	
 	<!-- 좋아요  -->
     <insert id="plusLikesCount">
-    	INSERT INTO VISIT_LIKES VALUES(SEQ_VISIT_LIKES.NEXTVAL, #{userId }, 'Y', #{visitNo })
+    	INSERT INTO VISIT_LIKE VALUES(SEQ_VISIT_LIKES.NEXTVAL, #{userId }, 'Y', #{visitNo })
     </insert>
     
     <delete id="minusLikesCount">
-    	DELETE VISIT_LIKES WHERE VISIT_NO = #{visitNo } AND USER_ID = #{userId } 
+    	DELETE VISIT_LIKE WHERE VISIT_NO = #{visitNo } AND USER_ID = #{userId } 
     </delete>
     
     <select id="getLIkes" resultMap="likeResultMap">

@@ -286,19 +286,30 @@ public class VisitController {
 		System.out.println("result : " + result);
 		return result;
 	}
+	// ==============좋아요
 	// 좋아요 추가
 	@ResponseBody
 	@RequestMapping(value="plusLikesCount.do",method=RequestMethod.GET)
 	public String plusLikesCount(VisitLike likes) {
-		vService.plusLikesCount(likes);
-		
-		return "";
+		System.out.println("=========좋아요 controller");
+		System.out.println(vService.plusLikesCount(likes));
+		String result = vService.plusLikesCount(likes)+"";
+		if(result != "0") {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	// 좋아요 취소
+	@ResponseBody
 	@RequestMapping(value="minusLikesCount.do",method=RequestMethod.GET)
 	public String minusLikesCount(VisitLike likes) {
-		vService.minusLikesCount(likes);
-		return "";
+		String result = vService.minusLikesCount(likes)+"";
+		if(result != "0") {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	// 좋아요 수 가져오기
 	public int getLikes(VisitLike likes) {
