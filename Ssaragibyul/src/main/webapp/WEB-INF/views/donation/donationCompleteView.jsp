@@ -61,15 +61,14 @@
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 	<br><br><br><br><br><br><br><br><br><br><br>
-		펀딩 참여 완료!!!!!
+		기부 참여 완료
 		
-	${funding.projectNo }<br>
-	${funding.optionPrice }원<br>
-	${funding.productName }<br>
-	${funding.productContent }<br>
+	${donation.projectNo }<br>
+	${donation.optionPrice }원<br>
+	${donation.productName }<br>
+	${donation.productContent }<br>
 	<form action="fundingJoin2.do" method="post">
-	<input type="text" name="qunatity"> 한계 : ${funding.optionLimit }<br>
-    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+    <input type="hidden" name="projectNo" value="${donation.projectNo }">
     <input type="hidden" name="userId" value="${loginUser.userId }">
     <input type="submit" class="getstarted" value="다음단계">
     </form>

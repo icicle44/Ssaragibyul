@@ -192,28 +192,33 @@
 		SELECT * FROM DONATION_LIKE WHERE D_PROJECT_NO = #{projectNo}
 	</select>
 	
-<!-- 	
-	좋아요 내역 추가
+	<!-- 좋아요 내역 추가 -->
 	<insert id="insertLike" parameterType="DonationLike">
 		INSERT INTO
 		DONATION_LIKE
-		VALUES(SEQ_DONATION_LIKE_NO.NEXTVAL, #{userId}, DEAULT, #{projectNo})
+		VALUES(SEQ_DONATION_LIKE_NO.NEXTVAL, #{userId}, DEFAULT, #{projectNo})
 	</insert> 
  	
-	좋아요 업데이트
+	<!-- 좋아요 업데이트 -->
 	<update id="updateLike" parameterType="Donation">
 		UPDATE DONATION SET LIKE_COUNT = LIKE_COUNT + 1
 		WHERE D_PROJECT_NO = #{projectNo}
 	</update>
--->
+
 	
 	
-	<!-- 관리자용 -->
-	<select id="selectDonationListCount" resultType="_int">
-	   SELECT COUNT(*) FROM DONATION
-	</select>
-    
- 	<select id="selectFundingListCount" resultType="_int">
-      SELECT COUNT(*) FROM FUNDING
-    </select>
+	 <!-- 관리자용 -->
+   <select id="selectDonationListCount" resultType="_int">
+      SELECT COUNT(*) FROM DONATION WHERE PROJECT_CODE = 0
+   </select>
+   
+   <select id="selectAllList" resultMap="donationResultMap">
+      SELECT * FROM DONATION WHERE PROJECT_CODE = 0
+   </select>
+   
+   <update id="deleteAdminDonation" parameterType="_int">
+      UPDATE DONATION
+      SET PROJECT_CODE = 1
+      WHERE D_POJECT_NO = #{projectNo}
+   </update>
 </mapper>
