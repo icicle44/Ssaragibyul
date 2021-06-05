@@ -74,10 +74,15 @@
 												<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">${vList.nickName } 님의 별</a></div>
 												<table class="info">
 													<tr>
-														<td class="t likes"><a href="#" id="plusLike" onclick="plusLikes(${vList.visitNo },'${loginUser.userId }')"><i class="far fa-heart"></i></a></td>
-														<!-- <i class="fas fa-heart"></i> -->
-														<td>${vList.likes }</td>
+													<c:if test="${ !empty loginUser.userId }">
+														<td class="t likes"></td>
+													</c:if>
+													<c:if test="${ empty loginUser.userId }">
+														<td class="t likes"><a href="#" id="plusLike" ><i class="far fa-heart"></i></a></td>
+													</c:if>
+														<td class="likesCount"></td>
 														<td class="t count">조회수</td>
+														<td class="t">작성일자</td>
 														<td class="t">작성일자</td>
 														<td>${vList.vUpdateDate }</td>
 													</tr>
@@ -92,29 +97,24 @@
 														<c:param name="renameFilename"
 															value="${visit.renameFilename }"></c:param>
 													</c:url>
-													<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
-													<a href="${vDelete }"><b>[삭제하기]</b></a>
-
+													<c:if test="${ loginUser.userId == vList.userId }">
+														<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
+														<a href="${vDelete }"><b>[삭제하기]</b></a>
+													</c:if>
+	
 												</div>
 											</div>
 											<br>
 											<div class="reply-container">
 												<div id="reply">
 													<!-- 댓글 등록 -->
-													<table align="center" width="500" cellspacing="0" >
+													<table align="center" width="500" cellspacing="0">
 														<tr>
-															<td><b>댓글</b></td>
-														</tr>
-														
-														<tr>
-															<td id="replyContents">
-																<textarea rows="2" cols="100" id="rContent" name="contents"></textarea>
-																<div id="noti">(0 / 100)</div>		
-																
+															<td><textarea rows="2" cols="80" id="rContent"
+																	name="contents"></textarea></td>
+															<td>
+																<a href="#" class="btn-gradient orange mini" id="rSubmit">등록</a>
 															</td>
-														</tr>
-														<tr>
-															<td><button class="btn-2" id="rSubmit" value="${vList.visitNo }">등록</button></td>
 														</tr>
 													</table>
 													<!-- 댓글 목록 -->
@@ -325,6 +325,10 @@
 					registReply(visitNo);
 					getReplyList(visitNo);// 댓글 목록 조회1
 					console.log(visitNo);
+					getLikes(visitNo)
+					if('${loginUser.userId}'!=""){
+						checkLikes(visitNo);
+					}
 					return visitNo;
 				});
 			};
@@ -450,8 +454,8 @@
 						var $rContent;
 						var $rCreateDate;
 						var $btnArea;
-						$('#' + 'rCount' + visitNo).text(
-								"댓글 (" + data.length + ")"); // 아직 안됨//////////////
+						/* $('#' + 'rCount' + visitNo).text(
+								"댓글 (" + data.length + ")"); */ // 아직 안됨//////////////
 
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) {
@@ -494,9 +498,9 @@
 				var rContent = "";
 				$(document).on('click','#rSubmit', function() { // 등록버튼을 클릭하면 아래 코드 실행
 							//alert(visitNo);
+							console.log($());
 							rContent = $(this).closest("td").prev().children(
-									"textarea").val(); // 클릭한 버튼 근처의 textarea를 가져옴
-
+							"textarea").val(); // 클릭한 버튼 근처의 textarea를 가져옴
 							$.ajax({
 								url : "addReply.do",
 								type : "post",
@@ -577,8 +581,40 @@
 					}
 				});
 			};
-			// 좋아요 추가
- 			function plusLikes(visitNo, userId){
+			// 좋아요 체크
+			function checkLikes (visitNo){
+				var userId = '${loginUser.userId }';
+				$.ajax({
+					url : "checkLikes.do",
+					type : "get",
+					data : {
+						"visitNo" : visitNo,
+						"userId" : userId
+					},
+					success : function(data) {
+						console.log(data);
+						if (data == "Y") {
+							$("a").remove("#plusLike");
+							$("a").remove("#minusLike");
+			 				$(".likes").append("<a href='#' id='minusLike' onclick='minusLikes("+visitNo+")'><i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
+						} else {
+							$("a").remove("#minusLike");
+							$("a").remove("#plusLike");
+							$(".likes").append("<a href='#' id='plusLike' onclick='plusLikes("+visitNo+")'><i class='far fa-heart'></i></a>");
+						}
+	
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+
+				});
+			};
+			// 좋아요 증가
+ 			function plusLikes(visitNo){
+				var userId = '${loginUser.userId }';			
  				console.log(visitNo, userId);
  				$.ajax({
 					url : "plusLikesCount.do",
@@ -592,7 +628,7 @@
 							console.log("Unexpected result : null");
 						} else {
 							$("a").remove("#plusLike");
-			 				$(".likes").append("\<a href='#' id='minusLike' onclick='minusLikes('"+visitNo+"','"+userId+"' <i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
+			 				$(".likes").append("<a href='#' id='minusLike' onclick='minusLikes("+visitNo+")'><i class='fas fa-heart' style='color:#EB5C01;'></i></a></td>");
 						}
 	
 					},
@@ -605,13 +641,58 @@
 				});
 			};
 			// 좋아요 취소
-			function minusLikes(){
- 				var visitNo = $(this).attr("data-no");
- 				alert(visitNo);
-				$("a").remove("#plusLike");
-				//$(".likes").append("<a href='#' id='inusLike' onclick='minusLikes()' data-visitNo='{vList.visitNo }'<i class='fas fa-heart' style='color:#EB5C01;'></i></a>");
+			function minusLikes(visitNo){
+				var userId = '${loginUser.userId }';
+				console.log(visitNo, userId);
+ 				$.ajax({
+					url : "minusLikesCount.do",
+					type : "get",
+					data : {
+						"visitNo" : visitNo,
+						"userId" : userId
+					},
+					success : function(data) {
+						if (data === "fail") {
+							console.log("Unexpected result : null");
+						} else {
+							$("a").remove("#minusLike");
+							$(".likes").append("<a href='#' id='plusLike' onclick='plusLikes("+visitNo+")'><i class='far fa-heart'></i></a>");
+						}
+	
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+
+				});
+				
 			};
 			
+			// 좋아요 수 가져오기
+			function getLikes(visitNo){
+				var userId = '${loginUser.userId }';
+ 				$.ajax({
+					url : "getLikes.do",
+					type : "get",
+					data : {
+						"visitNo" : visitNo,
+					},
+					success : function(data) {
+						
+							console.log("좋아요수 : "+data);
+							$(".likesCount").text("");
+							$(".likesCount").append(data);
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:"
+								+ request.responseText + "\n" + "error:"
+								+ error);
+					}
+
+				});
+			}
 			// 조회수 증가
 			function addHitsCount(visitNo) {
 				$.ajax({
@@ -635,6 +716,7 @@
 
 				});
 			};
+
 		</script>
 </body>
 

@@ -94,7 +94,9 @@ public interface VisitService {
 	
 	public int minusLikesCount(VisitLike likes);
 
-	public int getLikes(VisitLike likes);
+	public int getLikes(int visitNo);
+
+	public String checkLikes(VisitLike likes);
 
 	
 }

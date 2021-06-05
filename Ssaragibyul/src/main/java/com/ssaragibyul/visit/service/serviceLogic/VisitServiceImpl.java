@@ -103,6 +103,7 @@ public class VisitServiceImpl implements VisitService{
 	// 좋아요 plus
 	@Override
 	public int plusLikesCount(VisitLike likes) {
+		System.out.println("좋아요 증가 Service");
 		return vStore.plusLikesCount(likes);
 	}
 	// 좋아요 minus
@@ -110,16 +111,23 @@ public class VisitServiceImpl implements VisitService{
 	public int minusLikesCount(VisitLike likes) {
 		return vStore.minusLikesCount(likes);
 	}
-	// 좋아요 수
-	public int getLikes(VisitLike likes) {
-		return vStore.getLikes(likes);
+	// 좋아요 체크
+	@Override
+	public String checkLikes(VisitLike likes) {
+		return vStore.checkLikes(likes);
 	}
-
+	// 좋아요 수
+	@Override
+	public int getLikes(int visitNo) {
+		return vStore.getLikes(visitNo);
+	}
 	@Override
 	public int getListCnt(Map<String, String> param) {
 		
 		return 0;
 	}
+
+
 
 
 

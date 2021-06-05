@@ -3,7 +3,7 @@
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}       */
+}   */    
 body * {
   box-sizing: border-box;
   text-align: center;
@@ -12,7 +12,15 @@ body * {
 	margin-top:2em;
 	padding-top:2em;
 }
-
+textarea {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	border: solid 2px #404040;
+	border-radius: 5px;
+	font-size: 10px;
+	resize: both;
+}
 .grid {
 	position: relative;
 	margin: 0 auto;
@@ -552,3 +560,41 @@ table{
 .btn-2:hover:after {
   width: 101%;
 }
+/* 댓글등록버튼 */
+
+.btn-gradient.mini{
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn {
+	position: relative;
+	border: 0;
+	padding: 15px 25px;
+	display: inline-block;
+	text-align: center;
+	color: white;
+}
+.btn:active {
+	top: 4px;	
+}
+
+.btn-gradient {
+	text-decoration: none;
+	color: white;
+	padding: 10px 30px;
+	display: inline-block;
+	position: relative;
+	border: 1px solid rgba(0,0,0,0.21);
+	border-bottom: 4px solid rgba(0,0,0,0.21);
+	border-radius: 4px;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+.btn-gradient.orange {
+	background: rgba(255,105,30,1);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255,105,30,1)), to(rgba(230,95,28,1)));
+	background: -webkit-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: -moz-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: -o-linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+	background: linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
+}
+.btn-gradient.orange:active {background: #E8601B;}

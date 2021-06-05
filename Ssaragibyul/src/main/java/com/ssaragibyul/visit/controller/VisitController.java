@@ -286,13 +286,12 @@ public class VisitController {
 		System.out.println("result : " + result);
 		return result;
 	}
-	// ==============좋아요
+// ==============좋아요
 	// 좋아요 추가
 	@ResponseBody
 	@RequestMapping(value="plusLikesCount.do",method=RequestMethod.GET)
 	public String plusLikesCount(VisitLike likes) {
 		System.out.println("=========좋아요 controller");
-		System.out.println(vService.plusLikesCount(likes));
 		String result = vService.plusLikesCount(likes)+"";
 		if(result != "0") {
 			return "success";
@@ -304,6 +303,7 @@ public class VisitController {
 	@ResponseBody
 	@RequestMapping(value="minusLikesCount.do",method=RequestMethod.GET)
 	public String minusLikesCount(VisitLike likes) {
+		System.out.println("좋아요 취소 visitNo, userId : " + likes.getVisitNo() +likes.getUserId() );
 		String result = vService.minusLikesCount(likes)+"";
 		if(result != "0") {
 			return "success";
@@ -311,10 +311,25 @@ public class VisitController {
 			return "fail";
 		}
 	}
+	// 좋아요 체크
+	@ResponseBody
+	@RequestMapping(value = "checkLikes.do", method = RequestMethod.GET)
+	public String checkLikes(VisitLike likes) {
+		String likesYn = vService.checkLikes(likes);
+		System.out.println("좋아요 체크 :" + likesYn);
+		if(likesYn.equals("Y")) {
+			return "Y";
+		}else {
+			return "N";
+		}
+	}
 	// 좋아요 수 가져오기
-	public int getLikes(VisitLike likes) {
-		int result = 0;
-		result = vService.getLikes(likes);
-		return result;
+	@ResponseBody
+	@RequestMapping(value = "getLikes.do", method = RequestMethod.GET)
+	public String getLikes(@RequestParam("visitNo") int visitNo) throws Exception {
+		System.out.println("==============좋아요 가져오기");
+		int result = vService.getLikes(visitNo);
+		System.out.println("좋아요 수 result" + result);
+		return result+"";
 	}
 }

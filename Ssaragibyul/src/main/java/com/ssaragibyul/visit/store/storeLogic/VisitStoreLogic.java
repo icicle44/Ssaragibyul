@@ -104,6 +104,7 @@ public class VisitStoreLogic implements VisitStore{
 	// 좋아요 증가
 	@Override
 	public int plusLikesCount(VisitLike likes) {
+		System.out.println("좋아요 증가 Store");
 		return session.insert("visitMapper.plusLikesCount", likes);
 	}
 	// 좋아요 감소
@@ -111,10 +112,22 @@ public class VisitStoreLogic implements VisitStore{
 	public int minusLikesCount(VisitLike likes) {
 		return session.delete("visitMapper.minusLikesCount", likes);
 	}
+	// 좋아요 체크
+	@Override
+	public String checkLikes(VisitLike likes) {
+		VisitLike v = session.selectOne("visitMapper.checkLikes", likes);
+		try {
+			String check = v.getLikesYn();
+			return check;
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "N";
+		}
+	}
 	// 좋아요 수 가져오기
 	@Override
-	public int getLikes(VisitLike likes) {
-		return session.selectOne("visitMapper.getLikes", likes);
+	public int getLikes(int visitNo) throws NullPointerException {
+		return session.selectOne("visitMapper.getLikes", visitNo);
 	}
 
 

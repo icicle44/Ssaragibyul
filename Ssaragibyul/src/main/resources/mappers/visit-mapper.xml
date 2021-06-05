@@ -27,7 +27,7 @@
 	<resultMap type="VisitLike" id="likeResultMap">
 		<id property="likeNo" column="LIKE_NO"/>
 		<result property="userId" column="USER_ID"/>
-		<result property="likeYn" column="LIKES_YN"/>
+		<result property="likesYn" column="LIKES_YN"/>
 		<result property="visitNo" column="VISIT_NO"/>
 	</resultMap>
 	<resultMap type="VisitStat" id="visitStatResultMap">
@@ -233,8 +233,12 @@ FROM
     	DELETE VISIT_LIKE WHERE VISIT_NO = #{visitNo } AND USER_ID = #{userId } 
     </delete>
     
-    <select id="getLIkes" resultMap="likeResultMap">
-    	SELECT COUNT (*) FROM VISIT_LIKE WHERE USER_ID = #{userId } AND VISIT_NO = #{visitNo } 
+    <select id="getLikes" resultType="_int" resultMap="likeResultMap">
+    	SELECT COUNT (*) FROM VISIT_LIKE WHERE VISIT_NO = #{visitNo } 
+    </select>
+    
+    <select id="checkLikes" resultType="Integer" parameterType="com.ssaragibyul.visit.domain.VisitLike" resultMap="likeResultMap">
+    	SELECT LIKES_YN FROM VISIT_LIKE WHERE USER_ID = #{userId } AND VISIT_NO = #{visitNo }
     </select>
     
 	<!-- Status -->

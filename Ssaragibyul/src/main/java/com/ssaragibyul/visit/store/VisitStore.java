@@ -28,5 +28,6 @@ public interface VisitStore {
 	
 	public int plusLikesCount(VisitLike likes);
 	public int minusLikesCount(VisitLike likes);
-	public int getLikes(VisitLike likes);
+	public int getLikes(int visitNo);
+	public String checkLikes(VisitLike likes);
 }
