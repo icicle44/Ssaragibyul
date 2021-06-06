@@ -205,7 +205,24 @@ FROM
 		DELETE VISIT WHERE VISIT_NO = #{visitNo }
 	</delete>
 	
-	
+	<select id="searchAll" resultMap="visitResultMap">
+		SELECT * FROM VISIT JOIN MEMBER USING (USER_ID) JOIN VISIT_FILE USING (VISIT_NO)
+		<if test="searchCondition.toString() == 'nickname'">
+			WHERE NICKNAME LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'title'">
+			WHERE VISIT_TITLE LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'content'">
+			WHERE VISIT_CONTENTS LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'all'">
+			WHERE NICKNAME LIKE '%' || #{searchValue } || '%'
+			OR VISIT_TITLE LIKE '%' || #{searchValue } || '%'
+			OR VISIT_CONTENTS LIKE '%' || #{searchValue } || '%'
+		</if>
+		ORDER BY V_CREATE_DATE DESC
+	</select>
 	<!--  댓글 -->
 	<select id="selectReply" resultMap="replyResultMap">
 		SELECT REPLY_NO, VISIT_NO, USER_ID, CONTENTS, REG_DATE, NICKNAME FROM VISIT_REPLY JOIN MEMBER USING (USER_ID) WHERE VISIT_NO = #{no } ORDER BY REPLY_NO DESC

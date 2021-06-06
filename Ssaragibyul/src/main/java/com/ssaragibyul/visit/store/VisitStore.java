@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
 
@@ -30,4 +31,5 @@ public interface VisitStore {
 	public int minusLikesCount(VisitLike likes);
 	public int getLikes(int visitNo);
 	public String checkLikes(VisitLike likes);
+	public ArrayList<Visit> selectSearchAll(Search search);
 }

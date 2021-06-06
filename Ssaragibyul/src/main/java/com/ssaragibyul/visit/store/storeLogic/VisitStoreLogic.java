@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
 import com.ssaragibyul.visit.store.VisitStore;
@@ -128,6 +129,11 @@ public class VisitStoreLogic implements VisitStore{
 	@Override
 	public int getLikes(int visitNo) throws NullPointerException {
 		return session.selectOne("visitMapper.getLikes", visitNo);
+	}
+	@Override
+	public ArrayList<Visit> selectSearchAll(Search search) {
+		
+		return (ArrayList)session.selectList("visitMapper.searchAll", search);
 	}
 
 

@@ -257,15 +257,6 @@ public class VisitController {
 			return "fail";
 		}
 	}
-	// 검색
-	@RequestMapping(value="visitSearch.do", method=RequestMethod.GET)
-	public String visitSearch(@ModelAttribute Search search, Model model) {
-		
-		// 2개의 값을 하나에 담아서 보내는 방법
-		// 1. Domain(VO) 클래스 이용
-		// 2. HashMap 사용하기
-			return "common/errorPage";
-		}
 	// 조회수 증가
 	@ResponseBody
 	@RequestMapping(value="addHitsCount.do", method=RequestMethod.GET)
@@ -331,5 +322,20 @@ public class VisitController {
 		int result = vService.getLikes(visitNo);
 		System.out.println("좋아요 수 result" + result);
 		return result+"";
+	}
+	// 검색
+	@RequestMapping(value="visitSearch.do", method=RequestMethod.POST)
+	public String visitSearch(@ModelAttribute Search search, Model model) {
+		ArrayList<Visit> searchList = vService.printSearchAll(search);
+		System.out.println("searchList"+searchList);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("vList", searchList);
+			model.addAttribute("search",search);
+			return "visit/visitSearchList";
+		}else {
+			model.addAttribute("msg", "검색결과가 없습니다");
+			return "common/errorPage";
+		}
+		
 	}
 }

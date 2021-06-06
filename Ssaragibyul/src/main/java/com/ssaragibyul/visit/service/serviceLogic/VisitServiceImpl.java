@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
@@ -126,8 +127,11 @@ public class VisitServiceImpl implements VisitService{
 		
 		return 0;
 	}
-
-
+	@Override
+	public ArrayList<Visit> printSearchAll(Search search) {
+		
+		return vStore.selectSearchAll(search);
+	}
 
 
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
 
@@ -97,6 +98,8 @@ public interface VisitService {
 	public int getLikes(int visitNo);
 
 	public String checkLikes(VisitLike likes);
+
+	public ArrayList<Visit> printSearchAll(Search search);
 
 	
 }

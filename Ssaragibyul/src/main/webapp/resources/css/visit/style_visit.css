@@ -3,7 +3,7 @@
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-}   */    
+}  */      
 body * {
   box-sizing: border-box;
   text-align: center;
@@ -11,6 +11,11 @@ body * {
 .container{
 	margin-top:2em;
 	padding-top:2em;
+}
+#searchWrapper{
+	margin-left:2em;
+	margin-bottom:0.5em;
+	float:left;
 }
 textarea {
 	width: 100%;
@@ -598,3 +603,15 @@ table{
 	background: linear-gradient(rgba(255,105,30,1) 0%, rgba(230,95,28,1) 100%);
 }
 .btn-gradient.orange:active {background: #E8601B;}
+
+/* 검색 */
+#search-btn {
+	background-color: #EB5C01;
+	border-radius: 3px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	width: 60px;
+	height: 31px;
+	margin: 0px 10px;
+}
