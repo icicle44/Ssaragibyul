@@ -35,7 +35,7 @@
 	padding: 10px;
 	font-size:12px;
 }
-#fuck{
+#frame{
 	width: 550px;
 	height : 550px;
 }
@@ -144,7 +144,7 @@ width : 1540px;
 						
 				<div class="gridmain">
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status"> 
-			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "fuck">
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
 			<table class="display" id="example">
 				<tr>
 					<td> 
@@ -227,7 +227,7 @@ width : 1540px;
 						<div class="row align-items-stretch">
 				<div class="gridmain">
 		 <c:forEach var="e" items="${fListandFileEnd}" varStatus="status"> 
-			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-no=${e.projectNo }>
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-no=${e.projectNo } id = "frame">
 			<table class="a_pj">
 				<tr>
 					<td> 
@@ -254,14 +254,14 @@ width : 1540px;
 							<c:if test="${e.percent >99}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+									<rect x="0" y="0" height="2" width="100%" fill="#045FB4"></rect>
 								</svg>
 							</c:if>
 			
 							<c:if test="${e.percent < 100}">
 								<svg id="svg">
 									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="${e.percent}%" fill="#FF8000"></rect>
+									<rect x="0" y="0" height="2" width="${e.percent}%" fill="#045FB4"></rect>
 								</svg>
 							</c:if>
 						</td>
@@ -286,10 +286,14 @@ width : 1540px;
 	<!--  -->
 	<br><br><br><br><br><br><br>	
 	
-<!--  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button> -->
-<button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button>
+	
+	
+ <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
+<!-- <button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button> -->
 				</section>
 	<br>
+	<br>
+	<br>	<br>
 	<br>
 	<br>
 
@@ -343,13 +347,13 @@ width : 1540px;
 	<!-- .site-wrap -->
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/resources/js/jquery-3.3.1.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  -->   <script src="/resources/js/jquery-3.3.1.min.js"></script>
  	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+<!-- 	<script src="/resources/js/bootstrap.min.js"></script> -->
 	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.countdown.min.js"></script>

@@ -98,41 +98,41 @@
     text-align: center; 
     width: 30%; 
     line-height: 20px; 
-    background-color: WHITE; 
+    background-color: fcfcfc; 
     border: 1px solid #ccc; 
-    border-radius: 3px 3px 0 0; 
+    border-radius: 3px 3px 3px 3px; 
     color:DimGray; 
-    border-width:1px 1px 0 0; 
+    border-width:1px 1px 1px 1px; 
     cursor:pointer; 
 } 
 .detailtab input:nth-of-type(1):checked ~ label:nth-of-type(1) { 
-    background-color:#fcfcfc; 
+    background-color:#FE9A2E; 
     color:BLACK; 
 } 
 .detailtab input:nth-of-type(2):checked ~ label:nth-of-type(2) { 
-    background-color:#fcfcfc; 
+    background-color:#FE9A2E; 
     color:BLACK; 
 } 
 .detailtab input:nth-of-type(3):checked ~ label:nth-of-type(3) { 
-    background-color:#fcfcfc; 
+    background-color:#FE9A2E; 
     color:BLACK; 
 } 
 .detailtab > * { 
     display:none; 
 } 
-.detailtab input:nth-child(1):checked ~ .story_content, .detailtab input:nth-child(2):checked ~ .gift_content, .detailtab input:nth-child(3):checked ~ .commu_content{ 
+.detailtab input:nth-child(1):checked ~ .story_content, .detailtab input:nth-child(2):checked ~ .commu_content, .detailtab input:nth-child(3):checked ~ .info_content{ 
     display: block; 
 }
 .detailtab .story_content, 
-.detailtab .gift_content,
-.detailtab .commu_content{ 
+.detailtab .commu_content,
+.detailtab .info_content{ 
 	margin: auto;
 	justify-content: center;
 	width: 90%;
     padding: 32px; 
     background-color: white;
 } 
-.detailtab .commu_content{ 
+.detailtab .info_content{ 
 	width: 50%;
     padding: 32px; 
     padding-top: 50px;
@@ -149,11 +149,11 @@
     font-weight: bold; 
     background-color:#fff9ee; 
 } 
-.detailtab label#gift:nth-of-type(2):hover{ 
+.detailtab label#commu:nth-of-type(2):hover{ 
     font-weight: bold; 
     background-color:#fff9ee; 
 } 
-.detailtab label#commu:nth-of-type(3):hover{ 
+.detailtab label#info:nth-of-type(3):hover{ 
     font-weight: bold; 
     background-color:#fff9ee; 
 } 
@@ -227,7 +227,7 @@ input[type="button"].share:hover{
 	padding: 5px 10px 10px 10px; 
 	color: dimgray;
 }
-#gift1detail, #gift2detail, #gift3detail {
+#commu1detail, #commu2detail, #commu3detail {
 	visibility: visible;
 	line-height: 150%;
 	width: 500px;
@@ -237,12 +237,12 @@ input[type="button"].share:hover{
 	padding: 10px 10px 10px 10px;
 	background-color: #f2f2f2;
 }
-#gift1_price, #gift2_price, #gift3_price{
+#commu1_price, #commu2_price, #commu3_price{
 	font-size: 30px;
 	font-weight: bolder;
 	color: black;
 }
-#gift1_name, #gift2_name, #gift3_name{
+#commu1_name, #commu2_name, #commu3_name{
 	font-size: 15px;
 }
 
@@ -268,7 +268,7 @@ input[type="button"].selfunding2 {
 	cursor: pointer;
 	border-radius: 5px;
 }
-#gift_count{
+#commu_count{
 	font-size: 13px;
 	float:left;
 	text-align: center;
@@ -299,7 +299,7 @@ input[type="button"].selfunding2 {
 	z-index: 1002;
 	overflow: auto;
 }
-.community{
+.infonity{
 	overflow: auto;
     background-color: #f2f2f2;
     padding-right: 30%;
@@ -340,7 +340,7 @@ input[type="button"].selfunding2 {
 	font-weight: normal;
 	font-size: 11px;
 }
-#commu_planner{
+#info_planner{
 	margin: auto;
     background-color: black;
     padding-right: 30%;

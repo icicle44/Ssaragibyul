@@ -132,7 +132,14 @@ public class FundingSerivceImpl implements FundingService {
 		}
 		return fResult;
 	}
-	
+	public int fundingLikeRemove(Funding funding, FundingLike fundingLike) {
+		int result = fStore.updateProject_Like_Minus(funding);
+		int fResult = 0;
+		if(result>0) {
+			fResult = fStore.deleteProjectLike(fundingLike);
+		}
+		return fResult;
+	}
 	
 	@Override
 	public int registerFundingLog(FundingLog fundingLog, Funding funding) {
@@ -333,7 +340,9 @@ public class FundingSerivceImpl implements FundingService {
 		return fStore.selectOneCombine(projectNo);
 	}
 	
-	
-	
+	@Override
+	public FundingLog printSponserNumber(int projectNo) {
+		return fStore.selectSponserNumber(projectNo);
+	}
 	
 }

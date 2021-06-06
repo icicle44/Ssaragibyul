@@ -104,6 +104,10 @@ public interface FundingStore {
 	
 	public ArrayList<FundingLike> selectOneLike(int projectNo);
 	public Funding selectOneCombine(int projectNo);
+	public FundingLog selectSponserNumber(int projectNo);
+	
+	public int updateProject_Like_Minus(Funding funding);
+	public int deleteProjectLike(FundingLike fundingLike);
 }
 
 

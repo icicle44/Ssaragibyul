@@ -258,7 +258,7 @@ public class FundingController {
 		}		//펀딩 참여 페이지로 이동
 		
 		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
-		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) { 
+		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) {
 			 int result = fService.registerFundingLog(fundingLog, funding); //serviceImpl에서 store 메소드 2개 씀. + 선미누나가 추가한 포인트 내역 업데이트 메소드도 있음.
 			 if(result > 0) {
 				 return "funding/fundingJoinCompleteView";
@@ -287,20 +287,50 @@ public class FundingController {
 //	}			//펀딩 상세 페이지
 	
 		 // 좋아요 추가
+//	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
+//	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,
+//			                                            @RequestParam("projectNo") int userId) {
+//		
+//		fService.addreadCountHit(projectNo); 
+//		
+//		Funding funding = fService.printOne(projectNo);
+//		
+//		FundingFile fundingFile = fService.printOneFile(projectNo);
+//		
+//		FundingLog fundingLog = fService.printSponserNumber(projectNo);
+//
+//		ArrayList<FundingLike>  fundingLike = fService.printOneLike(projectNo, userId);
+//		
+//		if ((funding != null)&&(fundingFile != null)) {
+//			mv.addObject("fundingLike", fundingLike);
+//			mv.addObject("fundingLog", fundingLog);
+//			mv.addObject("fundingFile", fundingFile);
+//			mv.addObject("funding", funding).setViewName("funding/fundingDetail4");
+//		} else {
+//			mv.addObject("msg", "펀딩 상세 조회 실패!");
+//			mv.setViewName("common/errorPage");
+//		}
+//		return mv;
+//	}			//펀딩 상세 페이지
+	
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		
 		fService.addreadCountHit(projectNo); 
 		
 		Funding funding = fService.printOne(projectNo);
 		
 		FundingFile fundingFile = fService.printOneFile(projectNo);
+		
+		FundingLog fundingLog = fService.printSponserNumber(projectNo);
 
-		ArrayList<FundingLike>  fundingLike = fService.printOneLike(projectNo);
+		ArrayList<FundingLike>  fundingLikeUser = fService.printOneLike(projectNo);
 		
 		if ((funding != null)&&(fundingFile != null)) {
-			mv.addObject("fundingLike", fundingLike);
+			mv.addObject("fundingLikeUser", fundingLikeUser);
+			mv.addObject("fundingLog", fundingLog);
 			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail4");
+			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
 		} else {
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
 			mv.setViewName("common/errorPage");
@@ -392,48 +422,27 @@ public class FundingController {
 			 					  Model model) { 
 		 int result = fService.fundingLikeRegister(funding, fundingLike);
 		 if(result > 0) {
-			 return "funding/fundingJoinCompleteView";
+			 return "redirect:fundingList.do";
 		 }else {
 			 model.addAttribute("msg", "좋아요 등록 실패!!");
 			 return "common/errorPage";
 		 }
 	 } // 좋아요 해당 테이블 인서트 및 펀딩프로젝트 테이블에도 좋아요 숫자 업데이트 ↓ 아래거는 어떻게 할지 생각중.
 	
-	public void changeLikeStatus() {
-
-	}
 	
-	public void changeFundingStatus() {
-
-	}
-	
-	public int checkLikes(int projectNo, String userId) {
-		int result = 0;
-		return result;
-	}
-	public int updateLikesCount(int projectNo, String userId, String state) {
-		int result = 0;
-		return result;
-	}
-	public int plusLikesCount(String userId, int projectNo) {
-		int result = 0;
-		return result;
-	}
-	public int minusLikesCount(String userId, int projectNo, String state) {
-		int result = 0;
-		return result;
-	}
-	public int getLikes(String userId, int projectNo) {
-		int likes = 0;
-		return likes;
-	}
-	public String ReportView(FundingReport fReport) {
-		return "";
-	}										//이거 쓰는건가? ㅋㅋㅋ
-	
-	public String fundingPay() {
-		return "";
-	}
+	//취소
+	@RequestMapping(value="fundingLikeDelete.do", method = RequestMethod.POST)
+	 public String fundingLikeDelete(@ModelAttribute Funding funding, FundingLike fundingLike, 
+			 					  HttpServletRequest request,
+			 					  Model model) { 
+		 int result = fService.fundingLikeRemove(funding, fundingLike);
+		 if(result > 0) {
+			 return "redirect:fundingList.do";
+		 }else {
+			 model.addAttribute("msg", "좋아요 취소 실패!!");
+			 return "common/errorPage";
+		 }
+	 }
 	
 	
 	

@@ -296,5 +296,17 @@ public class FundingStoreLogic implements FundingStore{
 		return sqlSession.selectOne("fundingMapper.selectOneCombine", projectNo);
 	}
 
+	public FundingLog selectSponserNumber(int projectNo) {
+		return sqlSession.selectOne("fundingMapper.countSponserNumber", projectNo);
+	}
+
+	public int updateProject_Like_Minus(Funding funding) {
+		return sqlSession.update("fundingMapper.updateFundingProjectLikeCol_Minus", funding);
+	}
+
+	public int deleteProjectLike(FundingLike fundingLike) {
+		return sqlSession.delete("fundingMapper.deleteProjectLike", fundingLike);
+	}
+
 	
 }

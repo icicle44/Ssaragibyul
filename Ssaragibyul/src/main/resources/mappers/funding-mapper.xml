@@ -52,6 +52,7 @@
 		<result property="receiverAddr" column="RECEIVER_ADDR"></result>
 		<result property="receiverName" column="RECEIVER"></result>
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
+		<result property="sponser" column="SPONSER"></result>
 	</resultMap>
 <!-- 댓글 테이블  -->
 	<resultMap type="Reply" id="FundingReplyResultMap">
@@ -107,7 +108,7 @@
 <!-- 펀딩 리스트 상세 _ 하나만 출력 쿼리문 -->
 	<select id="selectOne" resultMap="fundingResultMap">
 		SELECT F_PROJECT_NO, USER_ID, SUBJECT, PRODUCT_NAME, GOAL_MONEY, SUM_MONEY, OPTION_PRICE, OPTION_LIMIT, START_DATE, FIN_DATE, PROJ_STORY, PRODUCT_CONT,
-        WARNING_INTRO, LIKE_COUNT, PROJECT_CODE, DELIVERY_DATE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE 
+        WARNING_INTRO, LIKE_COUNT, HITS_COUNT, PROJECT_CODE, DELIVERY_DATE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE 
         FROM FUNDING_PROJECT WHERE F_PROJECT_NO = #{projectNo}
 	</select>
 <!-- 펀딩 리스트 상세 (파일_사진)_ 하나만 출력 쿼리문 -->
@@ -116,7 +117,7 @@
 	</select>
 <!-- 펀딩리스트 상세(좋아용!) -->
 	<select id="selectOneLike" resultMap="FundingLikeResultMap">
-		SELECT * FROM FUNDING_LIKE WHERE F_PROJECT_NO = #{projectNo}
+		SELECT USER_ID FROM FUNDING_LIKE WHERE F_PROJECT_NO = #{projectNo}
 	</select>
 	
 	<select id="selectOneCombine" resultMap="fundingFileResultMap">
@@ -292,6 +293,10 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 </select>  
 
 
+<select id = "countSponserNumber" resultMap="FundingLogResultMap">
+ SELECT COUNT(*) AS SPONSER FROM DO_FUNDING WHERE F_PROJECT_NO2 =  #{projectNo}
+</select>
+
 
 	
 <!--펀링 리스트 메인 파일(사진) arrayList 전체 출력 쿼리문   지금 안씀-->
@@ -311,6 +316,8 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 		WHERE
 		F_PROJECT_NO = #{projectNo }
 	</update>
+	
+	
 		
 		
 		
@@ -358,17 +365,22 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 		WHERE
 		F_PROJECT_NO = #{projectNo }
 	</update>
+	
+	<!--좋아요 삭제 -->
+	<delete id="deleteProjectLike" parameterType="FundingLike">
+		 DELETE FUNDING_LIKE WHERE F_PROJECT_NO =
+		#{projectNo } AND USER_ID = #{userId }
+	</delete>
+	
+	 <!-- 좋아요 감소  -->
+	<update id="updateFundingProjectLikeCol_Minus" parameterType="Funding">
+		UPDATE FUNDING_PROJECT SET LIKE_COUNT = LIKE_COUNT - 1
+		WHERE
+		F_PROJECT_NO = #{projectNo }
+	</update>
 
-		
-		
-		<!-- 
-		 삭제용 예시 그냥 내비둠
-		<delete id="deleteMember" parameterType="Member"> DELETE 
-		MEMBER WHERE USER_ID = #{userId } </delete> 
-		
-		 -->
-		 
-		 
+
+	
 		 
 		 <!-- 검색니뮤  -->
 		

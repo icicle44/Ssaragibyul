@@ -87,6 +87,8 @@ public interface FundingService {
 	public int accusationRegister(FundingReport fundingReport);
 
 	public int fundingLikeRegister(Funding funding, FundingLike fundingLike);
+	
+	public int fundingLikeRemove(Funding funding, FundingLike fundingLike);
 
 	public ArrayList<Funding> printSearchAll_1(Search search);
 
@@ -106,6 +108,10 @@ public interface FundingService {
 	public ArrayList<FundingLike>  printOneLike(int projectNo);
 
 	public Funding printOneCombine(int projectNo);
+
+	public FundingLog printSponserNumber(int projectNo);
+
+
 
 
 	

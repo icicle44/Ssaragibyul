@@ -1,14 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
 <title>펀딩 상세</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- Reference to html5gallery.js -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
@@ -19,346 +22,524 @@
 <link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
 <!-- <link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css"> -->
+
 <link rel="stylesheet" href="/resources/css/aos.css">
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/resources/css/style_nav.css">
+<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/detailproject.css">
+</head>
 
+<script type="text/javascript" src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
+<script type="text/javascript" src="resources/js/html5gallery.js"></script>
 
-<script>
-window.onload=function(){
-   var year = Number(document.getElementById('year').value);
-   var month = Number(document.getElementById('month').value);
-   var day = Number(document.getElementById('day').value);
-   toDay = new Date();
-   var dDay = new Date(year, month - 1, day);
+<style type="text/css">
+.navbar .getstarted {
+  background: #EB5C01;
+  padding: 8px 10px;
+  margin: 10px;
+  border-radius: 4px;
+  color: #fff;
+}	
 
-   var n = Math.floor((dDay.getTime() - toDay.getTime()) / 86400000) + 1;
-   document.getElementById('input_dday').innerHTML = n + "일";
+.sug {
+	margin: auto;
 }
-function goPjList(){	
-	document.form2.action="projectlist";
-	document.form2.submit();
+
+.main-menu {
+	padding-left: 50px;
 }
-</script>
-<style>
-#fundedlist{
-	padding: 50px;
-	border-collapse: collapse;
-	margin:auto;
+.getstarted {
+	background: #EB5C01;
+	padding: 10px 100px;
+	margin: 20px;
+	margin-left: 140px;
+	border-radius: 4px;
+	color: #fff;
 }
-#fundedlist tr{
-	border-bottom : 2px solid lightgray;
+
+div.guide {margin:12px 24px;}
+div.guide span {color:#ff0000; font:italic 14px Arial, Helvetica, sans-serif;}
+div.guide p {color:#000000; font:14px Arial, Helvetica, sans-serif;}
+div.guide pre {color:#990000;}
+div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
+
+.format{
+padding-left : 260px;
+padding-top : 160px;
+	float : left;
+	width : 1000px;
+	height : 700px;
 }
-#fundedlist td{
-	font-size: 14px;
-	width: 200px;
-	padding: 10px;
+
+.detailView_right{
+float: left;
 }
-#golist{
-cursor : pointer;
+.noting{
+width : 300px;
+height: 170px;
+}
+.contents{
+padding-left : 50px;
+}
+.getstarteds{
+	background: #6E6E6E;
+	padding: 10px 100px;
+	margin: 20px;
+	margin-left: 140px;
+	border-radius: 4px;
+	color: #fff;
+}
+.getstarted_Liked{
+	background: #EB5C01;
+	padding: 10px 10px;
+	margin: 20px;
+	margin-left: 100px;
+	border-radius: 4px;
+	color: #fff;
+}
+.getstarted_unLiked{
+	background: #6E6E6E;
+	padding: 10px 10px;
+	margin: 20px;
+	margin-left: 100px;
+	border-radius: 4px;
+	color: #fff;
+}
+.detailtab{
+margin-left: 100px;
 }
 </style>
-<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-<body>
-   <div id="con">
-   <%-- <form name=form2 action="projectlist" id="test" method=post>
-   <input type="hidden" name="hiddenid" id="hiddenid" value="${funding.userId}"> </form>
-      <form name="form" id="detail" method="post">
-         <input type="hidden" id="pnum" value="${funding.projectNo}">
-         <input type="hidden" id="year" value="${funding.startDate}">
-         <input type="hidden" id="month" value="${funding.startDate}">
-         <input type="hidden" id="day" value="${funding.startDate}">
-         <input type="hidden" id="min_price1" value="${funding.projectStory}">
-         <input type="hidden" id="min_price2" value="${funding.projectStory}">
-         <input type="hidden" id="min_price3" value="${funding.projectStory}">
-         
-         <c:if test="${loginUser.userId eq funding.userId}">
-         	<a id=fb1>관리자로부터 받은 검토 피드백</a><br>
-         		<div class="feedback">
-         			<a id=fb2>${funding.warningIntro}</a><br>
-         		</div>
-         <br>
-         </c:if> --%>
-         <div id="fade" class="black_overlay"></div>         
-         <a href="#" id="category">${funding.subjectName}</a><br><br>
-         <div>
-         <img src="resources/upLoadFile/${fundingFile.fileMainName}" width="620px" alt="project_img"><br>
-		<%-- 	
-        <c:choose>
-			<c:when test="${{funding.leftDate < 1}">
-				<input type="button" class="funding2" value="프로젝트가 마감되었습니다." disabled>
-       			<input type="button" class="share" value="공유하기" onclick="share()">
-       		</c:when>
-		</c:choose>         
-         <c:choose>
-            <c:when test= "${funding.likeCount == 1 && userId == 0}"> 
-            </c:when>
-            <c:when test="${funding.likeCount == 1 && userId != 0 && fundingLike[0].like_yn == 0}"> 
-               <img src="resources/img/images/likeHeart.png" id="heart" width="40px" onclick="like()"><b id=likecount>${funding.likeCount}</b>
-             </c:when>
-            <c:when test="${funding.likeCount == 1 && userId != 0  && fundingLike[0].like_yn == 1}">
-               <img src="resources/img/images/likeHeart.png" id="heart"  width="40px" onclick="like()"><b id=likecount>${funding.likeCount}</b>
-            </c:when>
-            <c:when test="${funding.likeCount == 1 && userId != 0  && fundingLike[0].like_yn == null}">
-               <img src="resources/img/images/likeHeart.png" id="heart"   width="40px" onclick="like()"><b id=likecount>${funding.likeCount}</b>
-            </c:when>
-            <c:when test="${funding.likeCount != 1}">
-            </c:when>
-            </c:choose> 
-             --%>
-         <br>
-         <h1 id="subject">${funding.subjectName }</h1>
-         </div>
-                  
-         <div id="share_content" class="share_content">
-         <a onclick="exit()" style="float:right;">X</a><br><br><br>
-         <a>프로젝트 공유하기</a><br><br>
-         <div class="addthis_inline_share_toolbox"></div> 
-         </div>
-         
-         <div id="planner">
-            <img src="resources/upLoadFile/${fundingFile.fileMainName}" width="30px" alt="project_img" style="border-radius: 150px; height:40px; width:40px;">
-            &nbsp;<a style="color:black; vertical-align:4.5px;" id="golist" onclick="goPjList()"><%-- href="<c:url value="projectlist${project.pj_id}"/>"> --%>${fundingFile.fileMainName}</a>
-                </div>
-         <div id="pl_info">${funding.projectStory}</div><br>
-  <%--        <p>   
-            <span id="label">목표 금액 
-                  <label id="value1"><fmt:formatNumber value="${funding.goalMoney}" pattern="#,###"/>원</label>
-            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span id="label">후원자 
-                  <label id="value2">${funding.count}명</label>
-            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span id="label">남은 기간 
-            	  <c:choose>
-					<c:when test="${project.c_status == 1}">
-						<label id="input_dday" class="input_dday">0일</label><a id="fin_value"> (${project.pj_fin})</a>
-					</c:when>
-					<c:when test="${project.c_status == 2 or project.c_status == 4}">
-						<label id="input_dday2" class="input_dday">0일</label><a id="fin_value"> (${project.pj_fin})</a>
-       				</c:when>
-					<c:when test="${project.c_status == 3}">
-						<label id="input_dday2" class="input_dday">중단</label><a id="fin_value"> (${project.pj_fin})</a>
-					</c:when>
-				</c:choose>                  
-            </span>
-         </p> --%>
-       <%--  	 모인 금액 <label id="sum"><fmt:formatNumber value="${funding.sum}" pattern="#,###"/>원</label>
-         <span><a id="percent_value">(${dday.percent}%)</a></span>
-         <div class="Graph">
-            <p>
-               <c:if test="${dday.percent > 99}">
-					<svg id="svg">
-						<rect x="0" y="0" fill="#e9e9e9" height="2" width="100%"></rect>
-						<rect x="0" y="0" height="5" width="100%" fill="#430201"></rect>
-					</svg>
-				</c:if>
-				<c:if test="${dday.percent < 100}">
-					<svg id="svg">
-						<rect x="0" y="0" fill="#e9e9e9" height="2" width="100%"></rect>
-						<rect x="0" y="0" height="5" width="${dday.percent}%" fill="#430201"></rect>
-					</svg>
-				</c:if>
-            </p>
-         </div>
-         <div class="plinfo">
-         		<c:choose>
-					<c:when test="${project.c_status == 1}"> 
-							목표 금액이 달성되어야만 펀딩 성공입니다.<br> 목표금액이 모이지 않으면 마감일 다음날 자동 환불됩니다.
-					</c:when>
-					<c:when test="${project.c_status == 2}">
-						펀딩이 성공했습니다!<br> 선물은 펀딩 마감일 한달 이내로 발송됩니다.
-       				</c:when>
-					<c:when test="${project.c_status == 3}">
-						마감일 이전에 소정의 사유로 펀딩이 중단되었습니다.<br> 환불이 진행될 예정입니다.
-					</c:when>
-					<c:when test="${project.c_status == 4}">
-						목표 금액을 달성하지 못했습니다.<br> 환불이 진행될 예정입니다.
-					</c:when>
-				</c:choose>           
-           	
-         </div><br><br>
 
-         <div class="detailtab">
+
+
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200">
+
+	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<a href="/index.jsp" class="logo d-flex align-items-center" style="text-decoration: none;"> 
+				<img src="/resources/img/logo.png" alt=""> <span id="starLogo">싸라기별</sapn></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					     <li class="nav-item active">
+		        <!-- <a class="nav-link" href="#">펀딩 <span class="sr-only">(current)</span></a> -->
+		      </li>
+					<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> 기념관 </a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="text-align: center; width: 200px;">
+							<a class="dropdown-item" href="/independenceList.do">독립유공자 공훈록</a> <a
+								class="dropdown-item" href="/historyList.do">별들의 발자취</a> <a
+								class="dropdown-item" href="visitList.do">별보러 가자</a>
+						</div></li>
+					<li class="nav-item"><a class="nav-link" href="fundingList.do">펀딩</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="donationList.do">기부</a></li>
+					<li class="nav-item"><a class="nav-link" href="guide.do">가이드</a></li>
+					<a class="getstarted scrollto" href="suggestPage.do" style="text-decoration: none;">제안하기</a>
+				</ul>
+				<c:if test="${ empty sessionScope.loginUser }">
+					<div>
+						
+						<a class="nav-link" href="login.do">로그인</a>
+					</div>
+				</c:if>
+				
+				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId =='admin'}">
+					<div>
+						<a class="nav-link" href="adminMain.do">관리자페이지</a> 
+						<a class="nav-link" href="logout.do">로그아웃</a>
+					</div>
+				</c:if>
+				
+				<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId !='admin'}">
+					<div>
+						<a class="nav-link" href="logout.do">로그아웃</a> 
+						<a class="nav-link" href="myPage.do">마이페이지</a>
+					</div>				
+				</c:if>
+				
+			</div>
+		</div>
+	</nav>
+	
+	<!-- 포인트, 쪽지, 공지 -->
+	<c:if test="${ !empty sessionScope.loginUser && sessionScope.loginUser.userId !='admin'}">
+
+		<div id="btn">
+			<input type="checkbox" id="toggleBtn">
+			<label for="toggleBtn" class="toggleBtn" id="toggle-display"> 포인트&nbsp; &#124; &nbsp;쪽지 </label>
+			
+			<div id="myinfo">
+				<!-- 포인트 -->
+				<a class="" href="pointList.do" style="font-size:15px; font-weight:600; text-decoration:none;">포인트</a>
+				&nbsp;&nbsp;&nbsp;<span class="point-num" id="myPoint-total">${sessionScope.myPoint.total }</span>
+				<br><sup><span class="point-num" id="myPoint-reserved">진행 중 ${sessionScope.myPoint.reserved*-1 }</span></sup>
+				<br>
+				<!-- 쪽지 -->
+				<div class=msg-area>		
+					<a class="" href="recMsgList.do" style="font-size:15px; font-weight:600;">
+						<img src="resources/img/message/myinfo-message.svg" width="30px">
+					</a>
+					<span class=" badge rounded-pill" id="msgCount" style="width:15px;height:15px;border-radius:50%;font-size:11px;padding:2px;color:white;background-color:#EB5C01;">
+						${sessionScope.msgCount }
+					</span>
+				</div>
+				<!-- 공지사항 -->
+				<div class=notice-area>
+					<a class="" href="noticeMsgList.do" style="font-size:15px; font-weight:600;">
+						<img src="resources/img/message/myinfo-bell.svg" width="30px">
+					</a>
+					<span class="nav-link badge rounded-pill" id="noticeCount" style="width:11px;height:11px;border-radius:50%;color:#EB5C01;font-size:10px;background-color:#EB5C01;display:none;">
+						<c:if test="${sessionScope.notiCount != 0}">
+							${notiCount }
+						</c:if>
+					</span>
+				</div>
+			</div>
+		</div>
+
+	</c:if>
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/balloon/ckeditor.js"></script>
+<main>
+<br>
+<div class="row">
+<div class="format col-6">
+<!-- A wrapper DIV to center the Gallery -->
+<div style="text-align:center;">
+
+    <!-- Define the Div for Gallery -->
+    <!-- 1. Add class html5gallery to the Div -->
+    <!-- 2. Define parameters with HTML5 data tags -->
+	<div style="display:none;" class="html5gallery" data-skin="gallery" data-width="1000" data-height="700">
+		<a href="https://www.youtube.com/embed/lHJN6IO6jYI"><img src="resources/img/video_icon.png"></a>
+		<a href="resources/img/SuggestMain_01_Funding.png"><img src="resources/img/SuggestMain_01_Funding.png"></a>
+		<a href="resources/img/SuggestMain_02_Donation.png"><img src="resources/img/SuggestMain_02_Donation.png"></a>
+		<a href="resources/img/SuggestMain_01_Funding.png"><img src="resources/img/SuggestMain_01_Funding.png"></a>
+
+		
+	
+	</div>
+
+	</div>
+</div>
+	<div class="detailView_right col-6">
+		<div class="noting"></div>
+			<h1 class = "contents">${funding.subjectName }</h1>
+			<br>
+					<b class = "contents">펀딩 금액 : <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</b>
+					   					<c:if test="${funding.leftDate < 1}">
+										<div>
+							   						<input type="submit" class="getstarteds" value="마감된 펀딩 입니다." disabled>
+							   				</div>
+							       		</c:if>
+							       		
+							       		<c:if test="${funding.leftDate >= 1}">
+							       		<div>
+							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+							    					<input type="submit" class="getstarted" value="펀딩하기">
+							    					</form>
+							    		</div>
+							       		</c:if>
+    				<b class = "contents">달성률 : <fmt:formatNumber value="${funding.percent }" pattern="#,###"/>%</b>
+					<b class = "contents">목표 금액 : <fmt:formatNumber value="${funding.goalMoney }" pattern="#,###"/>원</b><br>
+					
+										   <c:if test="${funding.leftDate < 1}">
+										<div>
+							   						<b class ="contents">0일</b>
+							   				</div>
+							       		</c:if>
+							       		
+							       		<c:if test="${funding.leftDate >= 1}">
+							       		<div>
+						<b class = "contents">남은 기간 : <fmt:formatNumber value="${funding.leftDate }" pattern="#,###"/>일</b><br>
+							    		</div>
+							       		</c:if>
+					
+					<b class = "contents">후원자 : <fmt:formatNumber value="${fundingLog.sponser }" pattern="#,###"/>명</b><br>
+					<b class = "contents">조회수 : ${funding.hitsCount}</b>
+					<br>
+					<div>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+					
+					<!-- 로그인 안 했을 시  -->
+					<c:if test="${empty loginUser.userId}">
+					<form action="fundingLikeAdd.do" method="post" onSubmit="formChk();return false">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${funding.likeCount}
+   					</form>
+   					</c:if>	
+					
+					
+					<!--로그인하고 좋아요 이미 했을때 -->
+					 <c:set var="contains" value="false" />
+					<c:forEach var="like" items="${fundingLikeUser}">
+					  <c:if test="${like.userId eq loginUser.userId}">
+					    <c:set var="contains" value="true" />
+					  </c:if>
+					</c:forEach>
+					
+					<c:if test="${contains == 'true'}">
+					<form action="fundingLikeDelete.do" method="post">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_Liked" value="좋아요 ♥">${funding.likeCount}
+    				</form>
+					 </c:if>
+					
+					<!--로그인 했는데 아직 좋아요 안했을때  -->
+					<c:if test="${!empty loginUser.userId && contains == 'false'}">
+					<form action="fundingLikeAdd.do" method="post">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${funding.likeCount}
+   					</form>
+   					</c:if>
+					
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button>문의하기</button>  
+					<c:if test="${empty loginUser.userId}">
+						<form action="fundingAccusation.do" method="post" onSubmit="formChk();return false">
+					    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+					    <input type="submit" class="getstarted_unLiked" value="신고하기">
+					    </form>
+					   </c:if>
+					   <c:if test="${!empty loginUser.userId}">
+					    <form action="fundingAccusation.do" method="post">
+					    <input type="hidden" name="projectNo" value="${funding.projectNo }">
+					    <input type="submit" class="getstarted_Liked" value="신고하기">
+					    </form>
+					    </c:if>
+		
+					
+					 <br>
+					
+					<b class = "contents">펀딩 시작일 : ${funding.startDate }</b>
+						<b class = "contents">펀딩 종료일 : ${funding.finDate }</b>
+							<b class = "contents">예상 배송일 : ${funding.deleiveryDate }</b>
+				
+					</div>
+					
+	
+		</div>
+</div><br><br><hr>
+      <div class="detailtab">
             <input type="radio" name="detailtab" id="story" checked> 
-            <input type="radio" name="detailtab" id="gift" onclick="check_gift()"> 
             <input type="radio" name="detailtab" id="commu"> 
-            <label for="story">스토리보드</label>
-            <label for="gift">선물보기</label>
+            <input type="radio" name="detailtab" id="info"> 
+            <label for="story">스토리</label>
             <label for="commu">커뮤니티</label>
+            <label for="info">안내사항</label>
             
             <div id="story_content" class="story_content" style="text-align: left;">
-            
-            <div id="story1">
-               <p>${project.story}</p>
-               <c:if test="${userId eq project.pj_id}">
-               <a id="go_modify" onclick="modify()">수정하기</a>
-               </c:if>
-            </div>
-            <div id="story2">
-               <textarea id="contents" name="storyboard">${project.story}</textarea>
-               <script>
-                  CKEDITOR.replace('contents', { filebrowserUploadUrl : '/upload', height : '500px'});
-               </script><br>
-               <a id="go_modify" onclick="modify_cancel()" style="background-color:gray;">취소하기</a>&nbsp;&nbsp;&nbsp;
-               <a id="go_modify" onclick="modify_story()">저장하기</a>
-               <input type="hidden" name="modify" id="modify" value="${storyreq.modify}"> <br />
-            </div>
+               <p>${funding.projectStory }<</p>
             </div>
             
-            <div class="gift_content">
-               <div id="gift1detail" style="visibility: visible;">
-               <ul style="list-style-image: url(images/giftcount.png); line-height: 3px;">
-                  <li id="gift_count">${gift.count1}명이 선택</li>
-               </ul><br>
-                  <p id="gift1_price"><fmt:formatNumber value="${project.min_price1}" pattern="#,###"/>원+</p>
-                  <p id="gift1_name">${project.gift_name1} ( X 1 )</p>
-                  <c:choose>
-					<c:when test="${project.c_status == 1}"> 
-						  <c:choose>
-								<c:when test="${funder.status == 1}">
-									<input type="button" class="selfunding2" value="이미 펀딩하셨습니다." onclick="go_mine()">
-								</c:when>
-								<c:otherwise>
-									<input type="button" class="selfunding" value="펀딩하기" onclick="go_funding()">
-								</c:otherwise>
-						  </c:choose>
-					</c:when>
-					<c:when test="${project.c_status == 2}">
-                		  <input type="button" class="selfunding2" value="펀딩하기" disabled>
-       				</c:when>
-					<c:when test="${project.c_status == 3}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-					<c:when test="${project.c_status == 4}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-				</c:choose>   
-               </div>
-               <br> <br> <br>
-               <div id="gift2detail" style="visibility: visible;">
-               <ul style="list-style-image: url(images/giftcount.png); line-height: 3px;">
-                  <li id="gift_count">${gift.count2}명이 선택</li>
-               </ul><br>
-                  <p id="gift2_price"><fmt:formatNumber value="${project.min_price2}" pattern="#,###"/>원+</p>
-                  <p id="gift2_name">${project.gift_name2} ( X 1 )</p>
-                  <c:choose>
-					<c:when test="${project.c_status == 1}"> 
-						  <c:choose>
-								<c:when test="${funder.status == 1}">
-									<input type="button" class="selfunding2" value="이미 펀딩하셨습니다." onclick="go_mine()">
-								</c:when>
-								<c:otherwise>
-									<input type="button" class="selfunding" value="펀딩하기" onclick="go_funding()">
-								</c:otherwise>
-						  </c:choose>
-					</c:when>
-					<c:when test="${project.c_status == 2}">
-                		  <input type="button" class="selfunding2" value="펀딩하기" disabled>
-       				</c:when>
-					<c:when test="${project.c_status == 3}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-					<c:when test="${project.c_status == 4}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-				</c:choose>  
-               </div>
-               <br> <br> <br>
-               <div id="gift3detail" style="visibility: visible;">
-               <ul style="list-style-image: url(images/giftcount.png); line-height: 3px;">
-                  <li id="gift_count" style="float:left;">${gift.count3}명이 선택</li>
-               </ul><br>
-                  <p id="gift3_price"><fmt:formatNumber value="${project.min_price3}" pattern="#,###"/>원+</p>
-                  <p id="gift3_name">${project.gift_name3} ( X 1 )</p>
-				<c:choose>
-					<c:when test="${project.c_status == 1}"> 
-						  <c:choose>
-								<c:when test="${funder.status == 1}">
-									<input type="button" class="selfunding2" value="이미 펀딩하셨습니다." onclick="go_mine()">
-								</c:when>
-								<c:otherwise>
-									<input type="button" class="selfunding" value="펀딩하기" onclick="go_funding()">
-								</c:otherwise>
-						  </c:choose>
-					</c:when>
-					<c:when test="${project.c_status == 2}">
-                		  <input type="button" class="selfunding2" value="펀딩하기" disabled>
-       				</c:when>
-					<c:when test="${project.c_status == 3}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-					<c:when test="${project.c_status == 4}">
-                 		 <input type="button" class="selfunding2" value="펀딩하기" disabled>
-					</c:when>
-				</c:choose>  
-               </div> <br> <br>
-               <p style="font-size:13px; color: dimgray;">예상 전달일은 프로젝트 마감일 30일 이내입니다. 30일이 넘을 경우 자동 환불됩니다.</p>
-               
-               <br><br>
-		         <c:if test="${userId eq project.pj_id}">
-               	 <c:if test="${project.c_status == 2}">
-		         	<h2>펀딩해주신 분들 목록</h2><br>
-		         			<table id="fundedlist" style="border: 2px solid lightgray;">
-		         				<tr>
-		         					<td style="width:250px; font-weight:bold; font-size:20px;">아이디</td>
-		         					<td style="width:200px; font-weight:bold; font-size:20px;">연락처</td>
-		         					<td style="width:100px; font-weight:bold; font-size:20px;">우편번호</td>
-		         					<td style="width:300px; font-weight:bold; font-size:20px;">주소</td>
-		         					<td style="width:350px; font-weight:bold; font-size:20px;">선물이름</td>
-		         					<td style="width:150px; font-weight:bold; font-size:20px;">펀딩금액</td>
-		         				</tr>
-		         				<c:forEach var="f" items="${funderList}">
-		         				<tr>
-		         					<td style="width:250px;">${f.id}</td>
-		         					<td style="width:200px;">${f.tel}</td>
-		         					<td style="width:100px;">
-		         						<c:choose>
-		         						<c:when test="${f.number == 0}"></c:when>
-		         						<c:otherwise>${f.zip}</c:otherwise>
-		         						</c:choose>
-		         					</td>
-		         					<td style="width:300px;">
-		         						<c:choose>
-		         						<c:when test="${f.number == 0}"></c:when>
-		         						<c:otherwise>${f.address}, ${f.address2}</c:otherwise>
-		         						</c:choose>
-		         					</td>
-		         					<td style="width:350px;">
-		         						<c:if test="${f.number == 0}">선물 없음</c:if>
-		         						<c:if test="${f.number == 1}">${project.gift_name1}</c:if>
-		         						<c:if test="${f.number == 2}">${project.gift_name2}</c:if>
-		         						<c:if test="${f.number == 3}">${project.gift_name3}</c:if>
-		         					</td>
-		         					<td style="width:150px;"><fmt:formatNumber value="${f.funded}" pattern="#,###"/>원</td>
-		         				</tr>
-		         				</c:forEach>
-		         			</table><br>
-		         </c:if>
-		         </c:if>
-            </div>
-            <div class="commu_content">
-               <c:if test="${ empty articles }">
-                  <div class="community" style="background-color:white;">
-                     <a id="commu_null" style="font-size:14px; color:black;">작성된 글이 없습니다.</a>
-                  </div>
-               </c:if>
-               <c:if test="${! empty articles }">
-                  <c:forEach var="p" items="${articles}">
-                     <div class="community">
-                           <c:if test="${p.id == project.pj_id }"><span style="float:left;">
-                                 <a id="commu_planner">창작자</a>&nbsp;<a style="font-size:14px; color:black;">${p.name}</a></span>
-                                 <span style="float:right; font-size:14px; color:black;"><a id="go_comment" href="<c:url value="/read=${p.cseq}"/>">댓글 쓰러 가기</a></span></c:if>
-                           <c:if test="${p.id != project.pj_id}"><span style="float:left;">
-                                 <a style="font-size:14px; color:black;">${p.name}</a></span>
-                                 <span style="float:right; font-size:14px; color:black;"><a id="go_comment" href="<c:url value="/read=${p.cseq}"/>">댓글 쓰러 가기</a></span></c:if>
-                           <br><br><a style="font-weight:bold; color:black; font-size:20px; margin">${p.csub}</a><br><br>
-                           <a style="font-size:14px; color:#404040;">${p.ccon}</a><br>
-                     </div>
-                  </c:forEach> 
-               </c:if>
-            </div>--%>
+        <div class="commu_content">
+              	<table align="center" width="500" border="1" cellspacing="0">
+		<tr>
+			<td><textarea rows="3" cols="40" id="rContent"></textarea></td>
+			<td>
+				<button id="rSubmit">댓글 등록</button>
+			</td>
+		</tr>
+	</table>
+	
+	<!-- 댓글 목록 -->
+	<table align="center" width="500" border="1" cellspacing="0" id="rtb">
+		<thead>
+			<tr>
+				<!-- 댓글 갯수 -->
+				<td colspan="2"><b id="rCount"></b></td>
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+	</div>
+        
+            <div class="info_content">
+            		해당 프로젝트 안내 사항
+             <p>${funding.warningIntro }</p>
          </div>
+         </div>
+        
+         
+         
+         		<%@include file="../../../footer.jsp" %>
+	</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/balloon/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ -->
+	
+	
+ 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
+	<script src="/resources/js/jquery.easing.1.3.js"></script>
+	<script src="/resources/js/jquery-ui.js"></script>
+	<script src="/resources/js/popper.min.js"></script>
+<!-- 	<script src="/resources/js/bootstrap.min.js"></script> -->
+	<script src="/resources/js/owl.carousel.min.js"></script>
+	<script src="/resources/js/jquery.stellar.min.js"></script>
+	<script src="/resources/js/jquery.countdown.min.js"></script>
+	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
+	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
+	<script src="/resources/js/aos.js"></script>
+
+	<script src="/resources/js/jquery.fancybox.min.js"></script>
+
+	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/fundingList.js"></script>
+		
+	<script>
+	function formChk(){
+	    if(${empty loginUser.userId }){
+	      alert("로그인이 필요한 서비스입니다.");
+	    }else{
+	       return true;
+	    }
+	   }
+
+	
+	
+	$(function() {
+			getReplyList();
+			$("#rSubmit").on("click", function() {
+				var projectNo = '${funding.projectNo }';
+				var rContent = $("#rContent").val();
+				debugger;
+				$.ajax({
+					url : "addComment.do",
+					type : "post",
+					data : { "no" : projectNo , "contents" : rContent },
+					success : function(data) {
+						if(data == "success") {
+							// 댓글 불러오기
+							getReplyList();
+							// 작성 후 내용 초기화
+							$("#rContent").val("");
+						}else {
+							alert("댓글 등록 실패..");
+						}
+					},
+					error : function() {
+						alert("바보");
+					}
+				});
+			});
+		});
+		
+		function getReplyList() {
+			var projectNo = '${funding.projectNo }'
+			$.ajax({
+				url : "commentList.do",  
+				type : "get",
+				data : { "projectNo" : projectNo },
+				dataType : "json",
+				success : function(data) {
+					// db에 있는 데이터를 json형태로 가져와서
+					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
+					//console.log(data);
+					// tbody에 필요한 tr, td 태그를 만들면서
+					// 데이터를 tbody에 꽂아줄 것임.
+					var $tableBody = $("#rtb tbody");
+					$tableBody.html(""); // 비워주기
+					var $tr;
+					var $rWriter;
+					var $rContent;
+					var $rCreateDate;
+					var $btnArea;
+					$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
+					if(data.length > 0) {
+						for(var i in data) {
+							$tr = $("<tr>");
+							$rWriter = $("<td width='100'>").text(data[i].userId);
+							$rContent = $("<td>").text(data[i].contents);
+							$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
+							$btnArea = $("<td>")
+							.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");'>수정 </a>")							
+							.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");'> 삭제</a>");
+							$tr.append($rWriter);
+							$tr.append($rContent);
+							$tr.append($rCreateDate);
+							$tr.append($btnArea);
+							$tableBody.append($tr);
+						}
+					}
+				},
+				error : function() {
+					alert("죽어!");
+				}
+			});
+		}
+
+		function modifyReply(obj, projectNo, replyNo, contents) {
+			$trModify = $("<tr>");
+			$trModify.append("<td colspan='3'><input type='text' id='modifyReply' size='50' value='"+contents+"'></td>");
+			$trModify.append("<td><button onclick='modifyReplyCommit("+projectNo+","+replyNo+")'>수정완료</button></td>");
+			$(obj).parent().parent().after($trModify);
+		}
+		
+		function modifyReplyCommit(projectNo, replyNo) {
+			var modifiedContent = $("#modifyReply").val();
+			$.ajax({
+				url : "modifyComment.do",
+				type : "post",
+				data : { 
+					"no" : projectNo , 
+					"replyNo" : replyNo, 
+					"contents" : modifiedContent 
+				},
+				success : function(data) {
+					if(data == "success") {
+						getReplyList();
+					}else{
+						alert("댓글 수정 실패!");
+					}
+				},
+				error : function() {
+					alert("서버 통신 실패!");
+				}
+			});
+			
+		}
+		function removeReply(projectNo, replyNo) {
+			$.ajax({
+				url : "deleteComment.do",
+				type : "get",
+				data : { "no" : projectNo, "replyNo" : replyNo },
+				success : function(data) {
+					if(data == "success"){
+						getReplyList();
+					}else {
+						alert("댓글 조회 실패!");
+					}
+				},
+				error : function() {
+					
+				}
+			});
+		} 
+	</script>
+
 </body>
 </html>

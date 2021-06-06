@@ -308,7 +308,7 @@ margin : auto;
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+<!-- 	<script src="/resources/js/bootstrap.min.js"></script> -->
 	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.countdown.min.js"></script>
