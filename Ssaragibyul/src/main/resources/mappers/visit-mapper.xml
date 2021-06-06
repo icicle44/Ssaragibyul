@@ -233,7 +233,7 @@ FROM
     	DELETE VISIT_LIKE WHERE VISIT_NO = #{visitNo } AND USER_ID = #{userId } 
     </delete>
     
-    <select id="getLikes" resultType="_int" resultMap="likeResultMap">
+    <select id="getLikes" resultType="_int">
     	SELECT COUNT (*) FROM VISIT_LIKE WHERE VISIT_NO = #{visitNo } 
     </select>
     

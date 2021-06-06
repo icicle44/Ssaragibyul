@@ -629,6 +629,7 @@
 						} else {
 							$("a").remove("#plusLike");
 			 				$(".likes").append("<a href='#' id='minusLike' onclick='minusLikes("+visitNo+")'><i class='fas fa-heart' style='color:#EB5C01;'></i></a></td>");
+			 				getLikes(visitNo)
 						}
 	
 					},
@@ -657,6 +658,7 @@
 						} else {
 							$("a").remove("#minusLike");
 							$(".likes").append("<a href='#' id='plusLike' onclick='plusLikes("+visitNo+")'><i class='far fa-heart'></i></a>");
+							getLikes(visitNo)
 						}
 	
 					},
