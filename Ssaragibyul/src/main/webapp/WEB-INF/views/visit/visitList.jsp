@@ -78,7 +78,7 @@
 														<td class="t likes"></td>
 													</c:if>
 													<c:if test="${ empty loginUser.userId }">
-														<td class="t likes"><a href="#" id="plusLike" ><i class="far fa-heart"></i></a></td>
+														<td class="t likes"><a href="#" id="plusLike" onclick="needtologin()"><i class="far fa-heart"></i></a></td>
 													</c:if>
 														<td class="likesCount"></td>
 														<td class="t count">조회수</td>
@@ -113,7 +113,12 @@
 															<td><textarea rows="2" cols="80" id="rContent"
 																	name="contents"></textarea></td>
 															<td>
-																<a href="#" class="btn-gradient orange mini" id="rSubmit">등록</a>
+																<c:if test="${ empty loginUser.userId }">
+																	<a href="#" class="btn-gradient orange mini" onclick="needtologin()">등록</a>
+																</c:if>
+																<c:if test="${!empty loginUser.userId }">
+																	<a href="#" class="btn-gradient orange mini" id="rSubmit">등록</a>
+																</c:if>
 															</td>
 														</tr>
 													</table>
@@ -123,7 +128,7 @@
 														<thead>
 															<tr>
 																<!-- 댓글 갯수 -->
-																<td colspan="4"><b id="rCount${vList.visitNo }"></b></td>
+																<td colspan="5"><b class="rCount${vList.visitNo }"></b></td>
 															</tr>
 														</thead>
 														<tbody></tbody>
@@ -167,6 +172,7 @@
 			$(function() {
 				makeGrid();
 				click();
+				
 	            $("#replyContents").on("keyup",function(){
 	                // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
 	                //var inLength = $(this).val().length;
@@ -325,6 +331,7 @@
 					registReply(visitNo);
 					getReplyList(visitNo);// 댓글 목록 조회1
 					console.log(visitNo);
+					console.log("#rCount"+visitNo)
 					getLikes(visitNo)
 					if('${loginUser.userId}'!=""){
 						checkLikes(visitNo);
@@ -332,6 +339,12 @@
 					return visitNo;
 				});
 			};
+			// 로그인 요청
+			function needtologin(){
+				alert("로그인을 해주세요.");
+			}
+
+			// 부분 새로고침(아직 시도중)
 			function refresh(){
 		        // ajax option
 		        var ajaxOption = {
@@ -454,13 +467,19 @@
 						var $rContent;
 						var $rCreateDate;
 						var $btnArea;
-						/* $('#' + 'rCount' + visitNo).text(
-								"댓글 (" + data.length + ")"); */ // 아직 안됨//////////////
+						 $(".rCount"+visitNo).append(
+								"댓글 (" + data.length + ")"); // 아직 안됨//////////////
 
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) {
 								$tr = $("<tr>");
-								$rWriter = $("<td width='40'>").text(data[i].nick);
+								$rWriter = $("<td width='40'>").append(
+									"<c:url var='msgWriteUrl' value='msgWriterView.do'>"
+									+   "<c:param name='receiverId' value='"+data[i].userId+"'></c:param>"												   
+									+   "<c:param name='msgType' value='4'></c:param>"
+									+   "<c:param name='nickName' value='"+data[i].nick+"'></c:param>"
+									+ "</c:url>"
+									+ "<a href='#' onclick='msgPopup(\'${msgWriteUrl}\'); return false;	'>"+data[i].nick+'님의 별'+"</a>");
 								$rContent = $("<td width='80'>").text(data[i].contents);
 								$rCreateDate = $("<td width='50'>").text(data[i].enrollDate);
 								$btnArea1 = $("<td width='10'>").append(
@@ -477,8 +496,10 @@
 								$tr.append($rWriter);
 								$tr.append($rContent);
 								$tr.append($rCreateDate);
+								if('${loginUser.userId}'===data[i].userId){
 								$tr.append($btnArea1);
 								$tr.append($btnArea2);
+								}
 								$tableBody.append($tr);
 							}
 						} else {
@@ -513,6 +534,7 @@
 										// 댓글 목록 조회2
 										// 등록 버튼 누를 때 visitNo을 가져가서 댓글 목록 다시 불러옴
 										// visitNo를 특정할 수 없기 때문에 이를 자동으로 보내고 받을 수 없어서 목록 조회 2번하는 것
+										$(".rCount"+visitNo).html("");
 										getReplyList(visitNo);
 									} else {
 										alert("댓글 등록 실패");
@@ -549,6 +571,7 @@
 					},
 					success : function(data) {
 						if (data == "success") {
+							$(".rCount"+visitNo).html("");
 							getReplyList(visitNo);
 						} else {
 							alert("댓글 수정 실패!");
@@ -571,6 +594,7 @@
 					},
 					success : function(data) {
 						if (data == "success") {
+							$(".rCount"+visitNo).html("");
 							getReplyList(visitNo); // 목록조회3
 						} else {
 							alert("댓글이 없습니다");
