@@ -102,10 +102,10 @@
 							<br><br><br><br>
 
 			<input class="getNumber" type="number" name="cal">
-				${funding.finDate }<br>
-				<input class="getResult1" type="number" name="cal"><br>
+				개 선택<br>
+				<input class="getResult1" type="number" name="cal">원 리워드<br>
 				추가로 후원하기
-				<input type="number" id="addPrice" name="cal">
+				<input type="number" id="addPrice" name="cal">원
 			
 				<br><br><br><br><br><br><br>
 			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">펀딩하기</a>
@@ -116,16 +116,19 @@
 			<section id="sectionSuggest3">
 			<br><br><br><br>
 				<form action="fundingJoinComplete.do" method="post">
-					<input type="text" name="qunatity" class="getNumber"><br>
-					<input type="text" name="" class="getResult1"><br>
-					<input type="text" name="fundingPoint" class="getResult2"><br>
-	    			<input type="text" name="projectNo" value="${funding.projectNo }"><br>
-	   				<input type="text" name="userId" value="${loginUser.userId }"><br>
-	   				<input type="text" name="sumMoney" class="getResult2"><br>
+					<input type="text" name="qunatity" class="getNumber"> 선택  리워드 개수<br>
+					<input type="text" name="" class="getResult1"> 리워드 금액<br>
+					<input type="text" name="" class="addNumber"> 추가 후원 금액<br>
+	    			<input type="hidden" name="projectNo" value="${funding.projectNo }"><br>
+	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br>
+	   				<input type="text" name="sumMoney" class="getResult2"> 최종금액 <br>
 	   				<input type="text" name="receiverAddr">주소<br>
 	   				<input type="text" name="receiverName">이름<br>
 	   				<input type="text" name="receiverPhone">번호<br>
+	   				<input type="text" name="fundingPoint" class="getResult3">결졔 예약 하시겠습니까?<br>
+	   				
 	    			<input type="submit" class="getstarted" value="예약완료">
+	    			
     			</form>
 			</section>
 		<br><br><br><br><br><br>

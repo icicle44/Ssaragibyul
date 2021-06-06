@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="/resources/css/style_nav.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/detailproject.css">
+
 </head>
 
 <script type="text/javascript" src="resources/js/admin/core/jquery.3.2.1.min.js"></script>
@@ -222,13 +223,14 @@ margin-left: 100px;
 <div style="text-align:center;">
 
     <!-- Define the Div for Gallery -->
+	<!--<a href="https://www.youtube.com/embed/lHJN6IO6jYI"><img src="resources/img/video_icon.png"></a>  -->
     <!-- 1. Add class html5gallery to the Div -->
     <!-- 2. Define parameters with HTML5 data tags -->
 	<div style="display:none;" class="html5gallery" data-skin="gallery" data-width="1000" data-height="700">
-		<a href="https://www.youtube.com/embed/lHJN6IO6jYI"><img src="resources/img/video_icon.png"></a>
-		<a href="resources/img/SuggestMain_01_Funding.png"><img src="resources/img/SuggestMain_01_Funding.png"></a>
-		<a href="resources/img/SuggestMain_02_Donation.png"><img src="resources/img/SuggestMain_02_Donation.png"></a>
-		<a href="resources/img/SuggestMain_01_Funding.png"><img src="resources/img/SuggestMain_01_Funding.png"></a>
+		<a href="${fundingFile.videoUrl } "><img src="resources/img/video_icon.png"></a>
+		<a href="resources/upLoadFile/${fundingFile.fileMainName }"><img src="resources/upLoadFile/${fundingFile.fileMainName }"></a>
+		<a href="resources/upLoadFile/${fundingFile.fileSub1Name }"><img src="resources/upLoadFile/${fundingFile.fileSub1Name }"></a>
+		<a href="resources/upLoadFile/${fundingFile.fileSub2Name }"><img src="resources/upLoadFile/${fundingFile.fileSub2Name }"></a>
 
 		
 	
@@ -247,7 +249,16 @@ margin-left: 100px;
 							   				</div>
 							       		</c:if>
 							       		
-							       		<c:if test="${funding.leftDate >= 1}">
+							       		<c:if test="${(funding.leftDate >= 1) && (!empty loginUser.userId)  }">
+							       		<div>
+							    					<form action="fundingJoin.do" method="post" name="fundingGo">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+							    					<input type="submit" class="getstarted" value="펀딩하기">
+							    					</form>
+							    		</div>
+							    		</c:if>
+							     		<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
 							       		<div>
 							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">

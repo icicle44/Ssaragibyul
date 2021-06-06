@@ -187,7 +187,7 @@ width : 1540px;
 						<td id="dday_css">
 						<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
 						<c:if test="${p.leftDate < 1}"><b>마감</b></c:if>
-						<c:if test="${p.leftDate > 1}"><b>${p.leftDate}</b>일 남음</c:if>
+						<c:if test="${p.leftDate >= 1}"><b>${p.leftDate}</b>일 남음</c:if>
 						</td>
 						<td id="sum_css"><b><fmt:formatNumber value="${p.sumMoney}" pattern="#,###"/>원 , </b>
 						<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${p.percent}%</span>
