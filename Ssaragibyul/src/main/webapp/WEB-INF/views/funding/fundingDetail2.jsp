@@ -240,7 +240,7 @@ margin-left: 100px;
 </div>
 	<div class="detailView_right col-6">
 		<div class="noting"></div>
-			<h1 class = "contents">${funding.subjectName },  ${memberlist.nickName }</h1>
+			<h1 class = "contents">${funding.subjectName }</h1>
 			<br>
 					<b class = "contents">펀딩 금액 : <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</b>
 					   					<c:if test="${funding.leftDate < 1}">
@@ -437,6 +437,7 @@ margin-left: 100px;
 			$("#rSubmit").on("click", function() {
 				var projectNo = '${funding.projectNo }';
 				var rContent = $("#rContent").val();
+				debugger;
 				$.ajax({
 					url : "addComment.do",
 					type : "post",

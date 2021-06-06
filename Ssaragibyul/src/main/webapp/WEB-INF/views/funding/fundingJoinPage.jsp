@@ -115,7 +115,11 @@
 
 			<section id="sectionSuggest3">
 			<br><br><br><br>
+			 <% int totalMoney = 0;%>
 				<form action="fundingJoinComplete.do" method="post">
+				    <%
+   						 session.setAttribute("totalMoney", totalMoney);
+     					  	 %>
 					<input type="text" name="qunatity" class="getNumber"> 선택  리워드 개수<br>
 					<input type="text" name="" class="getResult1"> 리워드 금액<br>
 					<input type="text" name="" class="addNumber"> 추가 후원 금액<br>
@@ -126,8 +130,11 @@
 	   				<input type="text" name="receiverName">이름<br>
 	   				<input type="text" name="receiverPhone">번호<br>
 	   				<input type="text" name="fundingPoint" class="getResult3">결졔 예약 하시겠습니까?<br>
+	   				<input type="number" name="totalMoney" class="getResult3" value="${totalMoney }"><br>
 	   				
 	    			<input type="submit" class="getstarted" value="예약완료">
+	    			
+	    
 	    			
     			</form>
 			</section>

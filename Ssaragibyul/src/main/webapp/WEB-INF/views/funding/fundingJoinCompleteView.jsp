@@ -65,7 +65,12 @@
 		
 		앞으로도 많은 참여 부탁 드리겠습니다.
 		
-		펀딩 리스트로 이동 :  <button onclick="location.herf='/fundingIndex.do'">클릭</button>
+		펀딩 리스트로 이동 :  <button onclick="location.href='fundingIndex.do'">클릭</button>
+		<br>
+	
+   			 ${fundingLogOne[0].fundingPoint} 원이 최종 결제되었습니다. 
+   			 <br><br><br>
+		
 		
 	${funding.projectNo }<br>
 	${funding.optionPrice }원<br>
@@ -77,6 +82,16 @@
     <input type="hidden" name="userId" value="${loginUser.userId }">
     <input type="submit" class="getstarted" value="다음단계">
     </form>
+	
+	  <% String userid="Banda";%>
+    <form action="B.jsp" method="post">
+    <%
+    session.setAttribute("userId", userid);
+        %>
+        <input type="submit"
+                            value="Login">
+    </form>
+	
 	
 	<br><br><br><br><br><br><br><br><br><br>
  		<%@include file="../../../footer.jsp" %>

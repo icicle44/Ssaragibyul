@@ -10,6 +10,7 @@ import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
+import com.ssaragibyul.member.domain.Member;
 
 public interface FundingService {
 
@@ -110,6 +111,10 @@ public interface FundingService {
 	public Funding printOneCombine(int projectNo);
 
 	public FundingLog printSponserNumber(int projectNo);
+
+	public ArrayList<FundingLog> printFundingLogOne(int projectNo);
+
+	public Member printMemberList(Member member);
 
 
 

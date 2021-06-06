@@ -15,6 +15,7 @@ import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.funding.store.logic.FundingStoreLogic;
+import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.point.service.PointService;
 
 @Service
@@ -345,4 +346,10 @@ public class FundingSerivceImpl implements FundingService {
 		return fStore.selectSponserNumber(projectNo);
 	}
 	
+	public ArrayList<FundingLog> printFundingLogOne(int projectNo) {
+		return fStore.selectFundingLogOne(projectNo);
+	}	
+	public Member printMemberList(Member member) {
+		return fStore.seletOneMemberList(member);
+	}
 }

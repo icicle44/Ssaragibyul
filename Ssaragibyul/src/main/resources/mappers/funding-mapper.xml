@@ -298,6 +298,11 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 </select>
 
 
+
+<select id = "selectFundingLogOne" resultMap="FundingLogResultMap">
+	SELECT * FROM DO_FUNDING WHERE F_PROJECT_NO2 = #{projectNo} ORDER BY 1 DESC
+</select>
+
 	
 <!--펀링 리스트 메인 파일(사진) arrayList 전체 출력 쿼리문   지금 안씀-->
 	<select id="selectFundingFileList" resultMap="fundingFileResultMap">
@@ -326,7 +331,7 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 	<!-- 댓글 관련 insertReply -->
 	<!-- 댓글 입력  -->
 	<insert id="insertReply">
-		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },'닉네임', #{contents }, '펀딩상세', SYSDATE)
+		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },'닉네임', #{contents }, '펀딩상세', SYSTIMESTAMP)
 	</insert>
 	<!-- 댓글 출력  -->
 	<select id="selectReplyList" resultMap="FundingReplyResultMap">

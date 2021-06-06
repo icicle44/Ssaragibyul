@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
@@ -257,64 +258,24 @@ public class FundingController {
 			return mv;
 		}		//펀딩 참여 페이지로 이동
 		
-		 @RequestMapping(value="fundingJoinComplete.do", method = RequestMethod.POST )
-		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding) {
+		 @RequestMapping(value="fundingJoinComplete.do",method = { RequestMethod.GET, RequestMethod.POST })
+		 public String fundingJoinComplete(@ModelAttribute FundingLog fundingLog, Funding funding,
+				 		                   @RequestParam("projectNo") int projectNo, Model model) {
 			 int result = fService.registerFundingLog(fundingLog, funding); //serviceImpl에서 store 메소드 2개 씀. + 선미누나가 추가한 포인트 내역 업데이트 메소드도 있음.
-			 if(result > 0) {
+			 ArrayList<FundingLog> fundingLogOne = fService.printFundingLogOne(projectNo);
+			 if((result > 0)&&(fundingLogOne != null)) {
+				 model.addAttribute("fundingLogOne", fundingLogOne);
 				 return "funding/fundingJoinCompleteView";
 			 }else {
 				 return "common/errorPage";
 			 }
 		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
 
-		 
-//	원본
-//	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
-//	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
-//		fService.addreadCountHit(projectNo); 
-//		
-//		Funding funding = fService.printOne(projectNo);
-//		FundingFile fundingFile = fService.printOneFile(projectNo);
-//		
-//		if ((funding != null)&&(fundingFile != null)) {
-//			mv.addObject("fundingFile", fundingFile);
-//			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
-//		} else {
-//			mv.addObject("msg", "펀딩 상세 조회 실패!");
-//			mv.setViewName("common/errorPage");
-//		}
-//		return mv;
-//	}			//펀딩 상세 페이지
-	
-		 // 좋아요 추가
-//	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
-//	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,
-//			                                            @RequestParam("projectNo") int userId) {
-//		
-//		fService.addreadCountHit(projectNo); 
-//		
-//		Funding funding = fService.printOne(projectNo);
-//		
-//		FundingFile fundingFile = fService.printOneFile(projectNo);
-//		
-//		FundingLog fundingLog = fService.printSponserNumber(projectNo);
-//
-//		ArrayList<FundingLike>  fundingLike = fService.printOneLike(projectNo, userId);
-//		
-//		if ((funding != null)&&(fundingFile != null)) {
-//			mv.addObject("fundingLike", fundingLike);
-//			mv.addObject("fundingLog", fundingLog);
-//			mv.addObject("fundingFile", fundingFile);
-//			mv.addObject("funding", funding).setViewName("funding/fundingDetail4");
-//		} else {
-//			mv.addObject("msg", "펀딩 상세 조회 실패!");
-//			mv.setViewName("common/errorPage");
-//		}
-//		return mv;
-//	}			//펀딩 상세 페이지
-	
 	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,			
+								  HttpSession session, @ModelAttribute Member member) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		member.setUserId(loginUser.getUserId());
 		
 		fService.addreadCountHit(projectNo); 
 		
@@ -326,10 +287,13 @@ public class FundingController {
 
 		ArrayList<FundingLike>  fundingLikeUser = fService.printOneLike(projectNo);
 		
+		Member memberlist = fService.printMemberList(member);
+		
 		if ((funding != null)&&(fundingFile != null)) {
 			mv.addObject("fundingLikeUser", fundingLikeUser);
 			mv.addObject("fundingLog", fundingLog);
 			mv.addObject("fundingFile", fundingFile);
+			mv.addObject("memberlist", memberlist);
 			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
 		} else {
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
@@ -358,7 +322,7 @@ public class FundingController {
 	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport) { 
 		 int result = fService.accusationRegister(fundingReport);
 		 if(result > 0) {
-			 return "funding/fundingJoinCompleteView";
+			 return "funding/fundingList";
 		 }else {
 			 return "common/errorPage";
 		 }
@@ -418,26 +382,29 @@ public class FundingController {
 
 	@RequestMapping(value="fundingLikeAdd.do", method = RequestMethod.POST)
 	 public String fundingLikeAdd(@ModelAttribute Funding funding, FundingLike fundingLike, 
-			 					  HttpServletRequest request,
+			 					  HttpServletRequest request, RedirectAttributes redirectAttributes,
 			 					  Model model) { 
+			redirectAttributes.addFlashAttribute("okList", "AA BB CC");
 		 int result = fService.fundingLikeRegister(funding, fundingLike);
+		 String referer = request.getHeader("Referer");
 		 if(result > 0) {
-			 return "redirect:fundingList.do";
+			 return "redirect:"+ referer;
 		 }else {
 			 model.addAttribute("msg", "좋아요 등록 실패!!");
 			 return "common/errorPage";
 		 }
 	 } // 좋아요 해당 테이블 인서트 및 펀딩프로젝트 테이블에도 좋아요 숫자 업데이트 ↓ 아래거는 어떻게 할지 생각중.
-	
-	
+
 	//취소
 	@RequestMapping(value="fundingLikeDelete.do", method = RequestMethod.POST)
 	 public String fundingLikeDelete(@ModelAttribute Funding funding, FundingLike fundingLike, 
-			 					  HttpServletRequest request,
+			 					  HttpServletRequest request, RedirectAttributes redirectAttributes,
 			 					  Model model) { 
+		redirectAttributes.addFlashAttribute("okList", "AA BB CC");
 		 int result = fService.fundingLikeRemove(funding, fundingLike);
+		 String referer = request.getHeader("Referer");
 		 if(result > 0) {
-			 return "redirect:fundingList.do";
+			 return "redirect:"+ referer;
 		 }else {
 			 model.addAttribute("msg", "좋아요 취소 실패!!");
 			 return "common/errorPage";

@@ -10,6 +10,7 @@ import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
+import com.ssaragibyul.member.domain.Member;
 
 public interface FundingStore {
 
@@ -108,6 +109,8 @@ public interface FundingStore {
 	
 	public int updateProject_Like_Minus(Funding funding);
 	public int deleteProjectLike(FundingLike fundingLike);
+	public ArrayList<FundingLog> selectFundingLogOne(int projectNo);
+	public Member seletOneMemberList(Member member);
 }
 
 

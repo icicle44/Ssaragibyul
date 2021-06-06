@@ -15,6 +15,7 @@ import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.store.FundingStore;
+import com.ssaragibyul.member.domain.Member;
 
 @Repository
 public class FundingStoreLogic implements FundingStore{
@@ -306,6 +307,14 @@ public class FundingStoreLogic implements FundingStore{
 
 	public int deleteProjectLike(FundingLike fundingLike) {
 		return sqlSession.delete("fundingMapper.deleteProjectLike", fundingLike);
+	}
+
+	public ArrayList<FundingLog> selectFundingLogOne(int projectNo) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingLogOne", projectNo);
+	}
+
+	public Member seletOneMemberList(Member member) {
+		return sqlSession.selectOne("memberMapper.seletOneMemberList", member); 
 	}
 
 	
