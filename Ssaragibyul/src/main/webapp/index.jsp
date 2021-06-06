@@ -26,14 +26,20 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 
 </head>
+
+
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
-	
-	<%-- <%@include file="introduce.jsp" %> --%>
+
 <%@include file="header.jsp" %>
 
+	<!-- 상단 소개화면 -->
+	<div class="introduce-container">
+	 	<%@include file="introduce.jsp" %>
+	</div>
+
 	<header class="header-bar d-flex align-items-center site-navbar-target"
-		data-aos="fade-right">
+		data-aos="fade-right" id="left-nav">
 
 		<div class="d-inline-block d-lg-none ml-md-0 ml-auto py-3"
 			style="position: relative; top: 3px;">
@@ -50,41 +56,14 @@
 				<li><a href="#section-blog" class="nav-link">별보러 가자</a></li>
 				<!-- <li><a href="#section-contact" class="nav-link">검색</a></li> -->
 			</ul>
-			<!--      <ul class="social js-clone-nav">
-        <li><a href="#"><span class="icon-facebook"></span></a></li>
-        <li><a href="#"><span class="icon-twitter"></span></a></li>
-        <li><a href="#"><span class="icon-instagram"></span></a></li>
-      </ul>-->
 		</div>
 	</header>
-      <div style="width: 100%; height: 1100px;">
-<%-- 		<%@include file="introduce.jsp" %> --%>
- <!--                <section class="site-section darken-bg" id="section-home">
-        <div class="container" style="margin-top: 500px;">
-          <div class="row justify-content-center">
-            <div class="col-md-8">
-              <h2 class="heading text-uppercase text-white">Remeber</h2>
-				<h5 class="heading text-uppercase text-white">현재 우리가 있을 수 있게
-					해주신 분들을 기억하고,</h5>
-				<br>
-				<h2 class="heading text-uppercase text-white">Repay</h2>
-				<h5 class="heading text-uppercase text-white">우리의 위치에서 그 분들을 위해
-					할 수 있는 것을 실행함으로써,</h5>
-				<br>
-				<h2 class="heading text-uppercase text-white">Reunion</h2>
-				<h5 class="heading text-uppercase text-white">다시 하나가 되어 어려움을
-					극복하고자 합니다.</h5>
-            </div>
-          </div>
-        </div>
-      </section>
-      </div> 
-       -->
+
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
  		<div class="container-fluid">
 			<!-- 펀딩 프로젝트 -->
-			<div style="height: 1080px; padding-top: 200px;">
+			<div style="height: 1080px; padding-top: 0px;">
 				<section class="row align-items-stretch photos " id="section-funding">
 					<div class="col-12 justify-content-center">
 						<div class="row align-items-stretch" style="">
