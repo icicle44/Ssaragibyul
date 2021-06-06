@@ -130,7 +130,7 @@
 							</div>
 						</div>
                         
-						<div class="col-md-4">
+ 						<div class="col-md-4">
 							<div class="card card-primary">
 								<div class="card-header">
 									<div class="card-title">기부 현황</div>
@@ -145,7 +145,7 @@
 									</div>
 								</div>
 							</div>
-<!-- 							<div class="card">
+							<div class="card">
 								<div class="card-body pb-0">
 									<div class="h1 fw-bold float-right text-warning">+7%</div>
 									<h2 class="mb-2">213</h2>
@@ -154,8 +154,8 @@
 										<div id="lineChart"></div>
 									</div>
 								</div>
-							</div> -->
-						</div>
+							</div> 
+						</div> 
 					</div>
                     
                     <!--쪽지확인-->

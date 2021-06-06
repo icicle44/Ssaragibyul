@@ -6,6 +6,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
@@ -65,6 +66,14 @@ public interface AdminStore {
 	// 기부 삭제하기
 	public int deleteDonation(int donationNo);
 	
+	// 펀딩 신고리스트 카운트
+	public int selectFundingAccListCount();
+	// 기부 신고리스트 카운트
+	public int selectDonationAccListCount();
+	// 펀딩 신고 리스트
+	public ArrayList<FundingReport> selectFundingAccList(PageInfo pi);
+	// 기부 신고 리르트
+	public ArrayList<Donation> selectDonationAccList(PageInfo pi);
 	// 신고 게시물 리스트
 //	public ArrayList<Board> selectReportAll(PageInfo pi);
 //	// 신고 상세보기
@@ -109,8 +118,6 @@ public interface AdminStore {
 	public int selectFundingListCount();
 	public int selectDonationListCount();
 	public int selectVisitListCount();
-
-
 
 
 }

@@ -13,6 +13,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
@@ -106,15 +107,15 @@ public class AdminStoreLogic implements AdminStore{
 	}
 
 	@Override
-	public int deleteFunding(int fundingNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteFunding(int projectNo) {
+		return sqlSession.update("fundingMapper.deleteAdminFunding", projectNo);
 	}
 
 	@Override
 	public ArrayList<Donation> selectAllDoantion(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectAllList", null, rowBounds);
 	}
 
 	@Override
@@ -130,9 +131,8 @@ public class AdminStoreLogic implements AdminStore{
 	}
 
 	@Override
-	public int deleteDonation(int donationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteDonation(int projectNo) {
+		return sqlSession.update("donationMapper.deleteAdminDonation", projectNo);
 	}
 
 //	@Override
@@ -283,6 +283,30 @@ public class AdminStoreLogic implements AdminStore{
 	public ArrayList<VisitStat> selectCountPostVisit() {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("visitMapper.selectCountPostVisit");
+	}
+
+	@Override
+	public int selectFundingAccListCount() {
+		return sqlSession.selectOne("fundingMapper.selectFundingAccListCount");
+	}
+
+	@Override
+	public int selectDonationAccListCount() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public ArrayList<FundingReport> selectFundingAccList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectFundingAccList", null, rowBounds);
+	}
+
+	@Override
+	public ArrayList<Donation> selectDonationAccList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -34,9 +34,11 @@ import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.history.service.HistoryService;
@@ -273,7 +275,7 @@ public class AdminController {
 	public ModelAndView fundingListView(ModelAndView mv,
 										@RequestParam(value="page", required = false) Integer page) {
 		int currentPage = (page != null) ? page :1;
-		int listCount = aService.getListCount();
+		int listCount = aService.getFundingListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<Funding> fList = aService.printAllFunding(pi);
 		if(!fList.isEmpty()) {
@@ -306,38 +308,80 @@ public class AdminController {
 	}
 	
 	// 펀딩 삭제하기
-	@RequestMapping(value="adminFundingDelete.do")
-	public String fundingDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminFundingDelete.do", method = RequestMethod.GET)
+	public String fundingDelete(Model model, @RequestParam("projectNo") int projectNo) {
+		int result = aService.deleteFunding(projectNo);
+		if(result > 0 ) {
+			return "redirect:adminFundingList.do";
+		} else {
+			model.addAttribute("msg", "펀딩 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
 	}
 
 	//기부 리스트 출력
-	@RequestMapping(value="adminDonationListView.do", method = RequestMethod.GET)
-	public ModelAndView doantionListView(ModelAndView mv, Object Pagination) {
-		int cuurentPage = 0;
-		int listCount = dService.getListCount();
-		PageInfo pi = null;
-		ArrayList<Donation> dList = dService.PrintAll(pi);
+	@RequestMapping(value="adminDonationList.do", method = RequestMethod.GET)
+	public ModelAndView doantionListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
+		int cuurentPage = (page != null) ? page : 1;
+		int listCount = aService.getDonationListCount();
+		PageInfo pi = Pagination.getPageInfo(cuurentPage, listCount);
+		ArrayList<Donation> dList = aService.printAllDoantion(pi);
+		if(!dList.isEmpty()) {
+			mv.addObject("dList", dList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminDonationListView");
+		} else {
+			mv.addObject("msg", "펀딩 리스트 출력에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
 		return mv;
 	}
 
 	// 기부 상세보기
-	public Donation donationDetail() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminDonationDelail.do", method = RequestMethod.GET)
+	public ModelAndView donationDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+		// 게시글 상세 조회
+		Donation donation = dService.printOne(projectNo);
+		DonationFile donationFile = dService.printOneFile(projectNo);
+		if ((donation != null)&&(donation != null)) {
+			// 메소드 체이닝 방식
+			mv.addObject("donationFile", donationFile);
+			mv.addObject("donation", donation).setViewName("admin/adminDonationDetail");
+		} else {
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 	// 기부 삭제하기
-	public String donationDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminDonationDelet.do", method = RequestMethod.GET)
+	public String donationDelete(Model model, @RequestParam("projectNo") int projectNo) {
+		int result = aService.deleteDonation(projectNo);
+		if(result > 0 ) {
+			return "redirect : adminDonationList.do";
+		} else {
+			model.addAttribute("msg", "기부프로젝트 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
 	}
 
 	// 신고 게시물 리스트
-	public ModelAndView reportListView() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminFundingAccusationList.do", method = RequestMethod.GET)
+	public ModelAndView reportListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
+		int cuurentPage = (page != null) ? page : 1;
+		int listCount = aService.getFundingAccListCount();
+		PageInfo pi = Pagination.getPageInfo(cuurentPage, listCount);
+		ArrayList<FundingReport> fList = aService.printFundingAccList(pi);
+		if(!fList.isEmpty()) {
+			mv.addObject("faList", fList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminFundingAccusationList");
+		} else {
+			mv.addObject("msg", "펀딩 신고내역 출력에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
 	}
 
 	// 신고 상세보기
@@ -623,7 +667,8 @@ public class AdminController {
 	// 별보러가자 상세보기
 	@RequestMapping(value="adminVisitDetail.do", method = RequestMethod.GET)
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
-		Visit visit = aService.printOneVisit(visitNo);
+		Visit visit = vService.printOne(visitNo);
+				//aService.printOneVisit(visitNo);
 		if(visit != null) {
 			mv.addObject("visit", visit).setViewName("admin/adminVisitDetailView");
 		} else {
@@ -644,7 +689,8 @@ public class AdminController {
 		}
 		
 		// 디비에 데이터 업데이트
-		int result = aService.removeVisit(visitNo);
+		int result = vService.removeVisit(visitNo);
+				//aService.removeVisit(visitNo);
 		if(result > 0) {
 			return "redirect:adminVisitList.do";
 		} else {

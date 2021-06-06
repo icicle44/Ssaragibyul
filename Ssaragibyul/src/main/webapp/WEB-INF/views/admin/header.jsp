@@ -368,13 +368,18 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="adminDonationList.do">
 											<span class="sub-item">기부 관리</span>
 										</a>
 									</li>
 									<li>
+										<a href="adminFundingAccusationList.do">
+											<span class="sub-item">펀딩 신고 관리</span>
+										</a>
+									</li>
+									<li>
 										<a href="#">
-											<span class="sub-item">신고 프로젝트 관리</span>
+											<span class="sub-item">기부 신고 관리</span>
 										</a>
 									</li>
 								</ul>
@@ -416,11 +421,6 @@
 									<li>
 										<a href="adminVisitList.do">
 											<span class="sub-item">별 보러 가자 리스트</span>
-										</a>
-									</li>
-									<li>
-										<a href="#">
-											<span class="sub-item">회원 댓글 관리</span>
 										</a>
 									</li>
 								</ul>

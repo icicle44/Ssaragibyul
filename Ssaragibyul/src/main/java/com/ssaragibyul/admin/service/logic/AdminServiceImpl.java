@@ -12,6 +12,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.message.domain.Message;
@@ -110,15 +111,13 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int deleteFunding(int fundingNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteFunding(int projectNo) {
+		return aStore.deleteFunding(projectNo);
 	}
 
 	@Override
 	public ArrayList<Donation> printAllDoantion(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		return aStore.selectAllDoantion(pi);
 	}
 
 	@Override
@@ -134,9 +133,8 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public int deleteDonation(int donationNo) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int deleteDonation(int projectNo) {
+		return aStore.deleteDonation(projectNo);
 	}
 
 //	@Override
@@ -268,6 +266,27 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<VisitStat> getCountPostVisit() {
 		// TODO Auto-generated method stub
 		return aStore.selectCountPostVisit();
+	}
+
+	@Override
+	public int getFundingAccListCount() {
+		return aStore.selectFundingAccListCount();
+	}
+
+	@Override
+	public int getDonationAccListCount() {
+		return aStore.selectDonationAccListCount();
+	}
+
+	@Override
+	public ArrayList<FundingReport> printFundingAccList(PageInfo pi) {
+		return aStore.selectFundingAccList(pi);
+	}
+
+	@Override
+	public ArrayList<Donation> printDonationAccList(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return aStore.selectDonationAccList(pi);
 	}
 
 
