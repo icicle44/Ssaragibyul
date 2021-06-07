@@ -317,5 +317,9 @@ public class FundingStoreLogic implements FundingStore{
 		return sqlSession.selectOne("memberMapper.seletOneMemberList", member); 
 	}
 
+	public ArrayList<FundingLog> selectMyFunding(Member member) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFunding", member);
+	}
+
 	
 }

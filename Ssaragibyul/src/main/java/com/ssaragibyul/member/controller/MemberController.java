@@ -1,6 +1,7 @@
 package com.ssaragibyul.member.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLike;
+import com.ssaragibyul.funding.domain.FundingLog;
+import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
@@ -34,6 +40,9 @@ public class MemberController {
 	
 	@Autowired
 	private PointService pntService;
+
+	@Autowired
+	private FundingService fService;
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
@@ -172,7 +181,23 @@ public class MemberController {
     }
 	*/
 
-	// 마이페이지 뷰
+//	// 마이페이지 뷰    원본
+//	@RequestMapping(value="myPage.do", method=RequestMethod.GET)
+//	public String myInfoView(Member member, HttpSession session, Model model) {
+//		String userId = ((Member)session.getAttribute("loginUser")).getUserId(); // member 객체로 강제 변환!
+//		Independence independence = mService.mypage(userId);
+//		MyPoint myPoint = pntService.getMyPoint(userId);
+//		if (independence != null) {
+//			model.addAttribute("independence", independence);
+//			if(myPoint != null) {
+//				model.addAttribute("myPoint", myPoint);
+//			}
+//			return "mypage/myPageMain";
+//		}
+//		model.addAttribute("msg","정보 수정 실패");
+//		return "common/errorPage";   
+//	}
+	
 	@RequestMapping(value="myPage.do", method=RequestMethod.GET)
 	public String myInfoView(Member member, HttpSession session, Model model) {
 		String userId = ((Member)session.getAttribute("loginUser")).getUserId(); // member 객체로 강제 변환!
@@ -189,7 +214,6 @@ public class MemberController {
 		return "common/errorPage";   
 	}
 	
-	
 	// 정보 수정 비밀번호 확인 페이지
 	@RequestMapping(value="pwConfirm.do", method=RequestMethod.GET)
 	public String pwConfirm() {
@@ -203,10 +227,22 @@ public class MemberController {
 	}
 	
 	// 참여한 펀딩 프로젝트 페이지
-	@RequestMapping(value="myFunding.do", method=RequestMethod.GET)
-	public String myFundingView(Member member) {
-		return "mypage/myFunding";
-	}
+	@RequestMapping(value="myFunding.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView myFundingView(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		member.setUserId(loginUser.getUserId());
+		
+		ArrayList<FundingLog> myFundingList = fService.printMyFunding(member);
+		if (myFundingList != null) {
+			int fundingCnt = myFundingList.size();
+			mv.addObject("fundingCnt", fundingCnt);
+			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
+		}else{
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}	
 	
 	// 참여한 기부 프로젝트 페이지
 	@RequestMapping(value="myDonation.do", method=RequestMethod.GET)

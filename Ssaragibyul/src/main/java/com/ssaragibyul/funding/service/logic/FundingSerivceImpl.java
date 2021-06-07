@@ -352,4 +352,8 @@ public class FundingSerivceImpl implements FundingService {
 	public Member printMemberList(Member member) {
 		return fStore.seletOneMemberList(member);
 	}
+	
+	public ArrayList<FundingLog> printMyFunding(Member member){
+		return fStore.selectMyFunding(member);
+	}
 }

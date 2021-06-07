@@ -53,6 +53,7 @@
 		<result property="receiverName" column="RECEIVER"></result>
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
 		<result property="sponser" column="SPONSER"></result>
+		<collection property="fundingProject" resultMap="fundingResultMap" />
 	</resultMap>
 <!-- 댓글 테이블  -->
 	<resultMap type="Reply" id="FundingReplyResultMap">
@@ -81,6 +82,11 @@
 		<result property="likeYn" column="LIKE_YN"></result>
 		<result property="projectNo" column="F_PROJECT_NO"></result>
 	</resultMap>
+	   <!--신고하기 관련 관리자  -->
+	<resultMap type="ReportStat" id="reportStatResultMap">
+      <result property="reportDay" column="REPORT_DAY"/>
+      <result property="reportStatCount" column="REPORT_STAT_COUNT"/>
+   </resultMap>
 
 
 <!--펀딩 제안하기 입력 쿼리문 -->
@@ -164,7 +170,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-WHERE LEFT_DATE > 0
+WHERE LEFT_DATE > 0 AND PROJECT_CODE = 0
 </select>  
 
 <select id="selectFundingListEnd" resultMap="fundingResultMap">
@@ -180,7 +186,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-WHERE LEFT_DATE<![CDATA[ <= ]]>0
+WHERE LEFT_DATE<![CDATA[ <= ]]>0  AND PROJECT_CODE = 0
 </select>  
 
 
@@ -198,7 +204,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 6 DESC)
-WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>
+WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]> AND PROJECT_CODE = 0
 </select>  
 
 
@@ -215,7 +221,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 14 DESC)
-WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>
+WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>  AND PROJECT_CODE = 0
 </select>  
 
 
@@ -234,7 +240,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 6 DESC)
-WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>
+WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>  AND PROJECT_CODE = 0
 </select>  
 
 
@@ -256,7 +262,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 14 DESC)
-WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>
+WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]> AND PROJECT_CODE = 0
 </select>  
 
 
@@ -273,7 +279,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>
+WHERE <![CDATA[LEFT_DATE > 0 AND (ROWNUM >= 1 AND ROWNUM <= 6) ]]>  AND PROJECT_CODE = 0
 </select>  
 
 <select id="selectAllFundProjectEndLimit" resultMap="fundingResultMap">
@@ -289,7 +295,7 @@ SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRI
        FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 FROM FUNDING_PROJECT, FUNDING_FILE
 WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
+WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]> AND PROJECT_CODE = 0
 </select>  
 
 
@@ -331,7 +337,7 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 	<!-- 댓글 관련 insertReply -->
 	<!-- 댓글 입력  -->
 	<insert id="insertReply">
-		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },'닉네임', #{contents }, '펀딩상세', SYSTIMESTAMP)
+		INSERT INTO FUNDING_COMMENTS VALUES(SEQ_FUNDINGREPLYNO.NEXTVAL, #{no }, #{userId },#{nick }, #{contents }, '펀딩상세', SYSTIMESTAMP)
 	</insert>
 	<!-- 댓글 출력  -->
 	<select id="selectReplyList" resultMap="FundingReplyResultMap">
@@ -402,7 +408,7 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 			       FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 			FROM FUNDING_PROJECT, FUNDING_FILE
 			WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-			WHERE LEFT_DATE > 0 AND SUBJECT LIKE '%' || #{searchValue } || '%'
+			WHERE LEFT_DATE > 0 AND SUBJECT LIKE '%' || #{searchValue } || '%' AND PROJECT_CODE = 0
 	</select>		 
 		
 		<select id="selectSearchList_2" resultMap="fundingResultMap">
@@ -418,9 +424,35 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
 			       FUNDING_FILE.FILE_SUB2_PATH, FUNDING_FILE.UPLOAD_TIME
 			FROM FUNDING_PROJECT, FUNDING_FILE
 			WHERE FUNDING_PROJECT.F_PROJECT_NO = FUNDING_FILE.F_PROJECT_NO ORDER BY 1 DESC)
-			WHERE LEFT_DATE<![CDATA[ <= ]]>0 AND SUBJECT LIKE '%' || #{searchValue } || '%'
+			WHERE LEFT_DATE<![CDATA[ <= ]]>0 AND SUBJECT LIKE '%' || #{searchValue } || '%' AND PROJECT_CODE = 0
 	</select>		 
 		
+    
+    
+    
+   <select id="selectMyFunding" resultMap="FundingLogResultMap">
+    SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
+    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+    ON(F_PROJECT_NO = F_PROJECT_NO2) 
+    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 1 DESC
+	</select>	
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
              <!--나혜님이 추가한거 -->
    <select id="selectAllList" resultMap="fundingResultMap">
@@ -438,5 +470,43 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]>
        SET PROJECT_CODE = 1
        WHERE F_PROJECT_NO = #{projectNo}
     </update>
+    
+    <select id="selectFundingAccListCount" resultType="_int">
+       SELECT COUNT(*) FROM FUNDING_ACCUSATION WHERE PROCESSING = 'N'
+    </select>
+    
+    <select id="selectFundingAccList" resultMap="FundingReportResultMap">
+       SELECT * FROM FUNDING_ACCUSATION WHERE PROCESSING = 'N' ORDER BY ACCU_FUND_NO DESC
+    </select>
+    
+    <select id="selectOneFundingAcc" resultMap="FundingReportResultMap">
+       SELECT * FROM FUNDING_ACCUSATION WHERE ACCU_FUND_NO = #{accuFundingNo} 
+    </select>
+    
+    <update id="deleteFundingReport" parameterType="_int">
+       UPDATE FUNDING_ACCUSATION SET PROCESSING = 'Y' WHERE F_PROJECT_NO=#{projectNo}
+    </update>
+    
+    <update id="deleteFundingAcc" parameterType="_int">
+       UPDATE FUNDING_PROJECT SET PROJECT_CODE = 1 WHERE F_PROJECT_NO=#{projectNo}
+    </update>
+    
+    <select id="selectCountTodayRepor" resultType="_int">
+       SELECT COUNT(*) FROM FUNDING_ACCUSATION WHERE TO_DATE(ACCUSATION_DATE, 'YY/MM/DD') = TO_DATE(SYSDATE, 'YY/MM/DD')
+    </select>
+    
+    <select id="selectCountReport" resultMap="reportStatResultMap">
+      SELECT DAY_LEVEL, DAY_NAME "REPORT_DAY", NVL(STAT_COUNT, 0) "REPORT_STAT_COUNT" FROM DAY_LEVEL LEFT JOIN (SELECT DAY, COUNT(*) "STAT_COUNT" FROM(
+      SELECT TO_CHAR(ACCUSATION_DATE, 'D') "DAY_ORDER", CASE
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '1' THEN '일'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '2' THEN '월'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '3' THEN '화'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '4' THEN '수'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '5' THEN '목'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '6' THEN '금'
+      WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '7' THEN '토'
+      END "DAY"
+      FROM FUNDING_ACCUSATION ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) ON DAY = DAY_NAME ORDER BY 1       
+    </select>
     
 </mapper>
