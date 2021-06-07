@@ -14,13 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ssaragibyul.common.PageInfo;
-import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.independence.domain.Independence;
+import com.ssaragibyul.independence.domain.Pagination;
 import com.ssaragibyul.independence.service.IndependenceService;
-import com.ssaragibyul.member.domain.Member;
-import com.ssaragibyul.message.domain.Message;
 import com.ssaragibyul.message.service.MessageService;
+import com.ssaragibyul.visit.domain.Visit;
 
 
 @Controller
@@ -64,15 +63,17 @@ public class IndependenceController {
 		return mv;
 	}
 	
-
-	
 	@RequestMapping(value="independenceSearch.do", method=RequestMethod.GET)
 	public String independenceSearch(@ModelAttribute Search search, Model model) {
-		
-		// 2개의 값을 하나에 담아서 보내는 방법
-		// 1. Domain(VO) 클래스 이용
-		// 2. HashMap 사용하기
-
-		return "";
+		ArrayList<Independence> searchList = iService.printSearchAll(search);
+		System.out.println("searchList"+searchList);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("iList", searchList);
+			model.addAttribute("search",search);
+			return "visit/visitSearchList";
+		}else {
+			model.addAttribute("msg", "검색결과가 없습니다");
+			return "common/errorPage";
+		}
 	}
 }

@@ -96,7 +96,7 @@ article.accordion section:target h2 input
   -ms-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  margin-bottom: 500em;
+  margin-bottom: 10
 }
 article.accordion section,
 article.accordion section h2
@@ -135,7 +135,7 @@ article.accordion section h2
 z-index:5;
 }
 .searchform input {
-z-index:5;
+	margin-top: 8em;
 	background:#fefefe;
 	border: none;
 	font:12px/12px 'HelveticaNeue', Helvetica, Arial, sans-serif;

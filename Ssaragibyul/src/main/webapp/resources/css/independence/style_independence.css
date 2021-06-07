@@ -4,15 +4,194 @@ div, article, section {
     box-sizing: border-box;
     font-family: 'Noto Serif KR', serif;
     color: #464646;
-} */
+}   */
 body * {
   box-sizing: border-box;
   text-align: center;
+}	
+
+/* body { overflow: hidden; } */
+h2{
+	font-size:17px;
+}
+/* 아코디언 */
+.search-info{
+	font-famlily:korea;
+	color:#fff;
+	width:25px;
+	float:left;
+	item-align:center;
+	text-align:center;
+	font-size: 30px;
+}
+article.accordion
+{
+  position:relative;
+  display: block;
+  width: 26em;
+  height:10em;
+  margin: 0 auto;
+  background-color: #F5F5F5;
+  overflow: auto;
+  border-radius: 10px;
+}
+article.accordion section
+{
+	padding-top:44px;
+	z-index:100;
+  display: block;
+  float: left;
+  width: 2em;
+  height: 8em;
+  margin: 0em 0 0.5em 0.5em;
+  color: #333;
+/*   overflow: hidden; */
+  border-radius: 3px;
+}
+article.accordion section h2 input
+{
+  font-size: 1em;
+  font-weight: bold;
+  width: 8em;
+  height: 2em;
+  top: 12em;
+  left: 0;
+  text-indent: 1em;
+  padding: 0;
+  margin: 0;
+  color: #ddd;
+  -webkit-transform-origin: 0 0;
+  -moz-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  -o-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+article.accordion section{
+}
+article.accordion section h2 a input
+{
+  display: block;
+  width: 120%;
+  line-height: 1em;
+  text-decoration: none;
+  color: inherit;
+  outline: 0 none;
+}article.accordion section:target
+{
+  width: 15em;
+  padding: 0 1em;
+  color: #333;
+  background-color: #fff;
 }
 
+article.accordion section:target h2 input
+{
+  position: static;
+  font-size: 1.3em;
+  text-indent: 0;
+  color: #333;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  margin-bottom: 10
+}
+article.accordion section,
+article.accordion section h2
+{
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;
+}
+/* 검색창 */
+/*--------------------------------------------------------------
+1.0 - BASE SITE STYLES
+--------------------------------------------------------------*/
+*,*:after,*:before {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+}
+
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+.cf:after {
+    clear:both;
+}
+
+
+/*--------------------------------------------------------------
+2.0 - SEARCH FORM
+--------------------------------------------------------------*/
+.searchform input, .searchform button, form{
+/* 	float: left; */
+z-index:5;
+}
+.searchform input {
+	margin-top: 3em;
+	background:#fefefe;
+	border: none;
+	font:12px/12px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	margin-right: 5px;
+	padding: 10px;
+	width: 216px;
+	box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+	-moz-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px
+}
+.searchform input:focus {
+	outline: none;
+	box-shadow:0 0 4px #0d76be inset;
+	-moz-box-shadow:0 0 4px #0d76be inset;
+	-webkit-box-shadow:0 0 4px #0d76be inset;
+}
+.searchform input::-webkit-input-placeholder {
+ 	font-style: italic;
+ 	line-height: 15px
+}
+
+.searchform input:-moz-placeholder {
+  font-style: italic;
+ 	line-height: 15px
+}
+
+.searchform button {
+		height:30px;
+	vertical-align: inital;
+	background: linear-gradient(#eb5b01, #eb5c50);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34adec', endColorstr='#2691dc',GradientType=0 );
+	border: none;
+	color:#fff;
+	cursor: pointer;
+	font: 13px/13px 'HelveticaNeue', Helvetica, Arial, sans-serif;
+	padding: 10px;
+	width:106px;
+	box-shadow: 0 0 2px #2692dd inset;
+	-moz-box-shadow: 0 0 2px #2692dd inset;
+	-webkit-box-shadow: 0 0 2px #2692dd inset;
+  border-radius: 9px;
+  -moz-border-radius: 9px;
+  -webkit-border-radius: 9px;
+}
+.searchform button:hover {
+	opacity:.9;
+}
+/* 기존 */
 .container{
-	margin-top:20em;
-	padding-top:20em;
 }
 .header {
   background-color: #EB5C01;
@@ -36,8 +215,11 @@ body * {
 
 .contents{
 	float:right;
+	padding-top:0;
 }
-
+.search{
+	background: #464646;
+}
 .search, .intro, .table-users {
   width:100%;
   height: auto;
@@ -49,21 +231,20 @@ body * {
   overflow: hidden;
 }
 .contents{
-	padding: 6rem;
+	padding-top: 6rem;
 }
 table {
-
   width: 100%;
   heith: 80%;
 }
 table th{
-	color: black;
-  padding: 15px;
+	color: #286267;
+  padding: 05px;
   font-size: 15px;
 } 
 table td{
   color: #2b686e;
-  padding: 8px;
+  padding: 5px;
 }
 table td {
   font-size: 12px;
@@ -195,4 +376,4 @@ td{
     box-shadow: none;
     overflow: visible;
   }
-}
+  
