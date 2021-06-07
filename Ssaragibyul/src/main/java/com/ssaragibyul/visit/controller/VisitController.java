@@ -323,7 +323,7 @@ public class VisitController {
 		System.out.println("좋아요 수 result" + result);
 		return result+"";
 	}
-	// 검색
+//======================== 검색
 	@RequestMapping(value="visitSearch.do", method=RequestMethod.POST)
 	public String visitSearch(@ModelAttribute Search search, Model model) {
 		ArrayList<Visit> searchList = vService.printSearchAll(search);

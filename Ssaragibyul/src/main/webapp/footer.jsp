@@ -34,19 +34,6 @@
 		      </ul>
 		      </div>
 		</div>
-		<br>
-		<div class="row justify-content-center">
-			<div class="col-md-12 text-center">
-				<p style="font-size: 10px;">
-					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-					Copyright &copy;
-					<script>document.write(new Date().getFullYear());</script>
-					All rights reserved | made <i class="icon-heart text-danger" aria-hidden="true"></i> 
-					by <a href="https://colorlib.com" target="_blank">Spectrum</a>
-					Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
-				</p>
-			</div>
-		</div>
    </div>
    
    <!-- 문의하기(모든페이지적용) -->

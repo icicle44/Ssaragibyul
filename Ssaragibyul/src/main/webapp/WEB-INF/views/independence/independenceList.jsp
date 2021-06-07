@@ -20,23 +20,61 @@
 		<a href="#">별들의 발자취</a><hr>
 		<a href="visitList.do">별 보러 가자</a><hr>
 	</section>
-
 	<section class="contents col-md-8">
-		<div class="intro">[독립유공자 공적조서]는</div>
-		<div class="search">
-		검색창
+	  <div class="search">
+		<article class="accordion">
+		  <section id="acc1">
+		    <h2><a href="#acc1">성명</a></h2>
+		    <form class="searchform cf" id="form1">
+			  <input type="text" placeholder="성명을 입력해주세요">
+			  <button type="submit">검색</button>
+			</form>
+		  </section>
+		  
+		  <section id="acc2">
+		    <h2><a href="#acc2">운동계열</a></h2>
+		    <form class="searchform cf" id="form2">
+			  <input type="text" placeholder="운동계열을 입력해주세요">
+			  <button type="submit">검색</button>
+			</form>
+		  </section>
+		  
+		  <section id="acc3">
+		    <h2><a href="#acc3">포상연도</a></h2>
+		    <form class="searchform cf">
+			  <input type="text" placeholder="포상연도를 입력해주세요">
+			  <button type="submit">검색</button>
+			</form>
+		  </section>
+		  
+		  <section id="acc4">
+		    <h2><a href="#acc4">포상훈격</a></h2>
+		    <form class="searchform cf">
+			  <input type="text" placeholder="포상훈격을 입력해주세요">
+			  <button type="submit">검색</button>
+			</form>
+		  </section>
+		  
+		  <section id="acc5">
+		    <h2><a href="#acc5">본적</a></h2>
+		    <form class="searchform cf">
+			  <input type="text" placeholder="본적을 입력해주세요">
+			  <button type="submit">검색</button>
+			</form>
+		  </section>
+		</article>
 		</div>
  		<div class="table-users">
 			<table cellspacing="0">
 				<tr>
-					<th>번호</th>
-					<th>성명</th>
-					<th>한자명</th>
-					<th>생존연도</th>
-					<th>운동계열</th>
-					<th>포상년도</th>
-					<th>포상훈격</th>
-					<th>본적</th>
+					<th><b>번호</b></th>
+					<th><b>성명</b></th>
+					<th><b>한자명</b></th>
+					<th><b>생존연도</b></th>
+					<th><b>운동계열</b></th>
+					<th><b>포상년도</b></th>
+					<th><b>포상훈격</b></th>
+					<th><b>본적</b></th>
 				</tr>
 				<c:forEach items="${iList }" var="list">
 				<tr>
@@ -156,8 +194,13 @@
 	</section>
 </div>
 <script>
-$("div").on("click", function(){
-	alert($("this").attr('class'));
+$('html, body').css({'overflow': 'hidden', 'height': '100%'});
+$('#element').on('scroll touchmove mousewheel', function(event) {
+event.preventDefault();
+event.stopPropagation();
+return false;
+}); 
+
 	
 </script>
 </body>
