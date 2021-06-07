@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -24,9 +25,91 @@
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
 
 <link rel="stylesheet" href="/resources/css/style.css">
-
+<link rel="stylesheet" href="/resources/css/styleFundingList.css">
 </head>
+<style>
 
+.display {
+	margin:auto;
+	width: 402px;
+	margin-bottom: 30px;
+	padding: 10px;
+	font-size:12px;
+}
+#frame{
+	width: 550px;
+	height : 550px;
+}
+.gridmain > * {
+  float: left;  
+  width: 30%;
+  height: 30%;
+  font-size:12px;
+}
+.btn{
+margin: auto;
+}
+.#name_css{
+	text-align: left; 
+	padding-right:10px; 
+	font-weight:bold; 
+	font-size:12px; 
+	color:DimGray;
+}
+.nothing{
+ color:white;
+}
+#bar_td{
+	text-align: left; 
+	margin:auto;
+}
+#svg{
+	height:2px; 
+	width: 350px;
+}
+#dday_css{
+	float:left; 
+	width : 50%;
+	font-size:12px;
+}
+#sum_css{
+	float:right;
+	width : 50%;
+	text-align: right; 
+	font-size:12px;
+}
+.select{
+	float:right;
+}
+/* #head{
+	width : 1547px;
+} */
+#pj_search{
+width : 1540px;
+}
+#frmpj{
+}
+.scan{
+	float:right;
+}
+#headFont{
+	font-size:30px;
+}
+#between-blank {
+	height: 100px;
+}
+.pro-title {
+	padding-left: 80px;
+	padding-bottom: 40px;
+	/* padding-top: 30px; */
+	font-family: 'Noto Serif KR';
+}
+/* .container-fluid {
+	position: relative;
+	top: -100px;
+} */
+
+</style>
 
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -63,15 +146,19 @@
 	<main class="main-content">
  		<div class="container-fluid">
 			<!-- 펀딩 프로젝트 -->
+				
 			<div style="height: 1080px; padding-top: 0px;">
+				
 				<section class="row align-items-stretch photos " id="section-funding">
+				<h3 class="pro-title">펀딩 프로젝트</h3>
 					<div class="col-12 justify-content-center">
+				
 						<div class="row align-items-stretch" style="">
 
 
 							<!-- 펀딩 프로젝트-->
 
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+<!-- 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 								<a href="/resources/img/images/img_7.jpg"
 									class="d-block photo-item" data-fancybox="gallery"> <img
 									src="/resources/img/images/img_7.jpg" alt="Image"
@@ -141,18 +228,76 @@
 									</div>
 								</a>
 								<p>펀딩 프로젝트 이름</p>
-							</div>
+							</div> -->
+			
+		 <c:forEach var="p" items="${fListandFile}" varStatus="status" begin="0" end="5"> 
+		 
+			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
+			<table class="display" id="example">
+				<tr>
+					<td> 
+					    <a href="resources/upLoadFile/${p.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
+						<img src="resources/upLoadFile/${p.fundingFile.fileMainName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
+						<div class="photo-text-more">
+						<span class="icon icon-search">${p.subjectName}"</span>
+						</div></a></td>
+		 			</tr>
+		 			<tr>
+						<td align = "right"><img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${p.likeCount}</span></td>
+					</tr>
+					<tr>
+						<td>
+						<c:url var="fDetail" value="fundingDetail.do">
+						<c:param name="projectNo" value="${p.projectNo }"></c:param>
+						</c:url> 
+						<a href="${fDetail }" style="font-size : 1.5em">${p.subjectName }</a>
+						</td>
+					</tr>
+				 <tr>
+				<td colspan="2" id="bar_td">
+							<c:if test="${p.percent >99}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+								</svg>
+							</c:if>
+			
+							<c:if test="${p.percent < 100}">
+								<svg id="svg">
+									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+									<rect x="0" y="0" height="2" width="${p.percent}%" fill="#FF8000"></rect>
+								</svg>
+							</c:if>
+						</td>
+					</tr>
+				    <tr>
+						<td id="dday_css">
+						<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
+						<c:if test="${p.leftDate < 1}"><b>마감</b></c:if>
+						<c:if test="${p.leftDate >= 1}"><b>${p.leftDate}</b>일 남음</c:if>
+						</td>
+						<td id="sum_css"><b><fmt:formatNumber value="${p.sumMoney}" pattern="#,###"/>원 , </b>
+						<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${p.percent}%</span>
+					</td>
+					</tr> 
+				</table>
+				</div>
+			 </c:forEach> 							
 						</div>
 					</div>
 				</section>
 				<!-- #section-funding -->
-			</div>
-			<!-- 기부 프로젝트 -->
+
+			<div id="between-blank"></div>
+			<!-- 기부 프로젝트 -->	
+			
 			<section class="row align-items-stretch photos" id="section-donation">
+			<h3 class="pro-title">기부 프로젝트</h3>
 				<div class="col-12">
 					<div class="row align-items-stretch">
 
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+						<!-- <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 							<a href="/resources/img/images/img_4.jpg"
 								class="d-block photo-item" data-fancybox="gallery"> <img
 								src="/resources/img/images/img_4.jpg" alt="Image"
@@ -225,8 +370,67 @@
 								</div>
 							</a>
 							<p>기부 프로젝트 이름</p>
-						</div>
-
+						</div> -->
+				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
+								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
+									<table class="display" id="example">
+										<tr>
+											<td> 
+												<a href="resources/dUpLoadFiles/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
+													<img src="resources/dUpLoadFiles/${d.donationFile.fileName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
+													<div class="photo-text-more">
+														<span class="icon icon-search">${d.subjectName}"</span>
+													</div>
+												</a>
+											</td>
+										</tr>
+										<tr>
+											<td align = "right">
+												<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+												<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<c:url var="dDetail" value="donationDetail.do">
+													<c:param name="projectNo" value="${d.projectNo }"></c:param>
+												</c:url> 
+												<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2" id="bar_td">
+												<c:if test="${d.percent >99}">
+													<svg id="svg">
+														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+														<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+													</svg>
+												</c:if>
+										
+												<c:if test="${d.percent < 100}">
+													<svg id="svg">
+														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+														<rect x="0" y="0" height="2" width="${d.percent}%" fill="#FF8000"></rect>
+													</svg>
+												</c:if>
+											</td>
+										</tr>
+									    <tr>
+											<td id="dday_css">
+												<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
+												<c:if test="${d.leftDate < 1}"><b>마감</b></c:if>
+												<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
+											</td>
+											<td id="sum_css">
+												<b>
+													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
+												</b>
+												<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${d.percent}%</span>
+											</td>
+										</tr> 
+									</table>
+								</div>
+			 				</c:forEach> 
 
 					</div>
 
@@ -298,7 +502,7 @@
 						<p class="lead text-white mb-5" data-aos="fade-up"
 							data-aos-delay="100">당신의 마음을 함께 해주세요.</p>
 						<p data-aos="fade-up" data-aos-delay="100">
-							<a href="#section-contact"
+							<a href="suggestPage.do"
 								class="btn btn-primary btn-md smoothscroll">제안하기</a>
 						</p>
 					</div>
@@ -407,7 +611,8 @@
 					</div>
 				</div>
 			</section>
-
+			</div>
+		</div>
  		<%@include file="../../../footer.jsp" %>
 	</main>
 
