@@ -230,7 +230,7 @@
 	<!-- 댓글 작성 -->
 	<insert id="insertReply">
 		INSERT INTO 
-		DONATION_COMMENTS VALUES(SEQ_DONATION_REPLY_NO.NEXTVAL,  #{userId },'닉네임', #{contents }, '기부상세', SYSDATE, #{no })
+		DONATION_COMMENTS VALUES(SEQ_DONATION_REPLY_NO.NEXTVAL, #{userId }, #{nick }, #{contents }, '기부상세', SYSDATE, #{no })
 	</insert>
 	
 	<!-- 댓글 목록 출력 -->

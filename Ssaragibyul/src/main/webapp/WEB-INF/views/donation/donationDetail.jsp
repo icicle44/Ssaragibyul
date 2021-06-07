@@ -481,7 +481,7 @@ margin-left: 100px;
 							$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
 							$btnArea = $("<td>")
 							.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");return false;'>수정 </a>")							
-							.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");'> 삭제</a>");
+							.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");return false;'> 삭제</a>");
 							$tr.append($rWriter);
 							$tr.append($rContent);
 							$tr.append($rCreateDate);
