@@ -83,15 +83,6 @@
     <input type="submit" class="getstarted" value="다음단계">
     </form>
 	
-	  <% String userid="Banda";%>
-    <form action="B.jsp" method="post">
-    <%
-    session.setAttribute("userId", userid);
-        %>
-        <input type="submit"
-                            value="Login">
-    </form>
-	
 	
 	<br><br><br><br><br><br><br><br><br><br>
  		<%@include file="../../../footer.jsp" %>

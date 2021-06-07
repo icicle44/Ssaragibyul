@@ -113,12 +113,9 @@
                         </tr>
                     </table>
                  </div>
-                 ${myFundingList[0].doFundNo }, ${myFundingList[0].fundingProject.subjectName}, ${myFundingList[0].fundingProject.fundingFile.fileMainName},
-                 ${Math.round((myFundingList[0].fundingProject.sumMoney / myFundingList[0].fundingProject.goalMoney) * 100)}
-     <%--           ,${ }  --%>
+                 ${myFundingList[0].doFundNo }, ${myFundingList[0].fundingProject.subjectName}, ${myFundingList[0].fundingProject.fundingFile.fileMainName}
                  
-                 TRUNC(finDate) - TRUNC(SYSDATE) 
-                 ${fundingCnt}
+                 
                 </form>
             </div>
         </div>

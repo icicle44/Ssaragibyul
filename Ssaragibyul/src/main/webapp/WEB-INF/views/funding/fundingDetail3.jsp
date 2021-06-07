@@ -340,16 +340,13 @@ margin-left: 100px;
 					    </c:if>
 		
 					
+					 <br>
+					
 					<b class = "contents">펀딩 시작일 : ${funding.startDate }</b>
 						<b class = "contents">펀딩 종료일 : ${funding.finDate }</b>
 							<b class = "contents">예상 배송일 : ${funding.deleiveryDate }</b>
 				
 					</div>
-					
-					     <c:if test="${ loginUser.userId == funding.userId }">
-                                <a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
-                             </c:if><!-- ?? -->
-   
 					
 	
 		</div>
@@ -462,7 +459,7 @@ margin-left: 100px;
 			});
 		});
 		
-		function getReplyList(projectNo) {
+		function getReplyList() {
 			var projectNo = '${funding.projectNo }'
 			$.ajax({
 				url : "commentList.do",  
@@ -490,9 +487,7 @@ margin-left: 100px;
 							$tr.append($rWriter);
 							$tr.append($rContent);
 							$tr.append($rCreateDate);
-							if('${loginUser.userId}'===data[i].userId){
-								$tr.append($btnArea);
-								}
+							$tr.append($btnArea);
 							$tableBody.append($tr);
 						}
 					}

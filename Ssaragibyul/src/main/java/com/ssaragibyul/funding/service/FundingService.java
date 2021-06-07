@@ -116,6 +116,8 @@ public interface FundingService {
 
 	public Member printMemberList(Member member);
 
+	public ArrayList<FundingLog> printMyFunding(Member member);
+
 
 
 

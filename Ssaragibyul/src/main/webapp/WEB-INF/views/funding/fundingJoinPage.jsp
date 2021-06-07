@@ -90,8 +90,9 @@
 					${funding.productName }<br>
 					${funding.productContent }<br>
 					
-					<input id="sendNumber" type="number" name="" max="${funding.optionLimit }"> 한계 : ${funding.optionLimit }<br>
-				
+					<input id="sendNumber" type="number" name="" max="${funding.optionLimit }"> 한계 : <span id="optionLimit">"${funding.optionLimit }</span><br>
+					사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span>
+					
 				<br><br><br><br><br><br><br>
 			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
 			</section>
@@ -105,9 +106,12 @@
 				개 선택<br>
 				<input class="getResult1" type="number" name="cal">원 리워드<br>
 				추가로 후원하기
-				<input type="number" id="addPrice" name="cal">원
-			
+				<input type="number" id="addPrice" name="cal">원<br>
+				
+				사용 가능한 포인트: <span id="myPoint-total2">${sessionScope.myPoint.total}</span>
+				
 				<br><br><br><br><br><br><br>
+				
 			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">펀딩하기</a>
 			</section>
 
@@ -115,11 +119,7 @@
 
 			<section id="sectionSuggest3">
 			<br><br><br><br>
-			 <% int totalMoney = 0;%>
 				<form action="fundingJoinComplete.do" method="post">
-				    <%
-   						 session.setAttribute("totalMoney", totalMoney);
-     					  	 %>
 					<input type="text" name="qunatity" class="getNumber"> 선택  리워드 개수<br>
 					<input type="text" name="" class="getResult1"> 리워드 금액<br>
 					<input type="text" name="" class="addNumber"> 추가 후원 금액<br>
@@ -129,8 +129,7 @@
 	   				<input type="text" name="receiverAddr">주소<br>
 	   				<input type="text" name="receiverName">이름<br>
 	   				<input type="text" name="receiverPhone">번호<br>
-	   				<input type="text" name="fundingPoint" class="getResult3">결졔 예약 하시겠습니까?<br>
-	   				<input type="number" name="totalMoney" class="getResult3" value="${totalMoney }"><br>
+	   				<input type="text" name="fundingPoint" class="getResult3">포인트 사용 하시겠습니까?<br>
 	   				
 	    			<input type="submit" class="getstarted" value="예약완료">
 	    			

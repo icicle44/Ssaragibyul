@@ -111,6 +111,7 @@ public interface FundingStore {
 	public int deleteProjectLike(FundingLike fundingLike);
 	public ArrayList<FundingLog> selectFundingLogOne(int projectNo);
 	public Member seletOneMemberList(Member member);
+	public ArrayList<FundingLog> selectMyFunding(Member member);
 }
 
 

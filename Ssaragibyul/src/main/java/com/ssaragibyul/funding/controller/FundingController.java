@@ -270,39 +270,36 @@ public class FundingController {
 				 return "common/errorPage";
 			 }
 		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
-
-	@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,			
-								  HttpSession session, @ModelAttribute Member member) {
-		Member loginUser = (Member) session.getAttribute("loginUser");
-		member.setUserId(loginUser.getUserId());
-		
-		fService.addreadCountHit(projectNo); 
-		
-		Funding funding = fService.printOne(projectNo);
-		
-		FundingFile fundingFile = fService.printOneFile(projectNo);
-		
-		FundingLog fundingLog = fService.printSponserNumber(projectNo);
-
-		ArrayList<FundingLike>  fundingLikeUser = fService.printOneLike(projectNo);
-		
-		Member memberlist = fService.printMemberList(member);
-		
-		if ((funding != null)&&(fundingFile != null)) {
-			mv.addObject("fundingLikeUser", fundingLikeUser);
-			mv.addObject("fundingLog", fundingLog);
-			mv.addObject("fundingFile", fundingFile);
-			mv.addObject("memberlist", memberlist);
-			mv.addObject("funding", funding).setViewName("funding/fundingDetail");
-		} else {
-			mv.addObject("msg", "펀딩 상세 조회 실패!");
-			mv.setViewName("common/errorPage");
-		}
-		return mv;
-	}			//펀딩 상세 페이지
-
-
+		 
+			@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
+			public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,			
+										  HttpSession session, @ModelAttribute Member member) {
+				Member loginUser = (Member) session.getAttribute("loginUser");
+				if(loginUser != null) {
+				member.setUserId(loginUser.getUserId());
+				}else {
+					System.out.println("아이디없당. 근데 접속된당~");
+				}
+				
+				fService.addreadCountHit(projectNo); 
+				Funding funding = fService.printOne(projectNo);
+				FundingFile fundingFile = fService.printOneFile(projectNo);
+				FundingLog fundingLog = fService.printSponserNumber(projectNo);
+				ArrayList<FundingLike>  fundingLikeUser = fService.printOneLike(projectNo);
+				Member memberlist = fService.printMemberList(member);
+				
+				if ((funding != null)&&(fundingFile != null)) {
+					mv.addObject("fundingLikeUser", fundingLikeUser);
+					mv.addObject("fundingLog", fundingLog);
+					mv.addObject("fundingFile", fundingFile);
+					mv.addObject("memberlist", memberlist);
+					mv.addObject("funding", funding).setViewName("funding/fundingDetail");
+				} else {
+					mv.addObject("msg", "펀딩 상세 조회 실패!");
+					mv.setViewName("common/errorPage");
+				}
+					return mv;
+				}		
 	
 	 @RequestMapping(value="fundingAccusation.do", method=RequestMethod.POST)
 		public ModelAndView fundingAccusation(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
@@ -319,10 +316,10 @@ public class FundingController {
 		}		//펀딩 신고하기 페이지로 이동.
 	 
 	 @RequestMapping(value="accusationRegister.do", method = RequestMethod.POST )
-	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport) { 
+	 public String accusation_ReportRegister(@ModelAttribute FundingReport fundingReport, @RequestParam("projectNo") int projectNo) { 
 		 int result = fService.accusationRegister(fundingReport);
 		 if(result > 0) {
-			 return "funding/fundingList";
+			 return "redirect:fundingDetail.do?projectNo="+projectNo;
 		 }else {
 			 return "common/errorPage";
 		 }

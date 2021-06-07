@@ -15,6 +15,8 @@ public class FundingLog {
 	private String receiverPhone;
 	private int sponser;
 	
+	private Funding fundingProject;
+	
 	
 	public FundingLog() {}
 	
@@ -27,6 +29,50 @@ public class FundingLog {
 	
 	
 	
+
+	
+	
+	public FundingLog(int doFundNo, String userId, int fundingPoint, int qunatity, Date fundDate, int cancleYn,
+			int projectNo, String receiverAddr, String receiverName, String receiverPhone, Funding fundingProject) {
+		super();
+		this.doFundNo = doFundNo;
+		this.userId = userId;
+		this.fundingPoint = fundingPoint;
+		this.qunatity = qunatity;
+		this.fundDate = fundDate;
+		this.cancleYn = cancleYn;
+		this.projectNo = projectNo;
+		this.receiverAddr = receiverAddr;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.fundingProject = fundingProject;
+	}
+	
+	
+	
+	public FundingLog(int doFundNo, String userId, int fundingPoint, int qunatity, Date fundDate, int cancleYn,
+			int projectNo, String receiverAddr, String receiverName, String receiverPhone, int sponser,
+			Funding fundingProject) {
+		super();
+		this.doFundNo = doFundNo;
+		this.userId = userId;
+		this.fundingPoint = fundingPoint;
+		this.qunatity = qunatity;
+		this.fundDate = fundDate;
+		this.cancleYn = cancleYn;
+		this.projectNo = projectNo;
+		this.receiverAddr = receiverAddr;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.sponser = sponser;
+		this.fundingProject = fundingProject;
+	}
+
+
+
+
+
+
 	public FundingLog(int doFundNo, String userId, int fundingPoint, int qunatity, Date fundDate, int cancleYn,
 			int projectNo, String receiverAddr, String receiverName, String receiverPhone, int sponser) {
 		super();
@@ -42,10 +88,6 @@ public class FundingLog {
 		this.receiverPhone = receiverPhone;
 		this.sponser = sponser;
 	}
-
-
-
-
 
 
 
@@ -138,12 +180,32 @@ public class FundingLog {
 
 	
 	
+	public Funding getFundingProject() {
+		return fundingProject;
+	}
+
+
+	public void setFundingProject(Funding fundingProject) {
+		this.fundingProject = fundingProject;
+	}
+
+
+
 	@Override
 	public String toString() {
 		return "FundingLog [doFundNo=" + doFundNo + ", userId=" + userId + ", fundingPoint=" + fundingPoint
 				+ ", qunatity=" + qunatity + ", fundDate=" + fundDate + ", cancleYn=" + cancleYn + ", projectNo="
 				+ projectNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", sponser=" + sponser + "]";
+				+ receiverPhone + ", sponser=" + sponser + ", fundingProject=" + fundingProject + "]";
 	}
+
+	
+//	@Override
+//	public String toString() {
+//		return "FundingLog [doFundNo=" + doFundNo + ", userId=" + userId + ", fundingPoint=" + fundingPoint
+//				+ ", qunatity=" + qunatity + ", fundDate=" + fundDate + ", cancleYn=" + cancleYn + ", projectNo="
+//				+ projectNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
+//				+ receiverPhone + ", sponser=" + sponser + "]";
+//	}
 
 }
