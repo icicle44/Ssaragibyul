@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
+import com.ssaragibyul.member.domain.Member;
 
 public interface DonationStore{
 	public int addLikeCount(int dProjectNo, DonationLike dLike);
@@ -57,6 +59,8 @@ public interface DonationStore{
 	
 	public int updateProject_SumMonet(Donation donation);
 	
+	public Member selectOneMemberList(Member member);
+	
 	////////////
 	
 	// 후원자 수 카운트
@@ -82,6 +86,19 @@ public interface DonationStore{
 	
 	// 신고하기
 	public int accusationInsert(DonationReport donationReport);
+	
+	//////// 검색 ////////
+	public ArrayList<Donation> selectSearchList_1(Search search);
+
+	public ArrayList<Donation> selectSearchList_2(Search search);
+
+	public ArrayList<Donation> printAllProjectByLike();
+
+	public ArrayList<Donation> printAllProjectByMoneyEnd();
+	
+	public ArrayList<Donation> printAllProjectByLikeEnd();
+	//////////////////////
+	
 	
 	public ArrayList<Donation> PrintAll(PageInfo pi);
 
@@ -118,5 +135,6 @@ public interface DonationStore{
 	public int removeLike(int dProjectNo, DonationLike dLike);
 
 
-	
+
+
 }

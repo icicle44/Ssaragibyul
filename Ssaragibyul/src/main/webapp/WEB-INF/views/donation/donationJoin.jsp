@@ -64,8 +64,8 @@
 		<!-- style="color: #EB5C01" -->
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a href="#sectionSuggest1" class="nav-link">1. 결제 금액 선택</a></li>
-				<li><a href="#sectionSuggest2" class="nav-link">2. 정보 입력</a></li>
+				<li><a href="#sectionSuggest1" class="nav-link">1. 펀딩 리워드 선택</a></li>
+				<li><a href="#sectionSuggest2" class="nav-link">2. 리워드 선택 확인</a></li>
 			</ul>
 		</div>
 	</header>
@@ -73,33 +73,37 @@
 
 	<main class="main-content">
 		<br><br><br><br><br><br><br><br>
-			
-			<section id="sectionSuggest2"> <br><br><br><br>
 
-			<input class="getResult1" type="number" name="cal">원 기부하기<br>
-			
-			<br><br><br><br><br><br><br>
-			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">기부하기</a>
+
+			<section id="sectionSuggest1">
+			<br><br><br><br>
+				<h2>기부하기</h2>
+				<input type="number" id="price" name="cal">원<br>
+				
+				사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span>
+				
+				<br><br><br><br><br><br><br>
+				
+			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">펀딩하기</a>
 			</section>
 
-			<br><br><br><br><br><br><br><br><br>
+		<br><br><br><br><br><br><br><br><br>
 
-			<section id="sectionSuggest3">
+			<section id="sectionSuggest2">
 			<br><br><br><br>
 				<form action="donationJoinComplete.do" method="post">
-					<input type="text" name="" class="getResult1"> 리워드 금액<br>
 	    			<input type="hidden" name="projectNo" value="${donation.projectNo }"><br>
 	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br>
 	   				<input type="text" name="sumMoney" class="getResult2"> 최종금액 <br>
 	   				<input type="text" name="receiverName">이름<br>
 	   				<input type="text" name="receiverPhone">번호<br>
-	   				<input type="text" name="fundingPoint" class="getResult3">결졔 예약 하시겠습니까?<br>
-					<input type="number" name="totalMoney" class="getResult3" value="${totalMoney }"><br>
+	   				<input type="text" name="fundingPoint" class="getResult3">포인트 사용 하시겠습니까?<br>
 	   				
-	    			<input type="submit" class="getstarted" value="예약완료">
+	    			<input type="submit" class="getstarted" value="기부하기">
+	    			
     			</form>
 			</section>
-			<br><br><br><br><br><br>
+		<br><br><br><br><br><br>
 
 		<%@include file="../../../footer.jsp"%>
 	</main>

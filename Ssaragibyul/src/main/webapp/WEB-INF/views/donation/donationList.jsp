@@ -128,9 +128,9 @@ width : 1540px;
 		   			<div id="pj_search">
 		   		   	<select id = "chose1" class="select" onchange="location.href=this.value">
 	   		   	 		<option value = "" selected>선택</option>
-			       		<option value = "doantionList.do">최신글 순</option>
-				       	<option value = "doantionSelectMoney.do">모금액 순</option>
-				       	<option value = "doantionSelectLike.do">좋아요 순</option>
+			       		<option value = "donationList.do">최신글 순</option>
+				       	<option value = "donationSelectMoney.do">모금액 순</option>
+				       	<option value = "donationSelectLike.do">좋아요 순</option>
 					</select>
 					<form action="donationSearch_1.do" method="get" >
 						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
@@ -193,6 +193,7 @@ width : 1540px;
 												<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
 											</td>
 											<td id="sum_css">
+											${d.sumMoney}
 												<b>
 													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
 												</b>
@@ -223,9 +224,9 @@ width : 1540px;
 		    	<div id="pj_search">
 		    		<select id = "chose2" class="select" onchange="location.href=this.value">
 	   		   	 		<option value = "" selected>선택</option>
-			       		<option value = "doantionList.do">최신글 순</option>
-				       	<option value = "doantionSelectMoney.do">모금액 순</option>
-				       	<option value = "doantionSelectLike.do">좋아요 순</option>
+			       		<option value = "donationList.do"">최신글 순</option>
+				       	<option value = "donationSelectMoneyEnd.do">모금액 순</option>
+				       	<option value = "donationSelectLikeEnd.do">좋아요 순</option>
 					</select>
 					<form action="donationSearch_2.do" method="get" >
 						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
@@ -238,7 +239,7 @@ width : 1540px;
 					<div class="row align-items-stretch">
 						<div class="gridmain">
 	
-				 		<c:forEach var="d" items="${dListandFileEnd}" varStatus="status"> 
+				 		<c:forEach var="e" items="${dListandFileEnd}" varStatus="status"> 
 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
 								<table class="a_pj">
 									<tr>

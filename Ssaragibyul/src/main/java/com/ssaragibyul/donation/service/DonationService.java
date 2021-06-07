@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
+import com.ssaragibyul.member.domain.Member;
 
 public interface DonationService {
 
@@ -35,6 +37,8 @@ public interface DonationService {
 
 	public int addReadCountHit(int projectNo); // 기부 상세
 	
+	public Member printMemberList(Member member); // 기부 상세
+	
 	public DonationLog printSponserNumber(int projectNo); // 후원자 수
 	
 	public int registerDonationLog(Donation donation, DonationLog donationLog); // 기부 참여
@@ -52,6 +56,16 @@ public interface DonationService {
 	public ArrayList<DonationLog> printDonationLogOne(int projectNo); // 기부 참여하기
 	
 	public int accusationRegister(DonationReport donationReport); // 신고하기
+	
+	public ArrayList<Donation> printSearchAll_1(Search search); // 검색
+	
+	public ArrayList<Donation> printSearchAll_2(Search search); // 검색
+
+	public ArrayList<Donation> printAllProjectForLike(); // 검색 - 진행중인 프로젝트 : 좋아요순
+	
+	public ArrayList<Donation> printAllProjectEndForMoeny(); // 검색 - 종료된 프로젝트 : 금액순
+	
+	public ArrayList<Donation> printAllProjectEndForLike(); // 검색 - 종료된 프로젝트 : 좋아요순
 	
 	public int getListCount();
 

@@ -1,6 +1,5 @@
 package com.ssaragibyul.donation.controller;
 
-import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
@@ -21,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
@@ -33,6 +34,7 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
+import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
 
 @Controller
@@ -40,6 +42,9 @@ public class DonationController {
 
 	@Autowired
 	private DonationService dService;
+	
+	@Autowired
+	private FundingService fService;
 	
 	// 기부 리스트 보여주기: 테이블 2개 조인해서 불러오는 것
 	@RequestMapping(value = "donationList.do", method = RequestMethod.GET) 
@@ -206,23 +211,27 @@ public class DonationController {
 	
 	// 기부 상세 페이지 
 	@RequestMapping(value = "donationDetail.do", method = RequestMethod.GET)
-	public ModelAndView donationdetail(ModelAndView mv, @RequestParam("projectNo") int projectNo) {
+	public ModelAndView donationdetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,
+										HttpSession session, @ModelAttribute Member member) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		if(loginUser != null) {
+		member.setUserId(loginUser.getUserId());
+		}else {
+			System.out.println("아이디X");
+		}
 		
 		dService.addReadCountHit(projectNo);
-		
 		Donation donation = dService.printOne(projectNo);
-		System.out.println(donation);
-		
 		DonationFile donationFile = dService.printOneFile(projectNo);
-		
 		DonationLog donationLog = dService.printSponserNumber(projectNo);
-		
 		ArrayList<DonationLike> donationLikeUser = dService.printOneLike(projectNo);
+		Member memberlist = fService.printMemberList(member);
 		
 		if ((donation != null)&&(donationFile != null)) {
 			mv.addObject("donationFile", donationFile);
 			mv.addObject("donationLikeUser", donationLikeUser);
 			mv.addObject("donationLog", donationLog);
+			mv.addObject("memberlist", memberlist);
 			mv.addObject("donation", donation).setViewName("donation/donationDetail");
 		} else {
 			mv.addObject("msg", "기부 상세 조회 실패");
@@ -247,6 +256,23 @@ public class DonationController {
 		}
 		return mv; 
 	}	
+	
+	//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
+	@RequestMapping(value = "donationJoinComplete.do", method = RequestMethod.POST)
+	public String donationJoincomplete(@ModelAttribute DonationLog donationLog, Donation donation,
+										@RequestParam("projectNo")int projectNo, Model model) {
+		int result = dService.registerDonationLog(donation, donationLog); // serviceImpl에서 store 메소드 2개 사용 + 포인트 내역 업데이트 메소드 추가
+		ArrayList<DonationLog> donationLogOne = dService.printDonationLogOne(projectNo);
+		if ((result > 0 )&&(donationLogOne != null)) {
+			model.addAttribute("donationLogOne", donationLogOne);
+			return "donation/donationJoinCompleteView";
+		} else {
+			return "common.errorPage";
+		}
+	}
+	
+	
+	
 	
 	// 신고하기 페이지로 이동하기
 	@RequestMapping(value="donationAccusation.do", method=RequestMethod.POST)
@@ -276,30 +302,14 @@ public class DonationController {
 
 	
 	
-	
-	//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
-	@RequestMapping(value = "donationJoinComplete.do", method = RequestMethod.POST)
-	public String donationJoincomplete(@ModelAttribute DonationLog donationLog, Donation donation,
-										@RequestParam("projectNo")int projectNo, Model model) {
-		int result = dService.registerDonationLog(donation, donationLog); // serviceImpl에서 store 메소드 2개 사용 + 포인트 내역 업데이트 메소드 추가
-		ArrayList<DonationLog> donationLogOne = dService.printDonationLogOne(projectNo);
-		if ((result > 0 )&&(donationLogOne != null)) {
-			model.addAttribute("donationLogOne", donationLogOne);
-			return "redirect:donationList.do";
-		} else {
-			return "common.errorPage";
-		}
-	}
-	
-	
-	
 	// 좋아요 
 	@RequestMapping(value = "donationLikeAdd.do", method = RequestMethod.POST)
 	public String donationLikeAdd(@ModelAttribute Donation donation, DonationLike donationLike,
-									HttpServletRequest resuest, Model model) {
+									HttpServletRequest request, Model model) {
 		int result = dService.donationLikeRegister(donation, donationLike);
+		String referer = request.getHeader("Referer");
 		if (result > 0) {
-			return "redirect:donationList.do";
+			return "redirect:"+ referer;
 		}else {
 			model.addAttribute("msg", "좋아요 등록 실패");
 			return "common.errorPage";
@@ -309,11 +319,13 @@ public class DonationController {
 	// 좋아요 취소
 	@RequestMapping(value="donationLikeDelete.do", method = RequestMethod.POST)
 	 public String donationLikeDelete(@ModelAttribute Donation donation, DonationLike donationLike, 
-			 					  HttpServletRequest request,
+			 					  HttpServletRequest request, RedirectAttributes redirectAttributes,
 			 					  Model model) { 
+		 redirectAttributes.addFlashAttribute("okList", "AA BB CC");
 		 int result = dService.donationLikeRemove(donation, donationLike);
+		 String referer = request.getHeader("Referer");
 		 if(result > 0) {
-			 return "redirect:donationList.do";
+			 return "redirect:"+ referer;
 		 }else {
 			 model.addAttribute("msg", "좋아요 취소 실패!!");
 			 return "common/errorPage";
@@ -372,5 +384,97 @@ public class DonationController {
 	}
 	
 
+	//////// 검색 - 진행중인 프로젝트 ////////
+	@RequestMapping(value="donationSearch_1.do", method=RequestMethod.GET)
+	public String donationSearchForProcessing(@ModelAttribute Search search, Model model) {
+		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
+		ArrayList<Donation> searchList1 = dService.printSearchAll_1(search);
+		if(!searchList1.isEmpty()) {
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			model.addAttribute("dListandFile", searchList1);
+			model.addAttribute("search", search);
+			return "donation/donationList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	//////// 검색 - 종료한 프로잭트 ////////
+	@RequestMapping(value="donationSearch_2.do", method=RequestMethod.GET)
+	public String donationSearchForEnd(@ModelAttribute Search search, Model model) {
+		ArrayList<Donation> dListandFile = dService.printAllProject();   
+		ArrayList<Donation> searchList2 = dService.printSearchAll_2(search);
+		if(!searchList2.isEmpty()) {
+			model.addAttribute("dListandFile", dListandFile);
+			model.addAttribute("fListandFile", searchList2);
+			model.addAttribute("search", search);
+			return "donation/donationList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	/////// 검색 -> 좋아요순 ////////
+	@RequestMapping(value="donationSelectLike.do", method=RequestMethod.GET)
+	 public String donationSelectLike(Model model) {
+		 ArrayList<Donation> dListandFile = dService.printAllProjectForLike();   
+		 ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
+		 if(!dListandFile.isEmpty()) {				
+				model.addAttribute("dListandFile", dListandFile);
+				model.addAttribute("dListandFileEnd", dListandFileEnd);
+				return "donation/donationList";
+			}else {
+				model.addAttribute("msg", "기부 목록조회 실패");
+				return "common/errorPage";
+			}
+	 }
+	
+	/////// 검색 -> 금액순 ////////
+	@RequestMapping(value="donationSelectMoney.do", method=RequestMethod.GET)
+	 public String donationSelectMoney(Model model) {
+		 ArrayList<Donation> dListandFile = dService.printAllProjectForMoney();  
+		 ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
+		 if(!dListandFile.isEmpty()) {				
+				model.addAttribute("dListandFile", dListandFile);
+				model.addAttribute("dListandFileEnd", dListandFileEnd);
+				return "donation/donationList";
+			}else {
+				model.addAttribute("msg", "기부 목록조회 실패");
+				return "common/errorPage";
+			}
+	 }
+	
+	//////// 검색 -> 금액순(종료된 프로젝트)////////
+	@RequestMapping(value="donationSelectMoneyEnd.do", method=RequestMethod.GET)
+	 public String donationSelectMoneyEnd(Model model) {
+		 ArrayList<Donation> dListandFile = dService.printAllProject();   
+		 ArrayList<Donation> dListandFileEnd = dService.printAllProjectEndForMoeny();   
+		 if(!dListandFile.isEmpty()) {				
+				model.addAttribute("dListandFile", dListandFile);
+				model.addAttribute("dListandFileEnd", dListandFileEnd);
+				return "donation/donationList";
+			}else {
+				model.addAttribute("msg", "rlqn 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
+	
+	/////// 검색 -> 좋아요순(종료된 프로젝트) ////////
+	@RequestMapping(value="donationSelectLikeEnd.do", method=RequestMethod.GET)
+	 public String donationSelectLikeEnd(Model model) {
+		 ArrayList<Donation> dListandFile = dService.printAllProject();;   
+		 ArrayList<Donation> dListandFileEnd = dService.printAllProjectEndForLike();     
+		 if(!dListandFile.isEmpty()) {				
+				model.addAttribute("dListandFile", dListandFile);
+				model.addAttribute("dListandFileEnd", dListandFileEnd);
+				return "donation/donationList";
+			}else {
+				model.addAttribute("msg", "기부 목록조회 실패");
+				return "common/errorPage";
+			}
+	 }
 
 }

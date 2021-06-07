@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>펀딩 완료</title>
+<title>기부 완료</title>
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -61,17 +61,22 @@
       <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
 	<br><br><br><br><br><br><br><br><br><br><br>
-		기부 참여 완료
+		${loginUser.userName}님 감사합니다. 기부 참여가 완료되었습니다.
 		
-	${donation.projectNo }<br>
-	${donation.optionPrice }원<br>
-	${donation.productName }<br>
-	${donation.productContent }<br>
-	<form action="donationoin.do" method="post">
+		앞으로도 많은 참여 부탁 드리겠습니다.<br>
+		
+		기부 페이지로 이동 :  <button onclick="location.href='donationList.do'">클릭</button>
+		<br>
+	
+ 		${donationLogOne[0].donationPoint} 원이 최종 결제되었습니다. 
+ 		<br><br><br>
+		
+		
+	<form action="fundingJoin2.do" method="post">
     <input type="hidden" name="projectNo" value="${donation.projectNo }">
     <input type="hidden" name="userId" value="${loginUser.userId }">
-    <input type="submit" class="getstarted" value="다음단계">
     </form>
+	
 	
 	<br><br><br><br><br><br><br><br><br><br>
  		<%@include file="../../../footer.jsp" %>
@@ -80,13 +85,13 @@
 	<!-- .site-wrap -->
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/resources/js/jquery-3.3.1.min.js"></script>
+<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  -->   <script src="/resources/js/jquery-3.3.1.min.js"></script>
  	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
+<!-- 	<script src="/resources/js/bootstrap.min.js"></script> -->
 	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.countdown.min.js"></script>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
@@ -15,6 +16,8 @@ import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.point.service.PointService;
 
 @Service
@@ -108,6 +111,11 @@ public class DonationServiceImpl implements DonationService{
 	public int addReadCountHit(int projectNo) {
 		return dStore.addReadCount(projectNo);
 	}
+	
+	@Override
+	public Member printMemberList(Member member) {
+		return dStore.selectOneMemberList(member);
+	}
 	//////////////////////////
 
 	// 후원자 수 카운트
@@ -188,12 +196,47 @@ public class DonationServiceImpl implements DonationService{
 		return dStore.accusationInsert(donationReport);
 	}
 	
+	///////// 검색 ////////////
+	@Override
+	public ArrayList<Donation> printSearchAll_1(Search search) {
+		ArrayList<Donation> searchList1 = dStore.selectSearchList_1(search);
+		return searchList1;
+	}
+	
+	public ArrayList<Donation> printSearchAll_2(Search search) {
+		ArrayList<Donation> searchList1 = dStore.selectSearchList_2(search);
+		return searchList1;
+	}
+	
+	@Override
+	public ArrayList<Donation> printAllProjectForLike() {
+		ArrayList<Donation> dListandFile = dStore.printAllProjectByLike();
+		return dListandFile;
+	}
+
+	@Override
+	public ArrayList<Donation> printAllProjectEndForMoeny() {
+		ArrayList<Donation> dListandFileEnd = dStore.printAllProjectByMoneyEnd();
+		return dListandFileEnd;
+	}
+	
+	
+	@Override
+	public ArrayList<Donation> printAllProjectEndForLike() {
+		ArrayList<Donation> dListandFileEnd = dStore.printAllProjectByLikeEnd();
+		return dListandFileEnd;
+	}
+
+	//////////////////////////
+	
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	
+	
 	@Override
 	public ArrayList<Donation> PrintAll(PageInfo pi) {
 		// TODO Auto-generated method stub
@@ -277,5 +320,7 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
 
 }

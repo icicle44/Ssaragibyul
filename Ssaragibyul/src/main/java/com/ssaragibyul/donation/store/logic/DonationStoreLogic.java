@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
+import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
@@ -16,6 +17,7 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.store.DonationStore;
+import com.ssaragibyul.member.domain.Member;
 
 @Repository
 public class DonationStoreLogic implements DonationStore{
@@ -106,6 +108,12 @@ public class DonationStoreLogic implements DonationStore{
 	public ArrayList<DonationLike> selectOneLike(int projectNo) {
 		return (ArrayList)sqlSession.selectList("donationMapper.selectOneLike", projectNo);
 	}
+	
+	// 기부 상세보기
+	@Override
+	public Member selectOneMemberList(Member member) {
+		return sqlSession.selectOne("memberMapper.selectMemberList", member);
+	}
 
 	// 후원자 수 카운트
 	@Override
@@ -168,6 +176,33 @@ public class DonationStoreLogic implements DonationStore{
 	}
 
 	///////////////////////////
+	
+	
+	////// 검색 //////
+	@Override
+	public ArrayList<Donation> selectSearchList_1(Search search) {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectSearchList_1", search);
+	}
+
+	@Override
+	public ArrayList<Donation> selectSearchList_2(Search search) {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectSearchList_1", search);
+	}
+	@Override
+	public ArrayList<Donation> printAllProjectByLike() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectFundingList_Like");
+	}
+	@Override
+	public ArrayList<Donation> printAllProjectByMoneyEnd() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectFundingListEnd_Money");
+	}
+
+	@Override
+	public ArrayList<Donation> printAllProjectByLikeEnd() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectFundingListEnd_Like");
+	}
+	//////////////////
+	
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
@@ -270,5 +305,6 @@ public class DonationStoreLogic implements DonationStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 
 }

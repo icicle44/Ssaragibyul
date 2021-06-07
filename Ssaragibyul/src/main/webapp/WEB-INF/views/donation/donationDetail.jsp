@@ -234,7 +234,8 @@ margin-left: 100px;
 		
 		<div class="detailView_right col-6">
 			<div class="noting"></div>
-				<h1 class = "contents">${donation.subjectName }</h1><br>
+				<h1 class = "contents">${donation.subjectName }, ${memberlist.nickName }</h1><br>
+					console.log(${memberlist.nickName });
 					<b class = "contents">기부 금액 : <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</b>
 	   									<script>console.log('${donation.leftDate}');</script>
 	   									<c:if test="${donation.leftDate < 1}">
@@ -343,6 +344,11 @@ margin-left: 100px;
 						<b class = "contents">기부 종료일 : ${donation.finDate }</b>
 				
 						</div>
+						
+						<c:if test="${ loginUser.userId == donation.userId }">
+                        	<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
+                        </c:if><!-- ?? -->
+						
 					</div>
 				</div><br><br><hr>
 				
@@ -427,12 +433,12 @@ margin-left: 100px;
 			getReplyList();
 			$("#rSubmit").on("click", function() {
 				var projectNo = '${donation.projectNo }';
+				var nickName = '${memberlist.nickName }'
 				var rContent = $("#rContent").val();
-				debugger;
 				$.ajax({
 					url : "addWriteComment.do",
 					type : "post",
-					data : { "no" : projectNo , "contents" : rContent },
+					data : { "no" : projectNo , "contents" : rContent, "nick" : nickName },
 					success : function(data) {
 						if(data == "success") {
 							// 댓글 불러오기
@@ -459,11 +465,6 @@ margin-left: 100px;
 				data : { "projectNo" : projectNo },
 				dataType : "json",
 				success : function(data) {
-					// db에 있는 데이터를 json형태로 가져와서
-					// 댓글 목록 테이블의 tbody에 넣어주어야 함.
-					//console.log(data);
-					// tbody에 필요한 tr, td 태그를 만들면서
-					// 데이터를 tbody에 꽂아줄 것임.
 					var $tableBody = $("#rtb tbody");
 					$tableBody.html(""); // 비워주기
 					var $tr;
@@ -475,16 +476,18 @@ margin-left: 100px;
 					if(data.length > 0) {
 						for(var i in data) {
 							$tr = $("<tr>");
-							$rWriter = $("<td width='100'>").text(data[i].userId);
+							$rWriter = $("<td width='100'>").text(data[i].nick + "님의 별");
 							$rContent = $("<td>").text(data[i].contents);
 							$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
 							$btnArea = $("<td>")
-							.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");'>수정 </a>")							
+							.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");return false;'>수정 </a>")							
 							.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");'> 삭제</a>");
 							$tr.append($rWriter);
 							$tr.append($rContent);
 							$tr.append($rCreateDate);
-							$tr.append($btnArea);
+							if('${loginUser.userId}'===data[i].userId){
+								$tr.append($btnArea);
+								}
 							$tableBody.append($tr);
 						}
 					}
