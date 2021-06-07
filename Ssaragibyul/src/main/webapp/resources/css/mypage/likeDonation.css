@@ -94,24 +94,24 @@ header{
 /*상단*/
 
 
-.f-top{
+.d-top{
     width: auto;
     height: 30px;
-    margin: 20px 30px;
+    margin: 30px 60px;
 }
-.f-top .count{
+.d-top .count{
     float: left;
     width: 40%;
     height: auto;
 }
-.f-top .count #num{
+.d-top .count #num{
     float: left;
     padding-right: 5px;
     font-size: 19px;
     font-weight: 550;
     color: rgb(235, 92, 1);
 }
-.f-top .count #p-count{
+.d-top .count #d-count{
     padding-right: 5px;
     font-size: 19px;
     font-weight: 550;
@@ -119,13 +119,13 @@ header{
 }
 
 
-.f-top .category{
+.d-top .category{
     float: right;
     width: auto;
     height: auto;
     
 }
-.f-top .category #divide{
+.d-top .category #divide{
     width: 110px;
     height: 35px;
     text-align: center;
@@ -145,24 +145,23 @@ header{
 
 /*메인*/
 
-.f-cont{
-    float: left;
-    width: 27%;
+.d-cont{
+    width: auto;
     height: 300px;
-    margin: 10px 35px 100px 35px;
+    margin: 20px 60px;
 }
 
 
-.f-cont .funding #img{
+.d-cont .funding #img{
     margin-right: 20px;
     box-shadow: 2px solid blick;
     border-radius: 20px;
 }
 
-#f-img{
+#d-img{
     position: relative;
-    width: 100%;
-    height: 220px;
+    width: 450px;
+    height: 250px;
 }
 #hart-img{
     position: absolute;
@@ -175,10 +174,9 @@ header{
 /*제목*/
 
 .title{
-    width: 60%;
+    width: 500px;
     height: 120px;
-    text-align: center;
-    margin: 20px 40px;
+    margin-left: 20px;
 }
 
 .title #title-1{
@@ -192,15 +190,31 @@ header{
 .title #title-2{
     font-size: 19px;
     font-weight: bold;
-    margin-top: 0px;
+    margin-top: 10px;
     color: rgb(51, 51, 51);
+}
+
+
+.pay-status{
+    margin-top: -50px;
+    margin-left: 20px;
+    margin-bottom: 80px;
+    height: 30px;
+    width: auto;
+}
+
+.pay-status span{
+    height: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(241, 196, 15);
 }
 
 /*누적현황 - 남은 기간*/
 .accrue{
     width: 460px;
     padding-top: 10px;
-  
+    margin-left: 20px;
 }
 .accrue #sum{
     float: left;
@@ -218,7 +232,8 @@ header{
 }
 
 .accrue #time{
-    padding-left: 220px;
+    float: right;
+    margin-right: -40px;
 }
 
 .accrue #time img{
@@ -236,9 +251,10 @@ header{
 /*달성률 그래프*/
 
 .graph{
-    height: 4px;
+    height: 5px;
     width: auto;
-    margin-top: 10px;
+    margin-top: 30px;
+    margin-left: 20px;
     margin-bottom: 5px;
     background-color: rgb(190, 190, 190);
-}
+}}

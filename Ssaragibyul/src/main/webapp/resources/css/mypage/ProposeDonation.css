@@ -221,7 +221,7 @@ form{
 }
 
 #update-btn{
-    width: 150px;
+    width: 300px;
     height: 35px;
     text-align: center;
     color: white;
@@ -243,24 +243,3 @@ form{
 }
 
 
-#delete-btn{
-    width: 150px;
-    height: 35px;
-    text-align: center;
-    color: white;
-    font-size: 15px;
-    font-weight: 600;
-    background: rgb(174, 174, 174);
-    border: none;
-    border-radius: 7px;
-}
-
-#delete-btn:hover{
-    background-color: rgb(150, 150, 150);
-    border: none;
-}
-
-#delete-btn:active{
-    background-color: rgb(100, 100, 100);
-    border: none;
-}

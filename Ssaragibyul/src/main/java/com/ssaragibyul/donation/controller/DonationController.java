@@ -371,36 +371,6 @@ public class DonationController {
 		}
 	}
 	
-//	@RequestMapping(value="donationSelectMoney.do", method=RequestMethod.GET)
-//	 public String donationSelectMoney(Model model) {
-//		 ArrayList<Donation> fListandFile = dService.printAllProjectForMoney();   
-//		 ArrayList<Donation> fListandFileEnd = dService.printAllProjectEnd();   
-//		 if(!fListandFile.isEmpty()) {				
-//				model.addAttribute("fListandFile", fListandFile);
-//				model.addAttribute("fListandFileEnd", fListandFileEnd);
-//				return "funding/fundingList";
-//			}else {
-//				model.addAttribute("msg", "펀딩 목록조회 실패");
-//				return "common/errorPage";
-//			}
-//	
-//	 }
-//	 
-//	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
-//	 public String fundingSelectLike(Model model) {
-//		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
-//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-//		 if(!fListandFile.isEmpty()) {				
-//				model.addAttribute("fListandFile", fListandFile);
-//				model.addAttribute("fListandFileEnd", fListandFileEnd);
-//				return "funding/fundingList";
-//			}else {
-//				model.addAttribute("msg", "펀딩 목록조회 실패");
-//				return "common/errorPage";
-//			}
-//	
-//	 }
-	
-	
+
 
 }

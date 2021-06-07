@@ -69,7 +69,6 @@
                         </div>
                         <div class="btn">
                             <input type="button" value="수정" id="update-btn">
-                            <input type="button" value="삭제" id="delete-btn">
                         </div>
                     </div>
                     
@@ -106,7 +105,6 @@
                             </div>
                             <div class="btn">
                                 <input type="button" value="수정" id="update-btn">
-                                <input type="button" value="삭제" id="delete-btn">
                             </div>
                         </div>
                         
@@ -142,7 +140,6 @@
                         </div>
                         <div class="btn">
                             <input type="button" value="수정" id="update-btn">
-                            <input type="button" value="삭제" id="delete-btn">
                         </div>
                     </div>
                     <!--페이징 처리 div-->
