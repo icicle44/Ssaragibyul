@@ -10,6 +10,7 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
@@ -42,6 +43,12 @@ public interface AdminService {
 	public ArrayList<VisitStat> getCountReport();
 	//오늘 신고건
 	public int getCountTodayRepor();
+	// 캘린터 펀딩용
+	public ArrayList<Funding> getFundingCalendar(int projectNo);
+	// 캘린터 펀딩 가져오기
+	public ArrayList<Funding> getFundingList();
+	// 캘린더 기부 가져오기
+	public ArrayList<Donation> getDonationList();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);
@@ -75,7 +82,7 @@ public interface AdminService {
 	// 펀딩 신고 리스트
 	public ArrayList<FundingReport> printFundingAccList(PageInfo pi);
 	// 기부 신고 리스트
-	public ArrayList<Donation> printDonationAccList(PageInfo pi);
+	public ArrayList<DonationReport> printDonationAccList(PageInfo pi);
 	// 펀딩 신고 디테일
 	public FundingReport prinOneFundingAcc(int accuFundingNo);
 	// 펀딩 삭제
@@ -128,6 +135,9 @@ public interface AdminService {
 	public int getVisitListCount();
 	public int getFundingAccListCount();
 	public int getDonationAccListCount();
+
+
+
 
 	
 

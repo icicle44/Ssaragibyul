@@ -12,6 +12,7 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
@@ -292,8 +293,7 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public int selectDonationAccListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("donationMapper.selectDonationAccListCount");
 	}
 
 	@Override
@@ -304,9 +304,10 @@ public class AdminStoreLogic implements AdminStore{
 	}
 
 	@Override
-	public ArrayList<Donation> selectDonationAccList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<DonationReport> selectDonationAccList(PageInfo pi) {
+		int offset = (pi.getCurrentPage() -1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationAccList", null, rowBounds);
 	}
 
 	@Override
@@ -334,6 +335,16 @@ public class AdminStoreLogic implements AdminStore{
 	@Override
 	public int selectCountTodayRepor() {
 		return sqlSession.selectOne("fundingMapper.selectCountTodayRepor");
+	}
+
+	@Override
+	public ArrayList<Funding> selectAllFundingCal() {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectAllList");
+	}
+
+	@Override
+	public ArrayList<Donation> selectAllDonationCal() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectAllList");
 	}
 
 }
