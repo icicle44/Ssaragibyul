@@ -33,7 +33,31 @@
 		            businessHours : true,
 		            locale : "ko",
 		            height : "610px",
-		            backgroundColor : 'red'
+		            dayMaxEvents : true,
+		            dayMaxEvents : 2,
+		            eventSources: [{
+		            	events: function(info, successCallback, failureCallback) {
+		            		$.ajax({
+		            			url : "FundingCalendar.do",
+		            			type : 'POST',
+		            			dataType : 'json',
+		            			success : function(data) {
+									console.log(data);
+									successCallback(data);
+								}
+		            		});
+		            		$.ajax({
+		            			url : "DonationCalendar.do",
+		            			type : 'POST',
+		            			dataType : 'json',
+		            			success : function(data) {
+									console.log(data);
+									successCallback(data);
+								}
+		            		});
+		            	}
+		            }],
+		            eventColor: 'rgba(255, 99, 132, 0.2)'A
 		        });
 		        calendar.render();
 		      });

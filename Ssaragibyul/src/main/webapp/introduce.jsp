@@ -17,11 +17,11 @@
 	    src: url('../resources/fonts/independence.ttf') format('truetype');
 	    unicode-range: U+AC00-D7A3;
 	}
-	
+
 	.introduce-container {
 		background-color: gray;
 		width: 100%;
-		height: 1850px;
+		height: 1800px;
 		padding: 500px 0 0 56%;
 		margin: 0px;
 		left: 0px;

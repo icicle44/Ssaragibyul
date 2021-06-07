@@ -12,6 +12,7 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingReport;
 import com.ssaragibyul.history.domain.History;
@@ -285,8 +286,7 @@ public class AdminServiceImpl implements AdminService{
 	}
 
 	@Override
-	public ArrayList<Donation> printDonationAccList(PageInfo pi) {
-		// TODO Auto-generated method stub
+	public ArrayList<DonationReport> printDonationAccList(PageInfo pi) {
 		return aStore.selectDonationAccList(pi);
 	}
 
@@ -314,6 +314,22 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public int getCountTodayRepor() {
 		return aStore.selectCountTodayRepor();
+	}
+
+	@Override
+	public ArrayList<Funding> getFundingCalendar(int projectNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Funding> getFundingList() {
+		return aStore.selectAllFundingCal();
+	}
+
+	@Override
+	public ArrayList<Donation> getDonationList() {
+		return aStore.selectAllDonationCal();
 	}
 
 

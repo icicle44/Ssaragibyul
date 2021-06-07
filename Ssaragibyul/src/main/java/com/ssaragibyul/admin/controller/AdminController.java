@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
 import com.ssaragibyul.admin.service.AdminService;
 import com.ssaragibyul.common.PageInfo;
@@ -35,6 +36,7 @@ import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationFile;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
@@ -131,11 +133,54 @@ public class AdminController {
 		return mv;
 	}
 	
-	//관리자 메인 캘린더
-	public ArrayList<HashMap<String, String>> printCalendar(@RequestParam("projectNo") int projectNo){
-		System.out.println(projectNo);
-		//ArrayList<Funding>
-		return null;
+	//관리자 메인 캘린더(펀딩)
+	@ResponseBody
+	@RequestMapping(value="FundingCalendar.do", method = RequestMethod.POST)
+	public void printCalendar(HttpServletResponse respone) throws Exception{
+		System.out.println("dd");
+		ArrayList<Funding> fCalendar = aService.getFundingList(); 
+		// 이것이 json [{}]에서 []를 먼저 만들어준다!
+		
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>(); 
+		// 이것이 [{}]에서 {}를 만들어주는 거야!!!
+		// 민진왈 : []이것은 기차한칸!(arrayList), {}이것은 그 칸의 좌석(HashMap)!
+		// ArrayList<HashMap<String, String>>는 json이랑 호환이됨
+		
+		for(int i = 0; i < fCalendar.size(); i++) {
+			System.out.println(fCalendar.size()+"fCalendar.size()");
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("title", fCalendar.get(i).getSubjectName());
+		    map.put("start", String.valueOf(fCalendar.get(i).getStartDate())); 
+		    map.put("end", String.valueOf(fCalendar.get(i).getFinDate()));
+			list.add(map);
+			System.out.println("map잘나오나요? : " + map);
+		}
+		// 어레이 리스트를 제이슨 배열로 만들어줌!!! [{}, {}, {}, {}]
+		new Gson().toJson(list, respone.getWriter());
+	}
+	
+	//관리자 메인 캘린더(기부)
+	@ResponseBody
+	@RequestMapping(value="DonationCalendar.do", method = RequestMethod.POST)
+	public void printDonationCalendar(HttpServletResponse respone) throws Exception{
+		ArrayList<Donation> dCalendar = aService.getDonationList(); 
+		// 이것이 json [{}]에서 []를 먼저 만들어준다!
+		
+		ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>(); 
+		// 이것이 [{}]에서 {}를 만들어주는 거야!!!
+		// 민진왈 : []이것은 기차한칸!(arrayList), {}이것은 그 칸의 좌석(HashMap)!
+		// ArrayList<HashMap<String, String>>는 json이랑 호환이됨
+		
+		for(int i = 0; i < dCalendar.size(); i++) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("title", dCalendar.get(i).getSubjectName());
+		    map.put("start", String.valueOf(dCalendar.get(i).getStartDate())); 
+		    map.put("end", String.valueOf(dCalendar.get(i).getFinDate()));
+			list.add(map);
+			System.out.println("map잘나오나요? : " + map);
+		}
+		// 어레이 리스트를 제이슨 배열로 만들어줌!!! [{}, {}, {}, {}]
+		new Gson().toJson(list, respone.getWriter());
 	}
 	
 	// 관리자 메인 별보러가자 게시글 현황 그래프 자료
@@ -451,6 +496,24 @@ public class AdminController {
 		
 	}
 
+	// 신고 기부 프로젝트 리스트
+	@RequestMapping(value="adminDonationAccusationList.do", method = RequestMethod.GET)
+	public ModelAndView donationReportListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
+		int cuurentPage = (page != null) ? page : 1;
+		int listCount = aService.getDonationAccListCount();
+		PageInfo pi = Pagination.getPageInfo(cuurentPage, listCount);
+		ArrayList<DonationReport> dList = aService.printDonationAccList(pi);
+		if(!dList.isEmpty()) {
+			mv.addObject("dList", dList);
+			mv.addObject("pi", pi);
+			mv.setViewName("admin/adminDonationAccusationList");
+		} else {
+			mv.addObject("msg", "펀딩 신고내역 출력에 실패하였습니다.");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	
 	//댓글삭제하기
 	@ResponseBody
 	@RequestMapping(value="adminDeleteReply.do", method = RequestMethod.GET)

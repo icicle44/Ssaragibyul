@@ -2,6 +2,7 @@ package com.ssaragibyul.funding.service;
 
 import java.util.ArrayList;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
@@ -116,7 +117,9 @@ public interface FundingService {
 
 	public Member printMemberList(Member member);
 
-	public ArrayList<FundingLog> printMyFunding(Member member);
+	public ArrayList<FundingLog> printMyFunding(String userId, PageInfo pi);
+
+	public int getListCount(String userId);
 
 
 

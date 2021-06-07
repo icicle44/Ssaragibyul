@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
@@ -353,7 +354,11 @@ public class FundingSerivceImpl implements FundingService {
 		return fStore.seletOneMemberList(member);
 	}
 	
-	public ArrayList<FundingLog> printMyFunding(Member member){
-		return fStore.selectMyFunding(member);
+	public ArrayList<FundingLog> printMyFunding(String userId, PageInfo pi){
+		return fStore.selectMyFunding(userId, pi); 
+	}
+	
+	public int getListCount(String userId) {
+		return fStore.selectListCount(userId);
 	}
 }
