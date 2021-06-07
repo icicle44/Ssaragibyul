@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -201,9 +203,10 @@ width : 1540px;
 	</div>
 	<br>
 	<!--  -->
-	<br><br><br><br><br><br><br>	
+	<br><br><br><br><br><br><br>${fn:length(fListandFile)}	
+	<%-- <c:if test="${fListandFile.length > 6}">
  <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
- 
+ </c:if> --%>
 				</section>
 				<!--  -->
 				<!-- #section-funding -->
@@ -228,7 +231,7 @@ width : 1540px;
 				<div class="gridmain">
 		 <c:forEach var="e" items="${fListandFileEnd}" varStatus="status"> 
 			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-no=${e.projectNo } id = "frame">
-			<table class="a_pj">
+			<table class="display" id="example">
 				<tr>
 					<td> 
 					    <a href="resources/upLoadFile/${e.fundingFile.fileMainName}" class="d-block photo-item" data-fancybox="gallery"> 
@@ -287,8 +290,9 @@ width : 1540px;
 	<br><br><br><br><br><br><br>	
 	
 	
-	
+	<%-- <c:if test="${fListandFileEnd }">
  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
+ 	</c:if> --%>
 <!-- <button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button> -->
 				</section>
 	<br>

@@ -2,6 +2,7 @@ package com.ssaragibyul.funding.store;
 
 import java.util.ArrayList;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
@@ -14,7 +15,7 @@ import com.ssaragibyul.member.domain.Member;
 
 public interface FundingStore {
 
-	public int selectListCount();
+	public int selectListCount(String userId);
 
 	public int likesStatus(int projectNo);
 	
@@ -111,7 +112,7 @@ public interface FundingStore {
 	public int deleteProjectLike(FundingLike fundingLike);
 	public ArrayList<FundingLog> selectFundingLogOne(int projectNo);
 	public Member seletOneMemberList(Member member);
-	public ArrayList<FundingLog> selectMyFunding(Member member);
+	public ArrayList<FundingLog> selectMyFunding(String userId, PageInfo pi);
 }
 
 

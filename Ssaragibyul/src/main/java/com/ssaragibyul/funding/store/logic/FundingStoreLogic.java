@@ -2,10 +2,12 @@ package com.ssaragibyul.funding.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.funding.domain.Funding;
@@ -24,9 +26,8 @@ public class FundingStoreLogic implements FundingStore{
 	private SqlSessionTemplate sqlSession;
 	
 	@Override
-	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int selectListCount(String userId) {
+		return sqlSession.selectOne("fundingMapper.selectListCount", userId);
 	}
 
 	@Override
@@ -317,9 +318,12 @@ public class FundingStoreLogic implements FundingStore{
 		return sqlSession.selectOne("memberMapper.seletOneMemberList", member); 
 	}
 
-	public ArrayList<FundingLog> selectMyFunding(Member member) {
-		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFunding", member);
+	public ArrayList<FundingLog> selectMyFunding(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFunding", userId, rowBounds);
 	}
+//	return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFunding", member, pi, null, rowBounds);   ???
 
 	
 }

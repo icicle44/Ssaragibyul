@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
+import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
@@ -226,16 +228,39 @@ public class MemberController {
 		return "mypage/userUpdate";
 	}
 	
+//	// 참여한 펀딩 프로젝트 페이지
+//	@RequestMapping(value="myFunding.do", method = { RequestMethod.GET, RequestMethod.POST })
+//	public ModelAndView myFundingView(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+//		Member loginUser = (Member) session.getAttribute("loginUser");
+//		member.setUserId(loginUser.getUserId());
+//		
+//		ArrayList<FundingLog> myFundingList = fService.printMyFunding(member);
+//		if (myFundingList != null) {
+//			int fundingCnt = myFundingList.size();
+//			mv.addObject("fundingCnt", fundingCnt);
+//			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
+//		}else{
+//			mv.addObject("msg", "펀딩 상세 조회 실패!");
+//			mv.setViewName("common/errorPage");
+//		}
+//			return mv;
+//		}	
+	
 	// 참여한 펀딩 프로젝트 페이지
 	@RequestMapping(value="myFunding.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView myFundingView(ModelAndView mv, HttpSession session, @ModelAttribute Member member) {
+	public ModelAndView myFundingView(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+												@RequestParam(value="page", required=false) Integer page) {
 		Member loginUser = (Member) session.getAttribute("loginUser");
-		member.setUserId(loginUser.getUserId());
+		String userId = loginUser.getUserId();
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fService.getListCount(userId);
 		
-		ArrayList<FundingLog> myFundingList = fService.printMyFunding(member);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		ArrayList<FundingLog> myFundingList = fService.printMyFunding(userId,pi);
 		if (myFundingList != null) {
 			int fundingCnt = myFundingList.size();
 			mv.addObject("fundingCnt", fundingCnt);
+			mv.addObject("pi", pi);
 			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
 		}else{
 			mv.addObject("msg", "펀딩 상세 조회 실패!");
@@ -243,6 +268,7 @@ public class MemberController {
 		}
 			return mv;
 		}	
+	
 	
 	// 참여한 기부 프로젝트 페이지
 	@RequestMapping(value="myDonation.do", method=RequestMethod.GET)
