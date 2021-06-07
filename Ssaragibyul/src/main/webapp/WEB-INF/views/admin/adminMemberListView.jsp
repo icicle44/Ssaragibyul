@@ -106,7 +106,15 @@
 														</c:url>
 														<a href="${mDetail }"> ${ member.userId }</a>
 													</td>
-													<td>${member.nickName }</td>
+													<c:url var="msgWriteUrl4" value="msgWriterView.do">
+				                                       <c:param name="receiverId" value="${member.userId }"></c:param>
+				                                       <c:param name="msgType" value="4"></c:param>
+				                                       <c:param name="nickName" value="${member.nickName }"></c:param>
+				                                    </c:url>
+													<td>
+														<a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">
+														${member.nickName }</a>
+													</td>
 													<td>${member.userName }</td>
 													<td>${member.enrollDate}</td>
 													<td>${member.mCode }</td>

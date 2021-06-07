@@ -105,7 +105,15 @@
                                                <c:forEach items="${dList }" var="donation">
 												<tr>
 													<td align="center">${donation.projectNo }</td>
-													<td align="center">${donation.userId }</td>
+													<c:url var="msgWriteUrl4" value="msgWriterView.do">
+				                                       <c:param name="receiverId" value="${donation.userId }"></c:param>
+				                                       <c:param name="msgType" value="4"></c:param>
+				                                       <c:param name="nickName" value=""></c:param>
+				                                    </c:url>
+													<td align="center">
+													<a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">
+														${donation.userId }</a>
+													</td>
 													<td align="center">
 														<c:url var="dDetail" value="adminDonationDelail.do">
 															<c:param name="projectNo" value="${donation.projectNo }"></c:param>

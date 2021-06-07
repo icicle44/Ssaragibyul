@@ -91,10 +91,12 @@ public class AdminController {
 		int allMember = aService.printAllMemberCount();		//전체회원 수 카운트(탈퇴, 관리자 제외)
 		int newMemeber = aService.printTodayMemberCount(); // 오늘 가입한 회원 수
 		int deleteMember = aService.getCountDeleteMember(); //탈퇴한 회원수 카운트
+		int todayRepor = aService.getCountTodayRepor(); // 오늘 신고수
+		int allRepor = aService.getFundingAccListCount();// 전체 신고수
 		
 		//int reportAll = aService.printReportAllCount(); //신고게시글 수 카운트
-		// 오늘의 신고 게시글 수 카운
-		
+		// 펑딩 신고 요일별 현황
+		ArrayList<VisitStat> fdList = aService.getCountReport();
 		//별보러가자 게시글 현황
 		ArrayList<VisitStat> vList = aService.getCountPostVisit();
 		// 최근 보낸 쪽지 6개만
@@ -102,8 +104,6 @@ public class AdminController {
 		// 최근 받은 쪽지 6개만
 		ArrayList<Message> rmList = aService.getCountNewRecMessage();
 		System.out.println("vList입니다 - " + vList);
-		
-		String visitStat = vList.get(0).getVisitDay().toString();
 		
 		for (VisitStat message : vList) {
 			System.out.println(message.getVisitStatCount());			
@@ -123,9 +123,19 @@ public class AdminController {
 		//mv.addObject("reportAll", reportAll); //신고쪽지 보기
 		
 		mv.addObject("visitStat", vList);
+		mv.addObject("report", fdList);
+		mv.addObject("todayRepor", todayRepor);
+		mv.addObject("allRepor", allRepor);
 		
 		mv.setViewName("admin/adminMain");
 		return mv;
+	}
+	
+	//관리자 메인 캘린더
+	public ArrayList<HashMap<String, String>> printCalendar(@RequestParam("projectNo") int projectNo){
+		System.out.println(projectNo);
+		//ArrayList<Funding>
+		return null;
 	}
 	
 	// 관리자 메인 별보러가자 게시글 현황 그래프 자료
@@ -384,16 +394,61 @@ public class AdminController {
 		return mv;
 	}
 
-	// 신고 상세보기
-//	public Board reportDetail() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	// 펀딩 신고 상세보기
+	@RequestMapping(value="adminFundingAccusationDetail.do", method = RequestMethod.GET)
+	public ModelAndView fundingAccusationDetail(ModelAndView mv, @RequestParam("accuFundingNo") int accuFundingNo) {
+		// 게시글 상세 조회
+		FundingReport fundingReport =  aService.prinOneFundingAcc(accuFundingNo);
+		if (fundingReport != null) {
+			// 메소드 체이닝 방식
+			mv.addObject("fundingReport", fundingReport).setViewName("admin/adminFundingAccusationDetail");
+		} else {
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}
 	
 	// 신고 삭제하기
-	public String reportDelete() {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="adminFundingAccusationDelete.do", method = RequestMethod.GET)
+	public String reportDelete(Model model, @RequestParam("accuFundingNo") int accuFundingNo) {
+		// FundingReport에 accuFundingNo로 하나를 셀렉트 해온다
+		FundingReport fundingNo = aService.prinOneFundingAcc(accuFundingNo);
+		// FundingReport에 PROCESSING를 N으로 업데이트해준다
+		int result = aService.deleteFundingReport(fundingNo);
+		// Funding에서 PROJECT_CODE = 1로 업데이트해준다.
+		result = aService.deleteFundingAdd(fundingNo);
+		
+		if(result > 0 ) {
+			return "redirect:adminFundingAccusationList.do";
+		} else {
+			model.addAttribute("msg", "펀딩 신고 프로젝트 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
+	}
+	// 다중삭제
+	@ResponseBody
+	@RequestMapping(value="adminFundingAccDeleteAll.do", method=RequestMethod.GET)
+	public String receivedMsgDelete(@RequestParam(value = "accuFundingNo[]") List<Integer> accuFundingNoArr, ModelAndView mv) {
+		//배열에 해당하는 쪽지의 삭제표시컬럼 update
+		// FundingReport에 accuFundingNo로 하나를 셀렉트 해온다
+		int result = 0;
+		int count = 0;
+		for(int i=0; i < accuFundingNoArr.size() ; i++) {
+			int accuFundingNo = accuFundingNoArr.get(i);
+			FundingReport fundingNo = aService.prinOneFundingAcc(accuFundingNo);
+			// FundingReport에 PROCESSING를 N으로 업데이트해준다
+			result = aService.deleteFundingReport(fundingNo);
+			// Funding에서 PROJECT_CODE = 1로 업데이트해준다.
+			result = aService.deleteFundingAdd(fundingNo);
+			count = count + result;
+		}
+		if(count == accuFundingNoArr.size() ) {
+			return "success";
+		} else {
+			return "fail";
+		}			
+		
 	}
 
 	//댓글삭제하기

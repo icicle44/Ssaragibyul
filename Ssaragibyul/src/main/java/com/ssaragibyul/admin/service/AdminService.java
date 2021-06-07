@@ -38,6 +38,10 @@ public interface AdminService {
 	public ArrayList<Message> getCountNewRecMessage();
 	// 별보러가자 현황 요일별로 출력
 	public ArrayList<VisitStat> getCountPostVisit();
+	// 신고관리 카운트
+	public ArrayList<VisitStat> getCountReport();
+	//오늘 신고건
+	public int getCountTodayRepor();
 	
 	// 회원 전체 리스트 가져오기
 	public ArrayList<Member> printAll(PageInfo pi);
@@ -72,6 +76,12 @@ public interface AdminService {
 	public ArrayList<FundingReport> printFundingAccList(PageInfo pi);
 	// 기부 신고 리스트
 	public ArrayList<Donation> printDonationAccList(PageInfo pi);
+	// 펀딩 신고 디테일
+	public FundingReport prinOneFundingAcc(int accuFundingNo);
+	// 펀딩 삭제
+	public int deleteFundingAdd(FundingReport fundingNo);
+	// 펀딩 신고 삭제 1번째 업데이트
+	public int deleteFundingReport(FundingReport fundingNo);
 	// 신고 게시물 리스트
 //	public ArrayList<Board> printAllReport(PageInfo pi);
 //	// 신고 상세보기
@@ -118,6 +128,11 @@ public interface AdminService {
 	public int getVisitListCount();
 	public int getFundingAccListCount();
 	public int getDonationAccListCount();
+
+	
+
+	
+	
 	
 	
 }

@@ -309,4 +309,31 @@ public class AdminStoreLogic implements AdminStore{
 		return null;
 	}
 
+	@Override
+	public FundingReport selectOneFundingAcc(int accuFundingNo) {
+		return sqlSession.selectOne("fundingMapper.selectOneFundingAcc", accuFundingNo);
+	}
+
+	@Override
+	public int updateFundingAdd(FundingReport fundingNo) {
+		return sqlSession.update("fundingMapper.deleteFundingAcc", fundingNo);
+	}
+
+	@Override
+	public int updateFundingReport(FundingReport fundingNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("fundingMapper.deleteFundingReport", fundingNo);
+	}
+
+	@Override
+	public ArrayList<VisitStat> selectCountReport() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectCountReport");
+	}
+
+	@Override
+	public int selectCountTodayRepor() {
+		return sqlSession.selectOne("fundingMapper.selectCountTodayRepor");
+	}
+
 }
