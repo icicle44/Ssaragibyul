@@ -75,7 +75,14 @@
 											<td><button id="receiptbtn" onclick="receiptPopup('${point.receiptUrl }'); return false;">영수증</button></td>										
 										</c:if>
 										<c:if test="${point.eventCode == 1 && point.varType == 1}">										
-											<td><a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.</a></td>
+											<td>
+												<c:if test="${point.projectCode == 0 }">
+													<a href="fundingDetail.do?projectNo=${point.projectNo }" target="_blank">[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.</a>
+												</c:if>
+												<c:if test="${point.projectCode == 1 }">
+													[ ${point.subject } ] <span class="bold-text">펀딩</span>하셨습니다.												
+												</c:if>
+											</td>
 											<c:if test="${point.projectCode == 0 }">
 												<c:if test="${point.money >= 0 && point.fdate > 0 }">
 													<td>프로젝트 종료(성공)</td>

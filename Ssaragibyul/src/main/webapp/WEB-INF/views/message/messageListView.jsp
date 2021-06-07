@@ -147,7 +147,7 @@
 								<td colspan="5"></td>
 								<td style="padding:3px">
 									<button type="submit" id="deleteArrBtn">
-										<img src="/resources/img/message/delIcon.png" alt="delIcon" width="25px">
+										<img id="delIcon" src="/resources/img/message/delIcon.svg" alt="delIcon" width="25px" style="opacity:0.3">
 									</button>
 								</td>
 							</tr>
@@ -324,8 +324,10 @@
 			$("#checkAll").on("click", function(){
 				if($("#checkAll").prop("checked")) {
 					$("input[name=chk]").prop("checked", true);
+					$("#delIcon").css("opacity", "1");
 				}else {
 					$("input[name=chk]").prop("checked", false);
+					$("#delIcon").css("opacity", "0.3");
 				}
 			});
 			$("input[name=chk]").on("click", function(){
@@ -335,6 +337,14 @@
 					$("#checkAll").prop("checked", true);
 				}
 			});
+			
+			$("#delIcon").hover(function() {
+				$(this).css("opacity", "1");					
+			});
+			$("#delIcon").mouseleave(function() {
+				$(this).css("opacity", "0.3");					
+			});
+			
 			/* List View에서 삭제하기(다중) */
 			$("#deleteArrBtn").on("click", function(){
 				var cnt = $("input[name=chk]:checked").length;
