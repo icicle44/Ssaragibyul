@@ -67,7 +67,7 @@
 	${donation.optionPrice }원<br>
 	${donation.productName }<br>
 	${donation.productContent }<br>
-	<form action="fundingJoin2.do" method="post">
+	<form action="donationoin.do" method="post">
     <input type="hidden" name="projectNo" value="${donation.projectNo }">
     <input type="hidden" name="userId" value="${loginUser.userId }">
     <input type="submit" class="getstarted" value="다음단계">

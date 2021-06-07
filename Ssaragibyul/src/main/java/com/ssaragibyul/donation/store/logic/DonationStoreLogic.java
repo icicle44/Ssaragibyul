@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.store.DonationStore;
 
 @Repository
@@ -50,8 +52,9 @@ public class DonationStoreLogic implements DonationStore{
 	
 	// 기부 제안 파일 등록
 	@Override
-	public int insertDonation(DonationFile donationFile) {
-		return sqlSession.insert("donationMapper.insertDonationFile", donationFile);
+	public int insertDonationFile(DonationFile donationFile) {
+		int result = sqlSession.insert("donationMapper.insertDonationFile", donationFile);
+		return result;
 	}
 
 	
@@ -73,6 +76,18 @@ public class DonationStoreLogic implements DonationStore{
 	public int insertLike(DonationLike donationLike) {
 		return sqlSession.insert("donationMapper.insertLike", donationLike);
 	}
+	
+	// 좋아요 취소(감소)
+	@Override
+	public int updateLike_Minus(Donation donation) {
+		return sqlSession.update("donationMapper.updateLikeCol_Minus", donation);
+	}
+	
+	// 좋아요 취소
+	@Override
+	public int deleteLike(DonationLike donationLike) {
+		return sqlSession.delete("donationMapper.deleteLike", donationLike);
+	}
 
 	// 기부 상세보기
 	@Override
@@ -92,18 +107,67 @@ public class DonationStoreLogic implements DonationStore{
 		return (ArrayList)sqlSession.selectList("donationMapper.selectOneLike", projectNo);
 	}
 
+	// 후원자 수 카운트
+	@Override
+	public DonationLog selectSponserNumber(int projectNo) {
+		return sqlSession.selectOne("donationMapper.countSponserNumber", projectNo);
+	}
+	
+	// 댓글 작성
+	@Override
+	public int insertReply(Reply reply) {
+		return sqlSession.insert("donationMapper.insertReply", reply);
+	}
+	
+	// 댓글 목록 출력
+	@Override
+	public ArrayList<Reply> selectAllReply(int projectNo) {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectReplyList", projectNo);
+	}
+	
+	// 댓글 수정
+	@Override
+	public int updateReply(Reply reply) {
+		return sqlSession.update("donationMapper.updateReply", reply);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int deleteReply(Reply reply) {
+		return sqlSession.delete("donationMapper.deleteReply", reply);
+	}
+
+	// 금액
+	@Override
+	public ArrayList<Donation> printAllProjectByMoney() {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectFundingList_Money");
+	}
+	
+	// 기부 참여하기
+	@Override
+	public ArrayList<DonationLog> selectDonationLogOne(int projectNo) {
+		return (ArrayList)sqlSession.selectList("donationMapper.selectDonationLogOne", projectNo);
+	}
+	
+	// 신고하기
+	@Override
+	public int accusationInsert(DonationReport donationReport) {
+		return sqlSession.delete("donationMapper.reportInsert", donationReport);
+	}
+	
 	@Override
 	public int insertDonationLog(DonationLog donationLog) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.insert("donationMapper.insertDonationLog", donationLog);
+		return result;
 	}
-
+	
 	@Override
 	public int updateProject_SumMonet(Donation donation) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = sqlSession.update("donationMapper.updateDonationAddMoney", donation);
+		return result;
 	}
 
+	///////////////////////////
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
@@ -206,8 +270,5 @@ public class DonationStoreLogic implements DonationStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-
-
 
 }

@@ -17,7 +17,7 @@
 		<result property="hitsCount" column="HITS_COUNT"/>
 		<result property="projectCode" column="PROJECT_CODE"/>
 		<result property="percent" column="PERCENT"/>
-		<result property="leftDate" column="LEFTDATE"/>
+		<result property="leftDate" column="LEFT_DATE"/>
 		
 		<collection property="donationFile" resultMap="donationFileResultMap"></collection>
 	</resultMap>
@@ -47,7 +47,6 @@
 		<result property="qunatity" column="QUNATITY"/>
 		<result property="donateDate" column="DOANTE_DATE"/>
 		<result property="cancleYn" column="CANCLE_YN"/>
-		<result property="receiverAddr" column="RECEIVER_ADDR"/>
 		<result property="dProjectNo" column="D_PROJECT_NO"/>
 		<result property="receiverName" column="RECEIVER"/>
 		<result property="receiverPhone" column="RECEIVER_PHONE"/>
@@ -62,14 +61,14 @@
 	</resultMap>
 	
 	<!-- 댓글 -->
-	<resultMap type="Reply" id="FundingReplyResultMap">
-		<id property="commNo" column="COMM_NO"/>
-		<result property="usreId" column="USER_ID"/>
-		<result property="commTitle" column="COMM_TITLE"/>
-		<result property="commContents" column="COMM_CONTENTS"/>
-		<result property="regDate" column="REG_DATE"/>
-		<result property="dProjectNo" column="D_PROJECT_NO"/>
-		<result property="nickName" column="NICK_NAME"/>
+	<resultMap type="Reply" id="DonationReplyResultMap">
+		<id property="replyNo" column="COMM_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="nick" column="NICK_NAME"/>
+		<result property="contents" column="COMM_CONTENTS"/>
+		<result property="replyType" column="BOARD_TYPE"></result>
+		<result property="enrollDate" column="REG_DATE"/>
+		<result property="no" column="D_PROJECT_NO"/>
 	</resultMap>
 	
 	<!-- 댓글 신고 -->
@@ -156,7 +155,7 @@
 	<insert id="insertDonation" parameterType="Donation">
 		INSERT INTO DONATION
 		VALUES(SEQ_DONATION_NO.NEXTVAL, #{userId}, #{subjectName}, #{goalMoney}, DEFAULT, SYSDATE,
-		#{finDate}, #{projectStory}, #{warningIntro}, DEFAULT, DEFAULT, 1)
+		#{finDate}, #{projectStory}, #{warningIntro}, DEFAULT, DEFAULT, 0)
 	</insert>
 	
 	<!-- 기부 제안 파일 등록 -->
@@ -178,7 +177,7 @@
 	<!-- 기부 상세 & 기부 참여 -->
 	<select id="selectOne" resultMap="donationResultMap">
 		SELECT D_PROJECT_NO, USER_ID, SUBJECT, GOAL_MONEY, SUM_MONEY, START_DATE, FIN_DATE, PROJ_STORY,
-        WARNING_INTRO, LIKE_COUNT, PROJECT_CODE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE 
+        WARNING_INTRO, LIKE_COUNT, HITS_COUNT, PROJECT_CODE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE 
         FROM DONATION WHERE D_PROJECT_NO = #{projectNo}
 	</select>
 	
@@ -190,6 +189,12 @@
 	<!-- 기부 리스트 상세(좋아요) -->
 	<select id="selectOneLike" resultMap="DonationLikeResultMap">
 		SELECT * FROM DONATION_LIKE WHERE D_PROJECT_NO = #{projectNo}
+	</select>
+	
+	<!-- 후원자 수 카운트 -->
+	<select id="countSponserNumber" resultMap="DonationLogResultMap">
+		SELECT COUNT(*) AS SPONSER FROM DO_DONATION
+		WHERE D_PROJECT_NO =  #{projectNo}
 	</select>
 	
 	<!-- 좋아요 내역 추가 -->
@@ -204,7 +209,79 @@
 		UPDATE DONATION SET LIKE_COUNT = LIKE_COUNT + 1
 		WHERE D_PROJECT_NO = #{projectNo}
 	</update>
-
+	
+	<!-- 좋아요 취소 1 (감소) -->
+	<update id="updateLikeCol_Minus" parameterType="Donation">
+		UPDATE DONATION SET LIKE_COUNT = LIKE_COUNT - 1
+		WHERE
+		D_PROJECT_NO = #{projectNo }	
+	</update>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="deleteLike" parameterType="DonationLike">
+        DELETE DONATION_LIKE 
+        WHERE D_PROJECT_NO = #{projectNo } 
+        AND USER_ID = #{userId }
+	</delete>	
+	
+	<!-- 댓글 -->
+	
+	<!-- 댓글 작성 -->
+	<insert id="insertReply">
+		INSERT INTO 
+		DONATION_COMMENTS VALUES(SEQ_DONATION_REPLY_NO.NEXTVAL,  #{userId },'닉네임', #{contents }, '기부상세', SYSDATE, #{no })
+	</insert>
+	
+	<!-- 댓글 목록 출력 -->
+	<select id="selectReplyList" resultMap="DonationReplyResultMap">
+		SELECT * FROM DONATION_COMMENTS
+		WHERE
+		D_PROJECT_NO  = #{projectNo }
+		ORDER BY COMM_NO DESC
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" >
+		UPDATE DONATION_COMMENTS 
+		SET COMM_CONTENTS = #{contents }
+		WHERE D_PROJECT_NO = #{no } AND COMM_NO = #{replyNo }
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteReply">
+		DELETE DONATION_COMMENTS
+		WHERE D_PROJECT_NO = #{no } AND COMM_NO = #{replyNo }
+	</delete>
+	
+	<!-- 금액 -->
+	<select id=""></select>
+	
+	
+	<!-- 기부 참여하기 -->
+	<select id="selectFundingLogOne" resultMap="DonationLogResultMap">
+		SELECT * FROM DO_FUNDING WHERE F_PROJECT_NO2 = #{projectNo} ORDER BY 1 DESC
+	</select>
+	
+	<!-- 기부 참여하기 -->
+	<insert id="insertDonationLog" parameterType="DonationLog">
+	    INSERT INTO DO_DONATION
+    	VALUES(SEQ_DONATION_LOG_NO.NEXTVAL,#{userId},#{donationPoint},#{qunatity},SYSDATE,DEFAULT,#{projectNo}
+    	,#{receiver},#{receiverPhone})
+	</insert>
+	
+	<!-- 기부 참여하기 -->
+	<update id="updateDonationAddMoney" parameterType="Donation">
+	    UPDATE DONATION SET SUM_MONEY = (SUM_MONEY + #{sumMoney})
+    	WHERE D_PROJECT_NO = #{projectNo}	
+	</update>	
+	
+	<!-- 신고하기 -->
+	<insert id="reportInsert" parameterType="DonationReport"> 
+		INSERT INTO
+		DONATION_ACCUSATION
+		VALUES(SEQ_FUND_ACCUSATION_NO.NEXTVAL,#{userId},#{reportCode},#{reportContent},DEFAULT,SYSDATE,#{projectNo})
+	</insert>
+	
 	
 	
 	 <!-- 관리자용 -->

@@ -1,25 +1,29 @@
 package com.ssaragibyul.donation.domain;
 
+import java.sql.Date;
+
 public class DonationReport {
 
 	private int accuDonNo;
 	private String userId;
 	private int reportCode;
 	private String reportContent;
-	private int dProjectNo;
 	private String processing;
+	private Date accusationDate;
+	private int projectNo;
 	
 	public DonationReport() {}
 
-	public DonationReport(int accuDonNo, String userId, int reportCode, String reportContent, int dProjectNo,
-			String processing) {
+	public DonationReport(int accuDonNo, String userId, int reportCode, String reportContent, String processing,
+			Date accusationDate, int projectNo) {
 		super();
 		this.accuDonNo = accuDonNo;
 		this.userId = userId;
 		this.reportCode = reportCode;
 		this.reportContent = reportContent;
-		this.dProjectNo = dProjectNo;
 		this.processing = processing;
+		this.accusationDate = accusationDate;
+		this.projectNo = projectNo;
 	}
 
 	public int getAccuDonNo() {
@@ -54,14 +58,6 @@ public class DonationReport {
 		this.reportContent = reportContent;
 	}
 
-	public int getdProjectNo() {
-		return dProjectNo;
-	}
-
-	public void setdProjectNo(int dProjectNo) {
-		this.dProjectNo = dProjectNo;
-	}
-
 	public String getProcessing() {
 		return processing;
 	}
@@ -70,12 +66,29 @@ public class DonationReport {
 		this.processing = processing;
 	}
 
+	public Date getAccusationDate() {
+		return accusationDate;
+	}
+
+	public void setAccusationDate(Date accusationDate) {
+		this.accusationDate = accusationDate;
+	}
+
+	public int getProjectNo() {
+		return projectNo;
+	}
+
+	public void setProjectNo(int projectNo) {
+		this.projectNo = projectNo;
+	}
+
 	@Override
 	public String toString() {
-		return "DonateReport [accuDonNo=" + accuDonNo + ", userId=" + userId + ", reportCode=" + reportCode
-				+ ", reportContent=" + reportContent + ", dProjectNo=" + dProjectNo + ", processing=" + processing
-				+ "]";
+		return "DonationReport [accuDonNo=" + accuDonNo + ", userId=" + userId + ", reportCode=" + reportCode
+				+ ", reportContent=" + reportContent + ", processing=" + processing + ", accusationDate="
+				+ accusationDate + ", projectNo=" + projectNo + "]";
 	}
+
 	
 	
 }

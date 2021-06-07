@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
+import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
-import com.ssaragibyul.funding.domain.Funding;
-import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.point.service.PointService;
 
 @Service
@@ -60,7 +60,7 @@ public class DonationServiceImpl implements DonationService{
 		int result = dStore.insertDonation(donation);
 		int dResult = 0;
 		if (result > 0) {
-			result = dStore.insertDonation(donationFile);
+			dResult = dStore.insertDonationFile(donationFile);
 		}
 		return dResult;
 	}
@@ -110,6 +110,11 @@ public class DonationServiceImpl implements DonationService{
 	}
 	//////////////////////////
 
+	// 후원자 수 카운트
+	@Override
+	public DonationLog printSponserNumber(int projectNo) {
+		return dStore.selectSponserNumber(projectNo);
+	}
 	
 	// 좋아요 
 	@Override
@@ -122,12 +127,67 @@ public class DonationServiceImpl implements DonationService{
 		return dResult;
 	}
 
+	// 좋아요 취소
+	@Override
+	public int donationLikeRemove(Donation donation, DonationLike donationLike) {
+		int result = dStore.updateLike_Minus(donation);
+		int dResult = 0;
+		if (result > 0) {
+			dResult = dStore.deleteLike(donationLike);
+		}
+		return dResult;
+	}
+
 	// 
 	@Override
 	public int addLikeCount(int dProjectNo, DonationLike dLike) {
 		return dStore.addLikeCount(dProjectNo, dLike);
 	}
 
+	
+	// 댓글 작성
+	@Override
+	public int registerReply(Reply reply) {
+		return dStore.insertReply(reply);
+	}
+	
+	// 댓글 목록 출력
+	@Override
+	public ArrayList<Reply> printAllReply(int projectNo) {
+		return dStore.selectAllReply(projectNo);
+	}
+	
+	// 댓글 수정
+	@Override
+	public int updateReply(Reply reply) {
+		return dStore.updateReply(reply);
+	}
+
+	// 댓글 삭제
+	@Override
+	public int deleteReply(Reply reply) {
+		return dStore.deleteReply(reply);
+	}
+
+	// 금액
+	@Override
+	public ArrayList<Donation> printAllProjectForMoney() {
+		ArrayList<Donation> dListandFile = dStore.printAllProjectByMoney();
+		return dListandFile;
+	}
+	
+	// 기부 참여하기
+	@Override
+	public ArrayList<DonationLog> printDonationLogOne(int projectNo) {
+		return dStore.selectDonationLogOne(projectNo);
+	}
+	
+	// 신고하기
+	@Override
+	public int accusationRegister(DonationReport donationReport) {
+		return dStore.accusationInsert(donationReport);
+	}
+	
 	@Override
 	public int getListCount() {
 		// TODO Auto-generated method stub
@@ -217,6 +277,5 @@ public class DonationServiceImpl implements DonationService{
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 
 }

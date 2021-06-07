@@ -28,21 +28,22 @@
 
 </head>
 <style>
-.a_pj {
+.display {
 	margin:auto;
-	width: 400px;
+	width: 402px;
 	margin-bottom: 30px;
 	padding: 10px;
 	font-size:12px;
 }
-
+#frame{
+	width: 550px;
+	height : 550px;
+}
 .gridmain > * {
   float: left;  
-  width: 33%;
+  width: 30%;
+  height: 30%;
   font-size:12px;
-}
-.select{
-	margin : auto;
 }
 .btn{
 margin: auto;
@@ -56,6 +57,40 @@ margin: auto;
 }
 .nothing{
  color:white;
+}
+#bar_td{
+	text-align: left; 
+	margin:auto;
+}
+#svg{
+	height:2px; 
+	width: 350px;
+}
+#dday_css{
+	float:left; 
+	width : 50%;
+	font-size:12px;
+}
+#sum_css{
+	float:right;
+	width : 50%;
+	text-align: right; 
+	font-size:12px;
+}
+.select{
+	float:right;
+}
+
+#pj_search{
+width : 1540px;
+}
+#frmpj{
+}
+.scan{
+	float:right;
+}
+#headFont{
+	font-size:30px;
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -108,7 +143,7 @@ margin: auto;
 						<div class="gridmain">	
 
 				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
-								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
 									<table class="display" id="example">
 										<tr>
 											<td> 
@@ -281,15 +316,12 @@ margin: auto;
 		</main>
 
 	<!-- .site-wrap -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="/resources/js/jquery-3.3.1.min.js"></script>
  	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.countdown.min.js"></script>
@@ -300,6 +332,7 @@ margin: auto;
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
+	<script src="/resources/js/fundingList.js"></script>
 
 </body>
 </html>

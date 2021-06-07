@@ -3,11 +3,13 @@ package com.ssaragibyul.donation.service;
 import java.util.ArrayList;
 
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.domain.DonationComments;
 import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
+import com.ssaragibyul.donation.domain.DonationReport;
 
 public interface DonationService {
 
@@ -23,6 +25,8 @@ public interface DonationService {
 	
 	public int donationLikeRegister(Donation donation, DonationLike donationLike); // 좋아요 카운트
 	
+	public int donationLikeRemove(Donation donation, DonationLike donationLike); // 좋아요 취소
+	
 	public Donation printOne(int projectNo); // 기부 상세보기
 	
 	public DonationFile printOneFile(int projectNo); // 기부 상세보기
@@ -31,7 +35,23 @@ public interface DonationService {
 
 	public int addReadCountHit(int projectNo); // 기부 상세
 	
+	public DonationLog printSponserNumber(int projectNo); // 후원자 수
+	
 	public int registerDonationLog(Donation donation, DonationLog donationLog); // 기부 참여
+	
+	public int registerReply(Reply reply); // 댓글 작성
+	
+	public ArrayList<Reply> printAllReply(int projectNo); // 댓글 목록 출력
+	
+	public int updateReply(Reply reply); // 댓글 수정
+	
+	public int deleteReply(Reply reply); // 댓글 삭제
+	
+	public ArrayList<Donation> printAllProjectForMoney(); // 금액
+	
+	public ArrayList<DonationLog> printDonationLogOne(int projectNo); // 기부 참여하기
+	
+	public int accusationRegister(DonationReport donationReport); // 신고하기
 	
 	public int getListCount();
 
@@ -67,11 +87,6 @@ public interface DonationService {
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
-
-
-
-
-
 
 
 

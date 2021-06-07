@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>펀딩 참여</title>
+<title>기부 참여</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -64,10 +64,8 @@
 		<!-- style="color: #EB5C01" -->
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a class="nav-link" style="color: #000061"><strong>펀딩 참여하기</strong></a></li>
-				<li><a href="#sectionSuggest1" class="nav-link">1. 펀딩 리워드 선택</a></li>
-				<li><a href="#sectionSuggest2" class="nav-link">2. 리워드 선택 확인</a></li>
-				<li><a href="#sectionSuggest3" class="nav-link">3. 카드/배송정보 입력</a></li>
+				<li><a href="#sectionSuggest1" class="nav-link">1. 결제 금액 선택</a></li>
+				<li><a href="#sectionSuggest2" class="nav-link">2. 정보 입력</a></li>
 			</ul>
 		</div>
 	</header>
@@ -75,69 +73,43 @@
 
 	<main class="main-content">
 		<br><br><br><br><br><br><br><br>
-			<section id="sectionSuggest1">
-				<br><br><br><br>
-				<div id="test"></div>
-			  	<input type="hidden" value="${donation.optionPrice }" id="price">
-					${donation.optionPrice }원<br>
-					${donation.productName }<br>
-					${donation.productContent }<br>
-					
-					<input id="sendNumber" type="number" name="" max="${donation.optionLimit }"> 한계 : ${donation.optionLimit }<br>
-				
-				<br><br><br><br><br><br><br>
-			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
-			</section>
-
-			<br><br><br><br><br><br><br>
-
-			<section id="sectionSuggest2">
-							<br><br><br><br>
-
-			<input class="getNumber" type="number" name="cal">
-				${donation.finDate }<br>
-				<input class="getResult1" type="number" name="cal"><br>
-				추가로 후원하기
-				<input type="number" id="addPrice" name="cal">
 			
-				<br><br><br><br><br><br><br>
-			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">펀딩하기</a>
+			<section id="sectionSuggest2"> <br><br><br><br>
+
+			<input class="getResult1" type="number" name="cal">원 기부하기<br>
+			
+			<br><br><br><br><br><br><br>
+			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">기부하기</a>
 			</section>
 
-		<br><br><br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br><br>
 
 			<section id="sectionSuggest3">
 			<br><br><br><br>
 				<form action="donationJoinComplete.do" method="post">
-					<input type="text" name="qunatity" class="getNumber"><br>
-					<input type="text" name="" class="getResult1"><br>
-					<input type="text" name="donationPoint" class="getResult2"><br>
-	    			<input type="text" name="projectNo" value="${donation.projectNo }"><br>
-	   				<input type="text" name="userId" value="${loginUser.userId }"><br>
-	   				<input type="text" name="sumMoney" class="getResult2"><br>
+					<input type="text" name="" class="getResult1"> 리워드 금액<br>
+	    			<input type="hidden" name="projectNo" value="${donation.projectNo }"><br>
+	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br>
+	   				<input type="text" name="sumMoney" class="getResult2"> 최종금액 <br>
 	   				<input type="text" name="receiverName">이름<br>
 	   				<input type="text" name="receiverPhone">번호<br>
+	   				<input type="text" name="fundingPoint" class="getResult3">결졔 예약 하시겠습니까?<br>
+					<input type="number" name="totalMoney" class="getResult3" value="${totalMoney }"><br>
+	   				
 	    			<input type="submit" class="getstarted" value="예약완료">
     			</form>
 			</section>
-		<br><br><br><br><br><br>
-<!-- 
-		<a class="getstarted scrollto" href="donationList.do"
-			style="text-decoration: none;">뭘 쓰지</a>
-			 -->
+			<br><br><br><br><br><br>
+
 		<%@include file="../../../footer.jsp"%>
 	</main>
 
-
 	<!-- .site-wrap -->
-
-	<!--  	<script src="/resources/js/jquery-3.3.1.min.js"></script> -->
 
 	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 	<script src="/resources/js/jquery.easing.1.3.js"></script>
 	<script src="/resources/js/jquery-ui.js"></script>
 	<script src="/resources/js/popper.min.js"></script>
-	<script src="/resources/js/bootstrap.min.js"></script>
 	<script src="/resources/js/owl.carousel.min.js"></script>
 	<script src="/resources/js/jquery.stellar.min.js"></script>
 	<script src="/resources/js/jquery.countdown.min.js"></script>
@@ -149,7 +121,7 @@
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-	<script src="/resources/js/fundingJoin.js"></script>
+	<script src="/resources/js/donationJoin.js"></script>
 
 </body>
 </html>
