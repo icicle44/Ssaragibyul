@@ -207,20 +207,9 @@ FROM
 	
 	<select id="searchAll" resultMap="visitResultMap">
 		SELECT * FROM VISIT JOIN MEMBER USING (USER_ID) JOIN VISIT_FILE USING (VISIT_NO)
-		<if test="searchCondition.toString() == 'nickname'">
-			WHERE NICKNAME LIKE '%' || #{searchValue } || '%'
-		</if>
-		<if test="searchCondition.toString() == 'title'">
-			WHERE VISIT_TITLE LIKE '%' || #{searchValue } || '%'
-		</if>
-		<if test="searchCondition.toString() == 'content'">
-			WHERE VISIT_CONTENTS LIKE '%' || #{searchValue } || '%'
-		</if>
-		<if test="searchCondition.toString() == 'all'">
-			WHERE NICKNAME LIKE '%' || #{searchValue } || '%'
-			OR VISIT_TITLE LIKE '%' || #{searchValue } || '%'
-			OR VISIT_CONTENTS LIKE '%' || #{searchValue } || '%'
-		</if>
+		WHERE NICKNAME LIKE '%' || #{searchValue } || '%'
+		OR VISIT_TITLE LIKE '%' || #{searchValue } || '%'
+		OR VISIT_CONTENTS LIKE '%' || #{searchValue } || '%'
 		ORDER BY V_CREATE_DATE DESC
 	</select>
 	<!--  댓글 -->

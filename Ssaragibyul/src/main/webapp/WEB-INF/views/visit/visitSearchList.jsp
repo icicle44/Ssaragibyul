@@ -25,7 +25,7 @@
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/visit/demo.css" />
 <link rel="stylesheet" type="text/css"
-	href="/resources/css/visit/style_visit.css" />
+	href="/resources/css/visit/style_search.css" />
 <!-- Font -->
 <link
 	href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700"
@@ -53,18 +53,11 @@
 				<div class="button-container">
 					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
 						인증하기</button>
-					<div id="searchWrapper" align="left">
-						<form action="visitSearch.do" method="post">
-							<select name="searchCondition" class="form-select form-select-sm" aria-label=".form-select-sm example" id="searchCondition">
-								<option value="all" <c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-								<option value="nickName" <c:if test="${search.searchCondition == 'nickName' }">selected</c:if>>작성자</option>
-								<option value="title"<c:if test="${search.searchCondition == 'title' }">selected</c:if>>제목</option>
-								<option value="content"<c:if test="${search.searchCondition == 'content' }">selected</c:if>>내용</option>
-							</select>
-							<input aria-label=".form-control-sm example" id="search-window" type="text" size="15" name="searchValue" value="${search.searchValue }">
-							<button id="search-btn" type="submit">찾기</button>
-						</form>
-					</div>
+					<form id="search-content" action="visitSearch.do" method="post">
+					  <input type="text" name="input" class="input" id="search-input">
+					  <button type="reset" class="search" id="search-btn"></button>
+					  검색창
+					</form>
 				</div>
 				<div class="content">
 					<div class="grid">
@@ -184,7 +177,17 @@
 			$(function() {
 				makeGrid();
 				click();
+				/* 검색 시작 */
+				const input = document.getElementById("search-input");
+				const searchBtn = document.getElementById("search-btn");
 				
+				const expand = () => {
+				  searchBtn.classList.toggle("close");
+				  input.classList.toggle("square");
+				};
+				
+				searchBtn.addEventListener("click", expand);
+				/* 검색 끝 */
 	            $("#replyContents").on("keyup",function(){
 	                // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
 	                //var inLength = $(this).val().length;
@@ -754,6 +757,9 @@
 
 				});
 			};
+
+
+
 
 		</script>
 </body>

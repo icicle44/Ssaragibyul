@@ -628,7 +628,7 @@ table{
 
 input {
   position: absolute;
-  top: 1em;
+  top: -6em;
   left: 2.6em;
   box-sizing: border-box;
   width: 30px;
@@ -655,7 +655,7 @@ input {
 .search {
   background: none;
   position: absolute;
-  top: 0.3em;
+  top: -6.5em;
   left: 2em;
   height: 30px;
   width: 30px;
@@ -699,7 +699,7 @@ input {
   position: absolute;
   width: 13px;
   height: 2px;
-  margin-top: 3px;
+  margin-top: 2.5em;
   margin-left: -11px;
   background-color: #EB5C01;
   -webkit-transform: rotate(45deg);
@@ -715,7 +715,7 @@ input {
   width: 13px;
   height: 2px;
   background-color: #EB5C01;
-  margin-top: 3px;
+  margin-top: 2.5em;
   margin-left: -11px;
   cursor: pointer;
   -webkit-transform: rotate(-45deg);
