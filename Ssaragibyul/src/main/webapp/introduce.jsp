@@ -12,16 +12,23 @@
 
 </head>
 <style>
+	@font-face {
+	    font-family: 'independence';
+	    src: url('../resources/fonts/independence.ttf') format('truetype');
+	    unicode-range: U+AC00-D7A3;
+	}
+	
 	.introduce-container {
 		background-color: gray;
 		width: 100%;
 		height: 1850px;
-		padding: 500px 0 0 60%;
+		padding: 500px 0 0 56%;
 		margin: 0px;
 		left: 0px;
 		position:relative;
 		top: -300px;
 		z-index: 99999;
+		font-family: 'independence', 'Oswald';
 	}
 	
 	@media (min-width: 1200px)
@@ -101,16 +108,16 @@
 			</div>
 			<!-- 문구 -->
 			<div class="col-md-8" id="introduce-text">
-				<h3 class="heading text-uppercase text-white">Remeber</h3>
-				<h6 class="heading text-uppercase text-white">현재 우리가 있을 수 있게
+				<h2 class="heading text-uppercase text-white">Remeber</h2>
+				<h5 class="heading text-uppercase text-white">현재 우리가 있을 수 있게
 					해주신 분들을 기억하고,</h5>
 				<br>
-				<h3 class="heading text-uppercase text-white">Repay</h3>
-				<h6 class="heading text-uppercase text-white">우리의 위치에서 그 분들을 위해
+				<h2 class="heading text-uppercase text-white">Repay</h2>
+				<h5 class="heading text-uppercase text-white">우리의 위치에서 그 분들을 위해
 					할 수 있는 것을 실행함으로써,</h5>
 				<br>
-				<h3 class="heading text-uppercase text-white">Reunion</h3>
-				<h6 class="heading text-uppercase text-white">다시 하나가 되어 어려움을
+				<h2 class="heading text-uppercase text-white">Reunion</h2>
+				<h5 class="heading text-uppercase text-white">다시 하나가 되어 어려움을
 					극복하고자 합니다.</h5>
 			</div>
 		</div>

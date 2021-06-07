@@ -125,23 +125,24 @@
 			
 			/* 팝업창 닫기 시 적용할 함수 */
 			function popUpClose() {
-				/* var msgNo = '${message.msgNo }';
+				var msgNo = '${message.msgNo }';
 				var readYn = '${message.readYn}';
 				var readText = "";
 				if(readYn == 1) {
 					readText = "읽음";
+					opener.location.reload("recMsgCnt.do");
+					opener.location.reload("myPoint.do");
 					$(opener.document).find("td[id="+msgNo+"]").text(readText);
-					changeMsgCnt();
-				} */
-				if(${flag eq "rec"}){
+				}
+				/* if(${flag eq "rec"}){
 					self.close();
-					/* location.reload("recMsgList.do"); */
+					//location.reload("recMsgList.do");
 					opener.location.reload("recMsgList.do");								
 				}else if(${flag eq "send"}) {
 					self.close();
-					/* location.reload("sendMsgList.do"); */
+					//location.reload("sendMsgList.do");
 					opener.location.reload("sendMsgList.do");	
-				}
+				} */
 			}
 			/* 팝업창 닫힐때 */
 			$(window).bind("beforeunload",function(e){
