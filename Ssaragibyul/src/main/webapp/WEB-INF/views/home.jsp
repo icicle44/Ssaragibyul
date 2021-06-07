@@ -95,15 +95,16 @@ width : 1540px;
 #headFont{
 	font-size:30px;
 }
-#between-blank {
-	height: 100px;
-}
+/* #between-blank {
+	height: 60px;
+} */
 .pro-title {
 	padding-left: 80px;
 	padding-bottom: 40px;
 	/* padding-top: 30px; */
 	font-family: 'Noto Serif KR';
 }
+
 /* .container-fluid {
 	position: relative;
 	top: -100px;
@@ -289,7 +290,6 @@ width : 1540px;
 				</section>
 				<!-- #section-funding -->
 
-			<div id="between-blank"></div>
 			<!-- 기부 프로젝트 -->	
 			
 			<section class="row align-items-stretch photos" id="section-donation">
@@ -371,7 +371,7 @@ width : 1540px;
 							</a>
 							<p>기부 프로젝트 이름</p>
 						</div> -->
-				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"> 
+				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"  begin="0" end="5"> 
 								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
 									<table class="display" id="example">
 										<tr>
@@ -613,9 +613,9 @@ width : 1540px;
 			</section>
 			</div>
 		</div>
- 		<%@include file="../../../footer.jsp" %>
-	</main>
 
+	</main>
+<%--  		<%@include file="../../../footer.jsp" %> --%>
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
