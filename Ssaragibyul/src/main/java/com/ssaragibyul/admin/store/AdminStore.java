@@ -35,6 +35,10 @@ public interface AdminStore {
 	public ArrayList<Message> selectCountNewRecMessage();
 	// 지난주 별보러가자 게시글 현황
 	public ArrayList<VisitStat> selectCountPostVisit();
+	// 신고관리 카운트
+	public ArrayList<VisitStat> selectCountReport();
+	// 오늘 신고건 카운트
+	public int selectCountTodayRepor();
 	
 	
 	// 회원 전체 리스트 가져오기
@@ -74,6 +78,12 @@ public interface AdminStore {
 	public ArrayList<FundingReport> selectFundingAccList(PageInfo pi);
 	// 기부 신고 리르트
 	public ArrayList<Donation> selectDonationAccList(PageInfo pi);
+	// 펀딩 신고 디테일
+	public FundingReport selectOneFundingAcc(int accuFundingNo);
+	// 펀딩 신고 삭제
+	public int updateFundingAdd(FundingReport fundingNo);
+	// 펀딩 신고 삭제 2
+	public int updateFundingReport(FundingReport fundingNo);
 	// 신고 게시물 리스트
 //	public ArrayList<Board> selectReportAll(PageInfo pi);
 //	// 신고 상세보기
@@ -118,6 +128,12 @@ public interface AdminStore {
 	public int selectFundingListCount();
 	public int selectDonationListCount();
 	public int selectVisitListCount();
+
+
+
+
+	
+
 
 
 }

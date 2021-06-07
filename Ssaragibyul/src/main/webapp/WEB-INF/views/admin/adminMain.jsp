@@ -13,6 +13,9 @@
 
 	<!-- Fonts and icons -->
 	<script src="/resources/js/admin/plugin/webfont/webfont.min.js"></script>
+	<link href='/resources/css/admin/main.css' rel='stylesheet' />
+    <script src='/resources/js/admin/main.js'></script>
+	<script src='/resources/js/admin/ko.js'></script>
 	<script>
 		WebFont.load({
 			google: {"families":["Lato:300,400,700,900"]},
@@ -21,6 +24,19 @@
 				sessionStorage.fonts = true;
 			}
 		});
+		
+		 document.addEventListener('DOMContentLoaded', function() {
+		        var calendarEl = document.getElementById("calendar");
+		        var calendar = new FullCalendar.Calendar(calendarEl, {
+		        	editable : true,
+		            selectable : true,
+		            businessHours : true,
+		            locale : "ko",
+		            height : "610px",
+		            backgroundColor : 'red'
+		        });
+		        calendar.render();
+		      });
 	</script>
 
 	<!-- CSS Files -->
@@ -82,16 +98,16 @@
 						<div class="col-md-6">
 							<div class="card full-height">
 								<div class="card-body">
-									<div class="card-title">신고관리</div>
+									<div class="card-title">펀딩신고관리</div>
 									<div class="row py-3">
 										<div class="col-md-4 d-flex flex-column justify-content-around">
 											<div>
 												<h6 class="fw-bold text-uppercase text-success op-8">오늘 신고건</h6>
-												<h3 class="fw-bold">$9.782</h3>
+												<h3 class="fw-bold">${todayRepor }</h3>
 											</div>
 											<div>
 												<h6 class="fw-bold text-uppercase text-danger op-8">전체 신고건</h6>
-												<h3 class="fw-bold">$1,248</h3>
+												<h3 class="fw-bold">${ allRepor}</h3>
 											</div>
 										</div>
 										<div class="col-md-8">
@@ -131,30 +147,7 @@
 						</div>
                         
  						<div class="col-md-4">
-							<div class="card card-primary">
-								<div class="card-header">
-									<div class="card-title">기부 현황</div>
-									<div class="card-category">일주일 단위</div>
-								</div>
-								<div class="card-body pb-0">
-									<div class="mb-4 mt-2">
-										<h1>$4,578.58</h1>
-									</div>
-									<div class="pull-in">
-										<canvas id="dailySalesChart"></canvas>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-body pb-0">
-									<div class="h1 fw-bold float-right text-warning">+7%</div>
-									<h2 class="mb-2">213</h2>
-									<p class="text-muted">펀딩 제안 현황</p>
-									<div class="pull-in sparkline-fix">
-										<div id="lineChart"></div>
-									</div>
-								</div>
-							</div> 
+							<div class="card" id="calendar"></div>
 						</div> 
 					</div>
                     
@@ -390,16 +383,38 @@
 		/* 신고관리 차트 */
 		var totalIncomeChart = document.getElementById('totalIncomeChart').getContext('2d');
 
+		var reporArr = [];
+		<c:forEach items="${report }" var="report" varStatus="stat">
+			reporArr[${stat.index}] = ${report.reportStatCount };
+		</c:forEach>
+		console.log(reporArr);
 		var mytotalIncomeChart = new Chart(totalIncomeChart, {
 			type: 'bar',
 			data: {
-				labels: ["S", "M", "T", "W", "T", "F", "S", "S", "M", "T"],
-				datasets : [{
-					label: "Total Income",
-					backgroundColor: '#ff9e27',
-					borderColor: 'rgb(23, 125, 255)',
-					data: [6, 4, 9, 5, 4, 6, 4, 3, 8, 10],
-				}],
+				 labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+			        datasets: [{
+			            label: '펀딩 신고 현황',
+			            data: reporArr,
+			            backgroundColor: [
+			                'rgba(255, 99, 132, 0.2)',
+			                'rgba(54, 162, 235, 0.2)',
+			                'rgba(255, 206, 86, 0.2)',
+			                'rgba(75, 192, 192, 0.2)',
+			                'rgba(153, 102, 255, 0.2)',
+			                'rgba(255, 159, 64, 0.2)',
+			                'rgba(155, 99, 102, 0.2)'
+			            ],
+			            borderColor: [
+			                'rgba(255, 99, 132, 1)',
+			                'rgba(54, 162, 235, 1)',
+			                'rgba(255, 206, 86, 1)',
+			                'rgba(75, 192, 192, 1)',
+			                'rgba(153, 102, 255, 1)',
+			                'rgba(255, 159, 64, 1)',
+			                'rgba(155, 99, 102, 1)'
+			            ],
+			            borderWidth: 1
+			        }]
 			},
 			options: {
 				responsive: true,

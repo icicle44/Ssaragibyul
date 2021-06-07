@@ -2,6 +2,7 @@ package com.ssaragibyul.admin.service.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.javassist.compiler.ast.ASTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -287,6 +288,32 @@ public class AdminServiceImpl implements AdminService{
 	public ArrayList<Donation> printDonationAccList(PageInfo pi) {
 		// TODO Auto-generated method stub
 		return aStore.selectDonationAccList(pi);
+	}
+
+	@Override
+	public FundingReport prinOneFundingAcc(int accuFundingNo) {
+		return aStore.selectOneFundingAcc(accuFundingNo);
+	}
+
+	@Override
+	public int deleteFundingAdd(FundingReport fundingNo) {
+		return aStore.updateFundingAdd(fundingNo);
+	}
+
+	@Override
+	public int deleteFundingReport(FundingReport fundingNo) {
+		// TODO Auto-generated method stub
+		return aStore.updateFundingReport(fundingNo);
+	}
+
+	@Override
+	public ArrayList<VisitStat> getCountReport() {
+		return aStore.selectCountReport();
+	}
+
+	@Override
+	public int getCountTodayRepor() {
+		return aStore.selectCountTodayRepor();
 	}
 
 

@@ -106,7 +106,15 @@
                                                <c:forEach items="${fList }" var="list">
 												<tr>
 													<td align="center">${list.projectNo }</td>
-													<td align="center">${list.userId }</td>
+													<c:url var="msgWriteUrl4" value="msgWriterView.do">
+				                                       <c:param name="receiverId" value="${list.userId }"></c:param>
+				                                       <c:param name="msgType" value="4"></c:param>
+				                                       <c:param name="nickName" value=""></c:param>
+				                                    </c:url>
+													<td align="center">
+													<a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">
+														${list.userId }</a>
+													</td>
 													<td align="center">
 														<c:url var="fDetail" value="adminFundingDetail.do">
 															<c:param name="projectNo" value="${list.projectNo }"></c:param>

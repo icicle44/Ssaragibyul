@@ -84,13 +84,18 @@
 													<c:forEach items="${faList}" var="fList">
 														<tr>
 															<td align="center">${fList.accuFundingNo }</td>
-															<td align="center">${fList.userId }</td>
-															<td align="center">${fList.projectNo }</td>
+															<c:url var="msgWriteUrl4" value="msgWriterView.do">
+						                                       <c:param name="receiverId" value="${fList.userId }"></c:param>
+						                                       <c:param name="msgType" value="4"></c:param>
+						                                       <c:param name="nickName" value=""></c:param>
+						                                    </c:url>
 															<td align="center">
-																<c:url var="fDetail" value="adminFundingAccDetail.do">
-																	<c:param name="accuFundingNo" value="${fList.accuFundingNo }"></c:param>
-																</c:url>
-																<a href="${fDetail}">${fList.reportContent }</a>
+																<a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">
+															${fList.userId }</a>
+															</td>
+															<td align="center">
+																<a href="#modal_open${fList.accuFundingNo }" data-toggle="modal">${fList.projectNo }</a></td>
+															<td align="center">${fList.reportContent }</a>
 															</td>
 															<td align="center">${fList.accusationDate }</td>
 <%-- 															<c:if test="${message.msgType != 0}">
@@ -171,6 +176,8 @@
 													</td>
 												</tr>
 											</table>
+											
+											
 									</div>
 								</div>
 							</div>
@@ -179,6 +186,45 @@
 				</div>
 			</div>
 		</div>
+		
+		<!-- 모달창 -->
+		<c:forEach items="${faList }" var="fList">
+			<div class="modal fade" id="modal_open${fList.accuFundingNo }" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" static>
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">
+								<strong>펀딩 프로젝트 신고</strong>
+							</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<table class="table">
+							<tr>
+								<th class="colored">신고자ID</th>
+								<td colspan="3">${fList.userId }</td>
+							</tr>
+							<tr>
+								<th class="colored">제보분류코드</th>
+								<td>${fList.reportCode }</td>
+								<th class="colored">신고날짜</th>
+								<td>${fList.accusationDate }</td>
+							</tr>
+							<tr>
+								<th class="colored">신고내용</th>
+								<td colspan="4">${fList.reportContent }</td>
+							</tr>
+						</table> 
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary float-right" onclick="location.href='adminFundingAccusationDelete.do?accuFundingNo=${fList.accuFundingNo}';">삭제하기</button>
+							<button type="button" class="btn btn-secondary float-right" data-dismiss="modal">닫기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+		
 		<!-- End Custom template -->
 	</div>
 	
@@ -237,28 +283,23 @@
 			/* List View에서 삭제하기 */
 			$("#deleteArrBtn").on("click", function(){
 				var cnt = $("input[name=chk]:checked").length;
-				var msgNoArr = new Array();
+				var accuFundingNo = new Array();
 				$("input[name=chk]:checked").each(function(){
-					msgNoArr.push($(this).val());
+					accuFundingNo.push($(this).val());
 				});
-				console.log(msgNoArr.toString());
+				console.log(accuFundingNo.toString());
 				console.log(cnt);
 				if(cnt == 0) {
 					alert("선택된 쪽지가 없습니다.");
 				}else {
-					var url = "";
-					if(${flag eq "rec"}) {
-						url = "recMsgDelete.do";
-					}else if(${flag eq "send"}) {
-						url = "sendMsgDelete.do";
-					}
+					var url = "adminFundingAccDeleteAll.do";
 					var conf = confirm("정말 삭제하시겠습니까?");
 					console.log(url);
 					if(conf == true) {
 						$.ajax({
 							url: url,
-							type: "post",
-							data:{"msgNoArr" : msgNoArr},
+							type: "get",
+							data:{"accuFundingNo" : accuFundingNo},
 							success: function(data){
 								if(data=="success") {
 									alert("삭제하였습니다.");
@@ -277,6 +318,7 @@
 				}
 			});
 		});
+		
 	</script>
 </body>
 </html>

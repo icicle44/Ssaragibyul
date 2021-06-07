@@ -94,8 +94,8 @@
 													<th>번호</th>
 													<th>아이디</th>
 													<th>닉네임</th>
-													<th>사적지 번호</th>
 													<th>글제목</th>
+													<th>사적지 번호</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -103,14 +103,22 @@
 												<tr>
 													<td align="center">${list.visitNo }</td>
 													<td align="center">${list.userId }</td>
-													<td align="center">${list.nickName }</td>
-													<td align="center">${list.siteNo }</td>
+													<c:url var="msgWriteUrl4" value="msgWriterView.do">
+				                                       <c:param name="receiverId" value="${list.userId }"></c:param>
+				                                       <c:param name="msgType" value="4"></c:param>
+				                                       <c:param name="nickName" value="${list.nickName }"></c:param>
+				                                    </c:url>
+													<td align="center">
+													<a href="#" onclick="msgPopup('${msgWriteUrl4}'); return false;">
+														${list.nickName }</a>
+													</td>
 													<td align="center">
 														<c:url var="vDetail" value="adminVisitDetail.do">
 															<c:param name = "visitNo" value=" ${list.visitNo } "></c:param>
 														</c:url>
 														<a href="${vDetail }">${list.visitTitle }</a>
 													</td>
+													<td align="center">${list.siteNo }</td>
 												</tr>
 												</c:forEach>
 											</tbody>

@@ -16,6 +16,7 @@
 		<typeAlias type="com.ssaragibyul.funding.domain.FundingLog" alias="FundingLog"/>
 		<typeAlias type="com.ssaragibyul.funding.domain.FundingReport" alias="FundingReport"/>
 		<typeAlias type="com.ssaragibyul.funding.domain.FundingLike" alias="FundingLike"/>
+		<typeAlias type="com.ssaragibyul.funding.domain.ReportStat" alias="ReportStat"/>
 		<typeAlias type="com.ssaragibyul.common.Reply" alias="Reply"/>
 		<typeAlias type="com.ssaragibyul.visit.domain.Visit" alias="Visit"/>
 		<typeAlias type="com.ssaragibyul.visit.domain.VisitLike" alias="VisitLike"/>
