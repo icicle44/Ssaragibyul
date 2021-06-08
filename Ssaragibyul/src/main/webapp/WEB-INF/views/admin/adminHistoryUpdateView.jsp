@@ -84,25 +84,25 @@
 										<table class="table table-hover" >
 											<tbody>
                                                <tr>
-									               <td>사적지 이름</td>
+									               <th>사적지 이름</th>
 									               <td>
 									                  <input type="text" size="50" name="siteName" id="siteName" value="${history.siteName }">
 									               </td>
 									            </tr>
 									            <tr>
-					                                <td>사적지 유형</td>
+					                                <th>사적지 유형</th>
 					                                <td>
 					                                    <input type="text" size="50" name="siteType" value="${history.siteType }">
 					                                </td>
 					                            </tr>
 					                            <tr>
-					                            	<td>위도</td>
+					                            	<th>위도</th>
 					                            	<td>
 					                            		<input type="number" step="0.0000001" size="50" name="latitude" value="${history.latitude }">
 					                            	</td>
 					                            </tr>
 					                            <tr>
-					                            	<td>경도</td>
+					                            	<th>경도</th>
 					                            	<td>
 					                            		<input type="number" step="0.0000001" size="50" name="longitude" value="${history.longitude }">
 					                            	</td>
@@ -110,12 +110,10 @@
 					                            <c:forTokens items="${ history.siteAddr }" delims="," var="addr" varStatus="status">
 					               					<c:if test="${ status.index eq 0 }">
 						                            <tr>
-						                                <td>우편번호</td>
-						                            </tr>
-						                            <tr>
+						                                <th rowspan="3">주소</th>
 						                                <td>
 						                                    <input type="text" name="post"  class="postcodify_postcode5" value="${addr }">
-						                                    <button type="button" class="btn btn-outline-secondary" id="postcodify_search_button" style="width: 50px; height:30px; text-align: center;">검색</button>
+						                                    <button type="button" class="btn btn-outline-secondary" id="postcodify_search_button">검색</button>
 						                                </td>
 						                            </tr>
 						                            </c:if>

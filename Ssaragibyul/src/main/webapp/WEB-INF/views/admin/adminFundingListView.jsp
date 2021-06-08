@@ -24,13 +24,11 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="/resources/css/independence/style_independence.css">
+	<!-- CSS Files -->
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="resources/css/admin/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/admin/atlantis.min.css">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
 </head>
@@ -68,9 +66,23 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">펀딩 리스트</h4>
-											<!-- 검색 -->
-												<div class="row-fluid" align="right">
+									<h4 class="card-title" style="margin:auto; text-align: center;">펀딩 리스트</h4>
+														<!-- 검색 -->
+												<div id="pj_search">
+													<select id="chose1" class="select"
+														onchange="location.href=this.value">
+														<option value="" selected>선택</option>
+														<option value="adminFundingList.do">최신글 순</option>
+														<option value="fundingSelectMoney.do">모금액 순</option>
+														<option value="fundingSelectLike.do">좋아요 순</option>
+													</select>
+													<form action="fundingSearch_1.do" method="get">
+														<input type="text" name="searchValue" class="scan"
+															value="${search.searchValue }">&nbsp; <input
+															type="submit" class="scan" value="검색">
+													</form>
+												</div>
+												<%-- 												<div class="row-fluid" align="right">
 													<form class="pull-right"action="#" method="get">
 														<select name="searchCondition">
 															<option value="all"
@@ -85,7 +97,7 @@
 															value="${ search.searchValue }"> <input
 															type="submit" value="검색">
 													</form>
-												</div>
+												</div> --%>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -131,7 +143,7 @@
 											</tbody>
 										</table>
 										<!-- 페이징 -->
-										<table style="height : 50px; text-align: center; font-size: 12px;">
+										<table style="height : 50px; margin:auto; text-align: center; font-size: 12px;">
 											<tr align="center" height="20" >
 												<td colspan="8">
 													<!-- 이전 --> 

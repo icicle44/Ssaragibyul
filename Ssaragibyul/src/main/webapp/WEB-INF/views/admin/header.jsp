@@ -32,18 +32,6 @@
 			<nav class="navbar navbar-header navbar-expand-lg" style="background-color: #EB5C01">
 				
 				<div class="container-fluid">
-					<div class="collapse" id="search-nav">
-						<form class="navbar-left navbar-form nav-search mr-md-3">
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<button type="submit" class="btn btn-search pr-1">
-										<i class="fa fa-search search-icon"></i>
-									</button>
-								</div>
-								<input type="text" placeholder="Search ..." class="form-control">
-							</div>
-						</form>
-					</div>
 					<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
 						<li class="nav-item toggle-nav-search hidden-caret">
 							<a class="nav-link" data-toggle="collapse" href="#" role="button" aria-expanded="false" aria-controls="search-nav">
@@ -234,7 +222,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="adminDonationAccusationList.do">
 											<span class="sub-item">기부 신고 관리</span>
 										</a>
 									</li>

@@ -332,5 +332,20 @@ public class AdminServiceImpl implements AdminService{
 		return aStore.selectAllDonationCal();
 	}
 
+	@Override
+	public DonationReport printOneDonationAdd(int accuDonNo) {
+		return aStore.selectOneDonationAcc(accuDonNo);
+	}
+
+	@Override
+	public int deleteDonationReport(DonationReport donationNo) {
+		return aStore.deleteDonaitonReport(donationNo);
+	}
+
+	@Override
+	public int deleteDanationAdd(DonationReport donationNo) {
+		return aStore.deleteDonaitonAcc(donationNo);
+	}
+
 
 }

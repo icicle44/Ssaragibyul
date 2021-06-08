@@ -373,6 +373,68 @@ public class AdminController {
 			return "common/errorPage";
 		}
 	}
+	
+	//펀딩 검색하기
+	// 1. 
+	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
+	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
+		if(!searchList1.isEmpty()) {
+			model.addAttribute("fListandFileEnd", fListandFileEnd);
+			model.addAttribute("fListandFile", searchList1);
+			model.addAttribute("search", search);
+			return "funding/fundingList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
+	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
+		if(!searchList2.isEmpty()) {
+			model.addAttribute("fListandFile", fListandFile);
+			model.addAttribute("fListandFileEnd", searchList2);
+			model.addAttribute("search", search);
+			return "funding/fundingList";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
+	
+	 @RequestMapping(value="fundingSelectMoney.do", method=RequestMethod.GET)
+	 public String fundingSelectMoney(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectForMoney();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
+	 
+	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
+	 public String fundingSelectLike(Model model) {
+		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 if(!fListandFile.isEmpty()) {				
+				model.addAttribute("fListandFile", fListandFile);
+				model.addAttribute("fListandFileEnd", fListandFileEnd);
+				return "funding/fundingList";
+			}else {
+				model.addAttribute("msg", "펀딩 목록조회 실패");
+				return "common/errorPage";
+			}
+	
+	 }
 
 	//기부 리스트 출력
 	@RequestMapping(value="adminDonationList.do", method = RequestMethod.GET)
@@ -421,7 +483,7 @@ public class AdminController {
 		}
 	}
 
-	// 신고 게시물 리스트
+	// 펀딩 신고 게시물 리스트
 	@RequestMapping(value="adminFundingAccusationList.do", method = RequestMethod.GET)
 	public ModelAndView reportListView(ModelAndView mv, @RequestParam(value="page", required = false) Integer page) {
 		int cuurentPage = (page != null) ? page : 1;
@@ -512,6 +574,48 @@ public class AdminController {
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
+	}
+	
+	// 신고 기부 삭제하기
+	@RequestMapping(value="adminDonationAccusationDelete.do", method = RequestMethod.GET)
+	public String reportDonationDelete(Model model, @RequestParam("accuDonNo") int accuDonNo) {
+		// FundingReport에 accuFundingNo로 하나를 셀렉트 해온다
+		DonationReport donationNo = aService.printOneDonationAdd(accuDonNo);
+		// FundingReport에 PROCESSING를 N으로 업데이트해준다
+		int result = aService.deleteDonationReport(donationNo);
+		// Funding에서 PROJECT_CODE = 1로 업데이트해준다.
+		result = aService.deleteDanationAdd(donationNo);
+		
+		if(result > 0 ) {
+			return "redirect:adminDonationAccusationList.do";
+		} else {
+			model.addAttribute("msg", "기부 신고 프로젝트 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
+	}
+	// 기부 다중삭제
+	@ResponseBody
+	@RequestMapping(value="adminDonationAccDeleteAll.do", method=RequestMethod.GET)
+	public String receivedDonationDelete(@RequestParam(value = "accuDonNo[]") List<Integer> accuDonNoArr, ModelAndView mv) {
+		//배열에 해당하는 쪽지의 삭제표시컬럼 update
+		// FundingReport에 accuFundingNo로 하나를 셀렉트 해온다
+		int result = 0;
+		int count = 0;
+		for(int i=0; i < accuDonNoArr.size() ; i++) {
+			int accuDonNo = accuDonNoArr.get(i);
+			DonationReport donationNo = aService.printOneDonationAdd(accuDonNo);
+			// FundingReport에 PROCESSING를 N으로 업데이트해준다
+			result = aService.deleteDonationReport(donationNo);
+			// Funding에서 PROJECT_CODE = 1로 업데이트해준다.
+			result = aService.deleteDanationAdd(donationNo);
+			count = count + result;
+		}
+		if(count == accuDonNoArr.size() ) {
+			return "success";
+		} else {
+			return "fail";
+		}			
+		
 	}
 	
 	//댓글삭제하기

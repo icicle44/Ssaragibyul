@@ -65,7 +65,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">기부 신고 리스트</h4>
+									<h4 class="card-title" style="margin:auto; text-align: center;">기부 신고 리스트</h4>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">
@@ -94,7 +94,7 @@
 															${dList.userId }</a>
 															</td>
 															<td align="center">
-																<a href="#modal_open${dList.accuDonNo }" data-toggle="modal">${dList.dProjectNo }</a></td>
+																<a href="#modal_open${dList.accuDonNo }" data-toggle="modal">${dList.projectNo }</a></td>
 															<td align="center">${dList.reportContent }
 															</td>
 															<td align="center">${dList.accusationDate }</td>
@@ -189,7 +189,7 @@
 		
 		<!-- 모달창 -->
 		<c:forEach items="${dList }" var="dList">
-			<div class="modal fade" id="modal_open${dList.accuFundingNo }" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" static>
+			<div class="modal fade" id="modal_open${dList.accuDonNo }" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" static>
 				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">

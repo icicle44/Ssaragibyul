@@ -55,9 +55,9 @@
 									successCallback(data);
 								}
 		            		});
-		            	}
+		            	},
 		            }],
-		            eventColor: 'rgba(255, 99, 132, 0.2)'A
+		             eventColor: 'rgba(255, 99, 132, 0.2)' 
 		        });
 		        calendar.render();
 		      });

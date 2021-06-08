@@ -97,6 +97,10 @@ public interface AdminService {
 //	public ArrayList<Board> printSearchReport(Search search);
 	// 신고 삭제하기
 	public int deleteReport(int BoardNo);
+	// 신고 기부 삭제하기
+	public DonationReport printOneDonationAdd(int accuDonNo);
+	public int deleteDonationReport(DonationReport donationNo);
+	public int deleteDanationAdd(DonationReport donationNo);
 	
 	//댓글삭제하기
 	public int removeReply(Reply reply);
@@ -136,13 +140,5 @@ public interface AdminService {
 	public int getFundingAccListCount();
 	public int getDonationAccListCount();
 
-
-
-
-	
-
-	
-	
-	
 	
 }

@@ -347,4 +347,19 @@ public class AdminStoreLogic implements AdminStore{
 		return (ArrayList)sqlSession.selectList("donationMapper.selectAllList");
 	}
 
+	@Override
+	public DonationReport selectOneDonationAcc(int accuDonNo) {
+		return sqlSession.selectOne("donationMapper.selectOneDonationAcc", accuDonNo);
+	}
+
+	@Override
+	public int deleteDonaitonReport(DonationReport donationNo) {
+		return sqlSession.update("donationMapper.deleteDonaitonReport", donationNo);
+	}
+
+	@Override
+	public int deleteDonaitonAcc(DonationReport donationNo) {
+		return sqlSession.update("donationMapper.deleteDonaitonAcc", donationNo);
+	}
+
 }

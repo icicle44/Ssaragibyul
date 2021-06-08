@@ -97,6 +97,10 @@ public interface AdminStore {
 //	public ArrayList<Board> selectSearchReport(Search search);
 	// 신고 삭제하기
 	public int deleteReport(int BoardNo);
+	// 기부 신고 삭제하기
+	public DonationReport selectOneDonationAcc(int accuDonNo);
+	public int deleteDonaitonReport(DonationReport donationNo);
+	public int deleteDonaitonAcc(DonationReport donationNo);
 	
 	//댓글삭제하기
 	public int deleteReply(Reply reply);
@@ -133,14 +137,5 @@ public interface AdminStore {
 	public int selectFundingListCount();
 	public int selectDonationListCount();
 	public int selectVisitListCount();
-
-
-
-
-
-
-	
-
-
 
 }

@@ -123,7 +123,7 @@
 											</tbody>
 										</table>
 										<!-- 페이징 -->
-										<table style="height : 50px; text-align: center; font-size: 12px;">
+										<table style="height : 50px; margin:auto; text-align: center; font-size: 12px;">
 											<tr align="center" height="20" >
 												<td colspan="8">
 													<!-- 이전 --> 

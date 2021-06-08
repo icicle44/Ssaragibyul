@@ -24,13 +24,10 @@
 	</script>
 
 	<!-- CSS Files -->
-	<link rel="stylesheet" href="/resources/css/independence/style_independence.css">
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 	<link rel="stylesheet" href="resources/css/admin/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/admin/atlantis.min.css">
 
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
 	<!-- CSS Just for demo purpose, don't include it in your project -->
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
 </head>
@@ -67,7 +64,7 @@
 						<div class="col-md-12">
 							<div class="card">
 								<div class="card-header">
-									<h4 class="card-title">별 보러 가자 리스트</h4>
+									<h4 class="card-title" style="margin: auto; text-align: center;">별 보러 가자 리스트</h4>
 											<!-- 검색 -->
 												<div class="row-fluid" align="right">
 													<form class="pull-right"action="#" method="get">
@@ -89,7 +86,7 @@
 								<div class="card-body">
 									<div class="table-responsive">
 										<table id="basic-datatables" class="table table-hover" >
-											<thead>
+											<thead style="margin: auto; text-align: center;">
 												<tr>
 													<th>번호</th>
 													<th>아이디</th>
@@ -125,7 +122,7 @@
 										</table>
 										<button type="button" class="btn btn-warning float-right" onclick="location.href='adminVisitDelete.do?visitNo=${list.visitNo}';">삭제하기</button>
 										<!-- 페이징 -->
-										<table style="height : 50px; text-align: center; font-size: 12px;">
+										<table style="height : 50px; margin: auto; text-align: center; font-size: 12px;">
 											<tr align="center" height="20" >
 												<td colspan="8">
 													<!-- 이전 --> 
