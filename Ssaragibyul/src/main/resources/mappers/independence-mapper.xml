@@ -29,4 +29,8 @@
 	<select id="selectOne" resultMap="independenceResultMap">
 		SELECT * FROM INDEPENDENCE WHERE MNG_NO = #{independenceNo }
 	</select>
+	
+	<select id="selectSearchList" resultMap="independenceResultMap">
+		SELECT * FROM INDEPENDENCE WHERE NAME_KO = ${nameKo } OR ${}  ${}
+	</select>
 </mapper>

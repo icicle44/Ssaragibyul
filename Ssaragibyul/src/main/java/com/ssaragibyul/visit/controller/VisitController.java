@@ -39,7 +39,7 @@ public class VisitController {
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
 	public ModelAndView visitListView(ModelAndView mv, Visit visit) {
 		ArrayList<Visit> vList = vService.printAll();
-		if(visit != null) {
+		if(!vList.isEmpty()) {
 			mv.addObject("vList", vList).setViewName("visit/visitList");
 		}else {
 			mv.addObject("msg","게시글 조회 실패").setViewName("common/errorPage");

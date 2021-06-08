@@ -515,94 +515,34 @@ width : 1540px;
 						<div class="col-md-8">
 							<div class="row">
 								<h2 class="heading text-uppercase text-white" data-aos="fade-up">Blog</h2>
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_1.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
+								
+								
+								<c:forEach items="${vList }" var="vList" varStatus="status">
+									<c:if test="${status.index<5}">
+										<div class="col-md-12 mb-4" data-aos="fade-up">
+											<div class="d-md-flex d-block blog-entry align-items-start">
+												<div class="mr-0 mr-md-5 mb-3 img-wrap">
+													<a href="http://localhost:8888/visitList.do"><img src="/resources/vUploadFiles/${vList.renameFilename }"
+									alt="${vList.originalFilename }"
+														class="img-fluid"></a>
+												</div>
+												<div>
+													<div class="meta mb-3">
+														 <a href="http://localhost:8888/visitList.do">${vList.visitTitle }</a>
+													</div>
+													<p>${vList.visitContents }</p>
+												</div>
 											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
 										</div>
-									</div>
-								</div>
+									</c:if>
+								</c:forEach>
 
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_2.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_3.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="col-md-12 mb-4" data-aos="fade-up">
-									<div class="d-md-flex d-block blog-entry align-items-start">
-										<div class="mr-0 mr-md-5 mb-3 img-wrap">
-											<a href="single.html"><img
-												src="/resources/img/images/blog_4.jpg" alt="Image"
-												class="img-fluid"></a>
-										</div>
-										<div>
-											<h2 class="mt-0 mb-2">
-												<a href="single.html">My New Photography Has Been
-													Featured in Forbes</a>
-											</h2>
-											<div class="meta mb-3">
-												Posted by Ben Jones on <a href="#">별보러 가자 게시물</a>
-											</div>
-											<p>Lorem ipsum dolor sit amet, consectetur adipisicing
-												elit. Officiis aliquid doloremque qui, saepe alias eum?</p>
-										</div>
-									</div>
-								</div>
+							
 
 								<div class="col-12 text-center">
 									<div class="custom-pagination">
 					                    <div class="d-grid gap-2 col-6 mx-auto">
-					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="">더보기</button>
+					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="location.href='http://localhost:8888/visitList.do'">더보기</button>
 					                    </div>
 									</div>
 								</div>

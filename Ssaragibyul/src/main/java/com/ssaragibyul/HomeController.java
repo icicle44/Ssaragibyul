@@ -17,6 +17,8 @@ import com.ssaragibyul.donation.domain.Donation;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.service.FundingService;
+import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.service.VisitService;
 
 /**
  * Handles requests for the application home page.
@@ -29,6 +31,9 @@ public class HomeController {
 	
 	@Autowired
 	private DonationService dService;
+	
+	@Autowired
+	private VisitService vService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -50,14 +55,14 @@ public class HomeController {
 		ArrayList<Funding> fListandFile = fService.printAllProjectLimit();
 		ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndLimit();
 		ArrayList<Donation> dListandFile = dService.printAllProject();
-		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd(); 
-		if(!fListandFile.isEmpty()) {
+		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();
+		ArrayList<Visit> vList = vService.printAll();
+		if(!fListandFile.isEmpty() && !dListandFile.isEmpty() && !vList.isEmpty()) {
 			model.addAttribute("fListandFile", fListandFile);
 			model.addAttribute("fListandFileEnd", fListandFileEnd);
-			if(!dListandFile.isEmpty()) {
-				model.addAttribute("dListandFile", dListandFile); 
-				model.addAttribute("dListandFileEnd", dListandFileEnd);
-			}
+			model.addAttribute("dListandFile", dListandFile); 
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			model.addAttribute("vList", vList);
 		}else {
 			model.addAttribute("msg", "펀딩 목록조회 실패");
 		} 

@@ -5,191 +5,197 @@ div, article, section {
     font-family: 'Noto Serif KR', serif;
     color: #464646;
 }   */
-body * {
-  box-sizing: border-box;
-  text-align: center;
-}	
-
-/* body { overflow: hidden; } */
-h2{
-	font-size:17px;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700&display=swap');
+img{
+	position: absolute;
+	width: 50px;
+	height: 50px;
 }
-/* 아코디언 */
-.search-info{
-	font-famlily:korea;
-	color:#fff;
-	width:25px;
-	float:left;
-	item-align:center;
-	text-align:center;
-	font-size: 30px;
-}
-article.accordion
-{
-  position:relative;
-  display: block;
-  width: 26em;
-  height:10em;
-  margin: 0 auto;
-  background-color: #F5F5F5;
-  overflow: auto;
-  border-radius: 10px;
-}
-article.accordion section
-{
-	padding-top:44px;
-	z-index:100;
-  display: block;
-  float: left;
-  width: 2em;
-  height: 8em;
-  margin: 0em 0 0.5em 0.5em;
-  color: #333;
-/*   overflow: hidden; */
-  border-radius: 3px;
-}
-article.accordion section h2 input
-{
-  font-size: 1em;
-  font-weight: bold;
-  width: 8em;
-  height: 2em;
-  top: 12em;
-  left: 0;
-  text-indent: 1em;
-  padding: 0;
-  margin: 0;
-  color: #ddd;
-  -webkit-transform-origin: 0 0;
-  -moz-transform-origin: 0 0;
-  -ms-transform-origin: 0 0;
-  -o-transform-origin: 0 0;
-  transform-origin: 0 0;
-  -webkit-transform: rotate(-90deg);
-  -moz-transform: rotate(-90deg);
-  -ms-transform: rotate(-90deg);
-  -o-transform: rotate(-90deg);
-  transform: rotate(-90deg);
-}
-article.accordion section{
-}
-article.accordion section h2 a input
-{
-  display: block;
-  width: 120%;
-  line-height: 1em;
-  text-decoration: none;
-  color: inherit;
-  outline: 0 none;
-}article.accordion section:target
-{
-  width: 15em;
-  padding: 0 1em;
-  color: #333;
-  background-color: #fff;
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	list-style: none;
+	font-family: 'Montserrat', sans-serif;
 }
 
-article.accordion section:target h2 input
-{
-  position: static;
-  font-size: 1.3em;
-  text-indent: 0;
-  color: #333;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -ms-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  margin-bottom: 10
+body{
+	background: #7a75d1;
 }
-article.accordion section,
-article.accordion section h2
-{
-  -webkit-transition: all 1s ease;
-  -moz-transition: all 1s ease;
-  -ms-transition: all 1s ease;
-  -o-transition: all 1s ease;
-  transition: all 1s ease;
+
+.wrapper{
+	width: 850px;
+	margin: 50px auto;
+}
+
+.main_title{
+	font-size: 32px;
+	color: #fff;
+	letter-spacing: 2px;
+	background: #edc856;
+	padding: 10px; 
+	border-radius: 3px;
+	text-align: center;
+	width: 700px;
+	margin: 0 auto 25px;
+}
+
+.accordion_wrap ul{
+	display: flex;
+	justify-content: center;
+}
+
+.accordion_wrap .accordion_item{
+	list-style: none;
+	width: 100px;
+	height: 175px;
+	background: #edc856;
+	border-right: 1px solid #a48d2d;
+	cursor: pointer;
+	position: relative;
+	transition: all 0.2s linear;
+}
+
+.accordion_wrap .accordion_item:hover,
+.accordion_wrap li.active .accordion_item{
+	background: #a48d2d;
+	border-right: 1px solid #edc856;
+}
+
+.accordion_wrap li:first-child .accordion_item{
+	border-top-left-radius: 3px;
+	border-bottom-left-radius: 3px;
+}
+
+.accordion_wrap li:last-child .accordion_item,
+.accordion_wrap li:last-child .accordion_menu{
+	border-right: 0px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px;
+}
+
+.accordion_wrap ul li .icon{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	background: url('https://i.imgur.com/CKjTVJW.png');
+}
+
+.accordion_wrap ul li.walk .icon{
+	background-position: 0 0;
+	width: 20px;
+	height: 43px;
+}
+
+.accordion_wrap ul li.bicycle .icon{
+	background-position: 0 -56px;
+	width: 43px;
+	height: 28px;
+}
+
+.accordion_wrap ul li.bike .icon{
+	background-position: 0 -96px;
+	width: 43px;
+	height: 32px;
+}
+
+.accordion_wrap ul li.car .icon{
+	background-position: 0 -141px;
+	width: 43px;
+	height: 24px;
+}
+
+.accordion_wrap ul li.train .icon{
+	background-position: 0 -178px;
+	width: 43px;
+	height: 33px;
+}
+
+.accordion_wrap ul li.aeroplane .icon{
+	background-position: 0 -224px;
+	width: 43px;
+	height: 43px;
+}
+
+.accordion_wrap ul li.walk .accordion_item:hover .icon,
+.accordion_wrap ul li.walk.active .icon{
+	background-position: -57px 0;
+}
+
+.accordion_wrap ul li.bicycle .accordion_item:hover .icon,
+.accordion_wrap ul li.bicycle.active .icon{
+	background-position: -57px -56px;
+}
+
+.accordion_wrap ul li.bike .accordion_item:hover .icon,
+.accordion_wrap ul li.bike.active .icon{
+	background-position: -57px -96px;
+}
+
+.accordion_wrap ul li.car .accordion_item:hover .icon,
+.accordion_wrap ul li.car.active .icon{
+	background-position: -57px -141px;
+}
+
+.accordion_wrap ul li.train .accordion_item:hover .icon,
+.accordion_wrap ul li.train.active .icon{
+	background-position: -57px -178px;
+}
+
+.accordion_wrap ul li.aeroplane .accordion_item:hover .icon,
+.accordion_wrap ul li.aeroplane.active .icon{
+	background-position: -57px -224px;
+}
+
+.accordion_wrap ul li{
+	display: flex;
+}
+
+.accordion_menu{
+	width: 0px;
+	height: 175px;
+	background: #fffaeb;
+	color: #a48d2d;
+	overflow: hidden;
+	transition: width 0.2s ease;
+}
+
+.accordion_wrap ul li.active .accordion_menu{
+	width: 250px;
+}
+
+.accordion_menu .inner_am{
+	padding: 10px;
+}
+
+.accordion_menu .title{
+	font-weight: 600;
+}
+
+.accordion_menu .content{
+	font-size: 13px;
+	font-weight: 300;
+	margin: 10px 0;
+}
+
+.accordion_menu .view_more{
+	padding: 5px;
+	background: #a48d2d;
+	color: #fffaeb;
+	width: 125px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.accordion_menu .view_more:hover{
+	text-decoration: underline;
 }
 /* 검색창 */
-/*--------------------------------------------------------------
-1.0 - BASE SITE STYLES
---------------------------------------------------------------*/
-*,*:after,*:before {
-  box-sizing:border-box;
-  -moz-box-sizing:border-box;
-  -webkit-box-sizing:border-box;
-}
-
-.cf:before,
-.cf:after {
-    content:"";
-    display:table;
-}
-.cf:after {
-    clear:both;
-}
 
 
-/*--------------------------------------------------------------
-2.0 - SEARCH FORM
---------------------------------------------------------------*/
-.searchform input, .searchform button, form{
-/* 	float: left; */
-z-index:5;
-}
-.searchform input {
-	margin-top: 3em;
-	background:#fefefe;
-	border: none;
-	font:12px/12px 'HelveticaNeue', Helvetica, Arial, sans-serif;
-	margin-right: 5px;
-	padding: 10px;
-	width: 216px;
-	box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
-	-moz-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
-	-webkit-box-shadow: 0 0 4px rgba(0,0,0,.4) inset, 1px 1px 1px rgba(255,255,255,.75);
-  border-radius: 9px;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px
-}
-.searchform input:focus {
-	outline: none;
-	box-shadow:0 0 4px #0d76be inset;
-	-moz-box-shadow:0 0 4px #0d76be inset;
-	-webkit-box-shadow:0 0 4px #0d76be inset;
-}
-.searchform input::-webkit-input-placeholder {
- 	font-style: italic;
- 	line-height: 15px
-}
-
-.searchform input:-moz-placeholder {
-  font-style: italic;
- 	line-height: 15px
-}
-
-.searchform button {
-		height:30px;
-	vertical-align: inital;
-	background: linear-gradient(#eb5b01, #eb5c50);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#34adec', endColorstr='#2691dc',GradientType=0 );
-	border: none;
-	color:#fff;
-	cursor: pointer;
-	font: 13px/13px 'HelveticaNeue', Helvetica, Arial, sans-serif;
-	padding: 10px;
-	width:106px;
-	box-shadow: 0 0 2px #2692dd inset;
-	-moz-box-shadow: 0 0 2px #2692dd inset;
-	-webkit-box-shadow: 0 0 2px #2692dd inset;
-  border-radius: 9px;
-  -moz-border-radius: 9px;
-  -webkit-border-radius: 9px;
-}
-.searchform button:hover {
-	opacity:.9;
-}
 /* 기존 */
 .container{
 }
@@ -219,8 +225,17 @@ z-index:5;
 }
 .search{
 	background: #464646;
+	margin: 0;
+	height: 25em;
+	  width:100%;
+  border: 1px solid #327a81;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  max-width: calc(100% - 2em);
+  margin: 0;
+  overflow: hidden;	
 }
-.search, .intro, .table-users {
+.intro, .table-users {
   width:100%;
   height: auto;
   border: 1px solid #327a81;
@@ -239,7 +254,7 @@ table {
 }
 table th{
 	color: #286267;
-  padding: 05px;
+  padding: 1em 0em 1em 2em;
   font-size: 15px;
 } 
 table td{

@@ -30,7 +30,7 @@ public class IndependenceStoreLogic implements IndependenceStore{
 
 	@Override
 	public ArrayList<Independence> selectSearchList(Search search) {
-		return null;
+		return (ArrayList)sqlSession.selectList("independenceMapper.selectSearchList", search);
 	}
 
 	@Override

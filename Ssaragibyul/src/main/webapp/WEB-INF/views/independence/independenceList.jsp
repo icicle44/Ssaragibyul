@@ -22,47 +22,111 @@
 	</section>
 	<section class="contents col-md-8">
 	  <div class="search">
-		<article class="accordion">
-		  <section id="acc1">
-		    <h2><a href="#acc1">성명</a></h2>
-		    <form class="searchform cf" id="form1">
-			  <input type="text" placeholder="성명을 입력해주세요">
-			  <button type="submit">검색</button>
-			</form>
-		  </section>
-		  
-		  <section id="acc2">
-		    <h2><a href="#acc2">운동계열</a></h2>
-		    <form class="searchform cf" id="form2">
-			  <input type="text" placeholder="운동계열을 입력해주세요">
-			  <button type="submit">검색</button>
-			</form>
-		  </section>
-		  
-		  <section id="acc3">
-		    <h2><a href="#acc3">포상연도</a></h2>
-		    <form class="searchform cf">
-			  <input type="text" placeholder="포상연도를 입력해주세요">
-			  <button type="submit">검색</button>
-			</form>
-		  </section>
-		  
-		  <section id="acc4">
-		    <h2><a href="#acc4">포상훈격</a></h2>
-		    <form class="searchform cf">
-			  <input type="text" placeholder="포상훈격을 입력해주세요">
-			  <button type="submit">검색</button>
-			</form>
-		  </section>
-		  
-		  <section id="acc5">
-		    <h2><a href="#acc5">본적</a></h2>
-		    <form class="searchform cf">
-			  <input type="text" placeholder="본적을 입력해주세요">
-			  <button type="submit">검색</button>
-			</form>
-		  </section>
-		</article>
+		<div class="wrapper">
+	<div class="main_title">
+		Means Of Transportation
+	</div>
+	<div class="accordion_wrap">
+		<ul>
+			<li class="walk">
+				<div class="accordion_item">
+					<img href="resources/img/independence/11.jpg">
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Walk</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam unde aut ut aliquam harum doloremque quod quam iste id voluptatem!
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="bicycle">
+				<div class="accordion_item">
+					<div class="icon"></div>
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Bicycle</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam unde aut ut aliquam harum doloremque quod quam iste id voluptatem!
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="bike">
+				<div class="accordion_item">
+					<div class="icon"></div>
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Bike</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam unde aut ut aliquam harum doloremque quod quam iste id voluptatem!
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="car">
+				<div class="accordion_item">
+					<div class="icon"></div>
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Bike</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam unde aut ut aliquam harum doloremque quod quam iste id voluptatem!
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="train">
+				<div class="accordion_item">
+					<div class="icon"></div>
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Train</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam unde aut ut aliquam harum doloremque quod quam iste id voluptatem!
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+			<li class="aeroplane">
+				<div class="accordion_item">
+					<div class="icon"></div>
+				</div>
+				<div class="accordion_menu">
+					<div class="inner_am">
+						<div class="title">Aeroplane</div>
+						<div class="content">
+							Lorem ipsum dolor sit amet
+						</div>
+						<div class="view_more">
+							View More
+						</div>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
 		</div>
  		<div class="table-users">
 			<table cellspacing="0">
@@ -200,7 +264,23 @@ event.preventDefault();
 event.stopPropagation();
 return false;
 }); 
+var li_items = document.querySelectorAll(".accordion_wrap ul li");
+var ul = document.querySelector(".accordion_wrap ul");
 
+li_items.forEach(function(item){
+	item.addEventListener("click", function(){
+		li_items.forEach(function(item){
+			item.classList.remove("active");
+		})
+		item.classList.add("active");
+	});
+});
+
+ul.addEventListener("mouseleave", function(){
+	li_items.forEach(function(item){
+		item.classList.remove("active");
+	})
+});
 	
 </script>
 </body>
