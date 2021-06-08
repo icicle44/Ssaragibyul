@@ -31,5 +31,5 @@ public interface VisitStore {
 	public int minusLikesCount(VisitLike likes);
 	public int getLikes(int visitNo);
 	public String checkLikes(VisitLike likes);
-	public ArrayList<Visit> selectSearchAll(Search search);
+	public ArrayList<Visit> selectSearchAll(String searchValue);
 }

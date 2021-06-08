@@ -131,9 +131,9 @@ public class VisitStoreLogic implements VisitStore{
 		return session.selectOne("visitMapper.getLikes", visitNo);
 	}
 	@Override
-	public ArrayList<Visit> selectSearchAll(Search search) {
+	public ArrayList<Visit> selectSearchAll(String searchValue) {
 		
-		return (ArrayList)session.selectList("visitMapper.searchAll", search);
+		return (ArrayList)session.selectList("visitMapper.searchAll", searchValue);
 	}
 
 

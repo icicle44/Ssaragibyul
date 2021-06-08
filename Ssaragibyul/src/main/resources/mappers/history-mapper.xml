@@ -28,6 +28,14 @@
       SELECT COUNT(*) FROM HISTORY WHERE H_STATUS = 'Y'
     </select>
     
+	<select id="selectAllSiteTypes" resultMap="historyResultMap">
+    	SELECT SITE_TYPE FROM HISTORY
+    </select>    
+    
+    <select id="selectAllSiteNames" resultMap="historyResultMap">
+    	SELECT SITE_NAME FROM HISTORY WHERE SITE_TYPE = #{siteType }
+    </select>
+    
     <select id="selectOneHistory" resultMap="historyResultMap">
     	SELECT * FROM HISTORY WHERE SITE_NO = #{siteNo} AND H_STATUS = 'Y'
     </select>

@@ -26,6 +26,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
+import com.ssaragibyul.history.domain.History;
+import com.ssaragibyul.history.service.HistoryService;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.visit.domain.Visit;
 import com.ssaragibyul.visit.domain.VisitLike;
@@ -36,6 +38,8 @@ public class VisitController {
 	
 	@Autowired
 	private VisitService vService;
+	@Autowired
+	private HistoryService hService;
 	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
 	public ModelAndView visitListView(ModelAndView mv, Visit visit) {
 		ArrayList<Visit> vList = vService.printAll();
@@ -58,20 +62,13 @@ public class VisitController {
 		Gson gson = new GsonBuilder().create(); 
 		gson.toJson(addList, response.getWriter());
 
-		/*
-		if(!addList.isEmpty()) {
-			return addList;
-		}else {
-			return null;
-		}
-		*/
 	}
 
 	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		Visit visit = vService.printOne(visitNo);
 		if(visit != null) {
-			mv.addObject("visit", visit).setViewName("visit/visitListView");
+			mv.addObject("visit", visit).setViewName("visit/visitList");
 		}else {
 			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
 		}
@@ -79,9 +76,25 @@ public class VisitController {
 	}
 	// 게시글 등록화면
 	@RequestMapping(value="visitWriteView.do", method=RequestMethod.GET)
-	public String visitWriteView() {
-		
-		return "visit/visitWrite";
+	public ModelAndView visitWriteView(ModelAndView mv) {
+		ArrayList<History> hList = hService.printAllSiteType();
+		if(!hList.isEmpty()) {
+			mv.addObject("hList", hList).setViewName("visit/visitWrite");
+		}else {
+			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
+	}
+	// 게시글 등록할 때 SiteName 가져오기
+	@RequestMapping(value="getSiteName.do", method=RequestMethod.POST)
+	public void getSiteName(HttpServletResponse response, @RequestParam("siteType") String siteType) throws Exception{
+		System.out.println("siteType : " + siteType);
+		ArrayList<History> hList = hService.printAllSiteNames(siteType);
+		System.out.println("controller, siteName, hList : "+hList);
+		if(!hList.isEmpty()) {
+			Gson gson = new GsonBuilder().create(); 
+			gson.toJson(hList, response.getWriter());
+		}
 	}
 	// 게시글 등록
 	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)
@@ -325,12 +338,11 @@ public class VisitController {
 	}
 //======================== 검색
 	@RequestMapping(value="visitSearch.do", method=RequestMethod.POST)
-	public String visitSearch(@ModelAttribute Search search, Model model) {
-		ArrayList<Visit> searchList = vService.printSearchAll(search);
+	public String visitSearch(@RequestParam("searchValue") String searchValue, Model model) {
+		ArrayList<Visit> searchList = vService.printSearchAll(searchValue);
 		System.out.println("searchList"+searchList);
 		if(!searchList.isEmpty()) {
 			model.addAttribute("vList", searchList);
-			model.addAttribute("search",search);
 			return "visit/visitSearchList";
 		}else {
 			model.addAttribute("msg", "검색결과가 없습니다");

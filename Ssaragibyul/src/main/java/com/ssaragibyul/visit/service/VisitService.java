@@ -99,7 +99,6 @@ public interface VisitService {
 
 	public String checkLikes(VisitLike likes);
 
-	public ArrayList<Visit> printSearchAll(Search search);
+	public ArrayList<Visit> printSearchAll(String searchValue);
 
-	
 }

@@ -19,6 +19,7 @@ padding: 5em;
 }
 .input{
 	border:none;
+	width:400px;
 	/* border-right:0px; 
 	border-top:0px; 
 	boder-left:0px; 

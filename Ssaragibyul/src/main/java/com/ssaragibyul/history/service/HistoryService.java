@@ -16,4 +16,8 @@ public interface HistoryService {
 	public int modifyHistory(History history);
 	
 	public int removeHistory(int siteNo);
+
+	public ArrayList<History> printAllSiteNames(String siteType);
+
+	public ArrayList<History> printAllSiteType();
 }

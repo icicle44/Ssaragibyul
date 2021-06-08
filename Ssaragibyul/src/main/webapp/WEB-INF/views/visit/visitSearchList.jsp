@@ -48,17 +48,7 @@
 				<b>별 보러 가자</b>
 				<hr>
 			</section>
-
 			<section class="contents col-md-9">
-				<div class="button-container">
-					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
-						인증하기</button>
-					<form id="search-content" action="visitSearch.do" method="post">
-					  <input type="text" name="input" class="input" id="search-input">
-					  <button type="reset" class="search" id="search-btn"></button>
-					  검색창
-					</form>
-				</div>
 				<div class="content">
 					<div class="grid">
 						<c:forEach items="${vList }" var="vList">
@@ -148,9 +138,11 @@
 							</div>
 						</c:forEach>
 					</div>
-
-
 					<!-- /grid -->
+					<div>
+					<hr>
+					<a onclick="history.back()" style="cursor:pointer">[이전페이지로 돌아가기]</a>
+					</div>
 					<div class="preview">
 						<button class="action action--close">
 							<i class="fa fa-times" style="color:#EB5C01;"></i><span class="text-hidden">Close</span>

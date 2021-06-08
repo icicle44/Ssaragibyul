@@ -54,8 +54,8 @@
 					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
 						인증하기</button>
 					<form id="search-content" action="visitSearch.do" method="post">
-					  <input type="text" name="input" class="input" id="search-input">
-					  <button type="reset" class="search" id="search-btn"></button>
+					  <input type="text" name="searchValue" class="input" id="search-input">
+				  <button type="reset" class="search" id="search-btn"></button>
 					  검색창
 					</form>
 				</div>
@@ -70,7 +70,7 @@
 									<div class="description description--grid">
 										<div class="rightCon">
 											<div class="r-title col-md-12">
-												<div id="title">${vList.visitTitle }/${vList.visitNo }번글</div>
+												<div id="title">${vList.visitTitle }</div>
 												<c:url var="msgWriteUrl" value="msgWriterView.do">
 												   <c:param name="receiverId" value="${vList.userId }"></c:param>												   
 												   <c:param name="msgType" value="4"></c:param>

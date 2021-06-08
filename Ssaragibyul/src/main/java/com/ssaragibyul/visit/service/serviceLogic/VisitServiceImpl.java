@@ -128,11 +128,8 @@ public class VisitServiceImpl implements VisitService{
 		return 0;
 	}
 	@Override
-	public ArrayList<Visit> printSearchAll(Search search) {
-		
-		return vStore.selectSearchAll(search);
+	public ArrayList<Visit> printSearchAll(String searchValue) {
+		return vStore.selectSearchAll(searchValue);
 	}
-
-
 
 }
