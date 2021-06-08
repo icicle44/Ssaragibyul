@@ -127,7 +127,21 @@ public interface FundingService {
 	
 	public ArrayList<FundingLog> printMyFundingMoney(String userId, PageInfo pi);
 
-	public FundingLog calListNumberLikeFunding(String userId);
+	public FundingLike calListNumberLikeFunding(String userId);
+
+	public ArrayList<FundingLike> printLikeFunding(String userId, PageInfo pi);
+
+	public ArrayList<FundingLike> printLikeFundingLike(String userId, PageInfo pi);
+
+	public ArrayList<FundingLike> printLikeFundingMoney(String userId, PageInfo pi);
+
+	public Funding calListNumberProspFunding(String userId);
+
+	public ArrayList<Funding> printPropFunding(String userId, PageInfo pi);
+
+	public ArrayList<Funding> printPropFundingLike(String userId, PageInfo pi);
+
+	public ArrayList<Funding> printPropFundingMoney(String userId, PageInfo pi);
 	
 
 

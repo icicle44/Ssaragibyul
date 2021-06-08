@@ -371,8 +371,29 @@ public class FundingSerivceImpl implements FundingService {
 	public ArrayList<FundingLog> printMyFundingMoney(String userId, PageInfo pi){
 		return fStore.selectMyFundingMoney(userId, pi); 
 	}
-	public FundingLog calListNumberLikeFunding(String userId) {
+	public FundingLike calListNumberLikeFunding(String userId) {
 		return fStore.calListNumberLikeFunding(userId);
 	}
-
+	public ArrayList<FundingLike> printLikeFunding(String userId, PageInfo pi){
+		return fStore.selectLikeFunding(userId, pi); 
+	}
+	public ArrayList<FundingLike> printLikeFundingLike(String userId, PageInfo pi){
+		return fStore.selectLikeFundingLike(userId, pi); 
+	}
+	public ArrayList<FundingLike> printLikeFundingMoney(String userId, PageInfo pi){
+		return fStore.selectLikeFundingMoney(userId, pi); 
+	}
+	
+	public Funding calListNumberProspFunding(String userId) {
+		return fStore.calListNumberProspFunding(userId);
+	}
+	public ArrayList<Funding> printPropFunding(String userId, PageInfo pi){
+		return fStore.selectPropFunding(userId, pi); 
+	}
+	public ArrayList<Funding> printPropFundingLike(String userId, PageInfo pi){
+		return fStore.selectPropFundingLike(userId, pi); 
+	}
+	public ArrayList<Funding> printPropFundingMoney(String userId, PageInfo pi){
+		return fStore.selectPropFundingMoney(userId, pi); 
+	}
 }

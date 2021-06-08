@@ -115,9 +115,15 @@ public interface FundingStore {
 	public FundingLog calListNumberMyFunding(String userId);
 	public ArrayList<FundingLog> selectMyFunding(String userId, PageInfo pi);
 	public ArrayList<FundingLog> selectMyFundingLike(String userId, PageInfo pi);
-	public FundingLog calListNumberLikeFunding(String userId);
+	public FundingLike calListNumberLikeFunding(String userId);
+	public ArrayList<FundingLike> selectLikeFunding(String userId, PageInfo pi);
+	public ArrayList<FundingLike> selectLikeFundingLike(String userId, PageInfo pi);
+	public ArrayList<FundingLike> selectLikeFundingMoney(String userId, PageInfo pi);
+	public Funding calListNumberProspFunding(String userId);
+	public ArrayList<Funding> selectPropFunding(String userId, PageInfo pi);
+	public ArrayList<Funding> selectPropFundingLike(String userId, PageInfo pi);
+	public ArrayList<Funding> selectPropFundingMoney(String userId, PageInfo pi);
 }
-
 
 
 

@@ -23,6 +23,7 @@ public class Funding {
 	private Date deleiveryDate;
 	private int percent;
 	private int leftDate;
+	private int count;
 	
 	private FundingFile fundingFile;
 	
@@ -37,6 +38,42 @@ public class Funding {
 	
 	
 	
+public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
+			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
+			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate, int percent,
+			int leftDate, int count, FundingFile fundingFile) {
+		super();
+		this.projectNo = projectNo;
+		this.userId = userId;
+		this.subjectName = subjectName;
+		this.productName = productName;
+		this.goalMoney = goalMoney;
+		this.sumMoney = sumMoney;
+		this.optionPrice = optionPrice;
+		this.optionLimit = optionLimit;
+		this.startDate = startDate;
+		this.finDate = finDate;
+		this.projectStory = projectStory;
+		this.productContent = productContent;
+		this.warningIntro = warningIntro;
+		this.likeCount = likeCount;
+		this.hitsCount = hitsCount;
+		this.projectCode = projectCode;
+		this.deleiveryDate = deleiveryDate;
+		this.percent = percent;
+		this.leftDate = leftDate;
+		this.count = count;
+		this.fundingFile = fundingFile;
+	}
+
+
+
+
+
+
+
+
+
 public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
 			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
 			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate, int percent,
@@ -283,6 +320,20 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 	public FundingFile getFundingFile() {
 		return fundingFile;
 	}
+	
+	public void setFundingFile(FundingFile fundingFile) {
+		this.fundingFile = fundingFile;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 
 	@Override
 	public String toString() {
@@ -292,22 +343,10 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 				+ ", finDate=" + finDate + ", projectStory=" + projectStory + ", productContent=" + productContent
 				+ ", warningIntro=" + warningIntro + ", likeCount=" + likeCount + ", hitsCount=" + hitsCount
 				+ ", projectCode=" + projectCode + ", deleiveryDate=" + deleiveryDate + ", percent=" + percent
-				+ ", leftDate=" + leftDate + ", fundingFile=" + fundingFile + "]";
+				+ ", leftDate=" + leftDate + ", count=" + count + ", fundingFile=" + fundingFile + "]";
 	}
 
-
-
-
-
-
-
-
-
-	public void setFundingFile(FundingFile fundingFile) {
-		this.fundingFile = fundingFile;
-	}
 	
-
 	
 	}
 	

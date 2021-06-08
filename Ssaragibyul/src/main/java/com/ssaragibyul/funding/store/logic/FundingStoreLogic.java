@@ -341,9 +341,50 @@ public class FundingStoreLogic implements FundingStore{
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFundingMoney", userId, rowBounds);
 	}
 
-	public FundingLog calListNumberLikeFunding(String userId) {
+	public FundingLike calListNumberLikeFunding(String userId) {
 		return sqlSession.selectOne("fundingMapper.calListNumberLikeFunding", userId);
 	}
+
+	public ArrayList<FundingLike> selectLikeFunding(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectLikeFunding", userId, rowBounds);
+	}
+
+	public ArrayList<FundingLike> selectLikeFundingLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectLikeFundingLike", userId, rowBounds);
+	}
+
+	public ArrayList<FundingLike> selectLikeFundingMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectLikeFundingMoney", userId, rowBounds);
+	}
+
+	public Funding calListNumberProspFunding(String userId) {
+		return sqlSession.selectOne("fundingMapper.calListNumberProspFunding", userId);
+	}
+
+	public ArrayList<Funding> selectPropFunding(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectPropFunding", userId, rowBounds);
+	}
+
+	public ArrayList<Funding> selectPropFundingLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectPropFundingLike", userId, rowBounds);
+	}
+
+	public ArrayList<Funding> selectPropFundingMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectPropFundingMoney", userId, rowBounds);
+	}
+
 
 
 	
