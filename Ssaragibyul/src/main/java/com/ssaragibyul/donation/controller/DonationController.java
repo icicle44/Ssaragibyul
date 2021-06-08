@@ -291,10 +291,10 @@ public class DonationController {
  
 	// 신고하기 
 	@RequestMapping(value="accusation.do", method = RequestMethod.POST )
-	public String accusation_ReportRegister(@ModelAttribute DonationReport donationReport) { 
+	public String accusation_ReportRegister(@ModelAttribute DonationReport donationReport, @RequestParam("projectNo") int projectNo) { 
 		int result = dService.accusationRegister(donationReport);
 		if(result > 0) {
-			return "donation/donationList";
+			return "redirect:donationDetail.do?projectNo="+projectNo;
 		}else {
 			return "common/errorPage";
 		}

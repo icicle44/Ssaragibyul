@@ -235,7 +235,6 @@ margin-left: 100px;
 		<div class="detailView_right col-6">
 			<div class="noting"></div>
 				<h1 class = "contents">${donation.subjectName }, ${memberlist.nickName }</h1><br>
-					console.log(${memberlist.nickName });
 					<b class = "contents">기부 금액 : <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</b>
 	   									<script>console.log('${donation.leftDate}');</script>
 	   									<c:if test="${donation.leftDate < 1}">

@@ -40,13 +40,21 @@
 	height : 550px;
 }
 .gridmain > * {
-  float: left;  
-  width: 30%;
-  height: 30%;
-  font-size:12px;
+	float: left;  
+	width: 30%;
+	height: 30%;
+	font-size:12px;
+	font-family: 'Noto Serif KR', serif;
 }
+
+a{
+	text-decoration: none;
+}
+
 .btn{
-margin: auto;
+	margin: auto;
+	font-family: 'Noto Serif KR', serif;
+	text-align: center;
 }
 .#name_css{
 	text-align: left; 
@@ -56,15 +64,16 @@ margin: auto;
 	color:DimGray;
 }
 .nothing{
- color:white;
+ 	color:white;
 }
 #bar_td{
+	width:100%;
 	text-align: left; 
 	margin:auto;
 }
 #svg{
 	height:2px; 
-	width: 350px;
+	width: 400px;
 }
 #dday_css{
 	float:left; 
@@ -77,21 +86,65 @@ margin: auto;
 	text-align: right; 
 	font-size:12px;
 }
+
+/*  */
+
 .select{
-	float:right;
+	float:left;
+	height: 30px;
+	margin-right: 10px;
+	border-radius: 5px;
+    border: 1px solid rgb(104, 104, 104);
+    color: rgb(104, 104, 104);
+    font-weight:450;
+    text-align: center;
 }
 
 #pj_search{
-width : 1540px;
+    width : 100%;
+    float:right;
+   	padding-left: 75%;
+    margin-bottom: 30px;
+    font-family: 'Noto Serif KR', serif;
 }
+
 #frmpj{
 }
 .scan{
-	float:right;
+    float: left;   
+    border: 1px solid rgb(104, 104, 104);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 180px;
 }
+
+input::-webkit-input-placeholder {
+	color:gray;
+	font-size:15px;
+}
+
+.search{
+    float: left;
+    border: 1px solid rgb(104, 104, 104);
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    background-color: rgb(104, 104, 104);
+}
+
+.search:hover{
+	background-color:  rgb(80, 80, 80);
+}
+
+.search:active{
+	background-color:  rgb(70, 70, 70);
+}
+
 #headFont{
 	font-size:30px;
 }
+
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -133,8 +186,8 @@ width : 1540px;
 				       	<option value = "donationSelectLike.do">좋아요 순</option>
 					</select>
 					<form action="donationSearch_1.do" method="get" >
-						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
-						<input type="submit" class="scan" value="검색">
+						<input type="text" name="searchValue" class="scan" value="${search.searchValue }" placeholder="검색어를 입력해주세요." style="font-family: 'Noto Sans KR', sans-serif'">
+						<input type="submit" class="search" value="검색" style="font-family: 'Noto Sans KR', sans-serif'">
 					</form>
 					</div>
 					<!--  JS, 리다이렉트 URL -->
@@ -229,8 +282,8 @@ width : 1540px;
 				       	<option value = "donationSelectLikeEnd.do">좋아요 순</option>
 					</select>
 					<form action="donationSearch_2.do" method="get" >
-						<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
-						<input type="submit" class="scan" value="검색">
+						<input type="text" name="searchValue" class="scan" value="${search.searchValue }" placeholder="검색어를 입력해주세요." style="font-family: 'Noto Sans KR', sans-serif'">
+						<input type="submit" class="search" value="검색" style="font-family: 'Noto Sans KR', sans-serif'">
 					</form>
 					
 					<!--  JS, 리다이렉트 URL -->
@@ -244,12 +297,16 @@ width : 1540px;
 								<table class="a_pj">
 									<tr>
 										<td> 
-							   				<a href="resources/dUpLoadFile/${e.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
-												<img src="resources/dUploadFiles/${e.donationFile.fileName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
+							   				<a href="resources/dUpLoadFiles/${e.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
+												<img src="resources/dUpLoadFiles/${e.donationFile.fileName}" alt="Image" class="img-fluid" style="width:400px;, height:300px;">
 												<div class="photo-text-more">
 													<span class="icon icon-search">${e.subjectName}"</span>
 												</div>
 											</a>
+											
+											
+											
+											
 										</td>
 			 						</tr>
 		 							<tr>
@@ -293,7 +350,10 @@ width : 1540px;
 											<c:if test="${e.likeCount > 1}"><b>${d.leftDate}</b>일 남음</c:if>
 										</td>
 										<td id="sum_css">
-											<td id="sum_css"><b><fmt:formatNumber value="${e.sumMoney}" pattern="#,###"/>원 , </b>
+											${e.sumMoney}
+												<b>
+													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
+												</b>
 											<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${e.percent}%</span>
 										</td>
 									</tr>
@@ -308,7 +368,7 @@ width : 1540px;
 			<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="btn">프로젝트 더 보기</button> 
+			<button class="btn" onclick="location.href ='donationListFullPro.do'" style="text-align: center;">프로젝트 더 보기</button>
 		</section>
 		
 		<br><br><br>

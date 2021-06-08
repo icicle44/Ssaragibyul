@@ -80,7 +80,7 @@
 		<result property="reportContent" column="REPORT_CONTENT"/>
 		<result property="processing" column="PROCESSING"/>
 		<result property="accusationDate" column="ACCUSATION_DATE"/>
-		<result property="dProjectNo" column="D_PROJECT_NO"/>
+		<result property="projectNo" column="D_PROJECT_NO"/>
 	</resultMap>
 
 
