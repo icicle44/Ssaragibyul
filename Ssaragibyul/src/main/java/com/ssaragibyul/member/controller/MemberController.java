@@ -22,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.PageInfo;
-import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
@@ -30,6 +29,7 @@ import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.member.domain.PaginationMy;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.service.PointService;
@@ -255,10 +255,54 @@ public class MemberController {
 		int currentPage = (page != null) ? page : 1;
 		int listCount = fService.getListCount(userId);
 		
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
+		FundingLog fundingCnt = fService.calListNumberMyFunding(userId);
 		ArrayList<FundingLog> myFundingList = fService.printMyFunding(userId,pi);
 		if (myFundingList != null) {
-			int fundingCnt = myFundingList.size();
+			mv.addObject("fundingCnt", fundingCnt);
+			mv.addObject("pi", pi);
+			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
+		}else{
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}	
+	
+	@RequestMapping(value="myFundingLike.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView myFundingViewLike(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+												@RequestParam(value="page", required=false) Integer page) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fService.getListCount(userId);
+		
+		PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
+		FundingLog fundingCnt = fService.calListNumberMyFunding(userId);
+		ArrayList<FundingLog> myFundingList = fService.printMyFundingLike(userId,pi);
+		if (myFundingList != null) {
+			mv.addObject("fundingCnt", fundingCnt);
+			mv.addObject("pi", pi);
+			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
+		}else{
+			mv.addObject("msg", "펀딩 상세 조회 실패!");
+			mv.setViewName("common/errorPage");
+		}
+			return mv;
+		}	
+	
+	@RequestMapping(value="myFundingMoney.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView myFundingViewMoney(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+												@RequestParam(value="page", required=false) Integer page) {
+		Member loginUser = (Member) session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		int currentPage = (page != null) ? page : 1;
+		int listCount = fService.getListCount(userId);
+		
+		PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount);
+		FundingLog fundingCnt = fService.calListNumberMyFunding(userId);
+		ArrayList<FundingLog> myFundingList = fService.printMyFundingMoney(userId,pi);
+		if (myFundingList != null) {
 			mv.addObject("fundingCnt", fundingCnt);
 			mv.addObject("pi", pi);
 			mv.addObject("myFundingList", myFundingList).setViewName("mypage/myFunding");
@@ -289,11 +333,72 @@ public class MemberController {
 	}
 	
 	// 좋아한 펀딩 프로젝트 페이지
-	@RequestMapping(value="likeFunding.do", method=RequestMethod.GET)
-	public String likeFunding(Member member) {
-		return "mypage/likeFunding";
-	}
-	
+	// 참여한 펀딩 프로젝트 페이지
+		@RequestMapping(value="likeFunding.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView likeFundingView(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+													@RequestParam(value="page", required=false) Integer page) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			int currentPage = (page != null) ? page : 1;
+			int listCount = fService.getListCount(userId);
+			
+			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
+			FundingLog fundingCnt = fService.calListNumberLikeFunding(userId);
+			ArrayList<FundingLog> myFundingList = fService.printMyFundingMoney(userId,pi);
+			if (myFundingList != null) {
+				mv.addObject("fundingCnt", fundingCnt);
+				mv.addObject("pi", pi);
+				mv.addObject("myFundingList", myFundingList).setViewName("mypage/likeFunding");
+			}else{
+				mv.addObject("msg", "펀딩 상세 조회 실패!");
+				mv.setViewName("common/errorPage");
+			}
+				return mv;
+			}	
+		
+		@RequestMapping(value="likeFundingLike.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView likeFundingLike(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+													@RequestParam(value="page", required=false) Integer page) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			int currentPage = (page != null) ? page : 1;
+			int listCount = fService.getListCount(userId);
+			
+			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
+			FundingLog fundingCnt = fService.calListNumberLikeFunding(userId);
+			ArrayList<FundingLog> myFundingList = fService.printMyFundingMoney(userId,pi);
+			if (myFundingList != null) {
+				mv.addObject("fundingCnt", fundingCnt);
+				mv.addObject("pi", pi);
+				mv.addObject("myFundingList", myFundingList).setViewName("mypage/likeFunding");
+			}else{
+				mv.addObject("msg", "펀딩 상세 조회 실패!");
+				mv.setViewName("common/errorPage");
+			}
+				return mv;
+			}	
+		
+		@RequestMapping(value="likeFundingMoney.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView likeFundingViewMoney(ModelAndView mv, HttpSession session, @ModelAttribute Member member,
+													@RequestParam(value="page", required=false) Integer page) {
+			Member loginUser = (Member) session.getAttribute("loginUser");
+			String userId = loginUser.getUserId();
+			int currentPage = (page != null) ? page : 1;
+			int listCount = fService.getListCount(userId);
+			
+			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount);
+			FundingLog fundingCnt = fService.calListNumberLikeFunding(userId);
+			ArrayList<FundingLog> myFundingList = fService.printMyFundingMoney(userId,pi);
+			if (myFundingList != null) {
+				mv.addObject("fundingCnt", fundingCnt);
+				mv.addObject("pi", pi);
+				mv.addObject("myFundingList", myFundingList).setViewName("mypage/likeFunding");
+			}else{
+				mv.addObject("msg", "펀딩 상세 조회 실패!");
+				mv.setViewName("common/errorPage");
+			}
+				return mv;
+			}	
 	// 좋아한 기부 프로젝트 페이지
 	@RequestMapping(value="likeDonation.do", method=RequestMethod.GET)
 	public String likeDonation(Member member) {

@@ -361,4 +361,18 @@ public class FundingSerivceImpl implements FundingService {
 	public int getListCount(String userId) {
 		return fStore.selectListCount(userId);
 	}
+	
+	public ArrayList<FundingLog> printMyFundingLike(String userId, PageInfo pi){
+		return fStore.selectMyFundingLike(userId, pi); 
+	}
+	public FundingLog calListNumberMyFunding(String userId) {
+		return fStore.calListNumberMyFunding(userId);
+	}
+	public ArrayList<FundingLog> printMyFundingMoney(String userId, PageInfo pi){
+		return fStore.selectMyFundingMoney(userId, pi); 
+	}
+	public FundingLog calListNumberLikeFunding(String userId) {
+		return fStore.calListNumberLikeFunding(userId);
+	}
+
 }

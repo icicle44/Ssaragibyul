@@ -14,11 +14,18 @@ public class FundingLog {
 	private String receiverName;
 	private String receiverPhone;
 	private int sponser;
+	private int count;
 	
 	private Funding fundingProject;
 	
 	
 	public FundingLog() {}
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -32,6 +39,36 @@ public class FundingLog {
 
 	
 	
+	public FundingLog(int doFundNo, String userId, int fundingPoint, int qunatity, Date fundDate, int cancleYn,
+			int projectNo, String receiverAddr, String receiverName, String receiverPhone, int sponser, int count,
+			Funding fundingProject) {
+		super();
+		this.doFundNo = doFundNo;
+		this.userId = userId;
+		this.fundingPoint = fundingPoint;
+		this.qunatity = qunatity;
+		this.fundDate = fundDate;
+		this.cancleYn = cancleYn;
+		this.projectNo = projectNo;
+		this.receiverAddr = receiverAddr;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.sponser = sponser;
+		this.count = count;
+		this.fundingProject = fundingProject;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 	public FundingLog(int doFundNo, String userId, int fundingPoint, int qunatity, Date fundDate, int cancleYn,
 			int projectNo, String receiverAddr, String receiverName, String receiverPhone, Funding fundingProject) {
 		super();
@@ -191,13 +228,37 @@ public class FundingLog {
 
 
 
+	public int getCount() {
+		return count;
+	}
+
+
+
+
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "FundingLog [doFundNo=" + doFundNo + ", userId=" + userId + ", fundingPoint=" + fundingPoint
 				+ ", qunatity=" + qunatity + ", fundDate=" + fundDate + ", cancleYn=" + cancleYn + ", projectNo="
 				+ projectNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName + ", receiverPhone="
-				+ receiverPhone + ", sponser=" + sponser + ", fundingProject=" + fundingProject + "]";
+				+ receiverPhone + ", sponser=" + sponser + ", count=" + count + ", fundingProject=" + fundingProject
+				+ "]";
 	}
+
+
+
+
+
 
 	
 //	@Override

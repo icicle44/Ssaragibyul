@@ -15,6 +15,13 @@
 #svg{
 	width: 500px;
 }
+.table-users{
+margin : auto;
+padding-left: 555px;
+}
+.like-stauts{
+padding-left: 20px;
+}
 </style>
 <body>
     <jsp:include page="../../../header.jsp"/>
@@ -34,15 +41,15 @@
                 <form action="myFunding.do" method="post">
                 <div class="f-top">
                     <div class="count">
-                        <div id="num">${fundingCnt}</div>
+                        <div id="num">${fundingCnt.count}</div>
                         <div id="p-count">개의 프로젝트가 있습니다.</div>
                     </div>
                     <div class="category">
                         <select id="divide" name="divide" onchange="location.href=this.value">
-                            <option value = "" selected>선택</option>
-                            <option value="op">추가순</option>
-                            <option value="01" id="op">좋아요순</option>
-                            <option value="02" id="op">모금액순</option>
+                            <option value="" selected>선택</option>
+                            <option value="myFunding.do"   id="op">추가순</option>
+                            <option value="myFundingLike.do" id="op">좋아요순</option>
+                            <option value="myFundingMoney.do" id="op">모금액순</option>
                         </select>
                     </div>
                 </div>
@@ -59,11 +66,19 @@
                                 <img src="/resources/img/mypage/fundingIcon.png" id="hart-img" onclick="like(this)"> 
                            <td>
                                 <div class="title">
-                                    <p id="title-1">${m.fundingProject.subjectName }</p>
-                                    <p id="title-2">${m.fundingProject.productName }</p>
+                                <c:url var="fDetail" value="fundingDetail.do">
+								<c:param name="projectNo" value="${m.fundingProject.projectNo }"></c:param>
+								</c:url> 
+                                    <a href="${fDetail }" id="title-1">${m.fundingProject.subjectName }</a><br>
+                                    <a id="title-2">${m.fundingProject.productName }</a>
                                 </div>
                         <div class="pay-status">
-                                   <span>결제완료</span>
+                                   <span>결제완료(</span>
+                                   <span><fmt:formatNumber value="${m.fundingPoint}" pattern="#,###"/> 포인트)</span>
+                                </div>
+                                <div class="like-stauts">
+                                <img src="resources/img/images/likeHeart.png" style="width:30px;, height:30px;">
+								<span style="color:DimGray; font-size:18px; vertical-align:1px;">${m.fundingProject.likeCount}</span>
                                 </div>
                                 <div class="accrue">
                                     <div id="sum">
@@ -73,10 +88,16 @@
                                         <span>%</span>
                                     </div>
                                     <div id="time">
+                                    <c:if test="${m.fundingProject.leftDate < 1}">
                                         <img src="/resources/img/mypage/time-img.png" id="time-img">
-                                        <span>${m.fundingProject.leftDate } 일 남음</span>
+                                        <span>마감</span>
+                                        </c:if>
+                                      <c:if test="${m.fundingProject.leftDate >= 1}">
+                                    	  <img src="/resources/img/mypage/time-img.png" id="time-img">
+                                     	 <span>${m.fundingProject.leftDate } 일 남음</span>
+                                      </c:if>
                                     </div>
-                 </div>
+              				   </div>
                                 <div class="graph" id="bar_td">
                                  	<c:if test="${m.fundingProject.percent > 99}">
 								<svg id="svg">
@@ -102,12 +123,14 @@
                     
                     
                     
-                  <div class="table-users">
+            <div class="table-users">
 			<table cellspacing="0">  
                     				<!-- 페이징 -->
 				<tr align="center" height="20">
 					<td colspan="8">
 					<!-- 이전 -->
+			<%-- 		<c:url var="before" value="myFundingMoney.do">
+					<c:url var="before" value="myFundingLike.do"> --%>
 					<c:url var="before" value="myFunding.do">
 						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>

@@ -325,5 +325,26 @@ public class FundingStoreLogic implements FundingStore{
 	}
 //	return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFunding", member, pi, null, rowBounds);   ???
 
+	public ArrayList<FundingLog> selectMyFundingLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFundingLike", userId, rowBounds);
+	}
+
+	public FundingLog calListNumberMyFunding(String userId) {
+		return sqlSession.selectOne("fundingMapper.calListNumberMyFunding", userId); 
+	}
+	
+	public ArrayList<FundingLog> selectMyFundingMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectMyFundingMoney", userId, rowBounds);
+	}
+
+	public FundingLog calListNumberLikeFunding(String userId) {
+		return sqlSession.selectOne("fundingMapper.calListNumberLikeFunding", userId);
+	}
+
+
 	
 }

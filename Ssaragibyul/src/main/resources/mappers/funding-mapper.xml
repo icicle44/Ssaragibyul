@@ -53,6 +53,7 @@
 		<result property="receiverName" column="RECEIVER"></result>
 		<result property="receiverPhone" column="RECEIVER_PHONE"></result>
 		<result property="sponser" column="SPONSER"></result>
+		<result property="count" column="COUNT"></result>
 		<collection property="fundingProject" resultMap="fundingResultMap" />
 	</resultMap>
 <!-- 댓글 테이블  -->
@@ -429,15 +430,7 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]> AND PROJECT_C
 		
     
     
-    
-   <select id="selectMyFunding" resultMap="FundingLogResultMap">
-        select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from 
-       (SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
-	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
-	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
-	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 1 DESC) a
-	</select>	
-    
+   
     
     <select id="selectListCount" resultType="_int">
 		SELECT count(*) FROM DO_FUNDING LEFT OUTER JOIN 
@@ -445,10 +438,48 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]> AND PROJECT_C
 	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
 	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 1 DESC
 	</select>
+	
+	   <select id="calListNumberMyFunding" resultMap="FundingLogResultMap">
+       SELECT count(*) AS COUNT FROM DO_FUNDING LEFT OUTER JOIN 
+	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
+	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId }
+	</select>	
+	
+	
+	   <select id="selectMyFunding" resultMap="FundingLogResultMap">
+        select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from 
+       (SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
+	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
+	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 1 DESC) a
+	</select>	
+	
+	
+	
+	   <select id="selectMyFundingLike" resultMap="FundingLogResultMap">
+        select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from 
+       (SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
+	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
+	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 24 DESC) a
+	</select>	
+	
+	<select id="selectMyFundingMoney" resultMap="FundingLogResultMap">
+        select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from 
+       (SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
+	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+	    ON(F_PROJECT_NO = F_PROJECT_NO2) 
+	    WHERE PROJECT_CODE = 0 AND DO_FUNDING.USER_ID = #{userId } ORDER BY 16 DESC) a
+	</select>	
     
     
-    
-    
+     <select id="calListNumberLikeFunding" resultMap="FundingLogResultMap">
+       SELECT count(*) AS COUNT  FROM FUNDING_LIKE LEFT OUTER JOIN 
+	    (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 
+	    USING(F_PROJECT_NO) 
+	    WHERE PROJECT_CODE = 0 AND FUNDING_LIKE.USER_ID = #{userId }
+	</select>	
     
     
     

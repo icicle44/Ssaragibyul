@@ -121,6 +121,14 @@ public interface FundingService {
 
 	public int getListCount(String userId);
 
+	public ArrayList<FundingLog> printMyFundingLike(String userId, PageInfo pi);
+
+	public FundingLog calListNumberMyFunding(String userId);
+	
+	public ArrayList<FundingLog> printMyFundingMoney(String userId, PageInfo pi);
+
+	public FundingLog calListNumberLikeFunding(String userId);
+	
 
 
 
