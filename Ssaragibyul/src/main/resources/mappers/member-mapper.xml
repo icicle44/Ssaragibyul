@@ -34,7 +34,18 @@
 		<result property="achievement" column="ACHIEVEMENT_KO"/>
 	</resultMap>
 	
-	
+	<!-- 댓글 -->
+	<resultMap type="com.ssaragibyul.member.domain.CommentAndProject" id="commentProjectResultMap">
+		<id property="keyNo" column="KEY_NO"/>
+		<result property="projectNo" column="PROEJCT_NO"/>
+		<result property="commNo" column="COMM_NO"/>
+		<result property="userId" column="USER_ID"/>
+		<result property="commContents" column="COMM_CONTENTS"/>
+		<result property="boardType" column="BOARD_TYPE"/>
+		<result property="regDate" column="REG_DATE"/>
+		<result property="subject" column="SUBJECT"/>
+		<result property="projectCode" column="PROJECT_CODE"/>
+	</resultMap>	
 
 	<select id="selectOneMember" parameterType="Member" resultMap="memberResultMap">
 		SELECT * FROM MEMBER
@@ -121,6 +132,47 @@
 	<select id="seletOneMemberList" parameterType="Member" resultMap="memberResultMap">
 	   SELECT * FROM MEMBER WHERE USER_ID = #{userId }
 	</select>   
+
+	<!-- 댓글관련 -->
+	<select id="selectAllComments" parameterType="string" resultMap="commentProjectResultMap">
+		SELECT ROWNUM AS KEY_NO, C.* FROM (SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO)
+		UNION
+		SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO)
+		UNION
+		SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY) C
+		WHERE USER_ID=#{userId } ORDER BY REG_DATE DESC
+	</select>
+	<select id="selectCommentsCount" resultType="_int">
+		SELECT COUNT(*) FROM (SELECT ROWNUM AS KEY_NO, C.* FROM (SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO)
+		UNION
+		SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO)
+		UNION
+		SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY) C
+		WHERE USER_ID='test')
+	</select>
 	
+	<delete id="deleteComment" parameterType="map">
+		<if test="boardType.toString() == '펀딩상세'">
+			DELETE FROM FUNDING_COMMENTS WHERE COMM_NO=#{commNo}
+		</if>
+		<if test="boardType.toString() == '기부상세'">
+			DELETE FROM DONATION_COMMENTS WHERE COMM_NO=#{commNo}
+		</if>
+		<if test="boardType.toString() == '방문'">
+			DELETE FROM VISIT_REPLY WHERE REPLY_NO=#{commNo}
+		</if>
+	</delete>
+	
+	<update id="modifyComment" parameterType="map">
+		<if test="boardType.toString() == '펀딩상세'">
+			UPDATE FUNDING_COMMENTS SET COMM_CONTENTS=#{commContents} WHERE COMM_NO=#{commNo}
+		</if>
+		<if test="boardType.toString() == '기부상세'">
+			UPDATE DONATION_COMMENTS SET COMM_CONTENTS=#{commContents} WHERE COMM_NO=#{commNo}
+		</if>
+		<if test="boardType.toString() == '방문'">
+			UPDATE VISIT_REPLY SET CONTENTS=#{commContents} WHERE REPLY_NO=#{commNo}
+		</if>
+	</update>	
 	
 </mapper>

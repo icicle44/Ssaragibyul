@@ -1,12 +1,16 @@
 package com.ssaragibyul.member.store.logic;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.independence.domain.Independence;
+import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.store.MemberStore;
 
@@ -59,6 +63,30 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public Independence mypage(String userId) {
 		return sqlSession.selectOne("memberMapper.myPageView", userId);
+	}
+
+	//댓글 리스트 출력
+	@Override
+	public ArrayList<CommentAndProject> selectAllComments(PageInfo pi, String userId) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectAllComments", userId, rowBounds);
+	}
+
+	//댓글 리스트 갯수 출력
+	@Override
+	public int getcommentsListCount(String userId) {
+		return sqlSession.selectOne("memberMapper.selectCommentsCount", userId);
+	}
+
+	@Override
+	public int deleteComment(HashMap<String, String> dMap) {
+		return sqlSession.delete("memberMapper.deleteComment", dMap);
+	}
+
+	@Override
+	public int updateComment(HashMap<String, String> mMap) {
+		return sqlSession.update("memberMapper.modifyComment", mMap);
 	}
 
 	/*

@@ -2,6 +2,7 @@ package com.ssaragibyul.member.service.logic;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.independence.domain.Independence;
+import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.member.store.MemberStore;
@@ -66,6 +69,28 @@ public class MemberServiceImpl implements MemberService {
 		return mStore.mypage(userId);
 	}
 
+	//댓글 리스트
+	@Override
+	public ArrayList<CommentAndProject> printAllComment(PageInfo pi, String userId) {
+		return mStore.selectAllComments(pi, userId);
+	}
+
+	//댓글 리스트 갯수
+	@Override
+	public int getcommentsListCount(String userId) {
+		return mStore.getcommentsListCount(userId);
+	}
+
+	//댓글 삭제
+	@Override
+	public int deleteComment(HashMap<String, String> dMap) {
+		return mStore.deleteComment(dMap);
+	}
+
+	@Override
+	public int modifyComment(HashMap<String, String> mMap) {
+		return mStore.updateComment(mMap);
+	}
 	/*
 	 * @Override public int searchPw(String userPw) { // TODO Auto-generated method
 	 * stub return 0; }

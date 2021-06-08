@@ -22,12 +22,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.PageInfo;
+import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.funding.domain.Funding;
 import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.independence.domain.Independence;
+import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.domain.PaginationMy;
 import com.ssaragibyul.member.domain.PaginationPro;
@@ -477,8 +479,57 @@ public class MemberController {
 	
 	// 내가 쓴 댓글 페이지
 	@RequestMapping(value="myCommentList.do", method=RequestMethod.GET)
-	public String commentList(Member member) {
-		return "mypage/myCommentList";
+	public ModelAndView commentList(ModelAndView mv,
+									HttpSession session,
+									@RequestParam(value="page", required=false) Integer page) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		int currentPage = (page != null)? page : 1;
+		int listCount = mService.getcommentsListCount(userId);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<CommentAndProject> cpList = mService.printAllComment(pi, userId);
+		System.out.println(cpList.get(0).toString());
+		if(!cpList.isEmpty()) {
+			mv.addObject("cpList", cpList);
+		}else {
+			mv.addObject("tblMsg", "남기신 댓글이 없습니다.");
+		}
+		mv.addObject("pi", pi);
+		mv.setViewName("mypage/myCommentList");			
+		return mv;
+	}
+	//댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="commentDelete.do", method=RequestMethod.POST)
+	public String commentDelete(@RequestParam("commNo") int commNo, @RequestParam("boardType") String boardType) {
+		String replyNo = Integer.toString(commNo);
+		HashMap<String, String> dMap = new HashMap<String, String>();
+		dMap.put("commNo", replyNo);
+		dMap.put("boardType", boardType);
+		int result = mService.deleteComment(dMap);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+	}
+	//댓글 수정
+	@ResponseBody
+	@RequestMapping(value="myCommentModify.do", method=RequestMethod.POST)
+	public String commentModify(@RequestParam("commNo") int commNo,
+								@RequestParam("boardType") String boardType,
+								@RequestParam("commContents") String commContents) {
+		String replyNo = Integer.toString(commNo);
+		HashMap<String, String> mMap = new HashMap<String, String>();
+		mMap.put("commNo", replyNo);
+		mMap.put("boardType", boardType);
+		mMap.put("commContents", commContents);
+		int result = mService.modifyComment(mMap);
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 	}
 	
 	// 정보수정
