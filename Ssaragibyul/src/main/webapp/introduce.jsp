@@ -18,6 +18,13 @@
 	    unicode-range: U+AC00-D7A3;
 	}
 
+	body {
+		-ms-overflow-style: none;
+	}
+	::-webkit-scrollbar { 
+		display: none;
+	}
+
 	.introduce-container {
 		background-color: gray;
 		width: 100%;
@@ -29,8 +36,9 @@
 		top: -300px;
 		z-index: 99999;
 		font-family: 'independence', 'Oswald';
+		font-weight: lighter;
 	}
-	
+
 	@media (min-width: 1200px)
 	.introduce-container {
     	max-width: 100%;

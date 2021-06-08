@@ -68,9 +68,7 @@
 									&nbsp;&nbsp;&nbsp;<input type="button" value="돌아가기" id="backBtn">
 								</td>
 							</tr>
-	<!-- 						<input type="hidden" name="senderId" value="">
-							<input type="hidden" name="receiverId" value="">
-							<input type="hidden" name="msgType" value=""> -->
+
 					</table>
 				</div>
 			</section>

@@ -320,7 +320,9 @@
 			</div>
 		</div>
 
-	<jsp:include page="../../../footer.jsp"/>
+	<div style="padding-left: 150px;">
+		<jsp:include page="../../../footer.jsp"/>
+	</div>
 	</main>	
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script>

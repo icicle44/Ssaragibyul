@@ -96,9 +96,9 @@
 			
 			<div id="myinfo">
 				<!-- 포인트 -->
-				<a class="" href="pointList.do" style="font-size:15px; font-weight:600; text-decoration:none;">포인트</a>
+				<a class="" href="pointList.do" style="font-size:15px; font-weight:600; text-decoration:none;">포인트
 				&nbsp;&nbsp;&nbsp;<span class="point-num" id="myPoint-total">${sessionScope.myPoint.total }</span>
-				<br><sup><span class="point-num" id="myPoint-reserved">진행 중 ${sessionScope.myPoint.reserved*-1 }</span></sup>
+				<br><sup><span class="point-num" id="myPoint-reserved">진행 중 ${sessionScope.myPoint.reserved*-1 }</span></sup></a>
 				<br>
 				<!-- 쪽지 -->
 				<div class=msg-area>		

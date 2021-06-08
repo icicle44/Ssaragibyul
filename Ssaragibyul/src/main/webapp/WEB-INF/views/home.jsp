@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,7 +29,15 @@
 <link rel="stylesheet" href="/resources/css/styleFundingList.css">
 </head>
 <style>
+@font-face {
+    font-family: 'independence';
+    src: url('../resources/fonts/independence.ttf') format('truetype');
+    unicode-range: U+AC00-D7A3;
+}
 
+body {
+	font-family: 'independence';
+}
 .display {
 	margin:auto;
 	width: 402px;
@@ -95,9 +104,7 @@ width : 1540px;
 #headFont{
 	font-size:30px;
 }
-/* #between-blank {
-	height: 60px;
-} */
+
 .pro-title {
 	padding-left: 80px;
 	padding-bottom: 40px;
@@ -105,10 +112,10 @@ width : 1540px;
 	font-family: 'Noto Serif KR';
 }
 
-/* .container-fluid {
-	position: relative;
-	top: -100px;
-} */
+#section-testimonial {
+	padding-top: 10px;
+	padding-bottom: 280px;
+}
 
 </style>
 
@@ -148,7 +155,7 @@ width : 1540px;
  		<div class="container-fluid">
 			<!-- 펀딩 프로젝트 -->
 				
-			<div style="height: 1080px; padding-top: 0px;">
+			<div style="height: 3000x; padding-top: 0px;">
 				
 				<section class="row align-items-stretch photos " id="section-funding">
 				<h3 class="pro-title">펀딩 프로젝트</h3>
@@ -159,78 +166,6 @@ width : 1540px;
 
 							<!-- 펀딩 프로젝트-->
 
-<!-- 							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-								<a href="/resources/img/images/img_7.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_7.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="100">
-								<a href="/resources/img/images/img_8.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_8.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="200">
-								<a href="/resources/img/images/img_9.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_9.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div>
-
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-								<a href="/resources/img/images/img_10.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_10.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="100">
-								<a href="/resources/img/images/img_1.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_1.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div>
-							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-								data-aos-delay="200" style="padding-bottom: 200px;">
-								<a href="/resources/img/mages/img_2.jpg"
-									class="d-block photo-item" data-fancybox="gallery"> <img
-									src="/resources/img/images/img_2.jpg" alt="Image"
-									class="img-fluid">
-									<div class="photo-text-more">
-										<span class="icon icon-search"></span>
-									</div>
-								</a>
-								<p>펀딩 프로젝트 이름</p>
-							</div> -->
-			
 		 <c:forEach var="p" items="${fListandFile}" varStatus="status" begin="0" end="5"> 
 		 
 			<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
@@ -297,153 +232,75 @@ width : 1540px;
 				<div class="col-12">
 					<div class="row align-items-stretch">
 
-						<!-- <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-							<a href="/resources/img/images/img_4.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_4.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search">프로젝트 이름</span>
-
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div>
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-							data-aos-delay="100">
-							<a href="/resources/img/images/img_5.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_5.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search">프로젝트 이름</span>
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div>
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-							data-aos-delay="200">
-							<a href="/resources/img/images/img_1.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_1.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search"></span>
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div>
-
-
-
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
-							<a href="/resources/img/images/img_2.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_2.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search"></span>
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div>
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-							data-aos-delay="100">
-							<a href="/resources/img/images/img_3.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_3.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search"></span>
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div>
-						<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up"
-							data-aos-delay="200">
-							<a href="/resources/img/images/img_6.jpg"
-								class="d-block photo-item" data-fancybox="gallery"> <img
-								src="/resources/img/images/img_6.jpg" alt="Image"
-								class="img-fluid">
-								<div class="photo-text-more">
-									<span class="icon icon-search"></span>
-								</div>
-							</a>
-							<p>기부 프로젝트 이름</p>
-						</div> -->
-				 			<c:forEach var="d" items="${dListandFile}" varStatus="status"  begin="0" end="5"> 
-								<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
-									<table class="display" id="example">
-										<tr>
-											<td> 
-												<a href="resources/dUpLoadFiles/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
-													<img src="resources/dUpLoadFiles/${d.donationFile.fileName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
-													<div class="photo-text-more">
-														<span class="icon icon-search">${d.subjectName}"</span>
-													</div>
-												</a>
-											</td>
-										</tr>
-										<tr>
-											<td align = "right">
-												<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-												<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<c:url var="dDetail" value="donationDetail.do">
-													<c:param name="projectNo" value="${d.projectNo }"></c:param>
-												</c:url> 
-												<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="2" id="bar_td">
-												<c:if test="${d.percent >99}">
-													<svg id="svg">
-														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-														<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
-													</svg>
-												</c:if>
-										
-												<c:if test="${d.percent < 100}">
-													<svg id="svg">
-														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-														<rect x="0" y="0" height="2" width="${d.percent}%" fill="#FF8000"></rect>
-													</svg>
-												</c:if>
-											</td>
-										</tr>
-									    <tr>
-											<td id="dday_css">
-												<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
-												<c:if test="${d.leftDate < 1}"><b>마감</b></c:if>
-												<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
-											</td>
-											<td id="sum_css">
-												<b>
-													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
-												</b>
-												<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${d.percent}%</span>
-											</td>
-										</tr> 
-									</table>
-								</div>
-			 				</c:forEach> 
-
+			 			<c:forEach var="d" items="${dListandFile}" varStatus="status"  begin="0" end="5"> 
+							<div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" id = "frame">
+								<table class="display" id="example">
+									<tr>
+										<td> 
+											<a href="resources/dUpLoadFiles/${d.donationFile.fileName}" class="d-block photo-item" data-fancybox="gallery"> 
+												<img src="resources/dUpLoadFiles/${d.donationFile.fileName}" alt="Image" class="img-fluid" style="width:402px;, height:300px;">
+												<div class="photo-text-more">
+													<span class="icon icon-search">${d.subjectName}"</span>
+												</div>
+											</a>
+										</td>
+									</tr>
+									<tr>
+										<td align = "right">
+											<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+											<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<c:url var="dDetail" value="donationDetail.do">
+												<c:param name="projectNo" value="${d.projectNo }"></c:param>
+											</c:url> 
+											<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
+										</td>
+									</tr>
+									<tr>
+										<td colspan="2" id="bar_td">
+											<c:if test="${d.percent >99}">
+												<svg id="svg">
+													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+													<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+												</svg>
+											</c:if>
+									
+											<c:if test="${d.percent < 100}">
+												<svg id="svg">
+													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
+													<rect x="0" y="0" height="2" width="${d.percent}%" fill="#FF8000"></rect>
+												</svg>
+											</c:if>
+										</td>
+									</tr>
+								    <tr>
+										<td id="dday_css">
+											<img src="resources/img/images/calenderImage.jpg" style="width:18px;, height:18px;">
+											<c:if test="${d.leftDate < 1}"><b>마감</b></c:if>
+											<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
+										</td>
+										<td id="sum_css">
+											<b>
+												<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
+											</b>
+											<span id="percent_css" style="color:orange;, font-size:12px;"> 달성률 : ${d.percent}%</span>
+										</td>
+									</tr> 
+								</table>
+							</div>
+		 				</c:forEach> 
 					</div>
-
 				</div>
 			</section>
 			<!-- #section-donation -->
-
-
 			<section class="site-section" id="section-testimonial">
 				<div class="container">
 					<div class="row justify-content-center">
 						<div class="col-md-8 text-center">
-							<h2 class="heading text-uppercase text-white">Testimonial</h2>
+<!-- 							<h2 class="heading text-uppercase text-white">Testimonial</h2> -->
 
 							<div class="row justify-content-center">
 								<div class="col-md-12">
@@ -452,35 +309,47 @@ width : 1540px;
 
 										<div class="testimony text-center px-md-4">
 											<figure class="mx-auto d-inline-block">
-												<img src="/resources/img/images/person_2.jpg" alt="Image"
+												<img src="/resources/img/main/main_202106_1.jpg" alt="Image"
 													class="mx-auto img-fluid w-25 rounded-circle">
 											</figure>
-											<p class="text-white">
-												<strong>Jean Smith</strong>
+											<p class="">
+												<strong>의병 김 익 중</strong>
 											</p>
 											<blockquote>
-												<p>&ldquo;Lorem ipsum dolor sit amet, consectetur
-													adipisicing elit. Unde tenetur quis facilis quam optio
-													voluptate totam placeat, doloremque. Sit repellat ipsum
-													dolor fugit similique itaque maxime saepe ipsam. Velit,
-													harum!&rdquo;</p>
+												<p>
+												1846-08-17 ~ 1916-10-28 &nbsp;전라남도 화순<br>
+												
+												&ldquo;1895~1908 전후기 의병장으로 활동. 위에서는 나라를 파는 대신들이 의병에게 군사를 멋대로 일으킨 반역자라는 이름을 씌우면서 왜놈의 털 한 오라기도 상할까 두려워하고, 아래에서는 행실이 좋지 않은 부호들이 의병에게 폭도의 괴수라는 이름을 씌워서 제 집 창고에 쌓아 둔 반 톨의 곡식이라도 손해볼까 겁을 낸다.&rdquo;</p>
+											</blockquote>
+										</div>
+										
+										<div class="testimony text-center px-md-4">
+											<figure class="mx-auto d-inline-block">
+												<img src="/resources/img/main/main_202106_2.jpg" alt="Image"
+													class="mx-auto img-fluid w-25 rounded-circle">
+											</figure>
+											<p class="">
+												<strong>학생운동 장경례</strong>
+											</p>
+											<blockquote>
+												<p>
+												1913-04-06 ~ 1997-12-01 &nbsp;전라남도 광주<br>
+												&ldquo;1928.10부터 광주여자고등보통학교 학우 11명이 소녀회를 비밀히 조직하여 항일 독립운동 단체로서의 기틀을 마련하고, 1929. 11 광주 학생 독립운동 시위시에는 광주여고보생(光州女高普生)의 시위 가담을 주동하였다가 체포되어 학교에서 퇴학 당하고 장기간 구금 상태에서 심한 고문을 받음.&rdquo;</p>
 											</blockquote>
 										</div>
 
 										<div class="testimony text-center px-md-4">
 											<figure class="mx-auto d-inline-block">
-												<img src="/resources/img/images/person_3.jpg" alt="Image"
+												<img src="/resources/img/main/main_202106_3.jpg" alt="Image"
 													class="mx-auto img-fluid w-25 rounded-circle">
 											</figure>
-											<p class="text-white">
-												<strong>Jean Smith</strong>
+											<p class="">
+												<strong>독립운동지원 올리버 알 애비슨</strong>
 											</p>
 											<blockquote>
-												<p>&ldquo;Lorem ipsum dolor sit amet, consectetur
-													adipisicing elit. Unde tenetur quis facilis quam optio
-													voluptate totam placeat, doloremque. Sit repellat ipsum
-													dolor fugit similique itaque maxime saepe ipsam. Velit,
-													harum!&rdquo;</p>
+												<p>
+												1860-06-30 ~ 1956-08-29 캐나다<br>
+												&ldquo;1893년 제중원(濟衆院) 의사, 1904년 세브란스병원과 세브란스병원의학교 병원장, 1915-1916년 경신학교 대학부 부교장&#x2024;교장, 1917-1934년 연희전문학교 교장 등으로 의료교육에 공헌함. 1942-1943년 기독교인친한회(The Christian Friends of Korea) 재무로 대한민국임시정부의 승인과 독립운동을 지원할 것을 호소함.&rdquo;</p>
 											</blockquote>
 										</div>
 
@@ -498,8 +367,8 @@ width : 1540px;
 				data-stellar-background-ratio="0.5" id="section-bio">
 				<div class="row justify-content-center align-items-center">
 					<div class="col-md-7 text-center">
-						<h1 class="text-white heading text-uppercase" data-aos="fade-up" style="font-family: 'Noto Sans KR', sans-serif;">프로젝트 제안하기</h1>
-						<p class="lead text-white mb-5" data-aos="fade-up"
+						<h1 class="text-white heading text-uppercase" data-aos="fade-up" style="font-family: 'independence';">프로젝트 제안</h1>
+						<br><p class="lead text-white mb-5" data-aos="fade-up"
 							data-aos-delay="100">당신의 마음을 함께 해주세요.</p>
 						<p data-aos="fade-up" data-aos-delay="100">
 							<a href="suggestPage.do"
@@ -536,9 +405,6 @@ width : 1540px;
 										</div>
 									</c:if>
 								</c:forEach>
-
-							
-
 								<div class="col-12 text-center">
 									<div class="custom-pagination">
 					                    <div class="d-grid gap-2 col-6 mx-auto">
@@ -553,10 +419,9 @@ width : 1540px;
 			</section>
 			</div>
 		</div>
-
+	<%@include file="../../../footer.jsp" %>
 	</main>
-<%--  		<%@include file="../../../footer.jsp" %> --%>
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <script src="/resources/js/jquery-3.3.1.min.js"></script>
