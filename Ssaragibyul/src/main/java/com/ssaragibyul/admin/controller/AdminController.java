@@ -152,8 +152,9 @@ public class AdminController {
 			map.put("title", fCalendar.get(i).getSubjectName());
 		    map.put("start", String.valueOf(fCalendar.get(i).getStartDate())); 
 		    map.put("end", String.valueOf(fCalendar.get(i).getFinDate()));
+		    map.put("color", "rgba(75, 192, 192, 0.7)");
 			list.add(map);
-			System.out.println("map잘나오나요? : " + map);
+			System.out.println("map잘나오나요? 펀딩: " + map);
 		}
 		// 어레이 리스트를 제이슨 배열로 만들어줌!!! [{}, {}, {}, {}]
 		new Gson().toJson(list, respone.getWriter());
@@ -176,8 +177,9 @@ public class AdminController {
 			map.put("title", dCalendar.get(i).getSubjectName());
 		    map.put("start", String.valueOf(dCalendar.get(i).getStartDate())); 
 		    map.put("end", String.valueOf(dCalendar.get(i).getFinDate()));
+		    map.put("color", "rgba(255, 205, 86, 0.7)");
 			list.add(map);
-			System.out.println("map잘나오나요? : " + map);
+			System.out.println("map잘나오나요? 기부: " + map);
 		}
 		// 어레이 리스트를 제이슨 배열로 만들어줌!!! [{}, {}, {}, {}]
 		new Gson().toJson(list, respone.getWriter());
@@ -374,67 +376,22 @@ public class AdminController {
 		}
 	}
 	
-//	//펀딩 검색하기
-//	// 1. 
-//	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
-//	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
-//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-//		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
-//		if(!searchList1.isEmpty()) {
-//			model.addAttribute("fListandFileEnd", fListandFileEnd);
-//			model.addAttribute("fListandFile", searchList1);
-//			model.addAttribute("search", search);
-//			return "funding/fundingList";
-//		}else {
-//			model.addAttribute("msg", "공지사항 검색 실패");
-//			return "common/errorPage";
-//		}
-//	}
-//	
-//	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
-//	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
-//		 ArrayList<Funding> fListandFile = fService.printAllProject();   
-//		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
-//		if(!searchList2.isEmpty()) {
-//			model.addAttribute("fListandFile", fListandFile);
-//			model.addAttribute("fListandFileEnd", searchList2);
-//			model.addAttribute("search", search);
-//			return "funding/fundingList";
-//		}else {
-//			model.addAttribute("msg", "공지사항 검색 실패");
-//			return "common/errorPage";
-//		}
-//	}
-//	
-//	 @RequestMapping(value="fundingSelectMoney.do", method=RequestMethod.GET)
-//	 public String fundingSelectMoney(Model model) {
-//		 ArrayList<Funding> fListandFile = fService.printAllProjectForMoney();   
-//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-//		 if(!fListandFile.isEmpty()) {				
-//				model.addAttribute("fListandFile", fListandFile);
-//				model.addAttribute("fListandFileEnd", fListandFileEnd);
-//				return "funding/fundingList";
-//			}else {
-//				model.addAttribute("msg", "펀딩 목록조회 실패");
-//				return "common/errorPage";
-//			}
-//	
-//	 }
-//	 
-//	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
-//	 public String fundingSelectLike(Model model) {
-//		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
-//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-//		 if(!fListandFile.isEmpty()) {				
-//				model.addAttribute("fListandFile", fListandFile);
-//				model.addAttribute("fListandFileEnd", fListandFileEnd);
-//				return "funding/fundingList";
-//			}else {
-//				model.addAttribute("msg", "펀딩 목록조회 실패");
-//				return "common/errorPage";
-//			}
-//	
-//	 }
+	//펀딩 검색하기
+	// 1. 진행중인 펀딩 검색하기
+	@RequestMapping(value="fundingSearch.do", method=RequestMethod.GET)
+	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
+		if(!searchList1.isEmpty()) {
+			model.addAttribute("fListandFileEnd", fListandFileEnd);
+			model.addAttribute("fList", searchList1);
+			model.addAttribute("search", search);
+			return "admin/adminFundingListView";
+		}else {
+			model.addAttribute("msg", "공지사항 검색 실패");
+			return "common/errorPage";
+		}
+	}
 
 	//기부 리스트 출력
 	@RequestMapping(value="adminDonationList.do", method = RequestMethod.GET)
@@ -479,6 +436,22 @@ public class AdminController {
 			return "redirect : adminDonationList.do";
 		} else {
 			model.addAttribute("msg", "기부프로젝트 삭제에 실패하였습니다.");
+			return "common/errorPage";
+		}
+	}
+	
+	//////// 기부 검색 - 진행중인 프로젝트 ////////
+	@RequestMapping(value="donationSearch.do", method=RequestMethod.GET)
+	public String donationSearchForProcessing(@ModelAttribute Search search, Model model) {
+		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
+		ArrayList<Donation> searchList1 = dService.printSearchAll_1(search);
+		if(!searchList1.isEmpty()) {
+			model.addAttribute("dListandFileEnd", dListandFileEnd);
+			model.addAttribute("dList", searchList1);
+			model.addAttribute("search", search);
+			return "admin/adminDonationListView";
+		}else {
+			model.addAttribute("msg", "기부 검색 실패");
 			return "common/errorPage";
 		}
 	}
@@ -684,6 +657,21 @@ public class AdminController {
 		return mv;
 	}
 	
+	// 독립유공자 공훈록 검색( 이거 안됨 확인요망)
+//	@RequestMapping(value="adminIndependenceSearch.do", method=RequestMethod.GET)
+//	public String independenceSearch(@ModelAttribute Search search, Model model) {
+//		ArrayList<Independence> searchList = iService.printSearchAll(search);
+//		System.out.println("searchList"+searchList);
+//		if(!searchList.isEmpty()) {
+//			model.addAttribute("iList", searchList);
+//			model.addAttribute("search",search);
+//			return "admin/adminIndependenceList";
+//		}else {
+//			model.addAttribute("msg", "검색결과가 없습니다");
+//			return "common/errorPage";
+//		}
+//	}
+	
 	// 별들의발자취 리스트
 	@RequestMapping(value="adminHistoryList.do", method = RequestMethod.GET)
 	public ModelAndView histoyListView(ModelAndView mv,
@@ -884,6 +872,20 @@ public class AdminController {
 			mv.setViewName("common/errorPage");
 		}
 		return mv;
+	}
+	
+// 별보러가자 검색
+	@RequestMapping(value = "adminVisitSearch.do", method = RequestMethod.GET)
+	public String visitSearch(@RequestParam("searchValue") String searchValue, Model model) {
+		ArrayList<Visit> searchList = vService.printSearchAll(searchValue);
+		System.out.println("searchList" + searchList);
+		if (!searchList.isEmpty()) {
+			model.addAttribute("vList", searchList);
+			return "admin/adminVisitListView";
+		} else {
+			model.addAttribute("msg", "검색결과가 없습니다");
+			return "common/errorPage";
+		}
 	}
 
 	// 별보러가자 상세보기

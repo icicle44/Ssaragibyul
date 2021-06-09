@@ -69,14 +69,7 @@
 									<h4 class="card-title" style="margin:auto; text-align: center;">펀딩 리스트</h4>
 														<!-- 검색 -->
 												<div id="pj_search">
-													<select id="chose1" class="select"
-														onchange="location.href=this.value">
-														<option value="" selected>선택</option>
-														<option value="adminFundingList.do">최신글 순</option>
-														<option value="fundingSelectMoney.do">모금액 순</option>
-														<option value="fundingSelectLike.do">좋아요 순</option>
-													</select>
-													<form action="fundingSearch_1.do" method="get">
+													<form class="pull-right" action="fundingSearch.do" method="get">
 														<input type="text" name="searchValue" class="scan"
 															value="${search.searchValue }">&nbsp; <input
 															type="submit" class="scan" value="검색">

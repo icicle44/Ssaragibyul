@@ -13,6 +13,7 @@
 
 	<!-- Fonts and icons -->
 	<script src="/resources/js/admin/plugin/webfont/webfont.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<link href='/resources/css/admin/main.css' rel='stylesheet' />
     <script src='/resources/js/admin/main.js'></script>
 	<script src='/resources/js/admin/ko.js'></script>
@@ -25,6 +26,39 @@
 			}
 		});
 		
+		var fList = getfList();
+		function getfList() {
+			var result = "";
+			$.ajax({
+    			url : "FundingCalendar.do",
+    			type : 'POST',
+    			dataType : 'json',
+    			async : false,
+    			success : function(data) {
+    				result = data;
+					console.log(data);
+				}
+    		});
+			return result;
+		}
+		console.log(fList);
+		
+		var dList = getdList();
+		function getdList() {
+			var result = "";
+			$.ajax({
+    			url : "DonationCalendar.do",
+    			type : 'POST',
+    			dataType : 'json',
+    			async : false,
+    			success : function(data) {
+    				result = data;
+					console.log(data);
+				}
+    		});
+			return result;
+		}
+		
 		 document.addEventListener('DOMContentLoaded', function() {
 		        var calendarEl = document.getElementById("calendar");
 		        var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -35,29 +69,8 @@
 		            height : "610px",
 		            dayMaxEvents : true,
 		            dayMaxEvents : 2,
-		            eventSources: [{
-		            	events: function(info, successCallback, failureCallback) {
-		            		$.ajax({
-		            			url : "FundingCalendar.do",
-		            			type : 'POST',
-		            			dataType : 'json',
-		            			success : function(data) {
-									console.log(data);
-									successCallback(data);
-								}
-		            		});
-		            		$.ajax({
-		            			url : "DonationCalendar.do",
-		            			type : 'POST',
-		            			dataType : 'json',
-		            			success : function(data) {
-									console.log(data);
-									successCallback(data);
-								}
-		            		});
-		            	},
-		            }],
-		             eventColor: 'rgba(255, 99, 132, 0.2)' 
+		            eventSources: [ fList, dList ]
+		             /* eventColor: 'rgba(255, 99, 132, 0.2)'  */
 		        });
 		        calendar.render();
 		      });
