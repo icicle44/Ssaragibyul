@@ -374,67 +374,67 @@ public class AdminController {
 		}
 	}
 	
-	//펀딩 검색하기
-	// 1. 
-	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
-	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
-		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
-		if(!searchList1.isEmpty()) {
-			model.addAttribute("fListandFileEnd", fListandFileEnd);
-			model.addAttribute("fListandFile", searchList1);
-			model.addAttribute("search", search);
-			return "funding/fundingList";
-		}else {
-			model.addAttribute("msg", "공지사항 검색 실패");
-			return "common/errorPage";
-		}
-	}
-	
-	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
-	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
-		 ArrayList<Funding> fListandFile = fService.printAllProject();   
-		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
-		if(!searchList2.isEmpty()) {
-			model.addAttribute("fListandFile", fListandFile);
-			model.addAttribute("fListandFileEnd", searchList2);
-			model.addAttribute("search", search);
-			return "funding/fundingList";
-		}else {
-			model.addAttribute("msg", "공지사항 검색 실패");
-			return "common/errorPage";
-		}
-	}
-	
-	 @RequestMapping(value="fundingSelectMoney.do", method=RequestMethod.GET)
-	 public String fundingSelectMoney(Model model) {
-		 ArrayList<Funding> fListandFile = fService.printAllProjectForMoney();   
-		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-		 if(!fListandFile.isEmpty()) {				
-				model.addAttribute("fListandFile", fListandFile);
-				model.addAttribute("fListandFileEnd", fListandFileEnd);
-				return "funding/fundingList";
-			}else {
-				model.addAttribute("msg", "펀딩 목록조회 실패");
-				return "common/errorPage";
-			}
-	
-	 }
-	 
-	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
-	 public String fundingSelectLike(Model model) {
-		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
-		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
-		 if(!fListandFile.isEmpty()) {				
-				model.addAttribute("fListandFile", fListandFile);
-				model.addAttribute("fListandFileEnd", fListandFileEnd);
-				return "funding/fundingList";
-			}else {
-				model.addAttribute("msg", "펀딩 목록조회 실패");
-				return "common/errorPage";
-			}
-	
-	 }
+//	//펀딩 검색하기
+//	// 1. 
+//	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
+//	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
+//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+//		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
+//		if(!searchList1.isEmpty()) {
+//			model.addAttribute("fListandFileEnd", fListandFileEnd);
+//			model.addAttribute("fListandFile", searchList1);
+//			model.addAttribute("search", search);
+//			return "funding/fundingList";
+//		}else {
+//			model.addAttribute("msg", "공지사항 검색 실패");
+//			return "common/errorPage";
+//		}
+//	}
+//	
+//	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
+//	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
+//		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+//		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
+//		if(!searchList2.isEmpty()) {
+//			model.addAttribute("fListandFile", fListandFile);
+//			model.addAttribute("fListandFileEnd", searchList2);
+//			model.addAttribute("search", search);
+//			return "funding/fundingList";
+//		}else {
+//			model.addAttribute("msg", "공지사항 검색 실패");
+//			return "common/errorPage";
+//		}
+//	}
+//	
+//	 @RequestMapping(value="fundingSelectMoney.do", method=RequestMethod.GET)
+//	 public String fundingSelectMoney(Model model) {
+//		 ArrayList<Funding> fListandFile = fService.printAllProjectForMoney();   
+//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+//		 if(!fListandFile.isEmpty()) {				
+//				model.addAttribute("fListandFile", fListandFile);
+//				model.addAttribute("fListandFileEnd", fListandFileEnd);
+//				return "funding/fundingList";
+//			}else {
+//				model.addAttribute("msg", "펀딩 목록조회 실패");
+//				return "common/errorPage";
+//			}
+//	
+//	 }
+//	 
+//	 @RequestMapping(value="fundingSelectLike.do", method=RequestMethod.GET)
+//	 public String fundingSelectLike(Model model) {
+//		 ArrayList<Funding> fListandFile = fService.printAllProjectForLike();   
+//		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+//		 if(!fListandFile.isEmpty()) {				
+//				model.addAttribute("fListandFile", fListandFile);
+//				model.addAttribute("fListandFileEnd", fListandFileEnd);
+//				return "funding/fundingList";
+//			}else {
+//				model.addAttribute("msg", "펀딩 목록조회 실패");
+//				return "common/errorPage";
+//			}
+//	
+//	 }
 
 	//기부 리스트 출력
 	@RequestMapping(value="adminDonationList.do", method = RequestMethod.GET)

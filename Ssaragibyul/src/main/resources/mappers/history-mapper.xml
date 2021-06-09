@@ -29,7 +29,7 @@
     </select>
     
 	<select id="selectAllSiteTypes" resultMap="historyResultMap">
-    	SELECT SITE_TYPE FROM HISTORY
+    	<![CDATA[SELECT DISTINCT SITE_TYPE FROM HISTORY]]>
     </select>    
     
     <select id="selectAllSiteNames" resultMap="historyResultMap">

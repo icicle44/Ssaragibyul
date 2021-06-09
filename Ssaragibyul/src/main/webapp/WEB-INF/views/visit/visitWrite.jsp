@@ -25,7 +25,6 @@ body {
 .input {
 	border: none;
 	width: 400px auto;
-	height: 100px;
 	/* border-right:0px; 
 	border-top:0px; 
 	boder-left:0px; 
@@ -126,10 +125,18 @@ span {
  
     <script>
     	$(function(){
-    		console.log($("#siteType").val());
+    	// CKEditor
+  		   BalloonEditor
+  		      .create( document.querySelector( '#editor' ) )
+  		      .then( editor => {
+  		         window.editor = editor;
+  		      } )
+  		      .catch( error => {
+  		         console.error( 'There was a problem initializing the editor.', error );
+  		      } );
+  		   // sitetype 선택
     		$("#siteType").change(function(){
     		var siteType = $("#siteType").val();
-    			alert("변화!");
     			$.ajax({
 					url : "getSiteName.do",// 요청할 서버의 url
 					type : "POST",	// 요청 method 방식 
@@ -139,6 +146,7 @@ span {
 					dataType : "json",
 					success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
 						var option = "<option value='none'>=== 선택 ===</option>";
+						$("#siteName").html("");
 						$("#siteName").append(option);
 						$.each(data, function (index, item){
 							var siteNames = "<option value='"+item.siteName+"'>'"+item.siteName+"'</option>";

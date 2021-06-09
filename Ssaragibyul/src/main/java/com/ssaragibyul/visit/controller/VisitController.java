@@ -1,4 +1,4 @@
- package com.ssaragibyul.visit.controller;
+package com.ssaragibyul.visit.controller;
 
 import java.io.File;
 import java.sql.Date;
@@ -25,7 +25,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.Reply;
-import com.ssaragibyul.common.Search;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.history.service.HistoryService;
 import com.ssaragibyul.member.domain.Member;
@@ -35,74 +34,83 @@ import com.ssaragibyul.visit.service.VisitService;
 
 @Controller
 public class VisitController {
-	
+
 	@Autowired
 	private VisitService vService;
 	@Autowired
 	private HistoryService hService;
-	@RequestMapping(value="visitList.do", method= {RequestMethod.GET})
+
+	@RequestMapping(value = "visitList.do", method = { RequestMethod.GET })
 	public ModelAndView visitListView(ModelAndView mv, Visit visit) {
 		ArrayList<Visit> vList = vService.printAll();
-		if(!vList.isEmpty()) {
+		if (!vList.isEmpty()) {
 			mv.addObject("vList", vList).setViewName("visit/visitList");
-		}else {
-			mv.addObject("msg","게시글 조회 실패").setViewName("common/errorPage");
+		} else {
+			mv.addObject("msg", "게시글 조회 실패").setViewName("common/errorPage");
 		}
-	    return mv;
+		return mv;
 	}
+
 	// 글목록 스크롤
 	@RequestMapping(value = "visitScroll.do", method = RequestMethod.GET)
 	public void visitListScroll(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
 		System.out.println("==================scroll 컨트롤러 들어옴");
 		System.out.println("Scroll, visitNo : " + visitNo);
-		Integer visitNoToStart = visitNo; 
+		Integer visitNoToStart = visitNo;
 		int lastNo = checkLastNo();
 		System.out.println("checkLastNo : " + lastNo);
 		List<Visit> addList = vService.printScroll(visitNoToStart);
-		Gson gson = new GsonBuilder().create(); 
+		Gson gson = new GsonBuilder().create();
 		gson.toJson(addList, response.getWriter());
 
 	}
 
-	@RequestMapping(value="visitDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "visitDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		Visit visit = vService.printOne(visitNo);
-		if(visit != null) {
+		if (visit != null) {
 			mv.addObject("visit", visit).setViewName("visit/visitList");
-		}else {
+		} else {
 			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
-	// 게시글 등록화면
-	@RequestMapping(value="visitWriteView.do", method=RequestMethod.GET)
+
+	// 게시글 등록화면/ type목록가져오기
+	@RequestMapping(value = "visitWriteView.do", method = RequestMethod.GET)
 	public ModelAndView visitWriteView(ModelAndView mv) {
 		ArrayList<History> hList = hService.printAllSiteType();
-		if(!hList.isEmpty()) {
+		
+		
+		if (!hList.isEmpty()) {
 			mv.addObject("hList", hList).setViewName("visit/visitWrite");
-		}else {
-			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
+		} else {
+			mv.addObject("msg", "게시글 등록화면 이동실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
+
 	// 게시글 등록할 때 SiteName 가져오기
-	@RequestMapping(value="getSiteName.do", method=RequestMethod.POST)
-	public void getSiteName(HttpServletResponse response, @RequestParam("siteType") String siteType) throws Exception{
+	@RequestMapping(value = "getSiteName.do", method = RequestMethod.POST)
+	public void getSiteName(HttpServletResponse response, @RequestParam("siteType") String siteType) throws Exception {
 		System.out.println("siteType : " + siteType);
 		ArrayList<History> hList = hService.printAllSiteNames(siteType);
-		System.out.println("controller, siteName, hList : "+hList);
-		if(!hList.isEmpty()) {
-			Gson gson = new GsonBuilder().create(); 
+		System.out.println("controller, siteName, hList : " + hList);
+		if (!hList.isEmpty()) {
+			Gson gson = new GsonBuilder().create();
 			gson.toJson(hList, response.getWriter());
 		}
 	}
+
 	// 게시글 등록
-	@RequestMapping(value="visitRegister.do", method=RequestMethod.POST)
-	public ModelAndView visitRegister(ModelAndView mv,@ModelAttribute Visit visit, @RequestParam(value="uploadFile", required=false) MultipartFile uploadFile, HttpServletRequest request) {
+	@RequestMapping(value = "visitRegister.do", method = RequestMethod.POST)
+	public ModelAndView visitRegister(ModelAndView mv, @ModelAttribute Visit visit,
+			@RequestParam(value = "uploadFile", required = false) MultipartFile uploadFile,
+			HttpServletRequest request) {
 		// 서버에 파일 저장
-		if(!uploadFile.getOriginalFilename().equals("")) {
-			String renameFileName = saveFile(uploadFile,request);
-			if(renameFileName != null) {
+		if (!uploadFile.getOriginalFilename().equals("")) {
+			String renameFileName = saveFile(uploadFile, request);
+			if (renameFileName != null) {
 				visit.setOriginalFilename(uploadFile.getOriginalFilename());
 				visit.setRenameFilename(renameFileName);
 			}
@@ -110,78 +118,82 @@ public class VisitController {
 		// 디비에 데이터 저장
 		int result = 0;
 		String path = "";
-		
+
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		visit.setUploadTime(sdf.format(timestamp));
-		
+
 		result = vService.registerVisit(visit);
-		if(result > 0) {
+		if (result > 0) {
 			path = "redirect:visitList.do";
-		}else {
+		} else {
 			mv.addObject("msg", "방문 인증글 등록 실패");
 			path = "common/errorPage";
 		}
 		mv.setViewName(path);
 		return mv;
 	}
-	
+
 	// 게시글 수정화면
-	@RequestMapping(value="visitModifyView.do")
+	@RequestMapping(value = "visitModifyView.do")
 	public ModelAndView visitModifyView(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		Visit visit = vService.printOne(visitNo);
-		if(visit != null) {
+		if (visit != null) {
 			mv.addObject("visit", visit).setViewName("visit/visitModify");
-		}else {
+		} else {
 			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
+
 	// 게시글 수정
-	@RequestMapping(value="visitUpdate.do", method=RequestMethod.POST)
-	public ModelAndView visitUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Visit visit, @RequestParam(value="reloadFile", required=false) MultipartFile reloadFile) {
+	@RequestMapping(value = "visitUpdate.do", method = RequestMethod.POST)
+	public ModelAndView visitUpdate(ModelAndView mv, HttpServletRequest request, @ModelAttribute Visit visit,
+			@RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
 		System.out.println("=============================게시글 수정 controller 들어옴");
 		System.out.println("RenameFilename : " + visit.getRenameFilename());
 		// 파일 삭제 후 업로드
-		if(reloadFile != null && !reloadFile.isEmpty()) {
+		if (reloadFile != null && !reloadFile.isEmpty()) {
 			// 기존 파일 삭제
-			if( visit.getRenameFilename() != "") {
+			if (visit.getRenameFilename() != "") {
 				deleteFile(visit.getRenameFilename(), request);
 			}
 			// 새 파일 업로드
 			String renameFilename = saveFile(reloadFile, request);
-			if(renameFilename != null) {
+			if (renameFilename != null) {
 				visit.setOriginalFilename(reloadFile.getOriginalFilename());
 				visit.setRenameFilename(renameFilename);
 			}
 		}
 		// DB 수정
 		int result = vService.modifyVisit(visit);
-		if(result > 0) {
+		if (result > 0) {
 			mv.setViewName("redirect:visitList.do");
-		}else {
+		} else {
 			mv.addObject("msg", "게시글 수정 실패").setViewName("common/errorPage");
 		}
 		return mv;
 	}
-	
+
 	// 게시글 삭제
-	@RequestMapping(value="visitDelete.do", method=RequestMethod.GET)
-	public String visitDelete(Model model, @RequestParam("visitNo") int visitNo,@RequestParam("renameFilename") String renameFilename,HttpServletRequest request) {
+	@RequestMapping(value = "visitDelete.do", method = RequestMethod.GET)
+	public String visitDelete(Model model, @RequestParam("visitNo") int visitNo,
+			@RequestParam("renameFilename") String renameFilename, HttpServletRequest request) {
 		// 업로드된 파일 삭제
-		if(renameFilename != "") {
+		if (renameFilename != "") {
 			deleteFile(renameFilename, request);
 		}
-		
+
 		// 디비에 데이터 업데이트
 		int result = vService.removeVisit(visitNo);
-		if(result > 0) {
+		if (result > 0) {
 			return "redirect:visitList.do";
-		}else {
+		} else {
 			model.addAttribute("msg", "게시글 삭제 실패");
 			return "common/errorPage";
 		}
 	}
+
 	// 파일저장
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		// 파일 저장 경로 설정
@@ -190,13 +202,14 @@ public class VisitController {
 		// 저장 폴더 선택
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
-		if(!folder.exists()) {
+		if (!folder.exists()) {
 			folder.mkdir();
 		}
 		// 파일명 변경하기
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-		String originalFileName =file.getOriginalFilename();
-		String renameFileName =sdf.format(new Date(System.currentTimeMillis())) + "." + originalFileName.substring(originalFileName.lastIndexOf(".")+1);
+		String originalFileName = file.getOriginalFilename();
+		String renameFileName = sdf.format(new Date(System.currentTimeMillis())) + "."
+				+ originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
 		String filePath = folder + "\\" + renameFileName;
 		// 파일저장
 		try {
@@ -204,85 +217,91 @@ public class VisitController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-		} 
+		}
 		return renameFileName;
 	}
+
 	// 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
-		System.out.println("deleteFile, filename : "+fileName);
+		System.out.println("deleteFile, filename : " + fileName);
 		String root = request.getSession().getServletContext().getRealPath("resources");
 		System.out.println("deleteFile, root : " + root);
 		String savePath = root + "\\vUploadFiles";
 		File file = new File(savePath + "\\" + fileName);
-		if(file.exists()) {
+		if (file.exists()) {
 			file.delete();
 		}
 	}
+
 	// 댓글등록
 	@ResponseBody
-	@RequestMapping(value="addReply.do", method=RequestMethod.POST)
+	@RequestMapping(value = "addReply.do", method = RequestMethod.POST)
 	public String addReply(@ModelAttribute Reply reply, HttpSession session) {
 		System.out.println("컨트롤러 들어옴=============================");
-		Member loginUser = (Member)session.getAttribute("loginUser");
+		Member loginUser = (Member) session.getAttribute("loginUser");
 		reply.setUserId(loginUser.getUserId());
 		System.out.println("reply : " + reply);
 		int result = vService.registerReply(reply);
 		System.out.println("result : " + result);
-		if(result > 0) {
+		if (result > 0) {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
-	
+
 	// 댓글목록
-	@RequestMapping(value="replyList.do", method=RequestMethod.GET)
+	@RequestMapping(value = "replyList.do", method = RequestMethod.GET)
 	public void getReplyList(HttpServletResponse response, @RequestParam("visitNo") int visitNo) throws Exception {
 		ArrayList<Reply> rList = vService.printAllReply(visitNo);
-		System.out.println("controller, rList(댓글목록) : "+rList);
-		if(!rList.isEmpty()) {
-			Gson gson = new GsonBuilder().create(); 
+		System.out.println("controller, rList(댓글목록) : " + rList);
+		if (!rList.isEmpty()) {
+			Gson gson = new GsonBuilder().create();
 			gson.toJson(rList, response.getWriter());
-		}else {
-			
+		} else {
+
 		}
 	}
+
 	// 댓글수정
 	@ResponseBody
-	@RequestMapping(value="modifyReply.do", method=RequestMethod.POST)
+	@RequestMapping(value = "modifyReply.do", method = RequestMethod.POST)
 	public String modifyReply(@ModelAttribute Reply reply) {
 		int result = vService.modifyReply(reply);
-		if(result > 0) {
+		if (result > 0) {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
+
 	// 댓글삭제
 	@ResponseBody
-	@RequestMapping(value="deleteReply.do", method=RequestMethod.GET)
-	public String removeReply(@RequestParam("replyNo") int replyNo ) {
+	@RequestMapping(value = "deleteReply.do", method = RequestMethod.GET)
+	public String removeReply(@RequestParam("replyNo") int replyNo) {
 		int result = vService.removeReply(replyNo);
 		System.out.println("replyNo : " + replyNo + "result : " + result);
-		if(result > 0) {
+		if (result > 0) {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
+
 	// 조회수 증가
 	@ResponseBody
-	@RequestMapping(value="addHitsCount.do", method=RequestMethod.GET)
+	@RequestMapping(value = "addHitsCount.do", method = RequestMethod.GET)
 	public String addHitsCount(@RequestParam("visitNo") int visitNo) {
 		System.out.println("========================조회수 controller");
 		Integer hitCount = vService.addHitsCount(visitNo);
 		System.out.println("조회수 hitCount : " + hitCount);
-		if(hitCount != null) {
+		if (hitCount != null) {
 			return hitCount.toString();
-		}else {
+		} else {
 			return "fail";
 		}
 	}
+
 	// 마지막 목록의 visitNo 가져오기
 	public Integer checkLastNo() {
 		Integer result = 0;
@@ -290,43 +309,47 @@ public class VisitController {
 		System.out.println("result : " + result);
 		return result;
 	}
+
 // ==============좋아요
 	// 좋아요 추가
 	@ResponseBody
-	@RequestMapping(value="plusLikesCount.do",method=RequestMethod.GET)
+	@RequestMapping(value = "plusLikesCount.do", method = RequestMethod.GET)
 	public String plusLikesCount(VisitLike likes) {
 		System.out.println("=========좋아요 controller");
-		String result = vService.plusLikesCount(likes)+"";
-		if(result != "0") {
+		String result = vService.plusLikesCount(likes) + "";
+		if (result != "0") {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
+
 	// 좋아요 취소
 	@ResponseBody
-	@RequestMapping(value="minusLikesCount.do",method=RequestMethod.GET)
+	@RequestMapping(value = "minusLikesCount.do", method = RequestMethod.GET)
 	public String minusLikesCount(VisitLike likes) {
-		System.out.println("좋아요 취소 visitNo, userId : " + likes.getVisitNo() +likes.getUserId() );
-		String result = vService.minusLikesCount(likes)+"";
-		if(result != "0") {
+		System.out.println("좋아요 취소 visitNo, userId : " + likes.getVisitNo() + likes.getUserId());
+		String result = vService.minusLikesCount(likes) + "";
+		if (result != "0") {
 			return "success";
-		}else {
+		} else {
 			return "fail";
 		}
 	}
+
 	// 좋아요 체크
 	@ResponseBody
 	@RequestMapping(value = "checkLikes.do", method = RequestMethod.GET)
 	public String checkLikes(VisitLike likes) {
 		String likesYn = vService.checkLikes(likes);
 		System.out.println("좋아요 체크 :" + likesYn);
-		if(likesYn.equals("Y")) {
+		if (likesYn.equals("Y")) {
 			return "Y";
-		}else {
+		} else {
 			return "N";
 		}
 	}
+
 	// 좋아요 수 가져오기
 	@ResponseBody
 	@RequestMapping(value = "getLikes.do", method = RequestMethod.GET)
@@ -334,20 +357,21 @@ public class VisitController {
 		System.out.println("==============좋아요 가져오기");
 		int result = vService.getLikes(visitNo);
 		System.out.println("좋아요 수 result" + result);
-		return result+"";
+		return result + "";
 	}
+
 //======================== 검색
-	@RequestMapping(value="visitSearch.do", method=RequestMethod.POST)
+	@RequestMapping(value = "visitSearch.do", method = RequestMethod.POST)
 	public String visitSearch(@RequestParam("searchValue") String searchValue, Model model) {
 		ArrayList<Visit> searchList = vService.printSearchAll(searchValue);
-		System.out.println("searchList"+searchList);
-		if(!searchList.isEmpty()) {
+		System.out.println("searchList" + searchList);
+		if (!searchList.isEmpty()) {
 			model.addAttribute("vList", searchList);
 			return "visit/visitSearchList";
-		}else {
+		} else {
 			model.addAttribute("msg", "검색결과가 없습니다");
 			return "common/errorPage";
 		}
-		
+
 	}
 }
