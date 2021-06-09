@@ -129,6 +129,9 @@ public interface FundingStore {
 	public FundingLog selectOneProject(HashMap<String, String> fmap);
 	public int updateProjectLog(FundingLog fundingLog);
 	public int updateProject_SumMoneyMinus(Funding funding);
+	public Funding selectOneProjectforModifty(int projectNo);
+	public int fundingPropUpdate_Porejct(Funding funding);
+	public int fundingPropUpdate_File(FundingFile fundingFile);
 }
 
 

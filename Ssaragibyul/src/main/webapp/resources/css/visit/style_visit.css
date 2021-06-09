@@ -626,7 +626,7 @@ table{
   animation-iteration-count: 1;
 }
 
-input {
+#search-input {
   position: absolute;
   top: 1em;
   left: 2.6em;

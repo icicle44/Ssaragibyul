@@ -266,7 +266,7 @@ margin-left: 100px;
 																			  </c:if>
 																			</c:forEach>
 																			
-										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (!empty loginUser.userId)}">
+										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId != funding.userId)}">
 							     		<div>
 							    					<form action="fundingJoin.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
@@ -277,7 +277,7 @@ margin-left: 100px;
 							       		</c:if>
 							       		
 							       		
-							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (!empty loginUser.userId)}">
+							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (loginUser.userId != funding.userId)}">
 							       		<div>
 							    					<form action="fundingCancel.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
@@ -285,8 +285,15 @@ margin-left: 100px;
 							    					<input type="submit" class="getstarted" value="펀딩 취소">
 							    					</form>
 							    		</div>
-							    		</c:if>
-							 
+							    		</c:if>   			
+							    				
+						   					<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId == funding.userId)}">
+													<form action="fundingModifyView.do" method="post" name="fundingGo">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							    					<input type="submit" class="getstarted" value="펀딩 수정">
+							    					</form>
+						   					</c:if>
+													 
 				
 							       		
     				<b class = "contents">달성률 : <fmt:formatNumber value="${funding.percent }" pattern="#,###"/>%</b>
@@ -345,6 +352,7 @@ margin-left: 100px;
     				<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${funding.likeCount}
    					</form>
    					</c:if>
+
 					
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button>문의하기</button>  

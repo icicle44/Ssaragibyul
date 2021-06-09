@@ -20,4 +20,6 @@ public interface HistoryService {
 	public ArrayList<History> printAllSiteNames(String siteType);
 
 	public ArrayList<History> printAllSiteType();
+
+	public ArrayList<History> printAllSiteLocation(String siteName);
 }

@@ -36,6 +36,10 @@
     	SELECT SITE_NAME FROM HISTORY WHERE SITE_TYPE = #{siteType }
     </select>
     
+    <select id="selectSiteLocation" resultMap="historyResultMap">
+    	SELECT * FROM HISTORY WHERE SITE_NAME = #{siteName }
+    </select>
+    
     <select id="selectOneHistory" resultMap="historyResultMap">
     	SELECT * FROM HISTORY WHERE SITE_NO = #{siteNo} AND H_STATUS = 'Y'
     </select>

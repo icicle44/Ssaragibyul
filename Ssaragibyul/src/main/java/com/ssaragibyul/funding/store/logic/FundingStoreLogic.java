@@ -406,6 +406,16 @@ public class FundingStoreLogic implements FundingStore{
 	public int updateProject_SumMoneyMinus(Funding funding) {
 		return sqlSession.update("fundingMapper.updateProject_SumMoneyMinus", funding);
 	}
+	public Funding selectOneProjectforModifty(int projectNo) {
+		Funding funding = sqlSession.selectOne("fundingMapper.selectOneProjectforModifty", projectNo);
+		return funding;
+	}
+	public int fundingPropUpdate_Porejct(Funding funding) {
+		return sqlSession.update("fundingMapper.fundingPropUpdate_Porejct", funding);
+	}
+	public int fundingPropUpdate_File(FundingFile fundingFile) {
+		return sqlSession.update("fundingMapper.fundingPropUpdate_File", fundingFile);
+	}
 
 	
 }

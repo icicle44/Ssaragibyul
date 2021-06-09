@@ -14,4 +14,5 @@ public interface HistoryStore {
 	public int deleteHistory(int siteNo);
 	public ArrayList<History> selectAllSiteNames(String siteType);
 	public ArrayList<History> selectAllSiteType();
+	public ArrayList<History> selectSiteLocation(String siteName);
 }

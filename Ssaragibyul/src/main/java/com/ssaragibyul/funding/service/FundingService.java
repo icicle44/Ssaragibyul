@@ -154,6 +154,10 @@ public interface FundingService {
 
 	public int fundingCancelComplete(FundingLog fundingLog, Funding funding);
 
+	public Funding printOneProjectforModifty(int projectNo);
+
+	public int fundingPropUpdate(Funding funding, FundingFile fundingFile);
+
 
 	
 

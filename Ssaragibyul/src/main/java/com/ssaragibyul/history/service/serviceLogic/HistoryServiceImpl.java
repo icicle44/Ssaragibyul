@@ -56,4 +56,10 @@ public class HistoryServiceImpl implements HistoryService{
 		return hStore.selectAllSiteType();
 	}
 
+	@Override
+	public ArrayList<History> printAllSiteLocation(String siteName) {
+		
+		return hStore.selectSiteLocation(siteName);
+	}
+
 }

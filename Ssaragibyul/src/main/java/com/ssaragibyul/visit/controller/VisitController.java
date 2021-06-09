@@ -24,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.ssaragibyul.common.DistanceInfo;
+import com.ssaragibyul.common.DistanceLocation;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.history.domain.History;
 import com.ssaragibyul.history.service.HistoryService;
@@ -64,14 +66,14 @@ public class VisitController {
 		gson.toJson(addList, response.getWriter());
 
 	}
-
+	// 게시글 수정화면에 작성내용 띄우기
 	@RequestMapping(value = "visitDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView visitDetail(ModelAndView mv, @RequestParam("visitNo") int visitNo) {
 		Visit visit = vService.printOne(visitNo);
 		if (visit != null) {
 			mv.addObject("visit", visit).setViewName("visit/visitList");
 		} else {
-			mv.addObject("msg", "게시글 상세 조회 실패").setViewName("common/errorPage");
+			mv.addObject("msg", "다시 시도해주세요").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -102,6 +104,30 @@ public class VisitController {
 		}
 	}
 
+	// 게시글 등록할 때 Site 위치 가져오기
+	@RequestMapping(value = "getSiteLocation.do", method = RequestMethod.POST)
+	public void getSiteLocation(HttpServletResponse response, @RequestParam("siteName") String siteName) throws Exception {
+		System.out.println("컨트롤러 위치가져오기 siteName : " + siteName);
+		ArrayList<History> hList = hService.printAllSiteLocation(siteName);
+		if (!hList.isEmpty()) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(hList, response.getWriter());
+		}
+	}
+	// 내 위치와 사적지 위치 간 거리 계산
+	@RequestMapping(value="calDistance.do", method = RequestMethod.GET)
+	public void calDistance(DistanceInfo distInfo) {
+		
+	}
+	
+	// 거리 계산 api
+	public double calDist(DistanceInfo distInfo) {
+		distInfo.setUnit("meter");
+		final double dist = distInfo.getDistance();
+		System.out.println("distance : " + dist);
+		return dist;
+	}
+	
 	// 게시글 등록
 	@RequestMapping(value = "visitRegister.do", method = RequestMethod.POST)
 	public ModelAndView visitRegister(ModelAndView mv, @ModelAttribute Visit visit,

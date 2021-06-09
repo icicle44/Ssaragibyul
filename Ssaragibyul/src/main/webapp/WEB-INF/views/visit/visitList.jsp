@@ -589,7 +589,7 @@
 							$(".rCount"+visitNo).html("");
 							getReplyList(visitNo);
 						} else {
-							alert("댓글 수정 실패!");
+							alert("내용을 입력해주세요");
 						}
 					},
 					error : function() {
@@ -726,10 +726,8 @@
 							$(".likesCount").text("");
 							$(".likesCount").append(data);
 					},
-					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error+"좋아요 수 가져오기");
+					error : function() {
+						console.log('좋아요 수 가져오기 에러');
 					}
 
 				});
@@ -749,10 +747,8 @@
 							$(".count").after($("<td>").text(data));
 						}
 					},
-					error : function(request, status, error) {
-						alert("code:" + request.status + "\n" + "message:"
-								+ request.responseText + "\n" + "error:"
-								+ error +"조회수증가");
+					error : function() {
+						console.log('조회수 증가 에러');
 					}
 
 				});
