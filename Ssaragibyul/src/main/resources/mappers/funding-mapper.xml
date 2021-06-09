@@ -623,13 +623,35 @@ WHERE PROJECT_CODE = 0 AND USER_ID = #{userId }
     
     
     
+    <select id="selectOneProjectforModifty" resultMap="fundingResultMap">
+    	SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO) WHERE PROJECT_CODE = 0 AND F_PROJECT_NO = #{projectNo}
+    </select>
     
     
-    
-    
-    
-    
-    
+    	<update id="fundingPropUpdate_Porejct" parameterType="Funding">
+    	UPDATE FUNDING_PROJECT SET
+			SUBJECT = #{subjectName},
+			PRODUCT_NAME = #{productName},
+			GOAL_MONEY = #{goalMoney},
+			OPTION_PRICE = #{optionPrice},
+			OPTION_LIMIT = #{optionLimit},
+			FIN_DATE = #{finDate},
+			PROJ_STORY = #{projectStory},
+			PRODUCT_CONT = #{productContent},
+			WARNING_INTRO = #{warningIntro},
+			DELIVERY_DATE = #{deleiveryDate}
+			WHERE
+		F_PROJECT_NO = #{projectNo}
+    	</update>
+    	<update id="fundingPropUpdate_File" parameterType="FundingFile">
+    	UPDATE FUNDING_FILE SET
+			FILE_VIDEO_URL = #{videoUrl},
+			FILE_MAIN_NAME = #{fileMainName},
+			FILE_SUB1_NAME = #{fileSub1Name},
+			FILE_SUB2_NAME = #{fileSub2Name}
+			WHERE
+		F_PROJECT_NO = #{projectNo}
+    	</update>
     
              <!--나혜님이 추가한거 -->
    <select id="selectAllList" resultMap="fundingResultMap">

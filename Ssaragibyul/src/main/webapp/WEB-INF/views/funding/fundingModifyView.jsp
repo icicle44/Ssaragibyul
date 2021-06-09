@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>제안하기</title>
+<title>제안 수정 하기</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
@@ -110,7 +110,7 @@ margin : auto;
 	
 
 	<main class="main-content">
-		<form action="fundingRegister.do" method="post" enctype="multipart/form-data" id="postForm">
+		<form action="fundingUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		<br>
 				<br>
 				<br>
@@ -126,13 +126,13 @@ margin : auto;
 						프로젝트명
 					</div>
 					<div>
-						<input type="text" name="subjectName">
+						<input type="text" name="subjectName" value="${funding.subjectName }">
 					</div>
 					<div>
 						목표 금액
 					</div>
 					<div>
-						<input type="text" name="goalMoney">
+						<input type="text" name="goalMoney" value="${funding.goalMoney }">
 					</div>
 					<div>
 						진행 기간
@@ -145,14 +145,15 @@ margin : auto;
 					let day = today.getDay();  // 요일
 
 					document.write(year + '/' + month + '/' + date)</script> ~ 	
-						<input type="date" name="finDate">
+						<input type="date" name="finDate" value="${funding.finDate}">
 					</div>
 					
 					<div>
 						대표 이미지
 					</div>
 					<div>
-						<input type="file" name="uploadFileMain">
+						<input type="file" name="reloadFileMain"><br>
+						기존 파일 : ${funding.fundingFile.fileMainName }
 					</div>
 				<br><br><br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
@@ -166,14 +167,16 @@ margin : auto;
 						동영상 주소
 				</div>
 					<div>
-						<input type="text" name="videoUrl">
+						<input type="text" name="videoUrl" value="${funding.fundingFile.videoUrl }">
 					</div>
 					<div>
 						 이미지 등록
 					</div>
 					<div>
-						 <input type="file" name="uploadFileSub1">  <br>
-						    <input type="file" name="uploadFileSub2">
+						 <input type="file" name="reloadFileSub1">  <br>
+						 기존 서브 파일1: ${funding.fundingFile.fileSub1Name }<br>
+						    <input type="file" name="reloadFileSub2"><br>
+						    기존 서브 파일1: ${funding.fundingFile.fileSub2Name }
 					</div>
 					<div>
 							프로젝트 스토리
@@ -196,25 +199,25 @@ margin : auto;
 						리워드 금액
 					</div>
 					<div>
-						<input type="text" name="optionPrice">
+						<input type="text" name="optionPrice" value="${funding.optionPrice }">
 					</div>
 					<div>
 						리워드 제공 가능 수
 					</div>
 					<div>
-						<input type="text" name="optionLimit">
+						<input type="text" name="optionLimit" value="${funding.optionLimit }">
 					</div>
 					<div>
 						리워드 제목
 					</div>
 					<div>
-						<input type="text" name="productName">
+						<input type="text" name="productName" value="${funding.productName }">
 					</div>
 					<div>
 							리워드 내용
 					</div>
 						<div>
-						<textarea name="productContent" rows="6" cols="30" wrap="virtual"></textarea>
+						<textarea name="productContent" rows="6" cols="30" wrap="virtual" >${funding.productContent }</textarea>
 						</div>
 						<div>
 							배송지 필요여부
@@ -228,7 +231,7 @@ margin : auto;
 						예상 배송일
 					</div>
 					<div>	
-						<input type="date" name="deleiveryDate">
+						<input type="date" name="deleiveryDate" value="${funding.deleiveryDate }">
 						</div>
 					<br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest4"
@@ -243,7 +246,7 @@ margin : auto;
 				</div>
 				
 		<div>
-						<textarea name="warningIntro" rows="6" cols="30" wrap="virtual"></textarea>
+						<textarea name="warningIntro" rows="6" cols="30" wrap="virtual">${funding.warningIntro }</textarea>
 		</div>
 			<div>
 						문의 가능한 번호
@@ -257,10 +260,7 @@ margin : auto;
 					<div>
 						<input type="text" name="">
 					</div>
-					<div>
-						<input type="hidden" name="userId" value="${loginUser.userId }"></td>
-					</div>
-					
+					<input type = "hidden" name="projectNo" value="${funding.projectNo }">
 					
 			</section>
 		<br><br><br><br><br><br>

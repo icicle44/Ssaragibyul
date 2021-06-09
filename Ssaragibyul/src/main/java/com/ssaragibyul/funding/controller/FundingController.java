@@ -217,24 +217,74 @@ public class FundingController {
 
 
 	 
+		@RequestMapping(value="fundingModifyView.do", method=RequestMethod.POST)
+		public String fundingModifyView(@RequestParam("projectNo") int projectNo, Model model) {
+			model.addAttribute("funding", fService.printOneProjectforModifty(projectNo));
+			return "funding/fundingModifyView";
+		}
+		
 		@RequestMapping(value = "fundingUpdate.do", method = RequestMethod.POST)
-		public ModelAndView fundingUpdate(ModelAndView mv, HttpServletRequest request, 
-				@ModelAttribute Funding funding, @RequestParam(value = "reloadFile", required = false) MultipartFile reloadFile) {
-		
-			return mv;
+		public String fundingUpdate(ModelAndView mv, HttpServletRequest request, Model model,
+				@ModelAttribute Funding funding, FundingFile fundingFile,
+				@RequestParam("projectNo") int projectNo,
+				@RequestParam(value = "reloadFileMain", required = false) MultipartFile reloadFileMain,
+				@RequestParam(value = "reloadFileSub1", required = false) MultipartFile reloadFileSub1,
+				@RequestParam(value = "reloadFileSub2", required = false) MultipartFile reloadFileSub2) {
+			// 파일 삭제 후 업로드 ( 수정 )
+			if (reloadFileMain != null && !reloadFileMain.isEmpty()) {
+				// 기존 파일 삭제
+				if (fundingFile.getFileMainName() != "") {
+					deleteFile(fundingFile.getFileMainName(), request);
+				}
+				// 새 파일 업로드
+				String savePath = saveFile(reloadFileMain, request);
+				if (savePath != null) {
+					fundingFile.setFileMainName(reloadFileMain.getOriginalFilename());
+				}
+			}
+			if (reloadFileSub1 != null && !reloadFileSub1.isEmpty()) {
+				// 기존 파일 삭제
+				if (fundingFile.getFileSub1Name() != "") {
+					deleteFile(fundingFile.getFileSub1Name(), request);
+				}
+				// 새 파일 업로드
+				String savePath = saveFile(reloadFileSub1, request);
+				if (savePath != null) {
+					fundingFile.setFileSub1Name(reloadFileSub1.getOriginalFilename());
+				}
+			}
+			if (reloadFileSub2 != null && !reloadFileSub2.isEmpty()) {
+				// 기존 파일 삭제
+				if (fundingFile.getFileSub2Name() != "") {
+					deleteFile(fundingFile.getFileSub2Name(), request);
+				}
+				// 새 파일 업로드
+				String savePath = saveFile(reloadFileSub2, request);
+				if (savePath != null) {
+					fundingFile.setFileSub2Name(reloadFileSub2.getOriginalFilename());
+				}
+			}
+			// DB 수정
+			int result = fService.fundingPropUpdate(funding, fundingFile);
+			 if(result > 0) {
+				 return "redirect:fundingDetail.do?projectNo="+projectNo;
+			 }else {
+				 model.addAttribute("msg", "제안 수정 실패!!");
+				 return "common/errorPage";
+			 }
 		}
-
-		// 게시글 삭제(실제로는 상태 업데이트?)
-		@RequestMapping(value = "fundingDelete.do", method = RequestMethod.GET)
-		public String fundingDelete(Model model, @RequestParam("projectNo") int projectNo, 
-				@RequestParam("renameFilename") String renameFilename, HttpServletRequest request) {
 		
-			return "";
-		}
 
 		public void deleteFile(String fileName, HttpServletRequest request) {
-
-		}   //펀딩 수정 삭제 파일 삭제 등등 해야하는거. 일단 후순위로 미뤄둠... 프론트 먼저..
+			String root = request.getSession().getServletContext().getRealPath("resources");
+			String deletePath = root + "\\upLoadFile";
+			// 파일을 삭제하기 위해서는 filePath가 필요하다
+			// 파일이름만 알아도 filePath를 구할 수가 있다.
+			File deleteFile = new File(deletePath + "\\" + fileName);
+			if(deleteFile.exists()) {
+				deleteFile.delete();
+			}
+		}
 		
 	 
 	 

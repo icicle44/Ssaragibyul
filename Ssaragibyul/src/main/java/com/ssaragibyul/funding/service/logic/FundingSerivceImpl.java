@@ -420,4 +420,17 @@ public class FundingSerivceImpl implements FundingService {
 			      }
 			return fResult;
 		}
+	public Funding printOneProjectforModifty(int projectNo) {
+		Funding funding = fStore.selectOneProjectforModifty(projectNo);
+		return funding;
+	}
+	public int fundingPropUpdate(Funding funding, FundingFile fundingFile) {
+		int result = fStore.fundingPropUpdate_Porejct(funding);
+		int fResult = 0;
+		if(result>0) {
+			fResult = fStore.fundingPropUpdate_File(fundingFile);
+		}
+		return fResult;
+	}
+
 }
