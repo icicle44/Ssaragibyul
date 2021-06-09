@@ -1,6 +1,7 @@
 package com.ssaragibyul.funding.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -27,7 +28,15 @@ public class FundingStoreLogic implements FundingStore{
 	
 	@Override
 	public int selectListCount(String userId) {
-		return sqlSession.selectOne("fundingMapper.selectListCount", userId);
+		return sqlSession.selectOne("fundingMapper.selectListCountMy", userId);
+	}
+	@Override
+	public int selectListCountLike(String userId) {
+		return sqlSession.selectOne("fundingMapper.selectListCountLike", userId);
+	}
+	@Override
+	public int selectListCountProp(String userId) {
+		return sqlSession.selectOne("fundingMapper.selectListCountMy", userId);
 	}
 
 	@Override
@@ -385,7 +394,18 @@ public class FundingStoreLogic implements FundingStore{
 		return (ArrayList)sqlSession.selectList("fundingMapper.selectPropFundingMoney", userId, rowBounds);
 	}
 
-
+	public ArrayList<FundingLog> selectAllSponserList(int projectNo) {
+		return (ArrayList)sqlSession.selectList("fundingMapper.selectAllSponserList", projectNo);
+	}
+	public FundingLog selectOneProject(HashMap<String, String> fmap) {
+		return sqlSession.selectOne("fundingMapper.selectOneProject", fmap); 
+	}
+	public int updateProjectLog(FundingLog fundingLog) {
+		return sqlSession.update("fundingMapper.updateProjectLogCancel", fundingLog);
+	}
+	public int updateProject_SumMoneyMinus(Funding funding) {
+		return sqlSession.update("fundingMapper.updateProject_SumMoneyMinus", funding);
+	}
 
 	
 }

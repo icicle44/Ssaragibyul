@@ -128,8 +128,6 @@ padding-left: 20px;
 				<tr align="center" height="20">
 					<td colspan="8">
 					<!-- 이전 -->
-			<%-- 		<c:url var="before" value="myFundingMoney.do">
-					<c:url var="before" value="myFundingLike.do"> --%>
 					<c:url var="before" value="myFunding.do">
 						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>

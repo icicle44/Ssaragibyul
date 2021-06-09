@@ -67,7 +67,7 @@
             <div class="col-md-8">
               <h2>Contact  ${funding.projectNo } ${loginUser.userId }</h2>
 
-              <form action="accusationRegister.do" method="post" >
+              <form action="accusationRegister.do" method="post" onSubmit="formChk();return true">
                     
                     
 
@@ -112,7 +112,15 @@
 
  		<%@include file="../../../footer.jsp" %>
 	</main>
-
+	<script>
+	function formChk(){
+	    if(${!empty loginUser.userId }){
+	      alert("신고가 완료되었습니다. 관리자의 추후 연락을 기다려주세요");
+	    }else{
+	       return false;
+	    }
+	   }
+	</script>
 	<!-- .site-wrap -->
  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

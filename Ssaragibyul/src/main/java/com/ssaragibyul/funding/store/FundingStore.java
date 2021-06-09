@@ -1,6 +1,7 @@
 package com.ssaragibyul.funding.store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -16,6 +17,8 @@ import com.ssaragibyul.member.domain.Member;
 public interface FundingStore {
 
 	public int selectListCount(String userId);
+	public int selectListCountLike(String userId);
+	public int selectListCountProp(String userId);
 
 	public int likesStatus(int projectNo);
 	
@@ -123,7 +126,13 @@ public interface FundingStore {
 	public ArrayList<Funding> selectPropFunding(String userId, PageInfo pi);
 	public ArrayList<Funding> selectPropFundingLike(String userId, PageInfo pi);
 	public ArrayList<Funding> selectPropFundingMoney(String userId, PageInfo pi);
+	public FundingLog selectOneProject(HashMap<String, String> fmap);
+	public int updateProjectLog(FundingLog fundingLog);
+	public int updateProject_SumMoneyMinus(Funding funding);
 }
+
+
+
 
 
 

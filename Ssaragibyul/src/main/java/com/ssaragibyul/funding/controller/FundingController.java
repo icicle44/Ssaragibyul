@@ -271,6 +271,37 @@ public class FundingController {
 			 }
 		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
 		 
+			@RequestMapping(value = "fundingCancel.do", method =  RequestMethod.POST )
+			public ModelAndView fundingCancel(ModelAndView mv, @RequestParam("projectNo") int projectNo,
+															   @RequestParam("userId") String userId) {
+				String projectno = Integer.toString(projectNo);
+				HashMap<String, String> fMap = new HashMap<String, String>();
+				fMap.put("projectNo", projectno);
+				fMap.put("userId", userId);
+				FundingLog fundingLog = fService.printOneProject(fMap);
+				if (fundingLog != null) {
+					// 메소드 체이닝 방식
+					mv.addObject("fundingLog", fundingLog).setViewName("funding/fundingCancelPage");
+				} else {
+					mv.addObject("msg", "펀딩 참여 실패");
+					mv.setViewName("common/errorPage");
+				}
+				return mv;
+			}		//펀딩 취소 페이지로 이동
+			
+			@RequestMapping(value = "fundingCancelComplete.do", method =  RequestMethod.POST )
+			public String fundingCancelComplete(@ModelAttribute FundingLog fundingLog, Funding funding,
+	                   							@RequestParam("projectNo") int projectNo) {
+						int result = fService.fundingCancelComplete(fundingLog, funding); 
+						if(result > 0) {
+								return "redirect:fundingDetail.do?projectNo="+projectNo;
+						}else {
+							return "common/errorPage";
+							}
+						}
+			
+			
+			
 			@RequestMapping(value = "fundingDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 			public ModelAndView fundingDetail(ModelAndView mv, @RequestParam("projectNo") int projectNo,			
 										  HttpSession session, @ModelAttribute Member member) {
@@ -287,8 +318,10 @@ public class FundingController {
 				FundingLog fundingLog = fService.printSponserNumber(projectNo);
 				ArrayList<FundingLike>  fundingLikeUser = fService.printOneLike(projectNo);
 				Member memberlist = fService.printMemberList(member);
+				ArrayList<FundingLog> LogList = fService.printAllSponserList(projectNo);
 				
 				if ((funding != null)&&(fundingFile != null)) {
+					mv.addObject("LogList", LogList);
 					mv.addObject("fundingLikeUser", fundingLikeUser);
 					mv.addObject("fundingLog", fundingLog);
 					mv.addObject("fundingFile", fundingFile);

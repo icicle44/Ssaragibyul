@@ -204,9 +204,12 @@ width : 1540px;
 	<br>
 	<!--  -->
 	<br><br><br><br><br><br><br>${fn:length(fListandFile)}	
-	<%-- <c:if test="${fListandFile.length > 6}">
+	<c:if test="${fn:length(fListandFile) > 6}">
  <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
- </c:if> --%>
+ </c:if> 
+  <c:if test="${fn:length(fListandFile) <= 6 }">
+<a>더 복기가 없습니다.</a>
+ 	</c:if> 
 				</section>
 				<!--  -->
 				<!-- #section-funding -->
@@ -290,9 +293,12 @@ width : 1540px;
 	<br><br><br><br><br><br><br>	
 	
 	
-	<%-- <c:if test="${fListandFileEnd }">
+<c:if test="${fn:length(fListandFileEnd) > 6 }">
  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
- 	</c:if> --%>
+ 	</c:if> 
+ <c:if test="${fn:length(fListandFileEnd) <= 6 }">
+<a>더 복기가 없습니다.</a>
+ 	</c:if> 
 <!-- <button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button> -->
 				</section>
 	<br>

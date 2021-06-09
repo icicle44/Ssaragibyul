@@ -1,6 +1,7 @@
 package com.ssaragibyul.funding.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -120,6 +121,10 @@ public interface FundingService {
 	public ArrayList<FundingLog> printMyFunding(String userId, PageInfo pi);
 
 	public int getListCount(String userId);
+	
+	public int getListCountLike(String userId);
+	
+	public int getListCountProp(String userId);
 
 	public ArrayList<FundingLog> printMyFundingLike(String userId, PageInfo pi);
 
@@ -142,12 +147,23 @@ public interface FundingService {
 	public ArrayList<Funding> printPropFundingLike(String userId, PageInfo pi);
 
 	public ArrayList<Funding> printPropFundingMoney(String userId, PageInfo pi);
+
+	public ArrayList<FundingLog> printAllSponserList(int projectNo);
+
+	public FundingLog printOneProject(HashMap<String, String> fmap);
+
+	public int fundingCancelComplete(FundingLog fundingLog, Funding funding);
+
+
 	
 
 
 
 	
 }
+
+
+
 
 
 

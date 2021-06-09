@@ -1,6 +1,7 @@
 package com.ssaragibyul.funding.service.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -361,6 +362,12 @@ public class FundingSerivceImpl implements FundingService {
 	public int getListCount(String userId) {
 		return fStore.selectListCount(userId);
 	}
+	public int getListCountLike(String userId) {
+		return fStore.selectListCountLike(userId);
+	}
+	public int getListCountProp(String userId) {
+		return fStore.selectListCountProp(userId);
+	}
 	
 	public ArrayList<FundingLog> printMyFundingLike(String userId, PageInfo pi){
 		return fStore.selectMyFundingLike(userId, pi); 
@@ -396,4 +403,21 @@ public class FundingSerivceImpl implements FundingService {
 	public ArrayList<Funding> printPropFundingMoney(String userId, PageInfo pi){
 		return fStore.selectPropFundingMoney(userId, pi); 
 	}
+	public ArrayList<FundingLog> printAllSponserList(int projectNo){
+		ArrayList<FundingLog> LogList = fStore.selectAllSponserList(projectNo);
+		return LogList;
+	}
+	
+	public FundingLog printOneProject(HashMap<String, String> fmap) {
+		return fStore.selectOneProject(fmap);
+	}
+	
+	public int fundingCancelComplete(FundingLog fundingLog, Funding funding) {
+			int result = fStore.updateProjectLog(fundingLog);
+			int fResult = 0;
+		      if(result>0) {
+			         fResult = fStore.updateProject_SumMoneyMinus(funding);
+			      }
+			return fResult;
+		}
 }

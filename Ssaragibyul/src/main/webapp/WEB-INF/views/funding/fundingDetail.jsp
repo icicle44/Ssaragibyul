@@ -240,7 +240,7 @@ margin-left: 100px;
 </div>
 	<div class="detailView_right col-6">
 		<div class="noting"></div>
-			<h1 class = "contents">${funding.subjectName },  ${memberlist.nickName }</h1>
+			<h1 class = "contents">${funding.subjectName },  ${memberlist.nickName } ,${LogList[0].fundingPoint }</h1>
 			<br>
 					<b class = "contents">펀딩 금액 : <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</b>
 					   					<c:if test="${funding.leftDate < 1}">
@@ -248,25 +248,47 @@ margin-left: 100px;
 							   						<input type="submit" class="getstarteds" value="마감된 펀딩 입니다." disabled>
 							   				</div>
 							       		</c:if>
-							       		
-							       		<c:if test="${(funding.leftDate >= 1) && (!empty loginUser.userId)  }">
+							       		<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
 							       		<div>
+							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+							    					<input type="submit" class="getstarteds" value="펀딩하기">
+							    					</form>
+							    		</div>
+							       		</c:if>
+							       		
+							       								<!-- 걔산식  -->
+							       										 <c:set var="fund" value="false" />
+																			<c:forEach var="sponser" items="${LogList}">
+																			  <c:if test="${sponser.userId eq loginUser.userId}">
+																			    <c:set var="fund" value="true" />
+																			  </c:if>
+																			</c:forEach>
+																			
+										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (!empty loginUser.userId)}">
+							     		<div>
 							    					<form action="fundingJoin.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
 							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
 							    					<input type="submit" class="getstarted" value="펀딩하기">
 							    					</form>
 							    		</div>
-							    		</c:if>
-							     		<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
+							       		</c:if>
+							       		
+							       		
+							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (!empty loginUser.userId)}">
 							       		<div>
-							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
+							    					<form action="fundingCancel.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
-							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
-							    					<input type="submit" class="getstarted" value="펀딩하기">
+							   						<input type="hidden" name="userId" value="${loginUser.userId }">
+							    					<input type="submit" class="getstarted" value="펀딩 취소">
 							    					</form>
 							    		</div>
-							       		</c:if>
+							    		</c:if>
+							 
+				
+							       		
     				<b class = "contents">달성률 : <fmt:formatNumber value="${funding.percent }" pattern="#,###"/>%</b>
 					<b class = "contents">목표 금액 : <fmt:formatNumber value="${funding.goalMoney }" pattern="#,###"/>원</b><br>
 					
@@ -345,9 +367,9 @@ margin-left: 100px;
 							<b class = "contents">예상 배송일 : ${funding.deleiveryDate }</b>
 				
 					</div>
-					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					     <c:if test="${ loginUser.userId == funding.userId }">
-                                <a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
+                                <a href="${fModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
                              </c:if><!-- ?? -->
    
 					
@@ -423,7 +445,7 @@ margin-left: 100px;
 
 	<script src="/resources/js/main.js"></script>
 	<script src="/resources/js/fundingList.js"></script>
-		
+	
 	<script>
 	function formChk(){
 	    if(${empty loginUser.userId }){
