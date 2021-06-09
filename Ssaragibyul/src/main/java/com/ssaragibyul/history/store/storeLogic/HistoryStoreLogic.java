@@ -56,5 +56,11 @@ public class HistoryStoreLogic implements HistoryStore{
 		return (ArrayList)sqlSession.selectList("historyMapper.selectAllSiteTypes");
 	}
 
+	@Override
+	public ArrayList<History> selectSiteLocation(String siteName) {
+		
+		return (ArrayList)sqlSession.selectList("historyMapper.selectSiteLocation", siteName);
+	}
+
 	
 }
