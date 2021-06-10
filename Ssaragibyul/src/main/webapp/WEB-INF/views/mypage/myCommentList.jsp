@@ -28,13 +28,14 @@
                     
                 <!--상단-->
                 <div class="f-top">
-                    <!-- <div id="all-check">
-                        <input type="checkbox" id="ch-box"> 
-                        <span>전체 선택</span>
-                    </div>
-                    <div id="btns">
-                        <input type="button" value="삭제하기" id="delete-btn">
-                    </div> -->
+                   <%--  <div id="btns">
+						<select name="searchCondition" class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort">
+							<option value="all" <c:if test="${search.searchCondition eq 'all' }">selected</c:if>>전체</option>
+							<option value="펀딩상세" <c:if test="${search.searchCondition eq '펀딩상세' }">selected</c:if>>펀딩</option>
+							<option value="기부상세" <c:if test="${search.searchCondition eq '기부상세' }">selected</c:if>>기부</option>
+							<option value="방문" <c:if test="${search.searchCondition eq '방문' }">selected</c:if>>별보러</option>				
+						</select>
+                    </div> --%>
                 </div>
                 
                 <!--메인 내용-->
@@ -42,10 +43,10 @@
                     <div>
                         <table id="comm-table">
                             <tr id="title">
-                                <td>번호</td>
-                                <td>구분</td>
+                                <td width="8%">번호</td>
+                                <td width="10%">구분</td>
                                 <td>프로젝트명</td>
-                                <td>댓글 내용</td>
+                                <td width="45%">댓글 내용</td>
                                 <td>작성일</td>
                                 <td></td>
                             </tr>
@@ -70,13 +71,14 @@
 			                                	<td>방문</td>
 			                                </c:if>
 			                                
-			                                <td id="subject" style="text-overflow: ellipsis;">${comment.subject }${comment.commNo}</td>
+			                                <td id="subject"><font title="${comment.subject }">${comment.subject }</font></td>
 			                                <td class="contents">${comment.commContents }</td>
 			                                <td><fmt:formatDate value="${comment.regDate }" pattern="yyyy.MM.dd"/></td>
 			                                <td id="info" width="150px">
 			                                	<input type="hidden" name="boardType" value="${comment.boardType}">
 			                                	<input type="hidden" name="commNo" value="${comment.commNo}">
-												<input type="button" value="삭제" class="deleteBtn"> <input type="button" value="수정" class="appendBtn">
+												<input type="button" value="삭제" class="deleteBtn"> 
+												<input type="button" value="수정" class="appendBtn">
 											</td>
 			                            </tr>
 		                            </c:forEach>
@@ -84,7 +86,7 @@
                             </tbody>
                             <!-- 페이징 -->
 							<tr>
-								<td colspan="5" id="page-td">
+								<td colspan="6" id="page-td">
 									<!-- 전체리스트 페이징-->
 									<!-- 이전 -->
 									<c:url var="before" value="myCommentList.do">
@@ -219,9 +221,9 @@
 						var str = "";
 						str += "<tr>";
 						str += "<td></td><td></td>";
-						str += "<td>" + $(this).parent("td").parent("tr").find("#subject").text() +"</td>";
-						str += "<td><input type='text' name='commContents'></td>";
-						str += "<td colspan='2'>";
+						str += "<td id='modify-subject'>" + $(this).parent("td").parent("tr").find("#subject").text() +"</td>";
+						str += "<td colspan='2'><input type='text' name='commContents' placeholder='수정내용을 입력해주세요.'></td>";
+						str += "<td>";
 						str += "<input type='hidden' name='boardType' id='boardTypeMod' value=" + boardType + ">";
 						str += "<input type='hidden' name='commNo' id='commNoMod' value=" + commNo + ">";
 						str += "<input type='button' onclick='modifyComm(); return false;' value='등록' id='modifyBtn'> <input type='button' onclick='resetModifyWindow(); return false;' value='취소' id='resetBtn'></td></tr>";
@@ -233,6 +235,12 @@
 				}); 
 			});
 			
+		});
+		
+		$("#sort").on("change", function(){
+			var searchCondition = $("#sort option:selected").val();
+			var flag = '${flag}'
+			location.href = 'msgSearch.do?searchCondition='+searchCondition+'&flag='+flag;
 		});
 	</script>
 

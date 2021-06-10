@@ -123,7 +123,7 @@ form{
     color: rgb(93, 92, 92);
 }
 
-.f-top #btns{
+/* .f-top #btns{
 	float:right;
 	height: inherit;
 	width: 120px;
@@ -149,7 +149,7 @@ form{
 #delete-btn:active{
     background-color: rgb(100, 100, 100);
     border: none;
-}
+} */
 
 
 /****메인****/
@@ -163,6 +163,7 @@ form{
     --height: 500px;
     font-size: 16px;
     --font-weight: 550;
+    table-layout: fixed;
 }
 
 .f-cont a{
@@ -177,6 +178,7 @@ form{
     border-bottom: 1px solid rgb(190, 190, 190);
     border-top: 1px solid rgb(190, 190, 190);
     border-right: 0xp solid white;
+    padding: 10px;
 }
 
 /* .f-cont table input{
@@ -193,4 +195,63 @@ form{
 
 .contents {
 	padding-top: 0px;
+}
+
+/* 페이징 */
+#page-td {
+	font-size: 23px;
+	border-top:hidden;
+}
+#page-td a {
+	display: inline-block;
+	width: 30px;
+	margin: 0px;
+	border-radius: 3px;
+}
+#page-td a:link {
+	font-size: 16px;
+}
+#page-td a:hover {
+	background-color: #ffe1ce;
+}
+#page-td font {
+	font-size: 16px;
+	display: inline-block;
+	width: 30px;
+	margin: 0px;
+	border-radius: 3px;
+}
+
+input[name=commContents] {
+	width: 500px;
+}
+
+#subject {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#modify-subject {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.deleteBtn, #resetBtn {
+	background-color:#939393;
+	border-radius:5px;
+	border:hidden;
+	color:white;
+	font-size: 13px;
+	cursor:pointer;
+}
+
+.appendBtn, #modifyBtn {
+	background-color:#ffb973;
+	border-radius:5px;
+	border:hidden;
+	color:white;
+	font-size: 13px;
+	cursor:pointer;
 }
