@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좋아하는 프로젝트</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/mypage/likeFunding.css">
+<title>관심 펀딩 프로젝트</title>
+	<link rel="stylesheet" type="text/css" href="/resources/css/mypage/myFunding2.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 <style>
 #svg{
@@ -19,7 +20,58 @@ padding-left: 555px;
 }
 .like-stauts{
 padding-left: 20px;
+float:left;
 }
+.btn-stauts{
+float:left;
+}
+.blcok{
+padding-top : 30px;
+}
+.getstarted{
+	background: #EB5C01;
+	padding: 2px 4px;
+	margin: 2px;
+	margin-left: 17px;
+	border-radius: 3px;
+	color: #fff;
+}
+.btn{
+    width: 110px;
+    height: 35px;
+    text-align: left;
+    color: white;
+    font-size: 11px;
+    font-weight: 1000;
+    background: rgb(174, 174, 174);
+    border: none;
+    border-radius: 7px;
+    float : right;
+    font-style : 
+}
+
+.btn:hover{
+    background-color: rgb(150, 150, 150);
+    border: none;
+}
+
+.btn:active{
+    background-color: rgb(100, 100, 100);
+    border: none;
+}
+.btn1{
+    width: 110px;
+    height: 35px;
+    text-align: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 1000;
+    background: rgb(100, 100, 100);
+    border: none;
+    border-radius: 7px;
+    float : right;
+}
+
 </style>
 <body>
     <jsp:include page="../../../header.jsp"/>
@@ -30,30 +82,31 @@ padding-left: 20px;
                 <div id="k2">기부</div>
             </div>
             <div class="leftMenu">
-                    <jsp:include page="../../../myPageNav.jsp"/>
+                   <jsp:include page="../../../myPageNav.jsp"/>
             </div>
 
             <!--오른쪽 내용 : 마이페이지 수정할 때 여기만 고치면 됨-->
             <div class="rightCon">
-                <h2 align="center" id="h2">좋아하는 프로젝트</h2>
-                <form action="myFunding.do" method="post">
+                <h2 align="center" id="h2">관심 펀딩 프로젝트</h2>
                 <div class="f-top">
                     <div class="count">
                         <div id="num">${fundingCnt.count}</div>
                         <div id="p-count">개의 프로젝트가 있습니다.</div>
                     </div>
-						<div class="category">
+                    <div class="category">
                         <select id="divide" name="divide" onchange="location.href=this.value">
                             <option value="" selected>선택</option>
-                            <option value="likeFunding.do"   id="op">추가순</option>
-                            <option value="likeFundingLike.do" id="op">좋아요순</option>
-                            <option value="likeFundingMoney.do" id="op">모금액순</option>
+                            <option value="myFunding.do"   id="op">추가순</option>
+                            <option value="myFundingLike.do" id="op">좋아요순</option>
+                            <option value="myFundingMoney.do" id="op">모금액순</option>
                         </select>
                     </div>
                 </div>
                 
                 
-     <c:forEach var="m" items="${likeFundingList}" varStatus="status"> 
+                
+                
+               <c:forEach var="m" items="${likeFundingList}" varStatus="status"> 
     	  <div class="f-cont">
                     <table class="funding">
                         <tr>
@@ -68,12 +121,27 @@ padding-left: 20px;
                                     <a href="${fDetail }" id="title-1">${m.fundingProject.subjectName }</a><br>
                                     <a id="title-2">${m.fundingProject.productName }</a>
                                 </div>
-                        <div class="pay-status">
+                                <div class="pay-status">
+                                	<span>조회수 : ${m.fundingProject.hitsCount}</span>
                                 </div>
+                                <div class="heartAndBtn">			
                                 <div class="like-stauts">
                                 <img src="resources/img/images/likeHeart.png" style="width:30px;, height:30px;">
 								<span style="color:DimGray; font-size:18px; vertical-align:1px;">${m.fundingProject.likeCount}</span>
-                                </div>
+						     </div><div class="btn_status">
+						    			 <c:if test="${m.fundingProject.leftDate < 1}">
+                                        		<input type="submit" class="btn1" value="취소 불가">
+                                        </c:if>
+                                      <c:if test="${m.fundingProject.leftDate >= 1}">
+                                      	<form action="fundingLikeDelete.do" method="post" name="fundingGo">
+							   						<input type="hidden" name="projectNo" value="${m.projectNo }">
+							   						<input type="hidden" name="userId" value="${m.userId }">
+							    					<input type="submit" class="btn" value="좋아요 취소">
+							    					</form>
+                                      </c:if>
+					 </div>
+                           </div>
+                           <div class="blcok"></div>
                                 <div class="accrue">
                                     <div id="sum">
                                         <span><fmt:formatNumber value="${m.fundingProject.sumMoney }" pattern="#,###"/>원</span>
@@ -123,7 +191,7 @@ padding-left: 20px;
 				<tr align="center" height="20">
 					<td colspan="8">
 					<!-- 이전 -->
-					<c:url var="before" value="myFunding.do">
+					<c:url var="before" value="likeFunding.do">
 						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
 				<c:if test="${pi.currentPage <= 1 }">
@@ -134,7 +202,7 @@ padding-left: 20px;
 				</c:if>
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<c:url var="pagination" value="myFunding.do">
+					<c:url var="pagination" value="likeFunding.do">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
 					<c:if test="${p eq pi.currentPage }">
@@ -145,7 +213,7 @@ padding-left: 20px;
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:url var="after" value="myFunding.do">
+				<c:url var="after" value="likeFunding.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 				</c:url>
 				<c:if test="${pi.currentPage >= pi.maxPage }">
@@ -156,7 +224,6 @@ padding-left: 20px;
 				</c:if>
 			</td>
 		</tr></table></div>
-                </form>
             </div>
         </div>
     </div>

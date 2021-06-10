@@ -11,6 +11,9 @@ import com.ssaragibyul.donation.domain.DonationFile;
 import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingLike;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 
 public interface DonationService {
@@ -101,6 +104,35 @@ public interface DonationService {
 	public Donation printOneSuggest(int dProjectNo);
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
+	
+	//멤버페이지 기부 출력
+	
+	public int getListCount(String userId);
+	
+	public int getListCountLike(String userId);
+	
+	public int getListCountProp(String userId);
+	
+	
+	public ArrayList<DonationLog> printMyDonation(String userId, PageInfo pi);
+	
+	public ArrayList<DonationLog> printMyDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<DonationLog> printMyDonationMoney(String userId, PageInfo pi);
+
+
+	public ArrayList<DonationLike> printLikeDonation(String userId, PageInfo pi);
+
+	public ArrayList<DonationLike> printLikeDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<DonationLike> printLikeDonationMoney(String userId, PageInfo pi);
+
+
+	public ArrayList<Donation> printPropDonation(String userId, PageInfo pi);
+
+	public ArrayList<Donation> printPropDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<Donation> printPropDonationMoney(String userId, PageInfo pi);
 
 
 

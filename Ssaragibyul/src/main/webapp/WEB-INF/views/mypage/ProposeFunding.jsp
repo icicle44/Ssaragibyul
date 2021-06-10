@@ -6,19 +6,49 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>정보 수정 페이지</title>
+<title>제안한 펀딩 프로젝트</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/mypage/ProposeFunding2.css">
 </head>
 <style>
 #svg{
-	width: 315px;
+	width: 340px;
 }
 .table-users{
 margin : auto;
 padding-left: 555px;
 }
+#end-btn{
+    width: 330px;
+    height: 35px;
+    text-align: center;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    background: rgb(100, 100, 100);
+    border: none;
+    border-radius: 7px;
+}
 .like-stauts{
-padding-left: 20px;
+padding-left: 340px;
+}
+.f-progress{
+float:left;
+}
+#time{
+float:right;
+margin-right: 121px;
+}
+.accrue #time img{
+	width: 18px;
+	height: 18px;
+	margin-right: 5px;
+		margin-bottom: 5px;
+    }
+   .accrue #time span{
+   float:right;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgb(51, 51, 51);
 }
 </style>
 <body>
@@ -35,8 +65,7 @@ padding-left: 20px;
 
             <!--오른쪽 내용 : 마이페이지 수정할 때 여기만 고치면 됨-->
             <div class="rightCon">
-                <h2 align="center" id="h2">제안한 프로젝트</h2>
-                <form action="memberRegister.do" method="post">
+                <h2 align="center" id="h2">제안한 펀딩 프로젝트</h2>
                 <div class="f-top">
                     <div class="count">
                         <div id="f-count">제안한 프로젝트</div>
@@ -52,11 +81,12 @@ padding-left: 20px;
                         </select></div>
                 </div>
             
-                <c:forEach var="p" items="${likeFundingList}" varStatus="status"> 
+                <c:forEach var="p" items="${propFundingList}" varStatus="status"> 
                 <div class="cont">
                     <div class="img">
                     	<img src="/resources/upLoadFile/${p.fundingFile.fileMainName}"id="f-img">
                     </div>
+                    <div>
                     <div class="f-progress">
 						<c:if test="${p.leftDate < 1}">
 						<span>마감</span>
@@ -64,6 +94,11 @@ padding-left: 20px;
 						<c:if test="${p.leftDate >= 1}">
 						 <span>펀딩중</span>
 						</c:if>
+						</div>
+						<div class="like-stauts">
+                                <img src="resources/img/images/likeHeart.png" style="width:24px;, height:24px;">
+								<span style="color:DimGray; font-size:17px; vertical-align:1px;">${p.likeCount}</span>
+						</div>
                     </div>
                     <div class="title">
                         <div class="title-1">
@@ -86,7 +121,19 @@ padding-left: 20px;
                                 <span> ${p.percent}</span>
                                 <span>%</span>
                             </div>
-                        </div>
+                        <div id="time">
+                                    <c:if test="${p.leftDate < 1}">
+                                        <img src="/resources/img/mypage/time-img.png" id="time-img" >
+                                        <span>마감</span>
+                                        </c:if>
+                                      <c:if test="${p.leftDate >= 1}">
+                                    	  <img src="/resources/img/mypage/time-img.png" id="time-img">
+                                     	 <span>${p.leftDate } 일 남음</span>
+                                      </c:if>
+                                    </div>
+                            
+                            </div> 
+                       
                         <div class="graph" id="bar_td">
                                  	<c:if test="${p.percent > 99}">
 								<svg id="svg">
@@ -101,24 +148,29 @@ padding-left: 20px;
 									<rect x="0" y="0" height="6" width="${p.percent}%" fill="#FF8000"></rect>
 								</svg>
 								</c:if>
-                                </div>
+                               </div>
                         <div class="btn">
+                        <c:if test="${p.leftDate >= 1}">
                         	<form action="fundingModifyView.do" method="post" name="fundingGo" id="postForm">
 							 <input type="hidden" name="projectNo" value="${p.projectNo  }">
-                            <input type="button" value="수정" id="update-btn">
+                            <input type="button" value="제안 수정" id="update-btn">
                             </form>
+                            </c:if>
+                              <c:if test="${p.leftDate < 1}">
+                              <input type="button" value="수정 불가" id="end-btn">
+                              </c:if>
                         </div>
-                    </div>
-                    </c:forEach>
-
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div> 
+				</c:forEach>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<br>
           <div class="table-users">
 			<table cellspacing="0">  
                     				<!-- 페이징 -->
 				<tr align="center" height="20">
 					<td colspan="8">
 					<!-- 이전 -->
-					<c:url var="before" value="myFunding.do">
+					<c:url var="before" value="proposeFunding.do">
 						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
 				<c:if test="${pi.currentPage <= 1 }">
@@ -129,7 +181,7 @@ padding-left: 20px;
 				</c:if>
 				<!-- 페이지 -->
 				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
-					<c:url var="pagination" value="myFunding.do">
+					<c:url var="pagination" value="proposeFunding.do">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
 					<c:if test="${p eq pi.currentPage }">
@@ -140,7 +192,7 @@ padding-left: 20px;
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:url var="after" value="myFunding.do">
+				<c:url var="after" value="proposeFunding.do">
 					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 				</c:url>
 				<c:if test="${pi.currentPage >= pi.maxPage }">
@@ -151,7 +203,6 @@ padding-left: 20px;
 				</c:if>
 			</td>
 		</tr></table></div>
-                </form>
             </div>
         </div>
     </div>

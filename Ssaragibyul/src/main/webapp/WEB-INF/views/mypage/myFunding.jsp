@@ -19,7 +19,15 @@ margin : auto;
 padding-left: 555px;
 }
 .like-stauts{
-padding-left: 20px;}
+padding-left: 20px;
+float:left;
+}
+.btn-stauts{
+float:left;
+}
+.blcok{
+padding-top : 30px;
+}
 .getstarted{
 	background: #EB5C01;
 	padding: 2px 4px;
@@ -28,6 +36,41 @@ padding-left: 20px;}
 	border-radius: 3px;
 	color: #fff;
 }
+.btn{
+    width: 100px;
+    height: 35px;
+    text-align: left;
+    color: white;
+    font-size: 11px;
+    font-weight: 1000;
+    background: rgb(174, 174, 174);
+    border: none;
+    border-radius: 7px;
+    float : right;
+}
+
+.btn:hover{
+    background-color: rgb(150, 150, 150);
+    border: none;
+}
+
+.btn:active{
+    background-color: rgb(100, 100, 100);
+    border: none;
+}
+.btn1{
+    width: 100px;
+    height: 35px;
+    text-align: center;
+    color: white;
+    font-size: 11px;
+    font-weight: 1000;
+    background: rgb(100, 100, 100);
+    border: none;
+    border-radius: 7px;
+    float : right;
+}
+
 </style>
 <body>
     <jsp:include page="../../../header.jsp"/>
@@ -43,8 +86,7 @@ padding-left: 20px;}
 
             <!--오른쪽 내용 : 마이페이지 수정할 때 여기만 고치면 됨-->
             <div class="rightCon">
-                <h2 align="center" id="h2">참여한 프로젝트</h2>
-                <form action="myFunding.do" method="post">
+                <h2 align="center" id="h2">참여한 펀딩 프로젝트</h2>
                 <div class="f-top">
                     <div class="count">
                         <div id="num">${fundingCnt.count}</div>
@@ -82,17 +124,24 @@ padding-left: 20px;}
                                    <span>결제완료(</span>
                                    <span><fmt:formatNumber value="${m.fundingPoint}" pattern="#,###"/> 포인트)</span>
                                 </div>
-                                <div> 					
-                                					<form action="fundingCancel.do" method="post" name="fundingGo">
-							   						<input type="hidden" name="projectNo" value="${m.fundingProject.projectNo }">
-							   						<input type="hidden" name="userId" value="${loginUser.userId }">
-							    					<input type="submit" class="getstarted" value="펀딩 취소">
-							    					</form>
-                                </div>
+                                <div class="heartAndBtn">			
                                 <div class="like-stauts">
                                 <img src="resources/img/images/likeHeart.png" style="width:30px;, height:30px;">
 								<span style="color:DimGray; font-size:18px; vertical-align:1px;">${m.fundingProject.likeCount}</span>
-                                </div>
+						     </div><div class="btn_status">
+						    			 <c:if test="${m.fundingProject.leftDate < 1}">
+                                        		<input type="submit" class="btn1" value="취소 불가">
+                                        </c:if>
+                                      <c:if test="${m.fundingProject.leftDate >= 1}">
+                                      	<form action="fundingCancel.do" method="post" name="fundingGo">
+							   						<input type="hidden" name="projectNo" value="${m.projectNo }">
+							   						<input type="hidden" name="userId" value="${m.userId }">
+							    					<input type="submit" class="btn" value="펀딩 취소">
+							    					</form>
+                                      </c:if>
+					 </div>
+                           </div>
+                           <div class="blcok"></div>
                                 <div class="accrue">
                                     <div id="sum">
                                         <span><fmt:formatNumber value="${m.fundingProject.sumMoney }" pattern="#,###"/>원</span>
@@ -175,7 +224,6 @@ padding-left: 20px;}
 				</c:if>
 			</td>
 		</tr></table></div>
-                </form>
             </div>
         </div>
     </div>

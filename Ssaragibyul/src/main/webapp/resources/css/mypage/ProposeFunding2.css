@@ -86,7 +86,6 @@ header{
 }
 
 form{
-	margin: 40px;
 }
 
 #h2{
@@ -217,8 +216,9 @@ form{
 }
 
 .btn{
-	margin-left: 10px;
+	margin-left: 25px;
     text-align: center;
+    
 }
 
 #update-btn{

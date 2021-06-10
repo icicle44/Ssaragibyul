@@ -36,7 +36,7 @@ public class FundingStoreLogic implements FundingStore{
 	}
 	@Override
 	public int selectListCountProp(String userId) {
-		return sqlSession.selectOne("fundingMapper.selectListCountMy", userId);
+		return sqlSession.selectOne("fundingMapper.selectListCountProp", userId);
 	}
 
 	@Override

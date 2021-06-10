@@ -7,7 +7,21 @@ public class DonationLike {
 	private String likeYn;
 	private int projectNo;
 	
+	private Donation donation;
+	
 	public DonationLike() {}
+
+	
+	
+	public DonationLike(int likeNo, String userId, String likeYn, int projectNo, Donation donation) {
+		super();
+		this.likeNo = likeNo;
+		this.userId = userId;
+		this.likeYn = likeYn;
+		this.projectNo = projectNo;
+		this.donation = donation;
+	}
+
 
 	public DonationLike(int likeNo, String userId, String likeYn, int projectNo) {
 		super();
@@ -49,11 +63,21 @@ public class DonationLike {
 		this.projectNo = projectNo;
 	}
 
+	public Donation getDonation() {
+		return donation;
+	}
+
+	public void setDonation(Donation donation) {
+		this.donation = donation;
+	}
+
 	@Override
 	public String toString() {
 		return "DonationLike [likeNo=" + likeNo + ", userId=" + userId + ", likeYn=" + likeYn + ", projectNo="
-				+ projectNo + "]";
+				+ projectNo + ", donation=" + donation + "]";
 	}
+
+
 
 	
 	

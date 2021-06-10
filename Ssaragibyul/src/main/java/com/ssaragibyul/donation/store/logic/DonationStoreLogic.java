@@ -2,6 +2,7 @@ package com.ssaragibyul.donation.store.logic;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.store.DonationStore;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingLike;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 
 @Repository
@@ -305,6 +309,76 @@ public class DonationStoreLogic implements DonationStore{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	////기부 멤버 마이페이지 리스트
+	@Override
+	public int selectListCount(String userId) {
+		return sqlSession.selectOne("donationMapper.selectListCountMy", userId);
+	}
+	@Override
+	public int selectListCountLike(String userId) {
+		return sqlSession.selectOne("donationMapper.selectListCountLike", userId);
+	}
+	@Override
+	public int selectListCountProp(String userId) {
+		return sqlSession.selectOne("donationMapper.selectListCountProp", userId);
+	}
+
+	
+	public ArrayList<DonationLog> selectMyDonation(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectMyDonation", userId, rowBounds);
+	}
+
+	public ArrayList<DonationLog> selectMyDonationLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectMyDonationLike", userId, rowBounds);
+	}
+	
+	public ArrayList<DonationLog> selectMyDonationMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectMyDonationMoney", userId, rowBounds);
+	}
 
 
+	public ArrayList<DonationLike> selectLikeDonation(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectLikeDonation", userId, rowBounds);
+	}
+
+	public ArrayList<DonationLike> selectLikeDonationLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectLikeDonationLike", userId, rowBounds);
+	}
+
+	public ArrayList<DonationLike> selectLikeDonationMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectLikeDonationMoney", userId, rowBounds);
+	}
+
+
+	public ArrayList<Donation> selectPropDonation(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectPropDonation", userId, rowBounds);
+	}
+
+	public ArrayList<Donation> selectPropDonationLike(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectPropDonationLike", userId, rowBounds);
+	}
+
+	public ArrayList<Donation> selectPropDonationMoney(String userId, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("donationMapper.selectPropDonationMoney", userId, rowBounds);
+	}
+	
+	
 }

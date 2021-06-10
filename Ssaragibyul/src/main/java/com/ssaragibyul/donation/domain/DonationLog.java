@@ -16,7 +16,39 @@ public class DonationLog {
 	private String receiverPhone;
 	private int sponser;
 	
+	private Donation donation;
+	
 	public DonationLog() {}
+
+	
+	
+	
+	
+	
+	
+	public DonationLog(int donateNo, String userId, int fundingPoint, int qunatity, Date donationDate, int cancleYn,
+			int projectNo, String receiverAddr, String receiverName, String receiverPhone, int sponser,
+			Donation donation) {
+		super();
+		this.donateNo = donateNo;
+		this.userId = userId;
+		this.fundingPoint = fundingPoint;
+		this.qunatity = qunatity;
+		this.donationDate = donationDate;
+		this.cancleYn = cancleYn;
+		this.projectNo = projectNo;
+		this.receiverAddr = receiverAddr;
+		this.receiverName = receiverName;
+		this.receiverPhone = receiverPhone;
+		this.sponser = sponser;
+		this.donation = donation;
+	}
+
+
+
+
+
+
 
 	public DonationLog(int donateNo, String userId, int fundingPoint, int qunatity, Date donationDate, int cancleYn,
 			int projectNo, String receiverAddr, String receiverName, String receiverPhone, int sponser) {
@@ -122,11 +154,21 @@ public class DonationLog {
 		this.sponser = sponser;
 	}
 
+	public Donation getDonation() {
+		return donation;
+	}
+
+	public void setDonation(Donation donation) {
+		this.donation = donation;
+	}
+
 	@Override
 	public String toString() {
 		return "DonationLog [donateNo=" + donateNo + ", userId=" + userId + ", fundingPoint=" + fundingPoint
 				+ ", qunatity=" + qunatity + ", donationDate=" + donationDate + ", cancleYn=" + cancleYn
 				+ ", projectNo=" + projectNo + ", receiverAddr=" + receiverAddr + ", receiverName=" + receiverName
-				+ ", receiverPhone=" + receiverPhone + ", sponser=" + sponser + "]";
+				+ ", receiverPhone=" + receiverPhone + ", sponser=" + sponser + ", donation=" + donation + "]";
 	}
+
+
 }

@@ -243,10 +243,10 @@ margin-left: 100px;
 			<h1 class = "contents">${funding.subjectName }, ,${LogList[0].fundingPoint } ${memberlist.nickName } </h1> 	<br>
 			<div>
 			<c:url var="msgWriteUrl" value="msgWriterView.do">
-				 <c:param name="receiverId" value="${funding.userId }"></c:param>												   
-		 		 <c:param name="msgType" value="4"></c:param>
-			     <c:param name="nickName" value="작성자  = ${funding.member.nickName}"></c:param>
-			</c:url>
+         		    <c:param name="receiverId" value="${funding.userId }"></c:param>                                       
+          		    <c:param name="msgType" value="5"></c:param>
+        	 	     <c:param name="nickName" value="${funding.member.nickName}"></c:param>
+       		  </c:url>
 			
 			<br>
 					<b class = "contents">펀딩 금액 : <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</b>

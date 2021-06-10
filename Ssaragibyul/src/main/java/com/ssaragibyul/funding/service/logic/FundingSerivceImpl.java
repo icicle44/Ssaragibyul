@@ -403,6 +403,7 @@ public class FundingSerivceImpl implements FundingService {
 	public ArrayList<Funding> printPropFundingMoney(String userId, PageInfo pi){
 		return fStore.selectPropFundingMoney(userId, pi); 
 	}
+	
 	public ArrayList<FundingLog> printAllSponserList(int projectNo){
 		ArrayList<FundingLog> LogList = fStore.selectAllSponserList(projectNo);
 		return LogList;

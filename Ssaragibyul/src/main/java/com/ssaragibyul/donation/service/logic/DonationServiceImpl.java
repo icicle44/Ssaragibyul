@@ -17,6 +17,8 @@ import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
 import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingLike;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.point.service.PointService;
 
@@ -321,6 +323,45 @@ public class DonationServiceImpl implements DonationService{
 		return 0;
 	}
 
+	
+	
+	public int getListCount(String userId) {
+		return dStore.selectListCount(userId);
+	}
+	public int getListCountLike(String userId) {
+		return dStore.selectListCountLike(userId);
+	}
+	public int getListCountProp(String userId) {
+		return dStore.selectListCountProp(userId);
+	}
 
-
+	public ArrayList<DonationLog> printMyDonation(String userId, PageInfo pi){
+		return dStore.selectMyDonation(userId, pi); 
+	}
+	public ArrayList<DonationLog> printMyDonationLike(String userId, PageInfo pi){
+		return dStore.selectMyDonationLike(userId, pi); 
+	}
+	public ArrayList<DonationLog> printMyDonationMoney(String userId, PageInfo pi){
+		return dStore.selectMyDonationMoney(userId, pi); 
+	}
+	
+	public ArrayList<DonationLike> printLikeDonation(String userId, PageInfo pi){
+		return dStore.selectLikeDonation(userId, pi); 
+	}
+	public ArrayList<DonationLike> printLikeDonationLike(String userId, PageInfo pi){
+		return dStore.selectLikeDonationLike(userId, pi); 
+	}
+	public ArrayList<DonationLike> printLikeDonationMoney(String userId, PageInfo pi){
+		return dStore.selectLikeDonationMoney(userId, pi); 
+	}
+	
+	public ArrayList<Donation> printPropDonation(String userId, PageInfo pi){
+		return dStore.selectPropDonation(userId, pi); 
+	}
+	public ArrayList<Donation> printPropDonationLike(String userId, PageInfo pi){
+		return dStore.selectPropDonationLike(userId, pi); 
+	}
+	public ArrayList<Donation> printPropDonationMoney(String userId, PageInfo pi){
+		return dStore.selectPropDonationMoney(userId, pi); 
+	}
 }

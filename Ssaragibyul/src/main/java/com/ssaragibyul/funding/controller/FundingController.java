@@ -321,7 +321,7 @@ public class FundingController {
 			 }
 		 }		//펀딩 참여 페이지에서 '참여완료' 했을시 펀딩로그와 펀딩 프로젝트 테이블에 인서트
 		 
-			@RequestMapping(value = "fundingCancel.do", method =  RequestMethod.POST )
+			@RequestMapping(value = "fundingCancel.do", method = { RequestMethod.GET, RequestMethod.POST })
 			public ModelAndView fundingCancel(ModelAndView mv, @RequestParam("projectNo") int projectNo,
 															   @RequestParam("userId") String userId) {
 				String projectno = Integer.toString(projectNo);

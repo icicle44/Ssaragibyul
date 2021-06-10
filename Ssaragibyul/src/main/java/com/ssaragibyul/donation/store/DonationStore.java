@@ -134,7 +134,35 @@ public interface DonationStore{
 
 	public int removeLike(int dProjectNo, DonationLike dLike);
 
+	//멤버 마이페이지 기부 리스트
+	
+	public int selectListCount(String userId);
 
+	public int selectListCountLike(String userId);
+
+	public int selectListCountProp(String userId);
+
+	public ArrayList<DonationLog> selectMyDonation(String userId, PageInfo pi);
+
+	public ArrayList<DonationLog> selectMyDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<DonationLog> selectMyDonationMoney(String userId, PageInfo pi);
+
+	public ArrayList<DonationLike> selectLikeDonation(String userId, PageInfo pi);
+
+	public ArrayList<DonationLike> selectLikeDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<DonationLike> selectLikeDonationMoney(String userId, PageInfo pi);
+
+	public ArrayList<Donation> selectPropDonation(String userId, PageInfo pi);
+
+	public ArrayList<Donation> selectPropDonationLike(String userId, PageInfo pi);
+
+	public ArrayList<Donation> selectPropDonationMoney(String userId, PageInfo pi);
+
+
+	
+	
 
 
 }

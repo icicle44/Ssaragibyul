@@ -53,16 +53,16 @@
          <ul id="nav-v1"> 
              <li class="menu-v1"><a href="pwConfirm.do">내 정보 수정</a>         
              </li> 
+             <li class="menu-v1"><a href="proposeFunding.do">제안한 프로젝트  ▾</a> 
+                 <ul class="submenu"> 
+                     <li><a href="proposeFunding.do">펀딩</a></li> 
+                     <li><a href="proposeDonation.do">기부</a></li> 
+                 </ul> 
+             </li> 
              <li class="menu-v1"><a href="myFunding.do">참여한 프로젝트  ▾</a> 
                  <ul class="submenu"> 
                      <li><a href="myFunding.do">펀딩</a></li> 
                      <li><a href="myDonation.do">기부</a></li> 
-                 </ul> 
-             </li> 
-             <li class="menu-v1"><a href="proposeFunding.do">제안한 프로젝트  ▾</a> 
-                 <ul class="submenu"> 
-                     <li><a href="proposeFunding.do">펀딩</a></li> 
-                     <li><a href="proposeDonaion.do">기부</a></li> 
                  </ul> 
              </li> 
              <li class="menu-v1"><a href="likeFunding.do">관심 프로젝트  ▾</a> 
