@@ -240,7 +240,14 @@ margin-left: 100px;
 </div>
 	<div class="detailView_right col-6">
 		<div class="noting"></div>
-			<h1 class = "contents">${funding.subjectName },  ${memberlist.nickName } ,${LogList[0].fundingPoint }</h1>
+			<h1 class = "contents">${funding.subjectName }, ,${LogList[0].fundingPoint } ${memberlist.nickName } </h1> 	<br>
+			<div>
+			<c:url var="msgWriteUrl" value="msgWriterView.do">
+				 <c:param name="receiverId" value="${funding.userId }"></c:param>												   
+		 		 <c:param name="msgType" value="4"></c:param>
+			     <c:param name="nickName" value="작성자  = ${funding.member.nickName}"></c:param>
+			</c:url>
+			
 			<br>
 					<b class = "contents">펀딩 금액 : <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</b>
 					   					<c:if test="${funding.leftDate < 1}">
@@ -266,7 +273,7 @@ margin-left: 100px;
 																			  </c:if>
 																			</c:forEach>
 																			
-										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId != funding.userId)}">
+										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId != funding.userId) && (!empty loginUser.userId)}">
 							     		<div>
 							    					<form action="fundingJoin.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
@@ -277,7 +284,7 @@ margin-left: 100px;
 							       		</c:if>
 							       		
 							       		
-							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (loginUser.userId != funding.userId)}">
+							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (loginUser.userId != funding.userId) && (!empty loginUser.userId)}">
 							       		<div>
 							    					<form action="fundingCancel.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
@@ -287,7 +294,7 @@ margin-left: 100px;
 							    		</div>
 							    		</c:if>   			
 							    				
-						   					<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId == funding.userId)}">
+						   					<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId == funding.userId) && (!empty loginUser.userId)}">
 													<form action="fundingModifyView.do" method="post" name="fundingGo">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
 							    					<input type="submit" class="getstarted" value="펀딩 수정">
@@ -355,7 +362,11 @@ margin-left: 100px;
 
 					
 									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button>문의하기</button>  
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<div id="nickname"><a href="#" onclick="msgPopup('${msgWriteUrl}'); return false;">문의하기</a></div>
+					
+					
 					<c:if test="${empty loginUser.userId}">
 						<form action="fundingAccusation.do" method="post" onSubmit="formChk();return false">
 					    <input type="hidden" name="projectNo" value="${funding.projectNo }">
@@ -376,9 +387,7 @@ margin-left: 100px;
 				
 					</div>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					     <c:if test="${ loginUser.userId == funding.userId }">
-                                <a href="${fModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
-                             </c:if><!-- ?? -->
+
    
 					
 	
@@ -511,7 +520,14 @@ margin-left: 100px;
 					if(data.length > 0) {
 						for(var i in data) {
 							$tr = $("<tr>");
-							$rWriter = $("<td width='100'>").text(data[i].nick + "님의 별");
+							$rWriter = $("<td width='100'>").append(
+							"<c:url var='msgWriteUrl' value='msgWriterView.do'>"
+							+   "<c:param name='receiverId' value='"+data[i].userId+"'></c:param>"												   
+							+   "<c:param name='msgType' value='4'></c:param>"
+							+   "<c:param name='nickName' value='"+data[i].nick+"'></c:param>"
+							+ "</c:url>"
+							+ "<a href='#' onclick='msgPopup("+"\"msgWriterView.do?receiverId="+data[i].userId+"&msgType=4"+"&nickName="+data[i].nick+"\""+"); return false;'>"+data[i].nick+"님의 별</a>");
+						
 							$rContent = $("<td>").text(data[i].contents);
 							$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
 							$btnArea = $("<td>")

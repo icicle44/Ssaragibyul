@@ -333,7 +333,7 @@ public class MemberController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		int currentPage = (page != null) ? page : 1;
-		int listCount = fService.getListCount(userId);
+		int listCount = fService.getListCountProp(userId);
 		
 		PageInfo pi = PaginationPro.getPageInfo(currentPage, listCount); 
 		Funding fundingCnt = fService.calListNumberProspFunding(userId);
@@ -355,7 +355,7 @@ public class MemberController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		int currentPage = (page != null) ? page : 1;
-		int listCount = fService.getListCount(userId);
+		int listCount = fService.getListCountProp(userId);
 		
 		PageInfo pi = PaginationPro.getPageInfo(currentPage, listCount); 
 		Funding fundingCnt = fService.calListNumberProspFunding(userId);
@@ -377,7 +377,7 @@ public class MemberController {
 		Member loginUser = (Member) session.getAttribute("loginUser");
 		String userId = loginUser.getUserId();
 		int currentPage = (page != null) ? page : 1;
-		int listCount = fService.getListCount(userId);
+		int listCount = fService.getListCountProp(userId);
 		
 		PageInfo pi = PaginationPro.getPageInfo(currentPage, listCount);
 		Funding fundingCnt = fService.calListNumberProspFunding(userId);
@@ -407,7 +407,7 @@ public class MemberController {
 			Member loginUser = (Member) session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
 			int currentPage = (page != null) ? page : 1;
-			int listCount = fService.getListCount(userId);
+			int listCount = fService.getListCountLike(userId);
 			
 			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
 			FundingLike fundingCnt = fService.calListNumberLikeFunding(userId);
@@ -429,7 +429,7 @@ public class MemberController {
 			Member loginUser = (Member) session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
 			int currentPage = (page != null) ? page : 1;
-			int listCount = fService.getListCount(userId);
+			int listCount = fService.getListCountLike(userId);
 			
 			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount); 
 			FundingLike fundingCnt = fService.calListNumberLikeFunding(userId);
@@ -451,7 +451,7 @@ public class MemberController {
 			Member loginUser = (Member) session.getAttribute("loginUser");
 			String userId = loginUser.getUserId();
 			int currentPage = (page != null) ? page : 1;
-			int listCount = fService.getListCount(userId);
+			int listCount = fService.getListCountLike(userId);
 			
 			PageInfo pi = PaginationMy.getPageInfo(currentPage, listCount);
 			FundingLike fundingCnt = fService.calListNumberLikeFunding(userId);

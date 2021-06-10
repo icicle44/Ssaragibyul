@@ -19,7 +19,14 @@ margin : auto;
 padding-left: 555px;
 }
 .like-stauts{
-padding-left: 20px;
+padding-left: 20px;}
+.getstarted{
+	background: #EB5C01;
+	padding: 2px 4px;
+	margin: 2px;
+	margin-left: 17px;
+	border-radius: 3px;
+	color: #fff;
 }
 </style>
 <body>
@@ -74,6 +81,13 @@ padding-left: 20px;
                         <div class="pay-status">
                                    <span>결제완료(</span>
                                    <span><fmt:formatNumber value="${m.fundingPoint}" pattern="#,###"/> 포인트)</span>
+                                </div>
+                                <div> 					
+                                					<form action="fundingCancel.do" method="post" name="fundingGo">
+							   						<input type="hidden" name="projectNo" value="${m.fundingProject.projectNo }">
+							   						<input type="hidden" name="userId" value="${loginUser.userId }">
+							    					<input type="submit" class="getstarted" value="펀딩 취소">
+							    					</form>
                                 </div>
                                 <div class="like-stauts">
                                 <img src="resources/img/images/likeHeart.png" style="width:30px;, height:30px;">

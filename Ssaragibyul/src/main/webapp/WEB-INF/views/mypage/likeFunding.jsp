@@ -122,35 +122,36 @@ padding-left: 20px;
                     				<!-- 페이징 -->
 				<tr align="center" height="20">
 					<td colspan="8">
-					<c:url var="before" value="likeFunding.do">
-						<c:param name="page" value="${pi2.currentPage - 1 }"></c:param>
+					<!-- 이전 -->
+					<c:url var="before" value="myFunding.do">
+						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
-				<c:if test="${pi2.currentPage <= 1 }">
+				<c:if test="${pi.currentPage <= 1 }">
 					[이전]&nbsp;
 				</c:if>
-				<c:if test="${pi2.currentPage > 1 }">
+				<c:if test="${pi.currentPage > 1 }">
 					<a href="${before }">[이전]</a>&nbsp;
 				</c:if>
 				<!-- 페이지 -->
-				<c:forEach var="p" begin="${pi2.startPage }" end="${pi2.endPage }">
-					<c:url var="pagination" value="likeFunding.do">
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<c:url var="pagination" value="myFunding.do">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
-					<c:if test="${p eq pi2.currentPage }">
+					<c:if test="${p eq pi.currentPage }">
 						<font color="red" size="2">[${p }]</font>
 					</c:if>
-					<c:if test="${p ne pi2.currentPage }">
+					<c:if test="${p ne pi.currentPage }">
 						<a href="${pagination }">${p }</a>&nbsp;
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:url var="after" value="likeFunding.do">
-					<c:param name="page" value="${pi2.currentPage + 1 }"></c:param>
+				<c:url var="after" value="myFunding.do">
+					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 				</c:url>
-				<c:if test="${pi2.currentPage >= pi2.maxPage }">
+				<c:if test="${pi.currentPage >= pi.maxPage }">
 					[다음]&nbsp;
 				</c:if>
-				<c:if test="${pi2.currentPage < pi2.maxPage }">
+				<c:if test="${pi.currentPage < pi.maxPage }">
 					<a href="${after }">[다음]</a>&nbsp;
 				</c:if>
 			</td>

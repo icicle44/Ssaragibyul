@@ -412,14 +412,20 @@ public class FundingSerivceImpl implements FundingService {
 		return fStore.selectOneProject(fmap);
 	}
 	
-	public int fundingCancelComplete(FundingLog fundingLog, Funding funding) {
-			int result = fStore.updateProjectLog(fundingLog);
-			int fResult = 0;
-		      if(result>0) {
-			         fResult = fStore.updateProject_SumMoneyMinus(funding);
-			      }
-			return fResult;
-		}
+	   public int fundingCancelComplete(FundingLog fundingLog, Funding funding) {
+	         int result = fStore.updateProjectLog(fundingLog);
+	         int fResult = 0;
+	         int pntResult = 0;
+	            if(result>0) {
+	                  fResult = fStore.updateProject_SumMoneyMinus(funding);
+	                  if(fResult>0) {
+	                     int doFundNo = fundingLog.getDoFundNo();
+	                     pntResult = pntService.registerPosFundPoint(doFundNo);
+	                  }
+	            }
+	         return pntResult;
+	   }
+	   
 	public Funding printOneProjectforModifty(int projectNo) {
 		Funding funding = fStore.selectOneProjectforModifty(projectNo);
 		return funding;

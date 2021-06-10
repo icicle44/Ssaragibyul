@@ -39,6 +39,10 @@
 <script type="text/javascript" src="resources/js/html5gallery.js"></script>
 
 <style type="text/css">
+body{
+	font-family: 'Noto Serif KR', serif;
+}
+
 .navbar .getstarted {
   background: #EB5C01;
   padding: 8px 10px;
@@ -54,14 +58,7 @@
 .main-menu {
 	padding-left: 50px;
 }
-.getstarted {
-	background: #EB5C01;
-	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
-	border-radius: 4px;
-	color: #fff;
-}
+
 
 div.guide {margin:12px 24px;}
 div.guide span {color:#ff0000; font:italic 14px Arial, Helvetica, sans-serif;}
@@ -70,49 +67,285 @@ div.guide pre {color:#990000;}
 div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 
 .format{
-padding-left : 260px;
-padding-top : 160px;
+	padding-left : 250px;
+    padding-top: 70px;
+    margin-left:130px;
 	float : left;
 	width : 1000px;
 	height : 700px;
 }
 
 .detailView_right{
-float: left;
+	float: left;
 }
 .noting{
-width : 300px;
-height: 170px;
+	width: 300px;
+    height: 80px;
 }
+
+
 .contents{
-padding-left : 50px;
+	padding-left : 50px;
+	margin: 15px 0px 15px 0px;
+	font-size: 17px;
 }
-.getstarteds{
-	background: #6E6E6E;
-	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
+
+#title{
+	padding-top: 130px;
+	text-align:center;
+	color:#EB5C01;
+	font-size: 35px;
+}
+
+#money{
+	font-size: 20px;
+	color: #3F3F3F;
+}
+
+#accrue{
+	font-size: 20px;
+	color: #3F3F3F;
+}
+
+#percent{
+	font-size: 20px;
+	margin-top: 18px;
+	color: #3F3F3F;
+}
+
+#date{
+	font-size: 20px;
+	color: #3F3F3F;
+   	margin-top: 20px;
+}
+
+	#sponser{
+		float: left;
+		margin-top: 20px;
+		font-size: 17px;
+		
+	}
+	#hitsCount{
+		margin-top: -6px;
+	    position: absolute;
+	    font-size: 17px;
+	}
+
+.getstarteds {
+    position: absolute;
+    left: 50px;
+    border:none;
+    padding: 10px 100px;
+	margin: 10px 10px 20px 0px;
+	background: #EB5C01;
 	border-radius: 4px;
 	color: #fff;
 }
+.getstarteds:hover{
+	background-color: #E35901;
+	border:none;
+}
+
+.getstarteds:active{
+	background-color: #D75909;
+	border:none;
+}
+
+	
 .getstarted_Liked{
+	float:left;
+	border:none;
 	background: #EB5C01;
-	padding: 10px 10px;
-	margin: 20px;
-	margin-left: 100px;
+    padding: 10px 26px;
+    margin: 20px;
+    margin-left: 48px;
+    margin-top: 45px;
 	border-radius: 4px;
 	color: #fff;
 }
 .getstarted_unLiked{
+	float:left;
+	border:none;
 	background: #6E6E6E;
-	padding: 10px 10px;
-	margin: 20px;
-	margin-left: 100px;
+    padding: 10px 26px;
+    margin: 20px;
+    margin-left: 48px;
+    margin-top: 45px;
 	border-radius: 4px;
 	color: #fff;
 }
+.getstarted_unLiked:hover{
+	background-color: #535353;
+	border:none;
+}
+
+.getstarted_unLiked:active{
+	background-color: #404040;
+	border:none;
+}
+
+
+.getstarted_report{
+ 	position: absolute;
+ 	border:none;
+    left: 50px;
+    padding: 5x 2px;
+    font-size: 15px;
+    margin-bottom; 15px;
+	border-radius: 4px;
+}
+.getstarted_report:hover{
+	background-color: #DFDFDF;
+	border:none;
+}
+
+.getstarted_report:active{
+	background-color: #C5C5C5;
+	border:none;
+}
+
+
+#question{
+	background: #6E6E6E;
+	border:none;
+	padding: 10px 27px;
+    margin: 19px 3px;
+	border-radius: 4px;
+	color: #fff;
+}
+#question:hover{
+	background-color: #535353;
+	border:none;
+}
+
+#question:active{
+	background-color: #404040;
+	border:none;
+}
+
+label{
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.state{
+	margin-left:30px;
+	float: left;
+}
+
+#img{
+	border-radius: 50px;
+	border:1px solid black;
+	width: 55px;
+	height: 55px;
+	margin-left: 50px;
+	margin-bottom: 10px;
+}
+
+#img img{
+	margin: 12px;
+}
+
+#donation-date{
+	margin-left:-15px;
+	text-align: center;
+}
+
 .detailtab{
-margin-left: 100px;
+	margin-left: 100px;
+}
+
+
+/* 댓글 */
+#rCont{
+	border-radius: 10px;
+    border: 1px solid gray;
+    margin: 10px -30px 10px 0px;;
+}
+::placeholder{
+	padding: 25px 10px;
+	color: #A4A4A4;
+}
+#rSubmit{
+    height: 90px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px 55px 10px -40px;
+    background-color: #EB5C01;
+    color: #fff;
+    outline: none;
+}
+#rSubmit:hover{
+	background-color: #E35901;
+	border:none;
+}
+
+#rSubmit:active{
+	background-color: #D75909;
+	border:none;
+}
+#update-btn{
+	border-radius: 10px;
+	border:none;
+	background-color:#EB5C01;
+    color: white;
+    font-size: 15px;
+    width: 80px;
+    height: 40px;
+    outline: none;
+}
+#update-btn:hover{
+	background-color: #E35901;
+	border:none;
+}
+
+#update-btn:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
+}
+tr, td{
+	border:none;
+	margin: 10px;
+}
+td{
+	margin: auto;
+}
+#tab{
+	margin: 10px;
+}
+
+#trtr{
+	height: 90px;
+	width: 900px;
+}
+
+#rWiter{
+	color: #FE9A2E;
+	position: absolute;
+    margin-left: -30px
+}
+
+#rCont{
+	text-align: left;
+    border: none;
+    position: absolute;
+    padding-top: 30px;
+}
+
+#rCreateDate{
+    position: absolute;
+    font-size: 13px;
+    margin-top: 3px;
+    margin-left: 80px;
+}
+#update{
+	font-size: 15px;
+}
+
+#modifyReply{
+	height: 45px;
+	border:1px solid #b3b3b3;
 }
 </style>
 
@@ -212,13 +445,13 @@ margin-left: 100px;
 	
 	<script src="https://cdn.ckeditor.com/ckeditor5/27.1.0/balloon/ckeditor.js"></script>
 	
-	<main>
+	<main> <!--  body 부분에서는 id값, div로 감싸는 거(모인 금액, 달성률 & 후원자, 조회수), 순서 교체 수정 -->
 	<br>
+		<h1 id="title" style="height: 50px;">${donation.subjectName }</h1><br>
 	<div class="row">
 		<div class="format col-6">
 		<!-- A wrapper DIV to center the Gallery -->
 			<div style="text-align:center;">
-			
 			    <!-- Define the Div for Gallery -->
 			    <!-- 1. Add class html5gallery to the Div -->
 			    <!-- 2. Define parameters with HTML5 data tags -->
@@ -232,55 +465,51 @@ margin-left: 100px;
 		</div>
 		
 		
-		<div class="detailView_right col-6">
+		<div class="detailView_right col-4">
 			<div class="noting"></div>
-				<h1 class = "contents">${donation.subjectName }, ${memberlist.nickName }</h1><br>
-					<b class = "contents">기부 금액 : <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</b>
-	   									<script>console.log('${donation.leftDate}');</script>
-	   									<c:if test="${donation.leftDate < 1}">
-											<div>
-						   						<input type="submit" class="getstarteds" value="마감된 기부입니다." disabled>
-							   				</div>
-							       		</c:if>
-							       		
-							       		<c:if test="${(donation.leftDate >= 1) && (!empty loginUser.userId)  }">
-							       		<div>
-							    					<form action="donationJoin.do" method="post" name="donationGo">
-							   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
-							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
-							    					<input type="submit" class="getstarted" value="기부하기">
-							    					</form>
-							    		</div>
-							    		</c:if>
-							     		<c:if test="${(donation.leftDate >= 1) && (empty loginUser.userId) }">
-							       		<div>
-							    					<form action="donationJoin.do" method="post" name="donationGo" onSubmit="formChk();return false">
-							   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
-							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
-							    					<input type="submit" class="getstarted" value="기부하기">
-							    					</form>
-							    		</div>
-							       		</c:if>
-			       		
-    					<b class = "contents">달성률 : <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>%</b>
-						<b class = "contents">목표 금액 : <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원</b><br>
+				<%-- <h1 id="title">${donation.subjectName }</h1><br> --%>
+				<p class = "contents" id="accrue" style="font-weight: bold;">모인 금액 : <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</p>
+				<p class = "contents" id="money" style="font-weight: bold;">목표 금액   <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원</p>
+   				<p class = "contents" id="percent" style="font-weight: bold;">달성률 : <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>%</p>
 					
 					   	<c:if test="${donation.leftDate < 1}">
 							<div>
-	   							<b class ="contents">0일</b>
+	   							<b class ="contents" id="date">0일</b>
 			   				</div>
 			       		</c:if>
 							       		
 			       		<c:if test="${donation.leftDate >= 1}">
 				       		<div>
-								<b class = "contents">남은 기간 : <fmt:formatNumber value="${donation.leftDate }" pattern="#,###"/>일</b><br>
+								<b class = "contents" id="date">남은 기간 : <fmt:formatNumber value="${donation.leftDate }" pattern="#,###"/>일</b>
 				    		</div>
 			       		</c:if>
-					
-						<b class = "contents">후원자 : <fmt:formatNumber value="${donationLog.sponser }" pattern="#,###"/>명</b><br>
-						<b class = "contents">조회수 : ${donation.hitsCount}</b>
+						
+						<div class="bottom">
+							<b class = "contents" id="sponser">후원자 : <fmt:formatNumber value="${donationLog.sponser }" pattern="#,###"/>명</b><br>
+							<b class = "contents" id="hitsCount">조회수 : ${donation.hitsCount}</b>
+						</div>
+						
 						<br>
-						<div>
+						<c:if test="${donation.leftDate < 1}">
+							<div>							
+		   						<input type="submit" class="getstarteds" value="마감된 기부입니다." disabled>
+			   				</div>
+		       			</c:if>
+							       		
+			       		<c:if test="${(donation.leftDate >= 1) && (!empty loginUser.userId)  }">
+	    					<form action="donationJoin.do" method="post" name="donationGo">
+		    					<input type="submit" class="getstarteds" value="기부하기">
+		   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
+		   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+	    					</form>
+			    		</c:if>
+			     		<c:if test="${(donation.leftDate >= 1) && (empty loginUser.userId) }">
+	    					<form action="donationJoin.do" method="post" name="donationGo" onSubmit="formChk();return false">
+		    					<input type="submit" class="getstarteds" value="기부하기">
+		   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
+		   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+	    					</form>
+			       		</c:if>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 					
@@ -318,29 +547,39 @@ margin-left: 100px;
 	    						<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${donation.likeCount}
 	   						</form>
 	   					</c:if>
-					
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
-						<button>문의하기</button>  
+						<button id="question">문의하기</button>  
 						
 						<c:if test="${empty loginUser.userId}">
 							<form action="donationAccusation.do" method="post" onSubmit="formChk();return false">
 					    		<input type="hidden" name="projectNo" value="${donation.projectNo }">
-					    		<input type="submit" class="getstarted_unLiked" value="신고하기">
+					    		<input type="submit" class="getstarted_report" value="프로젝트에 문제가 있나요?   신고하기"><br>
 					    	</form>
 					  	</c:if>
 					  	
 					   	<c:if test="${!empty loginUser.userId}">
 					    	<form action="donationAccusation.do" method="post">
 					    		<input type="hidden" name="projectNo" value="${donation.projectNo }">
-					    		<input type="submit" class="getstarted_Liked" value="신고하기">
+					    		<input type="submit" class="getstarted_report" value="프로젝트에 문제가 있나요?   신고하기"><br>
 					   	 	</form>
 					    </c:if>
 		
 					 	<br>
-					
-						<b class = "contents">기부 시작일 : ${donation.startDate }</b>
-						<b class = "contents">기부 종료일 : ${donation.finDate }</b>
+						<div class="state" >
+							<div id="img">
+								<img src="resources/img/dantion_funding/date.png" style="width: 30px" height="30px" >
+							</div>
+							<b class = "contents" id="donation-date">기부 시작일</b><br>
+							<b class = "contents" id="donation-date">${donation.startDate}</b>
+						</div>
+						<div class="state">
+							<div id="img">
+								<img src="resources/img/dantion_funding/money.png" style="width: 30px" height="30px" >
+							</div>
+							<b class = "contents" id="donation-date">기부 종료일</b><br>
+							<b class = "contents" id="donation-date">${donation.finDate }</b>
+						</div>
+
 				
 						</div>
 						
@@ -360,15 +599,23 @@ margin-left: 100px;
 		            <label for="commu">커뮤니티</label>
 		            <label for="info">안내사항</label>
 			            
-		            	<div id="story_content" class="story_content" style="text-align: left;">
+		            	<div id="story_content" class="story_content" style="text-align: center; margin-left: 180px">
 			               <p>${donation.projectStory }<</p>
 			            </div>
 			            
-			        	<div class="commu_content">
-			              	<table align="center" width="500" border="1" cellspacing="0">
+			        	<div class="commu_content" style="text-align: center; margin-left: -5px; border: none" >
+			        		<div>
+				        		<h4 style="margin-top: 50px">"여러분의 한마디가 진행자에게 큰 힘이 됩니다."</h4><br><br>
+								<h5 style="margin-bottom: 10px">댓글 작성시 유의사항</h5>
+								<span>
+									프로젝트와 관계없는 글, 광고성, 욕설, 비방, 도배 등의 글은 내부 검토 후 삭제됩니다.<br>
+									프로젝트 관련 문의는 진행자에게 문의하시면 정확한 답변을 받을 수 있습니다.<br>
+								</span><br><br>
+							</div>
+			              	<table align="center" width="800" border="1" cellspacing="0" style="border: none;">
 								<tr>
 									<td>
-										<textarea rows="3" cols="40" id="rContent"></textarea>
+										<textarea rows="3" cols="60" id="rContent" style="resize: none;" placeholder="댓글을 작성해주세요 :)"></textarea>
 									</td>
 									<td>
 										<button id="rSubmit">댓글 등록</button>
@@ -378,11 +625,11 @@ margin-left: 100px;
 		
 			
 							<!-- 댓글 목록 -->
-							<table align="center" width="500" border="1" cellspacing="0" id="rtb">
+							<table align="center" width="650" border="1" cellspacing="0" id="rtb"  style="border: none;">
 								<thead>
 									<tr>
 									<!-- 댓글 갯수 -->
-										<td colspan="2"><b id="rCount"></b></td>
+										<td colspan="2" style="text-align: left; padding: 15px 0px 20px 0px;"><b id="rCount"></b></td>
 									</tr>
 								</thead>
 								<tbody></tbody>
@@ -474,16 +721,16 @@ margin-left: 100px;
 					$("#rCount").text("댓글 (" + data.length + ")"); // 댓글 갯수 표시
 					if(data.length > 0) {
 						for(var i in data) {
-							$tr = $("<tr>");
-							$rWriter = $("<td width='100'>").text(data[i].nick + "님의 별");
-							$rContent = $("<td>").text(data[i].contents);
-							$rCreateDate = $("<td width='100'>").text(data[i].enrollDate);
-							$btnArea = $("<td>")
-							.append("<a href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");return false;'>수정 </a>")							
-							.append("<a href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");return false;'> 삭제</a>");
+							$tr = $("<tr id='trtr'>");
+							$rWriter = $("<td colspan='4' width='150';' id='rWiter' colspan=4>").text(data[i].nick + "님의 별");
+							$rCreateDate = $("<td width='100' id='rCreateDate'>").text(data[i].enrollDate);
+							$rContent = $("<td id='rCont'>").text(data[i].contents);
+							$btnArea = $("<td width='130'>")
+							.append("<a id='update' href='#' onclick='modifyReply(this,"+projectNo+","+data[i].replyNo+",\""+data[i].contents+"\");return false;'>수정 </a>")							
+							.append("<a id='update' href='#' onclick='removeReply("+projectNo+","+data[i].replyNo+");return false;'> 삭제</a>");
 							$tr.append($rWriter);
-							$tr.append($rContent);
 							$tr.append($rCreateDate);
+							$tr.append($rContent);
 							if('${loginUser.userId}'===data[i].userId){
 								$tr.append($btnArea);
 								}
@@ -499,8 +746,8 @@ margin-left: 100px;
 		
 		function modifyReply(obj, projectNo, replyNo, contents) {
 			$trModify = $("<tr>");
-			$trModify.append("<td colspan='3'><input type='text' id='modifyReply' size='50' value='"+contents+"'></td>");
-			$trModify.append("<td><button onclick='modifyReplyCommit("+projectNo+","+replyNo+")'>수정완료</button></td>");
+			$trModify.append("<td><input type='text' id='modifyReply' size='55' value='"+contents+"'></td>");
+			$trModify.append("<td><button onclick='modifyReplyCommit("+projectNo+","+replyNo+")' id='update-btn'>수정 완료</button></td>");
 			$(obj).parent().parent().after($trModify);
 		}
 		
