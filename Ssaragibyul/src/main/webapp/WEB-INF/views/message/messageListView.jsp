@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/message/messageListView.css?ver=1" type="text/css"/>
+<link rel="stylesheet" href="resources/css/message/messageListView.css" type="text/css"/>
 <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
  -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
@@ -46,6 +46,7 @@
 										<option value="allUpper" <c:if test="${search.searchCondition eq 'allUpper' }">selected</c:if>>전체</option>
 										<option value="present" <c:if test="${search.searchCondition eq 'present' }">selected</c:if>>선물</option>
 										<option value="admin" <c:if test="${search.searchCondition eq 'admin' }">selected</c:if>>관리자</option>				
+										<option value="qna" <c:if test="${search.searchCondition eq 'qna' }">selected</c:if>>받은 문의</option>				
 									</select>
 								</form>				
 							</c:if>

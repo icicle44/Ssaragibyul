@@ -107,17 +107,17 @@ table a:hover {
 
 /*전체, 선물, 관리자*/
 .sort-div {
-	height: 31px;
+	height: 35px;
 }
 
 #sort-box {
 	--margin-left: 89%;
 	padding-right: 10px;
-	width: 100px;
+	width: 115px;
 	--align: right;
 }
 
-#sort-box:focus {
+#sort:forcus {
 	box-shadow: 0 0 0 0.2rem #ffcba8;
 	border-color: #f676aa;
 }

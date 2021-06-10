@@ -36,6 +36,16 @@
 							<option value="방문" <c:if test="${search.searchCondition eq '방문' }">selected</c:if>>별보러</option>				
 						</select>
                     </div> --%>
+                    <div class="sort-div" align="right">
+						<div id="sort-box" align="right">
+							<select name="searchCondition" class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort">
+								<option value="all" <c:if test="${search.searchCondition eq 'allUpper' }">selected</c:if>>전체</option>
+								<option value="펀딩상세" <c:if test="${search.searchCondition eq 'present' }">selected</c:if>>펀딩</option>
+								<option value="기부상세" <c:if test="${search.searchCondition eq 'admin' }">selected</c:if>>기부</option>				
+								<option value="방문" <c:if test="${search.searchCondition eq 'qna' }">selected</c:if>>별보러가자</option>				
+							</select>			
+						</div>
+					</div>
                 </div>
                 
                 <!--메인 내용-->
@@ -239,8 +249,7 @@
 		
 		$("#sort").on("change", function(){
 			var searchCondition = $("#sort option:selected").val();
-			var flag = '${flag}'
-			location.href = 'msgSearch.do?searchCondition='+searchCondition+'&flag='+flag;
+			location.href = 'mySearchComment.do?searchCondition='+searchCondition;
 		});
 	</script>
 

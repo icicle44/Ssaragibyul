@@ -58,6 +58,9 @@
 				<when test="searchCondition.toString()=='admin'">
 					AND SENDER_ID = #{searchValue}
 				</when>
+				<when test="searchCondition.toString()=='qna'">
+					AND MSG_TYPE = 5
+				</when>
 				<when test="searchCondition.toString()=='allLower'">
 					AND (NICKNAME LIKE '%'||#{searchValue}||'%'
 					OR MSG_TITLE LIKE '%'||#{searchValue}||'%'
