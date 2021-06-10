@@ -2,6 +2,8 @@ package com.ssaragibyul.funding.domain;
 
 import java.sql.Date;
 
+import com.ssaragibyul.member.domain.Member;
+
 public class Funding {
 	//펀딩 DB SQL 펀딩 프로젝트
 	private int projectNo;
@@ -26,6 +28,7 @@ public class Funding {
 	private int count;
 	
 	private FundingFile fundingFile;
+	private Member member;
 	
 	
 	public Funding() {}
@@ -38,6 +41,43 @@ public class Funding {
 	
 	
 	
+public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
+			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
+			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate, int percent,
+			int leftDate, int count, FundingFile fundingFile, Member member) {
+		super();
+		this.projectNo = projectNo;
+		this.userId = userId;
+		this.subjectName = subjectName;
+		this.productName = productName;
+		this.goalMoney = goalMoney;
+		this.sumMoney = sumMoney;
+		this.optionPrice = optionPrice;
+		this.optionLimit = optionLimit;
+		this.startDate = startDate;
+		this.finDate = finDate;
+		this.projectStory = projectStory;
+		this.productContent = productContent;
+		this.warningIntro = warningIntro;
+		this.likeCount = likeCount;
+		this.hitsCount = hitsCount;
+		this.projectCode = projectCode;
+		this.deleiveryDate = deleiveryDate;
+		this.percent = percent;
+		this.leftDate = leftDate;
+		this.count = count;
+		this.fundingFile = fundingFile;
+		this.member = member;
+	}
+
+
+
+
+
+
+
+
+
 public Funding(int projectNo, String userId, String subjectName, String productName, int goalMoney, int sumMoney,
 			int optionPrice, int optionLimit, Date startDate, Date finDate, String projectStory, String productContent,
 			String warningIntro, int likeCount, int hitsCount, int projectCode, Date deleiveryDate, int percent,
@@ -335,6 +375,37 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 	}
 
 
+
+
+
+
+
+
+
+	public Member getMember() {
+		return member;
+	}
+
+
+
+
+
+
+
+
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
+
+
+
+
+
+
+
+
 	@Override
 	public String toString() {
 		return "Funding [projectNo=" + projectNo + ", userId=" + userId + ", subjectName=" + subjectName
@@ -343,8 +414,12 @@ public Funding(int projectNo, String userId, String subjectName, String productN
 				+ ", finDate=" + finDate + ", projectStory=" + projectStory + ", productContent=" + productContent
 				+ ", warningIntro=" + warningIntro + ", likeCount=" + likeCount + ", hitsCount=" + hitsCount
 				+ ", projectCode=" + projectCode + ", deleiveryDate=" + deleiveryDate + ", percent=" + percent
-				+ ", leftDate=" + leftDate + ", count=" + count + ", fundingFile=" + fundingFile + "]";
+				+ ", leftDate=" + leftDate + ", count=" + count + ", fundingFile=" + fundingFile + ", member=" + member
+				+ "]";
 	}
+
+
+
 
 	
 	

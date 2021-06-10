@@ -24,6 +24,7 @@
 		<result property="leftDate" column="LEFT_DATE"></result>
 		<result property="count" column="COUNT"></result>
 		<collection property="fundingFile" resultMap="fundingFileResultMap" />
+		<collection property="member" resultMap="memberResultMap"></collection>
 	</resultMap><!-- JOIN시 collection 필수  join 아니면 안쓰임-->
 <!--펀딩 파일 테이블  -->
 	<resultMap type="FundingFile" id="fundingFileResultMap">
@@ -91,6 +92,21 @@
       <result property="reportDay" column="REPORT_DAY"/>
       <result property="reportStatCount" column="REPORT_STAT_COUNT"/>
    </resultMap>
+   
+   	<resultMap type="Member" id="memberResultMap">
+		<id property="userId" column="USER_ID"></id>
+		<result property="userPw" column="USER_PW"></result>
+		<result property="nickName" column="NICKNAME"></result>
+		<result property="userName" column="USER_NAME"></result>
+		<result property="userEmail" column="USER_EMAIL"></result>
+		<result property="userPhone" column="USER_PHONE"></result>
+		<result property="userAddr" column="USER_ADDR"></result>
+		<result property="birthday" column="BIRTHDAY"></result>
+		<result property="enrollDate" column="ENROLL_DATE"></result>
+		<result property="withdrawDate" column="WITHDRAW_DATE"></result>
+		<result property="mCode" column="M_CODE"></result>
+		<result property="mngNo" column="MNG_NO"></result>
+	</resultMap>
 
 
 <!--펀딩 제안하기 입력 쿼리문 -->
@@ -117,9 +133,17 @@
 	
 <!-- 펀딩 리스트 상세 _ 하나만 출력 쿼리문 -->
 	<select id="selectOne" resultMap="fundingResultMap">
-		SELECT F_PROJECT_NO, USER_ID, SUBJECT, PRODUCT_NAME, GOAL_MONEY, SUM_MONEY, OPTION_PRICE, OPTION_LIMIT, START_DATE, FIN_DATE, PROJ_STORY, PRODUCT_CONT,
-        WARNING_INTRO, LIKE_COUNT, HITS_COUNT, PROJECT_CODE, DELIVERY_DATE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE 
-        FROM FUNDING_PROJECT WHERE F_PROJECT_NO = #{projectNo}
+		SELECT F_PROJECT_NO,USER_ID,SUBJECT,PRODUCT_NAME,GOAL_MONEY,SUM_MONEY,OPTION_PRICE,OPTION_LIMIT,START_DATE,FIN_DATE,PROJ_STORY,PRODUCT_CONT,WARNING_INTRO,LIKE_COUNT,PROJECT_CODE,DELIVERY_DATE, 
+       PERCENT,LEFT_DATE, NICKNAME
+        FROM
+		(SELECT FUNDING_PROJECT.F_PROJECT_NO, FUNDING_PROJECT.USER_ID, FUNDING_PROJECT.SUBJECT, FUNDING_PROJECT.PRODUCT_NAME, FUNDING_PROJECT.GOAL_MONEY,
+       FUNDING_PROJECT.SUM_MONEY, FUNDING_PROJECT.OPTION_PRICE, FUNDING_PROJECT.OPTION_LIMIT, FUNDING_PROJECT.START_DATE, FUNDING_PROJECT.FIN_DATE, 
+       FUNDING_PROJECT.PROJ_STORY, FUNDING_PROJECT.PRODUCT_CONT, FUNDING_PROJECT.WARNING_INTRO, FUNDING_PROJECT.LIKE_COUNT, FUNDING_PROJECT.PROJECT_CODE,
+       FUNDING_PROJECT.DELIVERY_DATE, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT,  TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE,
+       MEMBER.NICKNAME
+		FROM FUNDING_PROJECT, MEMBER
+		WHERE FUNDING_PROJECT.USER_ID = MEMBER.USER_ID)
+		WHERE F_PROJECT_NO = #{projectNo}
 	</select>
 <!-- 펀딩 리스트 상세 (파일_사진)_ 하나만 출력 쿼리문 -->
 	<select id="selectOneFile" resultMap="fundingFileResultMap">
@@ -304,7 +328,7 @@ WHERE <![CDATA[LEFT_DATE <= 0 AND (ROWNUM >= 1 AND ROWNUM <= 6)]]> AND PROJECT_C
 
 
 <select id = "countSponserNumber" resultMap="FundingLogResultMap">
- SELECT COUNT(*) AS SPONSER FROM DO_FUNDING WHERE F_PROJECT_NO2 =  #{projectNo}
+ SELECT COUNT(*) AS SPONSER FROM DO_FUNDING WHERE CANCLE_YN = 0 AND F_PROJECT_NO2 =  #{projectNo}
 </select>
 
 
@@ -705,7 +729,7 @@ WHERE PROJECT_CODE = 0 AND USER_ID = #{userId }
       WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '6' THEN '금'
       WHEN TO_CHAR(ACCUSATION_DATE, 'D') = '7' THEN '토'
       END "DAY"
-      FROM FUNDING_ACCUSATION ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) ON DAY = DAY_NAME ORDER BY 1       
+      FROM FUNDING_ACCUSATION WHERE TO_CHAR(ACCUSATION_DATE) &gt;= TO_CHAR(SYSDATE-7,'YYYY-MM-DD') ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) ON DAY = DAY_NAME ORDER BY 1       
     </select>
     
 </mapper>

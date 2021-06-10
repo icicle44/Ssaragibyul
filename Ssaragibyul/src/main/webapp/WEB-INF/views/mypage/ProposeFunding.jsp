@@ -103,47 +103,50 @@ padding-left: 20px;
 								</c:if>
                                 </div>
                         <div class="btn">
+                        	<form action="fundingModifyView.do" method="post" name="fundingGo" id="postForm">
+							 <input type="hidden" name="projectNo" value="${p.projectNo  }">
                             <input type="button" value="수정" id="update-btn">
+                            </form>
                         </div>
                     </div>
                     </c:forEach>
 
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <!--페이징 처리 div-->
-            <div class="table-users">
+          <div class="table-users">
 			<table cellspacing="0">  
                     				<!-- 페이징 -->
 				<tr align="center" height="20">
 					<td colspan="8">
-					<c:url var="before" value="proposeFunding.do">
-						<c:param name="page" value="${pi1.currentPage - 1 }"></c:param>
+					<!-- 이전 -->
+					<c:url var="before" value="myFunding.do">
+						<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 					</c:url>
-				<c:if test="${pi1.currentPage <= 1 }">
+				<c:if test="${pi.currentPage <= 1 }">
 					[이전]&nbsp;
 				</c:if>
-				<c:if test="${pi1.currentPage > 1 }">
+				<c:if test="${pi.currentPage > 1 }">
 					<a href="${before }">[이전]</a>&nbsp;
 				</c:if>
 				<!-- 페이지 -->
-				<c:forEach var="p" begin="${pi1.startPage }" end="${pi1.endPage }">
-					<c:url var="pagination" value="proposeFunding.do">
+				<c:forEach var="p" begin="${pi.startPage }" end="${pi.endPage }">
+					<c:url var="pagination" value="myFunding.do">
 						<c:param name="page" value="${p }"></c:param>
 					</c:url>
-					<c:if test="${p eq pi1.currentPage }">
+					<c:if test="${p eq pi.currentPage }">
 						<font color="red" size="2">[${p }]</font>
 					</c:if>
-					<c:if test="${p ne pi1.currentPage }">
+					<c:if test="${p ne pi.currentPage }">
 						<a href="${pagination }">${p }</a>&nbsp;
 					</c:if>
 				</c:forEach>
 				<!-- 다음 -->
-				<c:url var="after" value="proposeFunding.do">
-					<c:param name="page" value="${pi1.currentPage + 1 }"></c:param>
+				<c:url var="after" value="myFunding.do">
+					<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
 				</c:url>
-				<c:if test="${pi1.currentPage >= pi1.maxPage }">
+				<c:if test="${pi.currentPage >= pi.maxPage }">
 					[다음]&nbsp;
 				</c:if>
-				<c:if test="${pi1.currentPage < pi1.maxPage }">
+				<c:if test="${pi.currentPage < pi.maxPage }">
 					<a href="${after }">[다음]</a>&nbsp;
 				</c:if>
 			</td>
@@ -156,5 +159,11 @@ padding-left: 20px;
     	<jsp:include page="../../../footer.jsp"/>
     </footer>
     <script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        $("#update-btn").on("click", function(){
+    	
+    	$("#postForm").submit();
+    });
+   </script>
 </body>
 </html>

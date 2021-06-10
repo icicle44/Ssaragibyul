@@ -186,7 +186,7 @@ margin : auto;
 					</div>
 					<input type="hidden" name="projectStory">
 					<input type="hidden" name="uploadImage">
-					<div id="editor" class="format" ></div>
+					<div id="editor" class="format" >${funding.projectStory}</div>
 				<br><br><br><br><br><br><br>
 			<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음단계</a>
 			</section>
