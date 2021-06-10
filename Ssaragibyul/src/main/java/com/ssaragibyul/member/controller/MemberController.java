@@ -32,6 +32,7 @@ import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.domain.PaginationMy;
 import com.ssaragibyul.member.domain.PaginationPro;
 import com.ssaragibyul.member.service.MemberService;
+import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.service.PointService;
 import com.ssaragibyul.visit.domain.Visit;
@@ -509,7 +510,30 @@ public class MemberController {
 		int listCount = mService.getcommentsListCount(userId);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
 		ArrayList<CommentAndProject> cpList = mService.printAllComment(pi, userId);
-		System.out.println(cpList.get(0).toString());
+		
+		if(!cpList.isEmpty()) {
+			mv.addObject("cpList", cpList);
+		}else {
+			mv.addObject("tblMsg", "남기신 댓글이 없습니다.");
+		}
+		mv.addObject("pi", pi);
+		mv.setViewName("mypage/myCommentList");			
+		return mv;
+	}
+	//댓글 카테고리 모아보기
+	@RequestMapping(value="mySearchComment.do", method=RequestMethod.GET)
+	public ModelAndView searchCommentList(ModelAndView mv,
+									HttpSession session,
+									@ModelAttribute SearchMsg search,
+									@RequestParam(value="page", required=false) Integer page) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		search.setUserId(userId);
+		int currentPage = (page != null)? page : 1;
+		int listCount = mService.getSearchCommentsCount(search);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+		ArrayList<CommentAndProject> cpList = mService.printSearchComment(pi, search);
+		
 		if(!cpList.isEmpty()) {
 			mv.addObject("cpList", cpList);
 		}else {

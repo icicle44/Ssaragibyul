@@ -148,7 +148,7 @@
 		SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO)
 		UNION
 		SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY) C
-		WHERE USER_ID='test')
+		WHERE USER_ID=#{userId })
 	</select>
 	
 	<delete id="deleteComment" parameterType="map">
@@ -174,5 +174,72 @@
 			UPDATE VISIT_REPLY SET CONTENTS=#{commContents} WHERE REPLY_NO=#{commNo}
 		</if>
 	</update>	
+	
+	<select id="selectSearchComments" resultMap="commentProjectResultMap">
+		<choose>
+			<when test="searchCondition.toString()=='all'">
+				SELECT ROWNUM AS KEY_NO, C.* FROM (SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO)
+				UNION
+				SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO)
+				UNION
+				SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY) C WHERE USER_ID=#{userId }
+			</when>		
+			<when test="searchCondition.toString()=='펀딩상세'">
+				SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO) WHERE A.USER_ID=#{userId } 
+			</when>
+			<when test="searchCondition.toString()=='기부상세'">
+				SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO) WHERE A.USER_ID=#{userId } 
+			</when>
+			<when test="searchCondition.toString()=='방문'">
+				SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY WHERE USER_ID=#{userId } 
+			</when>
+		</choose>
+		ORDER BY REG_DATE DESC
+	</select>
+	<select id="selectSearchCommentsCount" resultType="_int">
+		SELECT COUNT(*) FROM 
+		<choose>
+			<when test="searchCondition.toString()=='all'">
+				(SELECT ROWNUM AS KEY_NO, C.* FROM (SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO)
+				UNION
+				SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO)
+				UNION
+				SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY) C
+				WHERE USER_ID=#{userId })
+			</when>
+			<when test="searchCondition.toString()=='펀딩상세'">
+				(SELECT F_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, ENROLL_DATE AS REG_DATE, SUBJECT, PROJECT_CODE FROM FUNDING_COMMENTS A LEFT OUTER JOIN FUNDING_PROJECT B USING(F_PROJECT_NO) WHERE A.USER_ID=#{userId })
+			</when>
+			<when test="searchCondition.toString()=='기부상세'">
+				(SELECT D_PROJECT_NO AS PROEJCT_NO, COMM_NO, A.USER_ID, COMM_CONTENTS, BOARD_TYPE, REG_DATE, SUBJECT, PROJECT_CODE FROM DONATION_COMMENTS A LEFT OUTER JOIN DONATION B USING(D_PROJECT_NO) WHERE A.USER_ID=#{userId })
+			</when>
+			<when test="searchCondition.toString()=='방문'">
+				(SELECT NULL AS PROJECT_NO, REPLY_NO AS COMM_NO, USER_ID, CONTENTS AS COMM_CONTENTS, '방문' AS BOARD_TYPE, REG_DATE, '별 보러 가자' AS SUBJECT, 0 AS PROJECT_CODE FROM VISIT_REPLY WHERE USER_ID=#{userId })
+			</when>
+		</choose>
+	</select>
+	
+	<!-- 나혜님 -->
+	<select id="selectSearchList" resultMap="memberResultMap">
+      SELECT * FROM MEMBER
+      <if test="searchCondition.toString() == 'id'">
+         WHERE USER_ID LIKE '%' || #{searchValue} || '%'
+         ORDER BY USER_ID
+      </if>
+      <if test="searchCondition.toString() == 'nickName'">
+         WHERE NICKNAME LIKE '%' || #{searchValue} || '%'
+         ORDER BY NICKNAME
+      </if>
+      <if test="searchCondition.toString() == 'name'">
+         WHERE USER_NAME LIKE '%' || #{searchValue} || '%'
+         ORDER BY USER_NAME
+      </if>
+      <if test="searchCondition.toString() == 'all'">
+         WHERE USER_ID LIKE '%' || #{searchValue} || '%'
+         OR NICKNAME LIKE '%' || #{searchValue} || '%'
+         OR USER_NAME LIKE '%' || #{searchValue} || '%'
+         ORDER BY USER_ID
+      </if>
+   </select>
 	
 </mapper>

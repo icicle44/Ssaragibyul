@@ -17,6 +17,7 @@ import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.member.store.MemberStore;
+import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.visit.domain.Visit;
 
 @Service
@@ -106,5 +107,15 @@ public class MemberServiceImpl implements MemberService {
 	public int getMyListCount(String userId) {
 		return mStore.getListCount(userId);
 	}
-	
+
+	//댓글카테고리검색
+	@Override
+	public ArrayList<CommentAndProject> printSearchComment(PageInfo pi, SearchMsg search) {
+		return mStore.selectSearchComment(pi, search);
+	}
+	//댓글카테고리갯수
+	@Override
+	public int getSearchCommentsCount(SearchMsg search) {
+		return mStore.selectSearchCommentsCount(search);
+	}
 }

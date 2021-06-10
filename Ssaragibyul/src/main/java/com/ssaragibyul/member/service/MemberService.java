@@ -11,6 +11,7 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.visit.domain.Visit;
 
 public interface MemberService {
@@ -28,4 +29,6 @@ public interface MemberService {
 	public int deleteComment(HashMap<String, String> dMap); //댓글 삭제
 	public int modifyComment(HashMap<String, String> mMap);//댓글 수정
 	public int getMyListCount(String userId);
+	public ArrayList<CommentAndProject> printSearchComment(PageInfo pi, SearchMsg search);//댓글카테고리검색
+	public int getSearchCommentsCount(SearchMsg search);//댓글카테고리갯수
 }

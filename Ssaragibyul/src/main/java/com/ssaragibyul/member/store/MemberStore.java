@@ -7,6 +7,7 @@ import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
+import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.visit.domain.Visit;
 
 
@@ -25,4 +26,6 @@ public interface MemberStore {
 	public int deleteComment(HashMap<String, String> dMap);
 	public int updateComment(HashMap<String, String> mMap);
 	public int getListCount(String userId);
+	public ArrayList<CommentAndProject> selectSearchComment(PageInfo pi, SearchMsg search);
+	public int selectSearchCommentsCount(SearchMsg search);
 }

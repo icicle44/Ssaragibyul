@@ -13,6 +13,7 @@ import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.store.MemberStore;
+import com.ssaragibyul.message.domain.SearchMsg;
 import com.ssaragibyul.visit.domain.Visit;
 
 @Repository
@@ -100,6 +101,19 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public int getListCount(String userId) {
 		return sqlSession.selectOne("visitMapper.selectMyListCount", userId);
+	}
+
+	// 댓글카테고리검색
+	@Override
+	public ArrayList<CommentAndProject> selectSearchComment(PageInfo pi, SearchMsg search) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchComments", search, rowBounds);
+	}
+	//댓글카테고리갯수
+	@Override
+	public int selectSearchCommentsCount(SearchMsg search) {
+		return sqlSession.selectOne("memberMapper.selectSearchCommentsCount", search);
 	}
 
 	/*
