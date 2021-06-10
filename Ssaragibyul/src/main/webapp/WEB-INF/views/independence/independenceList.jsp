@@ -251,36 +251,35 @@
 			</div>
 		</div>
 	</div>
-</div>				
 </c:forEach>	
 
 
 	</section>
 </div>
 <script>
-$('html, body').css({'overflow': 'hidden', 'height': '100%'});
-$('#element').on('scroll touchmove mousewheel', function(event) {
-event.preventDefault();
-event.stopPropagation();
-return false;
-}); 
-var li_items = document.querySelectorAll(".accordion_wrap ul li");
-var ul = document.querySelector(".accordion_wrap ul");
-
-li_items.forEach(function(item){
-	item.addEventListener("click", function(){
+	$('html, body').css({'overflow': 'hidden', 'height': '100%'});
+	$('#element').on('scroll touchmove mousewheel', function(event) {
+	event.preventDefault();
+	event.stopPropagation();
+	return false;
+	}); 
+	var li_items = document.querySelectorAll(".accordion_wrap ul li");
+	var ul = document.querySelector(".accordion_wrap ul");
+	
+	li_items.forEach(function(item){
+		item.addEventListener("click", function(){
+			li_items.forEach(function(item){
+				item.classList.remove("active");
+			})
+			item.classList.add("active");
+		});
+	});
+	
+	ul.addEventListener("mouseleave", function(){
 		li_items.forEach(function(item){
 			item.classList.remove("active");
 		})
-		item.classList.add("active");
 	});
-});
-
-ul.addEventListener("mouseleave", function(){
-	li_items.forEach(function(item){
-		item.classList.remove("active");
-	})
-});
 	
 </script>
 </body>

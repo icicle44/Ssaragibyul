@@ -219,7 +219,20 @@ public class VisitController {
 			return "common/errorPage";
 		}
 	}
-
+	// 게시글 삭제 (myPage, 다중선택)
+	@ResponseBody
+	@RequestMapping(value="myVisitDelete.do", method=RequestMethod.GET)
+	public String receivedMsgDelete(@RequestParam(value = "visitNoArr[]") List<Integer> visitNoArr, ModelAndView mv) {
+		//배열에 해당하는 쪽지의 삭제표시컬럼 update
+		int result = vService.deleteMyVisitDelete(visitNoArr);
+		System.out.println(result);
+		if(result > 0) {
+			return "success";
+		} else {
+			return "fail";			
+		}
+	}
+	
 	// 파일저장
 	public String saveFile(MultipartFile file, HttpServletRequest request) {
 		// 파일 저장 경로 설정

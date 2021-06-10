@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.visit.domain.Visit;
@@ -100,5 +101,7 @@ public interface VisitService {
 	public String checkLikes(VisitLike likes);
 
 	public ArrayList<Visit> printSearchAll(String searchValue);
+
+	public int deleteMyVisitDelete(List<Integer> visitNoArr);
 
 }

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,7 +23,6 @@ import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Pagination;
 import com.ssaragibyul.funding.domain.Funding;
-import com.ssaragibyul.funding.domain.FundingFile;
 import com.ssaragibyul.funding.domain.FundingLike;
 import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
@@ -36,6 +34,8 @@ import com.ssaragibyul.member.domain.PaginationPro;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.point.domain.MyPoint;
 import com.ssaragibyul.point.service.PointService;
+import com.ssaragibyul.visit.domain.Visit;
+import com.ssaragibyul.visit.service.VisitService;
 
 @Controller
 public class MemberController {
@@ -48,6 +48,9 @@ public class MemberController {
 
 	@Autowired
 	private FundingService fService;
+	
+	@Autowired
+	private VisitService vService;
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
@@ -471,11 +474,29 @@ public class MemberController {
 		return "mypage/likeDonation";
 	}
 	
-	// 내가 쓴 게시물 페이지
+	// 내가 쓴 게시물 리스트
 	@RequestMapping(value="myPostList.do", method=RequestMethod.GET)
-	public String postList(Member member) {
-		return "mypage/myPostList";
+	public ModelAndView postList(ModelAndView mv, HttpSession session, Visit visit, @RequestParam(value="page", required=false) Integer page) {
+		System.out.println("================== 내가 쓴 게시글 리스트");
+		int currentPage = (page != null) ? page : 1;
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		String userId = loginUser.getUserId();
+		
+		int listCount =mService.getMyListCount(userId);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		ArrayList<Visit> vList = mService.printAllList(pi, userId);
+		System.out.println("vList, 내가 쓴 게시물 : "+vList);
+		
+		if(!vList.isEmpty()) {
+			mv.addObject("vList", vList);
+			mv.addObject("pi", pi);
+			mv.setViewName("mypage/myPostList");
+		}else {
+			mv.addObject("msg", "게시글 조회 실패").setViewName("common/errorPage");
+		}
+		return mv;
 	}
+
 	
 	// 내가 쓴 댓글 페이지
 	@RequestMapping(value="myCommentList.do", method=RequestMethod.GET)

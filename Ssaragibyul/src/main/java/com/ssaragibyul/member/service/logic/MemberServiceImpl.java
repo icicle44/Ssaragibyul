@@ -17,6 +17,7 @@ import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.service.MemberService;
 import com.ssaragibyul.member.store.MemberStore;
+import com.ssaragibyul.visit.domain.Visit;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -95,5 +96,15 @@ public class MemberServiceImpl implements MemberService {
 	 * @Override public int searchPw(String userPw) { // TODO Auto-generated method
 	 * stub return 0; }
 	 */
+	// 내가 쓴 게시글 모아보기
+	@Override
+	public ArrayList<Visit> printAllList(PageInfo pi, String userId) {
+		return mStore.selectAllList(pi, userId);
+	}
+
+	@Override
+	public int getMyListCount(String userId) {
+		return mStore.getListCount(userId);
+	}
 	
 }

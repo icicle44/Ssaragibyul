@@ -7,6 +7,7 @@
 		<result property="userId" column="USER_ID"/>
 		<result property="nickName" column="NICKNAME"/>
 		<result property="siteNo" column="SITE_NO"/>
+		<result property="siteName" column="SITE_NAME"/>
 		<result property="visitTitle" column="VISIT_TITLE"/>
 		<result property="visitContents" column="VISIT_CONTENTS"/>
 		<result property="visitCount" column="VISIT_COUNT"/>
@@ -171,6 +172,14 @@ FROM
 	<select id="selectVisitListCount" resultType="_int">
       SELECT COUNT(*) FROM VISIT
     </select>
+    <!-- 내가 쓴 게시글 모아보기 -->
+    <select id="selectAllMyList" resultMap="visitResultMap">
+    	SELECT * FROM VISIT JOIN HISTORY USING (SITE_NO) WHERE USER_ID = #{userId }
+    </select>
+    
+    <select id="selectMyListCount" resultType="_int">
+    	SELECT COUNT(*) FROM VISIT WHERE USER_ID = #{userId } ORDER BY V_CREATE_DATE
+    </select>
     
 	<update id="updateHitCount">
 		UPDATE VISIT
@@ -204,6 +213,13 @@ FROM
 	<delete id="deleteVisit" parameterType="_int">
 		DELETE VISIT WHERE VISIT_NO = #{visitNo }
 	</delete>
+	
+	<delete id="deleteMyVisit">
+		DELETE FROM VISIT WHERE VISIT_NO IN
+			<foreach collection="list" item="visitNoArr" open="(" close=")" separator=",">
+				#{visitNoArr }
+			</foreach>
+	</delete> 
 	
 	<select id="searchAll" resultMap="visitResultMap">
 		SELECT * FROM VISIT JOIN MEMBER USING (USER_ID) JOIN VISIT_FILE USING (VISIT_NO)
@@ -261,4 +277,6 @@ FROM
 		END "DAY"
 		FROM VISIT ORDER BY 1) GROUP BY DAY, DAY_ORDER ORDER BY DAY_ORDER ASC) ON DAY = DAY_NAME ORDER BY 1
     </select>
+    
+    
 </mapper>

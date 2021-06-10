@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.visit.domain.Visit;
@@ -135,6 +136,10 @@ public class VisitStoreLogic implements VisitStore{
 		
 		return (ArrayList)session.selectList("visitMapper.searchAll", searchValue);
 	}
-
+	@Override
+	public int deleteMyVisit(List<Integer> visitNoArr) {
+		
+		return session.delete("visitMapper.deleteMyVisit", visitNoArr);
+	}
 
 }

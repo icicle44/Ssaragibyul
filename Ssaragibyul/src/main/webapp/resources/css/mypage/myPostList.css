@@ -74,6 +74,7 @@ header{
 }
 
 .rightCon{
+	padding: 20px;
     border: 3px solid black;
     margin-right: 70px;
     width: 71%;

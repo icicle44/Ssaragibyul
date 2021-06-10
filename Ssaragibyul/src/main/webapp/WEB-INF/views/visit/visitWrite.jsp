@@ -130,6 +130,7 @@ span {
 
 	<script>
     	$(function(){
+    		
     	// CKEditor
   		   BalloonEditor
   		      .create( document.querySelector( '#editor' ) )
@@ -296,6 +297,11 @@ span {
 			navigator.geolocation.getCurrentPosition(successCallback,
 					errorCallback);
 		};
+		function regist() {
+			var editor = document.getElementById('editor');
+			console.log(editor.textContent);
+			$("#visitContents").val(editor.textContent);
+		}
     </script>
 
 

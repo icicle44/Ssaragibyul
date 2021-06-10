@@ -13,6 +13,7 @@ import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.CommentAndProject;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.store.MemberStore;
+import com.ssaragibyul.visit.domain.Visit;
 
 @Repository
 public class MemberStoreLogic implements MemberStore{
@@ -87,6 +88,18 @@ public class MemberStoreLogic implements MemberStore{
 	@Override
 	public int updateComment(HashMap<String, String> mMap) {
 		return sqlSession.update("memberMapper.modifyComment", mMap);
+	}
+	// 내가 쓴 게시글 모아보기
+	@Override
+	public ArrayList<Visit> selectAllList(PageInfo pi, String userId) {
+		int offset = (pi.getCurrentPage()-1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("visitMapper.selectAllMyList", userId, rowBounds);
+	}
+
+	@Override
+	public int getListCount(String userId) {
+		return sqlSession.selectOne("visitMapper.selectMyListCount", userId);
 	}
 
 	/*

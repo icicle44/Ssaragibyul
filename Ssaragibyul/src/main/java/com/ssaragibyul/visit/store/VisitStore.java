@@ -32,4 +32,5 @@ public interface VisitStore {
 	public int getLikes(int visitNo);
 	public String checkLikes(VisitLike likes);
 	public ArrayList<Visit> selectSearchAll(String searchValue);
+	public int deleteMyVisit(List<Integer> visitNoArr);
 }

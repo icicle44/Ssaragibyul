@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.point.service.PointService;
@@ -131,5 +132,9 @@ public class VisitServiceImpl implements VisitService{
 	public ArrayList<Visit> printSearchAll(String searchValue) {
 		return vStore.selectSearchAll(searchValue);
 	}
-
+	@Override
+	public int deleteMyVisitDelete(List<Integer> visitNoArr) {
+		
+		return vStore.deleteMyVisit(visitNoArr);
+	}
 }
