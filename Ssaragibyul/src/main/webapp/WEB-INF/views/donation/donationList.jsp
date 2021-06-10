@@ -33,7 +33,7 @@
 	width: 402px;
 	margin-bottom: 30px;
 	padding: 10px;
-	font-size:12px;
+	font-size:13px;
 }
 #frame{
 	width: 550px;
@@ -43,7 +43,7 @@
 	float: left;  
 	width: 30%;
 	height: 30%;
-	font-size:12px;
+	font-size:13px;
 	font-family: 'Noto Serif KR', serif;
 }
 
@@ -60,7 +60,7 @@ a{
 	text-align: left; 
 	padding-right:10px; 
 	font-weight:bold; 
-	font-size:12px; 
+	font-size:13px; 
 	color:DimGray;
 }
 .nothing{
@@ -78,32 +78,33 @@ a{
 #dday_css{
 	float:left; 
 	width : 50%;
-	font-size:12px;
+	font-size:16px;
 }
 #sum_css{
 	float:right;
 	width : 50%;
 	text-align: right; 
-	font-size:12px;
+	font-size:16px;
 }
 
 /*  */
 
 .select{
 	float:left;
-	height: 30px;
+	height: 40px;
 	margin-right: 10px;
 	border-radius: 5px;
     border: 1px solid rgb(104, 104, 104);
     color: rgb(104, 104, 104);
     font-weight:450;
     text-align: center;
+    font-size:16px;
 }
 
 #pj_search{
     width : 100%;
     float:right;
-   	padding-left: 75%;
+   	padding-left: 72%;
     margin-bottom: 30px;
     font-family: 'Noto Serif KR', serif;
 }
@@ -115,16 +116,20 @@ a{
     border: 1px solid rgb(104, 104, 104);
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-    width: 180px;
+    width: 190px;
+    height: 40px;
 }
 
 input::-webkit-input-placeholder {
 	color:gray;
-	font-size:15px;
+	font-size:16px;
 }
 
 .search{
     float: left;
+    height: 40px;
+    width: 60px;
+   	font-size:16px;
     border: 1px solid rgb(104, 104, 104);
     border-left: none;
     border-top-right-radius: 5px;
@@ -211,7 +216,7 @@ input::-webkit-input-placeholder {
 										<tr>
 											<td align = "right">
 												<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-												<span style="color:DimGray; font-size:13px; vertical-align:1px;">${d.likeCount}</span>
+												<span style="color:DimGray; font-size:14px; padding-top:20px; color: #EB5C01;">${d.likeCount}</span>
 											</td>
 										</tr>
 										<tr>
@@ -368,7 +373,7 @@ input::-webkit-input-placeholder {
 			<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<button class="btn" onclick="location.href ='donationListFullPro.do'" style="text-align: center;">프로젝트 더 보기</button>
+			<button class="btn" onclick="location.href ='donationListFullPro.do'" style="text-align: center; margin-right: 700px;">프로젝트 더 보기</button>
 		</section>
 		
 		<br><br><br>
