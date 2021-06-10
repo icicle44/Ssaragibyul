@@ -27,7 +27,7 @@ public class EmailSender  {
         try {
             mailSender.send(msg);
         }catch(MailException e) {
-            System.out.println("MailException¹ß»ı");
+            System.out.println("MailExceptionë°œìƒ");
             e.printStackTrace();
         }
     }

@@ -28,4 +28,7 @@ public interface MemberStore {
 	public int getListCount(String userId);
 	public ArrayList<CommentAndProject> selectSearchComment(PageInfo pi, SearchMsg search);
 	public int selectSearchCommentsCount(SearchMsg search);
+	public String selectPw(Member member);
+	public Object newPassword(Member member);
+	public String searchPw(Member member);
 }

@@ -1,14 +1,21 @@
 package com.ssaragibyul.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +35,8 @@ import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.independence.domain.Independence;
 import com.ssaragibyul.member.domain.CommentAndProject;
+import com.ssaragibyul.member.domain.Email;
+import com.ssaragibyul.member.domain.EmailSender;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.member.domain.PaginationMy;
 import com.ssaragibyul.member.domain.PaginationPro;
@@ -52,6 +61,9 @@ public class MemberController {
 	
 	@Autowired
 	private VisitService vService;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
@@ -160,11 +172,59 @@ public class MemberController {
 	}
 	
 	
-	// 비밀번호 찾기
-	public String searchPw(@RequestParam("userPw") String userPw, Model model) {
-		
-		return "common/errorPage";
-	}
+	// 새로운 비밀번호가 생성
+
+		@RequestMapping("newPassword.do")
+		public String newPassword(Member member, HttpSession session) throws Exception {
+			Random r = new Random();
+			int num = r.nextInt(89999) + 10000;
+			String npassword = Integer.toString(num)+"byul";// 새로운 비밀번호 변경
+			member.setUserPw(npassword);
+			mService.newPassword(member);
+			session.setAttribute("member", member);
+			return "redirect:/searchPw.do";
+
+		}
+
+		// 이메일로 비밀번호가 전송
+		@RequestMapping(value="searchPw.do", method=RequestMethod.GET)
+		public ModelAndView sendEmailAction (HttpSession session, ModelAndView mv) throws Exception {
+			Member member = (Member) session.getAttribute("member");
+			System.out.println("member in controller 비번 전송"+member);
+			Email email = new Email();
+			String userId = member.getUserId();
+			String userEmail = member.getUserEmail();
+			String userPw = mService.searchPw(member);
+
+			if(userPw!=null) {
+				email.setContent("비밀번호는 "+userPw+" 입니다."); // 이메일로 보낼 메시지
+				email.setReceiver(userEmail); // 받는이의 이메일 주소
+				email.setSubject(userId+"님 비밀번호 찾기 메일입니다."); // 이메일로 보낼 제목
+				
+				try {
+					MimeMessage msg = mailSender.createMimeMessage();
+					MimeMessageHelper messageHelper 
+					= new MimeMessageHelper(msg, true, "UTF-8");
+					
+					messageHelper.setSubject(email.getSubject());
+					messageHelper.setText(email.getContent());
+					messageHelper.setTo(email.getReceiver());
+					messageHelper.setFrom("it.bebop@gmail.com"); // 보내는 이의 주소(root-context.xml 에서 선언했지만 적어줬음)
+					msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(email.getReceiver()));
+					mailSender.send(msg);
+					
+				}catch(MessagingException e) {
+					System.out.println("MessagingException");
+					e.printStackTrace();
+				}
+				mv.setViewName("redirect:index.jsp");
+				return mv;
+			}else {
+				mv.addObject("msg","비밀번호 찾기 실패").setViewName("/common/errorPage");
+				return mv;
+			}
+		}
+
 	
 	
 	/*

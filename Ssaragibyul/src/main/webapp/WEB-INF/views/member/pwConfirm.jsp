@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좋아한 프로젝트</title>
+<title>비밀번호 확인</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/member/pwConfirm.css">
 </head>
 <body>

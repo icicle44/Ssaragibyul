@@ -120,5 +120,20 @@ public class MemberStoreLogic implements MemberStore{
 	 * @Override public int searchPw(Member member) { // TODO Auto-generated method
 	 * stub return 0; }
 	 */
+	@Override
+	public String selectPw(Member member) {
+		
+		return sqlSession.selectOne("memberMapper.selectPw", member);
+	}
 
+	@Override
+	public Object newPassword(Member member) {
+		return sqlSession.update("memberMapper.updateRandomPw",member);
+	}
+
+	@Override
+	public String searchPw(Member member) {
+		
+		return sqlSession.selectOne("memberMapper.searchPw",member);
+	}
 }

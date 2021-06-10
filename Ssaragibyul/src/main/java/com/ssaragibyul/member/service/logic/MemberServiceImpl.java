@@ -118,4 +118,14 @@ public class MemberServiceImpl implements MemberService {
 	public int getSearchCommentsCount(SearchMsg search) {
 		return mStore.selectSearchCommentsCount(search);
 	}
+
+	@Override
+	public String newPassword(Member member) {
+		return mStore.newPassword(member)+"";
+	}
+
+	@Override
+	public String searchPw(Member member) {
+		return mStore.searchPw(member);
+	}
 }

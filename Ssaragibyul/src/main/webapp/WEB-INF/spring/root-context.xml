@@ -25,6 +25,30 @@
            </bean> 
        </property> 
    </bean>
+   
+<!-- 이메일 보내기 -->
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="host" value="smtp.gmail.com" />
+        <property name="port" value="587" />
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="username" value="zlfjwh3@gmail.com" />
+        <property name="password" value="QWEqwe123!@#" />
+       <!-- email 요청 SMTP -->
+        <property name="javaMailProperties">
+            <props>
+	            <prop key="mail.transport.protocol">smtp</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	            <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+       
+    </bean>
+    <bean id="email" class="com.ssaragibyul.member.domain.Email">
+    </bean>
+    <bean id="emailSender" class="com.ssaragibyul.member.domain.EmailSender">
+    </bean>
+
 
 <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
    <property name="configLocation" value="classpath:mybatis-config.xml"></property>

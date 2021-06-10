@@ -31,4 +31,6 @@ public interface MemberService {
 	public int getMyListCount(String userId);
 	public ArrayList<CommentAndProject> printSearchComment(PageInfo pi, SearchMsg search);//댓글카테고리검색
 	public int getSearchCommentsCount(SearchMsg search);//댓글카테고리갯수
+	public String newPassword(Member member);
+	public String searchPw(Member member);
 }

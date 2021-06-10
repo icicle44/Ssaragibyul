@@ -12,7 +12,7 @@
     <header>
     	<jsp:include page="../../../header.jsp"/>
     </header>
-    <form action="findPw.do" method="post">
+    <form action="newPassword.do" id="pwsearch" method="post">
         <div class="contents">
             <h2 align="center" id="h2">비밀번호 찾기</h2>
             <div class="coment">
@@ -36,5 +36,17 @@
     	<jsp:include page="../../../footer.jsp"/>
     </footer>
     	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
+    	<script type="text/javascript">
+		function search(){
+			if(($("#userId").val()=null)&&($("#userEmail").val()!=null)){
+				$("#pwsearch").submit();
+			}else if(pwsearch.userId.value==null) {
+				alert("아이디를 입력하세요.")
+			}else if(pwsearch.userEmail.value==null) {
+				alert("이메일주소를 입력하세요.")
+			}
+		
+		}
+	</script>
     </body>
 </html>
