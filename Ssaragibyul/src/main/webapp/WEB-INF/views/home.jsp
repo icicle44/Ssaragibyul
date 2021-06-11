@@ -88,13 +88,13 @@ a{
 #dday_css{
 	float:left; 
 	width : 50%;
-	font-size:16px;
+	font-size:15px;
 }
 #sum_css{
 	float:right;
 	width : 50%;
 	text-align: right; 
-	font-size:16px;
+	font-size:15px;
 }
 
 /*  */
@@ -108,7 +108,7 @@ a{
     color: rgb(104, 104, 104);
     font-weight:450;
     text-align: center;
-    font-size:16px;
+    font-size:15px;
 }
 
 #pj_search{
@@ -132,14 +132,14 @@ a{
 
 input::-webkit-input-placeholder {
 	color:gray;
-	font-size:16px;
+	font-size:15px;
 }
 
 .search{
     float: left;
     height: 40px;
     width: 60px;
-   	font-size:16px;
+   	font-size:15px;
     border: 1px solid rgb(104, 104, 104);
     border-left: none;
     border-top-right-radius: 5px;
@@ -242,7 +242,7 @@ input::-webkit-input-placeholder {
 						<c:url var="fDetail" value="fundingDetail.do">
 						<c:param name="projectNo" value="${p.projectNo }"></c:param>
 						</c:url> 
-						<a href="${fDetail }" style="font-size : 1.5em">${p.subjectName }</a>
+						<a href="${fDetail }" style="font-size : 1.4em">${p.subjectName }</a>
 						</td>
 					</tr>
 				 <tr>
@@ -311,7 +311,7 @@ input::-webkit-input-placeholder {
 											<c:url var="dDetail" value="donationDetail.do">
 												<c:param name="projectNo" value="${d.projectNo }"></c:param>
 											</c:url> 
-											<a href="${dDetail }" style="font-size : 1.5em">${d.subjectName }</a>
+											<a href="${dDetail }" style="font-size : 1.4m">${d.subjectName }</a>
 										</td>
 									</tr>
 									<tr>

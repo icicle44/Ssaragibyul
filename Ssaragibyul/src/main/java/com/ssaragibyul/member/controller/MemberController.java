@@ -79,6 +79,7 @@ public class MemberController {
 	      
 	         if(referer != null) {
 	            session.setAttribute("referer",referer);
+	            System.out.println(referer);
 	            return "member/login";
 	         }else {
 	            model.addAttribute("msg", "다시 시도해주세요");
@@ -97,7 +98,9 @@ public class MemberController {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
 			String referer = (String)session.getAttribute("referer");
-			String url = referer.substring(22);
+			String url = referer.substring(21);
+			System.out.println(referer);
+			System.out.println(url);
 			return "redirect:" + url; //로그인화면 이전페이지로 복귀
 		}else {
 			model.addAttribute("msg", "로그인 실패");
