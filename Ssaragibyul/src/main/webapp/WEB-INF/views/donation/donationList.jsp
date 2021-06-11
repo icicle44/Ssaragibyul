@@ -72,7 +72,7 @@ a{
 	margin:auto;
 }
 #svg{
-	height:2px; 
+	height:7px; 
 	width: 400px;
 }
 #dday_css{
@@ -148,6 +148,7 @@ input::-webkit-input-placeholder {
 
 #headFont{
 	font-size:30px;
+	margin-left: -30px;
 }
 
 </style>
@@ -182,7 +183,7 @@ input::-webkit-input-placeholder {
 		<div style="height: 1080px; padding-top: 200px;">
 			<section class="row align-items-stretch photos " id="section-donation1">
 				<div id="head">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a id="headFont">진행중 프로젝트</a></div>	
+					<a id="headFont">진행중인 프로젝트</a></div>	
 		   			<div id="pj_search">
 		   		   	<select id = "chose1" class="select" onchange="location.href=this.value">
 	   		   	 		<option value = "" selected>선택</option>
@@ -216,7 +217,7 @@ input::-webkit-input-placeholder {
 										<tr>
 											<td align = "right">
 												<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-												<span style="color:DimGray; font-size:14px; padding-top:20px; color: #EB5C01;">${d.likeCount}</span>
+												<span style="color:DimGray; font-size:14px; padding-top:20px; color: #EB5C01; font-weight: bold;">${d.likeCount}</span>
 											</td>
 										</tr>
 										<tr>
@@ -231,15 +232,15 @@ input::-webkit-input-placeholder {
 											<td colspan="2" id="bar_td">
 												<c:if test="${d.percent >99}">
 													<svg id="svg">
-														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-														<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+														<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+														<rect x="0" y="0" height="4" width="100%" fill="#FF8000"></rect>
 													</svg>
 												</c:if>
 										
 												<c:if test="${d.percent < 100}">
 													<svg id="svg">
-														<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-														<rect x="0" y="0" height="2" width="${d.percent}%" fill="#FF8000"></rect>
+														<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+														<rect x="0" y="0" height="4" width="${d.percent}%" fill="#FF8000"></rect>
 													</svg>
 												</c:if>
 											</td>
@@ -317,7 +318,7 @@ input::-webkit-input-placeholder {
 		 							<tr>
 										<td align = "right">
 											<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-											<span style="color:DimGray; font-size:13px; vertical-align:1px;">${e.likeCount}</span>
+											<span style="color:DimGray; font-size:13px; vertical-align:1px; font-weight: bold;">${e.likeCount}</span>
 										</td>
 									</tr>
 
@@ -334,15 +335,15 @@ input::-webkit-input-placeholder {
 										<td colspan="2" id="bar_td">
 											<c:if test="${e.percent >99}">
 												<svg id="svg">
-													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-													<rect x="0" y="0" height="2" width="100%" fill="#FF8000"></rect>
+													<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+													<rect x="0" y="0" height="4" width="100%" fill="#FF8000"></rect>
 												</svg>
 											</c:if>
 							
 											<c:if test="${e.percent < 100}">
 												<svg id="svg">
-													<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-													<rect x="0" y="0" height="2" width="${e.percent}%" fill="#FF8000"></rect>
+													<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+													<rect x="0" y="0" height="4" width="${e.percent}%" fill="#FF8000"></rect>
 												</svg>
 											</c:if>
 										</td>

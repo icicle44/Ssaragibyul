@@ -16,7 +16,6 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-	<link rel="stylesheet" href="fonts/icomoon/style.css">
 	<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 
 	<!-- <link rel="stylesheet" href="/resources/css/bootstrap.min.css"> -->
@@ -40,6 +39,16 @@
 </head>
 
 <style>
+.main-content, .main-menu{
+	font-family: 'Noto Serif KR', serif;
+}
+
+#postForm{
+	margin-left: 150px;
+	color: #505050
+}
+
+
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
@@ -61,11 +70,80 @@ margin : auto;
 }
 
 .ql-toolbar{
-	width : 500px;
+	width :  720px;
 }
 .format{
-	width : 500px;
+	width : 720px;
 	height : 400px;
+}
+
+/*  */
+
+#project-title{
+	font-size: 18px; 
+	font-weight: bold; 
+	color: #1D1D1D
+}
+
+#title, #goal, #date, #video, #tel, #email{
+	margin-top: 10px;
+	width: 350px;
+}
+
+#editor{
+	margin-top: 10px;
+}
+
+.input-file-button{
+  padding: 6px 25px;
+  border-radius: 4px;
+  background-color: #DFDFDF;
+  cursor: pointer;
+}
+
+.input-file-button:hover{
+	background-color: #CACACA;
+	border:none;
+}
+
+.input-file-button:active{
+	background-color: #ADADAD;
+	border:none;
+}
+
+#input-file{
+	display: none;
+}
+
+#btn{
+	margin-left: 200px;
+}
+
+#submit-btn:hover{
+	background-color: #E35901;
+	border:none;
+}
+
+#submit-btn:active{
+	background-color: #D75909;
+	border:none;
+}
+.guide{
+	margin: 10px 0px;
+	background-color: #FAFAFA;
+	height: auto;
+	width: 720px;
+	font-size: 14px;
+}
+
+::placeholder{
+	color: #BCBCBC;
+}
+
+#waring{
+	margin-top: 10px;
+	width: 590px;
+	height: auto;
 }
 </style>
 
@@ -95,26 +173,23 @@ margin : auto;
 
 	<main class="main-content">
 		<form action="donationRegister.do" method="post" enctype="multipart/form-data" id="postForm">
-		<br><br><br><br> <br><br><br><br>
-
+		<br><br><br><br><br><br><br><br>  
 			<section id="sectionSuggest1">
-			<br><br><br><br>
+				<br><br><br>
+				<span id="project-title">프로젝트명</span><br>
+				<span>프로젝트의 주제와 특징이 드러나는 제목을 붙여주세요.</span><br>
 				<div>
-					프로젝트명
-				</div>
+					<input type="text" name="subjectName"  id="title" maxlength="50" placeholder="50자 이내로 작성해주세요." >
+					<span id="counter">( 0 / 50 )</span>
+				</div><br>
+				<span id="project-title">목표 금액</span><br>
+				<span>최소 100,000원 이상이어야 합니다.</span><br>
 				<div>
-					<input type="text" name="subjectName">
-				</div>
-				<div>
-					목표 금액
-				</div>
-				<div>
-					<input type="text" name="goalMoney">
-				</div>
-				<div>
-					진행 기간
-				</div>
-				<div> 
+					<input type="text" name="goalMoney" id="goal"> 원
+				</div><br>
+				<span id="project-title">진행 기간</span><br>
+				<span>최소 7일부터 최대 60일까지 가능합니다. </span><br>
+				<div id="date"> 
 					<script>	 	
 					let today = new Date();   
 
@@ -123,47 +198,64 @@ margin : auto;
 					let date = today.getDate();  // 날짜
 					let day = today.getDay();  // 요일
 
-					document.write(year + '/' + month + '/' + date)
+					document.write(year + ' / ' + month + ' / ' + date)
 					</script> ~ 	
 					<input type="date" name="finDate">
 				</div>
+				<br>
 				
+				<span id="project-title">대표 사진</span><br>
+				<span>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.</span><br><br>
 				<div>
-					대표 이미지
+					<input type="file" name="uploadFile" id="input-file" style="display:none">
+					<label class="input-file-button" for="input-file">파일선택</label>
+					<span id="fileName1" class="filname">선택된 파일없음</span><br>
 				</div>
-				<div>
-					<input type="file" name="uploadFile">
-				</div>
-				<br><br><br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
+				<br><br>
+				<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;" id="btn">다음단계</a>
 			</section>
 
 			<br><br><br><br><br><br><br>
 
 			<section id="sectionSuggest2">
 			<br><br><br><br>
+				<span id="project-title">동영상 주소</span><br>
+				<span>프로젝트를 소개할 수 있는 동영상의 주소를 적어주세요.</span><br>
 				<div>
-					동영상 주소
-				</div>
+					<input type="text" name="videoUrl" id="video">
+				</div><br>
+				
+				<span id="project-title">이미지 등록</span><br>
+				<span>프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요</span><br><br>
 				<div>
-					<input type="text" name="videoUrl">
-				</div>
-				<div>
-				 	이미지 등록
-				</div>
-				<div>
-				 	<input type="file" name="uploadFileSub1">  <br>
+					<!-- 	 	
+					<input type="file" name="uploadFileSub1">  <br>
 				    <input type="file" name="uploadFileSub2">
+				     -->
+				    
+				    <input type="file" name="uploadFileSub1" id="input-file" style="display:none">
+					<label class="input-file-button" for="input-file">파일선택</label>
+					<span id="fileName1" class="filname">선택된 파일없음</span><br>
+					
+					<input type="file" name="uploadFileSub2"id="input-file" style="display:none">
+					<label class="input-file-button" for="input-file">파일선택</label>
+					<span id="fileName1" class="filname">선택된 파일없음</span><br>
+				</div><br>
+				
+				<span id="project-title">프로젝트 스토리</span><br>
+				<span>프로젝트를 소개하고, 준비하는 과정에서 후원자에게 들려주고 싶었던 이야기를 진솔하게 전달해주세요.</span><br>
+				<div class="guide">
+					- Enter(↵) : 문단 나눔, Shift + Enter : 줄바꿈입니다.<br>
+					- ctrl+c/v를 이용해 선택한 이미지를 복사/붙여넣기 할 수 있습니다.<br>
+					- 이미지와 영상은 꼭 버튼을 이용하여 첨부해주세요.
 				</div>
-				<div>
-					프로젝트 스토리
-				</div>
+				
 				<input type="hidden" name="projectStory">
 				<input type="hidden" name="uploadImage">
 				<div id="editor" class="format"></div>
 				
 				<br><br><br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음단계</a>
+				<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;" id="btn">다음단계</a>
 			</section>
 
 			<br><br><br><br><br><br><br><br><br>
@@ -171,33 +263,34 @@ margin : auto;
 			
 			<section id="sectionSuggest3">
 				<br><br><br><br>
-				<div>
-					환불 정책 안내 사항
-				</div>
+				<span id="project-title">환불 정책 및 안내 사항</span><br>
+				<span>프로젝트 진행 과정에서 발생할 수 있는 위험 요소를 고려하여 신중히 설정해주세요. <br>예기치 못한 분쟁이 발생할 경우 중요한 기준이 됩니다.</span><br>
 				
 				<div>
-					<textarea name="warningIntro" rows="6" cols="30" wrap="virtual"></textarea>
+					<textarea name="warningIntro" rows="5" wrap="virtual" id="waring" maxlength="1500" style="resize: none;" placeholder="환불 및 교환 정책을 꼭 작성해주세요."></textarea>
+					<span id="counter2">( 0 / 1500)</span>
 				</div>
+				
+				<span id="project-title">문의 번호</span><br>
+				<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
 				<div>
-					문의 가능한 번호
+					<input type="text" id="tel">
 				</div>
+				
+				<span id="project-title">문의 이메일</span><br>
+				<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
 				<div>
-					<input type="text" name="">
-				</div>
-				<div>
-					문의 이메일
-				</div>
-				<div>
-					<input type="text" name="">
+					<input type="text" id="email">
 				</div>
 				<div>
 					<input type="hidden" name="userId" value="${loginUser.userId }"></td>
 				</div>
 			</section>
-			<br><br><br><br><br><br>
-			<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;">
-
+			
+			<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;
+			 margin-left: 200px; border: none; padding: 10px 100px; border-radius: 4px;">
 		</form>
+		<br><br>
 
 		<%@include file="../../../footer.jsp"%>
 		
@@ -229,5 +322,37 @@ margin : auto;
 	
 	<script src="/resources/js/fundingSug.js"></script>
 	
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
+	<script>
+	/* 제목 글자수 체크 */
+	 $(document).ready(function() {
+         $('#title').keyup(function (e){
+              var content = $(this).val();
+              $('#counter').html("("+content.length+" / 50자)");    //글자수 실시간 카운팅
+          });
+         
+      });
+	 
+	/* 환불 정책 및 안내 사항 글자수 체크  */
+	 $(document).ready(function() {
+         $('#waring').keyup(function (e){
+              var content = $(this).val();
+              $('#counter2').html("("+content.length+" / 1500자)");    //글자수 실시간 카운팅
+          });
+         
+      });
+	 
+	 /* 파일을 선택했을 때 파일명이 옆에 뜨도록 하는 것 */
+	 document.getElementById('input-file').addEventListener('change', function(){
+			var filename = document.getElementById('fileName1');
+			if(this.files[0] == undefined){
+				filename.innerText = '선택된 파일없음';
+				return;
+			}else{
+			filename.innerText = this.files[0].name;
+				
+			}
+		});
+	</script>
 </body>
 </html>

@@ -316,7 +316,7 @@ td{
 }
 
 #trtr{
-	height: 90px;
+	height: 110px;
 	width: 900px;
 }
 
@@ -331,6 +331,7 @@ td{
     border: none;
     position: absolute;
     padding-top: 30px;
+    width: 530px;
 }
 
 #rCreateDate{
@@ -468,9 +469,10 @@ td{
 		<div class="detailView_right col-4">
 			<div class="noting"></div>
 				<%-- <h1 id="title">${donation.subjectName }</h1><br> --%>
-				<p class = "contents" id="accrue" style="font-weight: bold;">모인 금액 : <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</p>
-				<p class = "contents" id="money" style="font-weight: bold;">목표 금액   <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원</p>
-   				<p class = "contents" id="percent" style="font-weight: bold;">달성률 : <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>%</p>
+				<p class = "contents" id="accrue" style="font-weight: bold;"> <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</p>
+				<span id="accrue-text">원 펀딩중</span>
+				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원</p>
+   				<p class = "contents" id="percent" style="font-weight: bold;"> <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>%</p>
 					
 					   	<c:if test="${donation.leftDate < 1}">
 							<div>
@@ -583,9 +585,9 @@ td{
 				
 						</div>
 						
-						<c:if test="${ loginUser.userId == donation.userId }">
+<%-- 						<c:if test="${ loginUser.userId == donation.userId }">
                         	<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
-                        </c:if><!-- ?? -->
+                        </c:if> --%>
 						
 					</div>
 				</div><br><br><hr>
