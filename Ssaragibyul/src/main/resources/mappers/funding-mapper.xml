@@ -624,6 +624,7 @@ WHERE PROJECT_CODE = 0 AND USER_ID = #{userId }
     		 SELECT * FROM DO_FUNDING WHERE F_PROJECT_NO2 = #{projectNo} AND CANCLE_YN = 0 ORDER BY 1 DESC
     	 </select>
     
+    
        <select id="selectOneProject" resultMap="FundingLogResultMap" parameterType="map">
   	select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from (SELECT * FROM DO_FUNDING LEFT OUTER JOIN 
     (SELECT * FROM FUNDING_PROJECT LEFT OUTER JOIN (FUNDING_FILE) USING(F_PROJECT_NO)) 

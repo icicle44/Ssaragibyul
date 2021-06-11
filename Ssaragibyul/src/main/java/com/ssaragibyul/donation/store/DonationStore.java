@@ -1,6 +1,7 @@
 package com.ssaragibyul.donation.store;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -159,6 +160,18 @@ public interface DonationStore{
 	public ArrayList<Donation> selectPropDonationLike(String userId, PageInfo pi);
 
 	public ArrayList<Donation> selectPropDonationMoney(String userId, PageInfo pi);
+
+	public DonationLog selectOneProject(HashMap<String, String> fmap);
+
+	public int updateProjectLog(DonationLog donationLog);
+
+	public int updateProject_SumMoneyMinus(Donation donation);
+
+	public Donation selectOneProjectforModifty(int projectNo);
+
+	public int donationPropUpdate_Porejct(Donation donation);
+
+	public int donationPropUpdate_File(DonationFile donationFile);
 
 
 	

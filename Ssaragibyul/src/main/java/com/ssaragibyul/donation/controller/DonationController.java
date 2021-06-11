@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,6 +35,9 @@ import com.ssaragibyul.donation.domain.DonationLike;
 import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
+import com.ssaragibyul.funding.domain.Funding;
+import com.ssaragibyul.funding.domain.FundingFile;
+import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.funding.service.FundingService;
 import com.ssaragibyul.member.domain.Member;
 
@@ -239,6 +243,109 @@ public class DonationController {
 		}
 		return mv;
 	}
+	
+	
+	@RequestMapping(value="donationgModifyView.do", method=RequestMethod.POST)
+	public String donationModifyView(@RequestParam("projectNo") int projectNo, Model model) {
+		model.addAttribute("donation", dService.printOneProjectforModifty(projectNo));
+		return "donation/donationModifyView";
+	}
+	
+	@RequestMapping(value = "donationUpdate.do", method = RequestMethod.POST)
+	public String donationUpdate(ModelAndView mv, HttpServletRequest request, Model model,
+			@ModelAttribute Donation donation, DonationFile donationFile,
+			@RequestParam("projectNo") int projectNo,
+			@RequestParam(value = "reloadFileMain", required = false) MultipartFile reloadFileMain,
+			@RequestParam(value = "reloadFileSub1", required = false) MultipartFile reloadFileSub1,
+			@RequestParam(value = "reloadFileSub2", required = false) MultipartFile reloadFileSub2) {
+		// 파일 삭제 후 업로드 ( 수정 )
+		if (reloadFileMain != null && !reloadFileMain.isEmpty()) {
+			// 기존 파일 삭제
+			if (donationFile.getFileName() != "") {
+				deleteFile(donationFile.getFileName(), request);
+			}
+			// 새 파일 업로드
+			String savePath = saveFile(reloadFileMain, request);
+			if (savePath != null) {
+				donationFile.setFileName(reloadFileMain.getOriginalFilename());
+			}
+		}
+		if (reloadFileSub1 != null && !reloadFileSub1.isEmpty()) {
+			// 기존 파일 삭제
+			if (donationFile.getFileSub1Name() != "") {
+				deleteFile(donationFile.getFileSub1Name(), request);
+			}
+			// 새 파일 업로드
+			String savePath = saveFile(reloadFileSub1, request);
+			if (savePath != null) {
+				donationFile.setFileSub1Name(reloadFileSub1.getOriginalFilename());
+			}
+		}
+		if (reloadFileSub2 != null && !reloadFileSub2.isEmpty()) {
+			// 기존 파일 삭제
+			if (donationFile.getFileSub2Name() != "") {
+				deleteFile(donationFile.getFileSub2Name(), request);
+			}
+			// 새 파일 업로드
+			String savePath = saveFile(reloadFileSub2, request);
+			if (savePath != null) {
+				donationFile.setFileSub2Name(reloadFileSub2.getOriginalFilename());
+			}
+		}
+		// DB 수정
+		int result = dService.donationPropUpdate(donation, donationFile);
+		 if(result > 0) {
+			 return "redirect:donationDetail.do?projectNo="+projectNo;
+		 }else {
+			 model.addAttribute("msg", "제안 수정 실패!!");
+			 return "common/errorPage";
+		 }
+	}
+	
+
+	public void deleteFile(String fileName, HttpServletRequest request) {
+		String root = request.getSession().getServletContext().getRealPath("resources");
+		String deletePath = root + "\\dUpLoadFiles";
+		// 파일을 삭제하기 위해서는 filePath가 필요하다
+		// 파일이름만 알아도 filePath를 구할 수가 있다.
+		File deleteFile = new File(deletePath + "\\" + fileName);
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
+	}
+	
+	
+	
+	@RequestMapping(value = "donationCancel.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView donationCancel(ModelAndView mv, @RequestParam("projectNo") int projectNo,
+													   @RequestParam("userId") String userId) {
+		String projectno = Integer.toString(projectNo);
+		HashMap<String, String> fMap = new HashMap<String, String>();
+		fMap.put("projectNo", projectno);
+		fMap.put("userId", userId);
+		DonationLog donationLog = dService.printOneDonation(fMap);
+		if (donationLog != null) {
+			// 메소드 체이닝 방식
+			mv.addObject("donationLog", donationLog).setViewName("donation/donationCancelPage");
+		} else {
+			mv.addObject("msg", "펀딩 참여 실패");
+			mv.setViewName("common/errorPage");
+		}
+		return mv;
+	}		//펀딩 취소 페이지로 이동
+	
+	@RequestMapping(value = "donationCancelComplete.do", method =  RequestMethod.POST )
+	public String donationCancelComplete(@ModelAttribute DonationLog donationLog, Donation donation,
+									     @RequestParam("projectNo") int projectNo) {
+				int result = dService.donationCancelComplete(donationLog, donation); 
+				if(result > 0) {
+						return "redirect:donationDetail.do?projectNo="+projectNo;
+				}else {
+					return "common/errorPage";
+					}
+				}
+	
+	
 	
 	
 	

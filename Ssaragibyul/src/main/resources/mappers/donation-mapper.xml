@@ -41,7 +41,7 @@
 	
 	<!-- 기부 내역 -->
 	<resultMap type="DonationLog" id="DonationLogResultMap">
-		<id property="donationNo" column="DONATION_NO"/>
+		<id property="donateNo" column="DODONAT_NO"/>
 		<result property="userId" column="USER_ID"/>
 		<result property="fundingPoint" column="DONATION_POINT"/>
 		<result property="qunatity" column="QUNATITY"/>
@@ -546,4 +546,55 @@
 	</select>	
    	
    	
+   	
+   	
+   	
+   	
+   	
+   	       <select id="selectOneProject" resultMap="DonationLogResultMap" parameterType="map">
+         	select a.*, CEIL((SUM_MONEY / GOAL_MONEY)*100) AS PERCENT, TRUNC(FIN_DATE) - TRUNC(SYSDATE) AS LEFT_DATE from (SELECT * FROM DO_DONATION LEFT OUTER JOIN 
+    (SELECT * FROM DONATION LEFT OUTER JOIN (DONATION_FILE) USING(D_PROJECT_NO))
+    USING(D_PROJECT_NO) 
+    WHERE PROJECT_CODE = 0 AND CANCLE_YN = 0 AND DO_DONATION.USER_ID = #{userId } AND D_PROJECT_NO = #{projectNo}) a
+    	 </select>
+    
+    <update id="updateProjectLogCancel" parameterType="DonationLog">
+    	UPDATE DO_DONATION
+		SET CANCLE_YN = 1
+		WHERE
+		DODONAT_NO = #{donateNo}
+	</update>
+	<update id="updateProject_SumMoneyMinus" parameterType="Donation">
+		UPDATE DONATION	
+		SET SUM_MONEY = (SUM_MONEY - #{sumMoney})
+		WHERE
+		D_PROJECT_NO = #{projectNo}
+	</update>
+    
+    
+    
+    <select id="selectOneProjectforModifty" resultMap="donationResultMap">
+    	 SELECT * FROM DONATION LEFT OUTER JOIN (DONATION_FILE) USING(D_PROJECT_NO) WHERE PROJECT_CODE = 0 AND D_PROJECT_NO = #{projectNo}
+    </select>
+    
+    
+    	<update id="donationPropUpdate_Porejct" parameterType="Donation">
+    	UPDATE DONATION SET
+			SUBJECT = #{subjectName},
+			GOAL_MONEY = #{goalMoney},
+			FIN_DATE = #{finDate},
+			PROJ_STORY = #{projectStory},
+			WARNING_INTRO = #{warningIntro}
+			WHERE
+		D_PROJECT_NO = #{projectNo}
+    	</update>
+    	<update id="donationPropUpdate_File" parameterType="DonationFile">
+    	UPDATE DONATION_FILE SET
+			FILE_VIDEO_URL = #{videoUrl},
+			FILE_NAME = #{fileName},
+			FILE_SUB1_NAME = #{fileSub1Name},
+			FILE_SUB2_NAME = #{fileSub2Name}
+			WHERE
+		D_PROJECT_NO = #{dProjectNo}
+    	</update>
 </mapper>

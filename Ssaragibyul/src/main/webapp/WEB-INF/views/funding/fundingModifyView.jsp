@@ -95,7 +95,7 @@ margin : auto;
 		<!-- style="color: #EB5C01" -->
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a class="nav-link" style="color: #000061"><strong>프로젝트 만들기</strong></a></li>
+				<li><a class="nav-link" style="color: #000061"><strong>프로젝트 수정</strong></a></li>
 				<li><a href="#sectionSuggest1" class="nav-link">1. 기본정보</a></li>
 				<li><a href="#sectionSuggest2" class="nav-link">2. 스토리</a></li>
 				<li><a href="#sectionSuggest3" class="nav-link">3. 리워드</a></li>

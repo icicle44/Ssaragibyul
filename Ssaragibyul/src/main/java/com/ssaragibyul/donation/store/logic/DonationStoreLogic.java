@@ -1,6 +1,7 @@
 package com.ssaragibyul.donation.store.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
@@ -379,6 +380,34 @@ public class DonationStoreLogic implements DonationStore{
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("donationMapper.selectPropDonationMoney", userId, rowBounds);
 	}
+	
+	public DonationLog selectOneProject(HashMap<String, String> fmap) {
+		return sqlSession.selectOne("donationMapper.selectOneProject", fmap); 
+	}
+
+	public int updateProjectLog(DonationLog donationLog) {
+		return sqlSession.update("donationMapper.updateProjectLogCancel", donationLog);
+	}
+
+	public int updateProject_SumMoneyMinus(Donation donation) {
+		return sqlSession.update("donationMapper.updateProject_SumMoneyMinus", donation);
+	}
+
+	public Donation selectOneProjectforModifty(int projectNo) {
+		Donation donation = sqlSession.selectOne("donationMapper.selectOneProjectforModifty", projectNo);
+		return donation;
+	}
+
+	public int donationPropUpdate_Porejct(Donation donation) {
+		return sqlSession.update("donationMapper.donationPropUpdate_Porejct", donation);
+	}
+
+	public int donationPropUpdate_File(DonationFile donationFile) {
+		return sqlSession.update("donationMapper.donationPropUpdate_File", donationFile);
+	}
+	
+	
+	
 	
 	
 }

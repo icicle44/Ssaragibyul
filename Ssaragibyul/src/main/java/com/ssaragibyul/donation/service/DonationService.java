@@ -1,6 +1,7 @@
 package com.ssaragibyul.donation.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Reply;
@@ -133,6 +134,14 @@ public interface DonationService {
 	public ArrayList<Donation> printPropDonationLike(String userId, PageInfo pi);
 
 	public ArrayList<Donation> printPropDonationMoney(String userId, PageInfo pi);
+
+	public Object printOneProjectforModifty(int projectNo);
+
+	public int donationPropUpdate(Donation donation, DonationFile donationFile);
+
+	public DonationLog printOneDonation(HashMap<String, String> fMap);
+
+	public int donationCancelComplete(DonationLog donationLog, Donation donation);
 
 
 

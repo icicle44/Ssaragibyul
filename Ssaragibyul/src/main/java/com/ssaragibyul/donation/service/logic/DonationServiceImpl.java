@@ -1,6 +1,7 @@
 package com.ssaragibyul.donation.service.logic;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,6 @@ import com.ssaragibyul.donation.domain.DonationLog;
 import com.ssaragibyul.donation.domain.DonationReport;
 import com.ssaragibyul.donation.service.DonationService;
 import com.ssaragibyul.donation.store.DonationStore;
-import com.ssaragibyul.funding.domain.Funding;
-import com.ssaragibyul.funding.domain.FundingLike;
-import com.ssaragibyul.funding.domain.FundingLog;
 import com.ssaragibyul.member.domain.Member;
 import com.ssaragibyul.point.service.PointService;
 
@@ -364,4 +362,36 @@ public class DonationServiceImpl implements DonationService{
 	public ArrayList<Donation> printPropDonationMoney(String userId, PageInfo pi){
 		return dStore.selectPropDonationMoney(userId, pi); 
 	}
+	
+	public DonationLog printOneDonation(HashMap<String, String> fmap) {
+		return dStore.selectOneProject(fmap);
+	}
+	
+	   public int donationCancelComplete(DonationLog donationLog, Donation donation) {
+	         int result = dStore.updateProjectLog(donationLog);
+	         int fResult = 0;
+	         	int pntResult = 0;
+	            if(result>0) {
+	                  fResult = dStore.updateProject_SumMoneyMinus(donation);
+                  if(fResult>0) {	                    
+                	  int doDonationNo = donationLog.getDonateNo();
+                     pntResult = pntService.registerPosDonatePoint(doDonationNo);	              
+                     }
+	            }
+	         return pntResult;
+	   }
+	   
+	public Donation printOneProjectforModifty(int projectNo) {
+		Donation donation = dStore.selectOneProjectforModifty(projectNo);
+		return donation;
+	}
+	public int donationPropUpdate(Donation donation, DonationFile donationFile) {
+		int result = dStore.donationPropUpdate_Porejct(donation);
+		int fResult = 0;
+		if(result>0) {
+			fResult = dStore.donationPropUpdate_File(donationFile);
+		}
+		return fResult;
+	}
+	
 }
