@@ -41,6 +41,10 @@
 <script type="text/javascript" src="resources/js/html5gallery.js"></script>
 
 <style type="text/css">
+body{
+	font-family : 'Noto Serif KR', serif;
+}
+
 .navbar .getstarted {
   background: #EB5C01;
   padding: 8px 10px;
@@ -56,14 +60,6 @@
 .main-menu {
 	padding-left: 50px;
 }
-.getstarted {
-	background: #EB5C01;
-	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
-	border-radius: 4px;
-	color: #fff;
-}
 
 div.guide {margin:12px 24px;}
 div.guide span {color:#ff0000; font:italic 14px Arial, Helvetica, sans-serif;}
@@ -72,8 +68,9 @@ div.guide pre {color:#990000;}
 div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 
 .format{
-padding-left : 260px;
-padding-top : 160px;
+padding-left : 250px;
+padding-top : 70px;
+padding-left : 130px;
 	float : left;
 	width : 1000px;
 	height : 700px;
@@ -84,35 +81,137 @@ float: left;
 }
 .noting{
 width : 300px;
-height: 170px;
+height: 80px;
 }
 .contents{
 padding-left : 50px;
+margin: 15px 0px 15px 0px;
+font-size: 17px;
 }
+
+#title{
+	padding-top : 130px;
+	text-align : center;
+	color : #EB5C01;
+	font-size : 35px;
+}
+
+#moneny{
+	font-size : 20px;
+	color : #3F3F3F;
+}
+
+#percent{
+	font-size : 20px;
+	margin-top : 18px;
+	color : #3F3F3F;
+}
+
+#date{
+	font-size : 20px;
+	color : #3F3F3F;
+	margin-top : 20px;
+}
+
+#sponser{
+	float : left;
+	margin-top : 20px;
+	font-size : 17px;
+}
+
+#hitsCount{
+	margin-top: -6px;
+	position: absolute;
+	font-size : 17px;
+}
+
+
+
 .getstarteds{
-	background: #6E6E6E;
-	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
-	border-radius: 4px;
-	color: #fff;
-}
-.getstarted_Liked{
+	position : absolute;
+	left : 50px;
+	border : none;
+	padding : 10px 100px;
+	margin : 10px 10px 20px 0px;
 	background: #EB5C01;
-	padding: 10px 10px;
-	margin: 20px;
-	margin-left: 100px;
 	border-radius: 4px;
 	color: #fff;
 }
+
+.getstarteds:hover{
+	background-color: #E35901;
+	border : none;
+}
+.getstarteds:active{
+	background-color: #D75909;
+	border : none;
+}
+
+.getstarted_Liked{
+	float : left;
+	border : none;
+	background: #EB5C01;
+	padding : 10px 26px;
+	margin : 20px;
+	margin-left : 48px;
+	margin-top : 45px;
+	border-radius : 4px;
+	color : #fff;
+	}
 .getstarted_unLiked{
+	float : left;
+	border : none;
 	background: #6E6E6E;
-	padding: 10px 10px;
-	margin: 20px;
-	margin-left: 100px;
-	border-radius: 4px;
-	color: #fff;
+	padding : 10px 26px;
+	margin : 20px;
+	margin-left : 48px;
+	margin-top : 45px;
+	border-radius : 4px;
+	color : #fff;
+}	
+
+.getstarted_unLiked:hover{
+	background-color : #535353;
+	border : none;
 }
+.getstarted_unLiked:active{
+	background-color : #404040;
+	border : none;
+}
+
+.getstarted_report{
+	postion : absolute;
+	border : none;
+	left : 50px;
+	padding : 5px 2px;
+	font-size : 15px;
+	margin-bottom: 15px;
+	border-radius: 4px;
+}
+
+.getstarted_report:hover{
+	background-color : #DFDFDF;
+	border : none;
+}
+
+.getstarted_report:active{
+	background-color : #C5C5C5;
+	border : none;
+}
+
+#question{
+	background : #6E6E6E;
+	border : none;
+	padding : 10px 27px;
+	margin: 19px 3px;
+	border-radius : 4px;
+	color : #fff;
+}
+
+#question:hover{
+	background-color : #535353;
+}
+
 .detailtab{
 margin-left: 100px;
 }
