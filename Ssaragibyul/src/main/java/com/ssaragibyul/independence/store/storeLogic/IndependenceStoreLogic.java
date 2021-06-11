@@ -29,8 +29,10 @@ public class IndependenceStoreLogic implements IndependenceStore{
 	}
 
 	@Override
-	public ArrayList<Independence> selectSearchList(Search search) {
-		return (ArrayList)sqlSession.selectList("independenceMapper.selectSearchList", search);
+	public ArrayList<Independence> selectSearchList(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("independenceMapper.selectSearchList", search, rowBounds);
 	}
 
 	@Override

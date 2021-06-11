@@ -8,7 +8,7 @@ import com.ssaragibyul.independence.domain.Independence;
 
 public interface IndependenceStore {
 	public ArrayList<Independence> selectList(PageInfo pi);
-	public ArrayList<Independence> selectSearchList(Search search);
+	public ArrayList<Independence> selectSearchList(Search search, PageInfo pi);
 	public Independence selectOne(int independenceNo);
 	public int selectListCount();
 }

@@ -5,65 +5,9 @@
 <html lang="ko">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
+<link rel="stylesheet" type="text/css" href="/resources/css/visit/style_visitWrite.css.css" />
 <title>방문인증글 작성하기</title>
 <%@include file="/header.jsp"%>
-<style>
-body {
-	text-align: left;
-}
-
-.wrapper {
-	padding: 5em;
-	height: 55em;
-	overflow: visible;
-}
-
-.form {
-	margin-top: 5em;
-}
-
-.input {
-	border: none;
-	width: 400px auto;
-	/* border-right:0px; 
-	border-top:0px; 
-	boder-left:0px; 
-	boder-bottom:0px;" */
-}
-
-span {
-	float: right;
-}
-
-/* 이미지 */
-.product-title {
-	text-align: center;
-	display: table;
-	width: 10em;
-	height: 10em;
-}
-
-.product-img-div {
-	position: relative;
-	display: table-cell;
-	vertical-align: middle;
-}
-
-.product-img {
-	position: absolute;
-	max-width: 25em;
-	max-height: 30em;
-	top: 2em;
-}
-
-#map {
-	position: absolute;
-	width: 50em;
-	height: 250px;
-	display: block;
-	top: 35em;
-}
-</style>
 </head>
 
 <body>

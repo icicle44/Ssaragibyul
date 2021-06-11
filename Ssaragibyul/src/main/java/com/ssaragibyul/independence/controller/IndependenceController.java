@@ -64,13 +64,17 @@ public class IndependenceController {
 	}
 	
 	@RequestMapping(value="independenceSearch.do", method=RequestMethod.GET)
-	public String independenceSearch(@ModelAttribute Search search, Model model) {
-		ArrayList<Independence> searchList = iService.printSearchAll(search);
+	public String independenceSearch(@RequestParam(value="page", required=false) Integer page, @ModelAttribute Search search, Model model) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount =iService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		ArrayList<Independence> searchList = iService.printSearchAll(search ,pi);
 		System.out.println("searchList"+searchList);
 		if(!searchList.isEmpty()) {
 			model.addAttribute("iList", searchList);
 			model.addAttribute("search",search);
-			return "visit/visitSearchList";
+			//model.addAttribute("pi",pi);
+			return "independence/independenceList";
 		}else {
 			model.addAttribute("msg", "검색결과가 없습니다");
 			return "common/errorPage";

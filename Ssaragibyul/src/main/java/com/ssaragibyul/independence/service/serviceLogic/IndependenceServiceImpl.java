@@ -26,8 +26,8 @@ public class IndependenceServiceImpl implements IndependenceService{
 	}
 
 	@Override
-	public ArrayList<Independence> printSearchAll(Search search) {
-		return iStore.selectSearchList(search);
+	public ArrayList<Independence> printSearchAll(Search search, PageInfo pi) {
+		return iStore.selectSearchList(search, pi);
 	}
 
 	@Override

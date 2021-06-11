@@ -31,6 +31,25 @@
 	</select>
 	
 	<select id="selectSearchList" resultMap="independenceResultMap">
-		SELECT * FROM INDEPENDENCE WHERE NAME_KO = ${nameKo } OR ${}  ${}
+		SELECT * FROM INDEPENDENCE 
+		<if test="searchCondition.toString() == 'nameKo'">
+			WHERE NAME_KO LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'birth'">
+			WHERE BIRTHDAY LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'activityLine'">
+			WHERE ACTIVITY_LINE LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'honoredYear'">
+			WHERE PRIZED_YEAR LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'honoredClass'">
+			WHERE PRIZED_CLASS LIKE '%' || #{searchValue } || '%'
+		</if>
+		<if test="searchCondition.toString() == 'home'">
+			WHERE REGISTER_LARGE_DIV LIKE '%' || #{searchValue } || '%' OR REGISTER_MID_DIV '%' || #{searchValue } || '%'
+		</if>
+		ORDER BY MNG_NO ASC
 	</select>
 </mapper>

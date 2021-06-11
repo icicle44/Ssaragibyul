@@ -8,7 +8,7 @@ import com.ssaragibyul.independence.domain.Independence;
 
 public interface IndependenceService {
 	public ArrayList<Independence> printAll(PageInfo pi);
-	public ArrayList<Independence> printSearchAll(Search search);
+	public ArrayList<Independence> printSearchAll(Search search, PageInfo pi);
 	public Independence printOne(int independenceNo);
 	public int getListCount();
 }
