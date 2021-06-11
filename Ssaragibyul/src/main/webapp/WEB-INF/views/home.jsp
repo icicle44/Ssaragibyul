@@ -43,64 +43,119 @@ body {
 	width: 402px;
 	margin-bottom: 30px;
 	padding: 10px;
-	font-size:12px;
+	font-size:13px;
 }
 #frame{
 	width: 550px;
 	height : 550px;
 }
 .gridmain > * {
-  float: left;  
-  width: 30%;
-  height: 30%;
-  font-size:12px;
+	float: left;  
+	width: 30%;
+	height: 30%;
+	font-size:13px;
+	font-family: 'Noto Serif KR', serif;
 }
+
+a{
+	text-decoration: none;
+}
+
 .btn{
-margin: auto;
+	margin: auto;
+	font-family: 'Noto Serif KR', serif;
+	text-align: center;
 }
 .#name_css{
 	text-align: left; 
 	padding-right:10px; 
 	font-weight:bold; 
-	font-size:12px; 
+	font-size:13px; 
 	color:DimGray;
 }
 .nothing{
- color:white;
+ 	color:white;
 }
 #bar_td{
+	width:100%;
 	text-align: left; 
 	margin:auto;
 }
 #svg{
 	height:2px; 
-	width: 350px;
+	width: 400px;
 }
 #dday_css{
 	float:left; 
 	width : 50%;
-	font-size:12px;
+	font-size:16px;
 }
 #sum_css{
 	float:right;
 	width : 50%;
 	text-align: right; 
-	font-size:12px;
+	font-size:16px;
 }
+
+/*  */
+
 .select{
-	float:right;
+	float:left;
+	height: 40px;
+	margin-right: 10px;
+	border-radius: 5px;
+    border: 1px solid rgb(104, 104, 104);
+    color: rgb(104, 104, 104);
+    font-weight:450;
+    text-align: center;
+    font-size:16px;
 }
-/* #head{
-	width : 1547px;
-} */
+
 #pj_search{
-width : 1540px;
+    width : 100%;
+    float:right;
+   	padding-left: 72%;
+    margin-bottom: 30px;
+    font-family: 'Noto Serif KR', serif;
 }
+
 #frmpj{
 }
 .scan{
-	float:right;
+    float: left;   
+    border: 1px solid rgb(104, 104, 104);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 190px;
+    height: 40px;
 }
+
+input::-webkit-input-placeholder {
+	color:gray;
+	font-size:16px;
+}
+
+.search{
+    float: left;
+    height: 40px;
+    width: 60px;
+   	font-size:16px;
+    border: 1px solid rgb(104, 104, 104);
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    background-color: rgb(104, 104, 104);
+}
+
+.search:hover{
+	background-color:  rgb(80, 80, 80);
+}
+
+.search:active{
+	background-color:  rgb(70, 70, 70);
+}
+
 #headFont{
 	font-size:30px;
 }
@@ -405,13 +460,13 @@ width : 1540px;
 										</div>
 									</c:if>
 								</c:forEach>
-								<div class="col-12 text-center">
+<!-- 								<div class="col-12 text-center">
 									<div class="custom-pagination">
 					                    <div class="d-grid gap-2 col-6 mx-auto">
 					                        <button class="btn btn-primary" type="button" style="width: 300px;" onclick="location.href='http://localhost:8888/visitList.do'">더보기</button>
 					                    </div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
