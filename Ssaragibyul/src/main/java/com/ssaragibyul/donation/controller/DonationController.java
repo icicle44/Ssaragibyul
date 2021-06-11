@@ -295,7 +295,8 @@ public class DonationController {
 		// DB 수정
 		int result = dService.donationPropUpdate(donation, donationFile);
 		 if(result > 0) {
-			 return "redirect:donationDetail.do?projectNo="+projectNo;
+			 return "redirect:donationDetail.do?projectNo="+projectNo; //상세 피이지
+//			 return "mypage/myDonation"; // 제안한 펀딩 페이지로 넘어감
 		 }else {
 			 model.addAttribute("msg", "제안 수정 실패!!");
 			 return "common/errorPage";
@@ -339,7 +340,8 @@ public class DonationController {
 									     @RequestParam("projectNo") int projectNo) {
 				int result = dService.donationCancelComplete(donationLog, donation); 
 				if(result > 0) {
-						return "redirect:donationDetail.do?projectNo="+projectNo;
+//						return "redirect:donationDetail.do?projectNo="+projectNo;   상세페이지로 넘어감.
+					return "mypage/myDonation"; // 기부 페이지로 넘어감
 				}else {
 					return "common/errorPage";
 					}
