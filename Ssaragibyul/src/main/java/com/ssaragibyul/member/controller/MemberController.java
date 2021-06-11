@@ -74,8 +74,16 @@ public class MemberController {
 	
 	//로그인 페이지로 이동
 	@RequestMapping(value = "login.do", method =  {RequestMethod.GET, RequestMethod.POST})
-	  public String loginView() {
-	        return "member/login";
+	  public String loginView(Model model, HttpServletRequest request, HttpSession session) {
+		 String referer = request.getHeader("Referer");
+	      
+	         if(referer != null) {
+	            session.setAttribute("referer",referer);
+	            return "member/login";
+	         }else {
+	            model.addAttribute("msg", "다시 시도해주세요");
+	            return "common/errorPage";
+	         }
 	  }
 	
 	// 로그인
@@ -88,7 +96,9 @@ public class MemberController {
 		if (loginUser != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
-			return "redirect:index.jsp";
+			String referer = (String)session.getAttribute("referer");
+			String url = referer.substring(22);
+			return "redirect:" + url; //로그인화면 이전페이지로 복귀
 		}else {
 			model.addAttribute("msg", "로그인 실패");
 			return "common/errorPage";
