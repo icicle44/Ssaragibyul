@@ -53,11 +53,13 @@
 				<div class="button-container">
 					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
 						인증하기</button>
-					<form id="search-content" action="visitSearch.do" method="post">
-					  <input type="text" name="searchValue" class="input" id="search-input">
-				  <button type="reset" class="search" id="search-btn"></button>
-					  검색창
-					</form>
+				<div id="searchInfo">검색→</div>
+				<form action="visitSearch.do" method="post"" class="search-bar">
+					<input type="search" name="searchValue" pattern=".*\S.*" required>
+					<button class="search-btn" type="submit">
+						<span>Search</span>
+					</button>
+				</form>
 				</div>
 				<div class="content">
 					<div class="grid">
@@ -71,6 +73,7 @@
 										<div class="rightCon">
 											<div class="r-title col-md-12">
 												<div id="title">${vList.visitTitle }</div>
+												<div id="siteName"><b>${vList.siteName }</b></div>
 												<c:url var="msgWriteUrl" value="msgWriterView.do">
 												   <c:param name="receiverId" value="${vList.userId }"></c:param>												   
 												   <c:param name="msgType" value="4"></c:param>
@@ -97,14 +100,14 @@
 													<c:url var="vModify" value="visitModifyView.do">
 														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
 													</c:url>
-													<c:url var="vDelete" value="visitDelete.do">
+<%-- 													<c:url var="vDelete" value="visitDelete.do">
 														<c:param name="visitNo" value="${vList.visitNo }"></c:param>
 														<c:param name="renameFilename"
 															value="${visit.renameFilename }"></c:param>
-													</c:url>
+													</c:url> --%>
 													<c:if test="${ loginUser.userId == vList.userId }">
 														<a href="${vModify }"><b>[수정 페이지로 이동]</b></a> &nbsp; 
-														<a href="${vDelete }"><b>[삭제하기]</b></a>
+														<a href="#" onclick="del(${vList.visitNo}, '${vList.renameFilename }' );"><b>[삭제하기]</b></a>
 													</c:if>
 	
 												</div>
@@ -136,8 +139,8 @@
 																<td colspan="5"><b class="rCount${vList.visitNo }"></b></td>
 															</tr>
 														</thead>
-														<tbody></tbody>
-													</table>
+												<tbody></tbody>
+															</table>
 												</div>
 												<div id="inform-con"></div>
 											</div>
@@ -177,17 +180,9 @@
 			$(function() {
 				makeGrid();
 				click();
-				/* 검색 시작 */
-				const input = document.getElementById("search-input");
-				const searchBtn = document.getElementById("search-btn");
+				// 검색 시작
 				
-				const expand = () => {
-				  searchBtn.classList.toggle("close");
-				  input.classList.toggle("square");
-				};
-				
-				searchBtn.addEventListener("click", expand);
-				/* 검색 끝 */
+				// 검색 끝
 	            $("#replyContents").on("keyup",function(){
 	                // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
 	                //var inLength = $(this).val().length;
@@ -256,6 +251,7 @@
 									// 5. 받아온 데이터가 ""이거나 null이 아닌 경우에 DOM handling을 해준다.
 									if(data.length === 0){// 6. 만약 서버로 부터 받아온 데이터가 없으면 그냥 아무것도 하지말까..??
 										alert("더 불러올 데이터가 없습니다.");
+										/* location.reload(); */
 									}//if : data != ""
 									else{//6. 서버로부터 받아온 data가 list이므로 이 각각의 원소에 접근하려면 each문을 사용한다. 
 										console.log(JSON.stringify(data));
@@ -463,6 +459,15 @@
 										}
 								});
 						
+			}
+			// 삭제확인
+			function del(visitNo,renameFilename){
+				console.log(visitNo);
+				console.log(renameFilename);
+				var chk = confirm("정말 삭제하시겠습니까?");
+				if(chk){
+					location.href='visitDelete.do?visitNo='+visitNo+'&renameFilename='+renameFilename;
+				}
 			}
 			// 댓글 목록 조회
 			function getReplyList(visitNo) {

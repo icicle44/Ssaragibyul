@@ -92,7 +92,7 @@ public class VisitController {
 		return mv;
 	}
 
-	// 게시글 등록할 때 SiteName 가져오기
+	// 게시글 등록화면 SiteName 가져오기
 	@RequestMapping(value = "getSiteName.do", method = RequestMethod.POST)
 	public void getSiteName(HttpServletResponse response, @RequestParam("siteType") String siteType) throws Exception {
 		System.out.println("siteType : " + siteType);
@@ -104,7 +104,7 @@ public class VisitController {
 		}
 	}
 
-	// 게시글 등록할 때 Site 위치 가져오기
+	// 게시글 등록화면 Site 위치 가져오기
 	@RequestMapping(value = "getSiteLocation.do", method = RequestMethod.POST)
 	public void getSiteLocation(HttpServletResponse response, @RequestParam("siteName") String siteName) throws Exception {
 		System.out.println("컨트롤러 위치가져오기 siteName : " + siteName);

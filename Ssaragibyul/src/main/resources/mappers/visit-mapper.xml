@@ -38,17 +38,18 @@
    
 	<select id="selectAll" resultMap="visitResultMap">
 		SELECT 
-		    D.VISIT_NO,
-		    D.USER_ID,
-		    D.NICKNAME,
-		    D.SITE_NO,
-		    D.VISIT_TITLE,
-		    D.VISIT_CONTENTS,
-		    D.V_CREATE_DATE,
-		    D.V_UPDATE_DATE,
-		    D.ORIGINAL_FILENAME,
-		    D.RENAME_FILENAME,
-		    D.UPLOAD_TIME 
+		    E.VISIT_NO,
+		    E.USER_ID,
+		    E.NICKNAME,
+		    E.SITE_NO,
+		    E.VISIT_TITLE,
+		    E.VISIT_CONTENTS,
+		    E.V_CREATE_DATE,
+		    E.V_UPDATE_DATE,
+		    E.ORIGINAL_FILENAME,
+		    E.RENAME_FILENAME,
+		    E.UPLOAD_TIME, 
+            E.SITE_NAME
 		FROM
 		(
 		SELECT     
@@ -62,15 +63,18 @@
 		    A.V_UPDATE_DATE,
 		    B.ORIGINAL_FILENAME,
 		    B.RENAME_FILENAME,
-		    B.UPLOAD_TIME 
+		    B.UPLOAD_TIME,
+            D.SITE_NAME
 		FROM
 		    VISIT       A,
 		    VISIT_FILE  B,
-		    MEMBER      C
+		    MEMBER      C,
+            HISTORY     D
 		WHERE A.USER_ID = C.USER_ID
 		    AND    A.VISIT_NO = B.VISIT_NO
+                AND A.SITE_NO = D.SITE_NO
 		      ORDER BY A.VISIT_NO DESC
-		      )D
+		      )E
 		    WHERE ROWNUM &lt;= 9
 	</select>
 	<select id="selectScroll" resultMap="visitResultMap">

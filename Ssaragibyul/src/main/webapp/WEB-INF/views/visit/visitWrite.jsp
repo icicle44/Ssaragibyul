@@ -54,7 +54,6 @@ span {
 	max-width: 25em;
 	max-height: 30em;
 	top: 2em;
-	left: -5em;
 }
 
 #map {
@@ -150,7 +149,7 @@ span {
 						"siteType" : siteType
 					},
 					dataType : "json",
-					success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
+					success : function(data){
 						var option = "<option value='none'>=== 선택 ===</option>";
 						$("#siteName").html("");
 						$("#siteName").append(option);
@@ -209,8 +208,9 @@ span {
 	  					async: false, // 안하면 showMap부분에서 다시 호출되어 sync?가 안맞음
 	  					dataType : "json",
 	  					success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
-		  					location.lat = data[0].latitude; 
+	  						var siteNo = "<input type='hidden' name='siteNo' value='"+data[0].siteNo+"'>";		  					location.lat = data[0].latitude; 
 		  					location.lnt = data[0].longitude;
+		  					$("#siteName").after(siteNo);
 	  					}// success
 	  				});// ajax
 	  				console.log("getSiteLocation result: ", location);
@@ -297,6 +297,7 @@ span {
 			navigator.geolocation.getCurrentPosition(successCallback,
 					errorCallback);
 		};
+		// contents내용 가져오기
 		function regist() {
 			var editor = document.getElementById('editor');
 			console.log(editor.textContent);
