@@ -2,6 +2,8 @@ package com.ssaragibyul.donation.domain;
 
 import java.sql.Date;
 
+import com.ssaragibyul.member.domain.Member;
+
 public class Donation {
 
 	private int projectNo;
@@ -20,8 +22,34 @@ public class Donation {
 	private int leftDate;
 	
 	private DonationFile donationFile;
+	private Member member;	
 	
 	public Donation() {}
+	
+	
+	
+
+	public Donation(int projectNo, String userId, String subjectName, int goalMoney, int sumMoney, Date startDate,
+			Date finDate, String projectStory, String warningIntro, int likeCount, int hitsCount, int projectCode,
+			int percent, int leftDate, DonationFile donationFile, Member member) {
+		super();
+		this.projectNo = projectNo;
+		this.userId = userId;
+		this.subjectName = subjectName;
+		this.goalMoney = goalMoney;
+		this.sumMoney = sumMoney;
+		this.startDate = startDate;
+		this.finDate = finDate;
+		this.projectStory = projectStory;
+		this.warningIntro = warningIntro;
+		this.likeCount = likeCount;
+		this.hitsCount = hitsCount;
+		this.projectCode = projectCode;
+		this.percent = percent;
+		this.leftDate = leftDate;
+		this.donationFile = donationFile;
+		this.member = member;
+	}
 
 	public Donation(int projectNo, String userId, String subjectName, int goalMoney, int sumMoney, Date startDate,
 			Date finDate, String projectStory, String warningIntro, int likeCount, int hitsCount, int projectCode,
@@ -164,17 +192,22 @@ public class Donation {
 		this.donationFile = donationFile;
 	}
 
+	public Member getMember() {
+		return member;
+	}
+
+	public void setMember(Member member) {
+		this.member = member;
+	}
+
 	@Override
 	public String toString() {
 		return "Donation [projectNo=" + projectNo + ", userId=" + userId + ", subjectName=" + subjectName
 				+ ", goalMoney=" + goalMoney + ", sumMoney=" + sumMoney + ", startDate=" + startDate + ", finDate="
 				+ finDate + ", projectStory=" + projectStory + ", warningIntro=" + warningIntro + ", likeCount="
 				+ likeCount + ", hitsCount=" + hitsCount + ", projectCode=" + projectCode + ", percent=" + percent
-				+ ", leftDate=" + leftDate + ", donationFile=" + donationFile + "]";
-	}
-
-	
-	
+				+ ", leftDate=" + leftDate + ", donationFile=" + donationFile + ", member=" + member + "]";
+	}	
 	
 }
 	

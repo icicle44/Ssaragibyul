@@ -550,7 +550,12 @@ td{
 	   						</form>
 	   					</c:if>
 						
-						<button id="question">문의하기</button>  
+						<c:url var="msgWriteUrl" value="msgWriterView.do">
+         		    		<c:param name="receiverId" value="${donation.userId }"></c:param>                                       
+          		    		<c:param name="msgType" value="5"></c:param>
+        	 	     		<c:param name="nickName" value="${donation.member.nickName}"></c:param>
+       		  			</c:url>
+						<button id="question" onclick="msgPopup('${msgWriteUrl}'); return false;">문의하기</button>  
 						
 						<c:if test="${empty loginUser.userId}">
 							<form action="donationAccusation.do" method="post" onSubmit="formChk();return false">

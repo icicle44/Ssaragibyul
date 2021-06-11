@@ -311,7 +311,7 @@ input::-webkit-input-placeholder {
 											<c:url var="dDetail" value="donationDetail.do">
 												<c:param name="projectNo" value="${d.projectNo }"></c:param>
 											</c:url> 
-											<a href="${dDetail }" style="font-size : 1.4m">${d.subjectName }</a>
+											<a href="${dDetail }" style="font-size : 1.4em">${d.subjectName }</a>
 										</td>
 									</tr>
 									<tr>
