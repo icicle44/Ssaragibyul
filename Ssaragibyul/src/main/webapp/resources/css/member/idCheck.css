@@ -3,6 +3,7 @@ body{
     width: auto;
     height: 600px;
     margin : auto;
+    font-family: 'Noto Serif KR', serif;
 }
 
 form{
@@ -31,6 +32,10 @@ header{
     height: 100px;
     text-align: center;
     margin: 0 600px;
+}
+
+#coment1{
+	margin: 80px 0px 80px 100px ;
 }
 
 #start{
@@ -65,7 +70,7 @@ header{
     height: 35px;
     width: 180px;
     border-radius: 5px;
-    margin-top:20px;
+    margin-top:80px;
     background: rgb(174, 174, 174);
    	font-weight: 550;
     color: white;

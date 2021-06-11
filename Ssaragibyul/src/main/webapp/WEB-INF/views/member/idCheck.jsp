@@ -6,7 +6,8 @@
 <meta charset="UTF-8">
 <title>아이디 확인</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/idCheck.css">
-	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
     <body>
