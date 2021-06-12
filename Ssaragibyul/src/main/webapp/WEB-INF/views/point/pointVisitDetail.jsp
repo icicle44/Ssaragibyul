@@ -15,12 +15,12 @@
 					<span id="table-title">별 보러 가자</span>
 				</div>
 			</section>
-			<section id="table-around">
+			<section id="table-around" style="height: 300px;">
 				<section class="write-lower">
 					<div id="point-visit-form">
 						<table align="center">
 							<tr>
-								<td rowspan="2" ><img src="/resources/vUploadFiles/${visit.renameFilename }" width="150px"/></td>
+								<td rowspan="3"><img src="/resources/vUploadFiles/${visit.renameFilename }" width="150px"/></td>
 								<td>${visit.visitTitle }</td>	
 							</tr>
 							<tr>
