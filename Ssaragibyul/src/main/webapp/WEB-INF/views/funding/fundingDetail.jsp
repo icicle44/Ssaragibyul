@@ -458,9 +458,9 @@ td{
 			    <!-- 2. Define parameters with HTML5 data tags -->
 				<div style="display:none;" class="html5gallery" data-skin="gallery" data-width="1000" data-height="700">
 					<a href="${fundingFile.videoUrl } "><img src="resources/img/video_icon.png"></a>
-					<a href="resources/dUpLoadFiles/${fundingFile.fileMainName }"><img src="resources/dUpLoadFiles/${fundingFile.fileMainName }"></a>
-					<a href="resources/dUpLoadFiles/${fundingFile.fileSub1Name }"><img src="resources/dUpLoadFiles/${fundingFile.fileSub1Name }"></a>
-					<a href="resources/dUpLoadFiles/${fundingFile.fileSub2Name }"><img src="resources/dUpLoadFiles/${fundingFile.fileSub2Name }"></a>
+					<a href="resources/upLoadFile/${fundingFile.fileMainName }"><img src="resources/upLoadFile/${fundingFile.fileMainName }"></a>
+					<a href="resources/upLoadFile/${fundingFile.fileSub1Name }"><img src="resources/upLoadFile/${fundingFile.fileSub1Name }"></a>
+					<a href="resources/upLoadFile/${fundingFile.fileSub2Name }"><img src="resources/upLoadFile/${fundingFile.fileSub2Name }"></a>
 				</div>
 			</div>
 		</div>
@@ -469,8 +469,8 @@ td{
 		<div class="detailView_right col-4">
 			<div class="noting"></div>
 				<%-- <h1 id="title">${donation.subjectName }</h1><br> --%>
-				<p class = "contents" id="accrue" style="font-weight: bold;"> <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원</p><span id="accrue-text">원 펀딩중</span>
-				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${funding.goalMoney }" pattern="#,###"/>원</p>
+				<p class = "contents" id="accrue" style="font-weight: bold;"> <fmt:formatNumber value="${funding.sumMoney }" pattern="#,###"/>원 <span id="accrue-text"> 펀딩중</span> </p>
+				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${funding.goalMoney }" pattern="#,###"/>원 (목표금액)</p>
    				<p class = "contents" id="percent" style="font-weight: bold;"> <fmt:formatNumber value="${funding.percent }" pattern="#,###"/>%</p>
 					
 					   	<c:if test="${funding.leftDate < 1}">
@@ -493,79 +493,103 @@ td{
 						<br>
 						<c:if test="${funding.leftDate < 1}">
 							<div>							
-		   						<input type="submit" class="getstarteds" value="마감된 기부입니다." disabled>
+		   						<input type="submit" class="getstarteds" value="마감된 펀딩입니다." disabled>
 			   				</div>
 		       			</c:if>
+			       				<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
+							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
+							    					<input type="submit" class="getstarteds" value="펀딩하기">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+							    					</form>
+							       		</c:if>
+							       								<!-- 걔산식  -->
+							       										 <c:set var="fund" value="false" />
+																			<c:forEach var="sponser" items="${LogList}">
+																			  <c:if test="${sponser.userId eq loginUser.userId}">
+																			    <c:set var="fund" value="true" />
+																			  </c:if>
+																			</c:forEach>
+																			
+										<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId != funding.userId) && (!empty loginUser.userId)}">
+							    					<form action="fundingJoin.do" method="post" name="fundingGo">
+							    					<input type="submit" class="getstarteds" value="펀딩하기">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
+							    					</form>
+							       		</c:if>
 							       		
-			       		<c:if test="${(funding.leftDate >= 1) && (!empty loginUser.userId)  }">
-	    					<form action="donationJoin.do" method="post" name="donationGo">
-		    					<input type="submit" class="getstarteds" value="펀딩하기">
-		   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
-		   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
-	    					</form>
-			    		</c:if>
-			     		<c:if test="${(donation.leftDate >= 1) && (empty loginUser.userId) }">
-	    					<form action="donationJoin.do" method="post" name="donationGo" onSubmit="formChk();return false">
-		    					<input type="submit" class="getstarteds" value="펀딩하기">
-		   						<input type="hidden" name="projectNo" value="${donation.projectNo }">
-		   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
-	    					</form>
-			       		</c:if>
+							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (loginUser.userId != funding.userId) && (!empty loginUser.userId)}">
+							    					<form action="fundingCancel.do" method="post" name="fundingGo">
+							    					<input type="submit" class="getstarteds" value="펀딩 취소">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							   						<input type="hidden" name="userId" value="${loginUser.userId }">
+							    					</form>
+							    		</c:if>   			
+							    				
+						   					<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId == funding.userId) && (!empty loginUser.userId)}">
+													<form action="fundingModifyView.do" method="post" name="fundingGo">
+							    					<input type="submit" class="getstarteds" value="펀딩 수정">
+							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
+							    					</form>
+						   					</c:if>
+			       		
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 					
 						<!-- 로그인 안 했을 시  -->
-						<c:if test="${empty loginUser.userId}">
-							<form action="donationLikeAdd.do" method="post" onSubmit="formChk();return false">
-								<input type="hidden" name="userId" value="${loginUser.userId }">
-	   							<input type="hidden" name="projectNo" value="${donation.projectNo }">
-	    						<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${donation.likeCount}
-	   						</form>
-	   					</c:if>	
+					<c:if test="${empty loginUser.userId}">
+					<form action="fundingLikeAdd.do" method="post" onSubmit="formChk();return false">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${funding.likeCount}
+   					</form>
+   					</c:if>	
 					
 					
-						<!--로그인하고 좋아요 이미 했을때 -->
-					 	<c:set var="contains" value="false" />
-						<c:forEach var="like" items="${donationLikeUser}">
-					 		<c:if test="${like.userId eq loginUser.userId}">
-					    		<c:set var="contains" value="true" />
-					  		</c:if>
-						</c:forEach>
+					<!--로그인하고 좋아요 이미 했을때 -->
+					 <c:set var="contains" value="false" />
+					<c:forEach var="like" items="${fundingLikeUser}">
+					  <c:if test="${like.userId eq loginUser.userId}">
+					    <c:set var="contains" value="true" />
+					  </c:if>
+					</c:forEach>
 					
-						<c:if test="${contains == 'true'}">
-							<form action="donationLikeDelete.do" method="post">
-								<input type="hidden" name="userId" value="${loginUser.userId }">
-	   							<input type="hidden" name="projectNo" value="${donation.projectNo }">
-	    						<input type="submit" class="getstarted_Liked" value="좋아요 ♥">${donation.likeCount}
-	    					</form>
-					 	</c:if>
+					<c:if test="${contains == 'true'}">
+					<form action="fundingLikeDelete.do" method="post">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_Liked" value="좋아요 ♥">${funding.likeCount}
+    				</form>
+					 </c:if>
 					
-						<!--로그인 했는데 아직 좋아요 안했을때  -->
-						<c:if test="${!empty loginUser.userId && contains == 'false'}">
-							<form action="donationLikeAdd.do" method="post">
-								<input type="hidden" name="userId" value="${loginUser.userId }">
-	   							<input type="hidden" name="projectNo" value="${donation.projectNo }">
-	    						<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${donation.likeCount}
-	   						</form>
-	   					</c:if>
-						
-						<c:url var="msgWriteUrl" value="msgWriterView.do">
-         		    		<c:param name="receiverId" value="${donation.userId }"></c:param>                                       
-          		    		<c:param name="msgType" value="5"></c:param>
-        	 	     		<c:param name="nickName" value="${donation.member.nickName}"></c:param>
-       		  			</c:url>
+					<!--로그인 했는데 아직 좋아요 안했을때  -->
+					<c:if test="${!empty loginUser.userId && contains == 'false'}">
+					<form action="fundingLikeAdd.do" method="post">
+					<input type="hidden" name="userId" value="${loginUser.userId }">
+   					<input type="hidden" name="projectNo" value="${funding.projectNo }">
+    				<input type="submit" class="getstarted_unLiked" value="좋아요 ♡">${funding.likeCount}
+   					</form>
+   					</c:if>
+
+       		  	<c:url var="msgWriteUrl" value="msgWriterView.do">
+         		     <c:param name="receiverId" value="${funding.userId }"></c:param>                                       
+          		     <c:param name="msgType" value="5"></c:param>
+        	 	     <c:param name="nickName" value="${funding.member.nickName}"></c:param>
+       		   </c:url>
+       		   
 						<button id="question" onclick="msgPopup('${msgWriteUrl}'); return false;">문의하기</button>  
 						
 						<c:if test="${empty loginUser.userId}">
-							<form action="donationAccusation.do" method="post" onSubmit="formChk();return false">
-					    		<input type="hidden" name="projectNo" value="${donation.projectNo }">
+							<form action="fundingAccusation.do" method="post" onSubmit="formChk();return false">
+					    		<input type="hidden" name="projectNo" value="${funding.projectNo }">
 					    		<input type="submit" class="getstarted_report" value="프로젝트에 문제가 있나요?   신고하기"><br>
 					    	</form>
 					  	</c:if>
 					  	
 					   	<c:if test="${!empty loginUser.userId}">
-					    	<form action="donationAccusation.do" method="post">
-					    		<input type="hidden" name="projectNo" value="${donation.projectNo }">
+					    	<form action="fundingAccusation.do" method="post">
+					    		<input type="hidden" name="projectNo" value="${funding.projectNo }">
 					    		<input type="submit" class="getstarted_report" value="프로젝트에 문제가 있나요?   신고하기"><br>
 					   	 	</form>
 					    </c:if>
