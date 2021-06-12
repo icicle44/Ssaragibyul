@@ -181,7 +181,7 @@ public class AdminStoreLogic implements AdminStore{
 	public ArrayList<History> pringAllHistoy(PageInfo pi) {
 		int offset = (pi.getCurrentPage() -1)* pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return (ArrayList)sqlSession.selectList("historyMapper.adminSelectAllList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("historyMapper.selectAllList", null, rowBounds);
 	}
 
 	@Override

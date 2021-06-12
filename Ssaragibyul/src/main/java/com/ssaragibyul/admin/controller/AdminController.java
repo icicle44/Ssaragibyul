@@ -757,7 +757,7 @@ public class AdminController {
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\upLoadFile";
+		String savePath = root + "\\hupLoadFile";
 		
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
@@ -857,7 +857,7 @@ public class AdminController {
 	//기념관 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\upLoadFile";
+		String savePath = root + "\\hupLoadFile";
 		File file = new File(savePath + "\\" + fileName);
 		if(file.exists()) {
 			file.delete();

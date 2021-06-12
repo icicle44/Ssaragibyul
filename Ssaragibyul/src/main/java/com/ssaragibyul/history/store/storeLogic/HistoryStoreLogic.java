@@ -16,8 +16,7 @@ public class HistoryStoreLogic implements HistoryStore{
 	SqlSession sqlSession;
 	@Override
 	public ArrayList<History> selectAllList(PageInfo pi) {
-		
-		return null;
+		return (ArrayList)sqlSession.selectList("historyMapper.selectAllList", pi);
 	}
 
 	@Override
@@ -60,6 +59,11 @@ public class HistoryStoreLogic implements HistoryStore{
 	public ArrayList<History> selectSiteLocation(String siteName) {
 		
 		return (ArrayList)sqlSession.selectList("historyMapper.selectSiteLocation", siteName);
+	}
+
+	@Override
+	public int getListCount() {
+		return sqlSession.selectOne("historyMapper.selectHistoryListCount");
 	}
 
 	

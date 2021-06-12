@@ -19,11 +19,10 @@ body * {
 }
 textarea {
 	width: 100%;
-	padding: 10px;
 	box-sizing: border-box;
 	border: solid 2px #404040;
 	border-radius: 5px;
-	font-size: 10px;
+	font-size: 20px;
 	resize: both;
 }
 .grid {
