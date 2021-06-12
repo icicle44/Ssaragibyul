@@ -74,8 +74,7 @@ public class AdminStoreLogic implements AdminStore{
 
 	@Override
 	public ArrayList<Member> selectSearchAll(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		return (ArrayList)sqlSession.selectList("memberMapper.selectSearchList", search);
 	}
 
 	@Override

@@ -320,12 +320,20 @@ public class AdminController {
 			return "common/errorPage";			
 		}
 	}
-
-	// 회원 쪽지보내기
-	public int SendNote(String MemberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	// 회원 검색
+	@RequestMapping(value="memberSearch.do", method = RequestMethod.GET)
+	public String memberSearch(@ModelAttribute Search search, Model model) {
+		ArrayList<Member> searchList = aService.printSearchAll(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("mList", searchList);
+			return "admin/adminMemberListView";
+		} else {
+			model.addAttribute("msg", "멤버 검색 실패");
+			return "common/errorPage";
+		}
 	}
+
 
 	// 펀딩 리스트 출력
 	@RequestMapping(value="adminFundingList.do", method = RequestMethod.GET)

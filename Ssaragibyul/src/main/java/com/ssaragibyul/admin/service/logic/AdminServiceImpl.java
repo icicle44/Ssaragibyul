@@ -81,8 +81,8 @@ public class AdminServiceImpl implements AdminService{
 
 	@Override
 	public ArrayList<Member> printSearchAll(Search search) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Member> searchList = aStore.selectSearchAll(search);
+		return searchList;
 	}
 
 	@Override
