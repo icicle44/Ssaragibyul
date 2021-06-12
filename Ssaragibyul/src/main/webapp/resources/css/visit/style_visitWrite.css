@@ -11,18 +11,20 @@ body {
 .form {
 	margin-top: 5em;
 }
+
 select {
-width: 200px;
-padding: .5em .3em;
-border: 1px solid #999;
-font-family: inherit;
-background: url('/resources/img/select.jpg') no-repeat 95% 50%;
-border-radius: 0px;
--webkit-appearance: none;
--moz-appearance: none;
+	width: 200px;
+	padding: .5em .3em;
+	border: 1px solid #999;
+	font-family: inherit;
+	background: url('/resources/img/select.jpg') no-repeat 95% 50%;
+	border-radius: 0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
 }
+
 select::-ms-expand {
-    display: none;
+	display: none;
 }
 
 .input {
@@ -36,10 +38,23 @@ select::-ms-expand {
 
 #identify {
 	float: right;
-	margin-right:10px;
-	padding:0;
+	margin-right: 10px;
+	padding: 0;
 }
-
+/* 파일박스  */
+.input-file-button{
+  padding: 6px 25px;
+  background-color:#FF6600;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+}
+#input_img{
+}
+/* 접근성 탭 포커스 스타일 */
+.file-focus {
+  outline: 1px dotted #d2310e;
+}
 
 /* 이미지 */
 .product-title {
@@ -69,37 +84,43 @@ select::-ms-expand {
 	display: block;
 	top: 35em;
 }
-#regist{
+
+#regist {
 	padding: 10px 50px;
 	margin: 0px 15px 0px 18px;
 }
-#prev{
+
+#prev {
 	left: 50px;
 	padding: 10px 50px;
 	margin: 0px 18px 0px 10px;
 }
+
 .orange {
-    position: absolute;
-    border:none;
-    padding: 10px 27px;
+	position: absolute;
+	border: none;
+	padding: 10px 27px;
 	margin: 10px;
 	background: #EB5C01;
 	border-radius: 4px;
 	color: #fff;
 }
-.orange:hover{
+
+.orange:hover {
 	background-color: #E35901;
-	border:none;
+	border: none;
 }
-.grey{
+
+.grey {
 	background: #6E6E6E;
-	border:none;
+	border: none;
 	padding: 10px 27px;
-    margin: 10px;
+	margin: 10px;
 	border-radius: 4px;
 	color: #fff;
 }
-.grey:hover{
+
+.grey:hover {
 	background-color: #535353;
-	border:none;
+	border: none;
 }

@@ -5,7 +5,8 @@
 <html lang="ko">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-<link rel="stylesheet" type="text/css" href="/resources/css/visit/style_visitWrite.css" />
+<link rel="stylesheet" type="text/css"
+	href="/resources/css/visit/style_visitWrite.css" />
 <title>방문인증글 작성하기</title>
 <%@include file="/header.jsp"%>
 </head>
@@ -41,8 +42,8 @@
 					<hr>
 					<div class="register-contents">
 						<input type="text" class="input" name="visitTitle"
-							placeholder="제목" required> <span>${loginUser.nickName }</span> <input
-							type="hidden" name="userId" value="${loginUser.userId }">
+							placeholder="제목" required> <span>${loginUser.nickName }</span>
+						<input type="hidden" name="userId" value="${loginUser.userId }">
 						<hr>
 						<div id="editor" contenteditable="true" placeholder="내용을 입력해주세요">
 							<p>내용을 입력해주세요</p>
@@ -52,14 +53,18 @@
 					</div>
 					<hr>
 					<div class="register-footer">
-						<input type="file" id="input_img" size="50" name="uploadFile">
+						<div class="filebox">
+						  <input type="file" id="input_img" name="uploadFile" >
+						</div>
 						<hr>
-						<button type="reset" class="grey" id="prev" onClick="history.go(-1)">이전으로</button>
-						<button type="submit" class="orange" id="regist" onclick="regist()">등록완료</button>
+						<button type="reset" class="grey" id="prev"
+							onClick="history.go(-1)">이전으로</button>
+						<button type="submit" class="orange" id="regist"
+							onclick="regist()">등록완료</button>
 						<hr>
 						<button type="button" class="grey" onclick="showMap()">지도보기</button>
 						<button type="button" class="grey" onclick="showMarker()">사적지</button>
-						<button id="getLocation" class="orange"type="button">내위치</button>
+						<button id="getLocation" class="orange" type="button">내위치</button>
 					</div>
 				</form>
 			</div>
@@ -73,6 +78,11 @@
 
 	<script>
     	$(function(){
+    	// 파일업로드
+		$("#file").on('change',function(){
+		  var fileName = $("#file").val();
+		  $(".upload-name").val(fileName);
+		});
     	// CKEditor
   		   BalloonEditor
   		      .create( document.querySelector( '#editor' ) )
