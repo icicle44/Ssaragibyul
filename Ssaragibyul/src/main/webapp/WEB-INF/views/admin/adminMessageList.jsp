@@ -32,7 +32,6 @@
 	<link rel="stylesheet" href="resources/css/admin/demo.css">
 </head>
 <body>
-<!-- 로고들이 다 안나와요 ㅠㅠ -->
 	<div class="wrapper">
 		<%@include file="header.jsp" %>
 

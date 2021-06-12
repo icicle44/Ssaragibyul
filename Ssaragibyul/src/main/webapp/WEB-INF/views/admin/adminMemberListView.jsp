@@ -67,16 +67,16 @@
 									<h4 class="card-title text-center">회원 리스트</h4>
 									<!-- 검색 -->
 									<div class="row-fluid" align="right">
-										<form class="pull-right" action="#" method="get">
+										<form class="pull-right" action="memberSearch.do" method="get">
 											<select name="searchCondition">
 												<option value="all"
 													<c:if test="${search.searchCondition == 'all' }">selected</c:if>>전체</option>
-												<option value="writer"
-													<c:if test="${search.searchCondition == 'writer' }">selected</c:if>>작성자</option>
-												<option value="title"
-													<c:if test="${search.searchCondition == 'title' }">selected</c:if>>제목</option>
-												<option value="content"
-													<c:if test="${search.searchCondition == 'content' }">selected</c:if>>내용</option>
+												<option value="id"
+													<c:if test="${search.searchCondition == 'id' }">selected</c:if>>ID</option>
+												<option value="nickName"
+													<c:if test="${search.searchCondition == 'nickName' }">selected</c:if>>닉네임</option>
+												<option value="name"
+													<c:if test="${search.searchCondition == 'name' }">selected</c:if>>이름</option>
 											</select> <input type="text" name="searchValue"
 												value="${ search.searchValue }"> <input type="submit" value="검색">
 										</form>

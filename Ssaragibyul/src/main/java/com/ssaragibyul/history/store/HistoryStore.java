@@ -15,4 +15,5 @@ public interface HistoryStore {
 	public ArrayList<History> selectAllSiteNames(String siteType);
 	public ArrayList<History> selectAllSiteType();
 	public ArrayList<History> selectSiteLocation(String siteName);
+	public int getListCount();
 }

@@ -19,8 +19,7 @@
 		<result property="uploadTime" column="UPLOAD_TIME"/> 
 	</resultMap>
 
-
-   <select id="adminSelectAllList" resultMap="historyResultMap">
+   <select id="selectAllList" resultMap="historyResultMap">
            SELECT * FROM HISTORY WHERE H_STATUS = 'Y' ORDER BY SITE_NO DESC
     </select>
 

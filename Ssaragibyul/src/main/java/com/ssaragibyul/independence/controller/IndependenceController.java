@@ -37,18 +37,6 @@ public class IndependenceController {
 		// Pagination은 common의 pagination
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 		ArrayList<Independence> iList = iService.printAll(pi);
-//		int msgNo = 1;
-//		Message message = mService.printOne(msgNo);
-//		
-//		String userId = "userId";
-//		String flag = "rec";
-//		
-//		HashMap<String, String> cntMap = new HashMap<String, String>();
-//		cntMap.put("flag", flag);
-//		cntMap.put("userId", userId);
-//		
-//		int msgCount = mService.getMsgListCount(cntMap);
-		
 		
 		if(!iList.isEmpty()) {
 			mv.addObject("iList", iList);
@@ -73,7 +61,7 @@ public class IndependenceController {
 		if(!searchList.isEmpty()) {
 			model.addAttribute("iList", searchList);
 			model.addAttribute("search",search);
-			//model.addAttribute("pi",pi);
+			model.addAttribute("pi",pi);
 			return "independence/independenceList";
 		}else {
 			model.addAttribute("msg", "검색결과가 없습니다");

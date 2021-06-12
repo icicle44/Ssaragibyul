@@ -85,7 +85,7 @@
 											<tbody>
 												<tr>
 													<td colspan="2" style="text-align: center;">
-														<img alt="" src="resources/upLoadFile/${histoy.renameFilename }">
+														<img alt="" src="resources/hupLoadFile/${histoy.renameFilename }">
 													</td>
 												</tr>
                                                <tr>

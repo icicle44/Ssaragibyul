@@ -16,8 +16,7 @@ public class HistoryServiceImpl implements HistoryService{
 	HistoryStore hStore; 
 	@Override
 	public ArrayList<History> printAll(PageInfo pi) {
-		
-		return null;
+		return hStore.selectAllList(pi);
 	}
 
 	@Override
@@ -60,6 +59,11 @@ public class HistoryServiceImpl implements HistoryService{
 	public ArrayList<History> printAllSiteLocation(String siteName) {
 		
 		return hStore.selectSiteLocation(siteName);
+	}
+
+	@Override
+	public int getListCount() {
+		return hStore.getListCount();
 	}
 
 }

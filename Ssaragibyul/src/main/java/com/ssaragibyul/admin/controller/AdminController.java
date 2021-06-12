@@ -320,12 +320,20 @@ public class AdminController {
 			return "common/errorPage";			
 		}
 	}
-
-	// 회원 쪽지보내기
-	public int SendNote(String MemberId) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	// 회원 검색
+	@RequestMapping(value="memberSearch.do", method = RequestMethod.GET)
+	public String memberSearch(@ModelAttribute Search search, Model model) {
+		ArrayList<Member> searchList = aService.printSearchAll(search);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("mList", searchList);
+			return "admin/adminMemberListView";
+		} else {
+			model.addAttribute("msg", "멤버 검색 실패");
+			return "common/errorPage";
+		}
 	}
+
 
 	// 펀딩 리스트 출력
 	@RequestMapping(value="adminFundingList.do", method = RequestMethod.GET)
@@ -749,7 +757,7 @@ public class AdminController {
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\upLoadFile";
+		String savePath = root + "\\hupLoadFile";
 		
 		File folder = new File(savePath);
 		// 폴더 없으면 자동 생성
@@ -849,7 +857,7 @@ public class AdminController {
 	//기념관 파일 삭제
 	public void deleteFile(String fileName, HttpServletRequest request) {
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\upLoadFile";
+		String savePath = root + "\\hupLoadFile";
 		File file = new File(savePath + "\\" + fileName);
 		if(file.exists()) {
 			file.delete();

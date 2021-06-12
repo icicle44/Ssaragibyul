@@ -22,4 +22,6 @@ public interface HistoryService {
 	public ArrayList<History> printAllSiteType();
 
 	public ArrayList<History> printAllSiteLocation(String siteName);
+
+	public int getListCount();
 }
