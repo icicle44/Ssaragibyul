@@ -185,8 +185,8 @@
 				// 검색 끝
 	            $("#replyContents").on("keyup",function(){
 	                // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
-	                //var inLength = $(this).val().length;
-	                //$("#noti").html("작성가능한 글자수 : "+ (100 - inLength));
+	                var inLength = $(this).val().length;
+	                $("#noti").html("작성가능한 글자수 : "+ (100 - inLength));
 	                alert("keyup");
 	                console.log("keyup");
 	            });

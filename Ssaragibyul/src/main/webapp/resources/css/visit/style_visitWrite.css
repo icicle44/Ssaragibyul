@@ -11,6 +11,19 @@ body {
 .form {
 	margin-top: 5em;
 }
+select {
+width: 200px;
+padding: .5em .3em;
+border: 1px solid #999;
+font-family: inherit;
+background: url('/resources/img/select.jpg') no-repeat 95% 50%;
+border-radius: 0px;
+-webkit-appearance: none;
+-moz-appearance: none;
+}
+select::-ms-expand {
+    display: none;
+}
 
 .input {
 	border: none;
@@ -21,9 +34,12 @@ body {
 	boder-bottom:0px;" */
 }
 
-span {
+#identify {
 	float: right;
+	margin-right:10px;
+	padding:0;
 }
+
 
 /* 이미지 */
 .product-title {
@@ -52,4 +68,38 @@ span {
 	height: 250px;
 	display: block;
 	top: 35em;
+}
+#regist{
+	padding: 10px 50px;
+	margin: 0px 15px 0px 18px;
+}
+#prev{
+	left: 50px;
+	padding: 10px 50px;
+	margin: 0px 18px 0px 10px;
+}
+.orange {
+    position: absolute;
+    border:none;
+    padding: 10px 27px;
+	margin: 10px;
+	background: #EB5C01;
+	border-radius: 4px;
+	color: #fff;
+}
+.orange:hover{
+	background-color: #E35901;
+	border:none;
+}
+.grey{
+	background: #6E6E6E;
+	border:none;
+	padding: 10px 27px;
+    margin: 10px;
+	border-radius: 4px;
+	color: #fff;
+}
+.grey:hover{
+	background-color: #535353;
+	border:none;
 }

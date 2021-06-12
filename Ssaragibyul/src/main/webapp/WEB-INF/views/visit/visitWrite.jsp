@@ -5,7 +5,7 @@
 <html lang="ko">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
-<link rel="stylesheet" type="text/css" href="/resources/css/visit/style_visitWrite.css.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/visit/style_visitWrite.css" />
 <title>방문인증글 작성하기</title>
 <%@include file="/header.jsp"%>
 </head>
@@ -27,7 +27,7 @@
 					enctype="multipart/form-data">
 					<div class="register-header">
 						<select id="siteType" name="siteType">
-							<option value="none">=== 선택 ===</option>
+							<option value="none">---- 사적지 분류 ----</option>
 							<c:forEach items="${hList }" var="hList">
 								<option value="${hList.siteType }">${hList.siteType }</option>
 							</c:forEach>
@@ -36,16 +36,16 @@
 
 
 						</select>
-						<span>방문인증되었습니다.</span>
+						<div id="identify">방문인증되었습니다.</div>
 					</div>
 					<hr>
 					<div class="register-contents">
 						<input type="text" class="input" name="visitTitle"
-							placeholder="제목"> <span>${loginUser.nickName }</span> <input
+							placeholder="제목" required> <span>${loginUser.nickName }</span> <input
 							type="hidden" name="userId" value="${loginUser.userId }">
 						<hr>
-						<div id="editor">
-							<p>입력값</p>
+						<div id="editor" contenteditable="true" placeholder="내용을 입력해주세요">
+							<p>내용을 입력해주세요</p>
 						</div>
 						<div id="noti">(0 / 150)</div>
 						<input type="hidden" id="visitContents" name="visitContents">
@@ -54,12 +54,12 @@
 					<div class="register-footer">
 						<input type="file" id="input_img" size="50" name="uploadFile">
 						<hr>
-						<button type="reset" onClick="history.go(-1)">이전페이지</button>
-						<button type="submit" onclick="regist()">등록완료</button>
+						<button type="reset" class="grey" id="prev" onClick="history.go(-1)">이전으로</button>
+						<button type="submit" class="orange" id="regist" onclick="regist()">등록완료</button>
 						<hr>
-						<button type="button" onclick="showMap()">show map</button>
-						<button type="button" onclick="showMarker()">show marker</button>
-						<button id="getLocation" type="button">방문인증하기</button>
+						<button type="button" class="grey" onclick="showMap()">지도보기</button>
+						<button type="button" class="grey" onclick="showMarker()">사적지</button>
+						<button id="getLocation" class="orange"type="button">내위치</button>
 					</div>
 				</form>
 			</div>
@@ -73,7 +73,6 @@
 
 	<script>
     	$(function(){
-    		
     	// CKEditor
   		   BalloonEditor
   		      .create( document.querySelector( '#editor' ) )
@@ -94,7 +93,7 @@
 					},
 					dataType : "json",
 					success : function(data){
-						var option = "<option value='none'>=== 선택 ===</option>";
+						var option = "<option value='none'>--- 사적지 이름 ---</option>";
 						$("#siteName").html("");
 						$("#siteName").append(option);
 						$.each(data, function (index, item){
@@ -247,6 +246,12 @@
 			console.log(editor.textContent);
 			$("#visitContents").val(editor.textContent);
 		}
+	    $("#editor").on("keyup",function(){
+	        // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.
+	        var inLength = $(this).text().length;
+	        $("#noti").html("작성가능한 글자수 : "+ (150 - inLength));
+	       
+	    });
     </script>
 
 
