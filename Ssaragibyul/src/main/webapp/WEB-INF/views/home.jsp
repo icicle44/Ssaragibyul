@@ -9,8 +9,6 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Favicons -->
-<link href="/resources/img/favicon.svg" rel="icon">
   
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
@@ -193,13 +191,13 @@ input::-webkit-input-placeholder {
 				class="icon-menu h3"></span></a>
 		</div>
 
-		<div class="main-menu">
+		<div class="main-menu" style="margin-right:10px;margin-left:20px;">
 			<ul class="js-clone-nav">
-				<li><a href="#section-home" class="nav-link">사이트 소개</a></li>
-				<li><a href="#section-funding" class="nav-link">펀딩 프로젝트</a></li>
-				<li><a href="#section-donation" class="nav-link">기부 프로젝트</a></li>
-				<li><a href="#section-bio" class="nav-link">제안하기</a></li>
-				<li><a href="#section-blog" class="nav-link">별보러 가자</a></li>
+				<li><a href="#section-home" class="nav-link" style="font-size:16px;">사이트 소개</a></li>
+				<li><a href="#section-funding" class="nav-link" style="font-size:16px;">펀딩 프로젝트</a></li>
+				<li><a href="#section-donation" class="nav-link" style="font-size:16px;">기부 프로젝트</a></li>
+				<li><a href="#section-bio" class="nav-link" style="font-size:16px;">제안하기</a></li>
+				<li><a href="#section-blog" class="nav-link" style="font-size:16px;">별보러 가자</a></li>
 				<!-- <li><a href="#section-contact" class="nav-link">검색</a></li> -->
 			</ul>
 		</div>
@@ -446,13 +444,13 @@ input::-webkit-input-placeholder {
 										<div class="col-md-12 mb-4" data-aos="fade-up">
 											<div class="d-md-flex d-block blog-entry align-items-start">
 												<div class="mr-0 mr-md-5 mb-3 img-wrap">
-													<a href="http://localhost:8888/visitList.do"><img src="/resources/vUploadFiles/${vList.renameFilename }"
+													<a href="visitList.do"><img src="/resources/vUploadFiles/${vList.renameFilename }"
 									alt="${vList.originalFilename }"
 														class="img-fluid"></a>
 												</div>
 												<div>
 													<div class="meta mb-3">
-														 <a href="http://localhost:8888/visitList.do">${vList.visitTitle }</a>
+														 <a href="visitList.do" style="font-size:20px">${vList.visitTitle }</a>
 													</div>
 													<p>${vList.visitContents }</p>
 												</div>
