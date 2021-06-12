@@ -42,59 +42,110 @@
 	height : 550px;
 }
 .gridmain > * {
-  float: left;  
-  width: 30%;
-  height: 30%;
-  font-size:12px;
+	float: left;  
+	width: 30%;
+	height: 30%;
+	font-size:13px;
+	font-family: 'Noto Serif KR', serif;
 }
+a{
+	text-decoration: none;
+}
+
 .btn{
-margin: auto;
+	margin: auto;
+	font-family: 'Noto Serif KR', serif;
+	text-align: center;
 }
 .#name_css{
 	text-align: left; 
 	padding-right:10px; 
 	font-weight:bold; 
-	font-size:12px; 
+	font-size:13px; 
 	color:DimGray;
 }
 .nothing{
  color:white;
 }
 #bar_td{
+	width:100%;
 	text-align: left; 
 	margin:auto;
 }
 #svg{
-	height:2px; 
+	height:7px; 
 	width: 350px;
 }
 #dday_css{
 	float:left; 
 	width : 50%;
-	font-size:12px;
+	font-size:15px;
 }
 #sum_css{
 	float:right;
 	width : 50%;
 	text-align: right; 
-	font-size:12px;
+	font-size:15px;
 }
 .select{
-	float:right;
+	float:left;
+	height: 40px;
+	margin-right: 10px;
+	border-radius: 5px;
+    border: 1px solid rgb(104, 104, 104);
+    color: rgb(104, 104, 104);
+    font-weight:450;
+    text-align: center;
+    font-size:16px;
 }
 /* #head{
 	width : 1547px;
 } */
 #pj_search{
-width : 1540px;
+    width : 100%;
+    float:right;
+   	padding-left: 72%;
+    margin-bottom: 30px;
+    font-family: 'Noto Serif KR', serif;
 }
 #frmpj{
 }
 .scan{
-	float:right;
+    float: left;   
+    border: 1px solid rgb(104, 104, 104);
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    width: 190px;
+    height: 40px;
+}
+input::-webkit-input-placeholder {
+	color:gray;
+	font-size:16px;
+}
+
+.search{
+    float: left;
+    height: 40px;
+    width: 60px;
+   	font-size:16px;
+    border: 1px solid rgb(104, 104, 104);
+    border-left: none;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    color: white;
+    background-color: rgb(104, 104, 104);
+}
+
+.search:hover{
+	background-color:  rgb(80, 80, 80);
+}
+
+.search:active{
+	background-color:  rgb(70, 70, 70);
 }
 #headFont{
 	font-size:30px;
+	margin-left: -30px;
 }
 </style>
 
@@ -136,9 +187,9 @@ width : 1540px;
 				       <option value = "fundingSelectLike.do">좋아요 순</option>
 				</select>
 				<form action="fundingSearch_1.do" method="get" >
-					<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
-					<input type="submit" class="scan" value="검색">
-				</form>
+					<input type="text" name="searchValue" class="scan" value="${search.searchValue }" placeholder="검색어를 입력해주세요." style="font-family: 'Noto Sans KR', sans-serif'">
+					<input type="submit" class="search" value="검색" style="font-family: 'Noto Sans KR', sans-serif'">
+					</form>
 			<!--  JS, 리다이렉트 URL -->
 					</div>
 					<div class="col-12 justify-content-center">
@@ -203,12 +254,11 @@ width : 1540px;
 	</div>
 	<br>
 	<!--  -->
-	<br><br><br><br><br><br><br>${fn:length(fListandFile)}	
+	<br><br><br><br><br><br><br>
 	<c:if test="${fn:length(fListandFile) > 6}">
  <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
  </c:if> 
   <c:if test="${fn:length(fListandFile) <= 6 }">
-<a>더 복기가 없습니다.</a>
  	</c:if> 
 				</section>
 				<!--  -->
@@ -224,8 +274,8 @@ width : 1540px;
 				       <option value = "fundingSelectLikeEnd.do">좋아요 순</option>
 				</select>
 				<form action="fundingSearch_2.do" method="get" >
-					<input type="text" name="searchValue" class="scan" value="${search.searchValue }">&nbsp;
-					<input type="submit" class="scan" value="검색">
+					<input type="text" name="searchValue" class="scan" value="${search.searchValue }" placeholder="검색어를 입력해주세요." style="font-family: 'Noto Sans KR', sans-serif'">
+					<input type="submit" class="search" value="검색" style="font-family: 'Noto Sans KR', sans-serif'">
 				</form>
 			<!--  JS, 리다이렉트 URL -->
 					</div>
@@ -244,9 +294,11 @@ width : 1540px;
 						</div></a></td>
 		 			</tr>
 		 			<tr>
-						<td align = "right"><img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
-						<span style="color:DimGray; font-size:13px; vertical-align:1px;">${e.likeCount}</span></td>
-					</tr>
+		 			<td align = "right">
+								<img src="resources/img/images/likeHeart.png" style="width:18px;, height:18px;">
+								<span style="color:DimGray; font-size:14px; padding-top:20px; color: #EB5C01; font-weight: bold;">${e.likeCount}</span>
+						</td>
+						</tr>
 					<tr>
 						<td>
 						<c:url var="fDetail" value="fundingDetail.do">
@@ -259,15 +311,15 @@ width : 1540px;
 				<td colspan="2" id="bar_td">
 							<c:if test="${e.percent >99}">
 								<svg id="svg">
-									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="100%" fill="#045FB4"></rect>
+									<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+									<rect x="0" y="0" height="4" width="100%" fill="#045FB4"></rect>
 								</svg>
 							</c:if>
 			
 							<c:if test="${e.percent < 100}">
 								<svg id="svg">
-									<rect x="0" y="0" fill="#efefef" height="2" width="100%"></rect>
-									<rect x="0" y="0" height="2" width="${e.percent}%" fill="#045FB4"></rect>
+									<rect x="0" y="0" fill="#efefef" height="4" width="100%"></rect>
+									<rect x="0" y="0" height="4" width="${e.percent}%" fill="#045FB4"></rect>
 								</svg>
 							</c:if>
 						</td>
@@ -297,7 +349,6 @@ width : 1540px;
  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
  	</c:if> 
  <c:if test="${fn:length(fListandFileEnd) <= 6 }">
-<a>더 복기가 없습니다.</a>
  	</c:if> 
 <!-- <button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button> -->
 				</section>
