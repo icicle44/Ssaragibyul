@@ -5,7 +5,7 @@
 
 ------------
 ## 수행기간
-2020년 3월 22일 ~ 4월 20일 (약 한달)
+2020년 5월 17일 ~ 6월 15일 (약 1달)
 
 ------------
 
@@ -33,11 +33,12 @@
 
 ------------
 ## 사용기술 및 개발환경
-![image](https://user-images.githubusercontent.com/81937349/118357070-29345100-b5b3-11eb-9a8f-e692a8b2ba48.png)
+![aasdgasdgasd](https://user-images.githubusercontent.com/42002548/121815795-23658480-ccb3-11eb-91d2-4a228299072b.png)
+
 Category | Detail
 ---- | ----
 Laguage | HTML5, JS, CSS3, JQuery, JSP, Java
-Library & API | Kakaomap, OpenWeather, Easy-pie-chart
+Library & API | Kakaomap
 IDE | VisualStudio, Eclpise
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
@@ -91,34 +92,13 @@ DataBase | AWS RDS, Oracle
     - 메인 페이지 프론트(CSS,JS), 날씨, 그래프 API 연동, 마이페이지 페이지 기능 구현.
 ------------
 ## 주요 기능
-1. 회원가입
-![0001](https://user-images.githubusercontent.com/81956425/118357017-d8bcf380-b5b2-11eb-8bc1-57e70f51a482.jpg)
-
-2. 마이페이지
-![0002](https://user-images.githubusercontent.com/81956425/118356858-2553ff00-b5b2-11eb-9a61-109ae974c15f.jpg)
-![0003](https://user-images.githubusercontent.com/81956425/118356816-048ba980-b5b2-11eb-9593-bca20d9adc97.jpg)
-3. 산책기록
-![0004](https://user-images.githubusercontent.com/81956425/118356817-05bcd680-b5b2-11eb-8fa5-c65e5d9044dc.jpg)
-![0005](https://user-images.githubusercontent.com/81956425/118356818-05bcd680-b5b2-11eb-878e-b6403cf4f61c.jpg)
-4. 산책일기
-![0006](https://user-images.githubusercontent.com/81956425/118356819-06556d00-b5b2-11eb-9f19-cbf97207816d.jpg)
-![0007](https://user-images.githubusercontent.com/81956425/118356820-06ee0380-b5b2-11eb-9286-94ffd09fb5e3.jpg)
-5. 산책짝꿍
-![0008](https://user-images.githubusercontent.com/81956425/118356821-06ee0380-b5b2-11eb-85b0-cca9938e157d.jpg)
-6. 멍멍이야기(커뮤니티)
-![0011](https://user-images.githubusercontent.com/81956425/118356935-7a901080-b5b2-11eb-9a33-623e809b9ac5.png)
-![0012](https://user-images.githubusercontent.com/81956425/118356937-7bc13d80-b5b2-11eb-91ad-18db1451fedd.png)
-7. 반려견 계산기
-![0009](https://user-images.githubusercontent.com/81956425/118356822-07869a00-b5b2-11eb-9732-d82b5fdcfd87.jpg)
-8. 관리자
-![0010](https://user-images.githubusercontent.com/81956425/118356824-07869a00-b5b2-11eb-9566-4ab18402ea17.jpg)
-
-
+업로드 예정
 ------------
 ## Document
-### 1. 유스케이스
-![유스케이스](https://user-images.githubusercontent.com/81937349/118353075-c71e2080-b59f-11eb-85b5-9db49f2ff080.png)
+### 1. 플로우차트
+![knknkjn](https://user-images.githubusercontent.com/42002548/121816008-28770380-ccb4-11eb-9573-ec501a98bfcf.png)
 
 ### 2. ERD
-![ERD_통합](https://user-images.githubusercontent.com/81937349/118353105-df8e3b00-b59f-11eb-9a3a-d53fd93c04d7.png)
+![hhhhhhhhhhh](https://user-images.githubusercontent.com/42002548/121816012-2b71f400-ccb4-11eb-84c1-7f4f2e4ccfa6.png)
+
 
