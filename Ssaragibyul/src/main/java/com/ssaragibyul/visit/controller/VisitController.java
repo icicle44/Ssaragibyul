@@ -327,7 +327,7 @@ public class VisitController {
 		}
 	}
 
-	// 조회수 증가
+	// 조회수 증가요
 	@ResponseBody
 	@RequestMapping(value = "addHitsCount.do", method = RequestMethod.GET)
 	public String addHitsCount(@RequestParam("visitNo") int visitNo) {
