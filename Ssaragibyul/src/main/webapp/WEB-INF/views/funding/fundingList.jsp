@@ -256,9 +256,9 @@ input::-webkit-input-placeholder {
 	<!--  -->
 	<br><br><br><br><br><br><br>
 	<c:if test="${fn:length(fListandFile) > 6}">
- <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
  </c:if> 
   <c:if test="${fn:length(fListandFile) <= 6 }">
+   <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
  	</c:if> 
 				</section>
 				<!--  -->
@@ -346,9 +346,10 @@ input::-webkit-input-placeholder {
 	
 	
 <c:if test="${fn:length(fListandFileEnd) > 6 }">
- <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
+
  	</c:if> 
  <c:if test="${fn:length(fListandFileEnd) <= 6 }">
+  <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
  	</c:if> 
 <!-- <button class="btn" onclick="getMoreFundingList()">프로젝트 더 보기</button> -->
 				</section>

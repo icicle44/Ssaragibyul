@@ -87,7 +87,7 @@ div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 .contents{
 	padding-left : 50px;
 	margin: 15px 0px 15px 0px;
-	font-size: 17px;
+	font-size: 15px;
 }
 
 #title{
@@ -130,7 +130,16 @@ div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 	    position: absolute;
 	    font-size: 17px;
 	}
-
+.getstarteds1{
+    position: absolute;
+    left: 50px;
+    border:none;
+    padding: 10px 100px;
+	margin: 10px 10px 20px 0px;
+	background: #6E6E6E;
+	border-radius: 4px;
+	color: #fff;
+}
 .getstarteds {
     position: absolute;
     left: 50px;
@@ -229,7 +238,7 @@ label{
 }
 
 .state{
-	margin-left:30px;
+	margin-left:1px;
 	float: left;
 }
 
@@ -247,7 +256,7 @@ label{
 }
 
 #donation-date{
-	margin-left:-15px;
+	margin-left:-10px;
 	text-align: center;
 }
 
@@ -498,7 +507,7 @@ td{
 		       			</c:if>
 			       				<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
 							    					<form action="fundingJoin.do" method="post" name="fundingGo" onSubmit="formChk();return false">
-							    					<input type="submit" class="getstarteds" value="펀딩하기">
+							    					<input type="submit" class="getstarteds1" value="펀딩하기">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
 							   						<input type="hidden" name="loginCheck" value="${loginUser.userId }">
 							    					</form>
@@ -597,17 +606,24 @@ td{
 					 	<br>
 						<div class="state" >
 							<div id="img">
-								<img src="resources/img/dantion_funding/date.png" style="width: 30px" height="30px" >
+								<img src="resources/img/dantion_funding/date.png" style="width: 25px" height="25px" >
 							</div>
-							<b class = "contents" id="donation-date">기부 시작일</b><br>
-							<b class = "contents" id="donation-date">${donation.startDate}</b>
+							<b class = "contents" id="donation-date">펀딩 시작일</b><br>
+							<b class = "contents" id="donation-date">${funding.startDate}</b>
 						</div>
 						<div class="state">
 							<div id="img">
-								<img src="resources/img/dantion_funding/money.png" style="width: 30px" height="30px" >
+								<img src="resources/img/dantion_funding/money.png" style="width: 25px" height="25px" >
 							</div>
-							<b class = "contents" id="donation-date">기부 종료일</b><br>
-							<b class = "contents" id="donation-date">${donation.finDate }</b>
+							<b class = "contents" id="donation-date">펀딩 종료일</b><br>
+							<b class = "contents" id="donation-date">${funding.finDate }</b>
+						</div>
+						<div class="state">
+							<div id="img">
+								<img src="resources/img/dantion_funding/delivery.png " style="width: 25px" height="25px" >
+							</div>
+							<b class = "contents" id="donation-date">배송 예정일</b><br>
+							<b class = "contents" id="donation-date">${funding.deleiveryDate }</b>
 						</div>
 
 				
@@ -618,10 +634,10 @@ td{
                         </c:if> --%>
 						
 					</div>
-				</div><br><br><hr>
+			<br><br><hr>
 				
 				
-				<div class="detailtab">
+			<div class="detailtab">
 	            	<input type="radio" name="detailtab" id="story" checked> 
 		            <input type="radio" name="detailtab" id="commu"> 
 		            <input type="radio" name="detailtab" id="info"> 
@@ -630,7 +646,7 @@ td{
 		            <label for="info">안내사항</label>
 			            
 		            	<div id="story_content" class="story_content" style="text-align: center; margin-left: 180px">
-			               <p>${donation.projectStory }<</p>
+			               <p>${funding.projectStory }</p>
 			            </div>
 			            
 			        	<div class="commu_content" style="text-align: center; margin-left: -5px; border: none" >
@@ -667,8 +683,8 @@ td{
 						</div>
         
             			<div class="info_content">
-            				해당 프로젝트 안내 사항
-             				<p>${donation.warningIntro }</p>
+            				해당 프로젝트 안내 사항<br>
+             				<p>${funding.warningIntro }</p>
          				</div>
          			</div>
         
@@ -708,11 +724,11 @@ td{
 	$(function() {
 			getReplyList();
 			$("#rSubmit").on("click", function() {
-				var projectNo = '${donation.projectNo }';
+				var projectNo = '${funding.projectNo }';
 				var nickName = '${memberlist.nickName }'
 				var rContent = $("#rContent").val();
 				$.ajax({
-					url : "addWriteComment.do",
+					url : "addComment.do",
 					type : "post",
 					data : { "no" : projectNo , "contents" : rContent, "nick" : nickName },
 					success : function(data) {
@@ -734,9 +750,9 @@ td{
 		
 	
 		function getReplyList() {
-			var projectNo = '${donation.projectNo }'
+			var projectNo = '${funding.projectNo }'
 			$.ajax({
-				url : "commentAllList.do",
+				url : "commentList.do",
 				type : "get",
 				data : { "projectNo" : projectNo },
 				dataType : "json",
@@ -752,7 +768,13 @@ td{
 					if(data.length > 0) {
 						for(var i in data) {
 							$tr = $("<tr id='trtr'>");
-							$rWriter = $("<td colspan='4' width='150';' id='rWiter' colspan=4>").text(data[i].nick + "님의 별");
+							$rWriter = $("<td colspan='4' width='150';' id='rWiter' colspan=4>").append(
+									"<c:url var='msgWriteUrl' value='msgWriterView.do'>"
+									+   "<c:param name='receiverId' value='"+data[i].userId+"'></c:param>"												   
+									+   "<c:param name='msgType' value='4'></c:param>"
+									+   "<c:param name='nickName' value='"+data[i].nick+"'></c:param>"
+									+ "</c:url>"
+									+ "<a href='#' onclick='msgPopup("+"\"msgWriterView.do?receiverId="+data[i].userId+"&msgType=4"+"&nickName="+data[i].nick+"\""+"); return false;'>"+data[i].nick+"님의 별</a>");
 							$rCreateDate = $("<td width='100' id='rCreateDate'>").text(data[i].enrollDate);
 							$rContent = $("<td id='rCont'>").text(data[i].contents);
 							$btnArea = $("<td width='130'>")
@@ -784,7 +806,7 @@ td{
 		function modifyReplyCommit(projectNo, replyNo) {
 			var modifiedContent = $("#modifyReply").val();
 			$.ajax({
-				url : "updateComment.do",
+				url : "modifyComment.do",
 				type : "post",
 				data : { 
 					"no" : projectNo , 
@@ -808,7 +830,7 @@ td{
 		
 		function removeReply(projectNo, replyNo) {
 			$.ajax({
-				url : "removeComment.do",
+				url : "deleteComment.do",
 				type : "get",
 				data : { "no" : projectNo, "replyNo" : replyNo },
 				success : function(data) {
