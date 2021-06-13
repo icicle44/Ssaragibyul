@@ -18,12 +18,13 @@ public class History {
 	private String originarFilename;
 	private String renameFilename;
 	private Timestamp uploadTime;
+	private int visitor;
 	
 	public History() {}
 	
 	public History(int siteNo, String siteName, String siteType, String siteContents, double latitude, double longitude,
 			String siteAddr, Date hCreateDate, Date hUpdateDate, String hStatus, int fileNo, String originarFilename,
-			String renameFilename, Timestamp uploadTime) {
+			String renameFilename, Timestamp uploadTime, int visitor) {
 		super();
 		this.siteNo = siteNo;
 		this.siteName = siteName;
@@ -39,6 +40,7 @@ public class History {
 		this.originarFilename = originarFilename;
 		this.renameFilename = renameFilename;
 		this.uploadTime = uploadTime;
+		this.visitor = visitor;
 	}
 
 	public int getSiteNo() {
@@ -153,13 +155,21 @@ public class History {
 		this.uploadTime = uploadTime;
 	}
 
+	public int getVisitor() {
+		return visitor;
+	}
+
+	public void setVisitor(int visitor) {
+		this.visitor = visitor;
+	}
+
 	@Override
 	public String toString() {
 		return "History [siteNo=" + siteNo + ", siteName=" + siteName + ", siteType=" + siteType + ", siteContents="
 				+ siteContents + ", latitude=" + latitude + ", longitude=" + longitude + ", siteAddr=" + siteAddr
 				+ ", hCreateDate=" + hCreateDate + ", hUpdateDate=" + hUpdateDate + ", hStatus=" + hStatus + ", fileNo="
 				+ fileNo + ", originarFilename=" + originarFilename + ", renameFilename=" + renameFilename
-				+ ", uploadTime=" + uploadTime + "]";
+				+ ", uploadTime=" + uploadTime + ", visitor=" + visitor + "]";
 	}
 
 

@@ -1,269 +1,243 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<!DOCTYPE html>
-<html lang="ko">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+
 <head>
-<title>별들의 발자취</title>
-<meta charset="utf-8">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
 <meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Favicons -->
-<link href="/resources/img/favicon.svg" rel="icon">
+	content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 
-<link
-	href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700"
-	rel="stylesheet">
-<link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-<link rel="stylesheet" href="/resources/css/magnific-popup.css">
-<link rel="stylesheet" href="/resources/css/jquery-ui.css">
-<link rel="stylesheet" href="/resources/css/owl.carousel.min.css">
-<link rel="stylesheet" href="/resources/css/owl.theme.default.min.css">
-<link rel="stylesheet" href="/resources/css/bootstrap-datepicker.css">
-<link rel="stylesheet"
-	href="/resources/fonts/flaticon/font/flaticon.css">
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-<link rel="stylesheet" href="/resources/css/aos.css">
-<link rel="stylesheet" href="/resources/css/fancybox.min.css">
-
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="/resources/css/styleFundingList.css">
-</head>
+<title>별들의 발자취</title>
+<%@include file="/header.jsp"%>
 <style>
-.contents{
-/* margin-left:5em; */
-}
-.project-card {
-	width: 495px;
-	height: 350px;
-	border-radius: 25px;
-	border: 1px solid rgb(0, 0, 0);
-	position: relative;
-	box-shadow: 5px 5px 20px;
-	transition: all 0.5s;
-	transition-delay: 0.2s;
-	margin-left: 15em;
-	margin-top: 10em;
-	text-align:center;
-}
-
-.project-card:hover {
-	width: 580px;
-	height: 400px;
-}
-
-.project-thumbnail {
-	width: 100%;
-	height: 60%;
-	border-top-left-radius: 25px;
-	border-top-right-radius: 25px;
-	background-image:
-		url("https://a-static.besthdwallpaper.com/spider-man-s-awesome-selfie-wallpaper-9842_L.jpg");
-	background-size: cover;
-}
-
-.project-explain {
-	width: 96%;
-	height: 20%;
-	margin: auto;
-	display: absolute;
-	z-index: 2;
+html, body, div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
+	p, blockquote, pre, a, abbr, acronym, address, big, quotes, code, del,
+	dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, u,
+	i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+	caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	do: inherit;
+	vertical-align: baseline;
 }
 .sideBar{
 	font-size: 15px;
-	font-weight: 200;
+	font-family: "Avenir Next", Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+/* 	font-weight: 200; */
 	float:left;
 	padding-top:25em;
 	color: #2b686e;
 	text-align: center;
 }
-img{
-	max-height: 10em;
-	max-width: 25em;
+.contents{
+	padding-top: 10em;
+	margin-left: 5em;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote : before, blockquote : after, q : before, q : after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/*css 초기화*/
+.card {
+	height: 400px;
+	width: 450px;
 	border-radius: 15px;
-}
-table th {
-  background-color: #F5F5F5;
-  font-weight: 300;
-}
-.colored{
-  background-color: #F5F5F5;
-  font-weight: 300;	
-  width: 10em;
-}
-table th {
-  background-color: #F5F5F5;
-  font-weight: 300;
-}
-table tr:nth-child(2n) {
-  background-color: white;
-}
-table tr:nth-child(2n+1) {
-  background-color: white;
+	display: inline-block;
+	margin: 0.5em;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	overflow: hidden;
 }
 
-td{
-	width: 80px;
-	
+.card-header {
+	-webkit-transition: 0.5s; /*사파리 & 크롬*/
+	-moz-transition: 0.5s; /*파이어폭스*/
+	-ms-transition: 0.5s; /*인터넷 익스플로러*/
+	-o-transition: 0.5s; /*오페라*/
+	transition: 0.5s;
+	width: 100%;
+	height: 270px;
+	border-radius: 15px 15px 0 0;
+	/* background-image: url("/resources/img/visit/old-paper.png"); */
+	background-size: 100% 280px;
+	background-repeat: no-repeat;
 }
-  td:first-child {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100px;
-  }
-  td:not(:first-child) {
-    clear: both;
-    margin-left: 100px;
-    padding: 4px 20px 4px 90px;
-    position: relative;
-    text-align: left;
-  }
-  td:not(:first-child):before {
-    color: #91ced4;
-    content: "";
-    display: block;
-    left: 0;
-    position: absolute;
-  }
-  td:nth-child(2):before {
-    content: "Name:";
-  }
-  td:nth-child(3):before {
-    content: "Email:";
-  }
-  td:nth-child(4):before {
-    content: "Phone:";
-  }
-  td:nth-child(5):before {
-    content: "Comments:";
-  }
 
-  tr {
-    padding: 10px 0;
-    position: relative;
-  }
-  tr:first-child {
-    display: none;
-  }
+.card:hover .card-header {
+	opacity: 0.8;
+	height: 100px;
 }
-  td:first-child {
-    background-color: #FFE8D9;
-    border-bottom: 1px solid #91ced4;
-    border-radius: 10px 10px 0 0;
-    position: relative;
-    top: 0;
-    transform: translateY(0);
-    width: 100%;
-  }
-  td:not(:first-child) {
-    margin: 0;
-    padding: 5px 1em;
-    width: 100%;
-  }
-  td:not(:first-child):before {
-    font-size: 0.8em;
-    padding-top: 0.3em;
-    position: relative;
-  }
-  td:last-child {
-    padding-bottom: 1rem !important;
-  }
 
-  tr {
-    background-color: white !important;
-    border: 1px solid #FFC8A5;
-    border-radius: 10px;
-    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-    margin: 0.5rem 0;
-    padding: 0;
-  }
+.card-header-is_closed {
+	background-color: #EF5A31;
+	color: #FFF;
+	font-weight: bold;
+	text-align: center;
+	float: right;
+	margin: 15px 15px 0 0;
+	border-radius: 50%;
+	font-weight: bold;
+	padding: 10px 10px;
+	line-height: 20px;
+}
 
+h1 {
+	color:#404040;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.card-body {
+	padding: 0.15em;
+	width: 30em;
+}
+
+.card-body-header {
+	line-height: 25px;
+	margin: 10px 20px 0px 20px;
+}
+
+.card-body-description {
+	opacity: 0;
+	color: #EB5C01;
+	line-height: 25px;
+	-webkit-transition: .2s ease-in-out; /*사파리&크롬*/
+	-moz-transition: .2s ease-in-out; /*파이어폭스*/
+	-ms-transition: .2s ease-in-out; /*익스플로러*/
+	-o-transition: .2s ease-in-out; /*오페라*/
+	transition: .2s ease-in-out;
+	overflow: hidden;
+	height: 180px;
+	margin: 5px 20px;
+}
+
+.card:hover .card-body-description {
+	opacity: 1;
+	-webkit-transition: .5s ease-in-out;
+	-moz-transition: .5s ease-in-out;
+	-ms-transition: .5s ease-in-out;
+	-o-transition: .5s ease-in-out;
+	transition: .5s ease-in-out;
+	overflow: scroll;
+}
+
+.card-body-hashtag {
+	color: #2478FF;
+	font-style: italic;
+}
+
+.card-body-footer {
+	position: absolute;
+	margin-top: 15px;
+	margin-bottom: 6px;
+	bottom: 0;
+	width: 420px;
+	font-size: 14px;
+	color: #9FA5A8;
+	padding: 0 15px;
+}
+
+.icon {
+	display: inline-block;
+	vertical-align: middle;
+	margin-right: 2px;
+}
+
+.icon-view_count {
+	width: 25px;
+	height: 17px;
+	background: url("images/eye.jpg") no-repeat;
+}
+
+.icon-comments_count {
+	margin-left: 5px;
+	width: 25px;
+	height: 17px;
+	background: url("images/comment.jpg") no-repeat;
+}
+
+.reg_date {
+	float: right;
+}
 </style>
 
-<body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="200">
+</head>
 
-	<%@include file="/header.jsp"%>
-		<div class="container">
-			<div class="container-fluid col-md-12">
-				<section class="sideBar col-md-3">
-					<a href="independenceList.do"><b>독립유공자 공훈록</b></a>
-					<hr>
-					<a href="#"><b>별들의 발자취</b></a>
-					<hr>
-					<b>별 보러 가자</b>
-					<hr>
-				</section>
-				<section class="contents col-md-9">
-					<c:forEach items="${hList }" var="hList">
-					<section class="contents project-card">
-						<img src="resources/hupLoadFile/${hList.renameFilename }">
-						<section class="project-explain">
-							<table class="table">
-									<tr>
-										<th></td>
-										<th></td>
-										<th>사적지 이름</td>
-										<th>${hList.siteName }</td>
-									</tr>
-									<tr>
-										<td class="colored"><b>사적지 타입</b></td>
-										<td><b>${hList.siteType }</b></td>
-										<td class="colored"><b>사적지 이름</b></td>
-										<td>${hList.siteName }}</td>
-									</tr>
-									<tr>
-										<td class="colored" colspan="2"><b>설명</b></td>
-										<td colspan="2">${hList.siteContents }</td>
-									</tr>
-									<tr>
-										<td class="colored" colspan="2"><b>주소</b></td>
-										<td>${hList.siteAddr }</td>
-									</tr>
-							</table>
-							
-						</section>
-					</section>
-					</c:forEach>
-					<section>
-					<%@include file="/footer.jsp"%>
-					</section>
-					
-				</section>
+<body>
+	<div class="container-fluid col-md-12">
+		<section class="sideBar col-md-4">
+			<b>독립유공자 공훈록</b>
+			<hr>
+			<a href="#"><b>별들의 발자취</b></a>
+			<hr>
+			<a href="visitList.do"><b>별 보러 가자</b></a>
 
+			<hr>
+		</section>
+		<section class="contents col-md-8">
+			<c:forEach items="${hList }" var="hList">
+			<div class="card">
+				<!-- 카드 헤더 -->
+				<div class="card-header" style="background-image: url('/resources/hupLoadFile/${hList.renameFilename }');">
+					<div class="card-header-is_closed">
+						<div class="card-header-text">방문</div>
+						<div class="card-header-number">인증하기</div>
+					</div>
+				</div>
+				<!--  카드 바디 -->
+				<div class="card-body">
+					<!--  카드 바디 헤더 -->
+					<div class="card-body-header">
+						<h1>${hList.siteName }</h1>
+						<p class="card-body-hashtag">${hList.siteType }</p>
+						<p class="card-body-nickname">${hList.siteAddr }</p>
+					</div>
+					<!--  카드 바디 본문 -->
+					<p class="card-body-description">${hList.siteContents }
+					</p>
+					<!--  카드 바디 푸터 -->
+					<div class="card-body-footer">
+						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+						<i class="icon icon-view_count"></i>조회 38회 <i
+							class="icon icon-comments_count"></i>댓글 4개 <i class="reg_date">
+							작성일 : ${hList.hCreateDate }</i>
+					</div>
+				</div>
 			</div>
-		</div>
-
-
-	
-
-
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
-	<script src="/resources/js/jquery-3.3.1.min.js"></script>
-	<script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
-	<script src="/resources/js/jquery.easing.1.3.js"></script>
-	<script src="/resources/js/jquery-ui.js"></script>
-	<script src="/resources/js/popper.min.js"></script>
-	<!-- <script src="/resources/js/bootstrap.min.js"></script> -->
-	<script src="/resources/js/owl.carousel.min.js"></script>
-	<script src="/resources/js/jquery.stellar.min.js"></script>
-	<script src="/resources/js/jquery.countdown.min.js"></script>
-	<script src="/resources/js/jquery.magnific-popup.min.js"></script>
-	<script src="/resources/js/bootstrap-datepicker.min.js"></script>
-	<script src="/resources/js/aos.js"></script>
-
-	<script src="/resources/js/jquery.fancybox.min.js"></script>
-
-	<script src="/resources/js/main.js"></script>
+			</c:forEach>
+		</section>
+	</div>
 
 </body>
 </html>
+
+
+

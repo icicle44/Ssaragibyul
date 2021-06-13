@@ -29,7 +29,7 @@ public class HistoryController {
 		int listCount =hService.getListCount();
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
 		ArrayList<History> hList = hService.printAll(pi);
-		
+
 		if(!hList.isEmpty()) {
 			mv.addObject("hList", hList);
 			mv.addObject("pi", pi);
@@ -54,5 +54,9 @@ public class HistoryController {
 		// 2. HashMap 사용하기
 
 		return "";
+	}
+	public int getVisitor(int siteNo) {
+		
+		return 0;
 	}
 }

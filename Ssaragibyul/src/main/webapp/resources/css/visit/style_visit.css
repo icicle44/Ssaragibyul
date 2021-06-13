@@ -8,6 +8,10 @@ body * {
   box-sizing: border-box;
   text-align: center;
 }
+.wrapper{
+	margin-top:100em;
+	padding-top:10em;
+}
 .container{
 	margin-top:2em;
 	padding-top:2em;
