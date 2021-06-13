@@ -269,15 +269,14 @@ table {
   heith: 80%;
 }
 table th{
-	color: #286267;
+  color: #286267;
   padding: 1em 0em 1em 2em;
-  font-size: 15px;
+/*   font-size: 15px; */
 } 
 table td{
   color: #2b686e;
   padding: 5px;
-}
-table td {
+  width: 5px;
   font-size: 12px;
   text-align: center;
   vertical-align: middle;
