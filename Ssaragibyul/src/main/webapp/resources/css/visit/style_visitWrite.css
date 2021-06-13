@@ -42,15 +42,6 @@ select::-ms-expand {
 	padding: 0;
 }
 /* 파일박스  */
-.input-file-button{
-  padding: 6px 25px;
-  background-color:#FF6600;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-}
-#input_img{
-}
 /* 접근성 탭 포커스 스타일 */
 .file-focus {
   outline: 1px dotted #d2310e;
@@ -93,14 +84,14 @@ select::-ms-expand {
 #prev {
 	left: 50px;
 	padding: 10px 50px;
-	margin: 0px 18px 0px 10px;
+	margin: 0px 18px 0px 5px;
 }
 
 .orange {
 	position: absolute;
 	border: none;
 	padding: 10px 27px;
-	margin: 10px;
+	margin: 5px 10px 0px 10px;
 	background: #EB5C01;
 	border-radius: 4px;
 	color: #fff;
@@ -115,7 +106,7 @@ select::-ms-expand {
 	background: #6E6E6E;
 	border: none;
 	padding: 10px 27px;
-	margin: 10px;
+	margin: 5px 10px 0px 5px;
 	border-radius: 4px;
 	color: #fff;
 }

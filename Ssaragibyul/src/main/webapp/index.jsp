@@ -4,6 +4,7 @@
 <head>
 	<title>Home</title>
 </head>
+
 <body>
 <jsp:forward page="home.do"/>
 <h1>

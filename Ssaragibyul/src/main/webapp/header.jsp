@@ -16,11 +16,9 @@
 
   <!-- Template Main CSS File -->
 <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
-<!-- Favicons -->
-<link href="/resources/img/favicon.svg" rel="icon">
+
 <link rel="stylesheet" href="/resources/css/style_nav.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
-
 </head>
 <style>
 .navbar .getstarted {

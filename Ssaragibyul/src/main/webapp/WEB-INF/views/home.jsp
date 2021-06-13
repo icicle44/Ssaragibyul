@@ -22,7 +22,8 @@
 
 <link rel="stylesheet" href="/resources/css/aos.css">
 <link rel="stylesheet" href="/resources/css/fancybox.min.css">
-
+<!-- Favicons -->
+<link href="/resources/static/favicon.svg" rel="icon">
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/styleFundingList.css">
 </head>
