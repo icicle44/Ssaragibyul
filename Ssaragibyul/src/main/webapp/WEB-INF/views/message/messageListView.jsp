@@ -71,7 +71,12 @@
 								<c:if test="${flag=='notice' }">
 									<td></td>
 								</c:if>
-								<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
+								<c:if test="${flag!='notice' }">
+									<th><input type="checkbox" class="msg-del-check" id="checkAll"></th>
+								</c:if>
+								<c:if test="${flag=='notice' }">
+									<th width="1px"></th>
+								</c:if>
 							</tr>
 						</thead>
 						<tbody>
@@ -139,19 +144,36 @@
 										<c:if test="${message.msgType == 0 }">
 											<td class="td-small"></td>
 										</c:if>
-										<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }"></td>					
+										<c:if test="${flag!='notice' }">
+											<td><input type="checkbox" class="msg-del-check" name="chk" value="${message.msgNo }"></td>		
+										</c:if>	
+										<c:if test="${flag=='notice' }">
+											<td></td>		
+										</c:if>				
 									</tr>
 								</c:forEach>
 							</c:if>
 							<!-- 삭제하기 -->
-							<tr>
-								<td colspan="5"></td>
-								<td style="padding:3px">
-									<button type="submit" id="deleteArrBtn">
-										<img id="delIcon" src="/resources/img/message/delIcon.svg" alt="delIcon" width="25px" style="opacity:0.3">
-									</button>
-								</td>
-							</tr>
+							<c:if test="${flag!='notice' }">
+								<tr>
+									<td colspan="5"></td>
+									<td style="padding:3px">
+										<button type="submit" id="deleteArrBtn">
+											<img id="delIcon" src="/resources/img/message/delIcon.svg" alt="delIcon" width="25px" style="opacity:0.3">
+										</button>
+									</td>
+								</tr>
+							</c:if>
+							<c:if test="${flag=='notice' }">
+								<tr>
+									<td colspan="5"></td>
+									<td style="padding:3px">
+										<button type="submit" id="deleteArrBtn">
+											<img id="delIcon" src="/resources/img/message/delIcon.svg" alt="delIcon" width="25px" style="opacity:0">
+										</button>
+									</td>
+								</tr>
+							</c:if>
 							<!-- 페이징 -->
 							<tr>
 								<td colspan="6" id="page-td">

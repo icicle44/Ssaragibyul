@@ -126,6 +126,9 @@
 	</select>
 	
 	<!-- 페이징용 리스트 갯수 -->
+	<select id="selectNoticeListCount" resultType="_int">
+		SELECT COUNT(*) FROM MESSAGE WHERE MSG_TYPE = 0 AND SEND_DELETE_YN = 0
+	</select>
 	<select id="selectMsgListCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM MESSAGE
 		<if test="flag.toString() == 'rec'">

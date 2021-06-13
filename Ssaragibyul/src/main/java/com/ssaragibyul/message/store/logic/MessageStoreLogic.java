@@ -96,8 +96,7 @@ public class MessageStoreLogic implements MessageStore{
 
 	@Override
 	public int getNoticeListCnt() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlSession.selectOne("messageMapper.selectNoticeListCount");
 	}
 
 	@Override
