@@ -42,7 +42,7 @@ public class History {
 		this.uploadTime = uploadTime;
 		this.visitor = visitor;
 	}
-
+//변경
 	public int getSiteNo() {
 		return siteNo;
 	}
