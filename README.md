@@ -91,10 +91,13 @@ DataBase | AWS RDS, Oracle
 -   이미지 업로드 예정
 ------------
 ## Document
-### 1. 플로우차트
+### 1. 유즈케이스
+![싸라기별_유즈케이스(03안)_05_09](https://user-images.githubusercontent.com/42002548/121817298-7ba08480-ccbb-11eb-8c98-39aaa79d7cdb.png)
+
+### 2. 플로우차트
 ![knknkjn](https://user-images.githubusercontent.com/42002548/121816008-28770380-ccb4-11eb-9573-ec501a98bfcf.png)
 
-### 2. ERD
+### 3. ERD
 ![hhhhhhhhhhh](https://user-images.githubusercontent.com/42002548/121816012-2b71f400-ccb4-11eb-84c1-7f4f2e4ccfa6.png)
 
 
