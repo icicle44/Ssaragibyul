@@ -1,6 +1,7 @@
 package com.ssaragibyul.history.store.storeLogic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,16 @@ public class HistoryStoreLogic implements HistoryStore{
 	public int getListCount() {
 		return sqlSession.selectOne("historyMapper.selectHistoryListCount");
 	}
+	@Override
+	public Integer printLastNo() {
+		History h = sqlSession.selectOne("historyMapper.selectLastNo");
+		Integer historyNo = h.getSiteNo();
+		return historyNo;
+	}
 
+	@Override
+	public List<History> selectScroll(Integer historyNoToStart) {
+		return sqlSession.selectList("historyMapper.selectScroll", historyNoToStart);
+	}
 	
 }

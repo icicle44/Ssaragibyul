@@ -1,6 +1,9 @@
 package com.ssaragibyul.history.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.common.Search;
 import com.ssaragibyul.history.domain.History;
@@ -40,7 +45,21 @@ public class HistoryController {
 		}
 		return mv;
 	}
-	
+	// 스크롤 페이징
+	@RequestMapping(value="historyScroll.do", method=RequestMethod.GET)
+	public void historyScroll(HttpServletResponse response, @RequestParam("historyNo") int historyNo) throws Exception{
+		Integer historyNoToStart = historyNo;
+		int lastNo = checkLastNo();
+		List<History> addList = hService.printScroll(historyNoToStart);
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(addList, response.getWriter());
+	}
+	public Integer checkLastNo() {
+		Integer result = 0;
+		result = hService.printLastNo();
+		System.out.println("result : " + result);
+		return result;
+	}
 	@RequestMapping(value="historyDetail.do", method=RequestMethod.GET)
 	public String historyDetail(@RequestParam("historyNo") int noticeNo, Model model) {
 		return "";

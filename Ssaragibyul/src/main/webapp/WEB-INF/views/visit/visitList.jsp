@@ -43,7 +43,7 @@
 			<section class="sideBar col-md-3">
 				<a href="independenceList.do"><b>독립유공자 공훈록</b></a>
 				<hr>
-				<a href="#"><b>별들의 발자취</b></a>
+				<a href="historyList.do"><b>별들의 발자취</b></a>
 				<hr>
 				<b>별 보러 가자</b>
 				<hr>

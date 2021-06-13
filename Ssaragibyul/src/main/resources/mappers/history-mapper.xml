@@ -19,14 +19,98 @@
 		<result property="uploadTime" column="UPLOAD_TIME"/> 
 	</resultMap>
 
-   <select id="selectAllList" resultMap="historyResultMap">
-           SELECT * FROM HISTORY WHERE H_STATUS = 'Y' ORDER BY SITE_NO DESC
+   <select id="selectAllList" resultMap="historyResultMap">                  
+   SELECT
+		*
+		FROM
+		    (
+		    SELECT
+		        *
+		    FROM
+		        HISTORY
+		    WHERE
+		        H_STATUS = 'Y'
+		    ORDER BY
+		        SITE_NO DESC
+		    )
+		    WHERE ROWNUM &lt;= 4
     </select>
 
    <select id="selectHistoryListCount" resultType="_int">
       SELECT COUNT(*) FROM HISTORY WHERE H_STATUS = 'Y'
     </select>
-    
+    <select id="selectScroll" resultMap="historyResultMap">
+    	SELECT
+            C.SITE_NO,
+            C.SITE_NAME,
+            C.SITE_TYPE,
+            C.SITE_CONTENTS,
+            C.LATITUDE,
+            C.LONGITUDE,
+            C.SITE_ADDR,
+            C.H_CREATE_DATE,
+            C.H_UPDATE_DATE,
+            C.H_STATUS,
+            C.FILE_NO,
+            C.ORIGINAL_FILENAME,
+            C.RENAME_FILENAME,
+            C.UPLOAD_TIME 
+		FROM
+			(
+			SELECT 
+				    B.SITE_NO,
+				    B.SITE_NAME,
+				    B.SITE_TYPE,
+				    B.SITE_CONTENTS,
+				    B.LATITUDE,
+				    B.LONGITUDE,
+				    B.SITE_ADDR,
+				    B.H_CREATE_DATE,
+				    B.H_UPDATE_DATE,
+				    B.H_STATUS,
+				    B.FILE_NO,
+                    B.ORIGINAL_FILENAME,
+                    B.RENAME_FILENAME,
+                    B.UPLOAD_TIME
+			FROM
+				(
+				SELECT     
+				    A.SITE_NO,
+				    A.SITE_NAME,
+				    A.SITE_TYPE,
+				    A.SITE_CONTENTS,
+				    A.LATITUDE,
+				    A.LONGITUDE,
+				    A.SITE_ADDR,
+				    A.H_CREATE_DATE,
+				    A.H_UPDATE_DATE,
+				    A.H_STATUS,
+				    A.FILE_NO,
+                    A.ORIGINAL_FILENAME,
+                    A.RENAME_FILENAME,
+                    A.UPLOAD_TIME
+				FROM
+                    HISTORY A
+			        ORDER BY A.SITE_NO DESC
+				      )B
+		    WHERE SITE_NO &lt; #{historyNo } AND H_STATUS = 'Y'
+		    )C
+		    WHERE ROWNUM &lt;= 4
+    </select>
+    <select id="selectLastNo" resultMap="historyResultMap">
+      SELECT
+    	SITE_NO
+		FROM ( SELECT
+		    SITE_NO
+		    FROM ( SELECT SITE_NO
+		        FROM
+		    HISTORY WHERE H_STATUS = 'Y'
+		ORDER BY
+		    SITE_NO ASC
+		) )
+		WHERE
+		    ROWNUM = 1
+    </select>
 	<select id="selectAllSiteTypes" resultMap="historyResultMap">
     	<![CDATA[SELECT DISTINCT SITE_TYPE FROM HISTORY]]>
     </select>    

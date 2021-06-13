@@ -1,6 +1,7 @@
 package com.ssaragibyul.history.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.history.domain.History;
@@ -24,4 +25,8 @@ public interface HistoryService {
 	public ArrayList<History> printAllSiteLocation(String siteName);
 
 	public int getListCount();
+
+	public Integer printLastNo();
+
+	public List<History> printScroll(Integer historyNoToStart);
 }

@@ -1,6 +1,7 @@
 package com.ssaragibyul.history.store;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.ssaragibyul.common.PageInfo;
 import com.ssaragibyul.history.domain.History;
@@ -16,4 +17,6 @@ public interface HistoryStore {
 	public ArrayList<History> selectAllSiteType();
 	public ArrayList<History> selectSiteLocation(String siteName);
 	public int getListCount();
+	public Integer printLastNo();
+	public List<History> selectScroll(Integer historyNoToStart);
 }

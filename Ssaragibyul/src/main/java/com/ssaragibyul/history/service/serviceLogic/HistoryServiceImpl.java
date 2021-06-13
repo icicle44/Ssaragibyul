@@ -1,6 +1,7 @@
 package com.ssaragibyul.history.service.serviceLogic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,5 +66,16 @@ public class HistoryServiceImpl implements HistoryService{
 	public int getListCount() {
 		return hStore.getListCount();
 	}
+
+	@Override
+	public Integer printLastNo() {
+		return hStore.printLastNo();
+	}
+
+	@Override
+	public List<History> printScroll(Integer historyNoToStart) {
+		return hStore.selectScroll(historyNoToStart);
+	}
+
 
 }
