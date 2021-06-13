@@ -803,6 +803,7 @@ public class MemberController {
 		
 		if(!cpList.isEmpty()) {
 			mv.addObject("cpList", cpList);
+			mv.addObject("search", search);
 		}else {
 			mv.addObject("tblMsg", "남기신 댓글이 없습니다.");
 		}
