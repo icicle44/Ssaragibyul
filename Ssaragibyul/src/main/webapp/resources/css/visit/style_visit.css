@@ -385,7 +385,9 @@ table{
 	-webkit-transform: translate3d(0, 20px, 0);
 	transform: translate3d(0, 20px, 0);
 }
-
+.replyCount{
+	margin-right: 4em;
+}
 .preview--open .details ul li {
 	opacity: 1;
 	-webkit-transform: translate3d(0, 0, 0);
