@@ -164,7 +164,7 @@ margin-right: 121px;
                         </div>
                     </div> 
 				</c:forEach>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<br>
           <div class="table-users">
 			<table cellspacing="0">  

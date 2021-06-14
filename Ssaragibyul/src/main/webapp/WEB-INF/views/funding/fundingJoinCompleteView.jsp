@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <title>펀딩 완료</title>
-<meta http-equiv="refresh" content="5; url=/donationList.do">
+<meta http-equiv="refresh" content="5; url=/fundingList.do">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -54,7 +54,7 @@ span{
 .contents{
 	text-align:center;
 	margin:auto;
-	height: 380px;
+	height: 480px;
 	width: 80%;
 	border-radius: 20px;
 	border: 1px solid gray;
@@ -125,7 +125,7 @@ span{
 
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a class="nav-link" style="color: #F1512F"><strong>결제 내역 확인</strong></a></li>
+				<li><a class="nav-link" style="font-size:16px;"><strong>결제 내역 확인</strong></a></li>
 			</ul>
 		</div>
 	</header>
@@ -135,7 +135,7 @@ span{
 		<div class="contents">
 		<br><br>
 			<h3>펀딩이 완료되었습니다.</h3>
-			<img src="/resources/img/mypage/fundingIcon.png" style="width:200px;, height:150px;">
+			<img src="/resources/img/mypage/fundingCompleteIcon.png" style="width:200px;, height:200px;">
 			<br>
 			
 			<p id="thank">후원자 ${loginUser.userName}님 펀딩에 동참해주셔서 감사합니다.<p>
@@ -144,17 +144,12 @@ span{
 			
 			<span>목표액이 미달할 경우 예정된 모든 결제 포인트는 자동으로 취소됩니다.</span><br><br>
 			
-			
 			<span>기다리시면 자동으로 목록  페이지로 넘어갑니다^^</span>
 			<br>
 		
 	 		<br><br><br>
 		</div>	
 		
-	<form action="fundingJoin2.do" method="post">
-    <input type="hidden" name="projectNo" value="${donation.projectNo }">
-    <input type="hidden" name="userId" value="${loginUser.userId }">
-    </form>
 	
 	
 	<br><br><br><br><br><br><br><br><br><br>

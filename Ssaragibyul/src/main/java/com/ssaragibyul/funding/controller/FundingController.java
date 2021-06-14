@@ -344,7 +344,7 @@ public class FundingController {
 	                   							@RequestParam("projectNo") int projectNo) {
 						int result = fService.fundingCancelComplete(fundingLog, funding); 
 						if(result > 0) {
-								return "redirect:fundingDetail.do?projectNo="+projectNo;
+								return "mypage/myFunding";
 						}else {
 							return "common/errorPage";
 							}
