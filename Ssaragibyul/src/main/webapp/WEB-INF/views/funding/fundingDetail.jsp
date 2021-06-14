@@ -383,7 +383,7 @@ td{
 								class="dropdown-item" href="/historyList.do">별들의 발자취</a> <a
 								class="dropdown-item" href="visitList.do">별보러 가자</a>
 						</div></li>
-					<li class="nav-item"><a class="nav-link" href="donationList.do">펀딩</a>
+					<li class="nav-item"><a class="nav-link" href="fundingList.do">펀딩</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="donationList.do">기부</a></li>
 					<li class="nav-item"><a class="nav-link" href="guide.do">가이드</a></li>
@@ -482,9 +482,15 @@ td{
 				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${funding.goalMoney }" pattern="#,###"/>원 (목표금액)</p>
    				<p class = "contents" id="percent" style="font-weight: bold;"> <fmt:formatNumber value="${funding.percent }" pattern="#,###"/>%</p>
 					
-					   	<c:if test="${funding.leftDate < 1}">
+					   	<c:if test="${(funding.leftDate < 1) && (funding.percent >= 100)}">
 							<div>
-	   							<b class ="contents" id="date">0일</b>
+	   							<b class ="contents" id="date">종료(펀딩 성공)</b>
+			   				</div>
+			       		</c:if>
+			       		
+			       		<c:if test="${(funding.leftDate < 1) && (funding.percent < 100)}">
+							<div>
+	   							<b class ="contents" id="date">종료(펀딩 실패)</b>
 			   				</div>
 			       		</c:if>
 							       		
@@ -502,7 +508,7 @@ td{
 						<br>
 						<c:if test="${funding.leftDate < 1}">
 							<div>							
-		   						<input type="submit" class="getstarteds" value="마감된 펀딩입니다." disabled>
+		   						<input type="submit" class="getstarteds1" value="펀딩마감" disabled>
 			   				</div>
 		       			</c:if>
 			       				<c:if test="${(funding.leftDate >= 1) && (empty loginUser.userId) }">
@@ -530,7 +536,7 @@ td{
 							       		
 							       		<c:if test="${(funding.leftDate >= 1) && (fund == 'true') && (loginUser.userId != funding.userId) && (!empty loginUser.userId)}">
 							    					<form action="fundingCancel.do" method="post" name="fundingGo">
-							    					<input type="submit" class="getstarteds" value="펀딩 취소">
+							    					<input type="submit" class="getstarteds" value="펀딩취소">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
 							   						<input type="hidden" name="userId" value="${loginUser.userId }">
 							    					</form>
@@ -538,7 +544,7 @@ td{
 							    				
 						   					<c:if test="${(funding.leftDate >= 1) && (fund == 'false') && (loginUser.userId == funding.userId) && (!empty loginUser.userId)}">
 													<form action="fundingModifyView.do" method="post" name="fundingGo">
-							    					<input type="submit" class="getstarteds" value="펀딩 수정">
+							    					<input type="submit" class="getstarteds" value="펀딩수정">
 							   						<input type="hidden" name="projectNo" value="${funding.projectNo }">
 							    					</form>
 						   					</c:if>

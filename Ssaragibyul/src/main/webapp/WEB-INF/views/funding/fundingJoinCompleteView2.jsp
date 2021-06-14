@@ -4,14 +4,15 @@
 <html lang="ko">
 <head>
 <title>펀딩 완료</title>
-<meta http-equiv="refresh" content="5; url=/donationList.do">
+<meta http-equiv="refresh" content="5; url=/fundingList.do">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicons -->
 <link href="/resources/img/favicon.png" rel="icon">
+  
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/jquery-ui.css">
@@ -25,14 +26,8 @@
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
-
-<link rel="stylesheet" href="/resources/fonts/korea.ttf">
 </head>
 <style>
-body, main{
-	font-family: 'Noto Serif KR', serif;
-}
-
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
@@ -40,72 +35,6 @@ body, main{
 	margin-left: 140px;
 	border-radius: 4px;
 	color: #fff;
-}
-
-#thank{
-	font-size: 19px;
-	font-weight:600;
-	color: #676767;
-	margin-bottom: 30px;
-}
-span{
-	font-size: 16px;
-}
-.contents{
-	text-align:center;
-	margin:auto;
-	height: 380px;
-	width: 80%;
-	border-radius: 20px;
-	border: 1px solid gray;
-	/* background-color: #F1F1F1; */
-}
-
-	
-#btn1{
-	float: left;
-	background: #EB5C01;
-	padding: 10px 10px;
-	margin: 20px;
-	margin-left: 360px;
-	border-radius: 4px;
-	color: #fff;
-	border: none;
-}
-
-#btn2{
-	float: left;
-	background: #EB5C01;
-	padding: 10px 80px;
-	margin: 20px;
-	margin-left: 0px;
-	border-radius: 4px;
-	color: #fff;
-	border: none;
-}
-
-#btn1:hover{
-	background-color: #E35901;
-	border:none;
-	outline: none;
-}
-
-#btn1:active{
-	background-color: #D75909;
-	border:none;
-	outline: none;
-}
-
-#btn2:hover{
-	background-color: #E35901;
-	border:none;
-	outline: none;
-}
-
-#btn2:active{
-	background-color: #D75909;
-	border:none;
-	outline: none;
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -130,30 +59,29 @@ span{
 		</div>
 	</header>
 
+      <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
-	<br><br><br><br><br><br><br><br>
-		<div class="contents">
-		<br><br>
-			<h3>펀딩이 완료되었습니다.</h3>
-			<img src="/resources/img/mypage/fundingIcon.png" style="width:200px;, height:150px;">
-			<br>
-			
-			<p id="thank">후원자 ${loginUser.userName}님 펀딩에 동참해주셔서 감사합니다.<p>
-			
-			<span>프로젝트가 목표금액을 모두 달성한 경우에만 결제가 완료됩니다.</span><br>
-			
-			<span>목표액이 미달할 경우 예정된 모든 결제 포인트는 자동으로 취소됩니다.</span><br><br>
-			
-			
-			<span>기다리시면 자동으로 목록  페이지로 넘어갑니다^^</span>
-			<br>
+	<br><br><br><br><br><br><br><br><br><br><br>
+		펀딩 참여가 완료되었습니다.
 		
-	 		<br><br><br>
-		</div>	
+		앞으로도 많은 참여 부탁 드리겠습니다.
 		
+		<!-- 펀딩 리스트로 이동 :  <button onclick="location.href='/fundingList.do';">클릭</button> -->
+		<br>
+	
+   			 ${fundingLogOne[0].fundingPoint} 원이 최종 결제되었습니다. 
+   			 <br><br><br>
+		
+		
+	${funding.projectNo }<br>
+	${funding.optionPrice }원<br>
+	${funding.productName }<br>
+	${funding.productContent }<br>
 	<form action="fundingJoin2.do" method="post">
-    <input type="hidden" name="projectNo" value="${donation.projectNo }">
+	<input type="text" name="qunatity"> 한계 : ${funding.optionLimit }<br>
+    <input type="hidden" name="projectNo" value="${funding.projectNo }">
     <input type="hidden" name="userId" value="${loginUser.userId }">
+    <input type="submit" class="getstarted" value="다음단계">
     </form>
 	
 	

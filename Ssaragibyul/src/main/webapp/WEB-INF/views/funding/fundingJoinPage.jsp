@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -61,13 +62,13 @@
 
 /* 고침 */
 
-#sectionSuggest1, #sectionSuggest2{
+#sectionSuggest1, #sectionSuggest2, #sectionSuggest3{
 	margin-left: 200px;
 	height: 40%;
 }
 
 .content1{
-	text-align:left;
+	text-align:center;
  	border: 1px solid #AFAFAF; 
  	border-radius: 15px;
 	width: 80%;
@@ -76,25 +77,33 @@
 }
 
 .content2{
-	text-align:left;
+	text-align:center;
 	border: 1px solid #AFAFAF;
 	border-radius: 15px;
 	width: 80%;
-	height: 350px;
-	margin-top: -100px;
+	height: 340px;
+	margin-top: 100px;
 }
 .content3{
-	text-align:left;
+	text-align:center;
 	border: 1px solid #AFAFAF;
 	border-radius: 15px;
 	width: 80%;
-	height: 350px;
-	margin-top: -100px;
+	height: 666px;
+	margin-top: 100px;
 }
 
 #sendBtn1{
 	margin-top: -100px;
 	margin-left: 350px;
+	}
+#sendBtn2{
+	margin-top: -100px;
+	margin-left: 350px;
+}
+#sendBtn3{
+	margin-top: -100px;
+	margin-left: -123px;
 }
 
 #myPoint-total1{
@@ -114,12 +123,15 @@ input:focus {
 #name{
 	margin-left: -130px;
 }
+#name1{
+	margin-left: -145px;
+}
 
 #phone{
 	margin-left: -80px;
 }
 
-#input-name, #input-phone{
+#input-name, #input-phone, #addPrice{
 	width: 220px;
 	margin-bottom: 10px;
 	border:1px solid gray;
@@ -133,8 +145,8 @@ input:focus {
 	margin-bottom: 50px;
 	font-size: 17px;
  	font-weight: bold;
-    margin-left: 360px;
-    margin-right: -290px;
+    margin-left: 460px;
+    margin-right: -440px;
 }
 .content2 span{
 	 font-size: 17px;
@@ -178,37 +190,40 @@ input:focus {
 			<section id="sectionSuggest1">
 			<br><br><br><br>
 				<div class="content1">
-				<h3 style="margin: 60px 0px 15px 0px; font-weight: bold;">펀딩 참여하기</h3><br><br>
+				<h3 style="margin: 60px 0px 15px 0px; font-weight: bold; color : #FE9A2E;">펀딩 참여하기</h3><br><br>
 				 <input type="hidden" value="${funding.optionPrice }" id="price">		
 					<h4> 리워드 명 : ${funding.productName }</h4><br><br>
 					
 					<h5>${funding.productContent }</h5><br><br>
-					<h6>개당 : ${funding.optionPrice }원</h6><br>
+					<h6>리워드 가격 : ${funding.optionPrice }원</h6><br>
 					<input id="sendNumber" type="number" name="cal" max="${funding.optionLimit }">
-					 한계 : <span id="optionLimit">"${funding.optionLimit }</span><br>
+					 최대 : <span id="optionLimit">${funding.optionLimit }</span><br>
 					사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span>
-					
-		<%-- 		<input type="number" id="price" name="cal"> 원<br>
-				사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span> --%>
+ 
 				</div>
-				<br><br><br><br><br><br><br>
-				
-			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음 단계로</a>
+				<br><br><br><br><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음 단계로</a>
 			</section>
 
 		<br><br><br><br><br><br><br><br><br>
 			<section id="sectionSuggest2">
-			<div class="content2">
-			<input class="getNumber" type="number" name="cal">
-				개 선택<br>
-				<input class="getResult1" type="number" name="cal">원 리워드<br>
-				추가로 후원하기
-				<input type="number" id="addPrice" name="cal">원<br>
-				
-				사용 가능한 포인트: <span id="myPoint-total2">${sessionScope.myPoint.total}</span>
+			<div class="content2"><br>
+			<span id="phone">리워드 선택 </span><br><br>
+			<input class="getNumber" type="number" name="cal" id="input-phone">개 선택<br>
+			<span></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input class="getResult1" type="number" name="cal" id="input-phone">포인트(총합) 리워드<br>
+			<br>
+			<span id="phone">추가로 후원하기</span><br><br>
+			<input type="number" id="addPrice" name="cal">포인트<br>
+			사용 가능한 포인트: <span id="myPoint-total2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${sessionScope.myPoint.total}</span>
 				
 				<br><br><br><br><br><br><br>
 				</div>
+						<br><br><br><br><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
 			<a id="sendBtn2" class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음 단계로</a>
 			</section>
 
@@ -218,24 +233,39 @@ input:focus {
 			<div class="content3">
 				<form action="fundingJoinComplete.do" method="post">
 	    			<input type="hidden" name="projectNo" value="${funding.projectNo }"><br>
-	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br>
-	   				<!-- <input type="text" name="sumMoney" class="getResult2"> 최종금액 <br> -->
-	   				<input type="text" name="qunatity" class="getNumber"> 선택  리워드 개수<br>
-					<input type="text" name="" class="getResult1"> 리워드 금액<br>
-					<input type="text" name="" class="addNumber"> 추가 후원 금액<br>
-					<input type="text" name="sumMoney" class="getResult2"> 최종금액 <br>
+	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br><br>
+	   				
+	   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="name">선택 리워드 개수</span><br>
+	   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   				
+	   				<input type="text" name="qunatity" class="getNumber" id="input-phone"> 선택  리워드 개수<br>
+	   				
+	   				<span id="name">리워드 금액</span><br>
+	   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" name="" class="getResult1" id="input-phone"> 리워드 금액<br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="name">추가로 후원한 금액</span><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" name="" class="addNumber" id="input-phone"> 추가 후원 금액<br>
+					
+					
+				<span id="name1">최종 합산</span><br>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	   				<input type="text" name="sumMoney" class="getResult2" id="input-phone"> 포인트<br><br>
+	   				
 	   				<span id="name">결제자 이름</span><br>
 	   				<input type="text" name="receiverName" id="input-name"><br>
 	   				<span id="phone">결제자 휴대폰 번호</span><br>
-	   				<input type="input-text" name="receiverPhone" id="input-phone"><br>
-	   				<span id="phone">결제자 주소</span><br>
+	   				<input type="text" name="receiverPhone" id="input-phone"><br>
+	   				
+	   				<span id="name">결제자 주소</span><br>
 	   				<input type="text" name="receiverAddr" id="input-phone"><br>
 	   				<div id="point">
 		   				<input type="text" name="fundingPoint" class="getResult3">
 		   				<span>포인트를 사용하시겠습니까?</span>
-	   				</div>
-	   				
-	    			<input type="submit" class="getstarted" value="펀딩하기">
+	   				</div><br><br>
+	    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	    			<input id="sendBtn3" type="submit" class="getstarted" value="펀딩하기">
 	    			
     			</form>
    			</div>
