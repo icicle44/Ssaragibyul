@@ -63,6 +63,9 @@ a{
 	font-size:13px; 
 	color:DimGray;
 }
+
+
+
 .nothing{
  	color:white;
 }
@@ -272,7 +275,6 @@ input::-webkit-input-placeholder {
 				<br><br><br><br><br><br><br>
 				
 				<c:if test="${fn:length(dListandFile) > 6}">		
-					
 				</c:if> 
 				<c:if test="${fn:length(dListandFile) <= 6 }">
 				<button class="btn" onclick="location.href ='donationListFullPro.do'">프로젝트 더 보기</button>
@@ -378,10 +380,10 @@ input::-webkit-input-placeholder {
 			<br><br><br>
 			<br><br><br>
 			<br><br><br>
-			<c:if test="${fn:length(fListandFileEnd) > 6 }">
+			<c:if test="${fn:length(distandFileEnd) > 6 }">
 
 			</c:if> 
-			<c:if test="${fn:length(fListandFileEnd) <= 6 }">
+			<c:if test="${fn:length(dListandFileEnd) <= 6 }">
 			<button class="btn" onclick="location.href ='donationListFullPro.do'" style="text-align: center; margin-right: 700px;">프로젝트 더 보기</button>
 			</c:if>
 		</section>

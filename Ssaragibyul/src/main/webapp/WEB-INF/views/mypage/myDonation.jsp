@@ -16,6 +16,35 @@
 #svg{
 	width: 500px;
 }
+
+.contents .kind #k1{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 85px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(238, 238, 238);
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(174, 174, 174);
+ 	padding-top: 10px;
+}
+
+.contents .kind #k2{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 10px 10px 0px 0px;
+   	background-color: white;
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(235, 92, 1);
+    padding-top: 6px;
+    border: 2px solid rgb(174, 174, 174);
+}
 .table-users{
 margin : auto;
 padding-left: 555px;

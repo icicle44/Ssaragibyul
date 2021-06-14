@@ -37,8 +37,9 @@ padding-top : 30px;
 	color: #fff;
 }
 .btn{
-    width: 110px;
+    width: 120px;
     height: 35px;
+    position:absolute;
     text-align: left;
     color: white;
     font-size: 11px;
@@ -47,9 +48,8 @@ padding-top : 30px;
     border: none;
     border-radius: 7px;
     float : right;
-    font-style : 
+    margin-left: 355px;
 }
-
 .btn:hover{
     background-color: rgb(150, 150, 150);
     border: none;
@@ -112,7 +112,6 @@ padding-top : 30px;
                         <tr>
                             <td id="img">
                                 <img src="/resources/upLoadFile/${m.fundingProject.fundingFile.fileMainName}"id="f-img">
-                                <img src="/resources/img/mypage/hartCheck.png" id="hart-img" onclick="like(this)"> 
                            <td>
                                 <div class="title">
                                 <c:url var="fDetail" value="fundingDetail.do">
@@ -126,8 +125,8 @@ padding-top : 30px;
                                 </div>
                                 <div class="heartAndBtn">			
                                 <div class="like-stauts">
-                                <img src="resources/img/images/likeHeart.png" style="width:30px;, height:30px;">
-								<span style="color:DimGray; font-size:18px; vertical-align:1px;">${m.fundingProject.likeCount}</span>
+                                <img src="resources/img/images/likeHeart.png" style="width:22px;, height:22px;">
+								<span style="color:DimGray; font-size:18px;">${m.fundingProject.likeCount}</span>
 						     </div><div class="btn_status">
 						    			 <c:if test="${m.fundingProject.leftDate < 1}">
                                         		<input type="submit" class="btn1" value="취소 불가">

@@ -19,6 +19,35 @@
 margin : auto;
 padding-left: 555px;
 }
+
+.contents .kind #k1{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 85px;
+    border-radius: 10px 10px 0px 0px;
+    background-color: rgb(238, 238, 238);
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(174, 174, 174);
+ 	padding-top: 10px;
+}
+
+.contents .kind #k2{
+    float: right;
+    width: 8%;
+    height: 40px;
+    margin-right: 15px;
+    border-radius: 10px 10px 0px 0px;
+   	background-color: white;
+    text-align: center;
+    font-weight: 550;
+    font-size: 17px;
+    color: rgb(235, 92, 1);
+    padding-top: 6px;
+    border: 2px solid rgb(174, 174, 174);
+}
 #end-btn{
     width: 280px;
     height: 35px;
@@ -168,7 +197,7 @@ margin-right: 150px;
 			<br>
           <div class="table-users">
 			<table cellspacing="0">  
-                    				<!-- 페이징 -->
+           	<!-- 페이징 -->
 				<tr align="center" height="20">
 					<td colspan="8">
 					<!-- 이전 -->

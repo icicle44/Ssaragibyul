@@ -40,11 +40,34 @@
 </head>
 
 <style>
+.main-content, .main-menu{
+	font-family: 'Noto Serif KR', serif;
+}
+
+#postForm{
+	margin-left: 150px;
+	color: #505050
+}
+
+/* 배경 */
+.suggest1, .suggest2, .suggest3{
+    width: 90%;
+    height: auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
+
+#sectionSuggest1, #sectionSuggest2, #sectionSuggest3{
+	margin: 10px 80px;
+}
+
+/*  */
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
+
 	border-radius: 4px;
 	color: #fff;
 }
@@ -61,11 +84,86 @@ margin : auto;
 }
 
 .ql-toolbar{
-	width : 500px;
+	width :  720px;
 }
 .format{
-	width : 500px;
+	width : 720px;
 	height : 400px;
+}
+
+/*  */
+
+#suggest-title{
+	font-size: 21px; 
+	font-weight: bold; 
+	color: #EB5C01;
+}
+
+#project-title{
+	font-size: 18px; 
+	font-weight: bold; 
+	color: #1D1D1D
+}
+
+#title, #goal, #date, #video, #tel, #email{
+	margin-top: 10px;
+	width: 350px;
+}
+
+#editor{
+	margin-top: 10px;
+}
+
+.input-file-button{
+  padding: 6px 25px;
+  border-radius: 4px;
+  background-color: #DFDFDF;
+  cursor: pointer;
+}
+
+.input-file-button:hover{
+	background-color: #CACACA;
+	border:none;
+}
+
+.input-file-button:active{
+	background-color: #ADADAD;
+	border:none;
+}
+
+#input-file{
+	display: none;
+}
+
+#btn{
+	margin-left: 350px;
+}
+
+#submit-btn:hover{
+	background-color: #E35901;
+	border:none;
+}
+
+#submit-btn:active{
+	background-color: #D75909;
+	border:none;
+}
+.guide{
+	margin: 10px 0px;
+	background-color: #FAFAFA;
+	height: auto;
+	width: 720px;
+	font-size: 14px;
+}
+
+::placeholder{
+	color: #BCBCBC;
+}
+
+#waring{
+	margin-top: 10px;
+	width: 590px;
+	height: auto;
 }
 </style>
 
@@ -96,109 +194,128 @@ margin : auto;
 	<main class="main-content">
 		<form action="donationUpdate.do" method="post" enctype="multipart/form-data" id="postForm">
 		<br><br><br><br> <br><br><br><br>
-
-			<section id="sectionSuggest1">
-			<br><br><br><br>
-				<div>
-					프로젝트명
-				</div>
-				<div>
-					<input type="text" name="subjectName" value="${donation.subjectName }">
-				</div>
-				<div>
-					목표 금액
-				</div>
-				<div>
-					<input type="text" name="goalMoney" value="${donation.goalMoney }">
-				</div>
-				<div>
-					진행 기간
-				</div>
-				<div> 
-					<script>	 	
-					let today = new Date();   
-
-					let year = today.getFullYear(); // 년도
-					let month = today.getMonth() + 1;  // 월
-					let date = today.getDate();  // 날짜
-					let day = today.getDay();  // 요일
-
-					document.write(year + '/' + month + '/' + date)
-					</script> ~ 	
-					<input type="date" name="finDate" value="${donation.finDate}">
-				</div>
+			<div class="suggest1">
+				<section id="sectionSuggest1">
+					<p id="suggest-title">1. 기본 사항</p><br>
+					<span id="project-title">프로젝트명</span><br>
+					<span>프로젝트의 주제와 특징이 드러나는 제목을 붙여주세요.</span><br>
+					<div>
+						<input type="text" name="subjectName"  id="title" maxlength="50" value="${donation.subjectName }">
+						<span id="counter">( 0 / 50 )</span>
+					</div><br>
+					<hr>
 				
-				<div>
-					대표 이미지
-				</div>
-				<div>
-					<input type="file" name="reloadFileMain">
-					<br>
-					기존 파일 : ${donation.donationFile.fileName }
-				</div>
-				<br><br><br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
-			</section>
-
+					<span id="project-title">목표 금액</span><br>
+					<span>최소 100,000원 이상이어야 합니다.</span><br>
+					<div>
+						<input type="text" name="goalMoney" id="goal" value="${donation.goalMoney }"> 원
+					</div><br>
+					<hr>
+		
+					<span id="project-title">진행 기간</span><br>
+					<span>최소 7일부터 최대 60일까지 가능합니다. </span><br>
+					<div id="date"> 
+						<script>	 	
+						let today = new Date();   
+	
+						let year = today.getFullYear(); // 년도
+						let month = today.getMonth() + 1;  // 월
+						let date = today.getDate();  // 날짜
+						let day = today.getDay();  // 요일
+	
+						document.write(year + ' / ' + month + ' / ' + date)
+						</script> ~ 	
+						<input type="date" name="finDate" value="${donation.finDate}">
+					</div>
+					<br><hr>
+					
+					<span id="project-title">대표 사진</span><br>
+					<span>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.</span><br><br>
+					<div>
+						<input type="file" name="uploadFile" id="input-file1" style="display:none">
+						<label class="input-file-button" for="input-file1">파일선택</label>
+						<span id="fileName1" class="filname">선택된 파일없음</span><br>
+						<br>
+						기존 파일 : ${donation.donationFile.fileName }
+					</div>
+					<br><br>
+					
+					<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음단계</a>
+				</section>
+			</div> 
 			<br><br><br><br><br><br><br>
-
-			<section id="sectionSuggest2">
-			<br><br><br><br>
-				<div>
-					동영상 주소
-				</div>
-				<div>
-					<input type="text" name="videoUrl" value="${donation.donationFile.videoUrl }">
-				</div>
-				<div>
-				 	이미지 등록
-				</div>
-				<div>
-				 	<input type="file" name="reloadFileSub1">  <br>
-				 		 기존 서브 파일1: ${donation.donationFile.fileSub1Name }<br>
-				    <input type="file" name="reloadFileSub2">	<br>
-				    	 기존 서브 파일1: ${donation.donationFile.fileSub2Name }
-				</div>
-				<div>
-					프로젝트 스토리
-				</div>
-				<input type="hidden" name="projectStory">
-				<input type="hidden" name="uploadImage">
-				<div id="editor" class="format">${donation.projectStory}</div>
-				
-				<br><br><br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음단계</a>
-			</section>
-
+			<div class="suggest2">
+				<section id="sectionSuggest2">
+				<p id="suggest-title">2. 스토리</p><br>
+					<span id="project-title">동영상 주소</span><br>
+					<span>프로젝트를 소개할 수 있는 동영상의 주소를 적어주세요.</span><br>
+					<div>
+						<input type="text" name="videoUrl" id="video" value="${donation.donationFile.videoUrl }">
+					</div><br><hr>
+					
+					<span id="project-title">이미지 등록</span><br>
+					<span>프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요</span><br><br>
+					<div>
+						<!-- 	 	
+						<input type="file" name="uploadFileSub1">  <br>
+					    <input type="file" name="uploadFileSub2">
+					     -->
+					    
+					    <input type="file" name="uploadFileSub1" id="input-file2" style="display:none">
+						<label class="input-file-button" for="input-file2">파일선택</label>
+						<span id="fileName2" class="filname">선택된 파일없음</span><br>
+						기존 서브 파일1: ${donation.donationFile.fileSub1Name }<br>
+						
+						<input type="file" name="uploadFileSub2"id="input-file3" style="display:none">
+						<label class="input-file-button" for="input-file3">파일선택</label>
+						<span id="fileName3" class="filname">선택된 파일없음</span><br>
+						기존 서브 파일1: ${donation.donationFile.fileSub2Name }
+					</div><br><hr>
+					
+					<span id="project-title">프로젝트 스토리</span><br>
+					<span>프로젝트를 소개하고, 준비하는 과정에서 후원자에게 들려주고 싶었던 이야기를 진솔하게 전달해주세요.</span><br>
+					
+					<input type="hidden" name="projectStory">
+					<input type="hidden" name="uploadImage">
+					<div id="editor" class="format">${donation.projectStory}</div>
+					
+					<br><br>
+					
+					<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;">다음단계</a>
+				</section>
+			</div>
 			<br><br><br><br><br><br><br><br><br>
 
-			
-			<section id="sectionSuggest3">
-				<br><br><br><br>
-				<div>
-					환불 정책 안내 사항
-				</div>
+			<div class="suggest3">
+				<section id="sectionSuggest3">
+					<p id="suggest-title">3. 안내사항</p><br>	
+					<span id="project-title">환불 정책 및 안내 사항</span><br>
+					<span>프로젝트 진행 과정에서 발생할 수 있는 위험 요소를 고려하여 신중히 설정해주세요. <br>예기치 못한 분쟁이 발생할 경우 중요한 기준이 됩니다.</span><br>
+					<div>
+						<textarea name="warningIntro" rows="5" wrap="virtual" id="waring" maxlength="1500" style="resize: none;">${donation.warningIntro }</textarea>
+						<span id="counter2">( 0 / 1500)</span>
+					</div>
+					<hr>
 				
-				<div>
-					<textarea name="warningIntro" rows="6" cols="30" wrap="virtual">${donation.warningIntro }</textarea>
-				</div>
-				<div>
-					문의 가능한 번호
-				</div>
-				<div>
-					<input type="text" name="">
-				</div>
-				<div>
-					문의 이메일
-				</div>
-				<div>
-					<input type="text" name="">
-				</div>
-				<input type = "hidden" name="dProjectNo" value="${donation.projectNo }">
-				<input type = "hidden" name="projectNo" value="${donation.projectNo }">
-			</section>
+					<span id="project-title">문의 번호</span><br>
+					<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
+					<div>
+						<input type="text" id="tel">
+					</div>
+					<hr>
+					<span id="project-title">문의 이메일</span><br>
+					<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
+					<div>
+						<input type="text" id="email">
+					</div><br><hr>
+					<input type = "hidden" name="dProjectNo" value="${donation.projectNo }">
+					<input type = "hidden" name="projectNo" value="${donation.projectNo }">
+				</section>
+			</div>
+			
 			<br><br><br><br><br><br>
-			<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;">
+<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;
+			 margin-left: 400px; margin-top:50px; border: none; padding: 10px 100px; border-radius: 4px;">
 
 		</form>
 
@@ -232,5 +349,56 @@ margin : auto;
 	
 	<script src="/resources/js/fundingSug.js"></script>
 	
+	
+	<script>
+	/* 제목 글자수 체크 */
+	 $(document).ready(function() {
+         $('#title').keyup(function (e){
+              var content = $(this).val();
+              $('#counter').html("("+content.length+" / 50자)");    //글자수 실시간 카운팅
+          });
+         
+      });
+	 
+	/* 환불 정책 및 안내 사항 글자수 체크  */
+	 $(document).ready(function() {
+         $('#waring').keyup(function (e){
+              var content = $(this).val();
+              $('#counter2').html("("+content.length+" / 1500자)");    //글자수 실시간 카운팅
+          });
+         
+      });
+	 
+	/* 파일을 선택했을 때 파일명이 옆에 뜨도록 하는 것 */
+	document.getElementById('input-file1').addEventListener('change', function(){
+			var filename = document.getElementById('fileName1');
+			if(this.files[0] == undefined){
+				filename.innerText = '선택된 파일없음';
+				return;
+			}else{
+			filename.innerText = this.files[0].name;
+			}
+	});
+	 
+	document.getElementById('input-file2').addEventListener('change', function(){
+		var filename = document.getElementById('fileName2');
+		if(this.files[0] == undefined){
+			filename.innerText = '선택된 파일없음';
+			return;
+		}else{
+		filename.innerText = this.files[0].name;
+		}
+	});
+	
+	document.getElementById('input-file3').addEventListener('change', function(){
+		var filename = document.getElementById('fileName3');
+		if(this.files[0] == undefined){
+			filename.innerText = '선택된 파일없음';
+			return;
+		}else{
+		filename.innerText = this.files[0].name;
+		}
+	});
+	</script>
 </body>
 </html>

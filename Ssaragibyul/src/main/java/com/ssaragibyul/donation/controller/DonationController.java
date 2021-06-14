@@ -53,7 +53,7 @@ public class DonationController {
 	// 기부 리스트 보여주기: 테이블 2개 조인해서 불러오는 것
 	@RequestMapping(value = "donationList.do", method = RequestMethod.GET) 
 	public String donationList(Model model) { 
-		ArrayList<Donation> dListandFile = dService.printAllProject();
+		ArrayList<Donation> dListandFile = dService.printAllProjectLimit();
 		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();  
 		if (!dListandFile.isEmpty()) {
 			model.addAttribute("dListandFile", dListandFile); 
@@ -68,7 +68,7 @@ public class DonationController {
 	
 	@RequestMapping(value = "donationListFullPro.do", method = RequestMethod.GET)
 	public String donationListFullPro(Model model) {
-		ArrayList<Donation> dListandFile = dService.printAllProjectLimit();
+		ArrayList<Donation> dListandFile = dService.printAllProject();
 		ArrayList<Donation> dListandFileEnd = dService.printAllProjectEnd();   
 		 if(!dListandFile.isEmpty()) {				
 			model.addAttribute("dListandFile", dListandFile);

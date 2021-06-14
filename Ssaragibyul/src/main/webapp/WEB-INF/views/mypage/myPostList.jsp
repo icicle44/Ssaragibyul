@@ -30,7 +30,7 @@
 				<!--상단-->
 				<div class="f-top">
 					<div id="all-check">
-						<input type="checkbox" id="checkAll"> <span>전체 선택</span>
+						<input type="checkbox" id="checkAll"> <span style="margin-bottom: 10px;">전체 선택</span>
 					</div>
 					<div id="btns">
 						<input type="button" value="삭제하기" id="delete-btn" style="opacity:0.3">
@@ -58,8 +58,8 @@
 							</c:forEach>
 							<!--반복-->
 							<!-- 페이징 -->
-							<tr align="center" height="20">
-								<td align="center" colspan="4">
+							<tr align="center" height="20" style="text-align: center; margin-left: 200px;">
+								<td align="center" colspan="11" style="margin-left: 200px;" >
 									<!-- 이전 --> <c:url var="before" value="myPostList.do">
 										<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
 									</c:url> <c:if test="${pi.currentPage <= 1 }">
@@ -72,7 +72,7 @@
 											<c:param name="page" value="${p }"></c:param>
 										</c:url>
 										<c:if test="${p eq pi.currentPage }">
-											<font color="red" size="5">[${p }]</font>
+											<font color="orange" size="3">[${p }]</font>
 										</c:if>
 										<c:if test="${p ne pi.currentPage }">
 											<a href="${pagination }">${p }</a>&nbsp;
