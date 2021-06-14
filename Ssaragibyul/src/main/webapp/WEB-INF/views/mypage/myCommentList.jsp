@@ -11,6 +11,7 @@
 </head>
 <body>
     <jsp:include page="../../../header.jsp"/>
+    <div style="height:50px;"></div>
     <div class="background">
         <div class="contents">
             <div class="kind">
