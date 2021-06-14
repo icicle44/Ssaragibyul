@@ -35,11 +35,12 @@
 
 ------------
 ## 사용기술 및 개발환경
-![aasdgasdgasd](https://user-images.githubusercontent.com/42002548/121815795-23658480-ccb3-11eb-91d2-4a228299072b.png)
+![jjjjjjjjjjjjjjjjj](https://user-images.githubusercontent.com/42002548/121833912-6140c800-cd08-11eb-89b6-110d0871c869.png)
+
 
 Category | Detail
 ---- | ----
-Laguage | HTML5, JS, CSS3, JQuery, JSP, Java
+Laguage | HTML5, JS, CSS3, JQuery, JSP, Java, Spring
 Library & API | googleMap, googleChart chartJs, FullCanlendar 
 IDE | VisualStudio, Eclpise
 Server | Tomcat(v8.5)
