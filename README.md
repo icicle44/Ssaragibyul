@@ -35,17 +35,18 @@
 
 ------------
 ## 사용기술 및 개발환경
-![aasdgasdgasd](https://user-images.githubusercontent.com/42002548/121815795-23658480-ccb3-11eb-91d2-4a228299072b.png)
+![jjjjjjjjjjjjjjjjj](https://user-images.githubusercontent.com/42002548/121833912-6140c800-cd08-11eb-89b6-110d0871c869.png)
+
 
 Category | Detail
 ---- | ----
-Laguage | HTML5, JS, CSS3, JQuery, JSP, Java
-Library & API | Kakaomap
-IDE | VisualStudio, Eclpise
+Laguage | HTML5, JS, CSS3, JQuery, JSP, Java, Spring
+Library & API | googleMap, googleChart, chartJs, FullCanlendar 
+IDE | VisualStudio Code, Eclpise
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
-CI | Github
-DataBase | AWS RDS, Oracle 
+CI | Github, GIT
+DataBase | AWS RDS, Oracle, sqldeveloper
 
 ------------
 ## 프로젝트 기능 구현
