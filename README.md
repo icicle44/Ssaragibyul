@@ -45,8 +45,8 @@ Library & API | googleMap, googleChart chartJs, FullCanlendar
 IDE | VisualStudio, Eclpise
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
-CI | Github
-DataBase | AWS RDS, Oracle 
+CI | Github, GIT
+DataBase | AWS RDS, Oracle, sqldeveloper
 
 ------------
 ## 프로젝트 기능 구현
