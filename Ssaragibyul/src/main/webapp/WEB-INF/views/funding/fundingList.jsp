@@ -166,8 +166,8 @@ input::-webkit-input-placeholder {
 
 		<div class="main-menu">
 			<ul class="js-clone-nav">
-				<li><a href="#section-funding1" class="nav-link">진행중 프로젝트</a></li>
-				<li><a href="#section-funding2" class="nav-link">종료된 프로젝트</a></li>
+				<li><a href="#section-funding1" class="nav-link" style="font-size:16px;">진행중 프로젝트</a></li>
+				<li><a href="#section-funding2" class="nav-link" style="font-size:16px;">종료된 프로젝트</a></li>
 			</ul>
 		</div>
 	</header>
@@ -258,7 +258,7 @@ input::-webkit-input-placeholder {
 	<c:if test="${fn:length(fListandFile) > 6}">
  </c:if> 
   <c:if test="${fn:length(fListandFile) <= 6 }">
-   <button class="btn" onclick="location.href ='fundingListFullEnd.do'">프로젝트 더 보기</button>
+   <button class="btn" onclick="location.href ='fundingListFullPro.do'">프로젝트 더 보기</button>
  	</c:if> 
 				</section>
 				<!--  -->

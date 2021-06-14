@@ -100,7 +100,7 @@ public class FundingController {
 	 						
 	 @RequestMapping(value="fundingSuggest.do", method=RequestMethod.GET)
 	 public String fundingSuggestMain() {
-		 return "funding/fundingSuggest2";
+		 return "funding/fundingSuggest";
 	 }	// 제안 페이지에서 펀딩을 눌렀을때 '펀딩-제안' 페이지로 이동 하는 컨트롤러
 	 
 		
@@ -495,7 +495,7 @@ public class FundingController {
 	
 	@RequestMapping(value="fundingSearch_1.do", method=RequestMethod.GET)
 	public String fundingSearchForProcessing(@ModelAttribute Search search, Model model) {
-		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEnd();   
+		 ArrayList<Funding> fListandFileEnd = fService.printAllProjectEndLimit();   
 		ArrayList<Funding> searchList1 = fService.printSearchAll_1(search);
 		if(!searchList1.isEmpty()) {
 			model.addAttribute("fListandFileEnd", fListandFileEnd);
@@ -510,7 +510,7 @@ public class FundingController {
 	
 	@RequestMapping(value="fundingSearch_2.do", method=RequestMethod.GET)
 	public String fundingSearchForEnd(@ModelAttribute Search search, Model model) {
-		 ArrayList<Funding> fListandFile = fService.printAllProject();   
+		 ArrayList<Funding> fListandFile = fService.printAllProjectLimit();   
 		ArrayList<Funding> searchList2 = fService.printSearchAll_2(search);
 		if(!searchList2.isEmpty()) {
 			model.addAttribute("fListandFile", fListandFile);
