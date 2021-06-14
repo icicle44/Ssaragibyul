@@ -138,7 +138,7 @@
 														<thead>
 															<tr>
 																<!-- 댓글 갯수 -->
-																<td colspan="5"><b class="rCount${vList.visitNo }"></b></td>
+																<td colspan="5"><b class="rCount${vList.visitNo } replyCount"></b></td>
 															</tr>
 														</thead>
 												<tbody></tbody>
@@ -340,6 +340,7 @@
 					$("#rtb tbody").html(""); // tbody부분을 비워줌. 비워주지 않으면 댓글 목록을 조회한 것이 다른 글의 tbody에도 남아있음
 					$(".count").next().remove();
 					visitNo = $(this).attr("data-visitNo"); // 클릭한 img의 아이디값으로 visitNo을 가져옴
+					 $(".rCount"+visitNo).html("");
 					addHitsCount(visitNo);
 					registReply(visitNo);
 					getReplyList(visitNo);// 댓글 목록 조회1
@@ -490,7 +491,7 @@
 						var $rCreateDate;
 						var $btnArea;
 						 $(".rCount"+visitNo).append(
-								"댓글 (" + data.length + ")"); // 아직 안됨//////////////
+								"댓글 (" + data.length + ")"); 
 
 						if (data.length > 0) { // 배열의 경우, "데이터가 있을 떄" 조건을 length로 표현함
 							for ( var i in data) {
@@ -563,7 +564,7 @@
 									}
 								},
 								error : function() {
-									alert("내용을 입력해주세요");
+									//alert("내용을 입력해주세요");
 								}
 							});
 							// 작성 후 내용 초기화
@@ -596,7 +597,7 @@
 							$(".rCount"+visitNo).html("");
 							getReplyList(visitNo);
 						} else {
-							alert("내용을 입력해주세요");
+							//alert("내용을 입력해주세요");
 						}
 					},
 					error : function() {

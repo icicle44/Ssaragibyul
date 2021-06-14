@@ -32,7 +32,9 @@
         <property name="port" value="587" />
         <property name="defaultEncoding" value="utf-8"/>
         <property name="username" value="zlfjwh3@gmail.com" />
-        <property name="password" value="QWEqwe123!@#" />
+<!--         <property name="password" value="QWEqwe123!@#" /> -->
+		<!-- 앱비밀번호 -->
+        <property name="password" value="piiepnvfygqfelyn" />
        <!-- email 요청 SMTP -->
         <property name="javaMailProperties">
             <props>
