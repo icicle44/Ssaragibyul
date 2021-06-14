@@ -40,7 +40,7 @@
 Category | Detail
 ---- | ----
 Laguage | HTML5, JS, CSS3, JQuery, JSP, Java
-Library & API | Kakaomap
+Library & API | googleMap, googleChart chartJs, FullCanlendar 
 IDE | VisualStudio, Eclpise
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
