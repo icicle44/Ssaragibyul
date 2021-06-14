@@ -32,10 +32,10 @@
 	
 	<select id="selectSearchList" resultMap="independenceResultMap">
 		SELECT * FROM INDEPENDENCE 
-		<if test="searchCondition.toString() == 'nameKo'">
+		<if test="searchCondition == 'nameKo'">
 			WHERE NAME_KO LIKE '%' || #{searchValue } || '%'
 		</if>
-		<if test="searchCondition.toString() == 'birth'">
+		<if test="searchCondition == 'birth'">
 			WHERE BIRTHDAY LIKE '%' || #{searchValue } || '%'
 		</if>
 		<if test="searchCondition.toString() == 'activityLine'">

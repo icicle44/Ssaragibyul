@@ -310,9 +310,9 @@
 			  $("#searchCondition").val(searchCondition);
 		 };
 		function getSearchValue(obj){
-			console.log(obj);
+			//alert(obj);
 			var searchValue = $(obj).prev().val();
-				alert(searchValue);
+				//alert(searchValue);
 			$("#searchValue").val(searchValue);
 		}
 		//검색창 보이기/숨기기

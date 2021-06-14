@@ -20,7 +20,7 @@
 		<section class="sideBar col-md-4">
 			<b>독립유공자 공훈록</b>
 			<hr>
-			<a href="#"><b>별들의 발자취</b></a>
+			<a href="historyList.do"><b>별들의 발자취</b></a>
 			<hr>
 			<a href="visitList.do"><b>별 보러 가자</b></a>
 
@@ -202,35 +202,6 @@
 
 					</c:forEach>
 
-					<!-- 페이징 -->
-					<tr align="center" height="20">
-						<td colspan="8">
-							<!-- 이전 --> <c:url var="before" value="independenceList.do">
-								<c:param name="page" value="${pi.currentPage - 1 }"></c:param>
-							</c:url> <c:if test="${pi.currentPage <= 1 }">
-					[이전]&nbsp;
-				</c:if> <c:if test="${pi.currentPage > 1 }">
-								<a href="${before }">[이전]</a>&nbsp;
-				</c:if> <!-- 페이지 --> <c:forEach var="p" begin="${pi.startPage }"
-								end="${pi.endPage }">
-								<c:url var="pagination" value="independenceList.do">
-									<c:param name="page" value="${p }"></c:param>
-								</c:url>
-								<c:if test="${p eq pi.currentPage }">
-									<font color="red" size="2">[${p }]</font>
-								</c:if>
-								<c:if test="${p ne pi.currentPage }">
-									<a href="${pagination }">${p }</a>&nbsp;
-					</c:if>
-							</c:forEach> <!-- 다음 --> <c:url var="after" value="independenceList.do">
-								<c:param name="page" value="${pi.currentPage + 1 }"></c:param>
-							</c:url> <c:if test="${pi.currentPage >= pi.maxPage }">
-					[다음]&nbsp;
-				</c:if> <c:if test="${pi.currentPage < pi.maxPage }">
-								<a href="${after }">[다음]</a>&nbsp;
-				</c:if>
-						</td>
-					</tr>
 				</table>
 			</div>
 			<%@include file="/footer.jsp"%>
@@ -310,9 +281,9 @@
 			  $("#searchCondition").val(searchCondition);
 		 };
 		function getSearchValue(obj){
-			console.log(obj);
+			//alert(obj);
 			var searchValue = $(obj).prev().val();
-				alert(searchValue);
+				//alert(searchValue);
 			$("#searchValue").val(searchValue);
 		}
 		//검색창 보이기/숨기기

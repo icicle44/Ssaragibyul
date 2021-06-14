@@ -61,8 +61,8 @@ public class IndependenceController {
 		if(!searchList.isEmpty()) {
 			model.addAttribute("iList", searchList);
 			model.addAttribute("search",search);
-			model.addAttribute("pi",pi);
-			return "independence/independenceList";
+			//model.addAttribute("pi",pi);
+			return "independence/independenceSearchList";
 		}else {
 			model.addAttribute("msg", "검색결과가 없습니다");
 			return "common/errorPage";
