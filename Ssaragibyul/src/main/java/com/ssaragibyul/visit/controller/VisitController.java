@@ -1,6 +1,7 @@
 package com.ssaragibyul.visit.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.ssaragibyul.common.DistanceInfo;
 import com.ssaragibyul.common.DistanceLocation;
 import com.ssaragibyul.common.Reply;
@@ -83,7 +85,6 @@ public class VisitController {
 	public ModelAndView visitWriteView(ModelAndView mv) {
 		ArrayList<History> hList = hService.printAllSiteType();
 		
-		
 		if (!hList.isEmpty()) {
 			mv.addObject("hList", hList).setViewName("visit/visitWrite");
 		} else {
@@ -116,8 +117,15 @@ public class VisitController {
 	}
 	// 내 위치와 사적지 위치 간 거리 계산
 	@RequestMapping(value="calDistance.do", method = RequestMethod.GET)
-	public void calDistance(DistanceInfo distInfo) {
-		
+	public void calDistance(HttpServletResponse response, DistanceInfo distInfo) throws Exception {
+		distInfo.setUnit("kilometer");
+		System.out.println("distInfo : " + distInfo);
+		final double dist = distInfo.getDistance();
+		System.out.println("dist(결과) :" + dist);
+		if (dist != 0) {
+			Gson gson = new GsonBuilder().create();
+			gson.toJson(dist, response.getWriter());
+		}
 	}
 	
 	// 거리 계산 api

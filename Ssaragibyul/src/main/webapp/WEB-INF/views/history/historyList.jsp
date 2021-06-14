@@ -206,7 +206,7 @@ h1 {
 			<c:forEach items="${hList }" var="hList">
 			<div class="card" data-no="${hList.siteNo }">
 				<!-- 카드 헤더 -->
-				<div class="card-header" style="background-image: url('/resources/hupLoadFile/${hList.renameFilename }')">
+				<div class="card-header"  onClick="location.href='visitWriteView.do?siteName=${hList.siteName}'+'&siteType=${hList.siteType }'" onmouseover="setCursor(this,'pointer')" style="background-image: url('/resources/hupLoadFile/${hList.renameFilename }')">
 					<div class="card-header-is_closed">
 						<div class="card-header-text">방문</div>
 						<div class="card-header-number">인증하기</div>
@@ -236,6 +236,10 @@ h1 {
 		</section>
 	</div>
 <script>
+// 커서 바꿔주는 스크립트
+function setCursor(str,str2){
+    str.style.cursor = str2;
+}
 /* ============ 스크롤 ================*/
 // 1. 스크롤 이벤트 최초 발생
 $(window).scroll(function(){

@@ -27,17 +27,25 @@
 				<form class="form" action="visitRegister.do" method="post"
 					enctype="multipart/form-data">
 					<div class="register-header">
-						<select id="siteType" name="siteType">
-							<option value="none">---- 사적지 분류 ----</option>
-							<c:forEach items="${hList }" var="hList">
-								<option value="${hList.siteType }">${hList.siteType }</option>
-							</c:forEach>
-						</select> <select id="siteName" name="siteName"
-							onchange="getSiteLocation()">
-
+						<select id="siteType" name="siteType" required>
+							<c:if test="${param.siteType == null }">
+								<option value="none">---- 사적지 분류 ----</option>
+								<c:forEach items="${hList }" var="hList">
+									<option value="${hList.siteType }">${hList.siteType }</option>
+								</c:forEach>
+							</c:if>
+							<c:if test="${param.siteType != null }">
+								<option value="${param.siteType }">${param.siteType }</option>
+							</c:if>
+						</select> 
+						<select id="siteName" name="siteName" onchange="getSiteLocation()" required>
+							<c:if test="${param.siteName != null }">
+								<option value="${param.siteName }">${param.siteName }</option>
+							</c:if>
 
 						</select>
-						<div id="identify">방문인증되었습니다.</div>
+						<input type="hidden" id="distance">
+						
 					</div>
 					<hr>
 					<div class="register-contents">
@@ -54,13 +62,11 @@
 					<hr>
 					<div class="register-footer">
 						<div class="filebox">
-						  <input type="file" id="input_img" name="uploadFile" >
+							<input type="file" id="input_img" name="uploadFile" required>
 						</div>
 						<hr>
 						<button type="reset" class="grey" id="prev"
 							onClick="history.go(-1)">이전으로</button>
-						<button type="submit" class="orange" id="regist"
-							onclick="regist()">등록완료</button>
 						<hr>
 						<button type="button" class="grey" onclick="showMap()">지도보기</button>
 						<button type="button" class="grey" onclick="showMarker()">사적지</button>
@@ -77,6 +83,13 @@
 		async defer></script>
 
 	<script>
+/* 		setTimeout(function() {
+	    	if($("#siteName").val()!=null){
+	    		var location = getSiteLocation();
+	    		alert(JSON.stringify(location));
+	    	};
+		}, 1000); */
+		
     	$(function(){
     	// 파일업로드
 		$("#file").on('change',function(){
@@ -145,30 +158,31 @@
 		            reader.readAsDataURL(f);
 		        });
 		    } 
-	  		   // 위치 가져오기
-	  		   function getSiteLocation(){
-	  			   var siteName = $("#siteName").val();
-	  			   var lat = "";
-	  			   var lnt = "";
-	  			   var location = {};
-	  			   // 사적지 위치 가져오기
-	  	   			$.ajax({
-	  					url : "getSiteLocation.do",// 요청할 서버의 url
-	  					type : "POST",	// 요청 method 방식 
-	  					data : { // 서버로 보낼 데이터 명시 
-	  						"siteName" : siteName
-	  					},
-	  					async: false, // 안하면 showMap부분에서 다시 호출되어 sync?가 안맞음
-	  					dataType : "json",
-	  					success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
-	  						var siteNo = "<input type='hidden' name='siteNo' value='"+data[0].siteNo+"'>";		  					location.lat = data[0].latitude; 
-		  					location.lnt = data[0].longitude;
-		  					$("#siteName").after(siteNo);
-	  					}// success
-	  				});// ajax
-	  				console.log("getSiteLocation result: ", location);
-	  				return location;
-	  			}
+	  	 // 위치 가져오기
+	   function getSiteLocation(){
+		   var siteName = $("#siteName").val();
+		   var lat = "";
+		   var lnt = "";
+		   var location = {};
+		   // 사적지 위치 가져오기
+   			$.ajax({
+				url : "getSiteLocation.do",// 요청할 서버의 url
+				type : "POST",	// 요청 method 방식 
+				data : { // 서버로 보낼 데이터 명시 
+					"siteName" : siteName
+				},
+				async: false, // 
+				dataType : "json",
+				success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
+					var siteNo = "<input type='hidden' name='siteNo' value='"+data[0].siteNo+"'>";
+					location.lat = data[0].latitude; 
+					location.lnt = data[0].longitude;
+					$("#siteName").after(siteNo);
+				}// success
+			});// ajax
+			console.log("getSiteLocation result: ", location);
+			return location;
+		}
 
 	  	function showMap(){
             //지도가 보여질 요소 찾아오기
@@ -225,6 +239,10 @@
 				lat : position.coords.latitude,
 				lng : position.coords.longitude
 			};
+    		var location = getSiteLocation();
+    		var identified = "<div id='identify'><b>방문인증되었습니다.</b></div>"
+    		var regist = "<button type='submit' class='orange' id='regist' onclick='register()'>등록완료</button>"
+    		//alert(JSON.stringify(location));
 			infoWindow.setPosition(pos);
 			//map.setCenter(pos);
 			console.log("Your current position is: latitude(" + pos.lat
@@ -235,11 +253,18 @@
 					type : "GET",	// 요청 method 방식 
 					data : { // 서버로 보낼 데이터 명시 
 						"myLat" : pos.lat,
-						"myLnt" : pos.lng
+						"myLnt" : pos.lng,
+						"markerLat" : location.lat,
+						"markerLnt" : location.lnt
 					},
 					dataType : "json",
 					success : function(data){// ajax 가 성공했을시에 수행될 function이다. 이 function의 파라미터는 서버로 부터 return받은 데이터이다.
-  						
+						alert("방문지와의 거리는 : " + data + "km입니다.");
+						$("#identify").html("");
+			    		if(data<= 1){
+			    			$("#distance").after(identified);
+			    			$("#prev").after(regist);
+			    		}
 					}// success
 				});// ajax
 		}
@@ -251,10 +276,10 @@
 					errorCallback);
 		};
 		// contents내용 가져오기
-		function regist() {
-			var editor = document.getElementById('editor');
-			console.log(editor.textContent);
-			$("#visitContents").val(editor.textContent);
+		function register() {
+ 			var editor = $("#editor");
+			//alert(editor.val());
+			$("#visitContents").val(editor.text());
 		}
 	    $("#editor").on("keyup",function(){
 	        // keypress는 한글입력이 인식 안되고 keyup, keydown은 된다.

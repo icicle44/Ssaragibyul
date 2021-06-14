@@ -51,8 +51,10 @@
 
 			<section class="contents col-md-9">
 				<div class="button-container">
-					<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
-						인증하기</button>
+					<c:if test="${ !empty loginUser.userId }">
+						<button class="btn-2" onclick="location.href='visitWriteView.do'">방문
+							인증하기</button>
+					</c:if>
 				<div id="searchInfo">검색→</div>
 				<form action="visitSearch.do" method="post"" class="search-bar">
 					<input type="search" name="searchValue" pattern=".*\S.*" required>
@@ -118,14 +120,14 @@
 													<!-- 댓글 등록 -->
 													<table align="center" width="500" cellspacing="0">
 														<tr>
-															<td><textarea rows="2" cols="80" id="rContent"
+															<td><textarea rows="1" cols="140" id="rContent"
 																	name="contents"></textarea></td>
 															<td>
 																<c:if test="${ empty loginUser.userId }">
-																	<a href="#" class="btn-gradient orange mini" onclick="needtologin()">등록</a>
+																	<button class="btn-gradient orange mini" onclick="needtologin()">등록</button>
 																</c:if>
 																<c:if test="${!empty loginUser.userId }">
-																	<a href="#" class="btn-gradient orange mini" id="rSubmit">등록</a>
+																	<button class="btn-gradient orange mini" id="rSubmit">등록</button>
 																</c:if>
 															</td>
 														</tr>
@@ -561,7 +563,7 @@
 									}
 								},
 								error : function() {
-									alert("서버 통신 실패!(댓글등록)");
+									alert("내용을 입력해주세요");
 								}
 							});
 							// 작성 후 내용 초기화

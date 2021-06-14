@@ -145,9 +145,13 @@ header{
     float: left;
     padding-right: 10px
 }
-
+.button-wrapper{
+	position: absolute;
+	top: 20em;
+	left: 20em;
+}
 table{
-    width: 80%;
+    width: 100%;
     height: 100%;
     font-size: 12px;
     font-weight: bold;
@@ -183,6 +187,7 @@ table{
 }
 #rSubmit{
 	float: right;
+	width: 100px;
 }                       
 
 /* 리스트의 그리드 부분----------------------------------------- */
@@ -575,8 +580,9 @@ table{
 /* 댓글등록버튼 */
 
 .btn-gradient.mini{
-  padding: 4px 12px;  
-  font-size: 12px;
+  padding: 4px 20px 4px 20px;  
+  font-size: 18px;
+  width: 50px;
 }
 .btn {
 	position: relative;
@@ -596,7 +602,6 @@ table{
 	padding: 10px 30px;
 	display: inline-block;
 	position: relative;
-	border: 1px solid rgba(0,0,0,0.21);
 	border-bottom: 4px solid rgba(0,0,0,0.21);
 	border-radius: 4px;
 	text-shadow: 0 1px 0 rgba(0,0,0,0.15);

@@ -40,6 +40,9 @@ select::-ms-expand {
 	float: right;
 	margin-right: 10px;
 	padding: 0;
+	color: #404040;
+	animation: fadeInText 3s 2s ease-out forwards;
+	font-family: 'Noto Serif KR', serif;
 }
 /* 파일박스  */
 /* 접근성 탭 포커스 스타일 */
