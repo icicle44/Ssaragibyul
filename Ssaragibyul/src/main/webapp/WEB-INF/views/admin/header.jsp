@@ -6,13 +6,25 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 헤더</title>
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
+<link rel="stylesheet" href="/resources/fonts/korea.ttf">
+<style>
+@font-face{
+   src:url("../fonts/korea.ttf");
+   font-family: "korea";
+}
+.font {
+	 font-family : "korea";
+}
+</style>
 </head>
 <body>
 		<div class="main-header">
 			<!-- Logo Header -->
 			<div class="logo-header" style="background-color: #EB5C01" >
 			<a href="/index.jsp" class="logo d-flex align-items-center" style="text-decoration: none;"> 
-				<img src="/resources/img/logo.png" alt=""> <span id="starLogo">싸라기별</sapn>
+				<img src="/resources/img/admin/logow.png" alt="" style="height: 50px;">
 			</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -102,7 +114,7 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" href="adminMain.do" >
 								<div class="avatar-sm">
-									<img src="resources/img/admin/profile.jpg" alt="..." class="avatar-img rounded-circle">
+									<img src="/resources/img/admin/taegeukgi.png" alt="..." class="avatar-img rounded-circle" >
 								</div>
 							</a>
 						</li>
@@ -118,7 +130,7 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="resources/img/admin/profile.jpg" alt="..." class="avatar-img rounded-circle">
+							<a href="adminMain.do" style="text-decoration: none;"><img src="/resources/img/admin/taegeukgi.png" alt="..." class="avatar-img rounded-circle" ></a>
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">

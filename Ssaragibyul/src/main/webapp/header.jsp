@@ -60,7 +60,7 @@
 					<li class="nav-item"><a class="nav-link" href="fundingList.do">펀딩</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="donationList.do">기부</a></li>
-					<li class="nav-item"><a class="nav-link" href="guide.do">가이드</a></li>
+					<li class="nav-item"><a class="nav-link" href="guide.do">소개</a></li>
 					<a class="getstarted scrollto" href="suggestPage.do" style="text-decoration: none;">제안하기</a>
 				</ul>
 				<c:if test="${ empty sessionScope.loginUser }">

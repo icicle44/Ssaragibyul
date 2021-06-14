@@ -210,12 +210,12 @@
 								<div class="card-body">
 									<ol class="activity-feed">
 									<c:forEach items="${newSendMessage }" var="nsmList" >
-										<li class="feed-item feed-item-secondary">
+										<li class="feed-item feed-item-warning">
 											<time class="date" datetime="9-25">${nsmList.msgNo}</time>
 											<span class="text">${nsmList.receiverId }<a href="#">${nsmList.msgTitle }</a></span>
 										</li>
 									</c:forEach>
-										<li class="feed-item feed-item-success">
+										<!-- <li class="feed-item feed-item-success">
 											<time class="date" datetime="9-24">Sep 24</time>
 											<span class="text">전체 <a href="#">"공지사항"</a></span>
 										</li>
@@ -234,7 +234,7 @@
 										<li class="feed-item">
 											<time class="date" datetime="9-17">Sep 17</time>
 											<span class="text">회원ID <a href="#">"쪽지제목"</a></span>
-										</li>
+										</li> -->
 									</ol>
 								</div>
 							</div>
@@ -264,7 +264,7 @@
 									</div>
 									<div class="separator-dashed"></div>
 									</c:forEach>
-									<div class="d-flex">
+<!-- 									<div class="d-flex">
 										<div class="avatar avatar-offline">
 											<span class="avatar-title rounded-circle border border-white bg-secondary">P</span>
 										</div>
@@ -314,7 +314,7 @@
 										<div class="float-right pt-1">
 											<small class="text-muted">2 Days Ago</small>
 										</div>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>

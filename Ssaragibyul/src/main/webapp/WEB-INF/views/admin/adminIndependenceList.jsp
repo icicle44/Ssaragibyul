@@ -68,14 +68,6 @@
 							<div class="card">
 								<div class="card-header">
 									<h4 class="card-title" style="margin:auto; text-align: center;">독립유공자 공훈록 리스트</h4>
-											<!-- 검색 -->
-												<div id="pj_search">
-													<form class="pull-right" action="adminIndependenceSearch.do" method="get">
-														<input type="text" name="searchValue" class="scan"
-															value="${search.searchValue }">&nbsp; <input
-															type="submit" class="scan" value="검색">
-													</form>
-												</div>
 								</div>
 								<div class="card-body">
 									<div class="table-responsive">

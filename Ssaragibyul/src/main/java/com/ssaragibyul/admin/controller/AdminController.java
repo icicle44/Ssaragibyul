@@ -665,20 +665,24 @@ public class AdminController {
 		return mv;
 	}
 	
-	// 독립유공자 공훈록 검색( 이거 안됨 확인요망)
-//	@RequestMapping(value="adminIndependenceSearch.do", method=RequestMethod.GET)
-//	public String independenceSearch(@ModelAttribute Search search, Model model) {
-//		ArrayList<Independence> searchList = iService.printSearchAll(search);
-//		System.out.println("searchList"+searchList);
-//		if(!searchList.isEmpty()) {
-//			model.addAttribute("iList", searchList);
-//			model.addAttribute("search",search);
-//			return "admin/adminIndependenceList";
-//		}else {
-//			model.addAttribute("msg", "검색결과가 없습니다");
-//			return "common/errorPage";
-//		}
-//	}
+	// 독립유공자 공훈록 검색
+	@RequestMapping(value="adminIndependenceSearch.do", method=RequestMethod.GET)
+	public String independenceSearch(@RequestParam(value="page", required=false) Integer page, @ModelAttribute Search search, Model model) {
+		int currentPage = (page != null) ? page : 1;
+		int listCount =iService.getListCount();
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount); 
+		ArrayList<Independence> searchList = iService.printSearchAll(search ,pi);
+		System.out.println("searchList"+searchList);
+		if(!searchList.isEmpty()) {
+			model.addAttribute("iList", searchList);
+			model.addAttribute("search",search);
+			model.addAttribute("pi",pi);
+			return "admin/adminIndependenceList";
+		}else {
+			model.addAttribute("msg", "검색결과가 없습니다");
+			return "common/errorPage";
+		}
+	}
 	
 	// 별들의발자취 리스트
 	@RequestMapping(value="adminHistoryList.do", method = RequestMethod.GET)
