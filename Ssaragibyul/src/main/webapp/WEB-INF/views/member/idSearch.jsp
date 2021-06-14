@@ -4,9 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입 페이지</title>
+<title>아이디 찾기</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/idSearch.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 </head>
     <body>
     <header>

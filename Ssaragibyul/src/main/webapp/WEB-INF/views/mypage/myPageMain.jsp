@@ -4,6 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 <meta charset="UTF-8">
 <title>마이페이지</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/mypage/myPageMain.css">

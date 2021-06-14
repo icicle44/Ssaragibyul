@@ -68,24 +68,27 @@
 
 .content{
 	text-align:center;
- 	border: 1px solid #AFAFAF; 
- 	border-radius: 15px;
 	width: 80%;
 	height: 250px;
 	margin-top: -100px;
+	border: 1px solid gray;
+    border-radius: 20px;
+    background-color: white;
+	
 }
 
 .content2{
 	text-align:center;
-	border: 1px solid #AFAFAF;
-	border-radius: 15px;
 	width: 80%;
-	height: 350px;
+	height: 430px;
 	margin-top: -100px;
+	border: 1px solid gray;
+    border-radius: 20px;
+    background-color: white;
 }
 
 #sendBtn1{
-	margin-top: -100px;
+	margin-top: -200px;
 	margin-left: 350px;
 }
 
@@ -107,16 +110,21 @@ input:focus {
 	margin-left: -130px;
 }
 
+#charge{
+	margin-left: -110px;
+}
+
 #phone{
 	margin-left: -80px;
 }
 
-#input-name, #input-phone{
+#input-name, #input-phone, .getResult2{
 	width: 220px;
 	margin-bottom: 10px;
 	border:1px solid gray;
 	border-radius:5px;
 }
+
 
 .getResult3{
 	float:left;
@@ -168,13 +176,13 @@ input:focus {
 			<section id="sectionSuggest1">
 			<br><br><br><br>
 				<div class="content">
-				<h3 style="margin: 60px 0px 15px 0px; font-weight: bold;">기부 참여하기</h3>
-				<input type="number" id="price" name="cal"> 원<br>
-				사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span>
+					<h3 style="margin: 60px 0px 15px 0px; font-weight: bold;">기부 참여하기</h3>
+					<input type="number" id="price" name="cal"> 원<br>
+					사용 가능한 포인트: <span id="myPoint-total1">${sessionScope.myPoint.total}</span>
 				</div>
 				<br><br><br><br><br><br><br>
 				
-			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;">다음 단계로</a>
+			<a id="sendBtn1" class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none; margin-top: -500px;">다음 단계로</a>
 			</section>
 
 		<br><br><br><br><br><br><br><br><br>
@@ -185,9 +193,13 @@ input:focus {
 				<form action="donationJoinComplete.do" method="post">
 	    			<input type="hidden" name="projectNo" value="${donation.projectNo }"><br>
 	   				<input type="hidden" name="userId" value="${loginUser.userId }"><br>
-	   				<!-- <input type="text" name="sumMoney" class="getResult2"> 최종금액 <br> -->
+	   				
+	   				<span id="charge">최종 결제 금액</span><br>
+	   				<input type="text" name="sumMoney" class="getResult2"><br> 
+	   				
 	   				<span id="name">결제자 이름</span><br>
 	   				<input type="text" name="receiverName" id="input-name"><br>
+	   				
 	   				<span id="phone">결제자 휴대폰 번호</span><br>
 	   				<input type="input-text" name="receiverPhone" id="input-phone"><br>
 	   				<div id="point">

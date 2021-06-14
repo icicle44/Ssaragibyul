@@ -9,9 +9,8 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Favicons -->
 <link href="/resources/img/favicon.png" rel="icon">
-  
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-<link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/jquery-ui.css">
@@ -25,8 +24,14 @@
 
 <link rel="stylesheet" href="/resources/css/style.css">
 
+
+<link rel="stylesheet" href="/resources/fonts/korea.ttf">
 </head>
 <style>
+body, main{
+	font-family: 'Noto Serif KR', serif;
+}
+
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
@@ -34,6 +39,72 @@
 	margin-left: 140px;
 	border-radius: 4px;
 	color: #fff;
+}
+
+#thank{
+	font-size: 19px;
+	font-weight:600;
+	color: #676767;
+	margin-bottom: 30px;
+}
+span{
+	font-size: 16px;
+}
+.contents{
+	text-align:center;
+	margin:auto;
+	height: 380px;
+	width: 80%;
+	border-radius: 20px;
+	border: 1px solid gray;
+	/* background-color: #F1F1F1; */
+}
+
+	
+#btn1{
+	float: left;
+	background: #EB5C01;
+	padding: 10px 10px;
+	margin: 20px;
+	margin-left: 360px;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+}
+
+#btn2{
+	float: left;
+	background: #EB5C01;
+	padding: 10px 80px;
+	margin: 20px;
+	margin-left: 0px;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+}
+
+#btn1:hover{
+	background-color: #E35901;
+	border:none;
+	outline: none;
+}
+
+#btn1:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
+}
+
+#btn2:hover{
+	background-color: #E35901;
+	border:none;
+	outline: none;
+}
+
+#btn2:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
@@ -58,19 +129,28 @@
 		</div>
 	</header>
 
-      <!-- 프로젝트 사이즈 고정하고 가운데로 가게 하는법 알아오기... -->
 	<main class="main-content">
-	<br><br><br><br><br><br><br><br><br><br><br>
-		${loginUser.userName}님 감사합니다. 기부 참여가 완료되었습니다.
+	<br><br><br><br><br><br><br><br>
+		<div class="contents">
+		<br><br>
+			<h3>기부가 완료되었습니다.</h3>
+			<img src="/resources/img/mypage/">
+			<br>
+			
+			<p id="thank">후원자 ${loginUser.userName}님 기부에 동참해주셔서 감사합니다.<p>
+			
+			<span>프로젝트가 목표금액을 모두 달성한 경우에만 결제됩니다.</span><br>
+			
+			<span>목표액이 미달할 경우 예정된 모든 결제 포인트는 자동으로 취소됩니다.</span><br><br>
+			
+			
+			<button id="btn1" onclick="location.href='donationList.do'">더 많은 프로젝트 둘러보기</button>
+			<button id="btn2" onclick="location.href='index.jsp'">홈으로</button>
+			<!-- <a href="donationList.do">더 많은 프로젝트 둘러보기</a> -->
+			<br>
 		
-		앞으로도 많은 참여 부탁 드리겠습니다.<br>
-		
-		기부 페이지로 이동 :  <button onclick="location.href='donationList.do'">클릭</button>
-		<br>
-	
- 		${donationLogOne[0].donationPoint} 원이 최종 결제되었습니다. 
- 		<br><br><br>
-		
+	 		<br><br><br>
+		</div>	
 		
 	<form action="fundingJoin2.do" method="post">
     <input type="hidden" name="projectNo" value="${donation.projectNo }">

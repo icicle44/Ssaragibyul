@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +41,8 @@
          </div>
      </div>
      <div id="rest-point">
-         <span id="point">잔여포인트 : </span>
-         <span id="point-num">${myPoint.total }</span>
-         <span id="point-num">예약중 : ${myPoint.reserved *-1 }</span>
+         <span id="point">잔여포인트 : <fmt:formatNumber value="${myPoint.total }" pattern="#,###"/> </span><br>
+         <span id="point-num" >예약중 : <fmt:formatNumber value="${myPoint.reserved *-1 }" pattern="#,###"/></span>
      </div>
      </c:if>
      <div id="logout">

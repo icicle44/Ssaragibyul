@@ -48,12 +48,25 @@
 	color: #505050
 }
 
+/* 배경 */
+.suggest1, .suggest2, .suggest3{
+    width: 90%;
+    height: auto;
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: white;
+    box-shadow: 3px 3px 3px 3px rgba(108, 108, 108, 0.5);
+}
 
+#sectionSuggest1, #sectionSuggest2, #sectionSuggest3{
+	margin: 10px 80px;
+}
+
+/*  */
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
-	margin: 20px;
-	margin-left: 140px;
+
 	border-radius: 4px;
 	color: #fff;
 }
@@ -78,6 +91,12 @@ margin : auto;
 }
 
 /*  */
+
+#suggest-title{
+	font-size: 21px; 
+	font-weight: bold; 
+	color: #EB5C01;
+}
 
 #project-title{
 	font-size: 18px; 
@@ -116,7 +135,7 @@ margin : auto;
 }
 
 #btn{
-	margin-left: 200px;
+	margin-left: 350px;
 }
 
 #submit-btn:hover{
@@ -173,122 +192,123 @@ margin : auto;
 
 	<main class="main-content">
 		<form action="donationRegister.do" method="post" enctype="multipart/form-data" id="postForm">
-		<br><br><br><br><br><br><br><br>  
-			<section id="sectionSuggest1">
-				<br><br><br>
-				<span id="project-title">프로젝트명</span><br>
-				<span>프로젝트의 주제와 특징이 드러나는 제목을 붙여주세요.</span><br>
-				<div>
-					<input type="text" name="subjectName"  id="title" maxlength="50" placeholder="50자 이내로 작성해주세요." >
-					<span id="counter">( 0 / 50 )</span>
-				</div><br>
-				<span id="project-title">목표 금액</span><br>
-				<span>최소 100,000원 이상이어야 합니다.</span><br>
-				<div>
-					<input type="text" name="goalMoney" id="goal"> 원
-				</div><br>
-				<span id="project-title">진행 기간</span><br>
-				<span>최소 7일부터 최대 60일까지 가능합니다. </span><br>
-				<div id="date"> 
-					<script>	 	
-					let today = new Date();   
-
-					let year = today.getFullYear(); // 년도
-					let month = today.getMonth() + 1;  // 월
-					let date = today.getDate();  // 날짜
-					let day = today.getDay();  // 요일
-
-					document.write(year + ' / ' + month + ' / ' + date)
-					</script> ~ 	
-					<input type="date" name="finDate">
-				</div>
-				<br>
-				
-				<span id="project-title">대표 사진</span><br>
-				<span>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.</span><br><br>
-				<div>
-					<input type="file" name="uploadFile" id="input-file" style="display:none">
-					<label class="input-file-button" for="input-file">파일선택</label>
-					<span id="fileName1" class="filname">선택된 파일없음</span><br>
-				</div>
-				<br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none;" id="btn">다음단계</a>
-			</section>
-
-			<br><br><br><br><br><br><br>
-
-			<section id="sectionSuggest2">
-			<br><br><br><br>
-				<span id="project-title">동영상 주소</span><br>
-				<span>프로젝트를 소개할 수 있는 동영상의 주소를 적어주세요.</span><br>
-				<div>
-					<input type="text" name="videoUrl" id="video">
-				</div><br>
-				
-				<span id="project-title">이미지 등록</span><br>
-				<span>프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요</span><br><br>
-				<div>
-					<!-- 	 	
-					<input type="file" name="uploadFileSub1">  <br>
-				    <input type="file" name="uploadFileSub2">
-				     -->
-				    
-				    <input type="file" name="uploadFileSub1" id="input-file" style="display:none">
-					<label class="input-file-button" for="input-file">파일선택</label>
-					<span id="fileName1" class="filname">선택된 파일없음</span><br>
+		<br><br><br><br><br><br><br><br>
+			<div class="suggest1">
+				<section id="sectionSuggest1">
 					
-					<input type="file" name="uploadFileSub2"id="input-file" style="display:none">
-					<label class="input-file-button" for="input-file">파일선택</label>
-					<span id="fileName1" class="filname">선택된 파일없음</span><br>
-				</div><br>
+					<p id="suggest-title">1. 기본 사항</p><br>
+					<span id="project-title">프로젝트명</span><br>
+					<span>프로젝트의 주제와 특징이 드러나는 제목을 붙여주세요.</span><br>
+					<div>
+						<input type="text" name="subjectName"  id="title" maxlength="50" placeholder="50자 이내로 작성해주세요." >
+						<span id="counter">( 0 / 50 )</span>
+					</div><br>
+					<hr>
+					<span id="project-title">목표 금액</span><br>
+					<span>최소 100,000원 이상이어야 합니다.</span><br>
+					<div>
+						<input type="text" name="goalMoney" id="goal"> 원
+					</div><br>
+					<hr>
+					<span id="project-title">진행 기간</span><br>
+					<span>최소 7일부터 최대 60일까지 가능합니다. </span><br>
+					<div id="date"> 
+						<script>	 	
+						let today = new Date();   
+	
+						let year = today.getFullYear(); // 년도
+						let month = today.getMonth() + 1;  // 월
+						let date = today.getDate();  // 날짜
+						let day = today.getDay();  // 요일
+	
+						document.write(year + ' / ' + month + ' / ' + date)
+						</script> ~ 	
+						<input type="date" name="finDate">
+					</div>
+					<br><hr>
+					
+					<span id="project-title">대표 사진</span><br>
+					<span>홈페이지와 외부 공유를 했을 때 보여집니다. 프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요.</span><br><br>
+					<div>
+						<input type="file" name="uploadFile" id="input-file1" style="display:none">
+						<label class="input-file-button" for="input-file1">파일선택</label>
+						<span id="fileName1" class="filname">선택된 파일없음</span><br>
+					</div>
+					<br><br>
+					<a class="getstarted scrollto" href="#sectionSuggest2" style="text-decoration: none; margin-left: 350px;" id="btn">다음단계</a>
+				</section>
+			</div>  
+			<br><br><br><br><br><br><br>
+			<div class="suggest2">
+				<section id="sectionSuggest2">
 				
-				<span id="project-title">프로젝트 스토리</span><br>
-				<span>프로젝트를 소개하고, 준비하는 과정에서 후원자에게 들려주고 싶었던 이야기를 진솔하게 전달해주세요.</span><br>
-				<div class="guide">
-					- Enter(↵) : 문단 나눔, Shift + Enter : 줄바꿈입니다.<br>
-					- ctrl+c/v를 이용해 선택한 이미지를 복사/붙여넣기 할 수 있습니다.<br>
-					- 이미지와 영상은 꼭 버튼을 이용하여 첨부해주세요.
+					<p id="suggest-title">2. 스토리</p><br>
+					<span id="project-title">동영상 주소</span><br>
+					<span>프로젝트를 소개할 수 있는 동영상의 주소를 적어주세요.</span><br>
+					<div>
+						<input type="text" name="videoUrl" id="video">
+					</div><br><hr>
+					
+					<span id="project-title">이미지 등록</span><br>
+					<span>프로젝트를 한 눈에 나타낼 수 있는 이미지를 등록해주세요</span><br><br>
+					<div>
+						<!-- 	 	
+						<input type="file" name="uploadFileSub1">  <br>
+					    <input type="file" name="uploadFileSub2">
+					     -->
+					    
+					    <input type="file" name="uploadFileSub1" id="input-file2" style="display:none">
+						<label class="input-file-button" for="input-file2">파일선택</label>
+						<span id="fileName2" class="filname">선택된 파일없음</span><br>
+						
+						<input type="file" name="uploadFileSub2"id="input-file3" style="display:none">
+						<label class="input-file-button" for="input-file3">파일선택</label>
+						<span id="fileName3" class="filname">선택된 파일없음</span><br>
+					</div><br><hr>
+					
+					<span id="project-title">프로젝트 스토리</span><br>
+					<span>프로젝트를 소개하고, 준비하는 과정에서 후원자에게 들려주고 싶었던 이야기를 진솔하게 전달해주세요.</span><br>
+					
+					<input type="hidden" name="projectStory">
+					<input type="hidden" name="uploadImage">
+					<div id="editor" class="format"></div>
+					
+					<br><br>
+					<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;" id="btn">다음단계</a>
+				</section>
 				</div>
-				
-				<input type="hidden" name="projectStory">
-				<input type="hidden" name="uploadImage">
-				<div id="editor" class="format"></div>
-				
-				<br><br><br><br><br><br><br>
-				<a class="getstarted scrollto" href="#sectionSuggest3" style="text-decoration: none;" id="btn">다음단계</a>
-			</section>
-
-			<br><br><br><br><br><br><br><br><br>
-
-			
-			<section id="sectionSuggest3">
-				<br><br><br><br>
-				<span id="project-title">환불 정책 및 안내 사항</span><br>
-				<span>프로젝트 진행 과정에서 발생할 수 있는 위험 요소를 고려하여 신중히 설정해주세요. <br>예기치 못한 분쟁이 발생할 경우 중요한 기준이 됩니다.</span><br>
-				
-				<div>
-					<textarea name="warningIntro" rows="5" wrap="virtual" id="waring" maxlength="1500" style="resize: none;" placeholder="환불 및 교환 정책을 꼭 작성해주세요."></textarea>
-					<span id="counter2">( 0 / 1500)</span>
+				<br><br><br><br><br><br><br><br><br>
+	
+				<div class="suggest3">
+					<section id="sectionSuggest3">
+						
+						<p id="suggest-title">3. 안내사항</p><br>	
+						<span id="project-title">환불 정책 및 안내 사항</span><br>
+						<span>프로젝트 진행 과정에서 발생할 수 있는 위험 요소를 고려하여 신중히 설정해주세요. <br>예기치 못한 분쟁이 발생할 경우 중요한 기준이 됩니다.</span><br>
+						<div>
+							<textarea name="warningIntro" rows="5" wrap="virtual" id="waring" maxlength="1500" style="resize: none;" placeholder="환불 및 교환 정책을 꼭 작성해주세요."></textarea>
+							<span id="counter2">( 0 / 1500)</span>
+						</div>
+						<hr>
+						<span id="project-title">문의 번호</span><br>
+						<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
+						<div>
+							<input type="text" id="tel">
+						</div>
+						<hr>
+						<span id="project-title">문의 이메일</span><br>
+						<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
+						<div>
+							<input type="text" id="email">
+						</div><br><hr>
+						<div>
+							<input type="hidden" name="userId" value="${loginUser.userId }"></td>
+						</div>
+					</section>
 				</div>
-				
-				<span id="project-title">문의 번호</span><br>
-				<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
-				<div>
-					<input type="text" id="tel">
-				</div>
-				
-				<span id="project-title">문의 이메일</span><br>
-				<span>후원자의 문의를 받을 수 있는 번호를 입력해주세요.</span><br>
-				<div>
-					<input type="text" id="email">
-				</div>
-				<div>
-					<input type="hidden" name="userId" value="${loginUser.userId }"></td>
-				</div>
-			</section>
 			
 			<input type="button" id="submit-btn" value="작성완료" class="getstarted scrollto" style="text-decoration: none;
-			 margin-left: 200px; border: none; padding: 10px 100px; border-radius: 4px;">
+			 margin-left: 400px; margin-top:50px; border: none; padding: 10px 100px; border-radius: 4px;">
 		</form>
 		<br><br>
 
@@ -342,17 +362,36 @@ margin : auto;
          
       });
 	 
-	 /* 파일을 선택했을 때 파일명이 옆에 뜨도록 하는 것 */
-	 document.getElementById('input-file').addEventListener('change', function(){
+	/* 파일을 선택했을 때 파일명이 옆에 뜨도록 하는 것 */
+	document.getElementById('input-file1').addEventListener('change', function(){
 			var filename = document.getElementById('fileName1');
 			if(this.files[0] == undefined){
 				filename.innerText = '선택된 파일없음';
 				return;
 			}else{
 			filename.innerText = this.files[0].name;
-				
 			}
-		});
+	});
+	 
+	document.getElementById('input-file2').addEventListener('change', function(){
+		var filename = document.getElementById('fileName2');
+		if(this.files[0] == undefined){
+			filename.innerText = '선택된 파일없음';
+			return;
+		}else{
+		filename.innerText = this.files[0].name;
+		}
+	});
+	
+	document.getElementById('input-file3').addEventListener('change', function(){
+		var filename = document.getElementById('fileName3');
+		if(this.files[0] == undefined){
+			filename.innerText = '선택된 파일없음';
+			return;
+		}else{
+		filename.innerText = this.files[0].name;
+		}
+	});
 	</script>
 </body>
 </html>

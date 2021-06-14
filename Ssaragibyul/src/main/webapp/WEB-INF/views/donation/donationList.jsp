@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -252,7 +255,6 @@ input::-webkit-input-placeholder {
 												<c:if test="${d.leftDate > 1}"><b>${d.leftDate}</b>일 남음</c:if>
 											</td>
 											<td id="sum_css">
-											${d.sumMoney}
 												<b>
 													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
 												</b>
@@ -268,10 +270,15 @@ input::-webkit-input-placeholder {
 				<br>
 		
 				<br><br><br><br><br><br><br>
-				<br><br><br><br><br><br><br>
-
-				<hr><hr>		
+				
+				<c:if test="${fn:length(dListandFile) > 6}">		
+					
+				</c:if> 
+				<c:if test="${fn:length(dListandFile) <= 6 }">
 				<button class="btn" onclick="location.href ='donationListFullPro.do'">프로젝트 더 보기</button>
+				
+				</c:if> 
+			
 			</section>
 			<!-- #section-funding -->
 				
@@ -356,7 +363,6 @@ input::-webkit-input-placeholder {
 											<c:if test="${e.likeCount > 1}"><b>${d.leftDate}</b>일 남음</c:if>
 										</td>
 										<td id="sum_css">
-											${e.sumMoney}
 												<b>
 													<fmt:formatNumber value="${d.sumMoney}" pattern="#,###"/>원 , 
 												</b>

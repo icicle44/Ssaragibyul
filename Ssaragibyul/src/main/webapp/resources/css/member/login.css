@@ -4,6 +4,7 @@ body{
     background-size: cover;
     width: auto;
     height: 1100px;
+   	font-family: 'Noto Serif KR', serif;
 }
 
 header{
@@ -11,6 +12,7 @@ header{
     height: 100px;
 }
 form{
+	font-family: 'Noto Serif KR', serif;
 	height: 700px;
 	background-image: url(/resources/img/member/member_background.jpg);
 	background-size:800px;
@@ -24,13 +26,6 @@ form{
   padding: 0;
   box-sizing: border-box;
 }
-
-/*html, body {
-  height: 100%;
-  background-color: #F15A5C;
-  font-family: "Roboto Slab", serif;
-  color: white;
-}*/
 
 .preload * {
   transition: none !important;
@@ -48,24 +43,24 @@ input[type="text"], input[type="password"] {
     border: none; 
     border-radius: 5px;
     margin-bottom: 30px;
-    color: #333;
+    color:#07051b;
     font-size: 15px;
 }
 
 input[type="text"]:focus, input[type="password"]:focus {
   outline: none;
   box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.3);
-}
-
-input[type="text"]:focus, input[type="password"]::-webkit-input-placeholder { 
-    padding-left: 10px;
 } 
+
+#userPw, #userId{
+	padding-left: 5px;
+}
 
 button {
     padding-left: 1.5em;
     padding-right: 1.5em;
     padding-bottom: 0.5em;
-    padding-top: 0.5em;
+    padding-top: 5px;
     border: none;
     border-radius: 5px;
     background-color: rgb(174, 174, 174);
@@ -75,6 +70,14 @@ button {
     font-weight: 600;
     height: 38px;
     width: 120px;
+}
+
+button:hover{
+	background-color: rgb(130, 130, 130); 	
+}
+
+button:active{
+	background-color: rgb(100, 100, 100);	
 }
 
 .login--login-submit {
@@ -91,7 +94,7 @@ button {
 
 .login--toggle-container {
     position: absolute;
-    background-color: black;
+    background-image: url(/resources/img/member/background.png);
     right: 0;
     line-height: 2.5em;
     width: 50%;
@@ -117,7 +120,7 @@ button {
 
 .login--username-container, .login--password-container {
   float: left;
-  background-color: none;
+  background-image: url(/resources/img/member/background.png);
   width: 50%;
   height: 120px;
   padding: 0.5em;
@@ -127,7 +130,7 @@ button {
     transform-origin: 100% 0%;
     transform: perspective(1000px) rotateY(180deg);
     transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
-    background-color: black;
+    background-color: #07051b;
     backface-visibility: hidden;
 }
 

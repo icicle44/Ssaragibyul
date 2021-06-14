@@ -10,6 +10,7 @@ form{
    	background-size:600px;
  	height: 600px;
     width: auto;
+    font-family: 'Noto Serif KR', serif;
 }
 header{
     width: auto;
@@ -39,7 +40,9 @@ header{
 }
 
 #p{
+	margin-top:10px;
     text-align: center;
+    font-weight: normal;
 }
 
 .input{
@@ -85,10 +88,15 @@ input::-webkit-input-placeholder {
     height: 35px;
     width: 180px;
     border-radius: 5px;
-    margin-top:20px;
+    margin-top:45px;
     background: rgb(174, 174, 174);
    	font-weight: 550;
     color: white;
+    border: none;
+}
+
+#pwSearch:hover{
+    background-color: rgb(130, 130, 130);
     border: none;
 }
 

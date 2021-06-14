@@ -1478,8 +1478,6 @@ a:hover {
 }
 .back1{
 	background: url('/resources/img/SuggestMain_01_Funding.png') ;
-	 min-height: 500px;
-	 min-width : 100%;
 /*   -webkit-filter: blur(5px);
   -moz-filter: blur(5px);
   -o-filter: blur(5px);
@@ -1496,42 +1494,5 @@ a:hover {
 
 .back2{
 	background: url('/resources/img/SuggestMain_02_Donation.png') ;
-	 min-height: 500px;
-	 min-width : 100%;
-/*   -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px); */
-} /*
-.content {
-  this is needed or the background will be offset by a few pixels at the top
-  overflow: auto;
-  position: relative;
-}
+	 
 
-.content::before {
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: -1;
-
-  display: block;
-  background-image: url('/resources/img/SuggestMain_01_Funding.png');
-  background-size:cover;
-  width: 100%;
-  height: 100%;
-
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  -o-filter: blur(5px);
-  -ms-filter: blur(5px);
-  filter: blur(5px);
-} 블러가 안돼.....ㅜㅠㅡㅜㅠ */
-.suggestBtn{
-	margin-left: 1111px;
-	margin-top: 333px;
-}
-/*# 
-ourceMappingURL=style.css.map */

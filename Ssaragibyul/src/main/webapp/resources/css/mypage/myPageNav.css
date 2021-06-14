@@ -4,7 +4,9 @@
     margin: 40px 40px 40px 40px; 
 }
 
-
+#point-num{
+	margin-left: -20px;
+}
 
 #userImg{
     width: 80px;
@@ -45,11 +47,11 @@
 }
 
 #rest-point{
-    padding-top: 8px;
+    margin-top: 55px;
     font-weight: 600;
     font-size: 18px;
     text-align: center;
-    color: rgb(51, 51, 51);
+    color: rgb(101, 101, 101)
 }
 
 #logout{

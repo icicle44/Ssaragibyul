@@ -8,7 +8,8 @@
 <title>로그인 페이지</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/login.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Anton&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js" ></script>
 </head>
     <body>
@@ -21,10 +22,10 @@
         <div class='preload login--container'>
             <div class='login--form'>
                 <div class='login--username-container'>
-                    <input placeholder='아이디를 입력해주세요.' type='text' name="userId">
+                    <input placeholder='아이디를 입력해주세요.' type='text' name="userId" id="userId">
                 </div>
                 <div class='login--password-container'>
-                    <input placeholder='비밀번호를 입력해주세요.' type='password' name="userPw">
+                    <input placeholder='비밀번호를 입력해주세요.' type='password' name="userPw" id="userPw">
                     <button class='js-toggle-login login--login-submit'>로그인</button>
                 </div>
             </div>

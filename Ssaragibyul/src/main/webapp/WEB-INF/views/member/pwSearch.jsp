@@ -7,6 +7,8 @@
 <title>비밀번호 찾기</title>
 	<link rel="stylesheet" type="text/css" href="/resources/css/member/pwSearch.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">	
 </head>
     <body>
     <header>
@@ -27,7 +29,7 @@
                 <input type="email" name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요.">
             </div>
             <div class="btn">
-                <input type="submit" value="임시 비밀번호 받기" id="pwSearch">
+                <input type="submit" value="임시 비밀번호 받기" id="pwSearch" onclick="searchBtn()">
             </div>
             </div>
         </div>
@@ -47,6 +49,13 @@
 			}
 		
 		}
-	</script>
+		
+        function searchBtn(){
+        	if(!alert("가입한 이메일로 임시 비밀번호가 발송되었습니다.")) {
+           		return false;
+       		}
+       		history.back();
+            }	
+        </script>
     </body>
 </html>

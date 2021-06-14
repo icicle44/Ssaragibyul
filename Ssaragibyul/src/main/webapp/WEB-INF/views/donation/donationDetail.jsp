@@ -87,7 +87,7 @@ div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 .contents{
 	padding-left : 50px;
 	margin: 15px 0px 15px 0px;
-	font-size: 17px;
+	font-size: 15px;
 }
 
 #title{
@@ -118,7 +118,7 @@ div.guide p.title {color:#df501f; font:18px Arial, Helvetica, sans-serif;}
 	color: #3F3F3F;
    	margin-top: 20px;
 }
-
+    
 	#sponser{
 		float: left;
 		margin-top: 20px;
@@ -254,7 +254,6 @@ label{
 .detailtab{
 	margin-left: 100px;
 }
-
 
 /* 댓글 */
 #rCont{
@@ -468,12 +467,9 @@ td{
 		
 		<div class="detailView_right col-4">
 			<div class="noting"></div>
-				<%-- <h1 id="title">${donation.subjectName }</h1><br> --%>
-				<p class = "contents" id="accrue" style="font-weight: bold;"> <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원</p>
-				<span id="accrue-text">원 펀딩중</span>
-				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원</p>
-   				<p class = "contents" id="percent" style="font-weight: bold;"> <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>%</p>
-					
+				<p class = "contents" id="accrue" style="font-weight: bold;"> <fmt:formatNumber value="${donation.sumMoney }" pattern="#,###"/>원 펀딩중</p>
+				<p class = "contents" id="money" style="font-weight: bold;"> <fmt:formatNumber value="${donation.goalMoney }" pattern="#,###"/>원 (목표금액)</p>
+   				<p class = "contents" id="percent" style="font-weight: bold;"> <fmt:formatNumber value="${donation.percent }" pattern="#,###"/>% 달성</p>
 					   	<c:if test="${donation.leftDate < 1}">
 							<div>
 	   							<b class ="contents" id="date">0일</b>
@@ -481,8 +477,9 @@ td{
 			       		</c:if>
 							       		
 			       		<c:if test="${donation.leftDate >= 1}">
-				       		<div>
-								<b class = "contents" id="date">남은 기간 : <fmt:formatNumber value="${donation.leftDate }" pattern="#,###"/>일</b>
+				       		<div class="date-title">
+								<b class = "contents" id="date"> <fmt:formatNumber value="${donation.leftDate }" pattern="#,###"/>일</b>
+				    			<span id="date-text">남음</span>
 				    		</div>
 			       		</c:if>
 						
@@ -490,7 +487,6 @@ td{
 							<b class = "contents" id="sponser">후원자 : <fmt:formatNumber value="${donationLog.sponser }" pattern="#,###"/>명</b><br>
 							<b class = "contents" id="hitsCount">조회수 : ${donation.hitsCount}</b>
 						</div>
-						
 						<br>
 						<c:if test="${donation.leftDate < 1}">
 							<div>							
@@ -629,8 +625,9 @@ td{
 									</td>
 								</tr>
 							</table>
-		
-			
+							<br>
+							<hr>
+							<br>
 							<!-- 댓글 목록 -->
 							<table align="center" width="650" border="1" cellspacing="0" id="rtb"  style="border: none;">
 								<thead>
