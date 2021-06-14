@@ -429,7 +429,7 @@
    	<update id="deleteAdminDonation" parameterType="_int">
       	UPDATE DONATION
       	SET PROJECT_CODE = 1
-      	WHERE D_POJECT_NO = #{projectNo}
+      	WHERE D_PROJECT_NO = #{projectNo}
    	</update>
    	
    	<select id="selectDonationAccListCount" resultType="_int">

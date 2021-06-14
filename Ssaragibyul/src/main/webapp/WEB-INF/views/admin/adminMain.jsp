@@ -212,7 +212,7 @@
 									<c:forEach items="${newSendMessage }" var="nsmList" >
 										<li class="feed-item feed-item-warning">
 											<time class="date" datetime="9-25">${nsmList.msgNo}</time>
-											<span class="text">${nsmList.receiverId }<a href="#">${nsmList.msgTitle }</a></span>
+											<span class="text">${nsmList.receiverId }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"${nsmList.msgTitle }"</span>
 										</li>
 									</c:forEach>
 										<!-- <li class="feed-item feed-item-success">

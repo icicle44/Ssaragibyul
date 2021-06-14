@@ -85,7 +85,7 @@
 											<tbody>
 												<tr>
 													<td colspan="2" style="text-align: center;">
-														<img alt="" src="resources/hupLoadFile/${histoy.renameFilename }">
+														<img alt="" src="resources/hupLoadFile/${histoy.renameFilename }" style="width: 700px;">
 													</td>
 												</tr>
                                                <tr>
@@ -101,7 +101,7 @@
 					                            	<td>					
 					                            	<input type="hidden" id="lat" value="${histoy.latitude}" >	               
 					                            	<input type="hidden" id="lng" value="${histoy.longitude}" >	               
-					                            		<div id="map"></div>
+					                            		<div id="map" style="margin: 20px; "></div>
 					                            	</td>
 					                            </tr>
 						                        <tr>
@@ -130,8 +130,11 @@
 												<c:param name="siteNo" value="${histoy.siteNo }"></c:param>
 												<c:param name="renameFilename" value="${histoy.originarFilename }"></c:param>
 											</c:url>
-											<button class="btn btn-outline-secondary float-right"><a href="${hModify}">수정 페이지로 이동</a></button>&nbsp;
-											<button class="btn btn-outline-secondary float-right"><a href="${hDelete}">삭제하기</a></button>
+											<div id="delete">
+											<button class="btn btn btn-warning float-right" style="margin-left: 10px;"><a href="${hModify}" style="color: white;">수정하기</a></button>&nbsp;
+						                       <input type="button" value="삭제하기" onclick="fnUserDelete()" id="delete-btn" class="btn btn btn-warning float-right">
+						                    </div>
+											<%-- <button class="btn btn-outline-secondary float-right"><a href="${hDelete}">삭제하기</a></button> --%>
 <%-- 											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminModifyView.do?siteNo=${history.siteNo}';">수정하기</button>
 											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminHistoryDelete.do?siteNo=${history.siteNo}';">삭제하기</button>  --%>
 										</div>
@@ -191,8 +194,16 @@
 		  var marker = new google.maps.Marker({position: uluru, map: map});
 
 		}
-
 		    </script>
+<script>
+	function fnUserDelete() {
+    	if(!confirm('정말로 삭제하시겠습니까?')){
+				return false;
+			}
+    	var siteNo = '${ histoy.siteNo }';
+    	location.href="adminHistoryDelete.do?siteNo="+ siteNo;
+    }
+	</script>	
 
 		    <!--Load the API from the specified URL
 
@@ -209,5 +220,6 @@
 		    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyTc2MMJwLr1q-4zJKrWn9gUx1OYmyIS8&callback=initMap">
 
 	</script>
+	
 </body>
 </html>

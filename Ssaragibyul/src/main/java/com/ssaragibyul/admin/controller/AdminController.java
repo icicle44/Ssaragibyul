@@ -441,7 +441,7 @@ public class AdminController {
 	public String donationDelete(Model model, @RequestParam("projectNo") int projectNo) {
 		int result = aService.deleteDonation(projectNo);
 		if(result > 0 ) {
-			return "redirect : adminDonationList.do";
+			return "redirect:adminDonationList.do";
 		} else {
 			model.addAttribute("msg", "기부프로젝트 삭제에 실패하였습니다.");
 			return "common/errorPage";
@@ -831,7 +831,7 @@ public class AdminController {
 		history.setSiteAddr(post + ", " + address1 + ", " + address2); 
 		int result = aService.modifyHistory(history);
 		if(result > 0) {
-			mv.setViewName("redirect: adminHistoryList.do");
+			mv.setViewName("redirect:adminHistoryList.do");
 		} else {
 			mv.addObject("msg", "별들의 발자취 수정에 실패하였습니다.").setViewName("common/errorPage");
 		}

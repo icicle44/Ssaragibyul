@@ -131,7 +131,10 @@
 											<c:url var="fDelete" value="adminFundingDelete.do">
 												<c:param name="siteNo" value="${funding.projectNo }"></c:param>
 											</c:url>
-											<button class="btn btn btn-warning float-right"><a href="${fDelete}" style="text-decoration: none; color: ffffff;">삭제하기</a></button>
+											<div id="delete">
+						                       <input type="button" value="삭제하기" onclick="fnUserDelete()" id="delete-btn" class="btn btn btn-warning float-right">
+						                    </div>
+											<%-- <button class="btn btn btn-warning float-right"><a href="${fDelete}" style="text-decoration: none; color: ffffff;">삭제하기</a></button> --%>
 											<button type="button" class="btn btn btn-warning float-right" onclick="location.href='adminFundingList.do';">목록보기</button>
 <%-- 											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminModifyView.do?siteNo=${history.siteNo}';">수정하기</button>
 											<button type="button" class="btn btn-outline-secondary float-right" onclick="location.href='adminHistoryDelete.do?siteNo=${history.siteNo}';">삭제하기</button>  --%>
@@ -168,6 +171,16 @@
 	<script src="resources/js/admin/setting-demo2.js"></script>
 	
     <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+    
+        <script>
+    function fnUserDelete() {
+    	if(!confirm('정말로 삭제하시겠습니까?')){
+				return false;
+			}
+    	var projectNo = '${ funding.projectNo }';
+    	location.href="adminFundingDelete.do?projectNo="+ projectNo;
+    }
+    </script>
     
 </body>
 </html>
