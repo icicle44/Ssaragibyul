@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>참여한 펀딩 프로젝트</title>
+	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+	<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 	<link rel="stylesheet" type="text/css" href="/resources/css/mypage/myFunding2.css">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 </head>

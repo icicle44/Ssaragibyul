@@ -154,9 +154,9 @@ margin : auto;
 				 	이미지 등록
 				</div>
 				<div>
-				 	<input type="file" name="uploadFileSub1">  <br>
+				 	<input type="file" name="reloadFileSub1">  <br>
 				 		 기존 서브 파일1: ${donation.donationFile.fileSub1Name }<br>
-				    <input type="file" name="uploadFileSub2">	<br>
+				    <input type="file" name="reloadFileSub2">	<br>
 				    	 기존 서브 파일1: ${donation.donationFile.fileSub2Name }
 				</div>
 				<div>
@@ -194,6 +194,7 @@ margin : auto;
 				<div>
 					<input type="text" name="">
 				</div>
+				<input type = "hidden" name="dProjectNo" value="${donation.projectNo }">
 				<input type = "hidden" name="projectNo" value="${donation.projectNo }">
 			</section>
 			<br><br><br><br><br><br>

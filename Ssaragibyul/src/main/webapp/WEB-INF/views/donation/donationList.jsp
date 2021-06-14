@@ -10,9 +10,6 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-<!-- Favicons -->
-<link href="/resources/img/favicon.png" rel="icon">
   
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
 <link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
@@ -154,6 +151,9 @@ input::-webkit-input-placeholder {
 	margin-left: -30px;
 }
 
+.header-bar ul li a {
+	font-size: 17px;
+}
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -377,10 +377,13 @@ input::-webkit-input-placeholder {
 			</div>
 			<br><br><br>
 			<br><br><br>
-			<br><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<br><br><br>
+			<c:if test="${fn:length(fListandFileEnd) > 6 }">
+
+			</c:if> 
+			<c:if test="${fn:length(fListandFileEnd) <= 6 }">
 			<button class="btn" onclick="location.href ='donationListFullPro.do'" style="text-align: center; margin-right: 700px;">프로젝트 더 보기</button>
+			</c:if>
 		</section>
 		
 		<br><br><br>

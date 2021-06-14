@@ -24,6 +24,7 @@ header{
 }
 
 .contents{
+	font-family: 'Noto Serif KR', serif;
     height: auto;
     padding-top: 80px;
 }
@@ -63,6 +64,7 @@ header{
 }
 
 .leftMenu{
+	font-family: 'Noto Serif KR', serif;
     border: 3px solid black;
     margin-left: 70px;
     width: 18%;
@@ -76,6 +78,7 @@ header{
 }
 
 .rightCon{
+	font-family: 'Noto Serif KR', serif;
     border: 3px solid black;
     margin-right: 70px;
     width: 71%;

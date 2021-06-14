@@ -8,6 +8,8 @@
 <title>정보 수정 페이지</title>
 <link rel="stylesheet" type="text/css"
 	href="/resources/css/mypage/myPostList.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 </head>
 <body>
 	<jsp:include page="../../../header.jsp" />

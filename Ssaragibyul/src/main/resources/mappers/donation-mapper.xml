@@ -37,7 +37,7 @@
 		<result property="fileSub2Size" column="FILE_SUB2_SIZE"/>
 		<result property="fileSub2Path" column="FILE_SUB2_PATH"/>
 		<result property="uploadTime" column="UPLOAD_TIME"/>
-		<result property="projectNo" column="F_PROJECT_NO"/>
+		<result property="dProjectNo" column="D_PROJECT_NO"/>
 	</resultMap>
 	
 	<!-- 기부 내역 -->

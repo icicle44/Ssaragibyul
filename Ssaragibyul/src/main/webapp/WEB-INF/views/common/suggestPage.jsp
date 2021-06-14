@@ -27,15 +27,15 @@
 }
 	
 .back1{
-	background-color: 
+	padding-left:25%;
 }
 
 .back2{
-	background-color: 
+	padding-left:25%;
 }
 	
 .guide{
-	background-color: #f6f5f5;
+	background-color: #FCFAF3;
 	height: 600px;
 	text-align:center;
 	margin: 50px 0px;
@@ -85,14 +85,16 @@
 	}
 	
 .funding{
-	background-color: #f6f5f5;
+	background-image:url("/resources/img/dantion_funding/background.png");
+	background-size:cover;
 	height: 400px;
 	text-align:center;
 	margin: 50px 0px;
 }	
 
 .donation{
-	background-color: #f6f5f5;
+	background-image:url("/resources/img/dantion_funding/background2.png");
+	background-size:cover;
 	height: 400px;
 	text-align:center;
 	margin: 50px 0px;
@@ -102,8 +104,8 @@
 	float: left;
 	background: #EB5C01;
 	text-align:center;
-	padding: 10px 100px;
-	margin-left:720px;
+	padding: 10px 90px;
+	margin-left:500px;
 	margin-top:30px;
 	border-radius: 4px;
 	color: #fff;
@@ -121,6 +123,62 @@
 	border:none;
 	outline: none;
 }
+
+.bottom-guide{
+	
+	height: 300px;
+	text-align:center;
+	margin: 50px 0px;
+}
+
+
+
+.suggestBtn2-1{
+	float: left;
+	background: #EB5C01;
+	text-align:center;
+	padding: 10px 40px;
+	margin-left:630px;
+	margin-top:30px;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+}
+
+.suggestBtn2-1:hover{
+	background-color: #E35901;
+	border:none;
+	outline: none;
+}
+
+.suggestBtn2-1:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
+}
+
+.suggestBtn2-2{
+	background: #EB5C01;
+	text-align:center;
+	padding: 10px 40px;
+	margin-left:-550px;
+	margin-top:30px;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+}
+
+.suggestBtn2-2:hover{
+	background-color: #E35901;
+	border:none;
+	outline: none;
+}
+
+.suggestBtn2-2:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
+}
 </style>
 
 
@@ -131,23 +189,23 @@
 	</header>
 
 	<main class="main-content">
-		<br><br><br><br><br><br><br>
-		
-		<div class="funding"><br><br>
+		<br>
+		<div class="top-guide">
+			
+		</div>
+		<div class="funding"><br><br><br><br><br>
 			<div class="back1">
 				<p id="guide-title">펀딩 프로젝트 만들기</p>
-				<span>제품/서비스를 리워드로 제공하여 수익을 얻습니다.</span><br>
-				<button class="suggestBtn" onclick="location.href='fundingSuggest.do'">펀딩</button>
+				<span style="color: white;">제품/서비스를 리워드로 제공하여 수익을 얻습니다.</span><br>
+				<button class="suggestBtn" onclick="location.href='fundingSuggest.do'">펀딩 제안하기</button>
 			</div>
 		</div>
 		
-		<br><br>
-		
-		<div class="donation"><br><br>
-			<p id="guide-title">기부 프로젝트 만들기</p>
-			<span>직접 기획한 프로젝트에 기부금을 사용할 수 있습니다.</span><br>
+		<div class="donation"><br><br><br><br><br>
 			<div class="back2">
-				<button class="suggestBtn" onclick="location.href='donationSuggest.do'">기부</button>
+				<p id="guide-title">기부 프로젝트 만들기</p>
+				<span>직접 기획한 프로젝트에 기부금을 사용할 수 있습니다.</span><br>
+				<button class="suggestBtn" onclick="location.href='donationSuggest.do'">기부 제안하기</button>
 			</div>
 		</div>
 				
@@ -189,6 +247,17 @@
 					약속한 선물을 전달하면 프로젝트가 끝납니다.<br>
 				</span>
 			</div>
+		</div>
+		
+		<div class="bottom-guide"><br><br>
+			<p id="guide-title">지금 독립 유공자 및 후손들을 위한 프로젝트를 만들어보세요.</p>
+			<span>
+				직관적인 프로젝트 편집 도구로 곧바로 작성을 시작할 수 있습니다.<br>
+				펀딩과 기부를 주선하고 후원을 통해 유공자 및 후손들을 도울 수 있습니다.<br> 
+				궁금한 점이 있으면 언제든지 문의를 남겨주세요.
+			</span><br>
+			<button class="suggestBtn2-1" onclick="location.href='fundingSuggest.do'">펀딩 제안하기</button>
+			<button class="suggestBtn2-2" onclick="location.href='donationSuggest.do'">기부 제안하기</button>
 		</div>
 	</main>
 	

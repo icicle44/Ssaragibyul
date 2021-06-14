@@ -14,7 +14,12 @@ header{
     margin : auto;
 }
 
+form{
+	font-family: 'Noto Serif KR', serif;	
+}
+
 .background{
+	
     height:900px;
     margin : auto;
     padding-top: 80px;
@@ -27,6 +32,7 @@ header{
 }
 
 .rightCon{
+	font-family: 'Noto Serif KR', serif;
     border: 3px solid black;
     margin: 70px ;
     width: 93%;

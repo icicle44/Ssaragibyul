@@ -47,7 +47,8 @@ padding-top : 30px;
     border: none;
     border-radius: 7px;
     float : right;
-    font-style : 
+    margin-left: 15px;
+     
 }
 
 .btn:hover{
@@ -112,7 +113,6 @@ padding-top : 30px;
                         <tr>
                             <td id="img">
                                 <img src="/resources/dUpLoadFiles/${m.donation.donationFile.fileName}"id="f-img">
-                                <img src="/resources/img/mypage/hartCheck.png" id="hart-img" onclick="like(this)"> 
                            <td>
                                 <div class="title">
                                 <c:url var="dDetail" value="donationDetail.do">

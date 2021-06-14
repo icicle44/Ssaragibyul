@@ -8,17 +8,19 @@
 <meta charset="UTF-8">
 <title>제안한 기부 프로젝트</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/mypage/ProposeFunding2.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 </head>
 <style>
 #svg{
-	width: 340px;
+	width: 300px;
 }
 .table-users{
 margin : auto;
 padding-left: 555px;
 }
 #end-btn{
-    width: 330px;
+    width: 280px;
     height: 35px;
     text-align: center;
     color: white;
@@ -29,14 +31,14 @@ padding-left: 555px;
     border-radius: 7px;
 }
 .like-stauts{
-padding-left: 330px;
+padding-left: 293px;
 }
 .f-progress{
 float:left;
 }
 #time{
 float:right;
-margin-right: 121px;
+margin-right: 150px;
 }
 .accrue #time img{
 	width: 18px;
@@ -106,7 +108,7 @@ margin-right: 121px;
 						<c:param name="projectNo" value="${p.projectNo }"></c:param>
 						</c:url> 
 						 <span>
-                           <a href="${eDetail }" id="title-1">${p.subjectName}</a><br>
+                           <a href="${dDetail }" id="title-1">${p.subjectName}</a><br>
                          </span>
                         </div>
                         <div class="title-2">

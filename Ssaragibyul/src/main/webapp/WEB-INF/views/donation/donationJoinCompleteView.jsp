@@ -135,7 +135,6 @@ span{
 		<div class="contents">
 		<br><br>
 			<h3>기부가 완료되었습니다.</h3>
-			<img src="/resources/img/mypage/">
 			<br>
 			
 			<p id="thank">후원자 ${loginUser.userName}님 기부에 동참해주셔서 감사합니다.<p>

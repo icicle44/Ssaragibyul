@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>제안한 펀딩 프로젝트</title>
 <link rel="stylesheet" type="text/css" href="/resources/css/mypage/ProposeFunding2.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
 </head>
 <style>
 #svg{

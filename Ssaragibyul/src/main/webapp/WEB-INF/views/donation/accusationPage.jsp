@@ -7,11 +7,10 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- Favicons -->
-<link href="/resources/img/favicon.png" rel="icon">
   
 <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900|Oswald:400,700" rel="stylesheet">
-<link rel="stylesheet" href="/resources/fonts/icomoon/style.css">
+<link rel="stylesheet" href="/resources/fonts/flaticon/font/flaticon.css">
+
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/magnific-popup.css">
 <link rel="stylesheet" href="/resources/css/jquery-ui.css">
@@ -27,6 +26,16 @@
 
 </head>
 <style>
+.header-bar ul li a {
+	font-size: 17px;
+}
+.main-menu{
+	font-family: 'Noto Serif KR', serif;
+}
+form{
+	font-family: 'Noto Serif KR', serif;
+}
+
 .getstarted {
 	background: #EB5C01;
 	padding: 10px 100px;
@@ -36,7 +45,50 @@
 	color: #fff;
 }
 
+::placeholder{
+	color: #9F9F9F;
+}
 
+.btn{
+	background: #EB5C01;
+	text-align:center;
+	width:200px;
+	height:40px;
+	margin-left:250px;
+	margin-top:60px;
+	border-radius: 4px;
+	color: #fff;
+	border: none;
+}
+
+.btn:hover{
+	background-color: #E35901;
+	border:none;
+	outline: none;
+}
+
+.btn:active{
+	background-color: #D75909;
+	border:none;
+	outline: none;
+}
+
+#cont{
+	width: 1000px;;
+	height: 600px;
+	border: 1px solid gray;
+    border-radius: 20px;
+    background-color: white;
+    margin-bottom: 15px;
+}
+
+form {
+	margin: 20px 40px;
+}
+
+font{
+	margin: 3px;
+}
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
 	data-offset="200">
@@ -66,30 +118,34 @@
 	 <section class="site-section" id="section-contact">
      	<div class="container">
         	<div class="row justify-content-center">
-          		<div class="col-md-8">
-          			<h2>Contact  ${donation.projectNo } ${loginUser.userId }</h2>
-
+          		<div class="col-md-8" id="cont">
 					<form action="accusation.do"" method="post" >
-                    
+                   			<div style="margin-top: 30px;">
+                   				<span style="font-size: 19px; font-weight: bold;"> 신고 게시물 </span><br><hr>
+                   				<span> ${donation.subjectName }</span>
+                   			</div><br>
+
                    		<div class="row form-group">
-                    		<div class="col-md-6 mb-3 mb-md-0">
-                        		<label for="fname">신고 유형을 골라주세요</label><br>
-                        			<input type="radio" name="reportCode" value="0"/><font>지적 재산권 침해</font> <br>
-
-									<input type="radio" name="reportCode" value="1"/><font>허위사실 유포</font> <br>
-
-									<input type="radio" name="reportCode" value="2"/><font>동일 제품의 타 채널 유통</font> <br>
-
-									<input type="radio" name="reportCode" value="3"/><font>싸라기별 커뮤니티 정책 위반</font> <br>
-
-									<input type="radio" name="reportCode" value="4"/><font>기타</font> <br>
+                    		<div class="col-md-8 mb-4 mb-md-0">
+                        		<label for="fname" style="font-size: 19px; font-weight: bold;">신고 유형을 골라주세요</label><hr>
+                        			<div style="margin-bottom: 10px;">여러 사유에 해당될 경우, 대표적인 사유 1개를 선택해 주세요.</div>
+                        			&nbsp;&nbsp;&nbsp;
+                        			<input type="radio" name="reportCode" value="0"/><font> 지적 재산권 침해</font> <br>
+									&nbsp;&nbsp;&nbsp;		
+									<input type="radio" name="reportCode" value="1"/><font> 허위사실 유포</font> <br>
+									&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="reportCode" value="2"/><font> 동일 제품의 타 채널 유통</font> <br>
+									&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="reportCode" value="3"/><font> 싸라기별 커뮤니티 정책 위반</font> <br>
+									&nbsp;&nbsp;&nbsp;
+									<input type="radio" name="reportCode" value="4"/><font> 기타</font> <br><hr>
                       		</div>
 						</div>
 
-						<div class="row form-group mb-5">
+						<div class="row form-group mb-7">
                       		<div class="col-md-12">
-                        		<label  for="message">신고 내용을 상세히 적어주세요</label> <br>
-                      				<textarea name="reportContent" rows="6" cols="30" wrap="virtual" placeholder="신고사유를 적어주세여요"></textarea>		
+                        		<label  for="message" style="font-weight: bold;">기타에 경우, 신고 내용을 상세히 적어주세요.</label><br>
+                      				<textarea name="reportContent" rows="3" cols="45" wrap="virtual" placeholder="해당 신고는 싸라기별 운영자에게 전달됩니다." style="resize: none;"></textarea>		
                      		 </div>
                    		</div>
                    		<input type="hidden" value="${donation.projectNo }" name="projectNo">
@@ -97,7 +153,7 @@
 
                    		<div class="row form-group">
                       		<div class="col-md-12">
-                        		<input type="submit" value="Send Message" class="btn btn-primary btn-md text-white">
+                        		<input type="submit" value="신고하기" class="btn" >
 							</div>
                    		</div>
 					</form>

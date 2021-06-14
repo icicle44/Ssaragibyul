@@ -146,6 +146,10 @@ input:focus {
 	margin-bottom: 20px;
 	margin-top: 20px;
 }
+
+.header-bar ul li a {
+	font-size: 17px;
+}
 </style>
 
 <body data-spy="scroll" data-target=".site-navbar-target" data-offset="200"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> 
