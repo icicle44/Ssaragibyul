@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <title>펀딩 완료</title>
+<meta http-equiv="refresh" content="5; url=/fundingList.do">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -37,7 +38,7 @@
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="200">
+	data-offset="200"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	
 	<%-- <%@include file="introduce.jsp" %> --%>
 <%@include file="../../../header.jsp" %>
@@ -65,7 +66,7 @@
 		
 		앞으로도 많은 참여 부탁 드리겠습니다.
 		
-		펀딩 리스트로 이동 :  <button onclick="location.href='/fundingList.do';">클릭</button>
+		<!-- 펀딩 리스트로 이동 :  <button onclick="location.href='/fundingList.do';">클릭</button> -->
 		<br>
 	
    			 ${fundingLogOne[0].fundingPoint} 원이 최종 결제되었습니다. 
@@ -108,6 +109,9 @@
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-
+	<script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){window.history.forward();}
+	</script>
 </body>
 </html>

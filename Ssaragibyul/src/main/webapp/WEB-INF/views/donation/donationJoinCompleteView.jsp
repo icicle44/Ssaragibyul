@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <title>기부 완료</title>
+<meta http-equiv="refresh" content="5; url=/donationList.do">
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -108,7 +109,7 @@ span{
 }
 </style>
 <body data-spy="scroll" data-target=".site-navbar-target"
-	data-offset="200">
+	data-offset="200"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	
 	<%-- <%@include file="introduce.jsp" %> --%>
 <%@include file="../../../header.jsp" %>
@@ -182,6 +183,9 @@ span{
 	<script src="/resources/js/jquery.fancybox.min.js"></script>
 
 	<script src="/resources/js/main.js"></script>
-
+	<script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){window.history.forward();}
+	</script>
 </body>
 </html>

@@ -148,7 +148,7 @@ input:focus {
 }
 </style>
 
-<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200"> 
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="200"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload=""> 
 	<%@include file="../../../header.jsp"%> 
 	
 	<header class="header-bar d-flex align-items-center site-navbar-target"
@@ -235,6 +235,9 @@ input:focus {
 
 	<script src="/resources/js/main.js"></script>
 	<script src="/resources/js/donationJoin.js"></script>
-
+	<script type="text/javascript">
+		 window.history.forward();
+		 function noBack(){window.history.forward();}
+	</script>
 </body>
 </html>
