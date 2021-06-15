@@ -137,7 +137,7 @@
 		
 		function onYouTubePlayerAPIReady(){
 			player = new YT.Player('muteYouTubeVideoPlayer', { /* json형태로 설정값 적어줌 */
-				videoId : 'k3UevKvP9RU',
+				videoId : '',
 				playerVars : {
 					autoplay : 1, 		// Auto-play the video on load
 					controls : 0, 		// Show pause/play buttons in player
