@@ -93,7 +93,6 @@ DataBase | AWS RDS, Oracle, sqldeveloper
 
 ![1  회원가입](https://user-images.githubusercontent.com/42002548/122520579-b9503500-d04e-11eb-93ad-97b4173a9921.png)
 -   회원가입
-<br>
 ![2  비밀번호 찾기](https://user-images.githubusercontent.com/42002548/122521578-f537ca00-d04f-11eb-97b6-945fbf333d19.png)
 -   비밀번호 찾기
 ![3  마이페이지(제안한 프로젝트)](https://user-images.githubusercontent.com/42002548/122521603-fec13200-d04f-11eb-83e7-db411dca36a0.png)
