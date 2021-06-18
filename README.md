@@ -22,8 +22,8 @@
 ------------
 
 ## 개요
--  '싸라기별'은 '자잘하지만 매우 귀한 것'을 뜻하는 순우리말입니다. 싸라기별 프로젝트는 작지만 귀중한 각자의 참여로서 독립유공자 분들을 기억하고  <br>
-    우리가 할 수 있는 방식으로 그들의 정신을 이어가고자 시작한 크라우드 펀딩 및 커뮤니티 제작하고자 시작하였습니다.
+-  '싸라기별'은 '자잘하지만 매우 귀한 것'을 뜻하는 순우리말입니다. 싸라기별 프로젝트는 작지만 귀중한 각자의 참여를 통해 독립유공자 분들을 기억하고 
+    우리가 할 수 있는 방식으로 그들의 정신을 이어가고자 시작한 크라우드 펀딩 및 커뮤니티 서비스 입니다.
 ------------
 
 ## 설계의 주안점
@@ -41,9 +41,10 @@
 
 Category | Detail
 ---- | ----
-Laguage | HTML5, JS, CSS3, JQuery, JSP, Java, Spring, R
-Library & API | googleMap, googleChart, chartJs, FullCanlendar 
-IDE | VisualStudio Code, Eclpise, Jupyter Notebook
+Laguage | HTML5, JS, CSS3, JSP, Java, Spring, R
+Framework | Spring, MyBatis
+Library & API | googleMap, googleChart, chartJs, FullCalendar, Geolocation, AJAX, JQuery 
+IDE | VisualStudio Code, Eclipse, Jupyter Notebook
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
 CI | Github, GIT
@@ -61,7 +62,7 @@ DataBase | AWS RDS, Oracle, sqldeveloper
 <br>
 
 - 오재승
-  - 조장(풀스택)
+  - 조장(프론트/백)
     - 펀딩(제안, 참여, 수정, 취소) 기능 담당.
     - 조장, 문서 통합 작업, 펀딩페이지 프론트/백 기능 구현, 기부 백 보조, 펀딩 참여, 제안 기능 구현.  
 <br>
