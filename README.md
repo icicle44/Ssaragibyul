@@ -93,56 +93,56 @@ DataBase | AWS RDS, Oracle, sqldeveloper
 
 ![1  회원가입](https://user-images.githubusercontent.com/42002548/122520579-b9503500-d04e-11eb-93ad-97b4173a9921.png)
 -   회원가입
-<hr>
-![2  비밀번호 찾기](https://user-images.githubusercontent.com/42002548/122520587-c0774300-d04e-11eb-8717-e9e87da8a773.png)
+<br>
+![2  비밀번호 찾기](https://user-images.githubusercontent.com/42002548/122521578-f537ca00-d04f-11eb-97b6-945fbf333d19.png)
 -   비밀번호 찾기
-<hr>
-![3  마이페이지(제안한 프로젝트)](https://user-images.githubusercontent.com/42002548/122520606-c79e5100-d04e-11eb-8878-e03c8b42eab5.png)
+<br>
+![3  마이페이지(제안한 프로젝트)](https://user-images.githubusercontent.com/42002548/122521603-fec13200-d04f-11eb-83e7-db411dca36a0.png)
 -   마이페이지(제안한 프로젝트)
 <br>
-![4  마이페이지(참여한 프로젝트)](https://user-images.githubusercontent.com/42002548/122520633-cff68c00-d04e-11eb-9a09-d694ef400139.png)
+![4  마이페이지(참여한 프로젝트)](https://user-images.githubusercontent.com/42002548/122521624-0680d680-d050-11eb-8768-50a357a54972.png)
 -   마이페이지(참여한 프로젝트)
 <br>
-![5  포인트](https://user-images.githubusercontent.com/42002548/122520659-db49b780-d04e-11eb-858c-40d1891f124d.png)
+![5  포인트](https://user-images.githubusercontent.com/42002548/122521683-16001f80-d050-11eb-835e-7ffb4e846741.png)
 -   포인트
  <br>
-![6  기부 리스트](https://user-images.githubusercontent.com/42002548/122520700-e997d380-d04e-11eb-928d-4862565e90dc.png)
+ ![6  기부 리스트](https://user-images.githubusercontent.com/42002548/122521738-257f6880-d050-11eb-9acd-d62ff2e30582.png)
 -   기부 리스트
 <br>
-![7  기부 상세](https://user-images.githubusercontent.com/42002548/122520723-f0bee180-d04e-11eb-9e4f-932cd93723f1.png)
+![7  기부 상세](https://user-images.githubusercontent.com/42002548/122521761-2c0de000-d050-11eb-8021-a061bc072b41.png)
 -   기부 상세
 <br>
-![8  기부 상세_댓글](https://user-images.githubusercontent.com/42002548/122520778-02a08480-d04f-11eb-9952-7290d245fd72.png)
+![8  기부 상세_댓글](https://user-images.githubusercontent.com/42002548/122521792-35974800-d050-11eb-9c44-505e5356b61a.png)
 -   기부 상세(댓글)
 <br>
-![9  기부 참여하기](https://user-images.githubusercontent.com/42002548/122520889-25cb3400-d04f-11eb-9d6c-c4e913398e4c.png)
+![9  기부 참여하기](https://user-images.githubusercontent.com/42002548/122521815-3b8d2900-d050-11eb-8f17-a0edfd3d7cb5.png)
 -   기부 참여하기
 <br>
-![10  기부 제안하기](https://user-images.githubusercontent.com/42002548/122520913-2d8ad880-d04f-11eb-9f11-0ec2c9032495.png)
+![10  기부 제안하기](https://user-images.githubusercontent.com/42002548/122521834-41830a00-d050-11eb-84f5-ebdc29c12b67.png)
 -   기부 제안하기
 <br>
-![11 펀딩 리스트](https://user-images.githubusercontent.com/42002548/122520947-37144080-d04f-11eb-9a57-373f0973d07c.JPG)
+![11 펀딩 리스트](https://user-images.githubusercontent.com/42002548/122521854-46e05480-d050-11eb-9834-29f3d373389e.JPG)
 -   펀딩 리스트
 <br>
-![12  펀딩 리스트](https://user-images.githubusercontent.com/42002548/122521039-514e1e80-d04f-11eb-90d1-5d9b36c42f68.JPG)
+![12  펀딩 상세](https://user-images.githubusercontent.com/42002548/122521879-4e076280-d050-11eb-93a7-86af689f8562.JPG)
 -   펀딩 상세
 <br>
-![13  쪽지](https://user-images.githubusercontent.com/42002548/122521088-6034d100-d04f-11eb-8638-9b8f2a040c2f.JPG)
+![13  쪽지](https://user-images.githubusercontent.com/42002548/122521902-552e7080-d050-11eb-8383-4e5062a4991d.JPG)
 -   쪽지
 <br>
-![14  공훈록](https://user-images.githubusercontent.com/42002548/122521102-64f98500-d04f-11eb-873c-f7313f0e27c3.JPG)
+![14  공훈록](https://user-images.githubusercontent.com/42002548/122521961-637c8c80-d050-11eb-85ac-b3f08225b18e.JPG)
 -   공훈록
 <br>
-![15  별들의 발자취](https://user-images.githubusercontent.com/42002548/122521129-6aef6600-d04f-11eb-9342-0944f0e25ecb.JPG)
+![15  별들의 발자취](https://user-images.githubusercontent.com/42002548/122521979-68414080-d050-11eb-98e6-5f49cc312b74.JPG)
 -   별들의 발자취
 <br>
-![16  별보러 가자](https://user-images.githubusercontent.com/42002548/122521160-72af0a80-d04f-11eb-8f20-8c5afcc5937a.JPG)
+![16  별보러 가자](https://user-images.githubusercontent.com/42002548/122522000-6ecfb800-d050-11eb-8037-1f58805ed320.JPG)
 -   별보러 가자
 <br>
-![17  관리자 메인](https://user-images.githubusercontent.com/42002548/122521238-8c505200-d04f-11eb-9fd1-7429b4835866.JPG)
+![17  관리자 메인](https://user-images.githubusercontent.com/42002548/122522022-742d0280-d050-11eb-932a-e7d3de6ab989.JPG)
 -   관리자 메인
 <br>
-![18  관리자 상세](https://user-images.githubusercontent.com/42002548/122521266-95412380-d04f-11eb-9cad-9afce2a6d741.JPG)
+![18  관리자 상세](https://user-images.githubusercontent.com/42002548/122522033-78592000-d050-11eb-9b2f-2455794f8b4b.JPG)
 -   관리자 상세
 ------------
 ## Document
