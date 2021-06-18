@@ -107,7 +107,7 @@ DataBase | AWS RDS, Oracle, sqldeveloper
 ![14  공훈록](https://user-images.githubusercontent.com/42002548/122521961-637c8c80-d050-11eb-85ac-b3f08225b18e.JPG)
 ![15  별들의 발자취](https://user-images.githubusercontent.com/42002548/122521979-68414080-d050-11eb-98e6-5f49cc312b74.JPG)
 ![16  별보러 가자](https://user-images.githubusercontent.com/42002548/122522000-6ecfb800-d050-11eb-8037-1f58805ed320.JPG)
-![17  관리자 메인](https://user-images.githubusercontent.com/42002548/122522022-742d0280-d050-11eb-932a-e7d3de6ab989.JPG)
+![17  관리자 메인1](https://user-images.githubusercontent.com/42002548/122523098-a12de500-d051-11eb-9c40-fd750ad2f5bd.png)
 ![18  관리자 상세](https://user-images.githubusercontent.com/42002548/122522033-78592000-d050-11eb-9b2f-2455794f8b4b.JPG)
 
 ------------
