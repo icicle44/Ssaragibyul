@@ -91,7 +91,7 @@ DataBase | AWS RDS, Oracle, sqldeveloper
 ------------
 ## 주요 기능
 
-![1  회원가입](https://user-images.githubusercontent.com/42002548/122520579-b9503500-d04e-11eb-93ad-97b4173a9921.png)
+![1  회원가입](https://user-images.githubusercontent.com/42002548/122522544-0d5c1900-d051-11eb-809b-75635e003f6d.png)
 ![2  비밀번호 찾기](https://user-images.githubusercontent.com/42002548/122521578-f537ca00-d04f-11eb-97b6-945fbf333d19.png)
 ![3  마이페이지(제안한 프로젝트)](https://user-images.githubusercontent.com/42002548/122521603-fec13200-d04f-11eb-83e7-db411dca36a0.png)
 ![4  마이페이지(참여한 프로젝트)](https://user-images.githubusercontent.com/42002548/122521624-0680d680-d050-11eb-8768-50a357a54972.png)
