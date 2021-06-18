@@ -40,9 +40,9 @@
 
 Category | Detail
 ---- | ----
-Laguage | HTML5, JS, CSS3, JQuery, JSP, Java, Spring
+Laguage | HTML5, JS, CSS3, JQuery, JSP, Java, Spring, R
 Library & API | googleMap, googleChart, chartJs, FullCanlendar 
-IDE | VisualStudio Code, Eclpise
+IDE | VisualStudio Code, Eclpise, Jupyter Notebook
 Server | Tomcat(v8.5)
 Document | Google Drive, Figma, ERDCloud, diagrams.net
 CI | Github, GIT
